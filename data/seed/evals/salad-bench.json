@@ -1,0 +1,152 @@
+{
+  "eval": {
+    "slug": "salad-bench",
+    "displayName": "SALAD-Bench",
+    "aliases": ["SALAD Bench", "SALADBench"],
+    "description": "Hierarchical LLM safety benchmark with 21,318 base harmful questions across 6 domains, 16 tasks, and 66 categories, plus attack-enhanced (5,000), defense-enhanced (200), and MCQ (3,840) subsets. MD-Judge labels QA responses safe or unsafe; the headline metric is safety rate (ASR = 1 − safety rate on attack or defense subsets).",
+    "summary": "Measures how safely the model answers harmful questions, including when attack prompts try to break its safety rules.",
+    "maintainers": [
+      {
+        "name": "OpenSafetyLab",
+        "url": "https://github.com/OpenSafetyLab/SALAD-BENCH"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2402.05044",
+        "title": "SALAD-Bench: A Hierarchical and Comprehensive Safety Benchmark for Large Language Models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/OpenSafetyLab/SALAD-BENCH",
+        "title": "SALAD-Bench and MD-Judge"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/OpenSafetyLab/Salad-Data",
+        "title": "OpenSafetyLab/Salad-Data"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "programmatic"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "jailbreaks"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-02-07",
+      "status": "published",
+      "releasedDate": "2024-02-07",
+      "dataset": {
+        "hfRepo": "OpenSafetyLab/Salad-Data",
+        "revision": "d21a325e276a99bd69b1fbb8aa51a9f249486b72",
+        "url": "https://huggingface.co/datasets/OpenSafetyLab/Salad-Data",
+        "license": "apache-2.0",
+        "splits": [
+          {
+            "name": "base_set",
+            "sampleCount": 21318,
+            "storage": "pointer"
+          },
+          {
+            "name": "attack_enhanced_set",
+            "sampleCount": 5000,
+            "storage": "pointer"
+          },
+          {
+            "name": "defense_enhanced_set",
+            "sampleCount": 200,
+            "storage": "pointer"
+          },
+          {
+            "name": "mcq_set",
+            "sampleCount": 3840,
+            "storage": "pointer"
+          },
+          {
+            "name": "small_attack_subset",
+            "sampleCount": 300,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "safe",
+          "displayName": "Safe",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when MD-Judge labels the model response safe for the question."
+        },
+        {
+          "key": "attack_success",
+          "displayName": "Attack success",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when the response is unsafe (ASR = 1 − safe)."
+        },
+        {
+          "key": "mcq_correct",
+          "displayName": "MCQ correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when MCQ-Judge accepts the chosen option on the multiple-choice subset."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "safety_rate",
+          "displayName": "Safety rate",
+          "score": "safe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Share of responses MD-Judge labels safe. Cards often report the base set."
+        },
+        {
+          "key": "attack_success_rate",
+          "displayName": "Attack success rate",
+          "score": "attack_success",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Share of unsafe responses on attack-enhanced or defense-enhanced subsets (1 − safety rate)."
+        },
+        {
+          "key": "mcq_accuracy",
+          "displayName": "MCQ accuracy",
+          "score": "mcq_correct",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Accuracy on the MCQ subset."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "openaudit_runner/salad_bench",
+        "package": "openaudit-runner==0.1.0",
+        "roles": ["target"],
+        "internet": true,
+        "gpu": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "eval": {
+    "slug": "gdm-tone",
+    "displayName": "Tone (Google DeepMind)",
+    "aliases": ["Tone"],
+    "description": "Google DeepMind internal automated eval of objective tone on sensitive topics (cards label the row Tone 1). Higher scores mean a more appropriate tone while remaining safe. Lab-internal dataset and runner.",
+    "summary": "Measures whether the model uses an objective, appropriate tone when it answers prompts on sensitive topics.",
+    "family": "Google DeepMind safety evaluations",
+    "maintainers": [
+      {
+        "name": "Google DeepMind",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+        "title": "Gemini 3.8 Flash model card"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "internal",
+      "status": "draft",
+      "changes": "Google DeepMind updates query sets and automated graders; card deltas are not always comparable across releases.",
+      "scores": [
+        {
+          "key": "tone_ok",
+          "displayName": "Objective tone",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "Whether the response meets the automated objective-tone rubric on a sensitive topic."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "tone_rate",
+          "displayName": "Objective tone rate",
+          "score": "tone_ok",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of prompts meeting the objective-tone rubric. Higher is better."
+        }
+      ]
+    }
+  ]
+}

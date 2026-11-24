@@ -1,0 +1,71 @@
+{
+  "eval": {
+    "slug": "anthropic-oss-fuzz",
+    "displayName": "Anthropic OSS-Fuzz Eval",
+    "aliases": ["OSS-Fuzz", "OSS-Fuzz corpus crash severity ladder"],
+    "description": "Anthropic internal cyber eval that runs agents against targets drawn from the public OSS-Fuzz corpus (on the order of thousands of entry points across about a thousand projects). Cards report graded scores from no hit through higher-severity crash tiers and rates of non-zero or top scores. Dataset and runner are lab-internal.",
+    "summary": "Measures how well AI agents find software bugs that cause crashes in real open-source programs.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://anthropic.com/claude-opus-5-system-card"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://anthropic.com/claude-opus-5-system-card",
+        "title": "Claude Opus 5 system card (OSS-Fuzz results)"
+      },
+      {
+        "kind": "blog",
+        "url": "https://www.anthropic.com/research/mythos-preview",
+        "title": "Mythos Preview cyber safety report (OSS-Fuzz severity ladder)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["cyber"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "card-reported",
+      "status": "draft",
+      "changes": "Anthropic reports OSS-Fuzz agent scores across system cards; exact task bank and thresholds are not published.",
+      "scores": [
+        {
+          "key": "score",
+          "displayName": "Target score",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Per-target graded score from Anthropic's harness (cards use thresholds such as above 0, at least 0.4, and 1.0)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "nonzero_score_rate",
+          "displayName": "Non-zero score rate",
+          "score": "score",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of targets with score above 0 (also reported as vulnerability identification rate or inverse zero-score rate)."
+        }
+      ]
+    }
+  ]
+}

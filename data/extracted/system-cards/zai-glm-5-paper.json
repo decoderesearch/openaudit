@@ -1,0 +1,340 @@
+{
+  "document": "zai-glm-5-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "zai-org/GLM-5"
+    }
+  ],
+  "pageCount": 40,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "200K",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "progressively extend context length from 4K to 200K,"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (foundation / large language model)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present GLM-5, a next-generation foundation model designed to transition"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "Interleaved Thinking, Preserved Thinking, and Turn-level Thinking",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "the model supports three distinct thinking characteristics (see Figure 7),"
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "744B",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "# Total Parameters            355B        744B"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "40B",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "# Activated Parameters         32B         40B"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "MoE with DSA (DeepSeek Sparse Attention); 744B total / 40B active",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "This results in a 744B parameter model (40B active\nparameters)"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "28.5 trillion tokens for the base model (web, code, math & science; mid-training long-context and agentic data)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "totaling 28.5 trillion tokens for the base\nmodel."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "Observed reward hacking in slides RL (hard truncation; excessive spacing/layout manipulation)",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "During training, we observe several forms of reward hacking behaviors, such as"
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "[CyberGym](/evals/cybergym) 43.2; significant improvement over GLM-4.7, second only to Claude Opus 4.5",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "On the cybersecurity coding benchmark (i.e., CyberGym),"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The technical report has no dedicated safety, refusal, jailbreak, or harmful-capability evaluation section beyond [CyberGym](/evals/cybergym) coding scores.", "tone": "mixed",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "We first assess GLM-5 with frontier models on agentic, reasoning, and coding (ARC) benchmarks."
+      }
+    },
+    {
+      "text": "On [CyberGym](/evals/cybergym), GLM-5 improves substantially over GLM-4.7 and ranks second only to Claude Opus 4.5 among reported models.", "tone": "bad",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "GLM-5 makes a significant improvement over GLM-4.7, second only to Claude Opus 4.5."
+      }
+    },
+    {
+      "text": "During slides reinforcement learning (RL) training, the authors observed reward hacking such as hard truncation of overlong content and excessive spacing or layout manipulation.", "tone": "bad",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "During training, we observe several forms of reward hacking behaviors, such as"
+      }
+    },
+    {
+      "text": "An 8-point Artificial Analysis Intelligence Index gain over GLM-4.7 is attributed in part to improvements in knowledge/hallucination, without a separate hallucination score in this paper.", "tone": "mixed",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "and knowledge/hallucination. This is the first time an open weights model has achieved a score of 50"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "CyberGym",
+      "model": "zai-org/GLM-5",
+      "metric": "Pass@1",
+      "value": 43.2,
+      "unit": "percent",
+      "settings": {
+        "harness": "Claude Code 2.1.18",
+        "other": "think mode, no web tools; temperature=1.0, top_p=1.0, max_new_tokens=32000; 250-minute timeout per task; single-run Pass@1 over 1,507 tasks"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 7",
+        "quote": " CyberGym                     43.2"
+      }
+    },
+    {
+      "rawEvalName": "CyberGym",
+      "model": "zai-org/GLM-4.7",
+      "metric": "Pass@1",
+      "value": 23.5,
+      "unit": "percent",
+      "settings": {
+        "harness": "Claude Code 2.1.18",
+        "other": "think mode, no web tools; single-run Pass@1 over 1,507 tasks"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 7",
+        "quote": " CyberGym                     43.2      23.5"
+      }
+    },
+    {
+      "rawEvalName": "CyberGym",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "Pass@1",
+      "value": 17.3,
+      "unit": "percent",
+      "settings": {
+        "harness": "Claude Code 2.1.18",
+        "other": "think mode, no web tools; single-run Pass@1 over 1,507 tasks"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 7",
+        "quote": " CyberGym                     43.2      23.5         17.3"
+      }
+    },
+    {
+      "rawEvalName": "CyberGym",
+      "model": "moonshotai/Kimi-K2.5",
+      "metric": "Pass@1",
+      "value": 41.3,
+      "unit": "percent",
+      "settings": {
+        "harness": "Claude Code 2.1.18",
+        "other": "think mode, no web tools; single-run Pass@1 over 1,507 tasks"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 7",
+        "quote": " CyberGym                     43.2      23.5         17.3     41.3"
+      }
+    },
+    {
+      "rawEvalName": "CyberGym",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "Pass@1",
+      "value": 50.6,
+      "unit": "percent",
+      "settings": {
+        "harness": "Claude Code 2.1.18",
+        "other": "think mode, no web tools; single-run Pass@1 over 1,507 tasks"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 7",
+        "quote": " CyberGym                     43.2      23.5         17.3     41.3     50.6"
+      }
+    },
+    {
+      "rawEvalName": "CyberGym",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "Pass@1",
+      "value": 39.9,
+      "unit": "percent",
+      "settings": {
+        "harness": "Claude Code 2.1.18",
+        "other": "think mode, no web tools; single-run Pass@1 over 1,507 tasks"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 7",
+        "quote": " CyberGym                     43.2      23.5         17.3     41.3     50.6      39.9"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:59:54Z"
+  },
+  "notes": "Technical report on GLM-5 agentic/coding capabilities; no safety system card section. Safety-relevant evalResults limited to CyberGym (cybersecurity coding / dangerous-capability style). Skipped all general capability tables (HLE, AIME, SWE-bench, Terminal-Bench, BrowseComp, MCP-Atlas, τ²-Bench, Vending-Bench, CC-Bench-V2, base SimpleQA/MMLU/etc.). GPT-5.2 has no CyberGym score (-). Reward-hacking topic reflects training-time observations in slides RL, not a finished-model safety eval. Figure 1 bar charts omitted (capability). Andon Labs ran Vending-Bench 2 but that is not a safety eval, so not listed under testers."
+}

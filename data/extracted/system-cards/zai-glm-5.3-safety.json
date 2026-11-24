@@ -1,0 +1,401 @@
+{
+  "document": "zai-glm-5.3-safety",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "zai-org/GLM-5.3"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "not_stated"
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "not_stated"
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "vulnerability discovery data and authorized security environments; differential training data; adversarial data covering jailbreak variants, disguised intent, and other attempts to evade safety review",
+      "source": {
+        "page": "From vulnerability discovery to multistep security analysis",
+        "quote": "As part of post-training, we introduced vulnerability discovery data and authorized security environments into the training mix."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [
+    {
+      "domain": "cyber",
+      "labLabel": "clear dual-use risks",
+      "phase": "unspecified",
+      "source": {
+        "page": "Preparing GLM-5.3 for Open Release",
+        "quote": "They also create clear dual-use risks. We are therefore taking a staged approach to release."
+      }
+    }
+  ],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "an external classifier identifies high-risk requests and helps prevent clearly harmful activity",
+      "source": {
+        "page": "Safety and staged release",
+        "quote": "In our hosted services, an external classifier identifies high-risk requests and helps prevent clearly harmful activity."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "adversarial data covering jailbreak variants, disguised intent, and other attempts to evade safety review",
+      "source": {
+        "page": "Safety and staged release",
+        "quote": "We also constructed adversarial data covering jailbreak variants, disguised intent, and other attempts to evade safety review."
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": true,
+      "headline": "evaluations cover unauthorized intrusion and other clearly malicious activity; red teams test manipulation into harmful activity",
+      "source": {
+        "page": "Safety and staged release",
+        "quote": "These evaluations examine both whether the model can be manipulated into supporting harmful activity and whether its safeguards interfere with legitimate security work."
+      }
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": true,
+      "headline": "A reasoning monitor assesses risk during task execution across multiple steps",
+      "source": {
+        "page": "Safety and staged release",
+        "quote": "A reasoning monitor assesses risk during task execution. It is designed to detect harmful objectives that may emerge across multiple steps"
+      }
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "[CyberGym](/evals/cybergym) 84.5%; [ExploitBench](/evals/exploitbench) 54.4%; [ExploitGym](/evals/exploitgym) 105 tasks in two hours, 130 in six hours",
+      "source": {
+        "page": "From vulnerability discovery to multistep security analysis",
+        "quote": "CyberGym begins with white-box source code and tests whether a model can identify and validate vulnerabilities by triggering faults. GLM-5.3 scores 84.5%"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": true,
+      "headline": "universities and professional security teams evaluate GLM models on real-world codebases; partners will red-team before broader release",
+      "source": {
+        "page": "From benchmarks to real software",
+        "quote": "We have also worked with universities and professional security teams to evaluate GLM models on real-world codebases in authorized settings."
+      }
+    }
+  ],
+  "testers": [
+    {
+      "name": "universities and professional security teams",
+      "scope": "evaluate GLM models on real-world codebases in authorized settings",
+      "source": {
+        "page": "From benchmarks to real software",
+        "quote": "We have also worked with universities and professional security teams to evaluate GLM models on real-world codebases in authorized settings."
+      }
+    }
+  ],
+  "findings": [
+    {
+      "text": "Z.ai cites a prior case where GLM-5.2 helped Hugging Face investigate an AI that autonomously bypassed its own safeguards.", "tone": "mixed",
+      "source": {
+        "page": "Preparing GLM-5.3 for Open Release",
+        "quote": "When GLM-5.2 helped Hugging Face investigate an incident in which an AI autonomously bypassed its own safeguards, it highlighted a broader shift."
+      }
+    },
+    {
+      "text": "Release is staged: selected security partners first, then broader API access, then complete model weights after safety evaluations.", "tone": "good",
+      "source": {
+        "page": "Preparing GLM-5.3 for Open Release",
+        "quote": "Selected security partners will first evaluate GLM-5.3 in controlled settings. Broader access and API availability will follow. Once the necessary safety evaluations and release preparations are complete, we will publish GLM-5.3’s complete model weights."
+      }
+    },
+    {
+      "text": "Safeguards use three layers: an external classifier, a reasoning monitor, and deep safety alignment in the model.", "tone": "good",
+      "source": {
+        "page": "Safety and staged release",
+        "quote": "For GLM-5.3, we use a defense-in-depth approach with three complementary layers."
+      }
+    },
+    {
+      "text": "Only model-level alignment ships with the open-weight checkpoint; hosted classifiers and monitors do not.", "tone": "mixed",
+      "source": {
+        "page": "Safety and staged release",
+        "quote": "Hosted classifiers and monitors apply to our services, but they do not automatically accompany the model into every local deployment. Model-level alignment is the safety layer included in the released checkpoint."
+      }
+    },
+    {
+      "text": "Across authorized real-world evaluations, the GLM series produced 2,436 vulnerability findings in 269 projects, including 1,097 medium-to-high severity.", "tone": "mixed",
+      "source": {
+        "page": "From benchmarks to real software",
+        "quote": "Across this work, the GLM series has produced 2,436 vulnerability findings across 269 projects, including 1,097 categorized as medium-to-high severity."
+      }
+    },
+    {
+      "text": "Z.ai created a Security Disclosure Ledger that can publish a cryptographic hash for issues still under coordinated disclosure.", "tone": "neutral",
+      "source": {
+        "page": "Discovery must be followed by responsible disclosure",
+        "quote": "For vulnerabilities still under coordinated disclosure, the ledger can publish a cryptographic hash. This allows a finding to be verified later without prematurely revealing operational details."
+      }
+    },
+    {
+      "text": "The lab is launching the OpenVuln initiative to help audit open-source projects and support disclosure and remediation.", "tone": "good",
+      "source": {
+        "page": "Launching the OpenVuln initiative",
+        "quote": "To help address this imbalance, we are launching the OpenVuln initiative alongside GLM-5.3."
+      }
+    },
+    {
+      "text": "The lab states that keywords alone cannot reliably tell authorized security work from attack intent.", "tone": "mixed",
+      "source": {
+        "page": "Safety and staged release",
+        "quote": "Keywords alone cannot reliably distinguish these cases. Intent, authorization, context, target, and potential impact all matter."
+      }
+    },
+    {
+      "text": "The lab says model-level safeguards raise the barrier to abuse but cannot give absolute control once weights are public.", "tone": "mixed",
+      "source": {
+        "page": "Safety and staged release",
+        "quote": "Once model weights are public, no developer can guarantee control over every downstream modification or use. Model-level safeguards can raise the barrier to abuse, but they cannot provide absolute control."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "CyberGym",
+      "model": "zai-org/GLM-5.3",
+      "metric": "score",
+      "value": 84.5,
+      "unit": "percent",
+      "source": {
+        "page": "From vulnerability discovery to multistep security analysis",
+        "quote": "GLM-5.3 scores 84.5%, compared with 77.2% for GLM-5.2."
+      }
+    },
+    {
+      "rawEvalName": "CyberGym",
+      "model": "zai-org/GLM-5.2",
+      "metric": "score",
+      "value": 77.2,
+      "unit": "percent",
+      "source": {
+        "page": "From vulnerability discovery to multistep security analysis",
+        "quote": "GLM-5.3 scores 84.5%, compared with 77.2% for GLM-5.2."
+      }
+    },
+    {
+      "rawEvalName": "ExploitBench",
+      "model": "zai-org/GLM-5.3",
+      "metric": "score",
+      "value": 54.4,
+      "unit": "percent",
+      "source": {
+        "page": "From vulnerability discovery to multistep security analysis",
+        "quote": "GLM-5.3 reaches 54.4%, more than twice GLM-5.2’s 24.4%."
+      }
+    },
+    {
+      "rawEvalName": "ExploitBench",
+      "model": "zai-org/GLM-5.2",
+      "metric": "score",
+      "value": 24.4,
+      "unit": "percent",
+      "source": {
+        "page": "From vulnerability discovery to multistep security analysis",
+        "quote": "GLM-5.3 reaches 54.4%, more than twice GLM-5.2’s 24.4%."
+      }
+    },
+    {
+      "rawEvalName": "ExploitGym",
+      "model": "zai-org/GLM-5.3",
+      "metric": "completed exploitation tasks",
+      "value": 105,
+      "unit": "count",
+      "settings": {
+        "other": "within two hours; normalized evaluation budgets"
+      },
+      "source": {
+        "page": "From vulnerability discovery to multistep security analysis",
+        "quote": "GLM-5.3 completes 105 tasks within two hours and 130 within six hours, compared with 29 and 39 for GLM-5.2."
+      }
+    },
+    {
+      "rawEvalName": "ExploitGym",
+      "model": "zai-org/GLM-5.3",
+      "metric": "completed exploitation tasks",
+      "value": 130,
+      "unit": "count",
+      "settings": {
+        "other": "within six hours; normalized evaluation budgets"
+      },
+      "source": {
+        "page": "From vulnerability discovery to multistep security analysis",
+        "quote": "GLM-5.3 completes 105 tasks within two hours and 130 within six hours, compared with 29 and 39 for GLM-5.2."
+      }
+    },
+    {
+      "rawEvalName": "ExploitGym",
+      "model": "zai-org/GLM-5.2",
+      "metric": "completed exploitation tasks",
+      "value": 29,
+      "unit": "count",
+      "settings": {
+        "other": "within two hours; normalized evaluation budgets"
+      },
+      "source": {
+        "page": "From vulnerability discovery to multistep security analysis",
+        "quote": "GLM-5.3 completes 105 tasks within two hours and 130 within six hours, compared with 29 and 39 for GLM-5.2."
+      }
+    },
+    {
+      "rawEvalName": "ExploitGym",
+      "model": "zai-org/GLM-5.2",
+      "metric": "completed exploitation tasks",
+      "value": 39,
+      "unit": "count",
+      "settings": {
+        "other": "within six hours; normalized evaluation budgets"
+      },
+      "source": {
+        "page": "From vulnerability discovery to multistep security analysis",
+        "quote": "GLM-5.3 completes 105 tasks within two hours and 130 within six hours, compared with 29 and 39 for GLM-5.2."
+      }
+    },
+    {
+      "rawEvalName": "real-world authorized codebase evaluations",
+      "rawModelName": "GLM series",
+      "metric": "vulnerability findings",
+      "value": 2436,
+      "unit": "count",
+      "source": {
+        "page": "From benchmarks to real software",
+        "quote": "Across this work, the GLM series has produced 2,436 vulnerability findings across 269 projects, including 1,097 categorized as medium-to-high severity."
+      }
+    },
+    {
+      "rawEvalName": "real-world authorized codebase evaluations",
+      "rawModelName": "GLM series",
+      "metric": "projects",
+      "value": 269,
+      "unit": "count",
+      "source": {
+        "page": "From benchmarks to real software",
+        "quote": "Across this work, the GLM series has produced 2,436 vulnerability findings across 269 projects, including 1,097 categorized as medium-to-high severity."
+      }
+    },
+    {
+      "rawEvalName": "real-world authorized codebase evaluations",
+      "rawModelName": "GLM series",
+      "metric": "medium-to-high severity findings",
+      "value": 1097,
+      "unit": "count",
+      "source": {
+        "page": "From benchmarks to real software",
+        "quote": "Across this work, the GLM series has produced 2,436 vulnerability findings across 269 projects, including 1,097 categorized as medium-to-high severity."
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T07:46:05Z"
+  },
+  "notes": "Source is a LinkedIn Pulse post (web page), not a PDF; no pageCount. Section headings used as page. No formal risk framework (ASL/Preparedness/FSF); only narrative 'clear dual-use risks' with staged release—level left out. No safety numeric rates (jailbreak ASR, refusal rates). Testers named only as 'universities and professional security teams' and unnamed future 'security partners'. Real-world 2,436/269/1,097 figures are for 'GLM series', not GLM-5.3 alone. Quotes use curly apostrophe in GLM-5.3’s as in the fetched text. No charts without numbers."
+}

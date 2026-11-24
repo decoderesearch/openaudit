@@ -1,0 +1,73 @@
+{
+  "eval": {
+    "slug": "protocolqa-open-ended",
+    "displayName": "ProtocolQA Open-Ended",
+    "aliases": [
+      "ProtocolQA Open Ended",
+      "ProtocolQA open-ended",
+      "Biological capability (High) — ProtocolQA Open-Ended",
+      "ProtocolQA Open-Ended (refusal-adjusted)",
+      "ProtocolQA Open-Ended — consensus expert baseline",
+      "ProtocolQA Open-Ended — median expert baseline",
+      "ProtocolQA Open-Ended consensus expert baseline",
+      "ProtocolQA Open-Ended median expert baseline"
+    ],
+    "description": "OpenAI open-ended adaptation of FutureHouse LAB-Bench ProtocolQA. Models get short-answer protocol troubleshooting items made from 108 multiple-choice seeds: a flawed common lab protocol, the failed wet-lab outcome, and a request for the fix. Graded for accuracy against expert answers; cards also report expert consensus and median baselines. Dataset and runner are lab-internal.",
+    "summary": "Tests whether the model can find the error in a failed lab protocol and give the correct fix.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://deploymentsafety.openai.com/gpt-5/protocolqa-open-ended"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-5/protocolqa-open-ended",
+        "title": "GPT-5 system card (ProtocolQA Open-Ended)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "human"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "open-ended-108",
+      "status": "draft",
+      "changes": "OpenAI open-ended rewrite of 108 LAB-Bench ProtocolQA items with PhD expert baselining; refusal-adjusted accuracy appears on some cards.",
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The short answer matches the expert fix for the flawed protocol (refusal-adjusted variants count safe refusals as correct on some cards)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of items graded correct. Cards also report pass@1 and expert consensus or median baselines."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "openaudit-web",
+  // Our Cloudflare account. A fork sets its own, and its own resource ids below.
+  "account_id": "15b91c8dab7a96ffcad42dd6c80e2f51",
+  // The password gate, then the OpenNext Worker (.open-next/worker.js).
+  "main": "worker.ts",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": { "directory": ".open-next/assets", "binding": "ASSETS" },
+  "observability": { "enabled": true },
+  "version_metadata": { "binding": "CF_VERSION_METADATA" },
+  // Run near Neon (aws us-east-1): a page makes many queries, and each one crosses this distance.
+  // Smart mode needs steady traffic from many locations before it moves the Worker.
+  "placement": { "region": "aws:us-east-1" },
+  // Locally, CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE gives the database. The id
+  // is the Hyperdrive config of a dev Neon branch.
+  "hyperdrive": [{ "binding": "HYPERDRIVE", "id": "a03403a3059f413896861acec6fcd25a" }],
+  // Per-IP limits (lib/server/limits.ts). STRICT: sign-in emails. ONCE: the Report and
+  // Subscribe forms. EVAL: excerpts and run logs. GENERAL: search and price quotes. Named environments do not inherit these, so
+  // production has its own.
+  "ratelimits": [
+    { "name": "RATE_LIMIT_STRICT", "namespace_id": "1001", "simple": { "limit": 10, "period": 60 } },
+    { "name": "RATE_LIMIT_GENERAL", "namespace_id": "1002", "simple": { "limit": 300, "period": 60 } },
+    { "name": "RATE_LIMIT_EVAL", "namespace_id": "1003", "simple": { "limit": 30, "period": 60 } },
+    { "name": "RATE_LIMIT_ONCE", "namespace_id": "1004", "simple": { "limit": 1, "period": 60 } }
+  ],
+  "env": {
+    // `wrangler deploy --env production`. Build it with the same NEXT_PUBLIC_URL: Next puts that
+    // value in the bundle.
+    "production": {
+      "name": "openaudit",
+      // Only the custom domains serve the site. SITE_PASSWORD keeps them private until launch.
+      "workers_dev": false,
+      "preview_urls": false,
+      "version_metadata": { "binding": "CF_VERSION_METADATA" },
+      "routes": [
+        { "pattern": "openaudit.com", "custom_domain": true },
+        { "pattern": "www.openaudit.com", "custom_domain": true }
+      ],
+      // Hyperdrive config `openaudit-production` (Neon branch `production`), with no query cache.
+      "hyperdrive": [{ "binding": "HYPERDRIVE", "id": "9e9eef4d858b4cc68b5bdeda2bd09354" }],
+      "ratelimits": [
+        { "name": "RATE_LIMIT_STRICT", "namespace_id": "2001", "simple": { "limit": 10, "period": 60 } },
+        { "name": "RATE_LIMIT_GENERAL", "namespace_id": "2002", "simple": { "limit": 300, "period": 60 } },
+        { "name": "RATE_LIMIT_EVAL", "namespace_id": "2003", "simple": { "limit": 30, "period": 60 } },
+        { "name": "RATE_LIMIT_ONCE", "namespace_id": "2004", "simple": { "limit": 1, "period": 60 } }
+      ],
+      "vars": {
+        "NEXT_PUBLIC_URL": "https://openaudit.com",
+        "BETTER_AUTH_URL": "https://openaudit.com",
+        // Sign-in is off in production for now: no sign-in button, and the auth routes return 404.
+        "OPENAUDIT_SIGN_IN": "0",
+        "OPENAUDIT_RUNS": "1",
+        // The site assistant (Ask OpenAudit). It needs the ANTHROPIC_API_KEY secret.
+        "OPENAUDIT_ASK": "1",
+        "RUN_QUEUE_ID": "783ca8cbfb474ecea2ff380509261b06",
+        "R2_ACCOUNT_ID": "15b91c8dab7a96ffcad42dd6c80e2f51",
+        "R2_BUCKET": "openaudit",
+        "EMAIL_FROM_ADDRESS": "OpenAudit <login@mail.openaudit.com>",
+        "REPLY_TO_ADDRESS": "OpenAudit <support@openaudit.com>",
+        // Only production sends the update email (lib/server/update-digest.ts). It has no daily
+        // cron, so only an admin sends (/admin/updates).
+        "UPDATES_SEND": "1"
+      }
+      // Secrets: BETTER_AUTH_SECRET, BOOTSTRAP_ADMIN_EMAILS, RESEND_API_KEY,
+      // CLOUDFLARE_TURNSTILE_SITEKEY, CLOUDFLARE_TURNSTILE_SECRETKEY, R2_S3_ENDPOINT,
+      // R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, CLOUDFLARE_RUN_QUEUE_WRITE_TOKEN,
+      // RUNNER_NOTIFY_TOKEN, RESEND_WEBHOOK_SECRET, ANTHROPIC_API_KEY, SITE_PASSWORD and SITE_LINK_KEY (the gate in lib/site-gate.ts;
+      // remove them at launch).
+    }
+  }
+}

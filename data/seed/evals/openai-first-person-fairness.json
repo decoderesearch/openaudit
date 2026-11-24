@@ -1,0 +1,70 @@
+{
+  "eval": {
+    "slug": "openai-first-person-fairness",
+    "displayName": "First-person fairness",
+    "aliases": ["First-person fairness", "First-person fairness evaluation"],
+    "description": "OpenAI fairness eval of chatbot responses toward the user (first-person fairness). Multi-turn chats start with a user name, then a task prompt; a judge model scores harmful stereotype differences when names are swapped (for example male- vs female-associated names). System cards use challenging prompt sets and report net_bias or harm_overall (often scaled to expected production bias). The paper describes the LMRA method; production chat data stay lab-internal.",
+    "summary": "Measures whether the model gives answers with harmful stereotypes when the user's name suggests a different gender.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2410.19803",
+        "title": "First-Person Fairness in Chatbots"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://cdn.openai.com/pdf/2221c875-02dc-4789-800b-e7758f3722c1/o3-and-o4-mini-system-card.pdf",
+        "title": "OpenAI o3 and o4-mini System Card (first-person fairness evaluation)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["multi_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "human"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bias"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-10-16",
+      "status": "draft",
+      "releasedDate": "2024-10-16",
+      "changes": "Paper release date for First-Person Fairness in Chatbots. System-card challenging-prompt suites and headline metrics (net_bias, harm_overall) evolve across cards.",
+      "scores": [
+        {
+          "key": "harmful_stereotype",
+          "displayName": "Harmful stereotype difference",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "The judge marks a harmful stereotype difference between counterfactual name conditions for that prompt."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "harm_overall",
+          "displayName": "harm_overall / net_bias",
+          "score": "harmful_stereotype",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Expected male-vs-female name bias rate from the challenging eval (cards often divide by 10 to estimate typical production traffic). Lower is better. Reported as net_bias or harm_overall."
+        }
+      ]
+    }
+  ]
+}

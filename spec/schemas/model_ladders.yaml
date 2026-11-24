@@ -1,0 +1,78 @@
+$defs:
+  ModelLadders:
+    type: object
+    description: >-
+      The default models for the LLM jobs that OpenAudit runs itself, from spec/model-ladders.yaml.
+      A tier is a ladder of models of about the same quality and price from different labs, best
+      first. A role uses a tier or its own list. For a target model, a role skips the models of the
+      target's lab.
+    required: [labs, tiers, roles]
+    additionalProperties: false
+    properties:
+      labs:
+        type: object
+        description: >-
+          Other name prefixes of a lab, to the prefix that the ladders use (`meta-llama` to
+          `meta`).
+        additionalProperties:
+          $ref: '#/$defs/LabPrefix'
+      tiers:
+        type: object
+        additionalProperties:
+          $ref: '#/$defs/ModelTier'
+      roles:
+        type: object
+        additionalProperties:
+          $ref: '#/$defs/LadderRole'
+      openWeights:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/LadderModel'
+        description: The models in the ladders that have open weights.
+
+  LabPrefix:
+    type: string
+    pattern: '^[a-z0-9][a-z0-9-]*$'
+
+  LadderModel:
+    type: string
+    pattern: '^[a-z0-9][a-z0-9-]*/[A-Za-z0-9][A-Za-z0-9._-]*$'
+    description: An OpenRouter model id (`anthropic/claude-sonnet-5.5`).
+
+  ModelTier:
+    type: object
+    required: [description, models]
+    additionalProperties: false
+    properties:
+      description:
+        type: string
+        minLength: 1
+      models:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/LadderModel'
+        description: Best first. At most one model per lab, so that each target gets a model.
+
+  LadderRole:
+    type: object
+    description: A job and its models. It has a `tier` or `models`, not both.
+    required: [description]
+    additionalProperties: false
+    properties:
+      description:
+        type: string
+        minLength: 1
+      tier:
+        type: string
+        minLength: 1
+        description: The name of a tier in `tiers`.
+      models:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/LadderModel'
+        description: The role's own ladder, best first, in place of a tier.

@@ -1,0 +1,84 @@
+{
+  "eval": {
+    "slug": "openai-image-input-evaluations",
+    "displayName": "Image input evaluations",
+    "aliases": [
+      "Image input",
+      "Image input evaluations — attack planning",
+      "Image input evaluations — illicit",
+      "Image input evaluations — violence",
+      "Image input evaluations — erotic",
+      "Image input evaluations — hate",
+      "Image input evaluations — extremism",
+      "Image input evaluations — self-harm",
+      "Image input evaluations — harms-erotic",
+      "Image input evaluations (hate)",
+      "Image input evaluations (extremism)",
+      "Image input evaluations (self-harm)",
+      "Image input evaluations (harms-erotic)",
+      "Image input — hate",
+      "Image input — extremism",
+      "Image input — self-harm",
+      "Image input — harms-erotic",
+      "Image input — illicit",
+      "Image input — attack planning"
+    ],
+    "description": "OpenAI internal disallowed-content evals for combined text-and-image inputs, introduced with ChatGPT Agent. Categories include hate, extremism, self-harm, and harms-erotic (plus illicit and attack planning in some cards). Scored as not_unsafe / safe completion without production safeguards. Dataset and runner are lab-internal.",
+    "summary": "Tests whether the model refuses to give harmful content when a request uses both text and images.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://deploymentsafety.openai.com/gpt-6-astra/gpt-6-astra.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-6-astra/gpt-6-astra.pdf",
+        "title": "GPT-6 Astra system card (image input evaluations)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "self_harm"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "chatgpt-agent",
+      "status": "draft",
+      "changes": "OpenAI reports that policies, graders, and datasets evolve; scores across cards are not always comparable.",
+      "scores": [
+        {
+          "key": "not_unsafe",
+          "displayName": "Not unsafe",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model output for a disallowed text-plus-image input is not classified as unsafe."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "not_unsafe_rate",
+          "displayName": "Not-unsafe / safe-completion rate",
+          "score": "not_unsafe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of image-input cases scored not_unsafe (also reported as safe completion). Higher is better. Per category."
+        }
+      ]
+    }
+  ]
+}

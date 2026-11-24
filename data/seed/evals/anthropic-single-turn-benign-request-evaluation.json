@@ -1,0 +1,70 @@
+{
+  "eval": {
+    "slug": "anthropic-single-turn-benign-request-evaluation",
+    "displayName": "Single-turn benign request evaluation (Anthropic)",
+    "aliases": [
+      "Single-turn benign request evaluation",
+      "Single-turn benign request",
+      "Single-turn benign requests",
+      "Single-turn benign request evaluation by language"
+    ],
+    "description": "Anthropic internal single-turn over-refusal eval. Prompts cover the same policy areas and languages as the harmful set, but are appropriate to answer. Cards report the over-refusal rate (share of benign prompts the model declines).",
+    "summary": "Measures how often the model refuses harmless requests that it should answer.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+        "title": "Claude Opus 5.5 System Card (PDF)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": []
+    },
+    "visibility": "public",
+    "family": "Anthropic safeguards evaluations"
+  },
+  "versions": [
+    {
+      "version": "2026-05-28",
+      "status": "published",
+      "releasedDate": "2026-05-28",
+      "scores": [
+        {
+          "key": "over_refused",
+          "displayName": "Over-refused",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "The model declined a benign prompt that should have been answered."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "over_refusal_rate",
+          "displayName": "Over-refusal rate",
+          "score": "over_refused",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of benign single-turn prompts the model over-refused."
+        }
+      ]
+    }
+  ]
+}

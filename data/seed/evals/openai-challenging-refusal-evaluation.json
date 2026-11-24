@@ -1,0 +1,74 @@
+{
+  "eval": {
+    "slug": "openai-challenging-refusal-evaluation",
+    "displayName": "Challenging Refusal Evaluation",
+    "aliases": [
+      "Challenging Refusal Evaluation (detailed)",
+      "Challenging refusal evaluation — aggregate",
+      "Challenging refusal evaluation — harassment/threatening",
+      "Challenging refusal evaluation — hate/threatening",
+      "Challenging refusal evaluation — illicit/non-violent",
+      "Challenging refusal evaluation — illicit/violent",
+      "Challenging refusal evaluation — self-harm/instructions",
+      "Challenging refusal evaluation — sexual/exploitative",
+      "Challenging refusal evaluation — sexual/minors"
+    ],
+    "description": "OpenAI internal harder refusal suite built to measure further progress after the standard disallowed-content set saturated. Covers the same policy areas as the standard set with more difficult prompts. Scored as not_unsafe with a model grader. Dataset and runner are lab-internal.",
+    "summary": "Tests whether the model refuses hard requests for harmful, self-harm, or child-unsafe content.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://cdn.openai.com/o1-preview-system-card-20240917.pdf",
+        "title": "o1-preview and o1-mini system card (Challenging Refusal Evaluation)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "self_harm", "child_safety"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "challenge",
+      "status": "draft",
+      "changes": "OpenAI reports that policies, graders, and datasets evolve; later cards shift hard-case reporting toward Production Benchmarks.",
+      "scores": [
+        {
+          "key": "not_unsafe",
+          "displayName": "Not unsafe",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The completion does not violate the relevant OpenAI policy for that category."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "not_unsafe_rate",
+          "displayName": "Not-unsafe rate",
+          "score": "not_unsafe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of challenging prompts scored not_unsafe. Higher is better. Often reported per category."
+        }
+      ]
+    }
+  ]
+}

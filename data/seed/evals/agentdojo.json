@@ -1,0 +1,186 @@
+{
+  "eval": {
+    "slug": "agentdojo",
+    "displayName": "AgentDojo",
+    "aliases": ["Agent Dojo", "AgentDojo Benchmark"],
+    "description": "Tests tool-using agents against prompt injections in tool outputs. Suites cover banking, Slack, travel, and workspace tasks. Scoring checks utility (user task done) and security (attacker goal not done). Cards often report attack success rate, including pass@1 and pass@5.",
+    "summary": "Tests whether AI agents follow hidden attacker instructions in tool outputs instead of the user's task.",
+    "maintainers": [
+      {
+        "name": "ETH Zurich SRI Lab",
+        "url": "https://github.com/ethz-spylab/agentdojo"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2406.13352",
+        "title": "AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/ethz-spylab/agentdojo",
+        "title": "Official AgentDojo framework"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://agentdojo.spylab.ai/",
+        "title": "AgentDojo docs and results"
+      },
+      {
+        "kind": "leaderboard",
+        "url": "https://agentdojo.spylab.ai/results/",
+        "title": "Inspectable AgentDojo results"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness", "capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["prompt_injection", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-06-19",
+      "status": "published",
+      "releasedDate": "2024-06-19",
+      "changes": "Paper release: 97 user tasks and 629 security test cases across four suites. Inspect Evals later expands workspace into workspace_plus (default run: 1014 injection samples).",
+      "dataset": {
+        "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/b49df6bc9e30b2d24571084bc710b9439b9ffa77/src/inspect_evals/agentdojo",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "banking",
+            "sampleCount": 144,
+            "storage": "pointer"
+          },
+          {
+            "name": "slack",
+            "sampleCount": 100,
+            "storage": "pointer"
+          },
+          {
+            "name": "travel",
+            "sampleCount": 140,
+            "storage": "pointer"
+          },
+          {
+            "name": "workspace_plus",
+            "sampleCount": 630,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "utility",
+          "displayName": "Utility",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the user-task utility check passes on the post-run environment."
+        },
+        {
+          "key": "security",
+          "displayName": "Security",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the injection-task security check fails for the attacker (the agent did not complete the malicious goal)."
+        },
+        {
+          "key": "attack_success",
+          "displayName": "Attack success",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when the attacker goal succeeds (complement of security on injection runs)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "attack_success_rate",
+          "displayName": "Attack success rate",
+          "score": "attack_success",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Share of injection runs where the attacker goal succeeds. Cards also report pass@1 and pass@5 ASR."
+        },
+        {
+          "key": "pass_at_1_attack_success_rate",
+          "displayName": "pass@1 attack success rate",
+          "score": "attack_success",
+          "aggregation": "pass_at_k",
+          "k": 1,
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Attack success with one trial per case (pass@1)."
+        },
+        {
+          "key": "pass_at_5_attack_success_rate",
+          "displayName": "pass@5 attack success rate",
+          "score": "attack_success",
+          "aggregation": "pass_at_k",
+          "k": 5,
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Attack success with up to five trials per case (pass@5)."
+        },
+        {
+          "key": "benign_utility",
+          "displayName": "Benign utility",
+          "score": "utility",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of user tasks solved with no injections present."
+        },
+        {
+          "key": "utility_under_attack",
+          "displayName": "Utility under attack",
+          "score": "utility",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of user tasks still solved when prompt injections are present."
+        },
+        {
+          "key": "security_rate",
+          "displayName": "Security",
+          "score": "security",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Share of injection runs where the agent avoids the attacker goal."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "inspect_evals/agentdojo",
+        "package": "inspect-evals[agentdojo]==0.22.0",
+        "roles": ["target"],
+        "sandbox": "docker",
+        "internet": false
+      }
+    }
+  ]
+}

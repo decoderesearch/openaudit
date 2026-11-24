@@ -1,0 +1,649 @@
+{
+  "document": "meta-llama-guard-4-model_card-system_card",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "meta-llama/Llama-Guard-4-12B"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "natively multimodal; text and multiple images",
+      "source": {
+        "page": "Model Details",
+        "quote": "Llama Guard 4 is a natively multimodal safety classifier with 12 billion parameters trained jointly on text and multiple images."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English and multilingual (French, German, Hindi, Italian, Portuguese, Spanish, Thai)",
+      "source": {
+        "page": "Classifier performance",
+        "quote": "French, German, Hindi, Italian, Portuguese, Spanish, and Thai"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "12 billion",
+      "source": {
+        "page": "Model Architecture",
+        "quote": "The model has 12 billion parameters in total and uses an early fusion transformer architecture with dense layers to keep the overall size small."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "dense early-fusion transformer pruned from Llama 4 Scout MoE (shared expert retained)",
+      "source": {
+        "page": "Model Architecture",
+        "quote": "The model has 12 billion parameters in total and uses an early fusion transformer architecture with dense layers to keep the overall size small."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "blend of Llama Guard 3-8B and Llama Guard 3-11B-vision data, plus multi-image and multilingual data; roughly 3:1 text-only to multimodal",
+      "source": {
+        "page": "Post-Training for Safety Classification",
+        "quote": "We blend the training data from both modalities, with a ratio of roughly 3:1 text-only data to multimodal data containing one or more images."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Classifies prompts and responses as safe or unsafe against MLCommons hazard taxonomy S1–S14",
+      "source": {
+        "page": "Model Details",
+        "quote": "it generates text in its output that indicates whether a given prompt or response is safe or unsafe, and if unsafe, it also lists the content categories violated."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "Hazard category S4: Child Sexual Exploitation",
+      "source": {
+        "page": "Hazard Taxonomy and Policy",
+        "quote": "S4: Child Sexual Exploitation"
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Hazard category S11: Suicide & Self-Harm",
+      "source": {
+        "page": "Hazard Taxonomy and Policy",
+        "quote": "S11: Suicide & Self-Harm"
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "May be susceptible to adversarial attacks that could bypass intended use",
+      "source": {
+        "page": "Limitations",
+        "quote": "Llama Guard 4 may be susceptible to adversarial attacks or prompt injection attacks that could bypass or alter its intended use"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "May be susceptible to prompt injection; points to Prompt Guard 2",
+      "source": {
+        "page": "Limitations",
+        "quote": "Llama Guard 4 may be susceptible to adversarial attacks or prompt injection attacks that could bypass or alter its intended use"
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": true,
+      "headline": "Additional category S14 Code Interpreter Abuse for text-only tool-call use cases",
+      "source": {
+        "page": "Hazard Taxonomy and Policy",
+        "quote": "We include an additional category, Code Interpreter Abuse, for text-only tool-call use cases."
+      }
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "Covers cyber crimes under S2 and Code Interpreter Abuse under S14",
+      "source": {
+        "page": "Hazard Taxonomy and Policy",
+        "quote": "and (6) cyber crimes (ex: hacking)"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "S9 Indiscriminate Weapons includes chemical and biological weapons",
+      "source": {
+        "page": "Hazard Taxonomy and Policy",
+        "quote": "including: (1) chemical weapons (ex: nerve gas), (2) biological weapons (ex: anthrax)"
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Llama Guard 4 roughly matches or exceeds Llama Guard 3 overall on input and output filtering for English, multilingual text, and mixed text and images.", "tone": "good",
+      "source": {
+        "page": "System-level safety",
+        "quote": "We find that Llama Guard 4 roughly matches or exceeds the overall performance of the Llama Guard 3 models on both input and output filtering, for English and multilingual text and for mixed text and images."
+      }
+    },
+    {
+      "text": "In some internal tests, input filtering cut safety violations and raised refusal rate more than output filtering.", "tone": "good",
+      "source": {
+        "page": "System-level safety",
+        "quote": "In some internal tests we have found that input filtering reduces safety violation rate and raises overall refusal rate more than output filtering does, but your experience may vary."
+      }
+    },
+    {
+      "text": "The card omits evals against competitor models because they are typically not aligned with this classifier's safety policy.", "tone": "mixed",
+      "source": {
+        "page": "Classifier performance",
+        "quote": "We omit evals against competitor models, which are typically not aligned with the specific safety policy that this classifier was trained on, limiting our ability to make direct comparisons."
+      }
+    },
+    {
+      "text": "For the multi-image baseline, only the final image was fed to Llama Guard 3-11B-vision, which does not support multiple images.", "tone": "mixed",
+      "source": {
+        "page": "Classifier performance",
+        "quote": "For multi-image prompts, only the final image was input into Llama Guard 3-11B-vision, which does not support multiple images."
+      }
+    },
+    {
+      "text": "S5 Defamation, S8 Intellectual Property, and S13 Elections may need factual, up-to-date knowledge beyond what this classifier provides alone.", "tone": "mixed",
+      "source": {
+        "page": "Limitations",
+        "quote": "Some hazard categories may require factual, up-to-date knowledge to be evaluated fully (for example, [S5] Defamation, [S8] Intellectual Property, and [S13] Elections)."
+      }
+    },
+    {
+      "text": "Performance was tested mostly with prompts of a few images (three most often); results may differ with many more images.", "tone": "mixed",
+      "source": {
+        "page": "Limitations",
+        "quote": "the performance of Llama Guard 4 was tested mostly with prompts containing a few images (three, most frequently), so performance may vary if using it to classify safety with a much larger number of images."
+      }
+    },
+    {
+      "text": "As a large language model (LLM) classifier, it may be bypassed by adversarial or prompt-injection attacks; Meta points users to Prompt Guard 2.", "tone": "bad",
+      "source": {
+        "page": "Limitations",
+        "quote": "Llama Guard 4 may be susceptible to adversarial attacks or prompt injection attacks that could bypass or alter its intended use: see Prompt Guard 2"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "in-house classifier test set",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "recall",
+      "value": 69,
+      "unit": "percent",
+      "settings": {
+        "surface": "English",
+        "other": "output filtering; average over S1–S13 equally weighted"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>English</left></td>\n    <td>69%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "false positive rate",
+      "value": 11,
+      "unit": "percent",
+      "settings": {
+        "surface": "English",
+        "other": "output filtering; average over S1–S13 equally weighted"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>English</left></td>\n    <td>69%</td>\n    <td>11%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "F1",
+      "value": 61,
+      "unit": "percent",
+      "settings": {
+        "surface": "English",
+        "other": "output filtering; average over S1–S13 equally weighted"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>English</left></td>\n    <td>69%</td>\n    <td>11%</td>\n    <td>61%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set vs Llama Guard 3",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "Δ recall",
+      "value": 4,
+      "unit": "percent",
+      "settings": {
+        "surface": "English",
+        "other": "vs Llama Guard 3-8B; output filtering"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>English</left></td>\n    <td>69%</td>\n    <td>11%</td>\n    <td>61%</td>\n    <td>4%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set vs Llama Guard 3",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "Δ false positive rate",
+      "value": -3,
+      "unit": "percent",
+      "settings": {
+        "surface": "English",
+        "other": "vs Llama Guard 3-8B; output filtering"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>English</left></td>\n    <td>69%</td>\n    <td>11%</td>\n    <td>61%</td>\n    <td>4%</td>\n    <td>-3%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set vs Llama Guard 3",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "Δ F1",
+      "value": 8,
+      "unit": "percent",
+      "settings": {
+        "surface": "English",
+        "other": "vs Llama Guard 3-8B; output filtering"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>English</left></td>\n    <td>69%</td>\n    <td>11%</td>\n    <td>61%</td>\n    <td>4%</td>\n    <td>-3%</td>\n    <td>8%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "recall",
+      "value": 43,
+      "unit": "percent",
+      "settings": {
+        "surface": "Multilingual",
+        "other": "output filtering; average over 7 non-English languages of Llama Guard 3-8B"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Multilingual</left></td>\n    <td>43%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "false positive rate",
+      "value": 3,
+      "unit": "percent",
+      "settings": {
+        "surface": "Multilingual",
+        "other": "output filtering; average over 7 non-English languages of Llama Guard 3-8B"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Multilingual</left></td>\n    <td>43%</td>\n    <td>3%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "F1",
+      "value": 51,
+      "unit": "percent",
+      "settings": {
+        "surface": "Multilingual",
+        "other": "output filtering; average over 7 non-English languages of Llama Guard 3-8B"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Multilingual</left></td>\n    <td>43%</td>\n    <td>3%</td>\n    <td>51%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set vs Llama Guard 3",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "Δ recall",
+      "value": -2,
+      "unit": "percent",
+      "settings": {
+        "surface": "Multilingual",
+        "other": "vs Llama Guard 3-8B; output filtering"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Multilingual</left></td>\n    <td>43%</td>\n    <td>3%</td>\n    <td>51%</td>\n    <td>-2%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set vs Llama Guard 3",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "Δ false positive rate",
+      "value": -1,
+      "unit": "percent",
+      "settings": {
+        "surface": "Multilingual",
+        "other": "vs Llama Guard 3-8B; output filtering"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Multilingual</left></td>\n    <td>43%</td>\n    <td>3%</td>\n    <td>51%</td>\n    <td>-2%</td>\n    <td>-1%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set vs Llama Guard 3",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "Δ F1",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "surface": "Multilingual",
+        "other": "vs Llama Guard 3-8B; output filtering"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Multilingual</left></td>\n    <td>43%</td>\n    <td>3%</td>\n    <td>51%</td>\n    <td>-2%</td>\n    <td>-1%</td>\n    <td>0%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "recall",
+      "value": 41,
+      "unit": "percent",
+      "settings": {
+        "surface": "Single-image",
+        "other": "output filtering; average over S1–S13 equally weighted"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Single-image</left></td>\n    <td>41%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "false positive rate",
+      "value": 9,
+      "unit": "percent",
+      "settings": {
+        "surface": "Single-image",
+        "other": "output filtering; average over S1–S13 equally weighted"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Single-image</left></td>\n    <td>41%</td>\n    <td>9%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "F1",
+      "value": 38,
+      "unit": "percent",
+      "settings": {
+        "surface": "Single-image",
+        "other": "output filtering; average over S1–S13 equally weighted"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Single-image</left></td>\n    <td>41%</td>\n    <td>9%</td>\n    <td>38%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set vs Llama Guard 3",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "Δ recall",
+      "value": 10,
+      "unit": "percent",
+      "settings": {
+        "surface": "Single-image",
+        "other": "vs Llama Guard 3-11B-vision; output filtering"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Single-image</left></td>\n    <td>41%</td>\n    <td>9%</td>\n    <td>38%</td>\n    <td>10%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set vs Llama Guard 3",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "Δ false positive rate",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "surface": "Single-image",
+        "other": "vs Llama Guard 3-11B-vision; output filtering"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Single-image</left></td>\n    <td>41%</td>\n    <td>9%</td>\n    <td>38%</td>\n    <td>10%</td>\n    <td>0%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set vs Llama Guard 3",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "Δ F1",
+      "value": 8,
+      "unit": "percent",
+      "settings": {
+        "surface": "Single-image",
+        "other": "vs Llama Guard 3-11B-vision; output filtering"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Single-image</left></td>\n    <td>41%</td>\n    <td>9%</td>\n    <td>38%</td>\n    <td>10%</td>\n    <td>0%</td>\n    <td>8%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "recall",
+      "value": 61,
+      "unit": "percent",
+      "settings": {
+        "surface": "Multi-image",
+        "other": "output filtering; average over S1–S13 equally weighted"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Multi-image</left></td>\n    <td>61%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "false positive rate",
+      "value": 9,
+      "unit": "percent",
+      "settings": {
+        "surface": "Multi-image",
+        "other": "output filtering; average over S1–S13 equally weighted"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Multi-image</left></td>\n    <td>61%</td>\n    <td>9%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "F1",
+      "value": 52,
+      "unit": "percent",
+      "settings": {
+        "surface": "Multi-image",
+        "other": "output filtering; average over S1–S13 equally weighted"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Multi-image</left></td>\n    <td>61%</td>\n    <td>9%</td>\n    <td>52%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set vs Llama Guard 3",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "Δ recall",
+      "value": 20,
+      "unit": "percent",
+      "settings": {
+        "surface": "Multi-image",
+        "other": "vs Llama Guard 3-11B-vision (final image only); output filtering"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Multi-image</left></td>\n    <td>61%</td>\n    <td>9%</td>\n    <td>52%</td>\n    <td>20%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set vs Llama Guard 3",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "Δ false positive rate",
+      "value": -1,
+      "unit": "percent",
+      "settings": {
+        "surface": "Multi-image",
+        "other": "vs Llama Guard 3-11B-vision (final image only); output filtering"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Multi-image</left></td>\n    <td>61%</td>\n    <td>9%</td>\n    <td>52%</td>\n    <td>20%</td>\n    <td>-1%</td>"
+      }
+    },
+    {
+      "rawEvalName": "in-house classifier test set vs Llama Guard 3",
+      "model": "meta-llama/Llama-Guard-4-12B",
+      "metric": "Δ F1",
+      "value": 17,
+      "unit": "percent",
+      "settings": {
+        "surface": "Multi-image",
+        "other": "vs Llama Guard 3-11B-vision (final image only); output filtering"
+      },
+      "source": {
+        "page": "Classifier performance",
+        "table": "Absolute values / vs. Llama Guard 3",
+        "quote": "<td><left>Multi-image</left></td>\n    <td>61%</td>\n    <td>9%</td>\n    <td>52%</td>\n    <td>20%</td>\n    <td>-1%</td>\n    <td>17%</td>"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:33:09Z"
+  },
+  "notes": "Source is a GitHub MODEL_CARD.md (Markdown with HTML tables), not a PDF; no pageCount. Seed date 2025-04-29 is not stated in the card body. Absolute R/FPR/F1 are for Llama Guard 4; Δ columns are vs Llama Guard 3-8B (text) or Llama Guard 3-11B-vision (image). Llama Guard 3-11B-vision is not in the seed. No external testers or formal risk-framework levels. Training compute, license, context window, and release date are not stated. Pruning diagrams have no numeric results. Hate (S10) listed as a hazard category but no bias evals, so bias topic left uncovered."
+}

@@ -1,0 +1,82 @@
+{
+  "eval": {
+    "slug": "reprobait",
+    "displayName": "ReproBAIT",
+    "aliases": [
+      "ReproBAIT (SecureBio)",
+      "ReproBAIT (SecureBio, railfree)",
+      "SecureBio ReproBAIT",
+      "Reproduction of Biological AI Tools (ReproBAIT)"
+    ],
+    "description": "SecureBio long-horizon agent eval: reproduce published biology AI tools (BAIMs) from their papers inside a sandboxed Docker setup with training data and limited GPU time. An evaluation script scores the submitted model on held-out test data as a fraction of the published tool's key metric. Task counts have grown from about nine to ten BAIMs across reports.",
+    "summary": "Measures how well AI agents can rebuild published biology AI tools from their papers.",
+    "family": "SecureBio",
+    "maintainers": [
+      {
+        "name": "SecureBio",
+        "url": "https://securebio.org/benchmarks/"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://securebio.org/resources/gpt-5-6-sol-assessment.pdf",
+        "title": "SecureBio GPT-5.6 Sol assessment (ReproBAIT section)"
+      },
+      {
+        "kind": "blog",
+        "url": "https://securebio.org/blog/gpt-56-sol-pre-release-testing-report/",
+        "title": "GPT-5.6 Sol pre-release testing report"
+      }
+    ],
+    "access": "held_out",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "9-baims",
+      "status": "draft",
+      "changes": "Reports use about 9–10 BAIM reproduction tasks; sandbox and scorer harden over time, so scores are not always comparable across assessments.",
+      "scores": [
+        {
+          "key": "published_metric_fraction",
+          "displayName": "Fraction of published metric",
+          "type": "continuous",
+          "min": 0,
+          "direction": "higher_is_better",
+          "description": "Held-out score of the agent's submitted model, divided by the key metric from the original BAIM paper (may exceed 1)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mean_published_metric_fraction",
+          "displayName": "Mean fraction of published performance",
+          "score": "published_metric_fraction",
+          "aggregation": "mean",
+          "min": 0,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Mean fraction of published BAIM performance across tasks."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "sandbox": "docker",
+        "gpu": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+# A push to main runs the checks and builds the web Worker in parallel. When all pass, it migrates
+# the production database and deploys the build. The runner Workers (staging for dev runs, then
+# production) deploy only when their code changes, or when a manual run asks for it.
+#
+# `openaudit-4core` is the org's paid larger runner, for the slowest jobs. The jobs run only in our
+# org, so a fork's push does not deploy or wait for that runner.
+#
+# Environment `production` secrets: PRODUCTION_DATABASE_URL (Neon branch `production`, direct, not
+# pooled) and CLOUDFLARE_API_TOKEN. Seed import and prod sync stay manual.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      runner:
+        description: Also deploy the runner Worker
+        type: boolean
+        default: false
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Checks
+    if: github.repository_owner == 'decoderesearch'
+    uses: ./.github/workflows/checks.yml
+    with:
+      large-runner: openaudit-4core
+
+  build:
+    name: Build the web Worker
+    if: github.repository_owner == 'decoderesearch'
+    runs-on: openaudit-4core
+    timeout-minutes: 20
+    # The build prerenders pages, and some query the database. An empty one is sufficient.
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: openaudit_build
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/openaudit_build
+      DIRECT_URL: postgres://postgres:postgres@localhost:5432/openaudit_build
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: pnpm exec prisma migrate deploy
+        working-directory: apps/web
+      - uses: actions/cache@v6
+        with:
+          path: apps/web/.next/cache
+          key: next-build-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+      # Next puts NEXT_PUBLIC_URL in the bundle.
+      - run: pnpm cf:build
+        working-directory: apps/web
+        env:
+          NEXT_PUBLIC_URL: https://openaudit.com
+      - uses: actions/upload-artifact@v7
+        with:
+          name: open-next
+          path: apps/web/.open-next
+          include-hidden-files: true
+          retention-days: 7
+
+  deploy:
+    name: Migrate and deploy the web Worker
+    needs: [checks, build]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: pnpm exec prisma migrate deploy
+        working-directory: apps/web
+        env:
+          DIRECT_URL: ${{ secrets.PRODUCTION_DATABASE_URL }}
+      - uses: actions/download-artifact@v8
+        with:
+          name: open-next
+          path: apps/web/.open-next
+      # The deploy step reads bindings locally, and needs a local value for Hyperdrive. It does not
+      # connect to it.
+      - run: pnpm exec wrangler deploy --env production
+        working-directory: apps/web
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE: postgres://postgres:postgres@localhost:5432/openaudit_build
+
+  runner:
+    name: Deploy the runner Workers
+    needs: [checks, deploy]
+    # A manual run has no previous push to compare with, so only its input counts.
+    if: (github.event_name == 'push' && needs.checks.outputs.runner == 'true') || inputs.runner
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: pnpm exec wrangler deploy
+        working-directory: apps/runner-cloud
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - run: pnpm exec wrangler deploy --env production
+        working-directory: apps/runner-cloud
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

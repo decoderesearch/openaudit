@@ -1,0 +1,2265 @@
+{
+  "document": "openai-gpt4o-image-generation-safety_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "openai/gpt-4o",
+      "section": "4o native image generation addendum"
+    }
+  ],
+  "basedOn": "openai-gpt4o-system_card",
+  "pageCount": 13,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "March 25, 2025",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "March 25, 2025"
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "Native image generation (photorealistic output; image inputs and transforms; text in images) within omnimodal GPT-4o",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "It can create photorealistic output. It can take images as inputs"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "not_stated"
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Autoregressive image generation natively embedded in omnimodal GPT-4o (unlike DALL·E diffusion)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "4o image generation is an autoregressive\nmodel natively embedded within ChatGPT."
+      }
+    },
+    "trainingData": {
+      "status": "not_stated"
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Policy refusal and not_unsafe across erotic, violent, and illicit image requests",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "not_unsafe: does the system produce output that violates our model policies?"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "child sexual abuse material (CSAM) scanning, photorealistic-child classifier, and edit bans at launch",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "OpenAI is deeply committed to addressing child safety risks, and we prioritize prevention,"
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Policies aim to prevent images that promote or facilitate self-harm",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "We aim to prevent attempts to generate images that promote or facilitate self-harm"
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "External red teamers used jailbreaks against image-generation safeguards",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "We also enabled red teamers to develop and use various jailbreaks and tactics"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Less demographic bias than DALL·E 3 across gender, race, and skin tone",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "We find that across all of our metrics, 4o image generation exhibits less bias than DALL·E 3."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [
+    {
+      "name": "Scale AI",
+      "scope": "External manual red teaming of 4o image generation with OpenAI Red Teaming Network",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "OpenAI worked with a cohort of vetted external red teamers from our Red Teaming Network and\nScale AI to test 4o image generation."
+      }
+    },
+    {
+      "name": "OpenAI Red Teaming Network",
+      "scope": "External manual adversarial testing including jailbreaks across prioritized risk areas",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "vetted external red teamers from our Red Teaming Network and\nScale AI to test 4o image generation."
+      }
+    }
+  ],
+  "findings": [
+    {
+      "text": "Per the Preparedness Framework, launching 4o image generation did not trigger additional Preparedness evaluations beyond those for GPT-4o.", "tone": "mixed",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "the launch of 4o image generation did not trigger additional Preparedness\nevaluations beyond those originally conducted for GPT-4o."
+      }
+    },
+    {
+      "text": "At launch, editing uploaded photorealistic images of children is not allowed.", "tone": "good",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "At launch, editing uploaded images of photorealistic children will not be allowed."
+      }
+    },
+    {
+      "text": "A refusal blocks prompts that ask for images in the style of a living artist.", "tone": "good",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "We added a refusal which triggers when a user attempts to generate an image in the style of a\nliving artist."
+      }
+    },
+    {
+      "text": "Adult public-figure generation is allowed with policy safeguards, unlike broader DALL·E blocks.", "tone": "mixed",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "At launch, we are not blocking the capability to generate adult public figures but are instead\nimplementing the same safeguards"
+      }
+    },
+    {
+      "text": "The photorealistic-person classifier is tuned to classify borderline cases as child for safety.", "tone": "good",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "we have tuned the classifier to err on the side of caution by classifying borderline or ambiguous cases\nas “child.”"
+      }
+    },
+    {
+      "text": "Gender outputs still predominantly favor male subjects despite improvement over DALL·E 3.", "tone": "mixed",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "despite 4o image generation surpassing DALL·E 3 in gender representation diversity,\nthe outputs still predominantly favor male subjects."
+      }
+    },
+    {
+      "text": "Violence/abuse edge cases use a more permissive approach than prior DALL·E policies, with extra caution for users under 18.", "tone": "mixed",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "We're adopting a more permissive approach for these edge cases compared to\nour previous DALL·E policies, while taking extra caution to protect users who may be under 18."
+      }
+    },
+    {
+      "text": "Provenance at general availability (GA) includes C2PA metadata on all assets plus internal origin tooling.", "tone": "good",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "C2PA metadata on all assets (verifiable origin, industry standard)."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Overall metrics – performance using external red teaming data",
+      "metric": "Not_unsafe",
+      "value": 0.955,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "With system mitigations only (prompt     0.955                        0.941"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "With system mitigations only (prompt blocking and output blocking)"
+      }
+    },
+    {
+      "rawEvalName": "Overall metrics – performance using external red teaming data",
+      "metric": "Not_overrefuse",
+      "value": 0.941,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "With system mitigations only (prompt     0.955                        0.941"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "With system mitigations only (prompt blocking and output blocking)"
+      }
+    },
+    {
+      "rawEvalName": "Overall metrics – performance using external red teaming data",
+      "metric": "Not_unsafe",
+      "value": 0.971,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "With system mitigations and chat model   0.971                        0.856"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "With system mitigations and chat model refusals"
+      }
+    },
+    {
+      "rawEvalName": "Overall metrics – performance using external red teaming data",
+      "metric": "Not_overrefuse",
+      "value": 0.856,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "With system mitigations and chat model   0.971                        0.856"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "With system mitigations and chat model refusals"
+      }
+    },
+    {
+      "rawEvalName": "Overall metrics - performance using automated red teaming data",
+      "metric": "Not_unsafe",
+      "value": 0.969,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "table": "Table 2",
+        "quote": "With system mitigations only (prompt     0.969                        0.899"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "With system mitigations only (prompt blocking and output blocking)"
+      }
+    },
+    {
+      "rawEvalName": "Overall metrics - performance using automated red teaming data",
+      "metric": "Not_overrefuse",
+      "value": 0.899,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "table": "Table 2",
+        "quote": "With system mitigations only (prompt     0.969                        0.899"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "With system mitigations only (prompt blocking and output blocking)"
+      }
+    },
+    {
+      "rawEvalName": "Overall metrics - performance using automated red teaming data",
+      "metric": "Not_unsafe",
+      "value": 0.975,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "table": "Table 2",
+        "quote": "With system mitigations and chat model   0.975                        0.830"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "With system mitigations and chat model refusals"
+      }
+    },
+    {
+      "rawEvalName": "Overall metrics - performance using automated red teaming data",
+      "metric": "Not_overrefuse",
+      "value": 0.83,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "table": "Table 2",
+        "quote": "With system mitigations and chat model   0.975                        0.830"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "With system mitigations and chat model refusals"
+      }
+    },
+    {
+      "rawEvalName": "Overall metrics - performance using real-world scenarios",
+      "metric": "Not_unsafe",
+      "value": 0.929,
+      "unit": "fraction",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "With system mitigations only   0.929                         0.996"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "With system mitigations only (prompt blocking and output blocking)"
+      }
+    },
+    {
+      "rawEvalName": "Overall metrics - performance using real-world scenarios",
+      "metric": "Not_overrefuse",
+      "value": 0.996,
+      "unit": "fraction",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "With system mitigations only   0.929                         0.996"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "With system mitigations only (prompt blocking and output blocking)"
+      }
+    },
+    {
+      "rawEvalName": "Overall metrics - performance using real-world scenarios",
+      "metric": "Not_unsafe",
+      "value": 0.932,
+      "unit": "fraction",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "With system mitigations and    0.932                         0.993"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "With system mitigations and chat model refusals"
+      }
+    },
+    {
+      "rawEvalName": "Overall metrics - performance using real-world scenarios",
+      "metric": "Not_overrefuse",
+      "value": 0.993,
+      "unit": "fraction",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "With system mitigations and    0.932                         0.993"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "With system mitigations and chat model refusals"
+      }
+    },
+    {
+      "rawEvalName": "Results for photorealistic-person classifier",
+      "metric": "precision",
+      "value": 0.905,
+      "unit": "fraction",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Photorealistic            2033          0.905      0.99"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Photorealistic person (adult or child)"
+      },
+      "n": 2033
+    },
+    {
+      "rawEvalName": "Results for photorealistic-person classifier",
+      "metric": "recall",
+      "value": 0.99,
+      "unit": "fraction",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Photorealistic            2033          0.905      0.99"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Photorealistic person (adult or child)"
+      },
+      "n": 2033
+    },
+    {
+      "rawEvalName": "Results for photorealistic-person classifier",
+      "metric": "precision",
+      "value": 0.8,
+      "unit": "fraction",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Photorealistic adult      919           0.80      0.776"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Photorealistic adult"
+      },
+      "n": 919
+    },
+    {
+      "rawEvalName": "Results for photorealistic-person classifier",
+      "metric": "recall",
+      "value": 0.776,
+      "unit": "fraction",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Photorealistic adult      919           0.80      0.776"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Photorealistic adult"
+      },
+      "n": 919
+    },
+    {
+      "rawEvalName": "Results for photorealistic-person classifier",
+      "metric": "precision",
+      "value": 0.8,
+      "unit": "fraction",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Photorealistic child      1113          0.80       0.97"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Photorealistic child"
+      },
+      "n": 1113
+    },
+    {
+      "rawEvalName": "Results for photorealistic-person classifier",
+      "metric": "recall",
+      "value": 0.97,
+      "unit": "fraction",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Photorealistic child      1113          0.80       0.97"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Photorealistic child"
+      },
+      "n": 1113
+    },
+    {
+      "rawEvalName": "Class distributions for gender",
+      "metric": "Male class distribution",
+      "value": 86,
+      "unit": "percent",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Individuals                  DALL·E 3             86%        14%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for gender",
+      "metric": "Female class distribution",
+      "value": 14,
+      "unit": "percent",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Individuals                  DALL·E 3             86%        14%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for gender",
+      "metric": "Male class distribution",
+      "value": 79,
+      "unit": "percent",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "4o image generation       79%        21%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for gender",
+      "metric": "Female class distribution",
+      "value": 21,
+      "unit": "percent",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "4o image generation       79%        21%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for gender",
+      "metric": "Male class distribution",
+      "value": 61,
+      "unit": "percent",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Groups                       DALL·E 3             61%        35%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for gender",
+      "metric": "Female class distribution",
+      "value": 35,
+      "unit": "percent",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Groups                       DALL·E 3             61%        35%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for gender",
+      "metric": "Male class distribution",
+      "value": 56,
+      "unit": "percent",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "4o image generation       56%        44%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for gender",
+      "metric": "Female class distribution",
+      "value": 44,
+      "unit": "percent",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "4o image generation       56%        44%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for gender",
+      "metric": "Shannon Entropy",
+      "value": 0.17,
+      "unit": "score",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Individuals                  DALL·E 3                     0.17                             35%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Individuals; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for gender",
+      "metric": "Frequency of heterogeneous outputs",
+      "value": 35,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Individuals                  DALL·E 3                     0.17                             35%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Individuals; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for gender",
+      "metric": "Shannon Entropy",
+      "value": 0.27,
+      "unit": "score",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "4o image generation               0.27                             46%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Individuals; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for gender",
+      "metric": "Frequency of heterogeneous outputs",
+      "value": 46,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "4o image generation               0.27                             46%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Individuals; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for gender",
+      "metric": "Shannon Entropy",
+      "value": 0.82,
+      "unit": "score",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Groups                       DALL·E 3                     0.82                             95%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Groups; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for gender",
+      "metric": "Frequency of heterogeneous outputs",
+      "value": 95,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Groups                       DALL·E 3                     0.82                             95%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Groups; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for gender",
+      "metric": "Shannon Entropy",
+      "value": 0.95,
+      "unit": "score",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "4o image generation               0.95                             100%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Groups; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for gender",
+      "metric": "Frequency of heterogeneous outputs",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "4o image generation               0.95                             100%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Groups; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "White class distribution",
+      "value": 90,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "Individuals          DALL·E 3          90%     0%          7%      0%       1%        2%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set / Category: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Black class distribution",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "Individuals          DALL·E 3          90%     0%          7%      0%       1%        2%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set / Category: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "East Asian class distribution",
+      "value": 7,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "Individuals          DALL·E 3          90%     0%          7%      0%       1%        2%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set / Category: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Indian class distribution",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "Individuals          DALL·E 3          90%     0%          7%      0%       1%        2%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set / Category: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Latino class distribution",
+      "value": 1,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "Individuals          DALL·E 3          90%     0%          7%      0%       1%        2%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set / Category: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Middle Eastern class distribution",
+      "value": 2,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "Individuals          DALL·E 3          90%     0%          7%      0%       1%        2%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set / Category: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Southeast Asian class distribution",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "Individuals          DALL·E 3          90%     0%          7%      0%       1%        2%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set / Category: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "White class distribution",
+      "value": 67,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "4o image generation    67%     19%         2%      2%       5%        5%            0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set / Category: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Black class distribution",
+      "value": 19,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "4o image generation    67%     19%         2%      2%       5%        5%            0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set / Category: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "East Asian class distribution",
+      "value": 2,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "4o image generation    67%     19%         2%      2%       5%        5%            0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set / Category: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Indian class distribution",
+      "value": 2,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "4o image generation    67%     19%         2%      2%       5%        5%            0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set / Category: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Latino class distribution",
+      "value": 5,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "4o image generation    67%     19%         2%      2%       5%        5%            0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set / Category: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Middle Eastern class distribution",
+      "value": 5,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "4o image generation    67%     19%         2%      2%       5%        5%            0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set / Category: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Southeast Asian class distribution",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "4o image generation    67%     19%         2%      2%       5%        5%            0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set / Category: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "White class distribution",
+      "value": 81,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "Groups               DALL·E 3          81%     3%          13%     0%       2%        1%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set / Category: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Black class distribution",
+      "value": 3,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "Groups               DALL·E 3          81%     3%          13%     0%       2%        1%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set / Category: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "East Asian class distribution",
+      "value": 13,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "Groups               DALL·E 3          81%     3%          13%     0%       2%        1%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set / Category: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Indian class distribution",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "Groups               DALL·E 3          81%     3%          13%     0%       2%        1%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set / Category: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Latino class distribution",
+      "value": 2,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "Groups               DALL·E 3          81%     3%          13%     0%       2%        1%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set / Category: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Middle Eastern class distribution",
+      "value": 1,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "Groups               DALL·E 3          81%     3%          13%     0%       2%        1%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set / Category: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Southeast Asian class distribution",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "Groups               DALL·E 3          81%     3%          13%     0%       2%        1%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set / Category: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "White class distribution",
+      "value": 64,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "4o image generation    64%     21%          4%     3%       6%        1%            0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set / Category: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Black class distribution",
+      "value": 21,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "4o image generation    64%     21%          4%     3%       6%        1%            0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set / Category: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "East Asian class distribution",
+      "value": 4,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "4o image generation    64%     21%          4%     3%       6%        1%            0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set / Category: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Indian class distribution",
+      "value": 3,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "4o image generation    64%     21%          4%     3%       6%        1%            0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set / Category: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Latino class distribution",
+      "value": 6,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "4o image generation    64%     21%          4%     3%       6%        1%            0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set / Category: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Middle Eastern class distribution",
+      "value": 1,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "4o image generation    64%     21%          4%     3%       6%        1%            0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set / Category: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for race",
+      "metric": "Southeast Asian class distribution",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 7",
+        "quote": "4o image generation    64%     21%          4%     3%       6%        1%            0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set / Category: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for race",
+      "metric": "Shannon Entropy",
+      "value": 0.13,
+      "unit": "score",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 8",
+        "quote": "Individuals                  DALL·E 3                     0.13                             52%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Individuals; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for race",
+      "metric": "Frequency of heterogeneous outputs",
+      "value": 52,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 8",
+        "quote": "Individuals                  DALL·E 3                     0.13                             52%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Individuals; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for race",
+      "metric": "Shannon Entropy",
+      "value": 0.36,
+      "unit": "score",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 8",
+        "quote": "4o image generation               0.36                             85%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Individuals; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for race",
+      "metric": "Frequency of heterogeneous outputs",
+      "value": 85,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 8",
+        "quote": "4o image generation               0.36                             85%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Individuals; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for race",
+      "metric": "Shannon Entropy",
+      "value": 0.27,
+      "unit": "score",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 8",
+        "quote": "Groups                       DALL·E 3                     0.27                             80%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Groups; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for race",
+      "metric": "Frequency of heterogeneous outputs",
+      "value": 80,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 8",
+        "quote": "Groups                       DALL·E 3                     0.27                             80%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Groups; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for race",
+      "metric": "Shannon Entropy",
+      "value": 0.5,
+      "unit": "score",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 8",
+        "quote": "4o image generation               0.50                             100%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Groups; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for race",
+      "metric": "Frequency of heterogeneous outputs",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 8",
+        "quote": "4o image generation               0.50                             100%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Groups; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Light class distribution",
+      "value": 90,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "Individuals                 DALL·E 3             90%      10%       0%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Medium class distribution",
+      "value": 10,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "Individuals                 DALL·E 3             90%      10%       0%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Dark class distribution",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "Individuals                 DALL·E 3             90%      10%       0%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Very Dark class distribution",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "Individuals                 DALL·E 3             90%      10%       0%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Light class distribution",
+      "value": 59,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "4o image generation       59%      29%       12%           0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Medium class distribution",
+      "value": 29,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "4o image generation       59%      29%       12%           0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Dark class distribution",
+      "value": 12,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "4o image generation       59%      29%       12%           0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Very Dark class distribution",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "4o image generation       59%      29%       12%           0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Individuals"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Light class distribution",
+      "value": 88,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "Groups                      DALL·E 3             88%      9%        3%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Medium class distribution",
+      "value": 9,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "Groups                      DALL·E 3             88%      9%        3%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Dark class distribution",
+      "value": 3,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "Groups                      DALL·E 3             88%      9%        3%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Very Dark class distribution",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "Groups                      DALL·E 3             88%      9%        3%            0%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Light class distribution",
+      "value": 62,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "4o image generation       62%      24%       15%           0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Medium class distribution",
+      "value": 24,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "4o image generation       62%      24%       15%           0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Dark class distribution",
+      "value": 15,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "4o image generation       62%      24%       15%           0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Class distributions for skin tone",
+      "metric": "Very Dark class distribution",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 9",
+        "quote": "4o image generation       62%      24%       15%           0%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Groups"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for skin tone",
+      "metric": "Shannon Entropy",
+      "value": 0.18,
+      "unit": "score",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 10",
+        "quote": "Individuals                DALL·E 3                   0.18                            61%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Individuals; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for skin tone",
+      "metric": "Frequency of heterogeneous outputs",
+      "value": 61,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 10",
+        "quote": "Individuals                DALL·E 3                   0.18                            61%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Individuals; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for skin tone",
+      "metric": "Shannon Entropy",
+      "value": 0.5,
+      "unit": "score",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 10",
+        "quote": "4o image generation             0.50                            96%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Individuals; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for skin tone",
+      "metric": "Frequency of heterogeneous outputs",
+      "value": 96,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 10",
+        "quote": "4o image generation             0.50                            96%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Individuals; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for skin tone",
+      "metric": "Shannon Entropy",
+      "value": 0.26,
+      "unit": "score",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 10",
+        "quote": "Groups                     DALL·E 3                   0.26                            89%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Groups; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for skin tone",
+      "metric": "Frequency of heterogeneous outputs",
+      "value": 89,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 10",
+        "quote": "Groups                     DALL·E 3                   0.26                            89%"
+      },
+      "rawModelName": "DALL·E 3",
+      "settings": {
+        "other": "Prompt Set: Groups; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for skin tone",
+      "metric": "Shannon Entropy",
+      "value": 0.61,
+      "unit": "score",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 10",
+        "quote": "4o image generation             0.61                            100%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Groups; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Shannon entropy and frequency of heterogeneous outputs for skin tone",
+      "metric": "Frequency of heterogeneous outputs",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 10",
+        "quote": "4o image generation             0.61                            100%"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "Prompt Set: Groups; 20 resamplings"
+      }
+    },
+    {
+      "rawEvalName": "Ahistorical and unrealistic bias results",
+      "metric": "Score (Higher is Better)",
+      "value": 92,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 11",
+        "quote": "DALL·E 3                            92%"
+      },
+      "rawModelName": "DALL·E 3"
+    },
+    {
+      "rawEvalName": "Ahistorical and unrealistic bias results",
+      "metric": "Score (Higher is Better)",
+      "value": 97,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 11",
+        "quote": "4o image                            97%"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "Safety evaluation results - erotic content",
+      "metric": "not_unsafe",
+      "value": 0.971,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 12",
+        "quote": "Human-curated red         364                     With system mitigations                      0.971        0.912"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations"
+      },
+      "n": 364
+    },
+    {
+      "rawEvalName": "Safety evaluation results - erotic content",
+      "metric": "not_overrefuse",
+      "value": 0.912,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 12",
+        "quote": "Human-curated red         364                     With system mitigations                      0.971        0.912"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations"
+      },
+      "n": 364
+    },
+    {
+      "rawEvalName": "Safety evaluation results - erotic content",
+      "metric": "not_unsafe",
+      "value": 0.979,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 12",
+        "quote": "With system mitigations and chat model refusals         0.979        0.884"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations and chat model refusals"
+      },
+      "n": 364
+    },
+    {
+      "rawEvalName": "Safety evaluation results - erotic content",
+      "metric": "not_overrefuse",
+      "value": 0.884,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 12",
+        "quote": "With system mitigations and chat model refusals         0.979        0.884"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations and chat model refusals"
+      },
+      "n": 364
+    },
+    {
+      "rawEvalName": "Safety evaluation results - erotic content",
+      "metric": "not_unsafe",
+      "value": 0.99,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 12",
+        "quote": "Automated      red        927                     With system mitigations                      0.990        0.875"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations"
+      },
+      "n": 927
+    },
+    {
+      "rawEvalName": "Safety evaluation results - erotic content",
+      "metric": "not_overrefuse",
+      "value": 0.875,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 12",
+        "quote": "Automated      red        927                     With system mitigations                      0.990        0.875"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations"
+      },
+      "n": 927
+    },
+    {
+      "rawEvalName": "Safety evaluation results - erotic content",
+      "metric": "not_unsafe",
+      "value": 0.992,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 12",
+        "quote": "With system mitigations and chat model refusals         0.992        0.859"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations and chat model refusals"
+      },
+      "n": 927
+    },
+    {
+      "rawEvalName": "Safety evaluation results - erotic content",
+      "metric": "not_overrefuse",
+      "value": 0.859,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 12",
+        "quote": "With system mitigations and chat model refusals         0.992        0.859"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations and chat model refusals"
+      },
+      "n": 927
+    },
+    {
+      "rawEvalName": "Safety evaluation results - imagery that is violent, abusive, or hateful",
+      "metric": "not_unsafe",
+      "value": 0.914,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 13",
+        "quote": "Human-curated red team-         1266                  With system mitigations                   0.914        0.917"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations"
+      },
+      "n": 1266
+    },
+    {
+      "rawEvalName": "Safety evaluation results - imagery that is violent, abusive, or hateful",
+      "metric": "not_overrefuse",
+      "value": 0.917,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 13",
+        "quote": "Human-curated red team-         1266                  With system mitigations                   0.914        0.917"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations"
+      },
+      "n": 1266
+    },
+    {
+      "rawEvalName": "Safety evaluation results - imagery that is violent, abusive, or hateful",
+      "metric": "not_unsafe",
+      "value": 0.952,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 13",
+        "quote": "With system mitigations and chat model refusals       0.952        0.795"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations and chat model refusals"
+      },
+      "n": 1266
+    },
+    {
+      "rawEvalName": "Safety evaluation results - imagery that is violent, abusive, or hateful",
+      "metric": "not_overrefuse",
+      "value": 0.795,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 13",
+        "quote": "With system mitigations and chat model refusals       0.952        0.795"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations and chat model refusals"
+      },
+      "n": 1266
+    },
+    {
+      "rawEvalName": "Safety evaluation results - imagery that is violent, abusive, or hateful",
+      "metric": "not_unsafe",
+      "value": 0.959,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 13",
+        "quote": "Automated red teaming           1627                 With system mitigations                    0.959        0.889"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations"
+      },
+      "n": 1627
+    },
+    {
+      "rawEvalName": "Safety evaluation results - imagery that is violent, abusive, or hateful",
+      "metric": "not_overrefuse",
+      "value": 0.889,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 13",
+        "quote": "Automated red teaming           1627                 With system mitigations                    0.959        0.889"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations"
+      },
+      "n": 1627
+    },
+    {
+      "rawEvalName": "Safety evaluation results - imagery that is violent, abusive, or hateful",
+      "metric": "not_unsafe",
+      "value": 0.968,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 13",
+        "quote": "With system mitigations and chat model refusals       0.968        0.821"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations and chat model refusals"
+      },
+      "n": 1627
+    },
+    {
+      "rawEvalName": "Safety evaluation results - imagery that is violent, abusive, or hateful",
+      "metric": "not_overrefuse",
+      "value": 0.821,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 13",
+        "quote": "With system mitigations and chat model refusals       0.968        0.821"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations and chat model refusals"
+      },
+      "n": 1627
+    },
+    {
+      "rawEvalName": "Safety evaluation results - instructions for illicit activities",
+      "metric": "not_unsafe",
+      "value": 0.999,
+      "unit": "fraction",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 14",
+        "quote": "Human-curated red team-       25                  With system mitigations                   0.999       0.959"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations"
+      },
+      "n": 25
+    },
+    {
+      "rawEvalName": "Safety evaluation results - instructions for illicit activities",
+      "metric": "not_overrefuse",
+      "value": 0.959,
+      "unit": "fraction",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 14",
+        "quote": "Human-curated red team-       25                  With system mitigations                   0.999       0.959"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations"
+      },
+      "n": 25
+    },
+    {
+      "rawEvalName": "Safety evaluation results - instructions for illicit activities",
+      "metric": "not_unsafe",
+      "value": 0.999,
+      "unit": "fraction",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 14",
+        "quote": "With system mitigations and chat model refusals      0.999       0.959"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations and chat model refusals"
+      },
+      "n": 25
+    },
+    {
+      "rawEvalName": "Safety evaluation results - instructions for illicit activities",
+      "metric": "not_overrefuse",
+      "value": 0.959,
+      "unit": "fraction",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 14",
+        "quote": "With system mitigations and chat model refusals      0.999       0.959"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations and chat model refusals"
+      },
+      "n": 25
+    },
+    {
+      "rawEvalName": "Safety evaluation results - instructions for illicit activities",
+      "metric": "not_unsafe",
+      "value": 0.972,
+      "unit": "fraction",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 14",
+        "quote": "Automated red teaming        309                  With system mitigations                   0.972       0.974"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations"
+      },
+      "n": 309
+    },
+    {
+      "rawEvalName": "Safety evaluation results - instructions for illicit activities",
+      "metric": "not_overrefuse",
+      "value": 0.974,
+      "unit": "fraction",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 14",
+        "quote": "Automated red teaming        309                  With system mitigations                   0.972       0.974"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations"
+      },
+      "n": 309
+    },
+    {
+      "rawEvalName": "Safety evaluation results - instructions for illicit activities",
+      "metric": "not_unsafe",
+      "value": 0.977,
+      "unit": "fraction",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 14",
+        "quote": "With system mitigations and chat model refusals      0.977       0.948"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations and chat model refusals"
+      },
+      "n": 309
+    },
+    {
+      "rawEvalName": "Safety evaluation results - instructions for illicit activities",
+      "metric": "not_overrefuse",
+      "value": 0.948,
+      "unit": "fraction",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 14",
+        "quote": "With system mitigations and chat model refusals      0.977       0.948"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "safeguards": true,
+        "other": "Human-curated red teaming; With system mitigations and chat model refusals"
+      },
+      "n": 309
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:34:26Z"
+  },
+  "notes": "Source PDF Native_Image_Generation_System_Card.pdf (13 printed pages). Mapped \"4o image generation\" to seed openai/gpt-4o; DALL·E 3 left as rawModelName. No Preparedness High/Critical labels in this addendum (footnote says no extra Prep evals), so riskDecisions empty. N example columns from Tables 12–14 stored as result n, not separate metrics. Groups gender DALL·E 3 Male+Female is 96% as printed. Quote matching uses PDF text layout."
+}

@@ -1,0 +1,537 @@
+{
+  "eval": {
+    "slug": "workspace-lens-readout",
+    "displayName": "Workspace Lens Readout",
+    "aliases": ["J++ readout evals", "latent variable extraction"],
+    "description": "Tests if a workspace lens can read the middle step that a model computes but does not say.\n\nEach item is a prompt with a known hidden token. For example, to answer \"the organ that pumps blood has this many chambers\" with \"4\", the model must think of \"heart\". The lens reads the model at one set token of the prompt, at seven layers spaced through the model. An item is a hit when the hidden token is in the lens's top 10 tokens at one layer or more. Before the top 10 is taken, tokens with no letter or digit are dropped (Readout Filtering).\n\nThe five tasks are multihop, multilingual, typo, association and poetry. The headline score is the mean recall@10 over the tasks.\n\nGurnee et al. (2026) made the items and the metric. Ayonrinde and Lindsey adapted them for the J++ Lens paper.",
+    "summary": "Tests if a workspace lens reads the hidden middle step of a task from a model's activations.",
+    "family": "Workspace lens evals",
+    "maintainers": [
+      {
+        "name": "Gurnee et al.",
+        "url": "https://transformer-circuits.pub/2026/workspace/index.html"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://transformer-circuits.pub/2026/workspace/index.html",
+        "title": "Gurnee et al., Verbalizable Representations Form a Global Workspace in Language Models (2026): the items and the metric"
+      },
+      {
+        "kind": "paper",
+        "url": "https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace",
+        "title": "Ayonrinde and Lindsey, J++ Lens: Jacobian Filtering Enables More Faithful Workspace Lenses (2026): the protocol that we run"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/safety-research/jpp_lens",
+        "title": "Ayonrinde and Lindsey, J++ Lens code and eval harness"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://github.com/anthropics/jacobian-lens/tree/main/data/evaluations",
+        "title": "The lens eval items of Gurnee et al. (2026)"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["method"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-10.3",
+      "status": "published",
+      "releasedDate": "2026-11",
+      "changes": "New runs of the 2026-10.2 setup on the six models, with one change to the readout token.\n\n- **Readout token:** a prompt that ends in a space is now read without the space, at the token before the answer. Most tokenizers join the space to the next word (\" Portuguese\"), so in 2026-10.2 the lens read a lone space token. This applies to 168 prompts with a word answer (52 multihop, 19 multilingual, 97 poetry). For poetry, the readout stays at the line break, so only the model's grade changes.\n- **Number answers:** the 31 multihop prompts with a number answer keep the space. All six tokenizers split the space from a number, so the space is the token before the answer.\n- **Check:** for each changed prompt, the run stops with an error if the prompt does not end at the token before the answer in the tokens of prompt + answer.\n- **J++ Lens:** we use the same Neuronpedia J++ Lens files. Their expert weights were fit with the space token as the readout, so they can be a bit worse at the new readout token.\n- **Effect:** on five models, scores are 0.7 to 3.4 points higher than in 2026-10.2, mostly from multihop (up to 11 points) and multilingual (up to 11 points). The one drop is the J++ Lens on Qwen3.5-122B-A10B (0.6 points; 6 points on multihop), which can come from its expert weights. The J++ Lens is still first on all six models.\n- **DeepSeek-V4-Flash:** this run is on two H200s, not four RTX PRO 6000s. Its 8-bit kernels give slightly different ranks on other GPUs, so tasks with no changed prompt also move, by up to 2.5 points. Its scores move by -0.4 to +1 points.\n\nThe items, the fit split, the lenses and the other notes are the same as in 2026-10.2.",
+      "dataset": {
+        "url": "https://github.com/safety-research/jpp_lens/tree/d7efc0de372e20589e899188c0cfe8434acc63ec/data/jlens/evaluations",
+        "license": "Apache-2.0",
+        "splits": [
+          { "name": "multihop", "sampleCount": 93, "storage": "pointer" },
+          { "name": "multilingual", "sampleCount": 107, "storage": "pointer" },
+          { "name": "typo", "sampleCount": 96, "storage": "pointer" },
+          { "name": "association", "sampleCount": 102, "storage": "pointer" },
+          { "name": "poetry", "sampleCount": 98, "storage": "pointer" }
+        ]
+      },
+      "scores": [
+        {
+          "key": "r_lens",
+          "displayName": "R-Lens",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "The share of the sample's hidden tokens that the R-Lens ranks in its top 10 at one of the seven readout layers or more."
+        },
+        {
+          "key": "jacobian_lens",
+          "displayName": "Jacobian Lens",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "The share of the sample's hidden tokens that the J-Lens ranks in its top 10 at one of the seven readout layers or more."
+        },
+        {
+          "key": "jpp_lens",
+          "displayName": "J++ Lens",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "The share of the sample's hidden tokens that the J++ Lens ranks in its top 10 at one of the seven readout layers or more."
+        },
+        {
+          "key": "logit_lens",
+          "displayName": "Logit Lens",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "The share of the sample's hidden tokens that the logit lens ranks in its top 10 at one of the seven readout layers or more."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "recall_at_10",
+          "displayName": "Readout recall@10",
+          "aggregation": "custom",
+          "headline": true,
+          "min": 0,
+          "max": 1,
+          "description": "The share of items whose intermediate is in the lens's top 10 tokens at one or more of the seven layers. The mean over the five tasks.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "recall_at_1",
+          "displayName": "Readout recall@1",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The share of items whose intermediate is the lens's top token at one or more of the seven layers. The mean over the five tasks.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multihop_recall_at_10",
+          "displayName": "Multihop recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on prompts that need a hidden fact to answer (\"the colour of the fourth planet\" needs \"Mars\").",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multilingual_recall_at_10",
+          "displayName": "Multilingual recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on prompts in a language other than English. The intermediates are the language, the relation and the English words (Spanish, opposite, big, small).",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "typo_recall_at_10",
+          "displayName": "Typo recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on sentences that end on a misspelled word (\"langauge\"). The intermediate is the correct word.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "association_recall_at_10",
+          "displayName": "Association recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on short passages that show a concept, such as grief, without its name.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "poetry_recall_at_10",
+          "displayName": "Poetry recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on rhyming couplets, read at the line break. The intermediate is the rhyme word that ends the second line.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        }
+      ]
+    },
+    {
+      "version": "2026-10.2",
+      "status": "published",
+      "releasedDate": "2026-11",
+      "changes": "The same runs as 2026-10.1, with no correctness filter.\n\n- **All answers count:** an item counts also when the model answers it wrong. The test is of the lens, not of the model, and neither paper gives a reason for the filter. The filter also drops a different set of items for each model. Gemma 4 31B now has all five tasks.\n- **Fit items:** the items that the J++ Lens fit used still do not count, for all lenses. This is 20% of the items that pass the filter.\n- **Readout token:** as in the harness, a prompt that ends in a space is read at the space token. For the 168 prompts with a word answer, this is not the token before the answer, because the tokenizer joins the space to the word.\n- **Effect:** scores are 0 to 9 points lower than in 2026-10.1, and 7 to 10 points lower for Gemma 4 31B, which now has poetry. The J++ Lens is still first on all six models.\n\nThe lenses and the other notes are the same as in 2026-10.1.",
+      "dataset": {
+        "url": "https://github.com/safety-research/jpp_lens/tree/d7efc0de372e20589e899188c0cfe8434acc63ec/data/jlens/evaluations",
+        "license": "Apache-2.0",
+        "splits": [
+          { "name": "multihop", "sampleCount": 93, "storage": "pointer" },
+          { "name": "multilingual", "sampleCount": 107, "storage": "pointer" },
+          { "name": "typo", "sampleCount": 96, "storage": "pointer" },
+          { "name": "association", "sampleCount": 102, "storage": "pointer" },
+          { "name": "poetry", "sampleCount": 98, "storage": "pointer" }
+        ]
+      },
+      "scores": [
+        {
+          "key": "r_lens",
+          "displayName": "R-Lens",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "The share of the sample's hidden tokens that the R-Lens ranks in its top 10 at one of the seven readout layers or more."
+        },
+        {
+          "key": "jacobian_lens",
+          "displayName": "Jacobian Lens",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "The share of the sample's hidden tokens that the J-Lens ranks in its top 10 at one of the seven readout layers or more."
+        },
+        {
+          "key": "jpp_lens",
+          "displayName": "J++ Lens",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "The share of the sample's hidden tokens that the J++ Lens ranks in its top 10 at one of the seven readout layers or more."
+        },
+        {
+          "key": "logit_lens",
+          "displayName": "Logit Lens",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "The share of the sample's hidden tokens that the logit lens ranks in its top 10 at one of the seven readout layers or more."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "recall_at_10",
+          "displayName": "Readout recall@10",
+          "aggregation": "custom",
+          "headline": true,
+          "min": 0,
+          "max": 1,
+          "description": "The share of items whose intermediate is in the lens's top 10 tokens at one or more of the seven layers. The mean over the five tasks.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "recall_at_1",
+          "displayName": "Readout recall@1",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The share of items whose intermediate is the lens's top token at one or more of the seven layers. The mean over the five tasks.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multihop_recall_at_10",
+          "displayName": "Multihop recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on prompts that need a hidden fact to answer (\"the colour of the fourth planet\" needs \"Mars\").",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multilingual_recall_at_10",
+          "displayName": "Multilingual recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on prompts in a language other than English. The intermediates are the language, the relation and the English words (Spanish, opposite, big, small).",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "typo_recall_at_10",
+          "displayName": "Typo recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on sentences that end on a misspelled word (\"langauge\"). The intermediate is the correct word.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "association_recall_at_10",
+          "displayName": "Association recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on short passages that show a concept, such as grief, without its name.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "poetry_recall_at_10",
+          "displayName": "Poetry recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on rhyming couplets, read at the line break. The intermediate is the rhyme word that ends the second line.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        }
+      ]
+    },
+    {
+      "version": "2026-10.1",
+      "status": "published",
+      "releasedDate": "2026-10",
+      "changes": "OpenAudit's own runs of the paper's harness ([jpp_lens](https://github.com/safety-research/jpp_lens) at `d7efc0de`) on the paper's six models. The items, the seven layers and Readout Filtering are the same as the paper's.\n\n- **Correctness filter:** an item counts only when the model answers it right. Typo and association items always count. We graded the answers with the harness, and our grades for Qwen3.6-27B are the same as the paper's. Gemma 4 31B has no poetry score, because only 1 of its 98 items passes.\n- **Lenses:** the J++ Lenses are from Neuronpedia, and the R-Lenses are our fits. Both use 64 WikiText-103 prompts. The J-Lenses are from Neuronpedia (456 to 1,000 WikiText prompts), or from Camila Blank (25 Pile prompts) on the Qwen3.5 models and DeepSeek-V4-Flash.\n- **DeepSeek-V4-Flash:** it runs on its own 8-bit weights. It uses Camila Blank's R-Lens, because our fit needs the bf16 model (about 570 GB).\n- **Not comparable with 2026-10:** most of our scores are higher than the paper's, also for the logit lens, which has no fit. With the paper's R-Lens files, our scores are 4 to 7 points higher on the Qwen3.5 models. So the differences come from the eval runs, not from the lens fits.\n- This version has no swap test.",
+      "dataset": {
+        "url": "https://github.com/safety-research/jpp_lens/tree/d7efc0de372e20589e899188c0cfe8434acc63ec/data/jlens/evaluations",
+        "license": "Apache-2.0",
+        "splits": [
+          { "name": "multihop", "sampleCount": 93, "storage": "pointer" },
+          { "name": "multilingual", "sampleCount": 107, "storage": "pointer" },
+          { "name": "typo", "sampleCount": 96, "storage": "pointer" },
+          { "name": "association", "sampleCount": 102, "storage": "pointer" },
+          { "name": "poetry", "sampleCount": 98, "storage": "pointer" }
+        ]
+      },
+      "scores": [
+        {
+          "key": "r_lens",
+          "displayName": "R-Lens",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "The share of the sample's hidden tokens that the R-Lens ranks in its top 10 at one of the seven readout layers or more."
+        },
+        {
+          "key": "jacobian_lens",
+          "displayName": "Jacobian Lens",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "The share of the sample's hidden tokens that the J-Lens ranks in its top 10 at one of the seven readout layers or more."
+        },
+        {
+          "key": "jpp_lens",
+          "displayName": "J++ Lens",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "The share of the sample's hidden tokens that the J++ Lens ranks in its top 10 at one of the seven readout layers or more."
+        },
+        {
+          "key": "logit_lens",
+          "displayName": "Logit Lens",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "The share of the sample's hidden tokens that the logit lens ranks in its top 10 at one of the seven readout layers or more."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "recall_at_10",
+          "displayName": "Readout recall@10",
+          "aggregation": "custom",
+          "headline": true,
+          "min": 0,
+          "max": 1,
+          "description": "The share of items whose intermediate is in the lens's top 10 tokens at one or more of the seven layers. The mean over the tasks (four for Gemma 4 31B).",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "recall_at_1",
+          "displayName": "Readout recall@1",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The share of items whose intermediate is the lens's top token at one or more of the seven layers. The mean over the tasks (four for Gemma 4 31B).",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multihop_recall_at_10",
+          "displayName": "Multihop recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on prompts that need a hidden fact to answer (\"the colour of the fourth planet\" needs \"Mars\").",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multilingual_recall_at_10",
+          "displayName": "Multilingual recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on prompts in a language other than English. The intermediates are the language, the relation and the English words (Spanish, opposite, big, small).",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "typo_recall_at_10",
+          "displayName": "Typo recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on sentences that end on a misspelled word (\"langauge\"). The intermediate is the correct word.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "association_recall_at_10",
+          "displayName": "Association recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on short passages that show a concept, such as grief, without its name.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "poetry_recall_at_10",
+          "displayName": "Poetry recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on rhyming couplets, read at the line break. The intermediate is the rhyme word that ends the second line.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        }
+      ]
+    },
+    {
+      "version": "2026-10",
+      "status": "published",
+      "releasedDate": "2026-10",
+      "scores": [],
+      "metrics": [
+        {
+          "key": "recall_at_10",
+          "displayName": "Readout recall@10",
+          "aggregation": "custom",
+          "headline": true,
+          "min": 0,
+          "max": 1,
+          "description": "The share of items whose intermediate is in the lens's top 10 tokens at one or more of the seven layers. The mean over the five tasks.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "recall_at_1",
+          "displayName": "Readout recall@1",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The share of items whose intermediate is the lens's top token at one or more of the seven layers. The mean over the five tasks.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multihop_recall_at_10",
+          "displayName": "Multihop recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on prompts that need a hidden fact to answer (\"the colour of the fourth planet\" needs \"Mars\").",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multilingual_recall_at_10",
+          "displayName": "Multilingual recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on prompts in a language other than English. The intermediates are the language, the relation and the English words (Spanish, opposite, big, small).",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "typo_recall_at_10",
+          "displayName": "Typo recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on sentences that end on a misspelled word (\"langauge\"). The intermediate is the correct word.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "association_recall_at_10",
+          "displayName": "Association recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on short passages that show a concept, such as grief, without its name.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "poetry_recall_at_10",
+          "displayName": "Poetry recall@10",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Recall@10 on rhyming couplets, read at the line break. The intermediate is the rhyme word that ends the second line.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "swap_top1",
+          "displayName": "Intermediate swap top-1",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The share of trials in which the swap of one intermediate's lens vector for another's makes the matching new answer the model's top word token.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "swap_top5",
+          "displayName": "Intermediate swap top-5",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The share of swap trials in which the matching new answer enters the model's top five word tokens.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        }
+      ],
+      "changes": "The J++ Lens paper's own numbers for six models, with its correctness filter. They include the swap test: it writes the lens vector of a different hidden token into the model, and checks if the answer changes to match it."
+    }
+  ]
+}

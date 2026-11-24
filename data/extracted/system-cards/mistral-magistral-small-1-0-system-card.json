@@ -1,0 +1,1578 @@
+{
+  "document": "mistral-magistral-small-1-0-system-card",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "mistralai/Magistral-Small-2506",
+      "section": "Magistral Small"
+    },
+    {
+      "model": "mistralai/magistral-medium-2506",
+      "section": "Magistral Medium"
+    }
+  ],
+  "pageCount": 23,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "multimodal (text + vision; RL training was text-only)",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "The initial checkpoints utilized for RL training, Mistral Small 3 and Mistral Medium 3, are multimodal"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "reasoning / chain-of-thought",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "In this paper, we introduce Mistral’s first reasoning models: Magistral Small and Magistral Medium,"
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "French, Spanish, Italian, German, Chinese, and Russian (plus English)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "languages: French, Spanish, Italian, German, Chinese, and Russian. When calculating the reward"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "                                                    • We release the weights of Magistral Small (24B) under the Apache 2 license1 ."
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "24B (Magistral Small)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "                                                    • We release the weights of Magistral Small (24B) under the Apache 2 license1 ."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "not_stated"
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Math and coding RL data; Magistral Small also uses cold-start SFT traces from Magistral Medium plus OpenThoughts and OpenR1 code subset",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Mistral Medium 3 with RL alone, and we open-source Magistral Small (Apache"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Magistral Medium was trained with pure reinforcement learning (RL) on Mistral Medium 3 (no distillation), with about a 50% AIME-24 pass@1 gain over the starting checkpoint.", "tone": "mixed",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "strength of our proposed RLVR framework, which yields a 50% increase in AIME-24 (pass@1) over the initial"
+      }
+    },
+    {
+      "text": "Unlike prior DeepSeek-R1 findings, RL on the smaller 24B model still beat distillation-only, and supervised fine-tuning (SFT)+RL was best for Magistral Small.", "tone": "neutral",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Here, contrary to findings"
+      }
+    },
+    {
+      "text": "Text-only RL did not erase multimodal ability; the paper reports gains on [MMMU](https://arxiv.org/abs/2311.16502) and MMMU-Pro after RL.", "tone": "mixed",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "contrary, we discover that the models not only retain their multimodal capabilities, but unexpectedly"
+      }
+    },
+    {
+      "text": "A language-consistency reward plus translated math problems is used so chain-of-thought and the answer match the user’s language.", "tone": "neutral",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "A core design principle for Magistral is for it to reason in the same language as the user. Reinforcement"
+      }
+    },
+    {
+      "text": "On multilingual AIME’24, Magistral Medium scores 4.3–9.9% lower than English (about 1–3 questions).", "tone": "neutral",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "performs 4.3-9.9% lower on multilingual versions compared to English, which corresponds to 1-3"
+      }
+    },
+    {
+      "text": "An alternate Medium path (SFT on open-source R1 traces, then RL) reaches R1-like math/code scores; [GPQA](https://arxiv.org/abs/2311.12022) Diamond fell from 72.9% to 71.0% after that RL.", "tone": "mixed",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "Please note that the performance on GPQA Diamond drops after RL from 72.9% to 71.0%."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 26.8,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " AIME’24                        26.8 / 43.4   73.6 / 90.0       39.2          71.0           79.8"
+      },
+      "model": "mistralai/mistral-medium-3",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise; average over 64 runs"
+      },
+      "n": 64
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 73.6,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " AIME’24                        26.8 / 43.4   73.6 / 90.0       39.2          71.0           79.8"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise; average over 64 runs"
+      },
+      "n": 64
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 39.2,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " AIME’24                        26.8 / 43.4   73.6 / 90.0       39.2          71.0           79.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise; average over 64 runs"
+      },
+      "n": 64
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 71,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " AIME’24                        26.8 / 43.4   73.6 / 90.0       39.2          71.0           79.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise; average over 64 runs"
+      },
+      "n": 64
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 79.8,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " AIME’24                        26.8 / 43.4   73.6 / 90.0       39.2          71.0           79.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise; average over 64 runs"
+      },
+      "n": 64
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "maj@64",
+      "value": 43.4,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " AIME’24                        26.8 / 43.4   73.6 / 90.0       39.2          71.0           79.8"
+      },
+      "model": "mistralai/mistral-medium-3",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise; average over 64 runs"
+      },
+      "n": 64
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "maj@64",
+      "value": 90,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " AIME’24                        26.8 / 43.4   73.6 / 90.0       39.2          71.0           79.8"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise; average over 64 runs"
+      },
+      "n": 64
+    },
+    {
+      "rawEvalName": "AIME’25",
+      "metric": "pass@1",
+      "value": 21.2,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " AIME’25                        21.2 / 30.0   64.9 / 83.3       28.8           -             70.0"
+      },
+      "model": "mistralai/mistral-medium-3",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise; average over 64 runs"
+      },
+      "n": 64
+    },
+    {
+      "rawEvalName": "AIME’25",
+      "metric": "pass@1",
+      "value": 64.9,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " AIME’25                        21.2 / 30.0   64.9 / 83.3       28.8           -             70.0"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise; average over 64 runs"
+      },
+      "n": 64
+    },
+    {
+      "rawEvalName": "AIME’25",
+      "metric": "pass@1",
+      "value": 28.8,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " AIME’25                        21.2 / 30.0   64.9 / 83.3       28.8           -             70.0"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise; average over 64 runs"
+      },
+      "n": 64
+    },
+    {
+      "rawEvalName": "AIME’25",
+      "metric": "pass@1",
+      "value": 70,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " AIME’25                        21.2 / 30.0   64.9 / 83.3       28.8           -             70.0"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise; average over 64 runs"
+      },
+      "n": 64
+    },
+    {
+      "rawEvalName": "AIME’25",
+      "metric": "maj@64",
+      "value": 30,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " AIME’25                        21.2 / 30.0   64.9 / 83.3       28.8           -             70.0"
+      },
+      "model": "mistralai/mistral-medium-3",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise; average over 64 runs"
+      },
+      "n": 64
+    },
+    {
+      "rawEvalName": "AIME’25",
+      "metric": "maj@64",
+      "value": 83.3,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " AIME’25                        21.2 / 30.0   64.9 / 83.3       28.8           -             70.0"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise; average over 64 runs"
+      },
+      "n": 64
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "accuracy",
+      "value": 91,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " MATH-500                          91.0          94.3           90.2          95.9           97.3"
+      },
+      "model": "mistralai/mistral-medium-3",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise"
+      }
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "accuracy",
+      "value": 94.3,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " MATH-500                          91.0          94.3           90.2          95.9           97.3"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise"
+      }
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "accuracy",
+      "value": 90.2,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " MATH-500                          91.0          94.3           90.2          95.9           97.3"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise"
+      }
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "accuracy",
+      "value": 95.9,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " MATH-500                          91.0          94.3           90.2          95.9           97.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise"
+      }
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "accuracy",
+      "value": 97.3,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " MATH-500                          91.0          94.3           90.2          95.9           97.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 40k for AIME/LiveCodeBench, 32k otherwise"
+      }
+    },
+    {
+      "rawEvalName": "GPQA",
+      "metric": "accuracy",
+      "value": 59.6,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " GPQA                              59.6          70.8           59.1          73.3           71.5"
+      },
+      "model": "mistralai/mistral-medium-3",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 32k"
+      }
+    },
+    {
+      "rawEvalName": "GPQA",
+      "metric": "accuracy",
+      "value": 70.8,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " GPQA                              59.6          70.8           59.1          73.3           71.5"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 32k"
+      }
+    },
+    {
+      "rawEvalName": "GPQA",
+      "metric": "accuracy",
+      "value": 59.1,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " GPQA                              59.6          70.8           59.1          73.3           71.5"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 32k"
+      }
+    },
+    {
+      "rawEvalName": "GPQA",
+      "metric": "accuracy",
+      "value": 73.3,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " GPQA                              59.6          70.8           59.1          73.3           71.5"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 32k"
+      }
+    },
+    {
+      "rawEvalName": "GPQA",
+      "metric": "accuracy",
+      "value": 71.5,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " GPQA                              59.6          70.8           59.1          73.3           71.5"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "other": "temperature 0.7; top-p 1.0; max tokens 32k"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v5)",
+      "metric": "score",
+      "value": 29.1,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " LiveCodeBench (v5)                29.1          59.4           36.2          50.0           65.9"
+      },
+      "model": "mistralai/mistral-medium-3",
+      "settings": {
+        "other": "temperature 0.7; top-p 0.95; max tokens 40k for LiveCodeBench, 32k otherwise; average over 16 runs"
+      },
+      "n": 16
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v5)",
+      "metric": "score",
+      "value": 59.4,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " LiveCodeBench (v5)                29.1          59.4           36.2          50.0           65.9"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "temperature 0.7; top-p 0.95; max tokens 40k for LiveCodeBench, 32k otherwise; average over 16 runs"
+      },
+      "n": 16
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v5)",
+      "metric": "score",
+      "value": 36.2,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " LiveCodeBench (v5)                29.1          59.4           36.2          50.0           65.9"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "other": "temperature 0.7; top-p 0.95; max tokens 40k for LiveCodeBench, 32k otherwise; average over 16 runs"
+      },
+      "n": 16
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v5)",
+      "metric": "score",
+      "value": 50,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " LiveCodeBench (v5)                29.1          59.4           36.2          50.0           65.9"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero",
+      "settings": {
+        "other": "temperature 0.7; top-p 0.95; max tokens 40k for LiveCodeBench, 32k otherwise; average over 16 runs"
+      },
+      "n": 16
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v5)",
+      "metric": "score",
+      "value": 65.9,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " LiveCodeBench (v5)                29.1          59.4           36.2          50.0           65.9"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "other": "temperature 0.7; top-p 0.95; max tokens 40k for LiveCodeBench, 32k otherwise; average over 16 runs"
+      },
+      "n": 16
+    },
+    {
+      "rawEvalName": "Aider Polyglot",
+      "metric": "score",
+      "value": 28.9,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " Aider Polyglot                    28.9          47.1           49.6           -             53.3"
+      },
+      "model": "mistralai/mistral-medium-3",
+      "settings": {
+        "other": "temperature 0.7; top-p 0.95; max tokens 40k for LiveCodeBench, 32k otherwise"
+      }
+    },
+    {
+      "rawEvalName": "Aider Polyglot",
+      "metric": "score",
+      "value": 47.1,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " Aider Polyglot                    28.9          47.1           49.6           -             53.3"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "temperature 0.7; top-p 0.95; max tokens 40k for LiveCodeBench, 32k otherwise"
+      }
+    },
+    {
+      "rawEvalName": "Aider Polyglot",
+      "metric": "score",
+      "value": 49.6,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " Aider Polyglot                    28.9          47.1           49.6           -             53.3"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "other": "temperature 0.7; top-p 0.95; max tokens 40k for LiveCodeBench, 32k otherwise"
+      }
+    },
+    {
+      "rawEvalName": "Aider Polyglot",
+      "metric": "score",
+      "value": 53.3,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " Aider Polyglot                    28.9          47.1           49.6           -             53.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "other": "temperature 0.7; top-p 0.95; max tokens 40k for LiveCodeBench, 32k otherwise"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v6)",
+      "metric": "score",
+      "value": 30,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " LiveCodeBench (v6)                30.0          50.3            -             -               -"
+      },
+      "model": "mistralai/mistral-medium-3",
+      "settings": {
+        "other": "temperature 0.7; top-p 0.95; max tokens 40k for LiveCodeBench, 32k otherwise; average over 16 runs"
+      },
+      "n": 16
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v6)",
+      "metric": "score",
+      "value": 50.3,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " LiveCodeBench (v6)                30.0          50.3            -             -               -"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "temperature 0.7; top-p 0.95; max tokens 40k for LiveCodeBench, 32k otherwise; average over 16 runs"
+      },
+      "n": 16
+    },
+    {
+      "rawEvalName": "Humanity’s Last Exam",
+      "metric": "accuracy",
+      "value": 4.4,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " Humanity’s Last Exam               4.4           9.0            -             -              8.6"
+      },
+      "model": "mistralai/mistral-medium-3",
+      "settings": {
+        "other": "text subset only; temperature 0.7; top-p 1.0; max tokens 32k"
+      }
+    },
+    {
+      "rawEvalName": "Humanity’s Last Exam",
+      "metric": "accuracy",
+      "value": 9,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " Humanity’s Last Exam               4.4           9.0            -             -              8.6"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "text subset only; temperature 0.7; top-p 1.0; max tokens 32k"
+      }
+    },
+    {
+      "rawEvalName": "Humanity’s Last Exam",
+      "metric": "accuracy",
+      "value": 8.6,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": " Humanity’s Last Exam               4.4           9.0            -             -              8.6"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "other": "text subset only; temperature 0.7; top-p 1.0; max tokens 32k"
+      }
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 65.4,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               AIME’24pass@1             65.4       65.8                      70.7"
+      },
+      "rawModelName": "Mistral Small 24B fine-tuned on reasoning traces from Magistral Medium (SFT)"
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 65.8,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               AIME’24pass@1             65.4       65.8                      70.7"
+      },
+      "rawModelName": "Mistral Small 24B trained from scratch with RL (RL only)"
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 70.7,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               AIME’24pass@1             65.4       65.8                      70.7"
+      },
+      "model": "mistralai/Magistral-Small-2506",
+      "settings": {
+        "other": "SFT + RL (Magistral Small); final Magistral Small"
+      }
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "maj@64",
+      "value": 90,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               AIME’24maj@64             90.0       86.7                      83.3"
+      },
+      "rawModelName": "Mistral Small 24B fine-tuned on reasoning traces from Magistral Medium (SFT)"
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "maj@64",
+      "value": 86.7,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               AIME’24maj@64             90.0       86.7                      83.3"
+      },
+      "rawModelName": "Mistral Small 24B trained from scratch with RL (RL only)"
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "maj@64",
+      "value": 83.3,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               AIME’24maj@64             90.0       86.7                      83.3"
+      },
+      "model": "mistralai/Magistral-Small-2506",
+      "settings": {
+        "other": "SFT + RL (Magistral Small); final Magistral Small"
+      }
+    },
+    {
+      "rawEvalName": "AIME’25",
+      "metric": "pass@1",
+      "value": 55.6,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               AIME’25pass@1             55.6       51.9                      62.8"
+      },
+      "rawModelName": "Mistral Small 24B fine-tuned on reasoning traces from Magistral Medium (SFT)"
+    },
+    {
+      "rawEvalName": "AIME’25",
+      "metric": "pass@1",
+      "value": 51.9,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               AIME’25pass@1             55.6       51.9                      62.8"
+      },
+      "rawModelName": "Mistral Small 24B trained from scratch with RL (RL only)"
+    },
+    {
+      "rawEvalName": "AIME’25",
+      "metric": "pass@1",
+      "value": 62.8,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               AIME’25pass@1             55.6       51.9                      62.8"
+      },
+      "model": "mistralai/Magistral-Small-2506",
+      "settings": {
+        "other": "SFT + RL (Magistral Small); final Magistral Small"
+      }
+    },
+    {
+      "rawEvalName": "AIME’25",
+      "metric": "maj@64",
+      "value": 76.7,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               AIME’25maj@64             76.7       66.7                      76.7"
+      },
+      "rawModelName": "Mistral Small 24B fine-tuned on reasoning traces from Magistral Medium (SFT)"
+    },
+    {
+      "rawEvalName": "AIME’25",
+      "metric": "maj@64",
+      "value": 66.7,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               AIME’25maj@64             76.7       66.7                      76.7"
+      },
+      "rawModelName": "Mistral Small 24B trained from scratch with RL (RL only)"
+    },
+    {
+      "rawEvalName": "AIME’25",
+      "metric": "maj@64",
+      "value": 76.7,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               AIME’25maj@64             76.7       66.7                      76.7"
+      },
+      "model": "mistralai/Magistral-Small-2506",
+      "settings": {
+        "other": "SFT + RL (Magistral Small); final Magistral Small"
+      }
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "accuracy",
+      "value": 93.2,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               MATH-500                  93.2       95.4                      95.9"
+      },
+      "rawModelName": "Mistral Small 24B fine-tuned on reasoning traces from Magistral Medium (SFT)"
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "accuracy",
+      "value": 95.4,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               MATH-500                  93.2       95.4                      95.9"
+      },
+      "rawModelName": "Mistral Small 24B trained from scratch with RL (RL only)"
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "accuracy",
+      "value": 95.9,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               MATH-500                  93.2       95.4                      95.9"
+      },
+      "model": "mistralai/Magistral-Small-2506",
+      "settings": {
+        "other": "SFT + RL (Magistral Small); final Magistral Small"
+      }
+    },
+    {
+      "rawEvalName": "GPQA",
+      "metric": "accuracy",
+      "value": 63.4,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               GPQA                      63.4       68.8                      68.2"
+      },
+      "rawModelName": "Mistral Small 24B fine-tuned on reasoning traces from Magistral Medium (SFT)"
+    },
+    {
+      "rawEvalName": "GPQA",
+      "metric": "accuracy",
+      "value": 68.8,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               GPQA                      63.4       68.8                      68.2"
+      },
+      "rawModelName": "Mistral Small 24B trained from scratch with RL (RL only)"
+    },
+    {
+      "rawEvalName": "GPQA",
+      "metric": "accuracy",
+      "value": 68.2,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               GPQA                      63.4       68.8                      68.2"
+      },
+      "model": "mistralai/Magistral-Small-2506",
+      "settings": {
+        "other": "SFT + RL (Magistral Small); final Magistral Small"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v5)",
+      "metric": "score",
+      "value": 52.2,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               LiveCodeBench (v5)        52.2       46.4                      55.8"
+      },
+      "rawModelName": "Mistral Small 24B fine-tuned on reasoning traces from Magistral Medium (SFT)"
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v5)",
+      "metric": "score",
+      "value": 46.4,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               LiveCodeBench (v5)        52.2       46.4                      55.8"
+      },
+      "rawModelName": "Mistral Small 24B trained from scratch with RL (RL only)"
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v5)",
+      "metric": "score",
+      "value": 55.8,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               LiveCodeBench (v5)        52.2       46.4                      55.8"
+      },
+      "model": "mistralai/Magistral-Small-2506",
+      "settings": {
+        "other": "SFT + RL (Magistral Small); final Magistral Small"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v6)",
+      "metric": "score",
+      "value": 44.6,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               LiveCodeBench (v6)        44.6       42.4                      47.4"
+      },
+      "rawModelName": "Mistral Small 24B fine-tuned on reasoning traces from Magistral Medium (SFT)"
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v6)",
+      "metric": "score",
+      "value": 42.4,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               LiveCodeBench (v6)        44.6       42.4                      47.4"
+      },
+      "rawModelName": "Mistral Small 24B trained from scratch with RL (RL only)"
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v6)",
+      "metric": "score",
+      "value": 47.4,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               LiveCodeBench (v6)        44.6       42.4                      47.4"
+      },
+      "model": "mistralai/Magistral-Small-2506",
+      "settings": {
+        "other": "SFT + RL (Magistral Small); final Magistral Small"
+      }
+    },
+    {
+      "rawEvalName": "Humanity’s Last Exam",
+      "metric": "accuracy",
+      "value": 5.3,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               Humanity’s Last Exam       5.3        6.1                       6.4"
+      },
+      "rawModelName": "Mistral Small 24B fine-tuned on reasoning traces from Magistral Medium (SFT)"
+    },
+    {
+      "rawEvalName": "Humanity’s Last Exam",
+      "metric": "accuracy",
+      "value": 6.1,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               Humanity’s Last Exam       5.3        6.1                       6.4"
+      },
+      "rawModelName": "Mistral Small 24B trained from scratch with RL (RL only)"
+    },
+    {
+      "rawEvalName": "Humanity’s Last Exam",
+      "metric": "accuracy",
+      "value": 6.4,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "               Humanity’s Last Exam       5.3        6.1                       6.4"
+      },
+      "model": "mistralai/Magistral-Small-2506",
+      "settings": {
+        "other": "SFT + RL (Magistral Small); final Magistral Small"
+      }
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 73.6,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "    AIME’24 (pass@1)        73.6        68.5       69.3         66.8        66.7       65.0       63.7"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "multilingual AIME 2024; input language English; reasoning and final response in input language"
+      }
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 68.5,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "    AIME’24 (pass@1)        73.6        68.5       69.3         66.8        66.7       65.0       63.7"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "multilingual AIME 2024; input language French; reasoning and final response in input language"
+      }
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 69.3,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "    AIME’24 (pass@1)        73.6        68.5       69.3         66.8        66.7       65.0       63.7"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "multilingual AIME 2024; input language Spanish; reasoning and final response in input language"
+      }
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 66.8,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "    AIME’24 (pass@1)        73.6        68.5       69.3         66.8        66.7       65.0       63.7"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "multilingual AIME 2024; input language German; reasoning and final response in input language"
+      }
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 66.7,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "    AIME’24 (pass@1)        73.6        68.5       69.3         66.8        66.7       65.0       63.7"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "multilingual AIME 2024; input language Italian; reasoning and final response in input language"
+      }
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 65,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "    AIME’24 (pass@1)        73.6        68.5       69.3         66.8        66.7       65.0       63.7"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "multilingual AIME 2024; input language Russian; reasoning and final response in input language"
+      }
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "pass@1",
+      "value": 63.7,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "    AIME’24 (pass@1)        73.6        68.5       69.3         66.8        66.7       65.0       63.7"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "multilingual AIME 2024; input language Chinese; reasoning and final response in input language"
+      }
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "score",
+      "value": 32.2,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 5",
+        "quote": "                       Starting Checkpoint          32.2                  22.7"
+      },
+      "rawModelName": "24B model",
+      "settings": {
+        "other": "Starting Checkpoint before domain-only RL"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench v5",
+      "metric": "score",
+      "value": 22.7,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 5",
+        "quote": "                       Starting Checkpoint          32.2                  22.7"
+      },
+      "rawModelName": "24B model",
+      "settings": {
+        "other": "Starting Checkpoint before domain-only RL"
+      }
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "score",
+      "value": 62.5,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 5",
+        "quote": "                       RL (Math only)               62.5               38.3 (+15.6)"
+      },
+      "rawModelName": "24B model",
+      "settings": {
+        "other": "RL (Math only)"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench v5",
+      "metric": "score",
+      "value": 38.3,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 5",
+        "quote": "                       RL (Math only)               62.5               38.3 (+15.6)"
+      },
+      "rawModelName": "24B model",
+      "settings": {
+        "other": "RL (Math only)"
+      }
+    },
+    {
+      "rawEvalName": "AIME’24",
+      "metric": "score",
+      "value": 49.7,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 5",
+        "quote": "                       RL (Code only)            49.7 (+17.5)             42.7"
+      },
+      "rawModelName": "24B model",
+      "settings": {
+        "other": "RL (Code only)"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench v5",
+      "metric": "score",
+      "value": 42.7,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 5",
+        "quote": "                       RL (Code only)            49.7 (+17.5)             42.7"
+      },
+      "rawModelName": "24B model",
+      "settings": {
+        "other": "RL (Code only)"
+      }
+    },
+    {
+      "rawEvalName": "MMMU",
+      "metric": "score",
+      "value": 70,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "observed on MMMU (+5%, reaching 70%), MMMU-Pro-Standard (+4.4%, reaching 57.9%) and"
+      },
+      "rawModelName": "Magistral (after text-only RL)",
+      "settings": {
+        "other": "multimodal benchmark after text-only RL; absolute value from prose describing Figure 10"
+      }
+    },
+    {
+      "rawEvalName": "MMMU-Pro-Standard",
+      "metric": "score",
+      "value": 57.9,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "observed on MMMU (+5%, reaching 70%), MMMU-Pro-Standard (+4.4%, reaching 57.9%) and"
+      },
+      "rawModelName": "Magistral (after text-only RL)",
+      "settings": {
+        "other": "multimodal benchmark after text-only RL; absolute value from prose describing Figure 10"
+      }
+    },
+    {
+      "rawEvalName": "MMMU-Pro-Vision",
+      "metric": "score",
+      "value": 52.1,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "MMMU-Pro-Vision (+12%, reaching 52.1%). While the most significant improvements are seen in"
+      },
+      "rawModelName": "Magistral (after text-only RL)",
+      "settings": {
+        "other": "multimodal benchmark after text-only RL; absolute value from prose describing Figure 10"
+      }
+    },
+    {
+      "rawEvalName": "Internal bench",
+      "metric": "score",
+      "value": 87.2,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 6",
+        "quote": "        Function calling         Internal bench            87.2                     87.4"
+      },
+      "model": "mistralai/mistral-medium-3",
+      "settings": {
+        "other": "Mistral internal function calling benchmark"
+      }
+    },
+    {
+      "rawEvalName": "Internal bench",
+      "metric": "score",
+      "value": 87.4,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 6",
+        "quote": "        Function calling         Internal bench            87.2                     87.4"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "Mistral internal function calling benchmark"
+      }
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "score",
+      "value": 86.8,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 6",
+        "quote": "        Instruction following    IFEval                    86.8                     87.4"
+      },
+      "model": "mistralai/mistral-medium-3",
+      "settings": {
+        "other": "internal version of IFEval; scores not comparable with public IFEval"
+      }
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "score",
+      "value": 87.4,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 6",
+        "quote": "        Instruction following    IFEval                    86.8                     87.4"
+      },
+      "model": "mistralai/magistral-medium-2506",
+      "settings": {
+        "other": "internal version of IFEval; scores not comparable with public IFEval"
+      }
+    },
+    {
+      "rawEvalName": "GPQA Diamond",
+      "metric": "accuracy",
+      "value": 72.9,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "Please note that the performance on GPQA Diamond drops after RL from 72.9% to 71.0%."
+      },
+      "rawModelName": "Magistral Medium fine-tuned on open-source traces",
+      "settings": {
+        "other": "SFT on OpenThoughts and OpenR1 DeepSeek-R1 traces before RL (Section 8 experiment)"
+      }
+    },
+    {
+      "rawEvalName": "GPQA Diamond",
+      "metric": "accuracy",
+      "value": 71,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "Please note that the performance on GPQA Diamond drops after RL from 72.9% to 71.0%."
+      },
+      "rawModelName": "Magistral Medium fine-tuned on open-source traces then RL",
+      "settings": {
+        "other": "RL on top of OSS-trace SFT (Section 8 experiment); not the pure-RL Magistral Medium"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:54:35Z"
+  },
+  "notes": "Seed URL is the Mistral Docs model page (product stub: June 10, 2025, 40k context, retired). Extracted from the linked Technical Report PDF https://arxiv.org/pdf/2506.10910 (Magistral), saved as text.txt (23 printed pages). alsoDocuments empty per seed-lookup (only this document key). Paper covers both Magistral Small and Magistral Medium; seed linked only Small, but Medium is a seed model so both are in covers. No safety, risk-tier, jailbreak, or external-tester results. Figure 1/5/10/11/13 charts: numeric bars not recovered from layout text; used prose absolutes for MMMU* and GPQA Diamond only. Figure 10 'reaching X%' does not name Small vs Medium—recorded as rawModelName 'Magistral (after text-only RL)'. Docs-page release date June 10, 2025 and 40k context are not in the PDF text, so releaseDate/contextWindow left not_stated. Table 1 is training-sample counts (setup), not eval scores—omitted. DeepSeek-R1-Zero kept as rawModelName (checkpoint of DeepSeek-R1)."
+}

@@ -1,0 +1,108 @@
+{
+  "eval": {
+    "slug": "pope",
+    "displayName": "POPE",
+    "aliases": ["Polling-based Object Probing Evaluation"],
+    "description": "Polling-based Object Probing Evaluation for object hallucination in vision-language models. For each image the model answers yes/no questions of the form \"Is there a {object} in the image?\" under random, popular, and adversarial negative sampling. Scored with accuracy (and often F1) against ground-truth presence labels, commonly on COCO.",
+    "summary": "Tests whether the model says an object is in an image when the object is not there.",
+    "maintainers": [
+      {
+        "name": "RUCAIBox",
+        "url": "https://github.com/RUCAIBox/POPE"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2305.10355",
+        "title": "Evaluating Object Hallucination in Large Vision-Language Models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/RUCAIBox/POPE",
+        "title": "POPE construction and COCO question files"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/lmms-lab-encoder/POPE",
+        "title": "lmms-lab-encoder/POPE (lmms-eval formatted)"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["hallucination"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2023-05",
+      "status": "published",
+      "releasedDate": "2023-05-17",
+      "dataset": {
+        "hfRepo": "lmms-lab-encoder/POPE",
+        "revision": "4db1276663dfa5eb8ad16a52d24c31a09e470896",
+        "url": "https://github.com/AoiDragon/POPE/tree/08d957b917e5a378a2f99d35b6293c536a66298b",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "Full/random",
+            "sampleCount": 3000,
+            "storage": "pointer"
+          },
+          {
+            "name": "Full/popular",
+            "sampleCount": 3000,
+            "storage": "pointer"
+          },
+          {
+            "name": "Full/adversarial",
+            "sampleCount": 3000,
+            "storage": "pointer"
+          },
+          {
+            "name": "default/test",
+            "sampleCount": 9000,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct yes/no",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the model's yes/no answer matches the object-presence label."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Share of polling questions answered correctly. Cards often report per sampling strategy (random, popular, adversarial) or an average."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

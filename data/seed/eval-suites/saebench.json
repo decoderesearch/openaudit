@@ -1,0 +1,50 @@
+{
+  "slug": "saebench",
+  "displayName": "SAEBench",
+  "summary": "Tests sparse autoencoders on eight tasks, from how much of the model they keep to how well they remove a concept.",
+  "description": "Eight evals of sparse autoencoders (SAEs) on Gemma 2 2B and Pythia 160M. Core measures how much of the model's behavior an SAE keeps. The other evals test if the latents are useful: for probes, for removing spurious signals or knowledge, and for explanations that people can read.\n\nSparsity changes most scores, so the evals compare SAEs at the same L0 (active latents for each token). Each score is read at a set L0 off the line through the SAEs of one design.\n\nThe results are the baseline SAEs from January 2025. Newer architectures are not in them.",
+  "maintainers": [
+    {
+      "name": "Karvonen, Rager, et al.",
+      "url": "https://github.com/adamkarvonen/SAEBench"
+    }
+  ],
+  "links": [
+    {
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2503.09532",
+      "title": "SAEBench: A Comprehensive Benchmark for Sparse Autoencoders"
+    },
+    {
+      "kind": "repo",
+      "url": "https://github.com/adamkarvonen/SAEBench",
+      "title": "SAEBench code"
+    },
+    {
+      "kind": "dataset",
+      "url": "https://huggingface.co/datasets/adamkarvonen/sae_bench_results_0125",
+      "title": "SAEBench result files (January 2025)"
+    },
+    {
+      "kind": "homepage",
+      "url": "https://www.neuronpedia.org/sae-bench",
+      "title": "Interactive SAEBench results on Neuronpedia"
+    }
+  ],
+  "evalOrder": [
+    "sae-bench-unlearning",
+    "sae-bench-scr",
+    "sae-bench-tpp",
+    "sae-bench-ravel",
+    "sae-bench-sparse-probing",
+    "sae-bench-absorption",
+    "sae-bench-autointerp",
+    "sae-bench-core"
+  ],
+  "matched": {
+    "eval": "sae-bench-core",
+    "metric": "l0",
+    "targets": [40, 80, 160, 320],
+    "default": 80
+  }
+}

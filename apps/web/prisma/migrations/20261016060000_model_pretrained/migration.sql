@@ -1,0 +1,1 @@
+ALTER TABLE "model" ADD COLUMN "pretrained" BOOLEAN NOT NULL DEFAULT false;

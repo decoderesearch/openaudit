@@ -1,0 +1,58 @@
+{
+  "version": "2026-11",
+  "workspaceBench": {
+    "commit": "2617613910e727fc31615a1193044c6cc729ad87",
+    "patch": "patches/2617613.patch"
+  },
+  "summary": "OpenAudit's instrument: the judge reads every readout line of a question at once (summ_direct), with no digest step, and its note tells it that each line is one sample (summ_direct_note). A family whose largest question is over maxPromptTokens is read at its lite site. If it is still too large, it uses WorkspaceBench's own digest method at the lite site.",
+  "opts": "summ_direct=1,summ_direct_note=1",
+  "judgeEffort": null,
+  "fallbackOpts": "",
+  "maxPromptTokens": 200000,
+  "promptTokens": { "fixed": 2500, "charsPerToken": 3.5, "perLine": 8 },
+  "cacheRepeatedPrompts": true,
+  "families": [
+    "buggy_code",
+    "directed_modulation",
+    "model_specific_directed_modulation",
+    "multihop",
+    "multilingual_mt",
+    "multilingual_multihop",
+    "multilingual_typo",
+    "poetry",
+    "relational_multihop",
+    "typo_mt"
+  ],
+  "later": [
+    "agentic_misalignment",
+    "arithmetic_intermediates",
+    "association",
+    "basic_readout",
+    "basic_readout_mt",
+    "chain_intermediates",
+    "conjunctive_association",
+    "hinted_cutoff",
+    "introspection",
+    "jailbreak_recognition",
+    "knowledge_cutoff",
+    "model_multihop",
+    "moral_rationale",
+    "multi_concept_directed_modulation",
+    "multihop_mt",
+    "multilingual",
+    "nyt_connections",
+    "role_bound_association",
+    "user_modeling",
+    "wrong_intermediate"
+  ],
+  "notRun": {
+    "typo": "WorkspaceBench replaced it with typo_mt.",
+    "jlens_concept_pr": "It scores a lens against the J-Lens with its own per-concept judge (about 71,000 calls). Not in this version."
+  },
+  "smoke": {
+    "model": "Qwen/Qwen3.5-0.8B",
+    "families": ["poetry", "directed_modulation", "multihop"],
+    "items": 2,
+    "judgeModel": "google/gemini-3.8-flash"
+  }
+}

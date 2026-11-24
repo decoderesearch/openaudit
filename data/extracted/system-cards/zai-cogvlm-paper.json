@@ -1,0 +1,313 @@
+{
+  "document": "zai-cogvlm-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "zai-org/cogvlm-chat-hf"
+    },
+    {
+      "rawModelName": "CogVLM-Grounding"
+    }
+  ],
+  "pageCount": 17,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "visual language (image + text)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "visual language foundation model"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "17B (CogVLM-17B); 6.5B trainable in pretraining",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "CogVLM-17B, trained from Vicuna-7B, achieves state-"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "EVA2-CLIP-E ViT, MLP (SwiGLU) adapter, Vicuna1.5-7B LLM, visual expert (QKV+MLP) per layer; deep fusion",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "a vision transformer (ViT) encoder, an MLP adapter, a pre-\ntrained large language model (GPT), and a visual expert"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "LAION-2B and COYO-700M filtered to ~1.5B (dropped broken URLs, NSFW, noisy captions, political bias, extreme aspect ratios); plus grounding and VQA/instruction SFT corpora",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "including LAION-2B and COYO-700M. After"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[POPE](/evals/pope) overall Accuracy 87.9 for CogVLM-Chat (higher is better)",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "dataset, and also scored 87.9 on the hallucination assessment"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Pretraining removed NSFW images and images with political bias from LAION/COYO; the paper reports no post-training safety or bias eval of the model.", "tone": "mixed",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "removing the broken URLs, NSFW images, images with"
+      }
+    },
+    {
+      "text": "Conclusion lists reinforcement learning from human feedback (RLHF) and anti-hallucination as future work; no RLHF or dedicated anti-hallucination training results are reported.", "tone": "mixed",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "explore, for example, better SFT alignment,\nmultimodal pre-training initialization.                                     RLHF and anti-hallucination. Since the previous famous"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "POPE",
+      "model": "zai-org/cogvlm-chat-hf",
+      "metric": "Accuracy",
+      "value": 87.9,
+      "unit": "percent",
+      "settings": {
+        "other": "overall; LLM Vicuna-7B"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "CogVLM-Chat       Vicuna-7B    82.3*   64.8*    70.4*       73.8*       91.2*     51.1    72.5      77.6       77.8     87.9     41.1     34.5"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "InstructBLIP",
+      "metric": "Accuracy",
+      "value": 53.8,
+      "unit": "percent",
+      "settings": {
+        "other": "overall; LLM Vicuna-7B"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "InstructBLIP      Vicuna-7B    -         -       50.1         -         60.5      26.2    58.8      33.9       59.8     53.8      -       25.3"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "LLaVA-1.5",
+      "metric": "Accuracy",
+      "value": 85.9,
+      "unit": "percent",
+      "settings": {
+        "other": "overall; LLM Vicuna-7B"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "LLaVA-1.5         Vicuna-7B 78.5*        -      58.2*         -          66.8     30.5    58.6      64.3       60.7     85.9      -       23.6"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "mPLUG-Owl2",
+      "metric": "Accuracy",
+      "value": 86.2,
+      "unit": "percent",
+      "settings": {
+        "other": "overall; LLM LLaMA2-7B"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "mPLUG-Owl2       LLaMA2-7B 79.4*       57.7*    58.2*         -          68.7     36.2    64.1      64.5       25.0     86.2     32.1     25.3"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "Unified-IO2",
+      "metric": "Accuracy",
+      "value": 87.7,
+      "unit": "percent",
+      "settings": {
+        "other": "overall; LLM UIO-2XXL"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "Unified-IO2       UIO-2XXL 79.4*       55.5*       -          -         86.2*      -      65.6      71.5        -       87.7      -        -"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "LLaVA-1.5",
+      "metric": "Accuracy",
+      "value": 85.9,
+      "unit": "percent",
+      "settings": {
+        "other": "overall; LLM Vicuna-13B"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "LLaVA-1.5         Vicuna-13B 80.0*       -      61.3*         -          71.6     35.4    61.6      67.7       64.6     85.9     33.6     26.1"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "SPHINX-2k",
+      "metric": "Accuracy",
+      "value": 87.2,
+      "unit": "percent",
+      "settings": {
+        "other": "overall; LLM LLaMA2 13B"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "SPHINX-2k        LLaMA2 13B 80.7*      62.6*    61.2*       67.8*        70.6     40.2    71.6      65.9        -       87.2     32.9     27.8"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:10:45Z"
+  },
+  "notes": "Technical report (arXiv:2311.03079), not a system card. Safety-only pilot: only POPE (Table 2) kept as hallucination eval. Figure 1 radar value 87.88 for POPE skipped as chart duplicate of Table 2 87.9. Skipped capability: NoCaps, Flickr, COCO, TextCaps, VQAv2, OKVQA, TextVQA, OCRVQA, ScienceQA, MM-Vet, SEED, MMBench, LLaVA-Bench, MMMU, MathVista, RefCOCO/+/g, Visual7W, and ablation Table 4. No risk framework, external testers, or refusal/jailbreak evals. Pretraining NSFW/political-bias filters do not cover bias. Open-source GitHub link given but no license name or release date in the text. Two-column layout made some architecture/training quotes span columns."
+}

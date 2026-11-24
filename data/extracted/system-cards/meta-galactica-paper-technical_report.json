@@ -1,0 +1,1570 @@
+{
+  "document": "meta-galactica-paper-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "facebook/galactica-120b"
+    },
+    {
+      "model": "facebook/galactica-30b"
+    },
+    {
+      "model": "facebook/galactica-6.7b"
+    },
+    {
+      "model": "facebook/galactica-1.3b"
+    },
+    {
+      "model": "facebook/galactica-125m"
+    }
+  ],
+  "pageCount": 58,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "July 2022 (papers in the corpus)",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "quote": "In total the full dataset contains 48 million papers,\nabstract and full-text, up to July 2022."
+      }
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "2048 tokens for all model sizes",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "• Context Window - we use a 2048 length context window for all model sizes."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text, LATEX, code, SMILES, amino-acid sequences, DNA sequences",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Table 1: Tokenizing Nature. Galactica trains on text sequences that represent scientific phenomena."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "GAL 125M 125M; GAL 1.3B 1.3B; GAL 6.7B 6.7B; GAL 30B 30.0B; GAL 120B 120.0B",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "GAL 120B      120.0B       96       10,240     80       128       2.0M      0.7 × 10−5     1.125B"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Transformer decoder-only; GeLU; no biases in dense kernels or layer norms; learned positional embeddings; 50k BPE vocabulary",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "Galactica uses a Transformer architecture in a decoder-only setup (Vaswani et al., 2017), with the following"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "106 billion tokens from papers, reference material, encyclopedias and other scientific sources",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Our corpus consists of 106 billion tokens from papers, reference material, encyclopedias and other scientific"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Title-based citation identifiers have greater hallucination error, especially at low citation counts.",
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "quote": "processing model has a higher accuracy, but greater risk of hallucination."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "GAL 120B scores 26% MC1 on [TruthfulQA](/evals/truthfulqa); performance rises with scale but stays low.",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "quote": "GAL 120B                 26%           0.02"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Galactica 120B [CrowS-Pairs](/evals/crows-pairs) overall 60.5, lower stereotypical bias than text-davinci-002 and OPT 175B except sexual orientation and age.",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "Galactica attains a better overall score of 60.5%"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "Galactica [RealToxicityPrompts](/evals/real-toxicity-prompts) continuations are much less toxic as prompt toxicity rises",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "quote": "Galactica exhibits much lower toxicity continuation rates,\neven as we increase the original prompt toxicity."
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The authors report Galactica is significantly less biased and toxic than the language models they compare.", "tone": "good",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "We find Galactica is\nsignificantly less biased and toxic than existing language models."
+      }
+    },
+    {
+      "text": "[TruthfulQA](/evals/truthfulqa) accuracy stays low in absolute terms even with a curated scientific corpus.", "tone": "mixed",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "quote": "However, absolute performance is still low. Given the curated nature of\nour corpus, this suggests that data alone does not cause language models to struggle at this task."
+      }
+    },
+    {
+      "text": "Paper-title citation IDs hallucinate more than alphanumeric IDs at lower model scales and low mention counts.", "tone": "mixed",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "found that paper titles are more prone to hallucination error at lower scales given the text-based nature of the"
+      }
+    },
+    {
+      "text": "[RealToxicityPrompts](/evals/real-toxicity-prompts) is reported only as a plot; the authors say Galactica continuations are much less toxic as prompt toxicity rises.", "tone": "good",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "quote": "Galactica exhibits much lower toxicity continuation rates,\neven as we increase the original prompt toxicity."
+      }
+    },
+    {
+      "text": "The 120B model still prefers more popular papers in citation prediction, so they say it likely needs augmentation before production use.", "tone": "mixed",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "quote": "some bias towards popular papers still remains with the 120B scale model, so the model likely requires"
+      }
+    },
+    {
+      "text": "The authors say generations still need a verification layer to assure they are correct and factual.", "tone": "mixed",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "quote": "Verification Even as language models become more accurate with scale, we need assurances that their\ngenerations are correct and factual."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 64.7,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Race                                        64.7"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Race"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 68.6,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Race                                        64.7         68.6"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Race"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 59.9,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Race                                        64.7         68.6               59.9"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Race"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 73.8,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Socioeconomic                               73.8"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Socioeconomic"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 76.2,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Socioeconomic                               73.8         76.2"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Socioeconomic"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 65.7,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Socioeconomic                               73.8         76.2               65.7"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Socioeconomic"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 62.6,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Gender                                      62.6"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Gender"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 65.7,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Gender                                      62.6         65.7"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Gender"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 51.9,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Gender                                      62.6         65.7               51.9"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Gender"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 76.7,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Disability                                  76.7"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Disability"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 76.7,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Disability                                  76.7         76.7"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Disability"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 66.7,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Disability                                  76.7         76.7               66.7"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Disability"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 61.6,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Nationality                                 61.6"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Nationality"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 62.9,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Nationality                                 61.6         62.9"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Nationality"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 51.6,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Nationality                                 61.6         62.9               51.6"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Nationality"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 76.2,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Sexual-orientation                          76.2"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Sexual-orientation"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 78.6,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Sexual-orientation                          76.2         78.6"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Sexual-orientation"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 77.4,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Sexual-orientation                          76.2         78.6               77.4"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Sexual-orientation"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 74.6,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Physical-appearance                         74.6"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Physical-appearance"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 76.2,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Physical-appearance                         74.6         76.2"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Physical-appearance"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 58.7,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Physical-appearance                         74.6         76.2               58.7"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Physical-appearance"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 73.3,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Religion                                    73.3"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Religion"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 68.6,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Religion                                    73.3         68.6"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Religion"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 67.6,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Religion                                    73.3         68.6               67.6"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Religion"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 64.4,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Age                                         64.4"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Age"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 67.8,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Age                                         64.4         67.8"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Age"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 69,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Age                                         64.4         67.8               69.0"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Age"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 67.2,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Overall                                     67.2"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Overall"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 69.5,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Overall                                     67.2         69.5"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Overall"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "stereotypical sentence preference",
+      "value": 60.5,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 19",
+        "quote": "                     Overall                                     67.2         69.5               60.5"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Overall"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 78.4,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    78.4"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Profession (Prof.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 74.1,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    78.4       74.1"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Profession (Prof.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 75.2,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    78.4       74.1             75.2"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Profession (Prof.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 63.4,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Prof.       SS (↓)                    63.4"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Profession (Prof.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 62.6,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Prof.       SS (↓)                    63.4       62.6"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Profession (Prof.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 57.2,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Prof.       SS (↓)                    63.4       62.6             57.2"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Profession (Prof.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 57.5,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   57.5"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Profession (Prof.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 55.4,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   57.5       55.4"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Profession (Prof.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 64.3,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   57.5       55.4             64.3"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Profession (Prof.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 75.6,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    75.6"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Gender (Gend.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 74,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    75.6       74.0"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Gender (Gend.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 74.6,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    75.6       74.0             74.6"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Gender (Gend.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 66.5,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Gend.       SS (↓)                    66.5"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Gender (Gend.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 63.6,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Gend.       SS (↓)                    66.5       63.6"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Gender (Gend.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 59.1,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Gend.       SS (↓)                    66.5       63.6             59.1"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Gender (Gend.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 50.6,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   50.6"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Gender (Gend.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 53.8,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   50.6       53.8"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Gender (Gend.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 61,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   50.6       53.8             61.0"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Gender (Gend.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 80.8,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    80.8"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Religion (Reli.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 84,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    80.8       84.0"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Religion (Reli.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 81.4,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    80.8       84.0             81.4"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Religion (Reli.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 59,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Reli.       SS (↓)                    59.0"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Religion (Reli.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 59,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Reli.       SS (↓)                    59.0       59.0"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Religion (Reli.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 55.1,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Reli.       SS (↓)                    59.0       59.0             55.1"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Religion (Reli.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 66.3,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   66.3"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Religion (Reli.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 68.9,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   66.3       68.9"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Religion (Reli.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 73.1,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   66.3       68.9             73.1"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Religion (Reli.)"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 77,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    77.0"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Race"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 74.9,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    77.0       74.9"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Race"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 74.5,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    77.0       74.9             74.5"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Race"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 57.4,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Race        SS (↓)                    57.4"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Race"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 56.8,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Race        SS (↓)                    57.4       56.8"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Race"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 54.8,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Race        SS (↓)                    57.4       56.8             54.8"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Race"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 65.7,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   65.7"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Race"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 64.8,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   65.7       64.8"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Race"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 67.3,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   65.7       64.8             67.3"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Race"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 77.6,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    77.6"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Overall"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 74.8,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    77.6       74.8"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Overall"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "LMS",
+      "value": 75,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   LMS (↑)                    77.6       74.8             75.0"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Overall"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 60.8,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Overall     SS (↓)                    60.8"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Overall"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 59.9,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Overall     SS (↓)                    60.8       59.9"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Overall"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "SS",
+      "value": 56.2,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                        Overall     SS (↓)                    60.8       59.9             56.2"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Overall"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 60.8,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   60.8"
+      },
+      "model": "openai/text-davinci-002",
+      "settings": {
+        "other": "Overall"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 60,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   60.8       60.0"
+      },
+      "model": "meta/opt-175b",
+      "settings": {
+        "other": "Overall"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "metric": "ICAT",
+      "value": 65.6,
+      "unit": "score",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "table": "Table 20",
+        "quote": "                                   ICAT (↑)                   60.8       60.0             65.6"
+      },
+      "model": "facebook/galactica-120b",
+      "settings": {
+        "other": "Overall"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC1 (Acc)",
+      "value": 21,
+      "unit": "percent",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "table": "Table 21",
+        "quote": "                                  OPT 175B                 21%"
+      },
+      "model": "meta/opt-175b",
+      "stderr": 0.13
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC1 (Acc)",
+      "value": 19,
+      "unit": "percent",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "table": "Table 21",
+        "quote": "                                  BLOOM 176B               19%"
+      },
+      "model": "bigscience/bloom",
+      "stderr": 0.07
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC1 (Acc)",
+      "value": 19,
+      "unit": "percent",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "table": "Table 21",
+        "quote": "                                  GAL 125M                 19%"
+      },
+      "model": "facebook/galactica-125m",
+      "stderr": 0.11
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC1 (Acc)",
+      "value": 19,
+      "unit": "percent",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "table": "Table 21",
+        "quote": "                                  GAL 1.3B                 19%"
+      },
+      "model": "facebook/galactica-1.3b",
+      "stderr": 0.15
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC1 (Acc)",
+      "value": 19,
+      "unit": "percent",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "table": "Table 21",
+        "quote": "                                  GAL 6.7B                 19%"
+      },
+      "model": "facebook/galactica-6.7b",
+      "stderr": 0.03
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC1 (Acc)",
+      "value": 24,
+      "unit": "percent",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "table": "Table 21",
+        "quote": "                                  GAL 30B                  24%"
+      },
+      "model": "facebook/galactica-30b",
+      "stderr": 0.05
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC1 (Acc)",
+      "value": 26,
+      "unit": "percent",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "table": "Table 21",
+        "quote": "                                  GAL 120B                 26%"
+      },
+      "model": "facebook/galactica-120b",
+      "stderr": 0.02
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:50:30Z"
+  },
+  "notes": "Technical report (arXiv:2211.09085). Safety evals are section 6 (CrowS-Pairs, StereoSet, RealToxicityPrompts, TruthfulQA) plus citation-identifier hallucination rates in Appendix Tables 26–27. Skipped Figure 22 RTP because it is a chart without printed numbers. Skipped capability benches (MMLU including computer_security and business_ethics, MATH, BIG-bench, PubMedQA, MedMCQA, MoleculeNet/Tox21 as molecular property prediction not CBRN, IUPAC accuracy, protein ROUGE, citation Correct/Incorrect). StereoSet LMS is the language-modeling score from that bias suite. TruthfulQA MC1 (Std) stored as stderr. Models trained for 450 billion tokens (~4.25 epochs) are noted here, not as FLOPs. No SimpleQA. No named model license or release date in the PDF. Perspective API scored RTP; it is not recorded as an external tester."
+}

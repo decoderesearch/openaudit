@@ -1,0 +1,72 @@
+{
+  "eval": {
+    "slug": "openai-user-confirmations",
+    "displayName": "User confirmations",
+    "aliases": [
+      "User confirmations — Financial transaction",
+      "User confirmations — High-stakes communication",
+      "User confirmations — General confirmation",
+      "User confirmations (Financial transaction)",
+      "User confirmations (High-stakes communication)",
+      "User confirmations (General confirmation)"
+    ],
+    "description": "OpenAI internal computer-use evals that check whether the model asks for confirmation before high-risk actions under platform and developer confirmation policy. Categories are financial transaction, high-stakes communication, and general confirmation. Scored as confirmation-policy adherence / compliance rate. Dataset and runner are lab-internal.",
+    "summary": "Checks if AI agents ask the user to confirm before they take high-risk actions.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-5-4-thinking/gpt-5-4-thinking.pdf",
+        "title": "GPT-5.4 Thinking System Card (User Confirmations During Computer Use)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["agentic", "multi_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["agentic_misuse", "sabotage"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-03-05",
+      "status": "draft",
+      "releasedDate": "2026-03-05",
+      "changes": "OpenAI reports an improved user-confirmations evaluation for computer use in the GPT-5.4 Thinking card. Policies and datasets may evolve.",
+      "scores": [
+        {
+          "key": "confirmation_adherence",
+          "displayName": "Confirmation policy adherence",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model follows the confirmation policy for that high-risk action category."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "confirmation_rate",
+          "displayName": "Confirmation / compliance rate",
+          "score": "confirmation_adherence",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of cases where the model adheres to the confirmation policy. Higher is better. Per category."
+        }
+      ]
+    }
+  ]
+}

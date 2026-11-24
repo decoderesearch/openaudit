@@ -1,0 +1,538 @@
+{
+  "document": "microsoft-phi-4-reasoning-vision-paper-technical_report",
+  "alsoDocuments": ["microsoft-phi-4-reasoning-vision-blog"],
+  "covers": [
+    {
+      "model": "microsoft/Phi-4-reasoning-vision-15B"
+    }
+  ],
+  "pageCount": 21,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "multimodal (vision and language)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present Phi-4-reasoning-vision-15B, a compact open-weight multimodal reasoning model, and share"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "hybrid: reasoning traces with <think> tokens and direct responses with <nothink> tokens",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "The mixture includes both reasoning traces (with <think> tokens) and\ndirect-response samples (with <nothink> tokens) as described in Section 4."
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "stated",
+      "value": "permissive license",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "is released under a permissive license with model weights, fine-tuning code, and benchmark logs. We"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "15B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present Phi-4-reasoning-vision-15B, a compact open-weight multimodal reasoning model, and share"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "mid-fusion: SigLIP-2 vision encoder, MLP projector, Phi-4-Reasoning language model",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "we use a mid-fusion architecture. It offers a practical trade-off between expressivity and efficiency without"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "200 billion tokens of multimodal data (open-source VL filtered/improved, Microsoft domain data, acquisitions; Stage 3 RAI including Hateful Memes, VLGuard, Think-in-Safety, WildGuard)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "We used just\n200 billion tokens of multimodal data leveraging Phi-4-Reasoning (trained with 16 billion tokens) based on"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Trained to refuse harmful requests; Text-to-Text and Image-to-Text safety defect rates 1.4% and 4.5% (lower is better)",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "refusal of harmful requests, and safe reasoning under adversarial prompts."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Automated red teaming assessed disallowed content including self-harm",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "including disallowed content (sexual, violent, hateful, or self-harm content), copyright content and intellectual"
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Automated red teaming assessed jailbreak susceptibility",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "and jailbreak susceptibility. The evaluation assessed the model’s groundedness and its tendency to"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[HallusionBench](/evals/hallusionbench) accuracy reported; safety eval assessed groundedness and fabricated or misleading information",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "jailbreak susceptibility. The evaluation assessed the model’s groundedness and its tendency to\ngenerate fabricated or misleading information. The safety evaluation built upon the e"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Safety training used public responsible AI (RAI) datasets (Hateful Memes, [VLGuard](/evals/vlguard), Think-in-Safety, [WildGuard](https://arxiv.org/abs/2406.18495)) plus internally generated refusal examples aligned with Microsoft Responsible AI Principles.", "tone": "good",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "including Hateful Memes (Kiela et al., 2021), VLGuard (Zong et al., 2024), Think-in-Safety (Lou et al., 2025),\nWildGuard (Han et al., 2024). This data covers a range of safety-relevant scenarios such as hateful content"
+      }
+    },
+    {
+      "text": "Automated red teaming on Azure covered disallowed content, copyright/intellectual property (IP), jailbreaks, groundedness, and harmful or misleading visual inputs; evaluation practices built on Phi-4-Reasoning’s safety assessment.", "tone": "good",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "Automated red teaming was performed on Azure to assess safety risks across multiple risk categories,"
+      }
+    },
+    {
+      "text": "Users should verify critical outputs for fine-grained visual details; the model has limitations around extremely detailed or nuanced image understanding.", "tone": "mixed",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "Like many models of its size, Phi-4-reasoning-vision-15B has limitations particularly around extremely\ndetailed or nuanced understanding of images. Users should verify critical outputs, especially for fine-"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Text to Text Safety",
+      "model": "microsoft/Phi-4-reasoning-vision-15B",
+      "metric": "Defect Rate",
+      "value": 1.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Automated content safety evaluation measuring safety policies"
+      },
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "    Text to Text Safety      Automated content safety evaluation measuring safety policies                  1.4%"
+      }
+    },
+    {
+      "rawEvalName": "Image to Text Safety",
+      "model": "microsoft/Phi-4-reasoning-vision-15B",
+      "metric": "Defect Rate",
+      "value": 4.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Automated content safety evaluation measuring safety policies"
+      },
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "    Image to Text Safety     Automated content safety evaluation measuring safety policies                  4.5%"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "microsoft/Phi-4-reasoning-vision-15B",
+      "metric": "accuracy",
+      "value": 64.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 5 non-thinking comparison; default hybrid model; temperature 0.0, greedy, 4096 max output tokens"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 5",
+        "quote": "HallusionBench               64.4             63.1       56      65.2      65.3     73.5     74.1      74.4      74.9"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "microsoft/Phi-4-reasoning-vision-15B",
+      "metric": "accuracy",
+      "value": 63.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Phi-4-reasoning-vision-15B –force nothink; Table 5"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 5",
+        "quote": "HallusionBench               64.4             63.1       56      65.2      65.3     73.5     74.1      74.4      74.9"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "microsoft/Phi-4-multimodal-instruct",
+      "metric": "accuracy",
+      "value": 56,
+      "unit": "percent",
+      "settings": {
+        "other": "Phi-4-mm-instruct; Table 5 non-thinking"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 5",
+        "quote": "HallusionBench               64.4             63.1       56      65.2      65.3     73.5     74.1      74.4      74.9"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "moonshotai/Kimi-VL-A3B-Instruct",
+      "metric": "accuracy",
+      "value": 65.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 5 non-thinking"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 5",
+        "quote": "HallusionBench               64.4             63.1       56      65.2      65.3     73.5     74.1      74.4      74.9"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "google/gemma-3-12b-it",
+      "metric": "accuracy",
+      "value": 65.3,
+      "unit": "percent",
+      "settings": {
+        "other": "gemma-3-12b-it; Table 5 non-thinking"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 5",
+        "quote": "HallusionBench               64.4             63.1       56      65.2      65.3     73.5     74.1      74.4      74.9"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Qwen/Qwen3-VL-8B-Instruct",
+      "metric": "accuracy",
+      "value": 73.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Qwen3-VL-8B-Instruct-4K; Table 5"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 5",
+        "quote": "HallusionBench               64.4             63.1       56      65.2      65.3     73.5     74.1      74.4      74.9"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Qwen/Qwen3-VL-8B-Instruct",
+      "metric": "accuracy",
+      "value": 74.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Qwen3-VL-8B-Instruct-32K; Table 5"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 5",
+        "quote": "HallusionBench               64.4             63.1       56      65.2      65.3     73.5     74.1      74.4      74.9"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Qwen/Qwen3-VL-32B-Instruct",
+      "metric": "accuracy",
+      "value": 74.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Qwen3-VL-32B-Instruct-4K; Table 5"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 5",
+        "quote": "HallusionBench               64.4             63.1       56      65.2      65.3     73.5     74.1      74.4      74.9"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Qwen/Qwen3-VL-32B-Instruct",
+      "metric": "accuracy",
+      "value": 74.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Qwen3-VL-32B-Instruct-32K; Table 5"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 5",
+        "quote": "HallusionBench               64.4             63.1       56      65.2      65.3     73.5     74.1      74.4      74.9"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "microsoft/Phi-4-reasoning-vision-15B",
+      "metric": "accuracy",
+      "value": 64.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 6 thinking comparison; default hybrid model; temperature 0.0, greedy, 4096 max output tokens"
+      },
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 6",
+        "quote": "HallusionBench               64.4             63.9       70.6      65.3      71.6       73          76.4    76.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "microsoft/Phi-4-reasoning-vision-15B",
+      "metric": "accuracy",
+      "value": 63.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Phi-4-reasoning-vision-15B –force thinking; Table 6"
+      },
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 6",
+        "quote": "HallusionBench               64.4             63.9       70.6      65.3      71.6       73          76.4    76.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "moonshotai/Kimi-VL-A3B-Thinking",
+      "metric": "accuracy",
+      "value": 70.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 6 thinking"
+      },
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 6",
+        "quote": "HallusionBench               64.4             63.9       70.6      65.3      71.6       73          76.4    76.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "google/gemma-3-12b-it",
+      "metric": "accuracy",
+      "value": 65.3,
+      "unit": "percent",
+      "settings": {
+        "other": "gemma-3-12b-it; Table 6 thinking"
+      },
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 6",
+        "quote": "HallusionBench               64.4             63.9       70.6      65.3      71.6       73          76.4    76.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Qwen/Qwen3-VL-8B-Thinking",
+      "metric": "accuracy",
+      "value": 71.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Qwen3-VL-8B-Thinking-4K; Table 6"
+      },
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 6",
+        "quote": "HallusionBench               64.4             63.9       70.6      65.3      71.6       73          76.4    76.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Qwen/Qwen3-VL-8B-Thinking",
+      "metric": "accuracy",
+      "value": 73,
+      "unit": "percent",
+      "settings": {
+        "other": "Qwen3-VL-8B-Thinking-40K; Table 6"
+      },
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 6",
+        "quote": "HallusionBench               64.4             63.9       70.6      65.3      71.6       73          76.4    76.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Qwen/Qwen3-VL-32B-Thinking",
+      "metric": "accuracy",
+      "value": 76.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Qwen3-VL-32B-Thinking-4K; Table 6"
+      },
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 6",
+        "quote": "HallusionBench               64.4             63.9       70.6      65.3      71.6       73          76.4    76.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Qwen/Qwen3-VL-32B-Thinking",
+      "metric": "accuracy",
+      "value": 76.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Qwen3-VL-32B-Thinking-40K; Table 6"
+      },
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 6",
+        "quote": "HallusionBench               64.4             63.9       70.6      65.3      71.6       73          76.4    76.6"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:59:41Z"
+  },
+  "notes": "Technical report (arXiv 2603.03975), not a system card. Safety is Section 7 plus HallusionBench in Tables 5–6. Text/Image-to-Text Safety defect rates have no named public dataset or comparison models. Automated red teaming is Microsoft/Azure (not listed as external testers). totalParams taken from the 15B model name (no separate “15 billion parameters” sentence). Training Stage 3 max sequence length 16384 not treated as inference contextWindow; 4096 max output tokens is an eval setting only. License named only as “permissive,” not a SPDX id. Skipped capability: AI2D, ChartQA, MathVerse, MathVision, MathVista, MMMU, MMStar, OCRBench, ScreenSpotv2, ScreenSpot-Pro, V*Bench, timing/Pareto plots. Qwen Thinking variants are seed checkpoints of Instruct, so stored as rawModelName."
+}

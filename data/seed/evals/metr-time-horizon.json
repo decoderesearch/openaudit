@@ -1,0 +1,94 @@
+{
+  "eval": {
+    "slug": "metr-time-horizon",
+    "displayName": "METR 50% time horizon",
+    "aliases": ["METR 50%-time horizon", "METR 50% time-horizon", "50%-task-completion time horizon"],
+    "description": "METR metric for how long a task humans take that an AI agent completes with 50% success. Agents run on software and research tasks with human time baselines; a logistic fit of success versus log human duration yields the 50% (and often 80%) time horizon. Many tasks stay private; public analysis code and some run data are released.",
+    "summary": "Measures the length of human task time that AI agents can finish with 50% success.",
+    "maintainers": [
+      {
+        "name": "METR",
+        "url": "https://metr.org/time-horizons/"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2503.14499",
+        "title": "Measuring AI Ability to Complete Long Tasks"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://metr.org/time-horizons/",
+        "title": "METR time-horizons dashboard"
+      },
+      {
+        "kind": "blog",
+        "url": "https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/",
+        "title": "METR blog post"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/METR/eval-analysis-public",
+        "title": "Public analysis code and run summaries"
+      }
+    ],
+    "access": "held_out",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "1.0",
+      "status": "published",
+      "releasedDate": "2025-03-19",
+      "changes": "Original TH1 task suite and analysis in Measuring AI Ability to Complete Long Tasks.",
+      "scores": [
+        {
+          "key": "task_success",
+          "displayName": "Task success",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 if the agent successfully completes that task attempt under the run’s scoring rules."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "p50_time_horizon",
+          "displayName": "50% time horizon",
+          "aggregation": "custom",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "unit": "minute",
+          "description": "Human-expert task duration at which the fitted success curve crosses 50%. Cards report this as METR 50% time horizon."
+        },
+        {
+          "key": "p80_time_horizon",
+          "displayName": "80% time horizon",
+          "aggregation": "custom",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "unit": "minute",
+          "description": "Human-expert task duration at which the fitted success curve crosses 80%."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "sandbox": "docker",
+        "internet": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "eval": {
+    "slug": "winomt",
+    "displayName": "WinoMT",
+    "aliases": ["Wino-MT"],
+    "description": "Tests gender bias in machine translation from English into languages with grammatical gender. The challenge set concatenates Winogender and WinoBias (3,888 sentences). After translation, morphological analysis checks whether the target occupation gets the correct gender inflection. Cards report overall accuracy plus stereotype (ΔS) and gender (ΔG) gaps.",
+    "summary": "Tests whether the model translates occupation words with the correct gender instead of following gender stereotypes.",
+    "maintainers": [
+      {
+        "name": "Stanovsky, Smith, and Zettlemoyer",
+        "url": "https://github.com/gabrielStanovsky/mt_gender"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/1906.00591",
+        "title": "Evaluating Gender Bias in Machine Translation"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/gabrielStanovsky/mt_gender",
+        "title": "WinoMT data and evaluation scripts"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bias"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2019-06",
+      "status": "published",
+      "releasedDate": "2019-06",
+      "dataset": {
+        "url": "https://github.com/gabrielStanovsky/mt_gender/tree/586292861cf2efdda2dec03c69c3408995a8b293",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "en",
+            "sampleCount": 3888,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "gender_correct",
+          "displayName": "Correct gender inflection",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the translated occupation (or aligned entity) has the morphological gender matching the English pronoun context."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "overall_accuracy",
+          "displayName": "Overall accuracy",
+          "score": "gender_correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of translations with correct gender for the focal entity across target languages."
+        },
+        {
+          "key": "delta_s",
+          "displayName": "ΔS",
+          "aggregation": "custom",
+          "direction": "nearer_zero_is_better",
+          "safetyDirection": "nearer_zero_is_better",
+          "description": "Accuracy gap between stereotypical and non-stereotypical role assignments."
+        },
+        {
+          "key": "delta_g",
+          "displayName": "ΔG",
+          "aggregation": "custom",
+          "direction": "nearer_zero_is_better",
+          "safetyDirection": "nearer_zero_is_better",
+          "description": "Accuracy gap between male and female pronoun contexts."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

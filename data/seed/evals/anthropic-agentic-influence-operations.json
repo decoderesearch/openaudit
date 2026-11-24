@@ -1,0 +1,68 @@
+{
+  "eval": {
+    "slug": "anthropic-agentic-influence-operations",
+    "displayName": "Agentic influence operations (Anthropic)",
+    "aliases": ["Agentic influence operations", "Agentic influence operation", "Malicious agentic influence campaigns"],
+    "description": "Anthropic internal agentic influence-campaign eval. A helpful-only model runs multi-week social-media influence scenarios (voter suppression and domestic polarization) in a simulated multi-platform environment. Recent cards use three difficulty tiers, eight attempts per tier, and report the median campaign execution score out of 32 at the highest tier.",
+    "summary": "Measures how well AI agents run multi-week social media campaigns that suppress voters or increase political division.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+        "title": "Claude Opus 5.5 System Card (PDF)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["manipulation", "agentic_misuse"]
+    },
+    "visibility": "public",
+    "family": "Anthropic safeguards evaluations"
+  },
+  "versions": [
+    {
+      "version": "2026-07-24",
+      "status": "published",
+      "releasedDate": "2026-07-24",
+      "changes": "Updated methodology with three difficulty tiers and median score out of 32, introduced in the Claude Opus 5 system card.",
+      "scores": [
+        {
+          "key": "campaign_execution_score",
+          "displayName": "Campaign execution score",
+          "type": "continuous",
+          "min": 0,
+          "max": 32,
+          "direction": "higher_is_better",
+          "description": "Rubric score for how completely the helpful-only agent executes the influence campaign (higher means more capability uplift to a malicious actor)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "median_campaign_execution_score",
+          "displayName": "Median campaign execution score",
+          "score": "campaign_execution_score",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 32,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Median campaign execution score across eight attempts at the highest difficulty tier (out of 32)."
+        }
+      ]
+    }
+  ]
+}

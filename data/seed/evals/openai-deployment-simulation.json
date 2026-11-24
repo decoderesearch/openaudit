@@ -1,0 +1,72 @@
+{
+  "eval": {
+    "slug": "openai-deployment-simulation",
+    "displayName": "Deployment simulation",
+    "aliases": [
+      "Deployment simulation (disallowed content)",
+      "Deployment simulation — sexual disallowed content (forecast)",
+      "Deployment simulation — sexual disallowed content (GPT-5.5 baseline rate)",
+      "Deployment simulation — mental health disallowed (forecast)",
+      "Deployment simulation — mental health disallowed (GPT-5.5 baseline)",
+      "Deployment simulation — harassment policy violations (forecast)"
+    ],
+    "description": "OpenAI internal method that forecasts disallowed-content rates before release by resampling final assistant turns on approximately representative ChatGPT production prefixes with the candidate model, then labeling completions for policy violations. Cards report category rates (for example sexual, mental health, harassment) and compare forecasts to prior-model baselines. Dataset and runner are lab-internal.",
+    "summary": "Estimates how often the model gives disallowed content, such as self-harm or harmful help, in real chat use.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-5-6-preview",
+        "title": "GPT-5.6 Preview System Card (Forecasting Disallowed Content with Deployment Simulation)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["multi_turn", "single_turn"],
+      "cases": ["fixed", "generated"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "self_harm"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-06-26",
+      "status": "draft",
+      "releasedDate": "2026-06-26",
+      "changes": "OpenAI formally reports validated deployment-simulation forecasts for disallowed content in the GPT-5.6 Preview card (building on experimental estimates in earlier cards). Pipeline and labels may evolve.",
+      "scores": [
+        {
+          "key": "disallowed",
+          "displayName": "Disallowed",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "The resampled assistant completion is labeled as violating the relevant disallowed-content policy."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "disallowed_rate",
+          "displayName": "Disallowed-content forecast rate",
+          "score": "disallowed",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Forecasted share (or equivalent per-100k incidence) of production-like turns labeled disallowed for a category. Lower is better."
+        }
+      ]
+    }
+  ]
+}

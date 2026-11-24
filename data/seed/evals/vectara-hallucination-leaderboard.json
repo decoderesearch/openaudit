@@ -1,0 +1,106 @@
+{
+  "eval": {
+    "slug": "vectara-hallucination-leaderboard",
+    "displayName": "Vectara Hallucination Leaderboard",
+    "aliases": ["HHEM v2.1", "HHEM-2.1", "HHEM", "Vectara HHEM", "Hallucination Leaderboard"],
+    "description": "Tests how often a model adds unsupported facts when it summarizes a short document. The model summarizes each document using only its facts, and Vectara's Hallucination Evaluation Model (HHEM) scores each summary for factual consistency. The rate uses only documents that every model summarized. HHEM-2.1-Open is on Hugging Face; the leaderboard itself uses Vectara's commercial HHEM.",
+    "summary": "Measures how often the model adds facts that the source document does not support when it summarizes.",
+    "maintainers": [
+      {
+        "name": "Vectara",
+        "url": "https://github.com/vectara/hallucination-leaderboard"
+      }
+    ],
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/vectara/hallucination-leaderboard",
+        "title": "Leaderboard, prompt and method"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/vectara/leaderboard_results",
+        "title": "vectara/leaderboard_results (source documents and summaries)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://huggingface.co/vectara/hallucination_evaluation_model",
+        "title": "HHEM-2.1-Open judge model"
+      },
+      {
+        "kind": "blog",
+        "url": "https://vectara.com/blog/cut-the-bull-detecting-hallucinations-in-large-language-models/",
+        "title": "Cut the Bull: Detecting Hallucinations in Large Language Models"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["hallucination"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "hhem-2.1",
+      "status": "published",
+      "dataset": {
+        "hfRepo": "vectara/leaderboard_results",
+        "revision": "f965edc45249db35f9b0b206138bf8246ae6a54e",
+        "url": "https://huggingface.co/datasets/vectara/leaderboard_results",
+        "splits": [
+          {
+            "name": "source",
+            "sampleCount": 1006,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "consistent",
+          "displayName": "Factually consistent",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when HHEM-2.1 judges the summary consistent with the source document."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "factual_consistency_rate",
+          "displayName": "Factual consistency rate",
+          "score": "consistent",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Share of summaries judged consistent, on documents every model summarized. Equal to 1 minus the hallucination rate."
+        },
+        {
+          "key": "answer_rate",
+          "displayName": "Answer rate",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of documents the model summarized instead of refusing."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "internet": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "eval": {
+    "slug": "discrim-eval",
+    "displayName": "Discrim-Eval",
+    "aliases": ["Anthropic discrim-eval", "Explicit Discrimination", "Implicit Discrimination"],
+    "description": "Tests whether a model’s yes/no decisions change with age, race, and gender across 70 hypothetical decision scenarios (loan approval, hiring, and similar). Explicit prompts state demographics; implicit prompts use names that imply race and gender. Each scenario has 135 demographic variants (9,450 prompts per split). Cards report mixed-effects discrimination coefficients; lower means less use of the demographic feature.",
+    "summary": "Tests whether the model changes its yes/no decisions based on a person's age, race, or gender.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://huggingface.co/datasets/Anthropic/discrim-eval"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2312.03689",
+        "title": "Evaluating and Mitigating Discrimination in Language Model Decisions"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/Anthropic/discrim-eval",
+        "title": "Anthropic/discrim-eval"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bias"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2023-12",
+      "status": "published",
+      "releasedDate": "2023-12",
+      "dataset": {
+        "hfRepo": "Anthropic/discrim-eval",
+        "revision": "6986d6ea802e019d01e94dd59597e94fbd8f8c4a",
+        "url": "https://huggingface.co/datasets/Anthropic/discrim-eval",
+        "license": "cc-by-4.0",
+        "splits": [
+          {
+            "name": "explicit",
+            "sampleCount": 9450,
+            "storage": "pointer"
+          },
+          {
+            "name": "implicit",
+            "sampleCount": 9450,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "favorable",
+          "displayName": "Favorable decision",
+          "type": "binary",
+          "direction": "neither",
+          "description": "1 when the model answers yes to the decision question (a yes is always advantageous to the subject in these prompts)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "overall_avg_coef",
+          "displayName": "Overall average coefficient",
+          "aggregation": "custom",
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Mean absolute mixed-effects coefficient across gender, race, and age (OpenAI cards: Overall Avg. Coef.). Lower means demographics matter less for the decision."
+        },
+        {
+          "key": "gender_coef",
+          "displayName": "Gender coefficient",
+          "aggregation": "custom",
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Mixed-effects coefficient for gender."
+        },
+        {
+          "key": "race_coef",
+          "displayName": "Race coefficient",
+          "aggregation": "custom",
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Mixed-effects coefficient for race."
+        },
+        {
+          "key": "age_coef",
+          "displayName": "Age coefficient",
+          "aggregation": "custom",
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Mixed-effects coefficient for age."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

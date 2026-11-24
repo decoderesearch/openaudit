@@ -1,0 +1,114 @@
+{
+  "eval": {
+    "slug": "do-anything-now",
+    "displayName": "Do Anything Now",
+    "aliases": ["DoAnythingNow", "Do-Anything-Now"],
+    "description": "In-the-wild jailbreak prompt collection from Shen et al. (JailbreakHub): 1,405 jailbreak prompts (Dec 2022–Dec 2023) plus a 390-question forbidden-scenario set. Labs apply the jailbreak templates to models and score whether safeguards hold; cards often report refusal accuracy or attack success rate.",
+    "summary": "Tests whether the model refuses harmful requests when users add jailbreak prompts found in real use.",
+    "maintainers": [
+      {
+        "name": "CISPA / Shen et al.",
+        "url": "https://github.com/verazuo/jailbreak_llms"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2308.03825",
+        "title": "“Do Anything Now”: Characterizing and Evaluating In-The-Wild Jailbreak Prompts on Large Language Models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/verazuo/jailbreak_llms",
+        "title": "Official JailbreakHub data and code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/TrustAIRLab/in-the-wild-jailbreak-prompts",
+        "title": "In-the-wild jailbreak and regular prompts"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://jailbreak-llms.xinyueshen.me/",
+        "title": "Project website"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["jailbreaks", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2023-12-25",
+      "status": "published",
+      "releasedDate": "2023-12-25",
+      "changes": "Full Dec 2022–Dec 2023 collection: 1,405 jailbreak prompts. An earlier snapshot (2023-05-07) has 666 jailbreak prompts.",
+      "dataset": {
+        "hfRepo": "TrustAIRLab/in-the-wild-jailbreak-prompts",
+        "revision": "a10aab8eff1c73165a442d4464dce192bd28b9c5",
+        "url": "https://huggingface.co/datasets/TrustAIRLab/in-the-wild-jailbreak-prompts",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "jailbreak_2023_12_25",
+            "sampleCount": 1405,
+            "storage": "pointer"
+          },
+          {
+            "name": "jailbreak_2023_05_07",
+            "sampleCount": 666,
+            "storage": "pointer"
+          },
+          {
+            "name": "regular_2023_12_25",
+            "sampleCount": 13735,
+            "storage": "pointer"
+          },
+          {
+            "name": "regular_2023_05_07",
+            "sampleCount": 5721,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "attack_success",
+          "displayName": "Attack success",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when the jailbreak prompt causes the model to answer a forbidden-scenario question unsafely."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "attack_success_rate",
+          "displayName": "Attack success rate",
+          "score": "attack_success",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Share of forbidden questions answered unsafely under the jailbreak. Cards also report refusal accuracy."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "internet": false
+      }
+    }
+  ]
+}

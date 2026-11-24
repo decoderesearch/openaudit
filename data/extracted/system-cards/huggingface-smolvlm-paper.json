@@ -1,0 +1,189 @@
+{
+  "document": "huggingface-smolvlm-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "HuggingFaceTB/SmolVLM-256M-Instruct",
+      "section": "4 Experimental Results"
+    },
+    {
+      "model": "HuggingFaceTB/SmolVLM-500M-Instruct",
+      "section": "4 Experimental Results"
+    },
+    {
+      "model": "HuggingFaceTB/SmolVLM-Instruct",
+      "section": "4 Experimental Results (SmolVLM-2.2B)"
+    }
+  ],
+  "pageCount": 20,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "16k tokens for SmolVLM (2.2B); 8k tokens for smaller variants (256M, 500M)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Accordingly, we adopt a 16k-token context for SmolVLM and an 8k-token limit for smaller variants."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "image and video with text (vision-language multimodal)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "models extend beyond static images, demonstrating robust video comprehension capabilities."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "family ranging from 256M to 2.2B (SmolVLM-256M, SmolVLM-500M, SmolVLM-2.2B)",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "We introduced SmolVLM, a family of memory-efficient Vision-Language Models ranging from 256M to 2.2B"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "SigLIP vision encoder (93M SigLIP-B/16 for 256M/500M; 400M SigLIP-SO400M for 2.2B) with pixel-shuffle and MLP projection into a SmolLM2 backbone (135M / 360M / 1.7B); self-attention VLM with image splitting",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "where encoded images are pooled and projected into a SmolLM2 backbone."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "two stages: vision (mixture from Laurençon et al. 2024 plus MathWriting; documents, captioning, VQA, charts, tables, reasoning, some text Q&A) then video fine-tuning (LLaVA-video-178k, Video-STAR, Vript, ShareGPT4Video, Vista-400k, MovieChat, FineVideo, M4-Instruct, Mammoth; text from Xu et al. 2024)",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "Model training proceeds in two stages: (1) a vision stage, and (2) a video stage."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:24:52Z"
+  },
+  "notes": "Capability/architecture technical report (arXiv 2504.05299). No safety, alignment, refusal, jailbreak, bias/fairness, toxicity, privacy, or dangerous-capability section or measured results; evalResults left empty per pilot safety-only rule. BioVQA is named only as a downstream biomedical VQA application, not a bio risk eval. Paper names SmolVLM-256M / 500M / 2.2B; mapped 2.2B to HuggingFaceTB/SmolVLM-Instruct (~2.25B params). Left out seed-linked SmolVLM2-* because the body never names SmolVLM2 as a model (only blog/demo URL paths). ArXiv date is not treated as model releaseDate. Skipped capability benches: OCRBench, AI2D, ChartQA, TextVQA, DocVQA, ScienceQA, MMMU, MathVista, MMStar, Video-MME, MLVU, MVBench, WorldSense, TempCompass, OpenCompass image/video ablations, CIDEr/VQA configuration sweeps, and throughput/RAM figures."
+}

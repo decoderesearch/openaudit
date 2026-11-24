@@ -1,0 +1,237 @@
+{
+  "document": "shlab-internlm2-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "internlm/internlm2-chat-7b"
+    },
+    {
+      "model": "internlm/internlm2-chat-20b"
+    },
+    {
+      "model": "internlm/internlm2-chat-7b-sft"
+    },
+    {
+      "model": "internlm/internlm2-chat-20b-sft"
+    },
+    {
+      "model": "internlm/internlm2-7b"
+    },
+    {
+      "model": "internlm/internlm2-20b"
+    },
+    {
+      "model": "internlm/internlm2-base-7b"
+    },
+    {
+      "model": "internlm/internlm2-base-20b"
+    },
+    {
+      "model": "internlm/internlm2-chat-1_8b"
+    }
+  ],
+  "pageCount": 53,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "200k context window",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "2. Designed with a 200k Context Window: InternLM2 exhibits impressive long-"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English, Chinese, and code",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "During each phase, we mixed data in\nEnglish, Chinese, and code."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "1.8B, 7B, and 20B",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "models of various sizes, including 1.8B, 7B, and 20B, all of which perform well in"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "LLaMA-style Transformer with Grouped-Query Attention (GQA) and SwiGLU",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "InternLM2 series models all choose Grouped-Query Attention (GQA) (Ainslie et al.,\n2023), so that it can infer both in high speed and low GPU memory with very long contexts."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "2.0T–2.6T tokens from web pages, papers, patents, books, and code (English/Chinese)",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "The total number of tokens used for pre-training the 1.8B, 7B, and 20B models ranges from\n2.0T to 2.6T, and the pre-training process consists of three distinct phases."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Pre-training uses domain/word blocking plus BERT toxicity and pornography classifiers to filter unsafe web content.", "tone": "good",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "we employed a comprehensive safety strategy combining\n“domain blocking”, “word blocking”, “pornography classifier”, and “toxicity classifier” to\nfilter the data."
+      }
+    },
+    {
+      "text": "Supervised fine-tuning (SFT) uses about 10 million instruction instances screened for helpfulness and harmlessness.", "tone": "good",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "instances, which have been screened to ensure their helpfulness and harmlessness."
+      }
+    },
+    {
+      "text": "Conditional Online Reinforcement Learning from Human Feedback (COOL RLHF) uses a conditional reward model for conflicting preferences and multi-round online proximal policy optimization (PPO) to mitigate reward hacking.", "tone": "good",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "which adopts\na conditional reward model to reconcile diverse but potentially conflicting preferences and\nexecutes Proximal Policy Optimization (PPO) over multiple rounds to mitigate emerging\nreward hacking in each phase."
+      }
+    },
+    {
+      "text": "The conditional reward model is trained to score helpfulness and harmlessness via distinct system prompts in one model.", "tone": "neutral",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "accuracy, helpfulness, harmlessness), and conducts three-round online RLHF to reduce\nreward hacking (Sec. 4.2."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:05:00Z"
+  },
+  "notes": "Technical report (arXiv 2403.17297), not a system card. Safety-only pilot: no dedicated safety/toxicity/jailbreak/bias/honesty eval tables for the chat models. Skipped capability and chat-preference suites (MMLU, GSM8K, HumanEval, Needle-in-a-Haystack, T-Eval, CIBench, AlpacaEval, MTBench, CompassArena, AlignBench, IFEval). Skipped Table 19 reward-model precision on Anthropic Helpful/Harmless and related preference sets (reward-model/judge benchmarks). Pre-training safety filters and SFT/RLHF harmlessness data are training methods, so topics stay uncovered; those claims are in findings. No external safety testers or risk-framework decisions."
+}

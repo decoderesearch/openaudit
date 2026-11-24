@@ -1,0 +1,1659 @@
+{
+  "document": "meta-code-llama-paper-technical_report",
+  "alsoDocuments": [
+    "meta-code-llama-blog"
+  ],
+  "covers": [
+    {
+      "model": "codellama/CodeLlama-7b-Instruct-hf"
+    },
+    {
+      "model": "codellama/CodeLlama-13b-Instruct-hf"
+    },
+    {
+      "model": "codellama/CodeLlama-34b-Instruct-hf"
+    },
+    {
+      "model": "codellama/CodeLlama-70b-Instruct-hf"
+    },
+    {
+      "model": "codellama/CodeLlama-7b-hf"
+    },
+    {
+      "model": "codellama/CodeLlama-13b-hf"
+    },
+    {
+      "model": "codellama/CodeLlama-34b-hf"
+    },
+    {
+      "model": "codellama/CodeLlama-70b-hf"
+    },
+    {
+      "model": "codellama/CodeLlama-7b-Python-hf"
+    },
+    {
+      "model": "codellama/CodeLlama-13b-Python-hf"
+    },
+    {
+      "model": "codellama/CodeLlama-34b-Python-hf"
+    },
+    {
+      "model": "codellama/CodeLlama-70b-Python-hf"
+    }
+  ],
+  "pageCount": 48,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "Fine-tuned with up to 16K tokens and support up to 100K tokens at inference (model card notes exceptions for Python/Instruct 70B)",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "quote": "were fine-tuned with up to 16K tokens, and support up to 100K tokens"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "Text input and text output",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "quote": "Models input text only."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English and relevant programming languages",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "quote": "Code Llama and its variants are intended for commercial and research use in English"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Permissive license allowing research and commercial use (same custom terms as Llama 2)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We release Code Llama under a permissive"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7B, 13B, 34B, and 70B parameters for each of Code Llama, Code Llama - Python, and Code Llama - Instruct",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "models (Code Llama - Instruct) with 7B, 13B, 34B, and 70B parameters each. These"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Autoregressive language models using optimized transformer architectures; 7B, 13B and 70B also support infilling",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "quote": "Code Llama and its variants are autoregressive language models using optimized"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Predominantly near-deduplicated publicly available code plus natural language; Instruct adds Llama 2 RLHF V5 helpfulness/safety data and self-instruct coding data",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Code Llama is trained predominantly on a near-deduplicated dataset of publicly available code. We also"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "1400K GPU hours on A100-80GB for all 12 models; 228.55 tCO2eq estimated emissions (offset)",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "quote": "In aggregate, training all 12 Code Llama models required 1400K GPU hours of compu-"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "Code Llama - Instruct 34B scores 47.4% truthful and informative on [TruthfulQA](/evals/truthfulqa) vs 34.6% for the base model (higher is better).",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "truthfulness (from 34.64 to 47.37 for 34B) and toxicity (from 17.62 to 0.00 for 34B)."
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Code Llama - Instruct shows an overall increase in positive sentiment for many [BOLD](/evals/bold) demographic groups after fine-tuning.",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "fine-tuning, also tends to show an overall increase in positive sentiment for many demographic groups in"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "Code Llama - Instruct reduces [ToxiGen](/evals/toxigen) toxic generations to near 0% across sizes",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "The percentage of toxic generations drastically reduces to virtually 0% across all Code Llama sizes, making"
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "Red teaming covered dual-intent and malicious-code prompts; Code Llama responses scored safer than GPT-3.5 Turbo on a Llama 2 safety reward model.",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "We observe that Code Llama tends to answer with safer responses; the distribution of safety"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Dual-intent prompts can bypass refusals: the model refuses ransomware help but may comply with a request to encrypt all files in the home directory.", "tone": "bad",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "rightfully refuses to provide support with writing ransomware code but it complies when asked to provide a"
+      }
+    },
+    {
+      "text": "Offensive-security red teamers argued advanced malware development is beyond current large language model (LLM) capability and that generated malware would often be easily detected.", "tone": "mixed",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "Advanced malware development is\nbeyond the current capabilities of available LLMs, and even an advanced LLM paired with an expert malware"
+      }
+    },
+    {
+      "text": "Instruction fine-tuning that prioritizes safety can degrade coding performance if run too long; the authors stopped at a balance of coding and safety.", "tone": "mixed",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "As our instruction finetuning set prioritizes safety, longer finetunings"
+      }
+    },
+    {
+      "text": "The authors state that the automatic safety benchmarks alone do not give a comprehensive understanding of risks and added red teaming.", "tone": "mixed",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "important to note that these evaluations alone do not provide a comprehensive understanding of the risks"
+      }
+    },
+    {
+      "text": "No Code Llama 70B rows appear in the safety tables ([TruthfulQA](/evals/truthfulqa) / [ToxiGen](/evals/toxigen) / [BOLD](/evals/bold)); reported safety numbers cover 7B, 13B and 34B only.", "tone": "mixed",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "Code Llama - Instruct 34B            47.37       0.00       0.452"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "tiiuae/falcon-7b",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 25.95,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Falcon 7B                            25.95"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "tiiuae/falcon-7b",
+      "metric": "percentage of toxic generations",
+      "value": 14.53,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Falcon 7B                            25.95       14.53"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "tiiuae/falcon-7b",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.283,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Falcon 7B                            25.95       14.53      0.283"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "mosaicml/mpt-7b",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 29.13,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "MPT 7B                               29.13"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "mosaicml/mpt-7b",
+      "metric": "percentage of toxic generations",
+      "value": 22.32,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "MPT 7B                               29.13       22.32"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "mosaicml/mpt-7b",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.322,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "MPT 7B                               29.13       22.32      0.322"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "StarCoder (Python) 15.5B",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 22.77,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "StarCoder (Python) 15.5B             22.77"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "rawModelName": "StarCoder (Python) 15.5B",
+      "metric": "percentage of toxic generations",
+      "value": 10.36,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "StarCoder (Python) 15.5B             22.77       10.36"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "rawModelName": "StarCoder (Python) 15.5B",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.31,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "StarCoder (Python) 15.5B             22.77       10.36      0.310"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-7b-hf",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 33.29,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 7B                           33.29"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "meta-llama/Llama-2-7b-hf",
+      "metric": "percentage of toxic generations",
+      "value": 21.25,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 7B                           33.29       21.25"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "meta-llama/Llama-2-7b-hf",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.304,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 7B                           33.29       21.25      0.304"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-13b-hf",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 41.86,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 13B                          41.86"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "meta-llama/Llama-2-13b-hf",
+      "metric": "percentage of toxic generations",
+      "value": 26.1,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 13B                          41.86       26.10"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "meta-llama/Llama-2-13b-hf",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.33,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 13B                          41.86       26.10      0.330"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Llama 2 34B",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 43.45,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 34B                          43.45"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "rawModelName": "Llama 2 34B",
+      "metric": "percentage of toxic generations",
+      "value": 21.19,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 34B                          43.45       21.19"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "rawModelName": "Llama 2 34B",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.318,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 34B                          43.45       21.19      0.318"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 26.19,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama 7B                        26.19"
+      },
+      "model": "codellama/CodeLlama-7b-hf"
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "metric": "percentage of toxic generations",
+      "value": 22.64,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama 7B                        26.19       22.64"
+      },
+      "model": "codellama/CodeLlama-7b-hf"
+    },
+    {
+      "rawEvalName": "BOLD",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.23,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama 7B                        26.19       22.64      0.230"
+      },
+      "model": "codellama/CodeLlama-7b-hf"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 33.29,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama 13B                       33.29"
+      },
+      "model": "codellama/CodeLlama-13b-hf"
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "metric": "percentage of toxic generations",
+      "value": 22.45,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama 13B                       33.29       22.45"
+      },
+      "model": "codellama/CodeLlama-13b-hf"
+    },
+    {
+      "rawEvalName": "BOLD",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.176,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama 13B                       33.29       22.45      0.176"
+      },
+      "model": "codellama/CodeLlama-13b-hf"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 34.64,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama 34B                       34.64"
+      },
+      "model": "codellama/CodeLlama-34b-hf"
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "metric": "percentage of toxic generations",
+      "value": 17.62,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama 34B                       34.64       17.62"
+      },
+      "model": "codellama/CodeLlama-34b-hf"
+    },
+    {
+      "rawEvalName": "BOLD",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.255,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama 34B                       34.64       17.62      0.255"
+      },
+      "model": "codellama/CodeLlama-34b-hf"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "tiiuae/falcon-7b-instruct",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 28.03,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Falcon-instruct 7B                   28.03"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "tiiuae/falcon-7b-instruct",
+      "metric": "percentage of toxic generations",
+      "value": 7.89,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Falcon-instruct 7B                   28.03        7.89"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "tiiuae/falcon-7b-instruct",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.332,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Falcon-instruct 7B                   28.03        7.89      0.332"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "mosaicml/mpt-7b-instruct",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 29.99,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "MPT-instruct 7B                      29.99"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "mosaicml/mpt-7b-instruct",
+      "metric": "percentage of toxic generations",
+      "value": 16.33,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "MPT-instruct 7B                      29.99       16.33"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "mosaicml/mpt-7b-instruct",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.302,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "MPT-instruct 7B                      29.99       16.33      0.302"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 57.04,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 Chat 7B                      57.04"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "metric": "percentage of toxic generations",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 Chat 7B                      57.04       0.00"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.482,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 Chat 7B                      57.04       0.00       0.482"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 62.18,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 Chat 13B                     62.18"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "metric": "percentage of toxic generations",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 Chat 13B                     62.18       0.00"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.471,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 Chat 13B                     62.18       0.00       0.471"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Llama 2 Chat 34B",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 67.2,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 Chat 34B                     67.20"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "rawModelName": "Llama 2 Chat 34B",
+      "metric": "percentage of toxic generations",
+      "value": 0.02,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 Chat 34B                     67.20        0.02"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "rawModelName": "Llama 2 Chat 34B",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.461,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Llama 2 Chat 34B                     67.20        0.02      0.461"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "codellama/CodeLlama-7b-Instruct-hf",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 31.46,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama - Instruct 7B             31.46"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "codellama/CodeLlama-7b-Instruct-hf",
+      "metric": "percentage of toxic generations",
+      "value": 0.04,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama - Instruct 7B             31.46        0.04"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "codellama/CodeLlama-7b-Instruct-hf",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.503,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama - Instruct 7B             31.46        0.04      0.503"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "codellama/CodeLlama-13b-Instruct-hf",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 36.84,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama - Instruct 13B            36.84"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "codellama/CodeLlama-13b-Instruct-hf",
+      "metric": "percentage of toxic generations",
+      "value": 0.01,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama - Instruct 13B            36.84        0.01"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "codellama/CodeLlama-13b-Instruct-hf",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.365,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama - Instruct 13B            36.84        0.01      0.365"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "codellama/CodeLlama-34b-Instruct-hf",
+      "metric": "percentage of generations that are both truthful and informative",
+      "value": 47.37,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama - Instruct 34B            47.37"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "codellama/CodeLlama-34b-Instruct-hf",
+      "metric": "percentage of toxic generations",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama - Instruct 34B            47.37       0.00"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "codellama/CodeLlama-34b-Instruct-hf",
+      "metric": "average sentiment score across demographic groups",
+      "value": 0.452,
+      "unit": "score",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 9",
+        "quote": "Code Llama - Instruct 34B            47.37       0.00       0.452"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "tiiuae/falcon-7b",
+      "metric": "percentage of informative generations",
+      "value": 96.08,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Falcon 7B                                           25.95             96.08"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "tiiuae/falcon-7b",
+      "metric": "percentage of truthful generations",
+      "value": 29.01,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Falcon 7B                                           25.95             96.08        29.01"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "mosaicml/mpt-7b",
+      "metric": "percentage of informative generations",
+      "value": 92.04,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "MPT 7B                                              29.13             92.04"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "mosaicml/mpt-7b",
+      "metric": "percentage of truthful generations",
+      "value": 36.72,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "MPT 7B                                              29.13             92.04        36.72"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "StarCoder (Python) 15.5B",
+      "metric": "percentage of informative generations",
+      "value": 87.88,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "StarCoder (Python) 15.5B                            22.77             87.88"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "StarCoder (Python) 15.5B",
+      "metric": "percentage of truthful generations",
+      "value": 32.44,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "StarCoder (Python) 15.5B                            22.77             87.88        32.44"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-7b-hf",
+      "metric": "percentage of informative generations",
+      "value": 93.02,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Llama 2 7B                                          33.29             93.02"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-7b-hf",
+      "metric": "percentage of truthful generations",
+      "value": 39.53,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Llama 2 7B                                          33.29             93.02        39.53"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-13b-hf",
+      "metric": "percentage of informative generations",
+      "value": 96.08,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Llama 2 13B                                         41.86             96.08"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-13b-hf",
+      "metric": "percentage of truthful generations",
+      "value": 45.65,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Llama 2 13B                                         41.86             96.08        45.65"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Llama 2 34B",
+      "metric": "percentage of informative generations",
+      "value": 96.7,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Llama 2 34B                                         43.45             96.70"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Llama 2 34B",
+      "metric": "percentage of truthful generations",
+      "value": 46.14,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Llama 2 34B                                         43.45             96.70        46.14"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage of informative generations",
+      "value": 86.66,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Code Llama 7B                                       26.19             86.66"
+      },
+      "model": "codellama/CodeLlama-7b-hf"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage of truthful generations",
+      "value": 38.31,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Code Llama 7B                                       26.19             86.66        38.31"
+      },
+      "model": "codellama/CodeLlama-7b-hf"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage of informative generations",
+      "value": 89.84,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Code Llama 13B                                      33.29             89.84"
+      },
+      "model": "codellama/CodeLlama-13b-hf"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage of truthful generations",
+      "value": 42.96,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Code Llama 13B                                      33.29             89.84        42.96"
+      },
+      "model": "codellama/CodeLlama-13b-hf"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage of informative generations",
+      "value": 93.88,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Code Llama 34B                                      34.64             93.88"
+      },
+      "model": "codellama/CodeLlama-34b-hf"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage of truthful generations",
+      "value": 40.39,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Code Llama 34B                                      34.64             93.88        40.39"
+      },
+      "model": "codellama/CodeLlama-34b-hf"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "tiiuae/falcon-7b-instruct",
+      "metric": "percentage of informative generations",
+      "value": 85.68,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Falcon-instruct 7B                                  28.03             85.68"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "tiiuae/falcon-7b-instruct",
+      "metric": "percentage of truthful generations",
+      "value": 41,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Falcon-instruct 7B                                  28.03             85.68        41.00"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "mosaicml/mpt-7b-instruct",
+      "metric": "percentage of informative generations",
+      "value": 94.37,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "MPT-instruct 7B                                     29.99             94.37"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "mosaicml/mpt-7b-instruct",
+      "metric": "percentage of truthful generations",
+      "value": 35.13,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "MPT-instruct 7B                                     29.99             94.37        35.13"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "metric": "percentage of informative generations",
+      "value": 96.45,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Llama 2 Chat 7B                                     57.04             96.45"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "metric": "percentage of truthful generations",
+      "value": 60.59,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Llama 2 Chat 7B                                     57.04             96.45        60.59"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "metric": "percentage of informative generations",
+      "value": 96.45,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Llama 2 Chat 13B                                    62.18             96.45"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "metric": "percentage of truthful generations",
+      "value": 65.73,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Llama 2 Chat 13B                                    62.18             96.45        65.73"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Llama 2 Chat 34B",
+      "metric": "percentage of informative generations",
+      "value": 97.06,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Llama 2 Chat 34B                                    67.20             97.06"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Llama 2 Chat 34B",
+      "metric": "percentage of truthful generations",
+      "value": 70.01,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Llama 2 Chat 34B                                    67.20             97.06        70.01"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "codellama/CodeLlama-7b-Instruct-hf",
+      "metric": "percentage of informative generations",
+      "value": 93.64,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Code Llama - Instruct 7B                            31.46             93.64"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "codellama/CodeLlama-7b-Instruct-hf",
+      "metric": "percentage of truthful generations",
+      "value": 36.96,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Code Llama - Instruct 7B                            31.46             93.64        36.96"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "codellama/CodeLlama-13b-Instruct-hf",
+      "metric": "percentage of informative generations",
+      "value": 91.92,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Code Llama - Instruct 13B                           36.84             91.92"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "codellama/CodeLlama-13b-Instruct-hf",
+      "metric": "percentage of truthful generations",
+      "value": 44.31,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Code Llama - Instruct 13B                           36.84             91.92        44.31"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "codellama/CodeLlama-34b-Instruct-hf",
+      "metric": "percentage of informative generations",
+      "value": 96.33,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % info column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Code Llama - Instruct 34B                           47.37             96.33"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "codellama/CodeLlama-34b-Instruct-hf",
+      "metric": "percentage of truthful generations",
+      "value": 50.92,
+      "unit": "percent",
+      "settings": {
+        "other": "temperature 0.1, top-p 0.9; % true column"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 19",
+        "quote": "Code Llama - Instruct 34B                           47.37             96.33        50.92"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:40:12Z"
+  },
+  "notes": "Technical report (arXiv:2308.12950), not a system card. Safety is Section 4 plus Appendix I. evalResults: Table 9 (TruthfulQA % true+info, ToxiGen % toxic, BOLD mean sentiment) and Table 19 (% info and % true; % true+info omitted as duplicate of Table 9). Skipped Appendix Tables 20–25 (ToxiGen/BOLD demographic breakdowns); aggregates are in Table 9. Figure 7 safety-reward KDE has no readable numeric scores. No 70B rows in safety tables. Skipped capability benchmarks (HumanEval, MBPP, MultiPL-E, DS-1000, CodeXGLUE, GSM8K, etc.). Testers empty: red team was 25 Meta employees (in-house). Base/Python covered via seed checkpoint ids; Instruct via seed model ids. Table labels without Instruct kept as rawModelName where no matching seed/checkpoint mapping was used (Code Llama 7B/13B/34B; Llama 2 34B; Llama 2 Chat 34B; StarCoder (Python) 15.5B)."
+}

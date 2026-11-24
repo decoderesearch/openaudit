@@ -1,0 +1,294 @@
+{
+  "document": "ai21-jamba-technical_report",
+  "alsoDocuments": ["ai21-jamba-blog"],
+  "covers": [
+    {
+      "model": "ai21labs/Jamba-v0.1"
+    }
+  ],
+  "pageCount": 17,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "training data last update in March 2024",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Jamba is trained on an in-house dataset that contains text data from the Web, books, and code, with\nthe last update in March 2024."
+      }
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "256K tokens",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "The released model supports lengths of up to 256K tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (large language model)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present Jamba, a new base large language model based on a novel hybrid"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Somewhat unusual for a new architecture, we release Jamba (12B active parameters, 52B total avail-\nable parameters) under Apache 2.0 license: https://huggingface.co/ai21labs/Jamba-v0.1."
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "52B total available parameters",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "The 7B-based Jamba model (12B\n                                        active parameters, 52B total available parameters) we are releasing was designed to fit in a single"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "12B active parameters",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "The 7B-based Jamba model (12B\n                                        active parameters, 52B total available parameters) we are releasing was designed to fit in a single"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "hybrid Transformer-Mamba mixture-of-experts (MoE)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present Jamba, a new base large language model based on a novel hybrid\n                                                     Transformer-Mamba mixture-of-experts (MoE) architecture. Specifically, Jamba"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "in-house dataset with text from the Web, books, and code; quality filters and deduplication; last update March 2024",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Jamba is trained on an in-house dataset that contains text data from the Web, books, and code, with\nthe last update in March 2024. Our data processing pipeline includes quality filters and deduplication."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa) (zero-shot) 46.4 for Jamba (higher is better)",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": " Jamba              87.1           82.5          73.5         64.4         83.2     45.9        46.4"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Released Jamba is a pretrained base model with no alignment or instruction tuning and no moderation mechanisms; the authors say it should not be used in production without further adaptation.", "tone": "bad",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Important notice: The Jamba model released is a pretrained base model, which did not go through\nalignment or instruction tuning, and does not have moderation mechanisms. It should not be used in"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Llama-2 13B",
+      "metric": "score",
+      "value": 37.4,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": " Llama-2 13B        80.7           72.8          77.3         59.4         80.5     37.7        37.4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Llama-2 70B",
+      "metric": "score",
+      "value": 44.9,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": " Llama-2 70B        85.3           80.2          80.2         67.3         82.8     46.9        44.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Gemma",
+      "metric": "score",
+      "value": 44.8,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot; 7B parameters per text"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": " Gemma              81.2           72.3          81.5         53.2         81.2     32.6        44.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Mixtral",
+      "metric": "score",
+      "value": 46.8,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot; Mixtral-8x7B per text"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": " Mixtral            86.7           81.2          77.6          66           83      44.8        46.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "ai21labs/Jamba-v0.1",
+      "metric": "score",
+      "value": 46.4,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": " Jamba              87.1           82.5          73.5         64.4         83.2     45.9        46.4"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:04:22Z"
+  },
+  "notes": "Architecture/capability technical report, not a safety card. Only safety-relevant numeric eval is TruthfulQA in Table 2 (honesty). Skipped capability benchmarks: HellaSwag, WinoGrande, ARC-E/C, PIQA, NQ, BoolQ, QuAC, GSM8K, HumanEval, MMLU, BBH, needle-in-a-haystack, few-shot classification, L-Eval long-context QA, and ablation tables (OLLM, IMDB, perplexity). No dedicated safety section, risk framework, external testers, or toxicity/jailbreak evals. Comparison labels Llama-2 13B/70B, Gemma, and Mixtral kept as rawModelName (no Instruct/chat variant named)."
+}

@@ -1,0 +1,636 @@
+{
+  "document": "meituan-longcat-flash-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "meituan-longcat/LongCat-Flash-Chat"
+    }
+  ],
+  "pageCount": 39,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "128k",
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "quote": "(3) The context length is extended to 128k through training on long context corpora."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "non-thinking",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "as a non-thinking foundation model, LongCat-Flash delivers highly\n                     competitive performance among other leading models, with exceptional strengths in agentic tasks."
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "560B",
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "quote": "LongCat-Flash has 560B total parameters, activating between 18.6B and 31.3B\nparameters per token depending on context, with an average activation of approximately 27B parameters."
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "18.6B–31.3B (27B on average)",
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "quote": "LongCat-Flash has 560B total parameters, activating between 18.6B and 31.3B\nparameters per token depending on context, with an average activation of approximately 27B parameters."
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "MoE with Zero-computation Experts and Shortcut-connected MoE; 28 layers; 512 FFN experts and 256 zero-computation experts; 12 experts activated per token",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "LongCat-Flash adopts a novel MoE architecture with two key innovations (Figure 2): (1) The MoE block incorporates"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "approximately 20 trillion tokens (pre-training stage 1), plus further mid- and long-context training",
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "quote": "We train the model on approximately 20 trillion\ntokens with 8192 sequence length to establish a robust base model."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Private Harmful-category safety eval (violence, hate, harassment, adult content, etc.); LongCat-Flash 84.0 (higher is better)",
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "quote": "Harmful                         82.79      80.82         53.91        56.19    66.56         -           83.98"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "Criminal-category safety eval includes underage violations among private test queries",
+      "source": {
+        "page": "18",
+        "pdfPage": 21,
+        "quote": "• Criminal: Illegal activities, underage violations, extreme terrorism and violence, etc."
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Harmful-category safety eval includes self-harm and suicide among private test queries",
+      "source": {
+        "page": "18",
+        "pdfPage": 21,
+        "quote": "• Harmful: Violence, hate Speech, insulting, harassment and bullying, self-harm and suicide, adult content, etc."
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Misinformation-category safety eval includes hallucination; also trains refusal for incomplete-context hallucination",
+      "source": {
+        "page": "18",
+        "pdfPage": 21,
+        "quote": "• Misinformation: misinformation and disinformation, unsafe practices, hallucination, etc."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Safety numbers in Table 3 come from private, manually reviewed test queries across four risk categories, not a named public benchmark.", "tone": "mixed",
+      "source": {
+        "page": "18",
+        "pdfPage": 21,
+        "quote": "Within each category, a sufficient number of private test queries are constructed, followed by a comprehensive manual\nreview to ensure the accuracy of their classification and the reliability of their quality."
+      }
+    },
+    {
+      "text": "Post-training safety data uses a policy with more than 40 safety categories and five response types (comply through hard refuse), including adversarial large language model (LLM)-synthesized red-team queries.", "tone": "good",
+      "source": {
+        "page": "17",
+        "pdfPage": 20,
+        "quote": "content safety policy that categorizes queries into more than 40 distinct safety categories across five response types:\ncomply, comply with guideline, soft refuse, soft refuse with guideline, or hard refuse."
+      }
+    },
+    {
+      "text": "Authors claim LongCat-Flash is especially strong on Harmful and Criminal relative to the comparison set.", "tone": "good",
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "quote": "Safety LongCat-Flash showed outstanding capability in identifying and mitigating risks on the whole, particularly in\nthe domains of Harmful and Criminal compared to other models."
+      }
+    },
+    {
+      "text": "Gemini2.5-Flash has no Safety scores in Table 3 (dashes for all four risk rows).", "tone": "neutral",
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "quote": "Harmful                         82.79      80.82         53.91        56.19    66.56         -           83.98"
+      }
+    },
+    {
+      "text": "The report says they optimize refusal for incomplete context to reduce hallucination, but gives no separate hallucination benchmark score.", "tone": "mixed",
+      "source": {
+        "page": "17",
+        "pdfPage": 20,
+        "quote": "To mitigate hallucination when confronted with an incomplete context, we optimize the\nmodel’s refusal capabilities, thereby improving its awareness of knowledge boundaries and limitations."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Safety",
+      "model": "deepseek-ai/DeepSeek-V3.1",
+      "metric": "score",
+      "value": 82.79,
+      "unit": "percent",
+      "settings": {
+        "other": "Harmful risk category; private test queries; chat / non-thinking comparison"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Harmful                         82.79"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "metric": "score",
+      "value": 80.82,
+      "unit": "percent",
+      "settings": {
+        "other": "Harmful risk category; private test queries; non-thinking mode; Qwen3-235B-A22B (2507 version); table label Qwen3 MoE-2507"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Harmful                         82.79      80.82"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "rawModelName": "Kimi-K2",
+      "metric": "score",
+      "value": 53.91,
+      "unit": "percent",
+      "settings": {
+        "other": "Harmful risk category; private test queries"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Harmful                         82.79      80.82         53.91"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "openai/gpt-4.1",
+      "metric": "score",
+      "value": 56.19,
+      "unit": "percent",
+      "settings": {
+        "other": "Harmful risk category; private test queries"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Harmful                         82.79      80.82         53.91        56.19"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "anthropic/claude-sonnet-4",
+      "metric": "score",
+      "value": 66.56,
+      "unit": "percent",
+      "settings": {
+        "other": "Harmful risk category; private test queries; non-thinking mode; table label Claude4 Sonnet"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Harmful                         82.79      80.82         53.91        56.19    66.56"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "meituan-longcat/LongCat-Flash-Chat",
+      "metric": "score",
+      "value": 83.98,
+      "unit": "percent",
+      "settings": {
+        "other": "Harmful risk category; private test queries; chat version of LongCat-Flash"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Harmful                         82.79      80.82         53.91        56.19    66.56         -           83.98"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "deepseek-ai/DeepSeek-V3.1",
+      "metric": "score",
+      "value": 87.83,
+      "unit": "percent",
+      "settings": {
+        "other": "Criminal risk category; private test queries; chat / non-thinking comparison"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Criminal                        87.83"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "metric": "score",
+      "value": 89.13,
+      "unit": "percent",
+      "settings": {
+        "other": "Criminal risk category; private test queries; non-thinking mode; Qwen3-235B-A22B (2507 version); table label Qwen3 MoE-2507"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Criminal                        87.83      89.13"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "rawModelName": "Kimi-K2",
+      "metric": "score",
+      "value": 77.19,
+      "unit": "percent",
+      "settings": {
+        "other": "Criminal risk category; private test queries"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Criminal                        87.83      89.13         77.19"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "openai/gpt-4.1",
+      "metric": "score",
+      "value": 81.58,
+      "unit": "percent",
+      "settings": {
+        "other": "Criminal risk category; private test queries"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Criminal                        87.83      89.13         77.19        81.58"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "anthropic/claude-sonnet-4",
+      "metric": "score",
+      "value": 87.58,
+      "unit": "percent",
+      "settings": {
+        "other": "Criminal risk category; private test queries; non-thinking mode; table label Claude4 Sonnet"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Criminal                        87.83      89.13         77.19        81.58    87.58"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "meituan-longcat/LongCat-Flash-Chat",
+      "metric": "score",
+      "value": 91.24,
+      "unit": "percent",
+      "settings": {
+        "other": "Criminal risk category; private test queries; chat version of LongCat-Flash"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Criminal                        87.83      89.13         77.19        81.58    87.58         -           91.24"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "deepseek-ai/DeepSeek-V3.1",
+      "metric": "score",
+      "value": 83.17,
+      "unit": "percent",
+      "settings": {
+        "other": "Misinformation risk category; private test queries; chat / non-thinking comparison"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Misinformation                  83.17"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "metric": "score",
+      "value": 77.76,
+      "unit": "percent",
+      "settings": {
+        "other": "Misinformation risk category; private test queries; non-thinking mode; Qwen3-235B-A22B (2507 version); table label Qwen3 MoE-2507"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Misinformation                  83.17      77.76"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "rawModelName": "Kimi-K2",
+      "metric": "score",
+      "value": 42.68,
+      "unit": "percent",
+      "settings": {
+        "other": "Misinformation risk category; private test queries"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Misinformation                  83.17      77.76         42.68"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "openai/gpt-4.1",
+      "metric": "score",
+      "value": 45.49,
+      "unit": "percent",
+      "settings": {
+        "other": "Misinformation risk category; private test queries"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Misinformation                  83.17      77.76         42.68        45.49"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "anthropic/claude-sonnet-4",
+      "metric": "score",
+      "value": 54.91,
+      "unit": "percent",
+      "settings": {
+        "other": "Misinformation risk category; private test queries; non-thinking mode; table label Claude4 Sonnet"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Misinformation                  83.17      77.76         42.68        45.49    54.91"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "meituan-longcat/LongCat-Flash-Chat",
+      "metric": "score",
+      "value": 81.72,
+      "unit": "percent",
+      "settings": {
+        "other": "Misinformation risk category; private test queries; chat version of LongCat-Flash"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Misinformation                  83.17      77.76         42.68        45.49    54.91         -           81.72"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "deepseek-ai/DeepSeek-V3.1",
+      "metric": "score",
+      "value": 98.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Privacy risk category; private test queries; chat / non-thinking comparison"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Privacy                         98.80"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "metric": "score",
+      "value": 98.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Privacy risk category; private test queries; non-thinking mode; Qwen3-235B-A22B (2507 version); table label Qwen3 MoE-2507"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Privacy                         98.80      98.80"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "rawModelName": "Kimi-K2",
+      "metric": "score",
+      "value": 96.39,
+      "unit": "percent",
+      "settings": {
+        "other": "Privacy risk category; private test queries"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Privacy                         98.80      98.80         96.39"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "openai/gpt-4.1",
+      "metric": "score",
+      "value": 98.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Privacy risk category; private test queries"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Privacy                         98.80      98.80         96.39        98.80"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "anthropic/claude-sonnet-4",
+      "metric": "score",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "Privacy risk category; private test queries; non-thinking mode; table label Claude4 Sonnet"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Privacy                         98.80      98.80         96.39        98.80    100.00"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "meituan-longcat/LongCat-Flash-Chat",
+      "metric": "score",
+      "value": 93.98,
+      "unit": "percent",
+      "settings": {
+        "other": "Privacy risk category; private test queries; chat version of LongCat-Flash"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 23,
+        "table": "Table 3",
+        "quote": "Privacy                         98.80      98.80         96.39        98.80    100.00        -           93.98"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:12:57Z"
+  },
+  "notes": "Technical report (arXiv 2509.01322), not a system card. Safety-only pilot: only Table 3 Safety block (Harmful/Criminal/Misinformation/Privacy private queries) kept in evalResults. Skipped capability blocks in Table 3 and elsewhere: MMLU, MMLU-Pro, ArenaHard-V2, CEval, CMMLU, IFEval, COLLIE, Meeseeks, MATH500, AIME24/25, BeyondAIME, GPQA-diamond, DROP, ZebraLogic, GraphWalks, LiveCodeBench, Humaneval+, MBPP+, SWE-Bench-Verified, TerminalBench, τ²-Bench, AceBench, VitaBench, plus base-model Section 3.6 tables. Gemini2.5-Flash Safety cells are dashes (omitted). Metric name not stated for Safety rows; treated as percent scores. Qwen and Kimi kept as rawModelName because the report does not name Instruct/Thinking seed variants exactly. PDF text layer had null bytes; stripped for searching; quotes taken from cleaned text.txt. Safety training synthesizer and refusal-for-hallucination claims noted in findings/topics but not treated as jailbreak coverage."
+}

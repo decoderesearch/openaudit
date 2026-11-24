@@ -1,0 +1,77 @@
+{
+  "eval": {
+    "slug": "openai-ctf-suite",
+    "displayName": "Capture the Flag (CTF)",
+    "aliases": [
+      "Capture the Flag",
+      "Capture the Flag (Internal)",
+      "Capture the Flag (CTF) challenges",
+      "Professional CTFs",
+      "Collegiate CTFs",
+      "High School CTFs"
+    ],
+    "description": "OpenAI internal Capture-the-Flag suite used in Preparedness cyber evaluations. Curated competition-style challenges (high school, collegiate, and professional difficulty) run in a headless Linux box with offensive tools. Scored mainly as pass@12 over multiple rollouts; later cards often focus on the professional set and an internal CTF label.",
+    "summary": "Measures whether AI agents can solve cybersecurity challenges that need hacking skills, from easy to expert level.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://deploymentsafety.openai.com/o3/capture-the-flag-ctf-challenges"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/o3/capture-the-flag-ctf-challenges",
+        "title": "OpenAI o3 system card — Capture the Flag"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://cdn.openai.com/o1-preview-system-card-20240917.pdf",
+        "title": "OpenAI o1-preview system card (CTF levels)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic", "multi_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["cyber", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "curated-ctfs",
+      "status": "draft",
+      "changes": "OpenAI updates a small share of challenges over time for harness bugs; later cards emphasize professional CTFs and an Internal CTF label.",
+      "scores": [
+        {
+          "key": "passed",
+          "displayName": "Passed",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The agent recovers the challenge flag within the allowed tool-use budget on that rollout."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "pass_at_12",
+          "displayName": "pass@12",
+          "score": "passed",
+          "aggregation": "pass_at_k",
+          "k": 12,
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "pass@12 over rollouts per challenge, often averaged within High School / Collegiate / Professional (or Internal) slices."
+        }
+      ]
+    }
+  ]
+}

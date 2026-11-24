@@ -1,0 +1,2203 @@
+{
+  "document": "moonshot-kimi-k2-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "moonshotai/Kimi-K2-Instruct"
+    },
+    {
+      "model": "moonshotai/Kimi-K2-Base"
+    }
+  ],
+  "pageCount": 32,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "128k (extended with YaRN after 4k then 32k stages)",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "To extend the context window to 128k, we employed the YaRN method [56]."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text language model with tool calling / agentic tool use",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce Kimi K2, a Mixture-of-Experts (MoE) large language model with 32 billion activated"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "non-thinking (evaluated and presented as a non-thinking model)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Kimi K2 achieves state-of-the-art performance among open-source non-thinking models, with"
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English and Chinese used in safety prompt generation; strong Chinese and English benchmark coverage",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "plugins support both English and Chinese, while others only support English. For combinations that support both, we"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "1.04 trillion total parameters",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Kimi K2 is a 1.04 trillion-parameter Mixture-of-Experts (MoE) transformer model with 32 billion activated parameters."
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "32 billion activated parameters (32.6B in architecture table)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Kimi K2 is a 1.04 trillion-parameter Mixture-of-Experts (MoE) transformer model with 32 billion activated parameters."
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "MoE transformer with MLA; 61 layers; 384 experts, 8 active per token; 64 attention heads; sparsity 48",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "The architecture follows a similar design to DeepSeek-V3 [11] , employing Multi-head Latent Attention (MLA) [45] as"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "15.5T tokens spanning Web Text, Code, Mathematics, and Knowledge; plus large-scale synthetic agentic/tool-use and RL data",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "The Kimi K2 pre-training corpus comprises 15.5 trillion tokens of curated, high-quality"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "[Promptfoo](/evals/promptfoo) Harmful plugin pass rates for Kimi-K2-Instruct range from 64.7 (Crescendo) to 100 (Base64) (higher is better).",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "We conducted red-teaming evaluations on Kimi K2 compare with other open-source LLMs. The evaluation covered a"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "Criminal plugin (includes Child Exploitation) is evaluated with [Promptfoo](/evals/promptfoo); Kimi-K2-Instruct Iterative Jailbreak pass rate 57.6 (higher is better).",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Plugin     Criminal     Chemical&Biological Weapons, Child Exploitation, Copyright Violations, Cybercrime, Illegal"
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Self Harm is included in the Harmful Promptfoo plugin used for red-teaming.",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Harmful     Graphic Content, Harassment and Bullying, Hate Speech, Insults, Profanity, Radicalization, Self"
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Iterative Jailbreak and Crescendo attack strategies are evaluated across plugins; Harmful–Iterative Jailbreak pass rate 92.2 for Kimi-K2-Instruct (higher is better).",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "range of attack scenarios—including harmful content, privacy content, and security content, as well as different attack"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "Prompt Injection is one of the Promptfoo attack strategies with reported pass rates per plugin.",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "strategies such as prompt injection and iterative jailbreak."
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": true,
+      "headline": "Misinformation plugin includes Excessive Agency; Security plugins cover tool/API misuse scenarios.",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Misinformation Competitor Endorsement, Unsupervised Contracts, Excessive Agency, Hallucination, Misin-"
+      }
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[HHEM-2.1-Open](/evals/vectara-hallucination-leaderboard) hallucination rate 1.1% (table 98.9 as 1-Hallu.) (lower is better); [FaithJudge](/evals/faithjudge) Retrieval-Augmented Generation (RAG) hallucination rate 7.4% (table 92.6) (lower is better).",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "Gemini 2.5 Flash. With HHEM-2.1-Open it achieves a hallucination rate of 1.1 %, reported in the tables as 1 minus the"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[FACTS Grounding](/evals/facts-grounding) adjusted score 88.5 (higher is better); faithfulness judge used in post-training; [FaithJudge](/evals/faithjudge) and [HHEM](/evals/vectara-hallucination-leaderboard) reported.",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "FACTS Grounding (Adjusted)          88.5        68.3            68.5      83.6       —        79.2      86.6"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": true,
+      "headline": "Critic rubrics require avoiding unwarranted flattery and ban opening with compliments to the user.",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "quote": "unwarranted flattery or excessive praise directed at the user or their input. Excellent responses interact respectfully"
+      }
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "Prescriptive rubrics in RL are designed to eliminate reward hacking.",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "fundamental values of our AI assistant that Kimi cherish, prescriptive rubrics (Appendix. F.2) that aim to eliminate"
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "Criminal plugin includes Cybercrime; Security plugin includes [CyberSecEval](https://arxiv.org/abs/2312.04724), [Harmbench](/evals/harmbench), and Malicious Code.",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Security     ASCII Smuggling, CyberSecEval, Harmbench, Debug Access, Divergent Repetition, DoNotAn-"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "Chemical&Biological Weapons is included in the Criminal Promptfoo plugin.",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Plugin     Criminal     Chemical&Biological Weapons, Child Exploitation, Copyright Violations, Cybercrime, Illegal"
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Safety evals used [Promptfoo](/evals/promptfoo) plus human review; the authors note subjectivity and limited relevance of some tool-misuse plugins for base large language models (LLMs).", "tone": "mixed",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "Automated Red-teaming Limitations Due to the involvement of human review, the evaluation results inevitably"
+      }
+    },
+    {
+      "text": "Without targeted optimization for the [Promptfoo](/evals/promptfoo) scenarios, some complex cases such as Harmful–Iterative Jailbreak still had relatively higher pass rates than other models.", "tone": "good",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Without targeted optimization for specific evaluation scenarios, the passing rate of some complex cases (e.g., Harm-"
+      }
+    },
+    {
+      "text": "Base64 attack encoding had little effect (pass rates near 100%), while Crescendo generally lowered pass rates.", "tone": "mixed",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Across different attack strategies, the models exhibited varying trends. Under the Base64 strategy, passing rates"
+      }
+    },
+    {
+      "text": "Safety post-training used an automated attack–target–judge prompt-evolution pipeline over seed risk categories including violence, fraud, and discrimination.", "tone": "neutral",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "Safety Our work to enhance the safety begins with a human-curated set of seed prompts, manually crafted to"
+      }
+    },
+    {
+      "text": "Self-critique reinforcement learning (RL) rubrics may favor confident answers and discourage hedging, which can overstate certainty under ambiguity.", "tone": "mixed",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "quote": "One potential side effect of this evaluation framework is that it may favor responses that appear confident and assertive,"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 98.04,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                      98.04               90.45            99.02             98.53"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 90.45,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                      98.04               90.45            99.02             98.53"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 99.02,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                      98.04               90.45            99.02             98.53"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 98.53,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                      98.04               90.45            99.02             98.53"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                      100                90.20             100               100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 90.2,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                      100                90.20             100               100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                      100                90.20             100               100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                      100                90.20             100               100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 93.14,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           93.14                100             95.10             99.02"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           93.14                100             95.10             99.02"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 95.1,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           93.14                100             95.10             99.02"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 99.02,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           93.14                100             95.10             99.02"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 92.16,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        92.16               66.67            72.55             74.51"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 66.67,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        92.16               66.67            72.55             74.51"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 72.55,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        92.16               66.67            72.55             74.51"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 74.51,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        92.16               66.67            72.55             74.51"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 64.71,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  64.71               64.71            80.39             86.27"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 64.71,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  64.71               64.71            80.39             86.27"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 80.39,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  64.71               64.71            80.39             86.27"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 86.27,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Harmful; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  64.71               64.71            80.39             86.27"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                       100                99.62            95.45             99.24"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 99.62,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                       100                99.62            95.45             99.24"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 95.45,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                       100                99.62            95.45             99.24"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 99.24,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                       100                99.62            95.45             99.24"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 96.97,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                     96.97               89.39            84.85             98.48"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 89.39,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                     96.97               89.39            84.85             98.48"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 84.85,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                     96.97               89.39            84.85             98.48"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 98.48,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                     96.97               89.39            84.85             98.48"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 75.76,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           75.76               91.67            69.70             98.47"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 91.67,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           75.76               91.67            69.70             98.47"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 69.7,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           75.76               91.67            69.70             98.47"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 98.47,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           75.76               91.67            69.70             98.47"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 57.57,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        57.57               21.21            25.76             53.03"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 21.21,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        57.57               21.21            25.76             53.03"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 25.76,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        57.57               21.21            25.76             53.03"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 53.03,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        57.57               21.21            25.76             53.03"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 56.06,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  56.06               31.81            42.42             59.09"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 31.81,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  56.06               31.81            42.42             59.09"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 42.42,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  56.06               31.81            42.42             59.09"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 59.09,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Criminal; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  56.06               31.81            42.42             59.09"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 97.28,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                       97.28               92.57            92.46             94.84"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 92.57,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                       97.28               92.57            92.46             94.84"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 92.46,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                       97.28               92.57            92.46             94.84"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 94.84,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                       97.28               92.57            92.46             94.84"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 98.48,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                      98.48               90.48            96.83             93.65"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 90.48,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                      98.48               90.48            96.83             93.65"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 96.83,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                      98.48               90.48            96.83             93.65"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 93.65,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                      98.48               90.48            96.83             93.65"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 98.39,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection            98.39               86.51            93.65             93.65"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 86.51,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection            98.39               86.51            93.65             93.65"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 93.65,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection            98.39               86.51            93.65             93.65"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 93.65,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection            98.39               86.51            93.65             93.65"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 63.97,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak         63.97               53.97            84.13             69.84"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 53.97,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak         63.97               53.97            84.13             69.84"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 84.13,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak         63.97               53.97            84.13             69.84"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 69.84,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak         63.97               53.97            84.13             69.84"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 85.71,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                   85.71               55.56            88.89             84.13"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 55.56,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                   85.71               55.56            88.89             84.13"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 88.89,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                   85.71               55.56            88.89             84.13"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 84.13,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Misinformation; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                   85.71               55.56            88.89             84.13"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                       100                 100              100               100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                       100                 100              100               100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                       100                 100              100               100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                       100                 100              100               100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                      100                 100              100               100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                      100                 100              100               100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                      100                 100              100               100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                      100                 100              100               100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 88.33,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           88.33               98.33             100              91.67"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 98.33,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           88.33               98.33             100              91.67"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           88.33               98.33             100              91.67"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 91.67,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           88.33               98.33             100              91.67"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 76.67,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        76.67                100             93.33             96.67"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        76.67                100             93.33             96.67"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 93.33,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        76.67                100             93.33             96.67"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 96.67,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        76.67                100             93.33             96.67"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 96.67,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  96.67                100             96.67              100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  96.67                100             96.67              100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 96.67,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  96.67                100             96.67              100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Privacy; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  96.67                100             96.67              100"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 77.84,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                      77.84               75.57            70.46             90.09"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 75.57,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                      77.84               75.57            70.46             90.09"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 70.46,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                      77.84               75.57            70.46             90.09"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 90.09,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Basic; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Basic                      77.84               75.57            70.46             90.09"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 82.93,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                     82.93               82.93            63.41             95.12"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 82.93,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                     82.93               82.93            63.41             95.12"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 63.41,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                     82.93               82.93            63.41             95.12"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 95.12,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Base64; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Base64                     82.93               82.93            63.41             95.12"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 87.8,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           87.80               97.56            65.85             84.13"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 97.56,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           87.80               97.56            65.85             84.13"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 65.85,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           87.80               97.56            65.85             84.13"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 84.13,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Prompt Injection; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Prompt Injection           87.80               97.56            65.85             84.13"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 43.9,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        43.90               60.97            43.90             78.04"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 60.97,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        43.90               60.97            43.90             78.04"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 43.9,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        43.90               60.97            43.90             78.04"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 78.04,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Iterative Jailbreak; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Iterative Jailbreak        43.90               60.97            43.90             78.04"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "passing rate",
+      "value": 68.29,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  68.29               87.80            68.29             87.80"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "passing rate",
+      "value": 87.8,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  68.29               87.80            68.29             87.80"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "deepseek-ai/DeepSeek-R1",
+      "metric": "passing rate",
+      "value": 68.29,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  68.29               87.80            68.29             87.80"
+      }
+    },
+    {
+      "rawEvalName": "Promptfoo",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "passing rate",
+      "value": 87.8,
+      "unit": "percent",
+      "settings": {
+        "other": "plugin: Security; strategy: Crescendo; Promptfoo red-teaming; 3 attack prompts per plugin–strategy (6 if EN+ZH); human review"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 6",
+        "quote": "Crescendo                  68.29               87.80            68.29             87.80"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "Adjusted score",
+      "value": 88.5,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "FACTS Grounding (Adjusted)          88.5        68.3            68.5      83.6       —        79.2      86.6"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "Adjusted score",
+      "value": 68.3,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "FACTS Grounding (Adjusted)          88.5        68.3            68.5      83.6       —        79.2      86.6"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "Adjusted score",
+      "value": 68.5,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "FACTS Grounding (Adjusted)          88.5        68.3            68.5      83.6       —        79.2      86.6"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "anthropic/claude-sonnet-4",
+      "metric": "Adjusted score",
+      "value": 83.6,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "FACTS Grounding (Adjusted)          88.5        68.3            68.5      83.6       —        79.2      86.6"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "openai/gpt-4.1",
+      "metric": "Adjusted score",
+      "value": 79.2,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "FACTS Grounding (Adjusted)          88.5        68.3            68.5      83.6       —        79.2      86.6"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-2.5-flash",
+      "metric": "Adjusted score",
+      "value": 86.6,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "FACTS Grounding (Adjusted)          88.5        68.3            68.5      83.6       —        79.2      86.6"
+      }
+    },
+    {
+      "rawEvalName": "HHEM v2.1",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "1-Hallu.",
+      "value": 98.9,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "HHEM v2.1 (1-Hallu.)                98.9        88.9            94.5      94.5       —        96.7      97.8"
+      }
+    },
+    {
+      "rawEvalName": "HHEM v2.1",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "1-Hallu.",
+      "value": 88.9,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "HHEM v2.1 (1-Hallu.)                98.9        88.9            94.5      94.5       —        96.7      97.8"
+      }
+    },
+    {
+      "rawEvalName": "HHEM v2.1",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "1-Hallu.",
+      "value": 94.5,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "HHEM v2.1 (1-Hallu.)                98.9        88.9            94.5      94.5       —        96.7      97.8"
+      }
+    },
+    {
+      "rawEvalName": "HHEM v2.1",
+      "model": "anthropic/claude-sonnet-4",
+      "metric": "1-Hallu.",
+      "value": 94.5,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "HHEM v2.1 (1-Hallu.)                98.9        88.9            94.5      94.5       —        96.7      97.8"
+      }
+    },
+    {
+      "rawEvalName": "HHEM v2.1",
+      "model": "openai/gpt-4.1",
+      "metric": "1-Hallu.",
+      "value": 96.7,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "HHEM v2.1 (1-Hallu.)                98.9        88.9            94.5      94.5       —        96.7      97.8"
+      }
+    },
+    {
+      "rawEvalName": "HHEM v2.1",
+      "model": "google/gemini-2.5-flash",
+      "metric": "1-Hallu.",
+      "value": 97.8,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "HHEM v2.1 (1-Hallu.)                98.9        88.9            94.5      94.5       —        96.7      97.8"
+      }
+    },
+    {
+      "rawEvalName": "FaithJudge",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "1-Hallu.",
+      "value": 92.6,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "FaithJudge (1-Hallu.)               92.6        83.4            75.7      83.0       —        91.0      93.2"
+      }
+    },
+    {
+      "rawEvalName": "FaithJudge",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "1-Hallu.",
+      "value": 83.4,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "FaithJudge (1-Hallu.)               92.6        83.4            75.7      83.0       —        91.0      93.2"
+      }
+    },
+    {
+      "rawEvalName": "FaithJudge",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "1-Hallu.",
+      "value": 75.7,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "FaithJudge (1-Hallu.)               92.6        83.4            75.7      83.0       —        91.0      93.2"
+      }
+    },
+    {
+      "rawEvalName": "FaithJudge",
+      "model": "anthropic/claude-sonnet-4",
+      "metric": "1-Hallu.",
+      "value": 83,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "FaithJudge (1-Hallu.)               92.6        83.4            75.7      83.0       —        91.0      93.2"
+      }
+    },
+    {
+      "rawEvalName": "FaithJudge",
+      "model": "openai/gpt-4.1",
+      "metric": "1-Hallu.",
+      "value": 91,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "FaithJudge (1-Hallu.)               92.6        83.4            75.7      83.0       —        91.0      93.2"
+      }
+    },
+    {
+      "rawEvalName": "FaithJudge",
+      "model": "google/gemini-2.5-flash",
+      "metric": "1-Hallu.",
+      "value": 93.2,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "FaithJudge (1-Hallu.)               92.6        83.4            75.7      83.0       —        91.0      93.2"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:22:35Z"
+  },
+  "notes": "Technical report (not a system card). Safety numbers from Table 6 (Promptfoo red-teaming pass rates) and Table 3 factuality/hallucination rows (FACTS Grounding, HHEM v2.1, FaithJudge). Skipped all general capability benchmarks (coding, math, agents, MMLU, IFEval, SimpleQA, Arena-Hard, long-context, etc.). Seed-linked moonshotai/Kimi-K2-Instruct-0905 is not named in the report, so omitted from covers. Kimi-K2-Base is evaluated in Table 4 but is not a seed model id (only a checkpoint of Instruct), so covered via rawModelName. No lab risk-tier decisions (ASL/Preparedness/CCL). No external safety testers; OpenHands/Multi-SWE-bench help was for SWE capability evals only. Figure 1 charts skipped (capability). PDF page 33 is blank; printed page numbers go to 32. Reviewer: Table 6 rows (100) use rawEvalName Promptfoo, with plugin and strategy in settings.other; checked against the page image."
+}

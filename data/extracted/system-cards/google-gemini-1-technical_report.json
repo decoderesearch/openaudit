@@ -1,0 +1,533 @@
+{
+  "document": "google-gemini-1-technical_report",
+  "alsoDocuments": [
+    "google-gemini-1-blog"
+  ],
+  "covers": [
+    {
+      "model": "google/gemini-1.0-ultra",
+      "section": "Gemini Ultra / Gemini Advanced / Gemini API Ultra"
+    },
+    {
+      "model": "google/gemini-pro",
+      "section": "Gemini Pro / Gemini API Pro / Gemini Apps"
+    },
+    {
+      "model": "google/gemini-nano",
+      "section": "Gemini Nano-1 (1.8B) and Nano-2 (3.25B)"
+    }
+  ],
+  "pageCount": 90,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "32k context length",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "They are trained to support 32k context\nlength, employing efficient attention mechanisms"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "Text, images, video, and audio inputs; generated text outputs (and interleaved image+text)",
+      "source": {
+        "page": "71",
+        "pdfPage": 71,
+        "quote": "Input(s)                  Text (e.g. a question, a prompt, a document(s) to be summa-\n                             rized), images, video, audio files.\n   Output(s)                 Generated text in response to the input"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "Multilingual; Gemini Apps scaled to 40+ languages",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "Scaling Gemini from English to 40+ languages imposed research challenges"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Google Terms of service / Generative AI Terms of service (product-dependent)",
+      "source": {
+        "page": "39",
+        "pdfPage": 39,
+        "quote": "• Google Terms of service\n   • Generative AI Terms of service"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "Nano-1 1.8B and Nano-2 3.25B; Ultra and Pro parameter counts not reported",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Nano, with 1.8B (Nano-1) and 3.25B (Nano-2) parameters, targeting low and high"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Decoder-only Transformer with multi-query attention; multimodal Nano/Pro/Ultra family",
+      "source": {
+        "page": "71",
+        "pdfPage": 71,
+        "quote": "containing variants known as Nano, Pro and Ultra (ordered\n                             by parameter count) based on a decoder-only Transformer\n                             architecture"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Multimodal and multilingual pre-training from web documents, books, and code, including image, audio, and video",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Our pre-training\ndataset uses data from web documents, books, and code, and includes image, audio, and video data."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [
+    {
+      "domain": "bio_chem",
+      "labLabel": "unlikely to provide CBRN information that would lead to catastrophic harm",
+      "phase": "after_mitigation",
+      "decidedBy": "Google DeepMind",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "The results suggest that the\n                                      models are unlikely to provide CBRN information that would lead to catastrophic\n                                      harm."
+      }
+    },
+    {
+      "domain": "cyber",
+      "labLabel": "can solve various entry-level tactical CTF challenges; struggled with longer-range exploration and planning; accuracy notably low on vulnerability identification",
+      "phase": "unspecified",
+      "decidedBy": "Google DeepMind",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "Gemini Advanced and the Gemini API Ultra model can solve various\n                                      entry-level, tactical challenges, but all models struggled with challenges involving\n                                      longer-range exploration and planning."
+      }
+    },
+    {
+      "domain": "manipulation",
+      "labLabel": "in some cases successfully deceive or influence participants, but overall results were mixed",
+      "phase": "unspecified",
+      "decidedBy": "Google DeepMind",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "models could successfully deceive or influence participants, but the overall results\n                                      were mixed."
+      }
+    },
+    {
+      "domain": "ai_rnd_autonomy",
+      "labLabel": "agents were not close to succeeding on most self-proliferation tasks",
+      "phase": "unspecified",
+      "decidedBy": "Google DeepMind",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "did not find that the agents were close to succeeding on\n                                      most such tasks."
+      }
+    }
+  ],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Post-trained Gemini API models evaluated against model safety policy harm types without product safety filters",
+      "source": {
+        "page": "32",
+        "pdfPage": 32,
+        "quote": "We evaluate post-trained Gemini API models against harm types according to our safety policies."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "Dedicated Trust and Safety child-safety experts built adversarial prompts and evaluated multimodal outputs",
+      "source": {
+        "page": "32",
+        "pdfPage": 32,
+        "quote": "For child safety, as a particularly sensitive area of work, we work with a dedicated team of child"
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Early models vulnerable to jailbreaks eliciting self-harm content; later mitigated",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "jailbreak and prompt injection attacks that produce affirmative responses to requests that include\npromoting violence, self-harm, and dangerous substances."
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Adversary-simulation red teaming found simple jailbreaks on early checkpoints; mitigations applied",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "early versions of the model were found to be vulnerable to simple\njailbreak and prompt injection attacks"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "Prompt injection treated as an integrity vulnerability class; early models found vulnerable",
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "quote": "Integrity            Prompt injection                         Input designed to enable the user to per-"
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": true,
+      "headline": "[Self-proliferation](/evals/gdm-self-proliferation) agent tasks: agents not close to succeeding on most resource-acquisition/self-improvement tasks",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "We tested whether autonomous agents powered by Gemini Pro and Ultra models\n                                      could perform difficult tasks relevant to acquiring resources and self-improving"
+      }
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Closed-book factuality inaccurate rate fell from 6.7% to 3.8% after factuality-focused post-training on Gemini API Pro",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "Gemini API Pro                      3.8%                      60.0%                   69.3%\n       Final stage of post-training        [3.1%, 4.8%]              [57.6%, 62.1%]"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "Attribution AIS rose from 40.2% to 60.0% and accurate hedging from 0% to 69.3% after factuality post-training",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "Gemini API Pro                      3.8%                      60.0%                   69.3%\n       Final stage of post-training        [3.1%, 4.8%]              [57.6%, 62.1%]"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "[BBQ](/evals/bbq), [Winogender](/evals/winogender), [Winobias](/evals/winobias), [RealToxicityPrompts](/evals/real-toxicity-prompts), Dollarstreet, and MIAP used for representational harms",
+      "source": {
+        "page": "34",
+        "pdfPage": 34,
+        "quote": "On BBQ, the average bias score stays close to zero, on a scale from -1 to 1"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "[RealToxicityPrompts](/evals/real-toxicity-prompts) average toxicity score fluctuates around 6% during training",
+      "source": {
+        "page": "34",
+        "pdfPage": 34,
+        "quote": "On BBQ, the average bias score stays close to zero, on a scale from -1 to 1,\nwhere -1 would be stereotype countering and 1 is stereotype reinforcing. On Real Toxicity Prompts\nthe average toxicity score during training fluctuates at around 6%."
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": true,
+      "headline": "Without hints, Pro and Ultra generally could not notice opportunities to modify surrounding infrastructure",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "without hints, the models were generally incapable of noticing such opportuni-"
+      }
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": true,
+      "headline": "Persuasion and deception studies with human participants: some success, overall results mixed",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "We tested whether Gemini Pro and Ultra models could persuade or deceive humans"
+      }
+    },
+    {
+      "topic": "power_seeking",
+      "covered": true,
+      "headline": "[Self-proliferation](/evals/gdm-self-proliferation) evaluations for acquiring resources and self-improving; agents not close to succeeding on most tasks",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "We tested whether autonomous agents powered by Gemini Pro and Ultra models\n                                      could perform difficult tasks relevant to acquiring resources and self-improving"
+      }
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "CTF challenges with Bash access; entry-level tactical success but weak long-horizon planning; low accuracy on vulnerability ID",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "We tested Gemini API Pro and Ultra models, in addition to Gemini Advanced, on a"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "CBRN: human eval on adversarial bio/rad/nuclear questions and closed-ended chem/knowledge questions",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "Chemical, Biological, Ra-"
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": true,
+      "headline": "Assurance evaluations by groups outside the model team; external black-box evaluations of Ultra",
+      "source": {
+        "page": "32",
+        "pdfPage": 32,
+        "quote": "Assurance evaluations are conducted for the purpose of governance and review, usually at"
+      }
+    }
+  ],
+  "testers": [
+    {
+      "name": "independent external groups (domain experts)",
+      "scope": "Black-box evaluations of a December 2023 Gemini API Ultra checkpoint on autonomous replication, CBRN, cyber, and societal risks; safety filters mostly on",
+      "source": {
+        "page": "38",
+        "pdfPage": 38,
+        "quote": "In 2023, we began working with a small set of independent external groups outside of Google to\nhelp identify areas for improvement in our model safety work by undertaking structured evaluations,\nqualitative probing, and unstructured red teaming."
+      }
+    },
+    {
+      "name": "external security testers (partner agency)",
+      "scope": "Security and prompt-injection testing, jailbreaking, and UI security failures on Gemini Advanced",
+      "source": {
+        "page": "39",
+        "pdfPage": 39,
+        "quote": "A group of external testers with security backgrounds, recruited through a\n     partner agency, conducted security and prompt-injection testing, jailbreaking, and user-interface\n     security failures."
+      }
+    }
+  ],
+  "findings": [
+    {
+      "text": "Early versions were vulnerable to simple jailbreak and prompt injection attacks eliciting violence, self-harm, and dangerous substances; findings were used to mitigate later models.", "tone": "bad",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "early versions of the model were found to be vulnerable to simple\njailbreak and prompt injection attacks that produce affirmative responses to requests that include\npromoting violence, self-harm, and dangerous substances."
+      }
+    },
+    {
+      "text": "Content-safety testing found Ultra and Pro had similar safety profiles, with medical advice and harassment as weaker policy areas.", "tone": "mixed",
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "quote": "Our Ultra and Pro models have been demonstrating similar safety profiles on this\ntesting, with medical advice and harassment as policy areas with particular room for improvement."
+      }
+    },
+    {
+      "text": "Image-to-text adversarial prompts could elicit violative captions, motivating dedicated multimodal safety mitigation.", "tone": "bad",
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "quote": "when provided with adversarial images\nand questions, models can produce captions with violative responses."
+      }
+    },
+    {
+      "text": "Representational-harm benchmarks saturate near 99% accuracy on these capable models, so the authors call for new bias measures beyond binary gender stereotypes.", "tone": "mixed",
+      "source": {
+        "page": "34",
+        "pdfPage": 34,
+        "quote": "most of these datasets quickly become saturated with accuracy scores\nclose to 99%, especially since we are evaluating highly capable large models."
+      }
+    },
+    {
+      "text": "On [BBQ](/evals/bbq) the average bias score stayed close to zero; on [Real Toxicity Prompts](/evals/real-toxicity-prompts) the average toxicity during training fluctuated around 6% (approximate, not exact scores).", "tone": "mixed",
+      "source": {
+        "page": "34",
+        "pdfPage": 34,
+        "quote": "On BBQ, the average bias score stays close to zero, on a scale from -1 to 1,\nwhere -1 would be stereotype countering and 1 is stereotype reinforcing. On Real Toxicity Prompts\nthe average toxicity score during training fluctuates at around 6%."
+      }
+    },
+    {
+      "text": "Without hints, Pro and Ultra were generally incapable of noticing opportunities to modify surrounding infrastructure in situational-awareness tests.", "tone": "good",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "without hints, the models were generally incapable of noticing such opportuni-\n                                      ties."
+      }
+    },
+    {
+      "text": "Models can make ungrounded inferences about people in image- and video-to-text settings, sometimes reinforcing stereotypes, without consistent group disparities observed.", "tone": "mixed",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "ungrounded inferences for video-to-text –\nsome instances of which can reinforce stereotypes or be otherwise of concern"
+      }
+    },
+    {
+      "text": "Dangerous-capability evaluations are framed as an early-warning system; no numeric Capture the Flag (CTF), persuasion, or chemical, biological, radiological and nuclear (CBRN) scores are reported in this paper.", "tone": "mixed",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "These evaluations function as an early warning\nsystem, highlighting upcoming areas for safety investment."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Factuality",
+      "model": "google/gemini-pro",
+      "metric": "inaccurate rate",
+      "value": 6.7,
+      "unit": "percent",
+      "ciLow": 5.8,
+      "ciHigh": 7.8,
+      "settings": {
+        "other": "Closed-Book Factuality; no factuality-focused adaptation; Gemini API Pro"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 6",
+        "quote": "Gemini API Pro                      6.7%                      40.2%                   0%\n       No factuality-focused adaptation    [5.8%, 7.8%]              [37.9%, 42.5%]"
+      }
+    },
+    {
+      "rawEvalName": "Factuality",
+      "model": "google/gemini-pro",
+      "metric": "AIS",
+      "value": 40.2,
+      "unit": "percent",
+      "ciLow": 37.9,
+      "ciHigh": 42.5,
+      "settings": {
+        "other": "Attribution; no factuality-focused adaptation; Gemini API Pro"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 6",
+        "quote": "Gemini API Pro                      6.7%                      40.2%                   0%\n       No factuality-focused adaptation    [5.8%, 7.8%]              [37.9%, 42.5%]"
+      }
+    },
+    {
+      "rawEvalName": "Factuality",
+      "model": "google/gemini-pro",
+      "metric": "hedging accuracy",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Hedging; no factuality-focused adaptation; Gemini API Pro"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 6",
+        "quote": "Gemini API Pro                      6.7%                      40.2%                   0%"
+      }
+    },
+    {
+      "rawEvalName": "Factuality",
+      "model": "google/gemini-pro",
+      "metric": "inaccurate rate",
+      "value": 3.8,
+      "unit": "percent",
+      "ciLow": 3.1,
+      "ciHigh": 4.8,
+      "settings": {
+        "other": "Closed-Book Factuality; final stage of post-training; Gemini API Pro"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 6",
+        "quote": "Gemini API Pro                      3.8%                      60.0%                   69.3%\n       Final stage of post-training        [3.1%, 4.8%]              [57.6%, 62.1%]"
+      }
+    },
+    {
+      "rawEvalName": "Factuality",
+      "model": "google/gemini-pro",
+      "metric": "AIS",
+      "value": 60,
+      "unit": "percent",
+      "ciLow": 57.6,
+      "ciHigh": 62.1,
+      "settings": {
+        "other": "Attribution; final stage of post-training; Gemini API Pro"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 6",
+        "quote": "Gemini API Pro                      3.8%                      60.0%                   69.3%\n       Final stage of post-training        [3.1%, 4.8%]              [57.6%, 62.1%]"
+      }
+    },
+    {
+      "rawEvalName": "Factuality",
+      "model": "google/gemini-pro",
+      "metric": "hedging accuracy",
+      "value": 69.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Hedging; final stage of post-training; Gemini API Pro"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 6",
+        "quote": "Gemini API Pro                      3.8%                      60.0%                   69.3%"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:10:32Z"
+  },
+  "notes": "Technical report (arXiv 2312.11805v5), not a system card. Safety numbers are sparse: only Table 6 Factuality (inaccuracy/AIS/hedging) has exact scores; BBQ 'close to zero' and RealToxicityPrompts '~6%' are approximate and were put in findings, not evalResults. Content-safety, cyber CTF, persuasion, CBRN, and red-teaming are qualitative. Capability tables (MMLU, coding, multimodal, ASR, etc.) skipped per pilot safety-only rule. trainingCompute left not_stated because the model card says Compute Requirements Not reported (TPUv4/v5e is hardware only). License disclosure uses product Terms of service links, not an open-source model license. External groups are unnamed."
+}

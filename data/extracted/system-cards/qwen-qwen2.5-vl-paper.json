@@ -1,0 +1,416 @@
+{
+  "document": "qwen-qwen2.5-vl-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "Qwen/Qwen2.5-VL-3B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen2.5-VL-7B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen2.5-VL-72B-Instruct"
+    }
+  ],
+  "pageCount": 23,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "Long-context pre-training sequence length 32,768 tokens (phases 1–2 use 8,192)",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "Sequence length          8192                    8192                      32768"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "image-text, video, and pure text",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "SFT phase, the model is fine-tuned on diverse multimodal data, including image-text pairs, video, and\npure text, sourced from general VQA, Rejection Samp"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "Primarily Chinese and English, with supplementary multilingual data; OCR covers French, German, Italian, Spanish, Portuguese, Arabic, Russian, Japanese, Korean, and Vietnamese",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "The dataset is primarily com-\nposed of Chinese and English data, with supplementary multilingual entries to support broader linguistic"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "Three sizes: Qwen2.5-VL-3B, Qwen2.5-VL-7B, and Qwen2.5-VL-72B",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": " Configuration                  Qwen2.5-VL-3B         Qwen2.5-VL-7B      Qwen2.5-VL-72B"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Redesigned ViT with 2D-RoPE and window attention, MLP vision-language merger, Qwen2.5 LLM backbone with MRoPE aligned to absolute time",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Vision Encoder: The vision encoder of Qwen2.5-VL employs a redesigned Vision Transformer (ViT)\narchitecture. Structurally, we incorporate 2D-RoPE and window attention"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Pre-training ~4.1T tokens across three stages (1.5T visual, 2T multimodal, 0.6T long-context); SFT ~2M entries (50% text / 50% multimodal) then DPO",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "Tokens                    1.5T                    2T                        0.6T"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[HallBench](/evals/hallusionbench)avg scores reported for Qwen2.5-VL-72B/7B/3B and comparison models in Table 3",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": " HallBenchavg (Guan et al., 2023)         58.1 Wang et al. (2024f)       55.5          55.0    57.4    58.1     55.2       52.9        46.3"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The report has no dedicated safety, red-teaming, jailbreak, bias, or dangerous-capability section; the only safety-adjacent numeric eval is [HallBench](/evals/hallusionbench) (HallusionBench).", "tone": "mixed",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "HallBench (Guan\net al., 2023), MTVQA (Tang et al., 2024), MME-RealWorld (Zhang et al., 2024f), MMVet (Yu et al., 2024),"
+      }
+    },
+    {
+      "text": "supervised fine-tuning (SFT) data filtering discards queries and answers that could lead to harmful outputs to uphold ethical guidelines; this is a training filter, not a model safety eval.", "tone": "good",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "queries and answers that are unrelated or could potentially lead to harmful\noutputs are also discarded. This structured approach ensures that the dataset adheres to ethical guidelines"
+      }
+    },
+    {
+      "text": "SFT data includes security-related query subsets among specialized instruction data, without reported safety benchmark scores for that subset.", "tone": "mixed",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "the dataset includes specialized subsets for General\nVisual Question Answering (VQA), image captioning, mathematical problem-solving, coding tasks,\nand security-related queries."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "HallBench",
+      "model": "anthropic/claude-3.5-sonnet-20240620",
+      "metric": "score",
+      "value": 55.5,
+      "unit": "percent",
+      "settings": {
+        "other": "avg; HallusionBench (Guan et al., 2023); Claude-3.5 Sonnet-0620"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": " HallBenchavg (Guan et al., 2023)         58.1 Wang et al. (2024f)       55.5          55.0    57.4    58.1     55.2       52.9        46.3"
+      }
+    },
+    {
+      "rawEvalName": "HallBench",
+      "model": "openai/gpt-4o",
+      "metric": "score",
+      "value": 55,
+      "unit": "percent",
+      "settings": {
+        "other": "avg; HallusionBench (Guan et al., 2023); GPT-4o-0513"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": " HallBenchavg (Guan et al., 2023)         58.1 Wang et al. (2024f)       55.5          55.0    57.4    58.1     55.2       52.9        46.3"
+      }
+    },
+    {
+      "rawEvalName": "HallBench",
+      "model": "OpenGVLab/InternVL2_5-78B",
+      "metric": "score",
+      "value": 57.4,
+      "unit": "percent",
+      "settings": {
+        "other": "avg; HallusionBench (Guan et al., 2023); InternVL2.5-78B"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": " HallBenchavg (Guan et al., 2023)         58.1 Wang et al. (2024f)       55.5          55.0    57.4    58.1     55.2       52.9        46.3"
+      }
+    },
+    {
+      "rawEvalName": "HallBench",
+      "rawModelName": "Qwen2-VL-72B",
+      "metric": "score",
+      "value": 58.1,
+      "unit": "percent",
+      "settings": {
+        "other": "avg; HallusionBench (Guan et al., 2023)"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": " HallBenchavg (Guan et al., 2023)         58.1 Wang et al. (2024f)       55.5          55.0    57.4    58.1     55.2       52.9        46.3"
+      }
+    },
+    {
+      "rawEvalName": "HallBench",
+      "model": "Qwen/Qwen2.5-VL-72B-Instruct",
+      "metric": "score",
+      "value": 55.2,
+      "unit": "percent",
+      "settings": {
+        "other": "avg; HallusionBench (Guan et al., 2023); Qwen2.5-VL-72B"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": " HallBenchavg (Guan et al., 2023)         58.1 Wang et al. (2024f)       55.5          55.0    57.4    58.1     55.2       52.9        46.3"
+      }
+    },
+    {
+      "rawEvalName": "HallBench",
+      "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+      "metric": "score",
+      "value": 52.9,
+      "unit": "percent",
+      "settings": {
+        "other": "avg; HallusionBench (Guan et al., 2023); Qwen2.5-VL-7B"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": " HallBenchavg (Guan et al., 2023)         58.1 Wang et al. (2024f)       55.5          55.0    57.4    58.1     55.2       52.9        46.3"
+      }
+    },
+    {
+      "rawEvalName": "HallBench",
+      "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+      "metric": "score",
+      "value": 46.3,
+      "unit": "percent",
+      "settings": {
+        "other": "avg; HallusionBench (Guan et al., 2023); Qwen2.5-VL-3B"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": " HallBenchavg (Guan et al., 2023)         58.1 Wang et al. (2024f)       55.5          55.0    57.4    58.1     55.2       52.9        46.3"
+      }
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "accuracy",
+      "value": 76.6,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": " CRPErelation (Wang et al., 2024h)        78.8 Chen et al. (2024d)         -           76.6    78.8      -      79.2       76.4        73.6"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "relation; GPT-4o-0513"
+      }
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "accuracy",
+      "value": 78.8,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": " CRPErelation (Wang et al., 2024h)        78.8 Chen et al. (2024d)         -           76.6    78.8      -      79.2       76.4        73.6"
+      },
+      "model": "OpenGVLab/InternVL2_5-78B",
+      "settings": {
+        "other": "relation; InternVL2.5-78B"
+      }
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "accuracy",
+      "value": 79.2,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": " CRPErelation (Wang et al., 2024h)        78.8 Chen et al. (2024d)         -           76.6    78.8      -      79.2       76.4        73.6"
+      },
+      "model": "Qwen/Qwen2.5-VL-72B-Instruct",
+      "settings": {
+        "other": "relation; Qwen2.5-VL-72B"
+      }
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "accuracy",
+      "value": 76.4,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": " CRPErelation (Wang et al., 2024h)        78.8 Chen et al. (2024d)         -           76.6    78.8      -      79.2       76.4        73.6"
+      },
+      "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+      "settings": {
+        "other": "relation; Qwen2.5-VL-7B"
+      }
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "accuracy",
+      "value": 73.6,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": " CRPErelation (Wang et al., 2024h)        78.8 Chen et al. (2024d)         -           76.6    78.8      -      79.2       76.4        73.6"
+      },
+      "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+      "settings": {
+        "other": "relation; Qwen2.5-VL-3B"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:33:44Z"
+  },
+  "notes": "Technical report (arXiv 2502.13923), not a system card. Safety-only pilot: only HallBenchavg in Table 3 (HallusionBench; Guan et al., 2023) qualifies. Skipped capability: MMMU/MMMU-Pro, MathVista/MATH-Vision/MathVerse, MegaBench, MMBench, MMStar, MME, MuirBench, BLINK, CRPE, MTVQA, RealWorldQA, MME-RealWorld, MMVet, MM-MT-Bench, pure-text Table 4 (MMLU-Pro/redux, LiveBench, GPQA, MATH, GSM8K, HumanEval, MultiPL-E, IFEval), OCR/Doc/Chart tables, grounding/counting, video benches, agent (AndroidWorld, OSWorld, ScreenSpot). Seed-linked Qwen2.5-VL-32B-Instruct never named (report: three sizes 3B/7B/72B). Qwen2-VL-72B left as rawModelName (Instruct not named). Training filters for harmful outputs and security-related SFT subsets noted in findings only. No risk framework or external safety testers. pageCount=24 from PDF form-feed pages (printed 1–15 plus refs). CRPE relation rows kept as a hallucination eval."
+}

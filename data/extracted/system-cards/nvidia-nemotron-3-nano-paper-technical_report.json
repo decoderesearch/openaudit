@@ -1,0 +1,237 @@
+{
+  "document": "nvidia-nemotron-3-nano-paper-technical_report",
+  "alsoDocuments": ["nvidia-nemotron-3-blog"],
+  "covers": [
+    {
+      "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16"
+    }
+  ],
+  "pageCount": 40,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "1M tokens",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Nemotron 3 Nano demonstrates enhanced agentic, reasoning, and chat abilities and supports context\n                                         lengths up to 1M tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present Nemotron 3 Nano 30B-A3B, a Mixture-of-Experts hybrid Mamba-\n                                         Transformer language model."
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "reasoning on/off control and token budget control",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "Nemotron 3 Nano allows for two different forms of reasoning control: reasoning on/off control and\ntoken budget control."
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "SFT translations into French, Spanish, Italian, German and Japanese",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "We used Qwen2.5-Instruct to translate our existing English post-training data into 5 target\nlanguages, French, Spanish, Italian, German and Japanese."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "31.6B",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Nemotron 3 Nano 30B-A3B Base contains 31.6B total parameters out of which 3.2B are active (3.6B including\nembeddings) per forward pass."
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "3.2B (3.6B including embeddings)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Nemotron 3 Nano 30B-A3B Base contains 31.6B total parameters out of which 3.2B are active (3.6B including\nembeddings) per forward pass."
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Mixture-of-Experts hybrid Mamba-Transformer",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present Nemotron 3 Nano 30B-A3B, a Mixture-of-Experts hybrid Mamba-\n                                         Transformer language model."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "25 trillion text tokens pretraining, then SFT and large-scale RL",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Nemotron 3 Nano was pretrained on 25 trillion text tokens, including\n                                         more than 3 trillion new unique tokens over Nemotron 2, followed by supervised fine tuning and"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "DPO ablation cuts tool hallucination rate to 0% on AIME25 and 0.7% on [GPQA](https://arxiv.org/abs/2311.12022)",
+      "source": {
+        "page": "38",
+        "pdfPage": 38,
+        "quote": "and the hallucination rate drops\ndramatically from 8.33% to just 0.7%."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The report has no dedicated safety benchmark table for the released model; safety appears only in supervised fine-tuning (SFT)/reinforcement learning from human feedback (RLHF) data construction and a Direct Preference Optimization (DPO) tool-hallucination ablation.", "tone": "mixed",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "Safety. We compile a diverse set of unsafe prompts sourced from the Nemotron Content Safety v2\n(Ghosh et al., 2025) and the Gretel Safety Alignment v1 (Gretel, 2024) datasets to target content\nsafety risks, and Harmful Tasks (Hasan et al., 2024) and Red-Team-2K (Luo et al., 2024)"
+      }
+    },
+    {
+      "text": "The authors state the released model does not use DPO for tool-hallucination control because reinforcement learning (RL) already matched that performance.", "tone": "neutral",
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "quote": "our released model does not rely on DPO, because reinforcement learning (RL) already achieved\ncomparable performance"
+      }
+    },
+    {
+      "text": "SFT safety responses are filtered with a content-safety classifier before training.", "tone": "good",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "A content-safety classifier is employed to filter the responses, ensuring alignment with\nsafety objectives."
+      }
+    },
+    {
+      "text": "RLHF safety preference data labels harmful prompts as safe-vs-unsafe and safe prompts as safe-vs-over-refusal.", "tone": "neutral",
+      "source": {
+        "page": "39",
+        "pdfPage": 39,
+        "quote": "for harmful\nprompts, <safe, unsafe> completions are labeled as the <chosen, rejected> pairs. For safe prompts,\n<safe, over-refusal> completions are annotated similarly as <chosen, rejected> pairs."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:04:55Z"
+  },
+  "notes": "Technical report (arXiv:2512.20848), not a system card. No risk framework, external safety testers, or safety benchmark scores for the released checkpoint. Only numeric safety-purpose results are tool hallucination rates in Table 7 (DPO ablation; released model uses RL instead). Capability tables skipped per pilot (name in reply): Table 2/3/4/5/6/8 and Figure 1 (MMLU-Pro, AIME25 accuracy, GPQA accuracy, LiveCodeBench, SciCode, HLE, MiniF2F, Terminal Bench, SWE-Bench, TauBench, BFCL, IFBench, Scale AI Multi Challenge, Arena-Hard-V2, AA-LCR, RULER, MMLU-ProX, WMT24++, MMLU-redux, prompt sensitivity). RewardBench/RM-Bench GenRM judge scores skipped. April 15, 2025 GitHub crawl cut-off left as not knowledgeCutoff."
+}

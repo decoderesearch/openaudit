@@ -1,0 +1,164 @@
+$defs:
+  ResultOrigin:
+    description: '`reported`: from a document (give `source`). `measured`: from an `EvalRun`.'
+    type: string
+    enum: [reported, measured]
+
+  ResultSettings:
+    description: >-
+      How the number was made. Compare results only when these match. Left out: not stated.
+    type: object
+    additionalProperties: false
+    properties:
+      reasoningEffort:
+        type: string
+        minLength: 1
+        description: The lab's words (`high`, `max`, `no thinking`).
+      tools:
+        type: boolean
+      passAtK:
+        type: integer
+        minimum: 1
+      trials:
+        type: integer
+        minimum: 1
+      harness:
+        type: string
+        minLength: 1
+        description: The scaffold or agent (`Claude Code`, `Terminus 2`).
+      safeguards:
+        type: boolean
+        description: Production safeguards (classifiers) were on.
+      helpfulOnly:
+        type: boolean
+        description: A helpful-only model, without safety training.
+      surface:
+        type: string
+        minLength: 1
+        description: Where it ran (`API`, `ChatGPT`).
+      otherModels:
+        type: string
+        minLength: 1
+        description: >-
+          The judge and other models besides the target, as `slot: model` pairs
+          (`judge: openai/gpt-4o`). Scores with different judges are not comparable.
+      other:
+        type: string
+        minLength: 1
+        description: Anything else the source says about the setup.
+
+  ResultSource:
+    type: object
+    additionalProperties: false
+    required: [documentId]
+    properties:
+      documentId:
+        $ref: '#/$defs/Id'
+      page:
+        type: string
+        minLength: 1
+        description: The page or section, as printed in the document.
+      pdfPage:
+        type: integer
+        minimum: 1
+        description: The page in the document's saved PDF, from 1. Links go here.
+      table:
+        type: string
+        minLength: 1
+        description: The table or figure (`Table 4`, `Figure 2.3.A`).
+      quote:
+        type: string
+        minLength: 1
+
+  EvalResult:
+    title: EvalResult
+    description: >-
+      One number: one metric of one eval for one model. A reported result that matches no
+      `Eval` or `Model` yet keeps the raw name, and the id is added later.
+    type: object
+    additionalProperties: false
+    required: [id, origin, metric, value, settings, reviewed]
+    properties:
+      id:
+        $ref: '#/$defs/Id'
+      origin:
+        $ref: '#/$defs/ResultOrigin'
+      evalId:
+        $ref: '#/$defs/Id'
+      evalVersionId:
+        $ref: '#/$defs/Id'
+      rawEvalName:
+        type: string
+        minLength: 1
+        description: The eval's name as the source writes it (`SWE-bench Verified (n=500)`).
+      modelId:
+        $ref: '#/$defs/Id'
+      rawModelName:
+        type: string
+        minLength: 1
+        description: The model's name as the source writes it.
+      metric:
+        type: string
+        minLength: 1
+        description: A `MetricDef.key` when the version is known; else the source's words.
+      value:
+        type: number
+      unit:
+        type: string
+        enum: [fraction, percent, score, count, seconds, tokens, other]
+        description: '`percent` is 0-100 and `fraction` is 0-1. `score` is any other scale.'
+      stderr:
+        type: number
+        minimum: 0
+      ciLow:
+        type: number
+      ciHigh:
+        type: number
+      n:
+        type: integer
+        minimum: 1
+        description: The number of samples, when stated.
+      safetyDirection:
+        $ref: '#/$defs/Direction'
+        description: >-
+          Which way is better for safety. `neither` for skill results (dangerous skills too) and for
+          refusals of safe requests. Left out: not known.
+      capabilityDirection:
+        $ref: '#/$defs/Direction'
+        description: 'Which way shows more skill. `neither` for behavior results. Left out: not known.'
+      settings:
+        $ref: '#/$defs/ResultSettings'
+      source:
+        $ref: '#/$defs/ResultSource'
+      evalRunId:
+        $ref: '#/$defs/Id'
+        description: The run a `measured` result comes from.
+      reviewed:
+        type: boolean
+      extraction:
+        $ref: '#/$defs/ExtractionInfo'
+    allOf:
+      - if:
+          properties:
+            origin:
+              const: reported
+        then:
+          properties:
+            rawEvalName: true
+            source: true
+          required: [rawEvalName, source]
+      - if:
+          properties:
+            origin:
+              const: measured
+        then:
+          properties:
+            evalRunId: true
+          required: [evalRunId]
+      - anyOf:
+          - properties:
+              modelId: true
+            required: [modelId]
+          - properties:
+              rawModelName: true
+            required: [rawModelName]

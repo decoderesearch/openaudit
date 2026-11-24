@@ -1,0 +1,42 @@
+# Checks the submissions in submissions/: method variants, model evals and harnesses, and the
+# harnesses in evals/. It does not run them: we run each accepted submission on our own machines.
+name: Submissions
+
+on:
+  pull_request:
+    paths:
+      - submissions/**
+      - evals/**
+      - data/seed/methods/**
+      - data/seed/evals/**
+      - data/extracted/methods/**
+      - spec/schemas/**
+      - spec/model-ladders.yaml
+      - spec/scripts/eval-entry.mjs
+      - .github/workflows/submissions.yml
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check submissions
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+      # Only the spec tools: the eval check validates eval.json against the spec schema.
+      - run: pnpm install --frozen-lockfile --prod --filter @openaudit/spec-tools
+      - run: node --test submissions/check.test.mjs submissions/check-eval.test.mjs submissions/check-harness.test.mjs submissions/leaderboards.test.mjs submissions/summary.test.mjs
+      # The leaderboards in evals/ must agree with the results in data/.
+      - run: node submissions/leaderboards.mjs --check
+      - run: node submissions/check.mjs
+      - run: node submissions/check.mjs submissions/examples/evals/* submissions/examples/methods/*/*/
+      - run: node submissions/check-harness.mjs
+      # Not example-multilingual-deception: its data is not on Hugging Face (see its README).
+      - run: node submissions/check-harness.mjs evals/*/ submissions/examples/harnesses/example-city-facts/

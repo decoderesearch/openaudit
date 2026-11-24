@@ -1,0 +1,48 @@
+$defs:
+  Organization:
+    title: Organization
+    description: A lab or company that makes models or publishes documents.
+    type: object
+    additionalProperties: false
+    required: [id, slug, displayName, aliases, slugAliases]
+    properties:
+      id:
+        $ref: '#/$defs/Id'
+      slug:
+        $ref: '#/$defs/Slug'
+        description: >-
+          The organization's page URL (`/qwen`, `/google`): the model owner that most of its
+          models use, in lowercase. Unique. Also a reserved handle.
+      displayName:
+        type: string
+        minLength: 1
+        description: The name to show (`Alibaba`).
+      aliases:
+        $ref: '#/$defs/Aliases'
+        description: Other names in documents (`Google DeepMind` and `Google Research` for `google`).
+      slugAliases:
+        description: >-
+          Other slugs that redirect to `slug`: old slugs and other model owners (`alibaba` for
+          `qwen`). Unique across all organizations.
+        type: array
+        items:
+          $ref: '#/$defs/Slug'
+        uniqueItems: true
+      website:
+        $ref: '#/$defs/Url'
+        description: The organization's own website.
+      summary:
+        $ref: '#/$defs/Markdown'
+        description: 1 to 3 sentences about the organization, with inline source links.
+      researchedAt:
+        type: string
+        format: date
+        description: >-
+          The day of the newest research for the organization page (YYYY-MM-DD). New research
+          looks only for events after this day.
+      researchDepth:
+        description: >-
+          How wide the research was. `deep`: many searches and primary sources. `light`: a few
+          searches; empty lists are usual.
+        type: string
+        enum: [deep, light]

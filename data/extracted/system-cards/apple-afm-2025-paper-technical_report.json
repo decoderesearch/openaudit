@@ -1,0 +1,2409 @@
+{
+  "document": "apple-afm-2025-paper-technical_report",
+  "alsoDocuments": ["apple-afm-2025-blog"],
+  "covers": [
+    {
+      "model": "apple/afm-on-device-2025"
+    },
+    {
+      "model": "apple/afm-server-2025"
+    }
+  ],
+  "pageCount": 27,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "up to 65K tokens after context lengthening (local attention sliding window 4096)",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "The context lengthening stage increased the number of tokens the model\n     can attend to, while maintaining its core capabilities. We accomplished this\n     by continuing to train the model on sequences containing up to 65K tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "multilingual multimodal foundation language models; text and image inputs; tool calls",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce two multilingual, multimodal foundation language models that power\n                                               Apple Intelligence features across Apple devices and services"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "designed to support 16 different languages",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "designed to support 16 different languages. Our latest foundation models include"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "on-device approximately 3-billion-parameter model; server PT-MoE size not stated as a single number; vision backbones ViT-g 1B (server) and ViTDet-L 300M (on-device)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "a compact, approximately 3-billion-parameter model optimized to run efficiently\n                                         on Apple silicon, alongside a mixture-of-expert server-based model with a novel"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "on-device: decoder with KV-cache sharing across two blocks; server: Parallel-Track Mixture-of-Experts (PT-MoE) with interleaved global–local attention; vision encoders (ViTDet-L / ViT-g) plus vision-language adaptation",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "a ∼3B-parameter\n                                               on-device model optimized for Apple silicon through architectural innovations such\n                                               as KV-cache sharing and 2-bit quantization-aware training; and (ii) a scalable server\n                                               model built on a novel Parallel-Track Mixture-of-Experts (PT-MoE) transformer that"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "licensed publisher data, curated public/open-source datasets, Applebot web crawl with robots.txt opt-out; no users’ private personal data or user interactions; filters for PII, profanity, unsafe material; synthetic data used in pre- and post-training",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "We do not use our users’ private personal data or user interactions when training\nour foundation models. Additionally, we take steps to apply filters to remove certain\ncategories of personally identifiable information and to exclude profanity and unsafe\nmaterial."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "server pre-training on 8192 v5p Cloud TPU accelerators (4×2048 chip slices) for 13.4T tokens",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "We trained our server model on 8192 v5p Cloud TPU accelerators provisioned as\n4 × 2048 chip slices using the AXLearn [Lee et al., 2025] framework. Training was\nconducted with a combination of data parallelism, fully-sharded-data-parallel, and\nthe newly introduced track parallelism for 13.4T tokens"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Built-in safety guardrails mitigate harmful model input and output; targeted safety evals for high-risk content",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "The framework enforces a base level of safety with built-in safety\nguardrails to mitigate harmful model input and output."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "Identifies and mitigates susceptibility to prompt injections as an inherent foundation-model risk",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "we have continued to identify and mitigate the\nrisks inherent to the use of foundation models, such as hallucinations and susceptibility\nto prompt injections."
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Hallucinations listed as an inherent risk they continue to identify and mitigate",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "we have continued to identify and mitigate the\nrisks inherent to the use of foundation models, such as hallucinations and susceptibility\nto prompt injections."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Safety taxonomy includes Algorithmic Biases and Stereotypes; culture-specific bias mitigation datasets",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "It\ncurrently contains 6 categories and 58 subcategories, which includes areas such as\nSlurs and Hate Speech/Symbols, Controversial and Sensitive Topics, and Algorithmic\nBiases and Stereotypes."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Safety taxonomy has 6 categories and 58 subcategories (e.g. Slurs and Hate Speech/Symbols, Controversial and Sensitive Topics, Algorithmic Biases and Stereotypes); no numeric violation rates are reported.", "tone": "mixed",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "It\ncurrently contains 6 categories and 58 subcategories, which includes areas such as\nSlurs and Hate Speech/Symbols, Controversial and Sensitive Topics, and Algorithmic\nBiases and Stereotypes."
+      }
+    },
+    {
+      "text": "Human red teaming was run across features to find locale-specific risks; overrides lists can block harmful outputs (e.g. slur prompts in writing tools or Genmoji).", "tone": "neutral",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "Finally, we conducted human red teaming across features to identify risks\nunique to each locale."
+      }
+    },
+    {
+      "text": "A novel prompt-selection algorithm for text-only reinforcement learning from human feedback (RLHF) is reported to raise Arena Hard by 4%, AlpacaEval win rate vs GPT4-Turbo by 7%, Agent Sandbox by 10%, [GPQA](https://arxiv.org/abs/2311.12022) by 7%, and Math500 by 5% versus a prior text-only dataset (deltas, not absolute scores).", "tone": "neutral",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "This text-only prompt set, which includes multilingual sets, leads to significant gains\nin both auto benchmarks (4% in Arena Hard [Li et al., 2024], 7% in win rate of\nAlpacaEval [Dubois et al., 2025] versus GPT4-Turbo, 10% in Agent Sandbox [Lu et al.,\n2025], 7% in GPQA [Rein et al., 2023], 5% in Math500 [Lightman et al., 2023]) and\nhuman benchmarks (1.3-2.0% increase in overall satisfaction across various locales)"
+      }
+    },
+    {
+      "text": "Multilingual RLHF is reported to lift over supervised fine-tuning (SFT) at a 16:9 win/loss rate in human evaluations.", "tone": "neutral",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "In human evaluations we find that RLHF provides significant lift over SFT,\nleading to 16:9 win/loss rate."
+      }
+    },
+    {
+      "text": "Human graders’ preferences differ on about 20–30% of preference data used for the reward model.", "tone": "mixed",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "The analysis shows\nthat human graders’ preferences differ for about 20-30% of the preference data, the\nprompts of which are usually subjective, difficult, and/or obscure."
+      }
+    },
+    {
+      "text": "On-device model is not designed as a general world-knowledge chatbot; Foundation Models framework targets summarization, extraction, short dialog, and similar tasks.", "tone": "neutral",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "While we have specialized our on-device model for these tasks,\nit is not designed to be a chatbot for general world knowledge."
+      }
+    },
+    {
+      "text": "Server pre-training used 8192 v5p Cloud TPU accelerators for 13.4T tokens; on-device dense training was about 14T tokens before mixture of experts (MoE) upcycling and distillation.", "tone": "neutral",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "We trained our server model on 8192 v5p Cloud TPU accelerators provisioned as\n4 × 2048 chip slices using the AXLearn [Lee et al., 2025] framework. Training was\nconducted with a combination of data parallelism, fully-sharded-data-parallel, and\nthe newly introduced track parallelism for 13.4T tokens"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "MMLU",
+      "model": "apple/afm-on-device-2025",
+      "metric": "accuracy",
+      "value": 67.85,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               AFM On-Device           67.85         60.60       74.91"
+      }
+    },
+    {
+      "rawEvalName": "MMMLU",
+      "model": "apple/afm-on-device-2025",
+      "metric": "accuracy",
+      "value": 60.6,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               AFM On-Device           67.85         60.60       74.91"
+      }
+    },
+    {
+      "rawEvalName": "MGSM",
+      "model": "apple/afm-on-device-2025",
+      "metric": "accuracy",
+      "value": 74.91,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               AFM On-Device           67.85         60.60       74.91"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "metric": "accuracy",
+      "value": 66.37,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               Qwen-2.5-3B             66.37         56.53       64.80"
+      }
+    },
+    {
+      "rawEvalName": "MMMLU",
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "metric": "accuracy",
+      "value": 56.53,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               Qwen-2.5-3B             66.37         56.53       64.80"
+      }
+    },
+    {
+      "rawEvalName": "MGSM",
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "metric": "accuracy",
+      "value": 64.8,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               Qwen-2.5-3B             66.37         56.53       64.80"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "accuracy",
+      "value": 75.1,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               Qwen-3-4B               75.10         66.52       82.97"
+      }
+    },
+    {
+      "rawEvalName": "MMMLU",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "accuracy",
+      "value": 66.52,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               Qwen-3-4B               75.10         66.52       82.97"
+      }
+    },
+    {
+      "rawEvalName": "MGSM",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "accuracy",
+      "value": 82.97,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               Qwen-3-4B               75.10         66.52       82.97"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "model": "google/gemma-3-4b-it",
+      "metric": "accuracy",
+      "value": 62.81,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               Gemma-3-4B              62.81         56.71       74.74"
+      }
+    },
+    {
+      "rawEvalName": "MMMLU",
+      "model": "google/gemma-3-4b-it",
+      "metric": "accuracy",
+      "value": 56.71,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               Gemma-3-4B              62.81         56.71       74.74"
+      }
+    },
+    {
+      "rawEvalName": "MGSM",
+      "model": "google/gemma-3-4b-it",
+      "metric": "accuracy",
+      "value": 74.74,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               Gemma-3-4B              62.81         56.71       74.74"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "accuracy",
+      "value": 57.84,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               Gemma-3n-E4B            57.84         50.93       77.77"
+      }
+    },
+    {
+      "rawEvalName": "MMMLU",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "accuracy",
+      "value": 50.93,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               Gemma-3n-E4B            57.84         50.93       77.77"
+      }
+    },
+    {
+      "rawEvalName": "MGSM",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "accuracy",
+      "value": 77.77,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 1",
+        "quote": "               Gemma-3n-E4B            57.84         50.93       77.77"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "model": "apple/afm-server-2025",
+      "metric": "accuracy",
+      "value": 80.2,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 2",
+        "quote": "                AFM Server             80.20        74.60       87.09"
+      }
+    },
+    {
+      "rawEvalName": "MMMLU",
+      "model": "apple/afm-server-2025",
+      "metric": "accuracy",
+      "value": 74.6,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 2",
+        "quote": "                AFM Server             80.20        74.60       87.09"
+      }
+    },
+    {
+      "rawEvalName": "MGSM",
+      "model": "apple/afm-server-2025",
+      "metric": "accuracy",
+      "value": 87.09,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 2",
+        "quote": "                AFM Server             80.20        74.60       87.09"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "model": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+      "metric": "accuracy",
+      "value": 84.88,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 2",
+        "quote": "                LLaMA 4 Scout          84.88        80.24       90.34"
+      }
+    },
+    {
+      "rawEvalName": "MMMLU",
+      "model": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+      "metric": "accuracy",
+      "value": 80.24,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 2",
+        "quote": "                LLaMA 4 Scout          84.88        80.24       90.34"
+      }
+    },
+    {
+      "rawEvalName": "MGSM",
+      "model": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+      "metric": "accuracy",
+      "value": 90.34,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 2",
+        "quote": "                LLaMA 4 Scout          84.88        80.24       90.34"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "accuracy",
+      "value": 87.52,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 2",
+        "quote": "                Qwen-3-235B            87.52        82.95       92.00"
+      }
+    },
+    {
+      "rawEvalName": "MMMLU",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "accuracy",
+      "value": 82.95,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 2",
+        "quote": "                Qwen-3-235B            87.52        82.95       92.00"
+      }
+    },
+    {
+      "rawEvalName": "MGSM",
+      "model": "Qwen/Qwen3-235B-A22B",
+      "metric": "accuracy",
+      "value": 92,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 2",
+        "quote": "                Qwen-3-235B            87.52        82.95       92.00"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "model": "openai/gpt-4o",
+      "metric": "accuracy",
+      "value": 85.7,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 2",
+        "quote": "                GPT-4o                 85.70        84.00       90.30"
+      }
+    },
+    {
+      "rawEvalName": "MMMLU",
+      "model": "openai/gpt-4o",
+      "metric": "accuracy",
+      "value": 84,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 2",
+        "quote": "                GPT-4o                 85.70        84.00       90.30"
+      }
+    },
+    {
+      "rawEvalName": "MGSM",
+      "model": "openai/gpt-4o",
+      "metric": "accuracy",
+      "value": 90.3,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct, non-thinking; languages supported by AFM; Simple-Evals"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 2",
+        "quote": "                GPT-4o                 85.70        84.00       90.30"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "model": "apple/afm-on-device-2025",
+      "metric": "accuracy",
+      "value": 67.8,
+      "unit": "percent",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 3",
+        "quote": " AFM On-Device                  67.8                    85.1                    16"
+      }
+    },
+    {
+      "rawEvalName": "IFEval (instruct)",
+      "model": "apple/afm-on-device-2025",
+      "metric": "score",
+      "value": 85.1,
+      "unit": "percent",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 3",
+        "quote": " AFM On-Device                  67.8                    85.1                    16"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "model": "apple/afm-on-device-2025",
+      "metric": "accuracy",
+      "value": 64.4,
+      "unit": "percent",
+      "settings": {
+        "other": "optimized (QAT/ASTC/quality recovery adapters); 2 bits-per-weight"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 3",
+        "quote": " AFM On-Device Opt              64.4                    82.3                     2"
+      }
+    },
+    {
+      "rawEvalName": "IFEval (instruct)",
+      "model": "apple/afm-on-device-2025",
+      "metric": "score",
+      "value": 82.3,
+      "unit": "percent",
+      "settings": {
+        "other": "optimized (QAT/ASTC/quality recovery adapters); 2 bits-per-weight"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 3",
+        "quote": " AFM On-Device Opt              64.4                    82.3                     2"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "model": "apple/afm-server-2025",
+      "metric": "accuracy",
+      "value": 80,
+      "unit": "percent",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 3",
+        "quote": " AFM Server                     80.0                    89.1                     16"
+      }
+    },
+    {
+      "rawEvalName": "IFEval (instruct)",
+      "model": "apple/afm-server-2025",
+      "metric": "score",
+      "value": 89.1,
+      "unit": "percent",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 3",
+        "quote": " AFM Server                     80.0                    89.1                     16"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "model": "apple/afm-server-2025",
+      "metric": "accuracy",
+      "value": 79.2,
+      "unit": "percent",
+      "settings": {
+        "other": "optimized (QAT/ASTC/quality recovery adapters); 3.6 bits-per-weight"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 3",
+        "quote": " AFM Server Opt                 79.2                    90.2                    3.6"
+      }
+    },
+    {
+      "rawEvalName": "IFEval (instruct)",
+      "model": "apple/afm-server-2025",
+      "metric": "score",
+      "value": 90.2,
+      "unit": "percent",
+      "settings": {
+        "other": "optimized (QAT/ASTC/quality recovery adapters); 3.6 bits-per-weight"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 3",
+        "quote": " AFM Server Opt                 79.2                    90.2                    3.6"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 35.3,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-3B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 51.8,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-3B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 12.9,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-3B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 25.6,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-4B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 51.7,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-4B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 22.7,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-4B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 19.9,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Qwen-3-4B-AWQ; locale EN; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 59.4,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Qwen-3-4B-AWQ; locale EN; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 20.7,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Qwen-3-4B-AWQ; locale EN; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 21,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3-4B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 57.1,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3-4B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 21.9,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3-4B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 25.8,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3n-E4B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 54,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3n-E4B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 20.2,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3n-E4B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 21.8,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Gemma-3n-E4B; locale EN; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 52.6,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Gemma-3n-E4B; locale EN; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 25.6,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Gemma-3n-E4B; locale EN; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 39.5,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-3B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 44.7,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-3B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 15.8,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-3B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 35.4,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-4B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 45.3,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-4B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 19.2,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-4B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 25.6,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Qwen-3-4B-AWQ; locale EN outside US; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 58.9,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Qwen-3-4B-AWQ; locale EN outside US; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 15.5,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Qwen-3-4B-AWQ; locale EN outside US; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 34.2,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3-4B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 45.9,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3-4B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 19.9,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3-4B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 30.5,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3n-E4B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 51,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3n-E4B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 18.5,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3n-E4B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 21.1,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Gemma-3n-E4B; locale EN outside US; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 54.1,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Gemma-3n-E4B; locale EN outside US; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 24.8,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Gemma-3n-E4B; locale EN outside US; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 36.8,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-3B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 47.7,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-3B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 15.5,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-3B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 25.9,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-4B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 50.1,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-4B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 24,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-4B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 29.1,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Qwen-3-4B-AWQ; locale PFIGSCJK; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 45.6,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Qwen-3-4B-AWQ; locale PFIGSCJK; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 25.3,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Qwen-3-4B-AWQ; locale PFIGSCJK; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 30.7,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3-4B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 44.2,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3-4B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 25.1,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3-4B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 42.5,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3n-E4B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 35.3,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3n-E4B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 22.2,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3n-E4B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 36,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Gemma-3n-E4B; locale PFIGSCJK; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 37.6,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Gemma-3n-E4B; locale PFIGSCJK; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 26.4,
+      "unit": "percent",
+      "settings": {
+        "other": "vs *Gemma-3n-E4B; locale PFIGSCJK; text side-by-side; AFM is Apple on-device compressed model (*)"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM wins",
+      "value": 22.7,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Llama-4-Scout; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "tie",
+      "value": 59.6,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Llama-4-Scout; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM loses",
+      "value": 17.7,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Llama-4-Scout; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM wins",
+      "value": 20.7,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-235B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "tie",
+      "value": 54.8,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-235B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM loses",
+      "value": 24.5,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-235B; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM wins",
+      "value": 16.7,
+      "unit": "percent",
+      "settings": {
+        "other": "vs GPT-4o; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "tie",
+      "value": 68.3,
+      "unit": "percent",
+      "settings": {
+        "other": "vs GPT-4o; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM loses",
+      "value": 15,
+      "unit": "percent",
+      "settings": {
+        "other": "vs GPT-4o; locale EN; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM wins",
+      "value": 29.1,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Llama-4-Scout; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "tie",
+      "value": 54.1,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Llama-4-Scout; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM loses",
+      "value": 16.8,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Llama-4-Scout; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM wins",
+      "value": 28.1,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-235B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "tie",
+      "value": 48.9,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-235B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM loses",
+      "value": 23,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-235B; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM wins",
+      "value": 15.4,
+      "unit": "percent",
+      "settings": {
+        "other": "vs GPT-4o; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "tie",
+      "value": 58.3,
+      "unit": "percent",
+      "settings": {
+        "other": "vs GPT-4o; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM loses",
+      "value": 26.3,
+      "unit": "percent",
+      "settings": {
+        "other": "vs GPT-4o; locale EN outside US; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM wins",
+      "value": 26.5,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Llama-4-Scout; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "tie",
+      "value": 56.5,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Llama-4-Scout; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM loses",
+      "value": 17,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Llama-4-Scout; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM wins",
+      "value": 20.1,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-235B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "tie",
+      "value": 52.4,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-235B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM loses",
+      "value": 27.5,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-3-235B; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM wins",
+      "value": 17.1,
+      "unit": "percent",
+      "settings": {
+        "other": "vs GPT-4o; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "tie",
+      "value": 58.6,
+      "unit": "percent",
+      "settings": {
+        "other": "vs GPT-4o; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side text preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM loses",
+      "value": 24.3,
+      "unit": "percent",
+      "settings": {
+        "other": "vs GPT-4o; locale PFIGSCJK; text side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 4 (read from image)",
+        "quote": "Figure 4: Fraction of preferred responses in side-by-side evaluation of text responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 37,
+      "unit": "percent",
+      "settings": {
+        "other": "vs InternVL-2.5-4B; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 46,
+      "unit": "percent",
+      "settings": {
+        "other": "vs InternVL-2.5-4B; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 17,
+      "unit": "percent",
+      "settings": {
+        "other": "vs InternVL-2.5-4B; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 36,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-VL-3B; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 45,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-VL-3B; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 19,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-VL-3B; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM wins",
+      "value": 34,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3-4B; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "tie",
+      "value": 47,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3-4B; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-on-device-2025",
+      "metric": "AFM loses",
+      "value": 18,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Gemma-3-4B; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM wins",
+      "value": 23,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Llama-4-Scout; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-server-2025",
+      "metric": "tie",
+      "value": 51,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Llama-4-Scout; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM loses",
+      "value": 26,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Llama-4-Scout; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM wins",
+      "value": 31,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-VL-32B; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-server-2025",
+      "metric": "tie",
+      "value": 44,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-VL-32B; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM loses",
+      "value": 26,
+      "unit": "percent",
+      "settings": {
+        "other": "vs Qwen-2.5-VL-32B; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM wins",
+      "value": 15,
+      "unit": "percent",
+      "settings": {
+        "other": "vs GPT-4o; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-server-2025",
+      "metric": "tie",
+      "value": 50,
+      "unit": "percent",
+      "settings": {
+        "other": "vs GPT-4o; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    },
+    {
+      "rawEvalName": "Human side-by-side image preference",
+      "model": "apple/afm-server-2025",
+      "metric": "AFM loses",
+      "value": 35,
+      "unit": "percent",
+      "settings": {
+        "other": "vs GPT-4o; locale EN; image side-by-side"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 5 (read from image)",
+        "quote": "Figure 5: Fraction of preferred responses in side-by-side evaluation of image responses"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:02:43Z"
+  },
+  "notes": "Technical report (arXiv 2507.13575), not a system card; alsoDocuments=[apple-afm-2025-blog] (blog not fetched). pageCount=27. Covers apple/afm-on-device-2025 (~3B) and apple/afm-server-2025 (PT-MoE). Responsible AI section is qualitative: taxonomy, guardrails, locale red teaming, prompt-injection/hallucination mitigations—no numeric violation rates. Tables 1–3 extracted fully. Figures 4–5 are raster images (page 18) with printed bar labels; the 99 values were read from the images and checked by a second reader (win+tie+lose≈100%). Their quotes are the figure captions. Skipped figures (no printed eval values): Figure 1 (page 2): modeling overview diagram, architectures, no printed values; Figure 2 (page 3): PT-MoE architecture diagram, no printed values; Figure 3 (page 11): distributed asynchronous RL infrastructure diagram, no printed values. Bits-per-weight in Table 3 omitted (compression setting, not an eval score). RLHF improvement deltas (Arena Hard/AlpacaEval/etc.) and 1.3–2.0% satisfaction range put in findings, not evalResults. InternVL-2.5-4B and Qwen-3-4B-AWQ use rawModelName (not top-level seed ids). No named external tester orgs; no riskDecisions."
+}

@@ -1,0 +1,65 @@
+{
+  "eval": {
+    "slug": "anthropic-election-integrity-multi-turn",
+    "displayName": "Election integrity multi-turn (Anthropic)",
+    "aliases": ["Election integrity multi-turn"],
+    "description": "Anthropic internal multi-turn safeguards eval for election-integrity conversations. A simulated user steers a longer conversation; graders score whether the model’s overall handling is appropriate. Cards report the appropriate response rate on the API and on Claude.ai.",
+    "summary": "Tests whether the model responds appropriately during long conversations about elections, including attempts to steer it toward harmful help.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+        "title": "Claude Opus 5.5 System Card (PDF)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["multi_turn"],
+      "cases": ["fixed", "generated"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["manipulation"]
+    },
+    "visibility": "public",
+    "family": "Anthropic safeguards evaluations"
+  },
+  "versions": [
+    {
+      "version": "2026-05-28",
+      "status": "published",
+      "releasedDate": "2026-05-28",
+      "scores": [
+        {
+          "key": "appropriate",
+          "displayName": "Appropriate response",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The multi-turn conversation is graded as an appropriate overall response."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "appropriate_response_rate",
+          "displayName": "Appropriate response rate",
+          "score": "appropriate",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of multi-turn conversations graded appropriate."
+        }
+      ]
+    }
+  ]
+}

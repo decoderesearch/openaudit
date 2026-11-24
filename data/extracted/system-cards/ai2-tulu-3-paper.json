@@ -1,0 +1,3839 @@
+{
+  "document": "ai2-tulu-3-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "allenai/Llama-3.1-Tulu-3-8B"
+    },
+    {
+      "model": "allenai/Llama-3.1-Tulu-3-70B"
+    },
+    {
+      "model": "allenai/Llama-3.1-Tulu-3-405B"
+    }
+  ],
+  "pageCount": 82,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "stated",
+      "value": "4096 tokens for generative evaluations (AlpacaEval generations up to 8192)",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "For generative evaluations our output length is 4096."
+      }
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text / open language models",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Tülu 3: Pushing Frontiers in\n                                         Open Language Model Post-Training"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "stated",
+      "value": "Training datasets described as permissively licensed; model weights and recipe released openly",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "are attributed to Tülu 3 Data, new permissively licensed training datasets targeting core skills, Tülu 3"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "8B, 70B, and 405B (post-trained from Llama 3.1 base)",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "The summary of Tülu 3 trained on Llama 3 at 8 and 70 billion parameters versus the leading"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Post-trained from Llama 3.1 base models (8B / 70B / 405B)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "trained on Llama 3.1 base versions (Dubey et al., 2024), with intermediate checkpoints, training data, training"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Tülu 3 Data: public + synthetic SFT mix, preference mixes, RLVR verifiable prompts; safety mixes include CoCoNot, WildJailbreak, WildGuardMix",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "are attributed to Tülu 3 Data, new permissively licensed training datasets targeting core skills, Tülu 3"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "[Tülu 3 Safety](/evals/tulu-3-safety) suite tests refusal on unsafe / harmful prompts across [HarmBench](/evals/harmbench) and peers.",
+      "source": {
+        "page": "39",
+        "pdfPage": 39,
+        "quote": "Each of these benchmarks evaluates whether models refuse to respond to unsafe requests, and"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Jailbreak robustness measured with [Do-Anything-Now](/evals/do-anything-now), JailbreakTrigger, and [WildJailbreakTest](/evals/wildjailbreak) adversarial harmful queries.",
+      "source": {
+        "page": "39",
+        "pdfPage": 39,
+        "quote": "Do-Anything-Now (Shen et al., 2024b) consists of jailbreak prompts that were created by combining the"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa) (MC2, 6-shot) is in the development suite under knowledge / truthfulness.",
+      "source": {
+        "page": "38",
+        "pdfPage": 38,
+        "quote": "TruthfulQA (Lin et al., 2021) contains questions that humans tend to answer incorrectly due to common"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "[HarmBench](/evals/harmbench) and [WildGuardTest](/evals/wildguard-test) include cybercrime / cyberattack risk categories with refusal rates.",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "quote": "Cybercrime & Unauthorized Intrusion              76.9           42.3          88.5        96.2          92.3        96.2"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "[HarmBench](/evals/harmbench) reports refusal on Chemical & Biological Weapons/Drugs prompts.",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "quote": "Chemical & Biological Weapons/Drugs              97.6           57.1          97.6       100.0          95.2        97.6"
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Safety supervised fine-tuning (SFT) data was largely orthogonal to other skills; removing it mainly dropped the safety average.", "tone": "good",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "Safety is Orthogonal. We found that our safety SFT data was generally orthogonal to our other datasets."
+      }
+    },
+    {
+      "text": "CoCoNot contrastive prompts helped reduce over-refusal on safe prompts.", "tone": "good",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "CoCoNot, were helpful for preventing our models from over-refusing safe prompts."
+      }
+    },
+    {
+      "text": "SFT checkpoints score highest on the safety suite; Direct Preference Optimization (DPO) and final reinforcement learning with verifiable rewards (RLVR) scores are slightly lower at 8B and 70B.", "tone": "mixed",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "quote": "Overall                     75.2              56.2             75.0         93.1         87.2        85.5"
+      }
+    },
+    {
+      "text": "There is no unseen (held-out) safety evaluation in the Tülu 3 Eval suite.", "tone": "mixed",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "Both splits cover all identified skills, except we have no unseen safety"
+      }
+    },
+    {
+      "text": "Safety responses are scored with the [WildGuard](https://arxiv.org/abs/2406.18495) classifier (RTA / refusal vs compliance), not human raters.", "tone": "neutral",
+      "source": {
+        "page": "39",
+        "pdfPage": 39,
+        "quote": "We use WildGuard to evaluate the model’s refusal"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "accuracy",
+      "value": 82.8,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "HarmBench                   82.8              53.4             84.1         98.4         94.4        94.7"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct"
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "accuracy",
+      "value": 53.4,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "HarmBench                   82.8              53.4             84.1         98.4         94.4        94.7"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410"
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "accuracy",
+      "value": 84.1,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "HarmBench                   82.8              53.4             84.1         98.4         94.4        94.7"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct"
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "accuracy",
+      "value": 98.4,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "HarmBench                   82.8              53.4             84.1         98.4         94.4        94.7"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "accuracy",
+      "value": 94.4,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "HarmBench                   82.8              53.4             84.1         98.4         94.4        94.7"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "accuracy",
+      "value": 94.7,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "HarmBench                   82.8              53.4             84.1         98.4         94.4        94.7"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "accuracy",
+      "value": 92.7,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "XSTest                      92.7              85.6             91.8         90.4         92.4        93.3"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "accuracy",
+      "value": 85.6,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "XSTest                      92.7              85.6             91.8         90.4         92.4        93.3"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "accuracy",
+      "value": 91.8,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "XSTest                      92.7              85.6             91.8         90.4         92.4        93.3"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "accuracy",
+      "value": 90.4,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "XSTest                      92.7              85.6             91.8         90.4         92.4        93.3"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "accuracy",
+      "value": 92.4,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "XSTest                      92.7              85.6             91.8         90.4         92.4        93.3"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "accuracy",
+      "value": 93.3,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "XSTest                      92.7              85.6             91.8         90.4         92.4        93.3"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B"
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "accuracy",
+      "value": 86.2,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "WildGuardTest               86.2              68.1             85.0         99.2         98.9        98.5"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct"
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "accuracy",
+      "value": 68.1,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "WildGuardTest               86.2              68.1             85.0         99.2         98.9        98.5"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410"
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "accuracy",
+      "value": 85,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "WildGuardTest               86.2              68.1             85.0         99.2         98.9        98.5"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct"
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "accuracy",
+      "value": 99.2,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "WildGuardTest               86.2              68.1             85.0         99.2         98.9        98.5"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "accuracy",
+      "value": 98.9,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "WildGuardTest               86.2              68.1             85.0         99.2         98.9        98.5"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "accuracy",
+      "value": 98.5,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "WildGuardTest               86.2              68.1             85.0         99.2         98.9        98.5"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B"
+    },
+    {
+      "rawEvalName": "JailbreakTrigger",
+      "metric": "accuracy",
+      "value": 78.8,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "Jailbreaktrigger            78.8              63.3             71.0         95.8         87.0        85.5"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct"
+    },
+    {
+      "rawEvalName": "JailbreakTrigger",
+      "metric": "accuracy",
+      "value": 63.3,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "Jailbreaktrigger            78.8              63.3             71.0         95.8         87.0        85.5"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410"
+    },
+    {
+      "rawEvalName": "JailbreakTrigger",
+      "metric": "accuracy",
+      "value": 71,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "Jailbreaktrigger            78.8              63.3             71.0         95.8         87.0        85.5"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct"
+    },
+    {
+      "rawEvalName": "JailbreakTrigger",
+      "metric": "accuracy",
+      "value": 95.8,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "Jailbreaktrigger            78.8              63.3             71.0         95.8         87.0        85.5"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "JailbreakTrigger",
+      "metric": "accuracy",
+      "value": 87,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "Jailbreaktrigger            78.8              63.3             71.0         95.8         87.0        85.5"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "JailbreakTrigger",
+      "metric": "accuracy",
+      "value": 85.5,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "Jailbreaktrigger            78.8              63.3             71.0         95.8         87.0        85.5"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B"
+    },
+    {
+      "rawEvalName": "Do-Anything-Now",
+      "metric": "accuracy",
+      "value": 45,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "DoAnythingNow               45.0              16.0             61.7         88.3         69.7        62.0"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct"
+    },
+    {
+      "rawEvalName": "Do-Anything-Now",
+      "metric": "accuracy",
+      "value": 16,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "DoAnythingNow               45.0              16.0             61.7         88.3         69.7        62.0"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410"
+    },
+    {
+      "rawEvalName": "Do-Anything-Now",
+      "metric": "accuracy",
+      "value": 61.7,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "DoAnythingNow               45.0              16.0             61.7         88.3         69.7        62.0"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct"
+    },
+    {
+      "rawEvalName": "Do-Anything-Now",
+      "metric": "accuracy",
+      "value": 88.3,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "DoAnythingNow               45.0              16.0             61.7         88.3         69.7        62.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "Do-Anything-Now",
+      "metric": "accuracy",
+      "value": 69.7,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "DoAnythingNow               45.0              16.0             61.7         88.3         69.7        62.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "Do-Anything-Now",
+      "metric": "accuracy",
+      "value": 62,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "DoAnythingNow               45.0              16.0             61.7         88.3         69.7        62.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B"
+    },
+    {
+      "rawEvalName": "WildJailbreakTest",
+      "metric": "accuracy",
+      "value": 65.6,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "WildjailbreakTest           65.6              50.7             56.2         86.7         81.1        78.8"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct"
+    },
+    {
+      "rawEvalName": "WildJailbreakTest",
+      "metric": "accuracy",
+      "value": 50.7,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "WildjailbreakTest           65.6              50.7             56.2         86.7         81.1        78.8"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410"
+    },
+    {
+      "rawEvalName": "WildJailbreakTest",
+      "metric": "accuracy",
+      "value": 56.2,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "WildjailbreakTest           65.6              50.7             56.2         86.7         81.1        78.8"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct"
+    },
+    {
+      "rawEvalName": "WildJailbreakTest",
+      "metric": "accuracy",
+      "value": 86.7,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "WildjailbreakTest           65.6              50.7             56.2         86.7         81.1        78.8"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "WildJailbreakTest",
+      "metric": "accuracy",
+      "value": 81.1,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "WildjailbreakTest           65.6              50.7             56.2         86.7         81.1        78.8"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "WildJailbreakTest",
+      "metric": "accuracy",
+      "value": 78.8,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "WildjailbreakTest           65.6              50.7             56.2         86.7         81.1        78.8"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B"
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 75.2,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "Overall                     75.2              56.2             75.0         93.1         87.2        85.5"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct"
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 56.2,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "Overall                     75.2              56.2             75.0         93.1         87.2        85.5"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410"
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 75,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "Overall                     75.2              56.2             75.0         93.1         87.2        85.5"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct"
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 93.1,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "Overall                     75.2              56.2             75.0         93.1         87.2        85.5"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 87.2,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "Overall                     75.2              56.2             75.0         93.1         87.2        85.5"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 85.5,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 25",
+        "quote": "Overall                     75.2              56.2             75.0         93.1         87.2        85.5"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B"
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "accuracy",
+      "value": 80.6,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "HarmBench                80.6          86.3          54.7           84.4         98.8          97.8          97.8"
+      },
+      "model": "meta-llama/Llama-3.1-70B-Instruct"
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "accuracy",
+      "value": 86.3,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "HarmBench                80.6          86.3          54.7           84.4         98.8          97.8          97.8"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "accuracy",
+      "value": 54.7,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "HarmBench                80.6          86.3          54.7           84.4         98.8          97.8          97.8"
+      },
+      "model": "NousResearch/Hermes-3-Llama-3.1-70B"
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "accuracy",
+      "value": 84.4,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "HarmBench                80.6          86.3          54.7           84.4         98.8          97.8          97.8"
+      },
+      "model": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF"
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "accuracy",
+      "value": 98.8,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "HarmBench                80.6          86.3          54.7           84.4         98.8          97.8          97.8"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "accuracy",
+      "value": 97.8,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "HarmBench                80.6          86.3          54.7           84.4         98.8          97.8          97.8"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "accuracy",
+      "value": 97.8,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "HarmBench                80.6          86.3          54.7           84.4         98.8          97.8          97.8"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "accuracy",
+      "value": 87.1,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "XSTest                   87.1          93.6          89.3           92.0         91.1          94.9          92.4"
+      },
+      "model": "meta-llama/Llama-3.1-70B-Instruct"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "accuracy",
+      "value": 93.6,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "XSTest                   87.1          93.6          89.3           92.0         91.1          94.9          92.4"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "accuracy",
+      "value": 89.3,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "XSTest                   87.1          93.6          89.3           92.0         91.1          94.9          92.4"
+      },
+      "model": "NousResearch/Hermes-3-Llama-3.1-70B"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "accuracy",
+      "value": 92,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "XSTest                   87.1          93.6          89.3           92.0         91.1          94.9          92.4"
+      },
+      "model": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "accuracy",
+      "value": 91.1,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "XSTest                   87.1          93.6          89.3           92.0         91.1          94.9          92.4"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "accuracy",
+      "value": 94.9,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "XSTest                   87.1          93.6          89.3           92.0         91.1          94.9          92.4"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "accuracy",
+      "value": 92.4,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "XSTest                   87.1          93.6          89.3           92.0         91.1          94.9          92.4"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B"
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "accuracy",
+      "value": 81.3,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "WildGuardTest            81.3          93.1          66.6           84.9         99.1          99.2          98.9"
+      },
+      "model": "meta-llama/Llama-3.1-70B-Instruct"
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "accuracy",
+      "value": 93.1,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "WildGuardTest            81.3          93.1          66.6           84.9         99.1          99.2          98.9"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "accuracy",
+      "value": 66.6,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "WildGuardTest            81.3          93.1          66.6           84.9         99.1          99.2          98.9"
+      },
+      "model": "NousResearch/Hermes-3-Llama-3.1-70B"
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "accuracy",
+      "value": 84.9,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "WildGuardTest            81.3          93.1          66.6           84.9         99.1          99.2          98.9"
+      },
+      "model": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF"
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "accuracy",
+      "value": 99.1,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "WildGuardTest            81.3          93.1          66.6           84.9         99.1          99.2          98.9"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "accuracy",
+      "value": 99.2,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "WildGuardTest            81.3          93.1          66.6           84.9         99.1          99.2          98.9"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "accuracy",
+      "value": 98.9,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "WildGuardTest            81.3          93.1          66.6           84.9         99.1          99.2          98.9"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B"
+    },
+    {
+      "rawEvalName": "JailbreakTrigger",
+      "metric": "accuracy",
+      "value": 71,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "Jailbreaktrigger         71.0          89.8          56.3           60.5         95.3          87.0          86.7"
+      },
+      "model": "meta-llama/Llama-3.1-70B-Instruct"
+    },
+    {
+      "rawEvalName": "JailbreakTrigger",
+      "metric": "accuracy",
+      "value": 89.8,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "Jailbreaktrigger         71.0          89.8          56.3           60.5         95.3          87.0          86.7"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "JailbreakTrigger",
+      "metric": "accuracy",
+      "value": 56.3,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "Jailbreaktrigger         71.0          89.8          56.3           60.5         95.3          87.0          86.7"
+      },
+      "model": "NousResearch/Hermes-3-Llama-3.1-70B"
+    },
+    {
+      "rawEvalName": "JailbreakTrigger",
+      "metric": "accuracy",
+      "value": 60.5,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "Jailbreaktrigger         71.0          89.8          56.3           60.5         95.3          87.0          86.7"
+      },
+      "model": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF"
+    },
+    {
+      "rawEvalName": "JailbreakTrigger",
+      "metric": "accuracy",
+      "value": 95.3,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "Jailbreaktrigger         71.0          89.8          56.3           60.5         95.3          87.0          86.7"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "JailbreakTrigger",
+      "metric": "accuracy",
+      "value": 87,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "Jailbreaktrigger         71.0          89.8          56.3           60.5         95.3          87.0          86.7"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "JailbreakTrigger",
+      "metric": "accuracy",
+      "value": 86.7,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "Jailbreaktrigger         71.0          89.8          56.3           60.5         95.3          87.0          86.7"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B"
+    },
+    {
+      "rawEvalName": "Do-Anything-Now",
+      "metric": "accuracy",
+      "value": 80,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "DoAnythingNow            80.0          93.3          26.7           36.3         93.7          69.0          67.7"
+      },
+      "model": "meta-llama/Llama-3.1-70B-Instruct"
+    },
+    {
+      "rawEvalName": "Do-Anything-Now",
+      "metric": "accuracy",
+      "value": 93.3,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "DoAnythingNow            80.0          93.3          26.7           36.3         93.7          69.0          67.7"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "Do-Anything-Now",
+      "metric": "accuracy",
+      "value": 26.7,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "DoAnythingNow            80.0          93.3          26.7           36.3         93.7          69.0          67.7"
+      },
+      "model": "NousResearch/Hermes-3-Llama-3.1-70B"
+    },
+    {
+      "rawEvalName": "Do-Anything-Now",
+      "metric": "accuracy",
+      "value": 36.3,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "DoAnythingNow            80.0          93.3          26.7           36.3         93.7          69.0          67.7"
+      },
+      "model": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF"
+    },
+    {
+      "rawEvalName": "Do-Anything-Now",
+      "metric": "accuracy",
+      "value": 93.7,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "DoAnythingNow            80.0          93.3          26.7           36.3         93.7          69.0          67.7"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "Do-Anything-Now",
+      "metric": "accuracy",
+      "value": 69,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "DoAnythingNow            80.0          93.3          26.7           36.3         93.7          69.0          67.7"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "Do-Anything-Now",
+      "metric": "accuracy",
+      "value": 67.7,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "DoAnythingNow            80.0          93.3          26.7           36.3         93.7          69.0          67.7"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B"
+    },
+    {
+      "rawEvalName": "WildJailbreakTest",
+      "metric": "accuracy",
+      "value": 59.2,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "WildjailbreakTest        59.2          66.0          53.8           56.1         88.6          86.3          86.2"
+      },
+      "model": "meta-llama/Llama-3.1-70B-Instruct"
+    },
+    {
+      "rawEvalName": "WildJailbreakTest",
+      "metric": "accuracy",
+      "value": 66,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "WildjailbreakTest        59.2          66.0          53.8           56.1         88.6          86.3          86.2"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "WildJailbreakTest",
+      "metric": "accuracy",
+      "value": 53.8,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "WildjailbreakTest        59.2          66.0          53.8           56.1         88.6          86.3          86.2"
+      },
+      "model": "NousResearch/Hermes-3-Llama-3.1-70B"
+    },
+    {
+      "rawEvalName": "WildJailbreakTest",
+      "metric": "accuracy",
+      "value": 56.1,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "WildjailbreakTest        59.2          66.0          53.8           56.1         88.6          86.3          86.2"
+      },
+      "model": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF"
+    },
+    {
+      "rawEvalName": "WildJailbreakTest",
+      "metric": "accuracy",
+      "value": 88.6,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "WildjailbreakTest        59.2          66.0          53.8           56.1         88.6          86.3          86.2"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "WildJailbreakTest",
+      "metric": "accuracy",
+      "value": 86.3,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "WildjailbreakTest        59.2          66.0          53.8           56.1         88.6          86.3          86.2"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "WildJailbreakTest",
+      "metric": "accuracy",
+      "value": 86.2,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "WildjailbreakTest        59.2          66.0          53.8           56.1         88.6          86.3          86.2"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B"
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 76.5,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "Overall                  76.5          87.0          57.9           69.0         94.4          89.0          88.3"
+      },
+      "model": "meta-llama/Llama-3.1-70B-Instruct"
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 87,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "Overall                  76.5          87.0          57.9           69.0         94.4          89.0          88.3"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 57.9,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "Overall                  76.5          87.0          57.9           69.0         94.4          89.0          88.3"
+      },
+      "model": "NousResearch/Hermes-3-Llama-3.1-70B"
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 69,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "Overall                  76.5          87.0          57.9           69.0         94.4          89.0          88.3"
+      },
+      "model": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF"
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 94.4,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "Overall                  76.5          87.0          57.9           69.0         94.4          89.0          88.3"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 89,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "Overall                  76.5          87.0          57.9           69.0         94.4          89.0          88.3"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 88.3,
+      "unit": "percent",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "table": "Table 26",
+        "quote": "Overall                  76.5          87.0          57.9           69.0         94.4          89.0          88.3"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B"
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 86.8,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "Safety(6 task avg.)           86.8        65.8        72.2         90.9          87.7         85.5          86.7"
+      },
+      "model": "meta-llama/Llama-3.1-405B-Instruct"
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 65.8,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "Safety(6 task avg.)           86.8        65.8        72.2         90.9          87.7         85.5          86.7"
+      },
+      "model": "NousResearch/Hermes-3-Llama-3.1-405B"
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 72.2,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "Safety(6 task avg.)           86.8        65.8        72.2         90.9          87.7         85.5          86.7"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 90.9,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "Safety(6 task avg.)           86.8        65.8        72.2         90.9          87.7         85.5          86.7"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "GPT 4o (11-24)"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 87.7,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "Safety(6 task avg.)           86.8        65.8        72.2         90.9          87.7         85.5          86.7"
+      },
+      "rawModelName": "Tülu 3 405B SFT",
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 85.5,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "Safety(6 task avg.)           86.8        65.8        72.2         90.9          87.7         85.5          86.7"
+      },
+      "rawModelName": "Tülu 3 405B DPO",
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 86.7,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "Safety(6 task avg.)           86.8        65.8        72.2         90.9          87.7         85.5          86.7"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-405B"
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 69.1,
+      "unit": "percent",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Safety      Safety(6 task avg.)           85.5       75.0       75.2      88.3      87.0       76.5       69.1       84.9     91.8"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "GPT-3.5-Turbo-0125"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 84.9,
+      "unit": "percent",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Safety      Safety(6 task avg.)           85.5       75.0       75.2      88.3      87.0       76.5       69.1       84.9     91.8"
+      },
+      "model": "openai/gpt-4o-mini",
+      "settings": {
+        "other": "GPT-4o-mini-2024-07-18"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "metric": "accuracy",
+      "value": 91.8,
+      "unit": "percent",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Safety      Safety(6 task avg.)           85.5       75.0       75.2      88.3      87.0       76.5       69.1       84.9     91.8"
+      },
+      "model": "anthropic/claude-3.5-haiku",
+      "settings": {
+        "other": "Claude 3.5 Haiku 20241022"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 55.1,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "TruthfulQA(6 shot)             55.1       63.1        57.0          61.4       55.5      46.8        56.1        55.0"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 63.1,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "TruthfulQA(6 shot)             55.1       63.1        57.0          61.4       55.5      46.8        56.1        55.0"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 57,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "TruthfulQA(6 shot)             55.1       63.1        57.0          61.4       55.5      46.8        56.1        55.0"
+      },
+      "rawModelName": "Magpie 8B",
+      "settings": {
+        "other": "6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 61.4,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "TruthfulQA(6 shot)             55.1       63.1        57.0          61.4       55.5      46.8        56.1        55.0"
+      },
+      "model": "google/gemma-2-9b-it",
+      "settings": {
+        "other": "6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 55.5,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "TruthfulQA(6 shot)             55.1       63.1        57.0          61.4       55.5      46.8        56.1        55.0"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 46.8,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "TruthfulQA(6 shot)             55.1       63.1        57.0          61.4       55.5      46.8        56.1        55.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; 6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 56.1,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "TruthfulQA(6 shot)             55.1       63.1        57.0          61.4       55.5      46.8        56.1        55.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; 6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 55,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "TruthfulQA(6 shot)             55.1       63.1        57.0          61.4       55.5      46.8        56.1        55.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 66.8,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": "TruthfulQA(6 shot)            66.8       69.9        66.5         62.6         55.7         67.9        67.6"
+      },
+      "model": "meta-llama/Llama-3.1-70B-Instruct",
+      "settings": {
+        "other": "6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 69.9,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": "TruthfulQA(6 shot)            66.8       69.9        66.5         62.6         55.7         67.9        67.6"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct",
+      "settings": {
+        "other": "6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 66.5,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": "TruthfulQA(6 shot)            66.8       69.9        66.5         62.6         55.7         67.9        67.6"
+      },
+      "model": "NousResearch/Hermes-3-Llama-3.1-70B",
+      "settings": {
+        "other": "6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 62.6,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": "TruthfulQA(6 shot)            66.8       69.9        66.5         62.6         55.7         67.9        67.6"
+      },
+      "model": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF",
+      "settings": {
+        "other": "6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 55.7,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": "TruthfulQA(6 shot)            66.8       69.9        66.5         62.6         55.7         67.9        67.6"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-SFT",
+      "settings": {
+        "other": "SFT stage; 6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 67.9,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": "TruthfulQA(6 shot)            66.8       69.9        66.5         62.6         55.7         67.9        67.6"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B-DPO",
+      "settings": {
+        "other": "DPO stage; 6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "MC2",
+      "value": 67.6,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": "TruthfulQA(6 shot)            66.8       69.9        66.5         62.6         55.7         67.9        67.6"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-70B",
+      "settings": {
+        "other": "6 shot MC2"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 97.6,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Chemical & Biological Weapons/Drugs              97.6           57.1          97.6       100.0          95.2        97.6"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Chemical & Biological Weapons/Drugs"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 57.1,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Chemical & Biological Weapons/Drugs              97.6           57.1          97.6       100.0          95.2        97.6"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Chemical & Biological Weapons/Drugs"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 97.6,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Chemical & Biological Weapons/Drugs              97.6           57.1          97.6       100.0          95.2        97.6"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Chemical & Biological Weapons/Drugs"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Chemical & Biological Weapons/Drugs              97.6           57.1          97.6       100.0          95.2        97.6"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Chemical & Biological Weapons/Drugs"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 95.2,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Chemical & Biological Weapons/Drugs              97.6           57.1          97.6       100.0          95.2        97.6"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Chemical & Biological Weapons/Drugs"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 97.6,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Chemical & Biological Weapons/Drugs              97.6           57.1          97.6       100.0          95.2        97.6"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Chemical & Biological Weapons/Drugs"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 75,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Copyright Violations                             75.0           56.3          60.0       100.0         100.0       100.0"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Copyright Violations"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 56.3,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Copyright Violations                             75.0           56.3          60.0       100.0         100.0       100.0"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Copyright Violations"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 60,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Copyright Violations                             75.0           56.3          60.0       100.0         100.0       100.0"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Copyright Violations"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Copyright Violations                             75.0           56.3          60.0       100.0         100.0       100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Copyright Violations"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Copyright Violations                             75.0           56.3          60.0       100.0         100.0       100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Copyright Violations"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Copyright Violations                             75.0           56.3          60.0       100.0         100.0       100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Copyright Violations"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 76.9,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Cybercrime & Unauthorized Intrusion              76.9           42.3          88.5        96.2          92.3        96.2"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Cybercrime & Unauthorized Intrusion"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 42.3,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Cybercrime & Unauthorized Intrusion              76.9           42.3          88.5        96.2          92.3        96.2"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Cybercrime & Unauthorized Intrusion"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 88.5,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Cybercrime & Unauthorized Intrusion              76.9           42.3          88.5        96.2          92.3        96.2"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Cybercrime & Unauthorized Intrusion"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 96.2,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Cybercrime & Unauthorized Intrusion              76.9           42.3          88.5        96.2          92.3        96.2"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Cybercrime & Unauthorized Intrusion"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 92.3,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Cybercrime & Unauthorized Intrusion              76.9           42.3          88.5        96.2          92.3        96.2"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Cybercrime & Unauthorized Intrusion"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 96.2,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Cybercrime & Unauthorized Intrusion              76.9           42.3          88.5        96.2          92.3        96.2"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Cybercrime & Unauthorized Intrusion"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Harassment & Bullying                           100.0           90.5         100.0       100.0         100.0       100.0"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Harassment & Bullying"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 90.5,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Harassment & Bullying                           100.0           90.5         100.0       100.0         100.0       100.0"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Harassment & Bullying"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Harassment & Bullying                           100.0           90.5         100.0       100.0         100.0       100.0"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Harassment & Bullying"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Harassment & Bullying                           100.0           90.5         100.0       100.0         100.0       100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Harassment & Bullying"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Harassment & Bullying                           100.0           90.5         100.0       100.0         100.0       100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Harassment & Bullying"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Harassment & Bullying                           100.0           90.5         100.0       100.0         100.0       100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Harassment & Bullying"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 88.9,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "General Harm                                     88.9           66.7          94.4        94.4          83.3        83.3"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "General Harm"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 66.7,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "General Harm                                     88.9           66.7          94.4        94.4          83.3        83.3"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "General Harm"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 94.4,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "General Harm                                     88.9           66.7          94.4        94.4          83.3        83.3"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "General Harm"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 94.4,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "General Harm                                     88.9           66.7          94.4        94.4          83.3        83.3"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; General Harm"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 83.3,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "General Harm                                     88.9           66.7          94.4        94.4          83.3        83.3"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; General Harm"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 83.3,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "General Harm                                     88.9           66.7          94.4        94.4          83.3        83.3"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "General Harm"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 96.2,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Illegal Activities                               96.2           64.2          98.1        96.2          98.1       100.0"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Illegal Activities"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 64.2,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Illegal Activities                               96.2           64.2          98.1        96.2          98.1       100.0"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Illegal Activities"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 98.1,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Illegal Activities                               96.2           64.2          98.1        96.2          98.1       100.0"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Illegal Activities"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 96.2,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Illegal Activities                               96.2           64.2          98.1        96.2          98.1       100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Illegal Activities"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 98.1,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Illegal Activities                               96.2           64.2          98.1        96.2          98.1       100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Illegal Activities"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Illegal Activities                               96.2           64.2          98.1        96.2          98.1       100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Illegal Activities"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 66.7,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Misinformation & Disinformation                  66.7           27.8          81.5       100.0          85.2        79.6"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Misinformation & Disinformation"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 27.8,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Misinformation & Disinformation                  66.7           27.8          81.5       100.0          85.2        79.6"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Misinformation & Disinformation"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 81.5,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Misinformation & Disinformation                  66.7           27.8          81.5       100.0          85.2        79.6"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Misinformation & Disinformation"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Misinformation & Disinformation                  66.7           27.8          81.5       100.0          85.2        79.6"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Misinformation & Disinformation"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 85.2,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Misinformation & Disinformation                  66.7           27.8          81.5       100.0          85.2        79.6"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Misinformation & Disinformation"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "refusal rate",
+      "value": 79.6,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 39",
+        "quote": "Misinformation & Disinformation                  66.7           27.8          81.5       100.0          85.2        79.6"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Misinformation & Disinformation"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 93.9,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Sensitive information government             93.9           81.6          87.8       100.0       100.0         100.0"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Sensitive information government"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 81.6,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Sensitive information government             93.9           81.6          87.8       100.0       100.0         100.0"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Sensitive information government"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 87.8,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Sensitive information government             93.9           81.6          87.8       100.0       100.0         100.0"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Sensitive information government"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Sensitive information government             93.9           81.6          87.8       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Sensitive information government"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Sensitive information government             93.9           81.6          87.8       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Sensitive information government"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Sensitive information government             93.9           81.6          87.8       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Sensitive information government"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 88.2,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Social stereotypes/discrimination            88.2           71.1          90.8        98.7       100.0         100.0"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Social stereotypes/discrimination"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 71.1,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Social stereotypes/discrimination            88.2           71.1          90.8        98.7       100.0         100.0"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Social stereotypes/discrimination"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 90.8,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Social stereotypes/discrimination            88.2           71.1          90.8        98.7       100.0         100.0"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Social stereotypes/discrimination"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 98.7,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Social stereotypes/discrimination            88.2           71.1          90.8        98.7       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Social stereotypes/discrimination"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Social stereotypes/discrimination            88.2           71.1          90.8        98.7       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Social stereotypes/discrimination"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Social stereotypes/discrimination            88.2           71.1          90.8        98.7       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Social stereotypes/discrimination"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 78,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Toxic language hate speech                   78.0           46.3          75.6       100.0          95.1        95.1"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Toxic language hate speech"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 46.3,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Toxic language hate speech                   78.0           46.3          75.6       100.0          95.1        95.1"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Toxic language hate speech"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 75.6,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Toxic language hate speech                   78.0           46.3          75.6       100.0          95.1        95.1"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Toxic language hate speech"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Toxic language hate speech                   78.0           46.3          75.6       100.0          95.1        95.1"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Toxic language hate speech"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 95.1,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Toxic language hate speech                   78.0           46.3          75.6       100.0          95.1        95.1"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Toxic language hate speech"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 95.1,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Toxic language hate speech                   78.0           46.3          75.6       100.0          95.1        95.1"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Toxic language hate speech"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 82.6,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Defamation                                   82.6           43.5          69.6       100.0       100.0         100.0"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Defamation"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 43.5,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Defamation                                   82.6           43.5          69.6       100.0       100.0         100.0"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Defamation"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 69.6,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Defamation                                   82.6           43.5          69.6       100.0       100.0         100.0"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Defamation"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Defamation                                   82.6           43.5          69.6       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Defamation"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Defamation                                   82.6           43.5          69.6       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Defamation"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Defamation                                   82.6           43.5          69.6       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Defamation"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 97.5,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Private information individual               97.5           91.4          96.3        98.8       100.0          98.8"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Private information individual"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 91.4,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Private information individual               97.5           91.4          96.3        98.8       100.0          98.8"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Private information individual"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 96.3,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Private information individual               97.5           91.4          96.3        98.8       100.0          98.8"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Private information individual"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 98.8,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Private information individual               97.5           91.4          96.3        98.8       100.0          98.8"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Private information individual"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Private information individual               97.5           91.4          96.3        98.8       100.0          98.8"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Private information individual"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 98.8,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Private information individual               97.5           91.4          96.3        98.8       100.0          98.8"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Private information individual"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 64.6,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Cyberattack                                  64.6           54.2          68.8        97.9          97.9        95.8"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Cyberattack"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 54.2,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Cyberattack                                  64.6           54.2          68.8        97.9          97.9        95.8"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Cyberattack"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 68.8,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Cyberattack                                  64.6           54.2          68.8        97.9          97.9        95.8"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Cyberattack"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 97.9,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Cyberattack                                  64.6           54.2          68.8        97.9          97.9        95.8"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Cyberattack"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 97.9,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Cyberattack                                  64.6           54.2          68.8        97.9          97.9        95.8"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Cyberattack"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 95.8,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Cyberattack                                  64.6           54.2          68.8        97.9          97.9        95.8"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Cyberattack"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 51.2,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Misleading information                       51.2           27.9          72.1       100.0          97.7        95.3"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Misleading information"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 27.9,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Misleading information                       51.2           27.9          72.1       100.0          97.7        95.3"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Misleading information"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 72.1,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Misleading information                       51.2           27.9          72.1       100.0          97.7        95.3"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Misleading information"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Misleading information                       51.2           27.9          72.1       100.0          97.7        95.3"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Misleading information"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 97.7,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Misleading information                       51.2           27.9          72.1       100.0          97.7        95.3"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Misleading information"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 95.3,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Misleading information                       51.2           27.9          72.1       100.0          97.7        95.3"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Misleading information"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 93.6,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Sexual content                               93.6           68.1          85.1        97.9       100.0         100.0"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Sexual content"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 68.1,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Sexual content                               93.6           68.1          85.1        97.9       100.0         100.0"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Sexual content"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 85.1,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Sexual content                               93.6           68.1          85.1        97.9       100.0         100.0"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Sexual content"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 97.9,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Sexual content                               93.6           68.1          85.1        97.9       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Sexual content"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Sexual content                               93.6           68.1          85.1        97.9       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Sexual content"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Sexual content                               93.6           68.1          85.1        97.9       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Sexual content"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 93.3,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Mental health                                93.3           80.0          93.3       100.0       100.0         100.0"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Mental health"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 80,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Mental health                                93.3           80.0          93.3       100.0       100.0         100.0"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Mental health"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 93.3,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Mental health                                93.3           80.0          93.3       100.0       100.0         100.0"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Mental health"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Mental health                                93.3           80.0          93.3       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Mental health"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Mental health                                93.3           80.0          93.3       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Mental health"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Mental health                                93.3           80.0          93.3       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Mental health"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 90,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Violence and physical harm                   90.0           45.0          72.5        97.5          97.5        97.5"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Violence and physical harm"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 45,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Violence and physical harm                   90.0           45.0          72.5        97.5          97.5        97.5"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Violence and physical harm"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 72.5,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Violence and physical harm                   90.0           45.0          72.5        97.5          97.5        97.5"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Violence and physical harm"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 97.5,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Violence and physical harm                   90.0           45.0          72.5        97.5          97.5        97.5"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Violence and physical harm"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 97.5,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Violence and physical harm                   90.0           45.0          72.5        97.5          97.5        97.5"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Violence and physical harm"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 97.5,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Violence and physical harm                   90.0           45.0          72.5        97.5          97.5        97.5"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Violence and physical harm"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 86.7,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Fraud assisting illegal activities           86.7           66.7          81.7        98.3          95.0        95.0"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Fraud assisting illegal activities"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 66.7,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Fraud assisting illegal activities           86.7           66.7          81.7        98.3          95.0        95.0"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Fraud assisting illegal activities"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 81.7,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Fraud assisting illegal activities           86.7           66.7          81.7        98.3          95.0        95.0"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Fraud assisting illegal activities"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 98.3,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Fraud assisting illegal activities           86.7           66.7          81.7        98.3          95.0        95.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Fraud assisting illegal activities"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 95,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Fraud assisting illegal activities           86.7           66.7          81.7        98.3          95.0        95.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Fraud assisting illegal activities"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 95,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Fraud assisting illegal activities           86.7           66.7          81.7        98.3          95.0        95.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Fraud assisting illegal activities"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 71.1,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Causing material harm                        71.1           55.6          80.0       100.0       100.0         100.0"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Causing material harm"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 55.6,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Causing material harm                        71.1           55.6          80.0       100.0       100.0         100.0"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Causing material harm"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 80,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Causing material harm                        71.1           55.6          80.0       100.0       100.0         100.0"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Causing material harm"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Causing material harm                        71.1           55.6          80.0       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Causing material harm"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Causing material harm                        71.1           55.6          80.0       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Causing material harm"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Causing material harm                        71.1           55.6          80.0       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Causing material harm"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 99,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Others                                       99.0           90.8          99.0       100.0       100.0         100.0"
+      },
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "settings": {
+        "other": "Others"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 90.8,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Others                                       99.0           90.8          99.0       100.0       100.0         100.0"
+      },
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "settings": {
+        "other": "Others"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 99,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Others                                       99.0           90.8          99.0       100.0       100.0         100.0"
+      },
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "settings": {
+        "other": "Others"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Others                                       99.0           90.8          99.0       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+      "settings": {
+        "other": "SFT stage; Others"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Others                                       99.0           90.8          99.0       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+      "settings": {
+        "other": "DPO stage; Others"
+      }
+    },
+    {
+      "rawEvalName": "WildGuardTest",
+      "metric": "refusal rate",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "table": "Table 40",
+        "quote": " Others                                       99.0           90.8          99.0       100.0       100.0         100.0"
+      },
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "settings": {
+        "other": "Others"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:48:00Z"
+  },
+  "notes": "Technical report (arXiv 2411.15124), not a system card. Safety-only evalResults per pilot: Tables 25–26 (per-benchmark + Overall/Tülu 3 Safety), Table 4 405B Safety avg, Table 2 closed-model Safety only, TruthfulQA from Tables 5–6, HarmBench/WildGuardTest category refusal rates from Tables 39–40. Skipped capability suites (MMLU, BBH, MATH, GSM8K, HumanEval, IFEval, AlpacaEval, DROP, PopQA, etc.). Skipped duplicate Safety/TruthfulQA numbers from Tables 2/5/6/9/23 when already in 25/26/4/5/6. Skipped interpolated (♢) TruthfulQA for Claude. 405B SFT/DPO use rawModelName (no seed checkpoints). WildGuard is the judge classifier for safety scores, not a model-under-test eval. Safety training data (WildJailbreak/WildGuardMix/CoCoNot) noted as method, not topic coverage by itself. No risk framework thresholds or external safety testers. pageCount=83 PDF pages."
+}

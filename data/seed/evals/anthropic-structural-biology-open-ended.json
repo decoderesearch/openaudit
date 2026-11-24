@@ -1,0 +1,65 @@
+{
+  "eval": {
+    "slug": "anthropic-structural-biology-open-ended",
+    "displayName": "Structural Biology open-ended (Anthropic)",
+    "aliases": ["Structural biology (open-ended)", "Structural Biology open-ended"],
+    "description": "Anthropic open-ended adaptation of its structural-biology eval: given structural data and basic tools, the model must answer free-form questions about biomolecular function. Cards report accuracy separately from the multiple-choice variant.",
+    "summary": "Tests whether the model can answer open-ended questions about how biomolecules work, using structural data.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/6a5fa276ac68b9aeb0c8b6af5fa36326e0e166dd/Claude%20Opus%204.6%20System%20Card.pdf",
+        "title": "Claude Opus 4.6 System Card (Structural Biology open-ended)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn", "agentic"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "human", "programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public",
+    "family": "Anthropic life sciences"
+  },
+  "versions": [
+    {
+      "version": "open-ended",
+      "status": "draft",
+      "changes": "Open-ended variant of Anthropic structural biology; graded separately from multiple-choice.",
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The free-form answer matches the graded solution for that item."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of open-ended items graded correct."
+        }
+      ]
+    }
+  ]
+}

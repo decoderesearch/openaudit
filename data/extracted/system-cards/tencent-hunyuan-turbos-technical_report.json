@@ -1,0 +1,239 @@
+{
+  "document": "tencent-hunyuan-turbos-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "tencent/hunyuan-turbos"
+    }
+  ],
+  "pageCount": 26,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "256K (scaled from 4K to 32K then 256K)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "The context is scaled from 4K tokens to 32K tokens, and ultimately to 256K\ntokens, as in Hunyuan-Large."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (large language model)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Aiming to further push these boundaries, we introduce Hunyuan-TurboS, a large hybrid\nTransformer-Mamba Mixture of Experts (MoE) model."
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "adaptive long-short CoT: automatic ”no thinking” mode for simple queries and ”thinking” mode for complex problems",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "When faced with simple questions, TurboS automatically activates a ”no thinking” mode\nto deliver results of sufficient quality at minimal computational cost. Conversely, when encountering\ncomplex problems, TurboS automatically switches to a ”thinking” mode, employing deep reasoning"
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English and Multilingual (SFT data topic)",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "(7) English and Multilingual: Diverse instruction data are created through document augmentation,"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "560B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Architecturally, this 56B activated (560B total) parameter model"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "56B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Architecturally, this 56B activated (560B total) parameter model"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "hybrid Transformer-Mamba2-MoE: 128 layers (57 Mamba, 7 Attention, 64 FFN), AMF/MF blocks, GQA, MoE FFN with 32 experts (1 shared + 2 specialized activated), vocab 128K",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "With 128 layers (57 Mamba, 7 Attention, and 64 FFN), the model scales to 56B activated\nparameters and 560B total parameters."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "16T high-quality pre-training tokens; 3M SFT instructions",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Hunyuan-TurboS is pre-trained on a 16T high-\nquality token dataset, supporting a context length of up to 256K."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The report has no dedicated safety evaluation section and reports no safety, refusal, jailbreak, toxicity, bias, or dangerous-capability benchmark numbers.", "tone": "mixed",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "focus on performance in knowledge, reasoning, mathematics, coding, Alignment Task, and instruction\nfollowing."
+      }
+    },
+    {
+      "text": "Supervised fine-tuning (SFT) safety data uses nearly 1,000 safety categories, a risk classifier, and an internal red team for adversarial testing, with no measured outcomes reported.", "tone": "mixed",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "(13) Safety: Nearly 1,000 safety categories measure diversity and coverage to address vulnerabilities.\n           A classification model continuously identifies risky data. A red team conducts adversarial testing"
+      }
+    },
+    {
+      "text": "General-domain reinforcement learning (RL) builds safety preference pairs with classifiers and refusal heuristics, without reporting safety scores.", "tone": "mixed",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "(9) Safety. For safety alignment, safe response pairs are identified using classifiers and refusal\n           heuristics, then incorporated into preference datasets."
+      }
+    },
+    {
+      "text": "The code sandbox uses file and network isolation described as strict security measures against harmful code execution during training rewards.", "tone": "good",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "Strict security measures such as file and network isolation are in place to prevent the execution of harmful\ncode."
+      }
+    },
+    {
+      "text": "Creative-writing RL uses paired generative reward models (GRMs) to mitigate reward hacking; Knowledge question answering (QA) and long-context tracks use hallucination critics—both are training methods without eval numbers.", "tone": "good",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "are used to mitigate reward hacking. During RL, creative rewards are blended with automated"
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:19:37Z"
+  },
+  "notes": "Technical report (arXiv 2505.15431), not a system card. No safety/alignment/jailbreak/toxicity/dangerous-capability eval tables. Safety appears only as SFT data curation (~1,000 categories, classifier, red team) and RL preference-data pipelines (classifiers + refusal heuristics), plus training mentions of hallucination critics and reward-hacking mitigation—treated as training methods, so topics stay uncovered per pilot override. Skipped all capability numbers: LMSYS Arena (Table 3/Fig 5), Table 4 and related text (GSM8k, MATH, AIME, OlympiadBench, BBH, DROP, Zebra-logic, HumanEval, LiveCodeBench, MMLU, MMLU-pro, GPQA-diamond, Chinese-SimpleQA, C-Eval, CMMLU, LiveBench, Arena-Hard, AlignmentBench/AlignBench, MTBench, AlpacaEval, IF-Eval, SysBench, AVG), Table 2 base-model pretrain scores, Table 5 output tokens, Figure 1 charts. AlignBench/AlignmentBench and Arena-Hard/AlpacaEval/MTBench skipped as preference/chat capability, not safety. Physics/chemistry/biology appear only as science reasoning SFT domains, not bio/chem safety. Header date 2025-07-08 and model tag Hunyuan-TurboS-20250416 are not phrased as a release/launch date. Empty trailing PDF page ignored; pageCount=26 from printed folios."
+}

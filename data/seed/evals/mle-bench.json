@@ -1,0 +1,149 @@
+{
+  "eval": {
+    "slug": "mle-bench",
+    "displayName": "MLE-bench",
+    "aliases": ["MLE-Bench", "MLE-bench"],
+    "description": "OpenAI benchmark of 75 offline Kaggle competitions for end-to-end machine-learning engineering by agents (data prep, training, experiments, submission). Scores use each competition’s Kaggle metric against public leaderboard medal thresholds. The headline metric is any-medal rate; Low (Lite), Medium, High, and All complexity splits are standard.",
+    "summary": "Measures how well AI agents do machine-learning engineering tasks from start to finish.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://github.com/openai/mle-bench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2410.07095",
+        "title": "MLE-bench: Evaluating Machine Learning Agents on Machine Learning Engineering"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/openai/mle-bench",
+        "title": "MLE-bench code and competition scaffolding"
+      },
+      {
+        "kind": "blog",
+        "url": "https://openai.com/index/mle-bench/",
+        "title": "OpenAI MLE-bench announcement"
+      },
+      {
+        "kind": "leaderboard",
+        "url": "https://github.com/openai/mle-bench",
+        "title": "Leaderboard in the repository README"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-10-10",
+      "status": "published",
+      "releasedDate": "2024-10-10",
+      "dataset": {
+        "url": "https://github.com/openai/mle-bench/tree/507f92e1138bb6e40dac5c6ee7a6758e6424bf97",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "low",
+            "sampleCount": 22,
+            "storage": "pointer"
+          },
+          {
+            "name": "medium",
+            "sampleCount": 38,
+            "storage": "pointer"
+          },
+          {
+            "name": "high",
+            "sampleCount": 15,
+            "storage": "pointer"
+          },
+          {
+            "name": "split75",
+            "sampleCount": 75,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "any_medal",
+          "displayName": "Any medal",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 if the agent’s submission meets at least the bronze medal threshold on that competition’s leaderboard metric."
+        },
+        {
+          "key": "above_median",
+          "displayName": "Above median",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 if the submission scores above the median Kaggle entrant."
+        },
+        {
+          "key": "valid_submission",
+          "displayName": "Valid submission",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 if the agent produced a valid competition submission."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "any_medal_rate",
+          "displayName": "Any medal (%)",
+          "score": "any_medal",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of competitions where the agent earns at least a bronze medal. Report mean ± SEM over seeds; break down by Low/Medium/High/All."
+        },
+        {
+          "key": "above_median_rate",
+          "displayName": "Above median (%)",
+          "score": "above_median",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of competitions above the median Kaggle score."
+        },
+        {
+          "key": "valid_submission_rate",
+          "displayName": "Valid submission (%)",
+          "score": "valid_submission",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of competitions with a valid submission."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "sandbox": "docker",
+        "internet": false,
+        "gpu": true
+      }
+    }
+  ]
+}

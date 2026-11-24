@@ -1,0 +1,387 @@
+{
+  "document": "openai-gpt3-paper-technical_report",
+  "alsoDocuments": ["openai-api-blog"],
+  "fileUrl": "https://arxiv.org/pdf/2005.14165",
+  "covers": [
+    {
+      "rawModelName": "GPT-3 Small",
+      "section": "Table 2.1; 125M scaling model"
+    },
+    {
+      "rawModelName": "GPT-3 Medium",
+      "section": "Table 2.1; 350M scaling model"
+    },
+    {
+      "rawModelName": "GPT-3 Large",
+      "section": "Table 2.1; 760M scaling model"
+    },
+    {
+      "rawModelName": "GPT-3 XL",
+      "section": "Table 2.1; 1.3B scaling model"
+    },
+    {
+      "rawModelName": "GPT-3 2.7B",
+      "section": "Table 2.1"
+    },
+    {
+      "rawModelName": "GPT-3 6.7B",
+      "section": "Table 2.1"
+    },
+    {
+      "rawModelName": "GPT-3 13B",
+      "section": "Table 2.1; Winogender in Section 6.2.1"
+    },
+    {
+      "model": "openai/gpt-3",
+      "section": "GPT-3 175B / GPT-3; bias analysis in Section 6.2"
+    }
+  ],
+  "pageCount": 75,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "2048 tokens",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "All models use a context window of nctx = 2048 tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "175 billion for GPT-3 175B; also 125M, 350M, 760M, 1.3B, 2.7B, 6.7B, and 13.0B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Specifically, we train GPT-3, an autoregressive language model with 175 billion parameters, 10x more than any previous non-sparse language model"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "GPT-2 architecture with alternating dense and locally banded sparse attention; 2048-token context",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "We use the same model and architecture as GPT-2 [RWC+ 19], including the modified initialization, pre-normalization,"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "filtered Common Crawl, WebText2, Books1, Books2, and English-language Wikipedia; 300 billion tokens",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "two internet-based books corpora (Books1 and Books2) and English-language Wikipedia."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "several thousand petaflop/s-days for GPT-3 175B (Table D.1: 3.64E+03 petaflop/s-day, 3.14E+23 FLOPs); 300B training tokens",
+      "source": {
+        "page": "39",
+        "pdfPage": 39,
+        "quote": "175B consumed several thousand petaflop/s-days of compute during pre-training, compared to tens of petaflop/s-days"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Internet-trained models have internet-scale biases; 83% of 388 occupations were more likely followed by a male identifier",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "83% of the 388 occupations we tested were more likely to be followed by a male identifier by GPT-3."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The authors monitored crime and misinformation forums after GPT-2 and found discussion of misuse but no successful deployments; they judged the threat from low- and mid-skill actors as not immediate.", "tone": "good",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "we found fewer instances of experimentation and no successful deployments since then."
+      }
+    },
+    {
+      "text": "Professional threat analysts told the authors there was no discernible change in advanced persistent threats (APT) operations using language models since GPT-2, in part because steerability was still early.", "tone": "good",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "Since the release of GPT-2 there has been no discernible difference in operations that may see potential gains by using language models."
+      }
+    },
+    {
+      "text": "Gender co-occurrence completions described women more often with appearance words such as beautiful and gorgeous, while men were described with a wider range of adjectives (Table 6.1).", "tone": "bad",
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "quote": "We found females were more often described using appearance oriented words such as ”beautiful” and ”gorgeous” as compared to men"
+      }
+    },
+    {
+      "text": "When prompted about race, Asian had the highest sentiment in 3 of 7 models and Black the lowest in 5 of 7; gaps narrowed only slightly at larger sizes. Figure 6.1 has no numeric table.", "tone": "bad",
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "quote": "Across the models we analyzed, ‘Asian’ had a consistently high sentiment - it ranked 1st in 3 out of 7 models."
+      }
+    },
+    {
+      "text": "Completions about Islam favored words such as violent, terrorism, and terrorist more than other religions, and those words were in the top 40 most favored for Islam in GPT-3.", "tone": "bad",
+      "source": {
+        "page": "38",
+        "pdfPage": 38,
+        "quote": "words such as violent, terrorism and terrorist co-occurred at a greater rate with Islam than with other religions"
+      }
+    },
+    {
+      "text": "Humans identified ~200-word GPT-3 175B news articles as machine-written only about 52% of the time (chance is 50%); the paper flags this as relevant to misuse, but the study’s stated aim is generation quality, so those rows are not in evalResults.", "tone": "bad",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "This task is also relevant to the potential misuse of language models discussed in Section 6.1."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "occupation gender association",
+      "model": "openai/gpt-3",
+      "metric": "percent of occupations more likely followed by a male identifier",
+      "value": 83,
+      "unit": "percent",
+      "n": 388,
+      "settings": {
+        "other": "Neutral Variant prompt The {occupation} was a"
+      },
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "83% of the 388 occupations we tested were more likely to be followed by a male identifier by GPT-3."
+      }
+    },
+    {
+      "rawEvalName": "occupation gender association",
+      "model": "openai/gpt-3",
+      "metric": "average occupation bias",
+      "value": -1.11,
+      "unit": "score",
+      "settings": {
+        "other": "Neutral Variant"
+      },
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "was −1.11 for the Neutral Variant, −2.14 for the Competent Variant and −1.15"
+      }
+    },
+    {
+      "rawEvalName": "occupation gender association",
+      "model": "openai/gpt-3",
+      "metric": "average occupation bias",
+      "value": -2.14,
+      "unit": "score",
+      "settings": {
+        "other": "Competent Variant"
+      },
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "was −1.11 for the Neutral Variant, −2.14 for the Competent Variant and −1.15"
+      }
+    },
+    {
+      "rawEvalName": "occupation gender association",
+      "model": "openai/gpt-3",
+      "metric": "average occupation bias",
+      "value": -1.15,
+      "unit": "score",
+      "settings": {
+        "other": "Incompetent Variant"
+      },
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "was −1.11 for the Neutral Variant, −2.14 for the Competent Variant and −1.15"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "model": "openai/gpt-3",
+      "metric": "accuracy",
+      "value": 64.17,
+      "unit": "percent",
+      "settings": {
+        "other": "pronoun resolution, occupation vs participant"
+      },
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "GPT-3 175B had the highest accuracy of all the models (64.17%) on this task."
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "model": "openai/gpt-3",
+      "metric": "accuracy",
+      "value": 81.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Occupant sentences, female pronouns"
+      },
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "for females was higher than for males (81.7% vs 76.7%)"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "model": "openai/gpt-3",
+      "metric": "accuracy",
+      "value": 76.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Occupant sentences, male pronouns"
+      },
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "for females was higher than for males (81.7% vs 76.7%)"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "GPT-3 13B",
+      "metric": "accuracy",
+      "value": 60,
+      "unit": "percent",
+      "settings": {
+        "other": "Occupant sentences, same accuracy for male and female pronouns"
+      },
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "GPT-3 13B - which had the same accuracy (60%) for both"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:59:09Z"
+  },
+  "notes": "Technical report (Brown et al. 2020), not a system card. Safety content is Section 6 Broader Impacts: qualitative misuse/threat analysis plus gender/race/religion probes. Winogender and occupation-gender rates are the only numeric safety results; Table 6.1 is word co-occurrence counts, Table 6.2 is word lists, Figure 6.1 (racial sentiment) has no readable numbers. Skipped all capability tables (LAMBADA, TriviaQA, SuperGLUE, arithmetic, translation, reading comprehension, NLI, cloze, news-article human detection Tables 3.11–3.12). News detection is cited for misuse but its stated purpose is generation quality. No formal risk-threshold decision. No named external safety tester. interpretability is covered from a one-line limitation, not an interpretability experiment. Training mix percentages in Table 2.2 are not eval scores. Smaller GPT-3 sizes are the paper’s own scaling models, not seed ids."
+}

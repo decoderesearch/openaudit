@@ -1,0 +1,358 @@
+{
+  "document": "microsoft-phi-1.5-paper-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "microsoft/phi-1_5"
+    },
+    {
+      "rawModelName": "phi-1.5-web"
+    },
+    {
+      "rawModelName": "phi-1.5-web-only"
+    }
+  ],
+  "pageCount": 16,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "2048",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "use rotary embedding with rotary dimension 32, and context length 2048. We also use flash-attention"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (natural language corpora; also evaluated on coding)",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Both phi-1.5 and phi-1.5-web are base models pre-trained on large natural language corpora. In"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "1.3 billion",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "build phi-1.5, a 1.3 billion parameter model trained on a dataset of 30 billion tokens, which achieves"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Transformer with 24 layers, 32 heads (head dim 64), rotary embedding (rotary dim 32), same as phi-1",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "It is a Transformer [VSP+ 17] with 24 layers, 32 heads, and each head has dimension 64. We"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "phi-1 training data (7B tokens) plus ~20B synthetic textbook-like NLP tokens; dataset ~30B tokens; trained 150B tokens (80% new synthetic, 20% phi-1 data). Variants also use filtered Falcon RefinedWeb and Stack/StackOverflow code.",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Our training data for phi-1.5 is a combination of phi-1’s training data (7B tokens) and newly created"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "phi-1.5 1.5K GPU hours; phi-1.5-web 3K GPU hours (single A100-80G, context 2048, fp16)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "phi-1.5 (1.3B)       1.5K         8            <3ms          3.5G             30B         150B"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Section on toxicity and biases; synthetic textbook data said to attenuate toxic/biased generation vs web-only models",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "4    Addressing Toxicity and Biases"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "On 86 toxicity probe prompts, phi-1.5 passed 47 and failed 34; [ToxiGen](/evals/toxigen) safety scores also reported (Figure 2)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "prompts, phi-1.5 had a ‘pass’ label on 47 prompts, a ‘fail’ label on 34 prompts and only 4 prompts were"
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Authors claim textbook-like synthetic training attenuates toxic content generation versus models trained only on internet data.", "tone": "good",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "In phi-1.5, the adoption of “textbook-like” synthetic data for training appears to have an attenuating"
+      }
+    },
+    {
+      "text": "Despite lower toxicity propensity than some base models, phi-1.5 is not immune; released as a base model to support safeguard research.", "tone": "mixed",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "although phi-1.5 has a lower propensity for generating toxic content"
+      }
+    },
+    {
+      "text": "On the same 86 toxicity probes, Llama2-7B and Falcon-7B each passed on fewer than 20 prompts.", "tone": "bad",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "understand’ tag on 13 and 17 prompts, respectively, thus passing on <20 prompts each."
+      }
+    },
+    {
+      "text": "phi-1.5 is open-sourced without instruction fine-tuning or other alignment stages to enable research on hallucinations, toxicity, and bias.", "tone": "mixed",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "We open-source our raw phi-1.5 model (without instruction fine-tuning or any other stage of align-"
+      }
+    },
+    {
+      "text": "[ToxiGen](/evals/toxigen) demographic safety scores are shown only as a chart (Figure 2) with no numeric table in the text layer.", "tone": "mixed",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Figure 2: Safety scores computed on 13 demographics   from ToxiGen [HGP+ 22]. In accordance with [HPA23], a"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "toxicity probe prompts",
+      "model": "microsoft/phi-1_5",
+      "metric": "pass",
+      "value": 47,
+      "unit": "count",
+      "n": 86,
+      "settings": {
+        "other": "86 prompts; manual labels fail/pass/did not understand"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "prompts, phi-1.5 had a ‘pass’ label on 47 prompts, a ‘fail’ label on 34 prompts and only 4 prompts were"
+      }
+    },
+    {
+      "rawEvalName": "toxicity probe prompts",
+      "model": "microsoft/phi-1_5",
+      "metric": "fail",
+      "value": 34,
+      "unit": "count",
+      "n": 86,
+      "settings": {
+        "other": "86 prompts; manual labels fail/pass/did not understand"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "prompts, phi-1.5 had a ‘pass’ label on 47 prompts, a ‘fail’ label on 34 prompts and only 4 prompts were"
+      }
+    },
+    {
+      "rawEvalName": "toxicity probe prompts",
+      "model": "microsoft/phi-1_5",
+      "metric": "did not understand",
+      "value": 4,
+      "unit": "count",
+      "n": 86,
+      "settings": {
+        "other": "86 prompts; manual labels fail/pass/did not understand"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "prompts, phi-1.5 had a ‘pass’ label on 47 prompts, a ‘fail’ label on 34 prompts and only 4 prompts were"
+      }
+    },
+    {
+      "rawEvalName": "toxicity probe prompts",
+      "rawModelName": "Llama2-7B",
+      "metric": "fail",
+      "value": 54,
+      "unit": "count",
+      "n": 86,
+      "settings": {
+        "other": "86 prompts; manual labels fail/pass/did not understand"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "than Llama2-7B and Falcon-7B, which failed on 54 and 50 prompts respectively, and had a ‘did not"
+      }
+    },
+    {
+      "rawEvalName": "toxicity probe prompts",
+      "rawModelName": "Llama2-7B",
+      "metric": "did not understand",
+      "value": 13,
+      "unit": "count",
+      "n": 86,
+      "settings": {
+        "other": "86 prompts; manual labels fail/pass/did not understand"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "understand’ tag on 13 and 17 prompts, respectively, thus passing on <20 prompts each."
+      }
+    },
+    {
+      "rawEvalName": "toxicity probe prompts",
+      "rawModelName": "Falcon-7B",
+      "metric": "fail",
+      "value": 50,
+      "unit": "count",
+      "n": 86,
+      "settings": {
+        "other": "86 prompts; manual labels fail/pass/did not understand"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "than Llama2-7B and Falcon-7B, which failed on 54 and 50 prompts respectively, and had a ‘did not"
+      }
+    },
+    {
+      "rawEvalName": "toxicity probe prompts",
+      "rawModelName": "Falcon-7B",
+      "metric": "did not understand",
+      "value": 17,
+      "unit": "count",
+      "n": 86,
+      "settings": {
+        "other": "86 prompts; manual labels fail/pass/did not understand"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "understand’ tag on 13 and 17 prompts, respectively, thus passing on <20 prompts each."
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:37:24Z"
+  },
+  "notes": "Technical report (arXiv:2309.05463), not a system card. Safety-only pilot: included the internal 86-prompt toxicity probe (manual pass/fail/DNU counts). Skipped ToxiGen Figure 2 bar chart—no readable per-bar numbers in the text layer (caption only). Skipped all capability tables and Figure 1: WinoGrande, ARC-Easy/Challenge, BoolQ, SIQA (Table 2); PIQA, Hellaswag, MMLU, OpenbookQA, SQuAD (Table 3); GSM8K, HumanEval, MBPP (Table 4). No risk-framework levels or external safety testers (Microsoft authors only). Modalities inferred as text from language-model framing; languages not explicitly listed for phi-1.5. Covered variants phi-1.5-web and phi-1.5-web-only as rawModelName (no seed ids). Seed-linked microsoft/phi-1_5 included."
+}

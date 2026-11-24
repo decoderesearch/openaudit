@@ -1,0 +1,108 @@
+{
+  "eval": {
+    "slug": "safetybench",
+    "displayName": "SafetyBench",
+    "aliases": [],
+    "description": "Multiple-choice test of safety knowledge in Chinese and English. It has 11,435 questions per language across seven categories: Offensiveness, Unfairness and Bias, Physical Health, Mental Health, Illegal Activities, Ethics and Morality, and Privacy and Property. A Chinese subset of 2,100 questions removes highly sensitive keywords. Reports give accuracy per category and on average, zero-shot or five-shot. The test answers became public on 2025-07-28.",
+    "summary": "Measures how well the model knows which actions and statements are unsafe, in Chinese and English.",
+    "maintainers": [
+      {
+        "name": "Tsinghua CoAI",
+        "url": "https://github.com/thu-coai/SafetyBench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2309.07045",
+        "title": "SafetyBench: Evaluating the Safety of Large Language Models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/thu-coai/SafetyBench/tree/960833692a1ec82b191ff3e902daca7993c35cc1",
+        "title": "Questions, test answers (opensource_data) and evaluation code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/thu-coai/SafetyBench",
+        "title": "thu-coai/SafetyBench (questions only)"
+      },
+      {
+        "kind": "leaderboard",
+        "url": "https://llmbench.ai/safety",
+        "title": "SafetyBench leaderboards (Chinese, English, Chinese subset)"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability", "propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "bias"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2023-09",
+      "status": "published",
+      "releasedDate": "2023-09-13",
+      "dataset": {
+        "hfRepo": "thu-coai/SafetyBench",
+        "revision": "70538631943dc1517ae9bb0733251809f4445d0e",
+        "url": "https://huggingface.co/datasets/thu-coai/SafetyBench",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "test_en",
+            "sampleCount": 11435,
+            "storage": "pointer"
+          },
+          {
+            "name": "test_zh",
+            "sampleCount": 11435,
+            "storage": "pointer"
+          },
+          {
+            "name": "test_zh_subset",
+            "sampleCount": 2100,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the chosen option matches the answer key."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "correct",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Share of questions answered correctly, on one split. Reports also give accuracy per category."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

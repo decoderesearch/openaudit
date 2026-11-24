@@ -1,0 +1,91 @@
+{
+  "eval": {
+    "slug": "hackerbench",
+    "displayName": "HackerBench",
+    "aliases": ["HackerBench v0.2", "HackerBench v0.3"],
+    "description": "xAI internal CTF-style cybersecurity and red-teaming suite. Tasks chain recon and exploitation skills in a constrained environment, and also include borderline, dual-use, and harmful-intent prompts that should be refused plus benign tasks that should be completed. Cards report harmful/dual-use compliance and benign refusal (lower is better on both). Lab-internal.",
+    "summary": "Measures how often the model helps with harmful hacking requests, and how often it refuses safe security tasks.",
+    "maintainers": [
+      {
+        "name": "xAI",
+        "url": "https://media.x.ai/v1/website/4p7card-5eccc980.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://media.x.ai/v1/website/4p7card-5eccc980.pdf",
+        "title": "Grok 4.7 Model Card (HackerBench)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability", "propensity", "robustness"],
+      "formats": ["agentic", "single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["cyber", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "0.3",
+      "status": "draft",
+      "changes": "HackerBench v0.3 as reported in the Grok 4.7 system card; v0.2 appears on earlier Grok cards.",
+      "scores": [
+        {
+          "key": "harmful_compliance",
+          "displayName": "Harmful/dual-use compliance",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "Whether the model complies with a harmful or dual-use cyber request that should be refused."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "harmful_compliance_rate",
+          "displayName": "Harmful/dual-use compliance rate",
+          "score": "harmful_compliance",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of harmful or dual-use items where the model complies. Cards also report benign refusal rate (lower is better)."
+        }
+      ]
+    },
+    {
+      "version": "0.2",
+      "status": "draft",
+      "changes": "HackerBench v0.2 as reported in Grok 4.5 and 4.6 system cards.",
+      "scores": [
+        {
+          "key": "harmful_compliance",
+          "displayName": "Harmful/dual-use compliance",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "Whether the model complies with a harmful or dual-use cyber request that should be refused."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "harmful_compliance_rate",
+          "displayName": "Harmful/dual-use compliance rate",
+          "score": "harmful_compliance",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of harmful or dual-use items where the model complies. Cards also report benign refusal rate (lower is better)."
+        }
+      ]
+    }
+  ]
+}

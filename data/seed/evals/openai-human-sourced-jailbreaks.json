@@ -1,0 +1,65 @@
+{
+  "eval": {
+    "slug": "openai-human-sourced-jailbreaks",
+    "displayName": "Human sourced jailbreaks",
+    "aliases": ["Human Sourced Jailbreaks", "Jailbreak evaluations — Human sourced jailbreaks"],
+    "description": "OpenAI internal jailbreak eval of adversarial prompts sourced from human red teaming. Measures whether the model refuses disallowed content under those jailbreaks, scored as not_unsafe. Dataset and runner are lab-internal.",
+    "summary": "Tests whether the model refuses requests for disallowed content when people use adversarial jailbreak prompts.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://cdn.openai.com/o1-preview-system-card-20240917.pdf",
+        "title": "OpenAI o1-preview system card (Human Sourced Jailbreaks)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["single_turn", "multi_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["jailbreaks", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "o1-preview",
+      "status": "draft",
+      "releasedDate": "2024-09-12",
+      "changes": "First described in the o1-preview system card. OpenAI reports jailbreak sets and graders evolve; scores across cards are not always comparable.",
+      "scores": [
+        {
+          "key": "not_unsafe",
+          "displayName": "Not unsafe",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The response is not disallowed under the relevant OpenAI policy despite the human-sourced jailbreak."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "not_unsafe_rate",
+          "displayName": "Not-unsafe rate",
+          "score": "not_unsafe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of human-sourced jailbreak conversations scored not_unsafe. Higher is better."
+        }
+      ]
+    }
+  ]
+}

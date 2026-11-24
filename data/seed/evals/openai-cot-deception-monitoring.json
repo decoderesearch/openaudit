@@ -1,0 +1,89 @@
+{
+  "eval": {
+    "slug": "openai-cot-deception-monitoring",
+    "displayName": "CoT Deception Monitoring",
+    "aliases": [
+      "CoT Deception Monitoring",
+      "CoT deception monitor validation",
+      "CoT Deception Monitor validation",
+      "CoT Deception Monitor Validation",
+      "CoT deception monitor (production)"
+    ],
+    "description": "OpenAI internal chain-of-thought monitor that flags when a reasoning model knowingly gives incorrect information or omits important facts (deception in CoT). Cards report category rates on production-like traffic (for example intentional hallucinations) and monitor validation metrics such as precision and recall on labeled deceptive vs non-deceptive chats. Dataset and runner are lab-internal.",
+    "summary": "Measures how often the model's reasoning shows it knowingly gives false information or hides important facts.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://cdn.openai.com/o1-system-card-20241205.pdf",
+        "title": "OpenAI o1 System Card (CoT Deception Monitoring)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["multi_turn", "single_turn"],
+      "cases": ["live_human", "fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["honesty", "cot_monitorability", "hallucination"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-12-05",
+      "status": "draft",
+      "releasedDate": "2024-12-05",
+      "changes": "OpenAI introduces CoT Deception Monitoring in the o1 system card. Later cards add production monitoring rates and validation precision/recall. Monitors and labels may evolve.",
+      "scores": [
+        {
+          "key": "deceptive",
+          "displayName": "Deceptive",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "The CoT deception monitor flags the chain of thought / response as deceptive (knowingly incorrect or omitting important information)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "deception_rate",
+          "displayName": "Deception rate",
+          "score": "deceptive",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of conversations or CoTs classified as deceptive (also broken down by subcategory). Lower is better."
+        },
+        {
+          "key": "monitor_precision",
+          "displayName": "Monitor precision",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Precision of the CoT deception monitor on an internal labeled validation set."
+        },
+        {
+          "key": "monitor_recall",
+          "displayName": "Monitor recall",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Recall of the CoT deception monitor on an internal labeled validation set."
+        }
+      ]
+    }
+  ]
+}

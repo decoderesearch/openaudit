@@ -1,0 +1,105 @@
+{
+  "eval": {
+    "slug": "sae-bench-core",
+    "displayName": "SAEBench Core",
+    "aliases": ["SAEBench core metrics"],
+    "description": "Replaces the activations of the model with the SAE output and measures the loss that the model keeps (loss recovered), the KL divergence and the explained variance. It also counts the active latents for each token (L0) and the latents that never activate.",
+    "summary": "Measures how much of the model's behavior an SAE keeps when the SAE output replaces the activations.",
+    "suite": "saebench",
+    "maintainers": [
+      {
+        "name": "Karvonen, Rager, et al.",
+        "url": "https://github.com/adamkarvonen/SAEBench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2503.09532",
+        "title": "SAEBench: A Comprehensive Benchmark for Sparse Autoencoders"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/adamkarvonen/SAEBench",
+        "title": "SAEBench code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/adamkarvonen/sae_bench_results_0125",
+        "title": "SAEBench result files (January 2025)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www.neuronpedia.org/sae-bench",
+        "title": "Interactive SAEBench results on Neuronpedia"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["method"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-01",
+      "status": "published",
+      "releasedDate": "2025-01",
+      "scores": [],
+      "metrics": [
+        {
+          "key": "ce_loss_score",
+          "displayName": "Loss recovered",
+          "aggregation": "custom",
+          "headline": true,
+          "description": "The fraction of the cross-entropy loss gap (zero ablation to clean) that the SAE output keeps.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "l0",
+          "displayName": "L0",
+          "aggregation": "custom",
+          "unit": "latents",
+          "description": "The mean number of active latents for each token.",
+          "direction": "neither",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "kl_div_score",
+          "displayName": "KL divergence score",
+          "aggregation": "custom",
+          "description": "The fraction of the KL divergence gap (zero ablation to clean) that the SAE output keeps.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "explained_variance",
+          "displayName": "Explained variance",
+          "aggregation": "custom",
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "frac_alive",
+          "displayName": "Alive latents",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The fraction of latents that activate.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        }
+      ]
+    }
+  ]
+}

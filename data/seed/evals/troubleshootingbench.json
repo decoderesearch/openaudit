@@ -1,0 +1,72 @@
+{
+  "eval": {
+    "slug": "troubleshootingbench",
+    "displayName": "TroubleshootingBench",
+    "aliases": [
+      "Biological capability (High) — TroubleshootingBench",
+      "TroubleshootingBench (refusals as successes)",
+      "TroubleshootingBench (incl. refusals)",
+      "TroubleshootingBench (refusal-adjusted)",
+      "TroubleshootingBench — 80th percentile expert",
+      "TroubleshootingBench — 80th percentile expert score threshold",
+      "TroubleshootingBench 80th percentile expert"
+    ],
+    "description": "OpenAI short-answer eval of tacit wet-lab troubleshooting on non-public expert-written protocols. Experts supply protocols and three realistic failure questions each (52 protocols after review). Graded for accuracy or pass@1 against expert fixes; cards use an 80th-percentile PhD expert score as an indicative threshold, and some treat refusals as successes. Dataset and runner are lab-internal.",
+    "summary": "Tests whether the model can find and fix problems in expert wet-lab protocols when experiments fail.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://deploymentsafety.openai.com/gpt-5/troubleshootingbench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-5/troubleshootingbench",
+        "title": "GPT-5 system card (TroubleshootingBench)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "human"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "52-protocols",
+      "status": "draft",
+      "changes": "52 expert protocols with three troubleshooting questions each; 12-expert baselining on OpenAI cards.",
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The short answer correctly identifies and fixes the protocol error (refusal-as-success variants count a refusal as correct on some cards)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy / pass@1",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of questions graded correct. Cards also cite an 80th-percentile expert threshold."
+        }
+      ]
+    }
+  ]
+}

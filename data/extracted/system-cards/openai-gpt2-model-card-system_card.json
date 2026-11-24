@@ -1,0 +1,139 @@
+{
+  "document": "openai-gpt2-model-card-system_card",
+  "alsoDocuments": [],
+  "covers": [
+    {"model": "openai-community/gpt2"},
+    {"model": "openai-community/gpt2-medium"},
+    {"model": "openai-community/gpt2-large"},
+    {"model": "openai-community/gpt2-xl"}
+  ],
+  "pageCount": 1,
+  "disclosures": {
+    "releaseDate": {"status": "not_stated"},
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "end of 2017",
+      "source": {
+        "page": "Model date",
+        "quote": "February 2019, trained on data that cuts off at the end of 2017."
+      }
+    },
+    "contextWindow": {"status": "not_stated"},
+    "maxOutput": {"status": "not_stated"},
+    "modalities": {"status": "not_stated"},
+    "reasoningModes": {"status": "not_stated"},
+    "languages": {"status": "not_stated"},
+    "license": {"status": "not_stated"},
+    "totalParams": {
+      "status": "stated",
+      "value": "1.5 billion parameters; also 124 million, 355 million, and 774 million",
+      "source": {
+        "page": "Model version",
+        "quote": "1.5 billion parameters: the fourth and largest GPT-2 version. We have also released 124 million, 355 million, and 774 million parameter models."
+      }
+    },
+    "activeParams": {"status": "not_stated"},
+    "architecture": {
+      "status": "stated",
+      "value": "Language model",
+      "source": {
+        "page": "Model type",
+        "quote": "Language model"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "WebText (text from 45 million outbound Reddit links)",
+      "source": {
+        "page": "Datasets",
+        "quote": "This model was trained on (and evaluated against) WebText, a dataset consisting of the text contents of 45 million links posted by users of the ‘Reddit’ social network."
+      }
+    },
+    "trainingCompute": {"status": "not_stated"}
+  },
+  "riskDecisions": [],
+  "topics": [
+    {"topic": "harmful_requests", "covered": false},
+    {"topic": "child_safety", "covered": false},
+    {"topic": "self_harm", "covered": false},
+    {"topic": "jailbreaks", "covered": false},
+    {"topic": "prompt_injection", "covered": false},
+    {"topic": "agentic_misuse", "covered": false},
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Does not distinguish fact from fiction",
+      "source": {
+        "page": "Out-of-scope use cases",
+        "quote": "Because large-scale language models like GPT-2 do not distinguish fact from fiction, we don’t support use-cases that require the generated text to be true."
+      }
+    },
+    {"topic": "honesty", "covered": false},
+    {"topic": "sycophancy", "covered": false},
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "No statistically significant difference in gender, race, and religious bias probes between 774M and 1.5B",
+      "source": {
+        "page": "Out-of-scope use cases",
+        "quote": "We found no statistically significant difference in gender, race, and religious bias probes between 774M and 1.5B, implying all versions of GPT-2 should be approached with similar levels of caution around use cases that are sensitive to biases around human attributes."
+      }
+    },
+    { "topic": "toxicity", "covered": false },
+    {"topic": "reward_hacking", "covered": false},
+    {"topic": "eval_awareness", "covered": false},
+    {"topic": "situational_awareness", "covered": false},
+    {"topic": "cot_monitorability", "covered": false},
+    {"topic": "sabotage", "covered": false},
+    {"topic": "manipulation", "covered": false},
+    {"topic": "power_seeking", "covered": false},
+    {"topic": "welfare", "covered": false},
+    {"topic": "cyber", "covered": false},
+    {"topic": "bio_chem", "covered": false},
+    {"topic": "auditing", "covered": false}
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "OpenAI's in-house fine-tuned detector of GPT-2 outputs reached approximately 95% accuracy, but the card says no single detection method is enough.", "tone": "mixed",
+      "source": {
+        "page": "Caveats and Recommendations",
+        "quote": "Our fine-tuned detector model reached accuracy levels of approximately 95%."
+      }
+    },
+    {
+      "text": "Training data used a blocklist so WebText did not sample sexually explicit or otherwise offensive subreddits.", "tone": "good",
+      "source": {
+        "page": "Datasets",
+        "quote": "Before generating the dataset we used a blocklist to ensure we didn’t sample from a variety of subreddits which contain sexually explicit or otherwise offensive content."
+      }
+    },
+    {
+      "text": "The card says it remains unclear how well model-output detection will work over the long term.", "tone": "mixed",
+      "source": {
+        "page": "Caveats and Recommendations",
+        "quote": "it remains unclear what the long-term dynamics are of detecting outputs from these models."
+      }
+    },
+    {
+      "text": "The authors say disciplined testing that fully maps GPT-2 capabilities and data influence is still hard.", "tone": "mixed",
+      "source": {
+        "page": "Caveats and Recommendations",
+        "quote": "it’s currently difficult to know what disciplined testing procedures can be applied to it to fully understand its capabilities"
+      }
+    },
+    {
+      "text": "The card advises against human-facing deployment until deployers study biases for the intended use case.", "tone": "mixed",
+      "source": {
+        "page": "Out-of-scope use cases",
+        "quote": "we do not recommend that they be deployed into systems that interact with humans unless the deployers first carry out a study of biases relevant to the intended use-case."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:47:14Z"
+  },
+  "notes": "Short GitHub markdown model card (not a PDF); page fields are section headings; pageCount set to 1. 'Model date' is February 2019 but the text never calls it a release or launch date, so releaseDate is not_stated (Last updated November 2019 is also not a release date). No evaluation tables; the only quantitative safety-adjacent figure is 'approximately 95%' detector accuracy, which was left out of evalResults as an approximate value and put in findings. Bias probes are described qualitatively with no numeric scores. No formal risk framework labels or external testers. Linked blog/paper were not read; only this model_card.md."
+}

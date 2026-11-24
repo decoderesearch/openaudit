@@ -1,0 +1,228 @@
+{
+  "eval": {
+    "slug": "abstentionbench",
+    "displayName": "AbstentionBench",
+    "aliases": ["Abstention Bench"],
+    "description": "Holistic abstention benchmark spanning about 20 datasets and 6 scenarios (underspecified context, false premise, stale knowledge, unknown answers, underspecified intent, and related cases). An LLM judge labels whether the model abstained; headline metric is abstention recall (share of should-abstain items where the model abstains). Also reports precision, F1, and answer accuracy when abstention is not required.",
+    "summary": "Measures whether the model declines to answer questions that lack enough information, rest on false ideas, or have no known answer.",
+    "maintainers": [
+      {
+        "name": "Meta FAIR",
+        "url": "https://github.com/facebookresearch/AbstentionBench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2506.09038",
+        "title": "AbstentionBench: Reasoning LLMs Fail on Unanswerable Questions"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/facebookresearch/AbstentionBench",
+        "title": "Runner, judges, and dataset adapters"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/facebook/AbstentionBench",
+        "title": "facebook/AbstentionBench"
+      },
+      {
+        "kind": "error_report",
+        "url": "https://github.com/facebookresearch/AbstentionBench/issues/17",
+        "title": "AbstentionBench labels"
+      },
+      {
+        "kind": "error_report",
+        "url": "https://github.com/yinzhangyue/SelfAware/issues/4",
+        "title": "SelfAware labels"
+      },
+      {
+        "kind": "error_report",
+        "url": "https://github.com/facebookresearch/worldsense/issues/1",
+        "title": "WorldSense questions"
+      },
+      {
+        "kind": "error_report",
+        "url": "https://github.com/amayuelas/knowledge-of-knowledge/issues/2",
+        "title": "KUQ labels"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["honesty", "hallucination"]
+    },
+    "visibility": "unlisted"
+  },
+  "versions": [
+    {
+      "version": "2025-06",
+      "status": "published",
+      "releasedDate": "2025-06-10",
+      "dataset": {
+        "url": "https://huggingface.co/datasets/facebook/AbstentionBench",
+        "license": "cc-by-nc-4.0",
+        "sources": [
+          {
+            "hfRepo": "allenai/coconot",
+            "revision": "2cbe16aabf9069f17e48c8daad8aeabc29469eb7"
+          },
+          {
+            "hfRepo": "amayuelas/KUQ",
+            "revision": "f99b53aa226dbb0d1b086db3ec352b0da0aa8f41"
+          },
+          {
+            "hfRepo": "cais/mmlu",
+            "revision": "c30699e8356da336a370243923dbaf21066bb9fe"
+          },
+          {
+            "hfRepo": "Idavidrein/gpqa",
+            "revision": "5233cd1db58884ed0bf678c7c6be731722a23f84"
+          },
+          {
+            "hfRepo": "ninoscherrer/moralchoice",
+            "revision": "89c0fe7b158b5ade5d10e0644c1aa20ab4c78cbe"
+          },
+          {
+            "hfRepo": "openai/gsm8k",
+            "revision": "cc7b047b6e5bb11b4f1af84efc572db110a51b3c"
+          },
+          {
+            "hfRepo": "rajpurkar/squad_v2",
+            "revision": "3ffb306f725f7d2ce8394bc1873b24868140c412"
+          },
+          {
+            "hfRepo": "tasksource/bigbench",
+            "revision": "210c156767d2f4f05d2f4fd0bb275017a67040fd"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/nyu-mll/BBQ/bea11bd97d79217245b5871acd247b9d6eb24598/data/"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/suzgunmirac/BIG-Bench-Hard/9ee07bd481feebf959a6b59d61ea57bdcf30964d/bbh/disambiguation_qa.json"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/thunlp/FalseQA/9a9729974d8c5cfbfc6929e5b830111c0ed7c0c7/dataset/test.csv"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/stellalisy/mediQ/faa2ce62fef0423e35af4c31d7537aad973173eb/data/"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/yinzhangyue/SelfAware/f0bad1ff77bd42fc4eb2360281ed646c7bb7bd0c/data/SelfAware.json"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/mikejqzhang/SituatedQA/1ef854512fe0f692ca55f92ff2feedf3d7612eda/data/qa_data/"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/Yuki-Asuuna/UMWP/1b3ae0fae01a6c6f178361c716bbb4f7d7d54c3c/data/StandardDataset.jsonl"
+          },
+          {
+            "url": "https://github.com/facebookresearch/worldsense/raw/bd81d945077f169cf95ff39207f788f86e4645e9/data/worldsense/"
+          }
+        ],
+        "splits": [
+          {
+            "name": "benchmark",
+            "sampleCount": 10000,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "sampleTerms": {
+        "display": "open",
+        "source": "https://huggingface.co/datasets/facebook/AbstentionBench",
+        "note": "Most subsets are open. GPQA asks that its examples stay out of public text.",
+        "subsets": [
+          {
+            "key": "dataset_name",
+            "value": "GPQA",
+            "display": "sign_in",
+            "quote": "You agree to NOT reveal examples from this dataset in plain text or images online, to reduce the risk of leakage into foundation model training corpora.",
+            "source": "https://huggingface.co/datasets/Idavidrein/gpqa"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "abstained_when_should",
+          "displayName": "Abstained when should",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the judge says the model abstained on a sample labeled should-abstain."
+        },
+        {
+          "key": "answer_correct",
+          "displayName": "Answer correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the correctness judge accepts the answer on a non-abstention sample."
+        },
+        {
+          "key": "abstained",
+          "displayName": "Abstained",
+          "type": "binary",
+          "direction": "neither",
+          "attemptName": "abstention_bench_scorer",
+          "pass": {
+            "byTarget": {
+              "True": { "yes": true, "no": false },
+              "False": { "yes": false, "no": true }
+            }
+          },
+          "description": "Yes when the judge says the model abstained. A sample passes when this matches its should-abstain label."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "abstention_recall",
+          "displayName": "Abstention recall",
+          "score": "abstained_when_should",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Share of should-abstain samples where the model abstains."
+        },
+        {
+          "key": "answer_accuracy",
+          "displayName": "Answer accuracy",
+          "score": "answer_correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Accuracy on samples where abstention is not required."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "inspect_evals/abstention_bench",
+        "package": "inspect-evals==0.22.0",
+        "defaultLimit": 2000,
+        "roles": ["target", "judge"],
+        "models": [
+          {
+            "id": "judge",
+            "role": "judge",
+            "taskArg": "grader_model",
+            "default": "meta-llama/llama-3.1-8b-instruct",
+            "tier": "fast",
+            "scoring": true
+          }
+        ],
+        "internet": true
+      }
+    }
+  ]
+}

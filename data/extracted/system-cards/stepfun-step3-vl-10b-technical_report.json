@@ -1,0 +1,376 @@
+{
+  "document": "stepfun-step3-vl-10b-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "stepfun-ai/Step3-VL-10B"
+    }
+  ],
+  "pageCount": 50,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "128k (SFT sequence length)",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "an extended sequence length of 128k to support long-context understanding."
+      }
+    },
+    "maxOutput": {
+      "status": "stated",
+      "value": "65,536 tokens (SeRe eval); 131,072 tokens (PaCoRe eval)",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "with a maximum length\nof 65,536 tokens. For complex perception"
+      }
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "vision-language / multimodal (image and text)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "We assess vision-language capabilities across nine distinct"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "Sequential Reasoning (SeRe) and Parallel Coordinated Reasoning (PaCoRe)",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "By default, the model uses Sequential Reasoning (SeRe), generating"
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "10B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "despite its compact 10B footprint, S T E P 3 - V L - 1 0 B rivals or surpasses models"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "1.8B Perception Encoder + Qwen3-8B decoder with 16× spatial-downsampling projector; multi-crop (728×728 global, 504×504 local)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "S T E P 3-VL-10B integrates the 1.8B language-optimized Perception Encoder (Bolya et al., 2025),"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "1.2T multimodal tokens pre-training; SFT ~190B (stage 1) + 36B (stage 2) tokens",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "on a total of 1.2T tokens over 370K iterations with a global batch size of 8,192 and a sequence"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[HallusionBench](/evals/hallusionbench) 64.9 (SeRe) / 64.5 (PaCoRe); assessed for robustness and fine-grained recognition (higher is better)",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "ness and fine-grained recognition are assessed via HallusionBench (Guan et al., 2024),"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "reinforcement learning from human feedback (RLHF) uses behavioral regularization (language consistency, citation verification, epistemic calibration) as guardrails against reward hacking and to target hallucinations, with no measured safety scores.", "tone": "good",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "To mitigate “reward hacking” and enforce safety and reliabil-"
+      }
+    },
+    {
+      "text": "The report claims superior human-preference alignment via internal Elo evaluation, but gives no numeric Elo or safety scores.", "tone": "mixed",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "Our internal\nElo-based evaluation confirms that, S T E P 3 - V L - 1 0 B achieves a preference score that matches"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "zai-org/GLM-4.6V-Flash",
+      "metric": "official metric",
+      "value": 59.92,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 1; GLM-4.6V Flash 9B"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 1",
+        "quote": "  / General    HallusionBench                  64.91              59.92       62.23    58.79     63.53"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Qwen/Qwen3-VL-8B-Thinking",
+      "metric": "official metric",
+      "value": 62.23,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 1; 8B"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 1",
+        "quote": "  / General    HallusionBench                  64.91              59.92       62.23    58.79     63.53"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "OpenGVLab/InternVL3_5-8B",
+      "metric": "official metric",
+      "value": 58.79,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 1; InternVL 3.5 8B"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 1",
+        "quote": "  / General    HallusionBench                  64.91              59.92       62.23    58.79     63.53"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "XiaomiMiMo/MiMo-VL-7B-RL-2508",
+      "metric": "official metric",
+      "value": 63.53,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 1; MiMo-VL RL-2508 7B"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 1",
+        "quote": "  / General    HallusionBench                  64.91              59.92       62.23    58.79     63.53"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "stepfun-ai/Step3-VL-10B",
+      "metric": "official metric",
+      "value": 64.91,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 3; SeRe mode; Recognition / General VQA"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 3",
+        "quote": " / General HallusionBench             64.91     64.54         60.63      65.58     65.63      64.13"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "stepfun-ai/Step3-VL-10B",
+      "metric": "official metric",
+      "value": 64.54,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 3; PaCoRe mode"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 3",
+        "quote": " / General HallusionBench             64.91     64.54         60.63      65.58     65.63      64.13"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "zai-org/GLM-4.6V",
+      "metric": "official metric",
+      "value": 60.63,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 3; GLM-4.6V 106B-A12B"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 3",
+        "quote": " / General HallusionBench             64.91     64.54         60.63      65.58     65.63      64.13"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Qwen/Qwen3-VL-235B-A22B-Thinking",
+      "metric": "official metric",
+      "value": 65.58,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 3; 235B-A22B"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 3",
+        "quote": " / General HallusionBench             64.91     64.54         60.63      65.58     65.63      64.13"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "google/gemini-2.5-pro",
+      "metric": "official metric",
+      "value": 65.63,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 3; Gemini-2.5 Pro"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 3",
+        "quote": " / General HallusionBench             64.91     64.54         60.63      65.58     65.63      64.13"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "Seed-1.5-VL-Thinking",
+      "metric": "official metric",
+      "value": 64.13,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 3"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 3",
+        "quote": " / General HallusionBench             64.91     64.54         60.63      65.58     65.63      64.13"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:05:02Z"
+  },
+  "notes": "Capability-focused StepFun technical report (architecture, pre/post-train, multimodal and text benches). No dedicated safety, risk-threshold, refusal, jailbreak, bias, toxicity, cyber, or bio section. Only safety-relevant numeric eval is HallusionBench (Tables 1 and 3). Behavioral Regularization during RLHF claims to mitigate reward hacking and hallucinations (citation verification, epistemic calibration) without measured rates—reward_hacking left uncovered (training method only). Skipped all capability benches: MMMU, MathVista/Vision/Verse, MMBench, MMStar, SimpleVQA, MMVP, counting, OCR, spatial, GUI, MMLU-Pro, GPQA, AIME, LiveCodeBench, IFEval, Arena-Hard, WildBench, HealthBench, and related. Open-source claimed; no license name or calendar release date. Figure 1 chart numbers skipped (tables cover HallusionBench). Seed-linked model stepfun-ai/Step3-VL-10B is covered."
+}

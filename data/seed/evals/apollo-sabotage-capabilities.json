@@ -1,0 +1,78 @@
+{
+  "eval": {
+    "slug": "apollo-sabotage-capabilities",
+    "displayName": "Apollo sabotage capabilities",
+    "aliases": [
+      "Apollo sabotage",
+      "Apollo Research — sabotage (AI R&D / backdoors)",
+      "Apollo sabotage capabilities — mean score",
+      "Apollo sabotage capabilities — mean score (strongest baseline)",
+      "Apollo sabotage capabilities — mean score (second baseline)"
+    ],
+    "description": "Apollo Research long-horizon evaluations of whether an agent can sabotage other models when explicitly instructed to (scheming harm ability, not propensity). Tasks include AI R&D settings such as inserting backdoors, with progressive difficulty levels. OpenAI cards report mean scores (often F1-like) across tasks; detailed strategic-deception results are often kept private.",
+    "summary": "Tests whether AI agents can sabotage other models, such as by inserting backdoors, when told to do so.",
+    "maintainers": [
+      {
+        "name": "Apollo Research",
+        "url": "https://www.apolloresearch.ai"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2412.04984",
+        "title": "Frontier Models are Capable of In-context Scheming (related Apollo suite)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www.apolloresearch.ai/science",
+        "title": "Apollo Research science"
+      }
+    ],
+    "access": "held_out",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge", "human"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["sabotage", "cyber", "agentic_misuse"]
+    },
+    "visibility": "public",
+    "family": "Apollo scheming"
+  },
+  "versions": [
+    {
+      "version": "ai-rd-backdoors",
+      "status": "draft",
+      "changes": "Task sets and difficulty ladders used in partner testing; details are not fully public.",
+      "scores": [
+        {
+          "key": "sabotage_score",
+          "displayName": "Sabotage score",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "description": "Per-task sabotage success score (often an F1 variant) when the agent is instructed to sabotage."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mean_sabotage_score",
+          "displayName": "Mean sabotage score",
+          "score": "sabotage_score",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Mean sabotage score across tasks and difficulty levels."
+        }
+      ]
+    }
+  ]
+}

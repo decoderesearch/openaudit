@@ -1,0 +1,5553 @@
+{
+  "document": "apple-afm-2024-paper-technical_report",
+  "alsoDocuments": ["apple-afm-2024-blog"],
+  "covers": [
+    {
+      "model": "apple/afm-on-device"
+    },
+    {
+      "model": "apple/afm-server"
+    }
+  ],
+  "pageCount": 47,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "product focus not longer than 8k; AFM-server real context at most 24k for non-retrieval tasks (trained to 32768)",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "quote": "Although the focus for this version of AFM was not to support context lengths\nlonger than 8k, in Table 9 we use the RULER [Hsieh et al., 2024] benchmark to"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text / language models",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present foundation language models developed to power Apple Intel-"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "~3 billion (AFM-on-device); AFM-server size not disclosed",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "including a ∼3 billion parameter model designed to run"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "2.58B non-embedding + 0.15B embedding (AFM-on-device)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Num non-embedding params (B)        2.58"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "dense decoder-only Transformer; GQA (8 KV heads), SwiGLU, RoPE (base 500k), RMSNorm, shared embeddings; AFM-on-device: dim 3072, 24 query heads, 26 layers",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "The AFM base models are dense decoder-only models that build on the\nTransformer architecture [Vaswani et al., 2017], with the following design"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "licensed publisher data, curated public/open-source datasets, Applebot web crawl; no private Apple user data; code from license-filtered GitHub; math Q&A and web math",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "This includes data we have licensed from publishers, curated publicly-\navailable or open-sourced datasets, and publicly available information crawled"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "AFM-server: 6.3T tokens on 8192 TPUv4; AFM-on-device: distilled/pruned, trained on 2048 TPUv5p; +1T continued; +100B context-lengthening",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "AFM-server: We train AFM-server from scratch for 6.3T tokens on 8192\nTPUv4 chips, using a sequence length of 4096 and a batch-size of 4096 sequences."
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "AFM-on-device 7.5% and AFM-server 6.3% violation rates on adversarial safety prompts, lower than open-source and commercial models",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "quote": "Both AFM-on-device and AFM-server are robust to adversarial\nprompts, achieving violation rates significantly lower than open-source and"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Self-harm content always treated with special care; illegal content always blocked",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "to always be treated with special care (such as any content that relates to self\nharm) while other categories will always be blocked (such as illegal content)."
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Red teaming uses jailbreaks/prompt injections and other attack vectors against base models and features",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "quote": "models include jailbreaks/prompt injections, persuasive techniques [Zeng et al.,\n2024], and linguistic features known to cause model misbehavior (e.g. slang,"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "Summarization adapter trained against instructions embedded in content to summarize",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "Prompt injection    We find that AFM-on-device is prone to following instruc-\ntions or answering questions that are present in the input content instead of"
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Summarization graded for groundedness (exaggerated, inferred, inaccurate, or hallucinated details)",
+      "source": {
+        "page": "26",
+        "pdfPage": 26,
+        "quote": "the original payload. Summaries that are not completely grounded may\n      contain details that are exaggerated, inferred, inaccurate, or hallucinated."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "Safety evaluation set covers factuality per Apple safety policy; reward model includes truthfulness labels",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "quote": "prompts to test AFM’s performance on harmful content, sensitive topics, and\nfactuality according to our safety policy."
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Responsible AI principle to avoid stereotypes and systemic biases; taxonomy includes Hate Speech, Stereotypes, and Slurs",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "continuously to avoid perpetuating stereotypes and systemic biases across\nour AI tools and models."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Over 10% of post-training data are adversarial or related to safety or sensitive topics.", "tone": "neutral",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "quote": "In total, over 10% of the training data are adversarial or related to safety\nor sensitive topics, including single and multi-turn safety category annotations,"
+      }
+    },
+    {
+      "text": "AFM-on-device wins 47.7% side-by-side against Phi-3-mini despite being about 25% smaller.", "tone": "neutral",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "AFM-on-device obtains a win rate of 47.7% when"
+      }
+    },
+    {
+      "text": "AFM-server is preferred over GPT-3.5 on general human eval (51.5% wins, 27.4% ties).", "tone": "neutral",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "win rate of more than 50% and a tie rate of 27.4% against GPT-3.5."
+      }
+    },
+    {
+      "text": "For non-retrieval long-context tasks, AFM-server real context length is described as at most 24k.", "tone": "neutral",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "quote": "beyond retrieval, is currently at most 24k."
+      }
+    },
+    {
+      "text": "Safety taxonomy has 12 primary categories and 51 subcategories.", "tone": "neutral",
+      "source": {
+        "page": "26",
+        "pdfPage": 26,
+        "quote": "Currently, it consists of 12 primary categories comprised of 51 subcategories,"
+      }
+    },
+    {
+      "text": "AFM-on-device summarization was prone to answering injected instructions in the payload; mitigated with synthetic data from AFM-server.", "tone": "mixed",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "Prompt injection    We find that AFM-on-device is prone to following instruc-\ntions or answering questions that are present in the input content instead of"
+      }
+    },
+    {
+      "text": "No Apple user private personal data or user interactions are used to train the foundation models.", "tone": "good",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "We do not use our users’ private personal data or user\ninteractions when training our foundation models."
+      }
+    },
+    {
+      "text": "Accuracy-recovery low-rank adaptation (LoRA) adapters (rank 16) recover much of the quality lost to 3.5–3.7 bpw quantization.", "tone": "neutral",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "quote": "By using\naccuracy-recovery LoRA adapters with only rank 16, Alpaca win rate can be"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "HELM MMLU-5s",
+      "metric": "accuracy",
+      "value": 61.4,
+      "unit": "percent",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 2",
+        "quote": "MMLU (5 shot)                 61.4                75.4"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "5-shot; HELM MMLU v1.5.0; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "HELM MMLU-5s",
+      "metric": "accuracy",
+      "value": 75.4,
+      "unit": "percent",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 2",
+        "quote": "MMLU (5 shot)                 61.4                75.4"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "5-shot; HELM MMLU v1.5.0; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (5-shot)",
+      "metric": "accuracy",
+      "value": 75.3,
+      "unit": "percent",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 3",
+        "quote": "MMLU (5-shot)                          75.3"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "Open LLM Leaderboard V1; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K (5-shot)",
+      "metric": "accuracy",
+      "value": 72.4,
+      "unit": "percent",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 3",
+        "quote": "GSM8K (5-shot)                         72.4"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "Open LLM Leaderboard V1; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "ARC-c (25-shot)",
+      "metric": "accuracy",
+      "value": 69.7,
+      "unit": "percent",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 3",
+        "quote": "ARC-c (25-shot)                        69.7"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "Open LLM Leaderboard V1; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag (10-shot)",
+      "metric": "accuracy",
+      "value": 86.9,
+      "unit": "percent",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 3",
+        "quote": "HellaSwag (10-shot)                    86.9"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "Open LLM Leaderboard V1; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "Winogrande (5-shot)",
+      "metric": "accuracy",
+      "value": 79.2,
+      "unit": "percent",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 3",
+        "quote": "Winogrande (5-shot)                    79.2"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "Open LLM Leaderboard V1; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "Narrative QA",
+      "metric": "score",
+      "value": 77.5,
+      "unit": "percent",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 4",
+        "quote": "Narrative QA                             77.5"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "HELM-Lite v1.5.0; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "Natural Questions (open)",
+      "metric": "score",
+      "value": 73.8,
+      "unit": "percent",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 4",
+        "quote": "Natural Questions (open)                 73.8"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "HELM-Lite v1.5.0; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "Natural Questions (closed)",
+      "metric": "score",
+      "value": 43.1,
+      "unit": "percent",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 4",
+        "quote": "Natural Questions (closed)               43.1"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "HELM-Lite v1.5.0; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "Openbook QA",
+      "metric": "score",
+      "value": 89.6,
+      "unit": "percent",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 4",
+        "quote": "Openbook QA                              89.6"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "HELM-Lite v1.5.0; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "score",
+      "value": 67.2,
+      "unit": "percent",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 4",
+        "quote": "MMLU                                     67.2"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "HELM-Lite v1.5.0; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "MATH-CoT",
+      "metric": "score",
+      "value": 55.4,
+      "unit": "percent",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 4",
+        "quote": "MATH-CoT                                 55.4"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "HELM-Lite v1.5.0; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "score",
+      "value": 72.3,
+      "unit": "percent",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 4",
+        "quote": "GSM8K                                    72.3"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "HELM-Lite v1.5.0; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "LegalBench",
+      "metric": "score",
+      "value": 67.9,
+      "unit": "percent",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 4",
+        "quote": "LegalBench                               67.9"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "HELM-Lite v1.5.0; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "MedQA",
+      "metric": "score",
+      "value": 64.4,
+      "unit": "percent",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 4",
+        "quote": "MedQA                                    64.4"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "HELM-Lite v1.5.0; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "WMT 2014",
+      "metric": "score",
+      "value": 18.6,
+      "unit": "percent",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 4",
+        "quote": "WMT 2014                                 18.6"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "HELM-Lite v1.5.0; pre-training"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM wins",
+      "value": 29.7,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Llama‑3‑8B               29.7%                              32.0%                               38.3%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Llama‑3‑8B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "Tie",
+      "value": 32,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Llama‑3‑8B               29.7%                              32.0%                               38.3%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Llama‑3‑8B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM loses",
+      "value": 38.3,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Llama‑3‑8B               29.7%                              32.0%                               38.3%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Llama‑3‑8B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM wins",
+      "value": 43.7,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Gemma‑7B                         43.7%                                  26.8%                      29.5%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Gemma‑7B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "Tie",
+      "value": 26.8,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Gemma‑7B                         43.7%                                  26.8%                      29.5%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Gemma‑7B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM loses",
+      "value": 29.5,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Gemma‑7B                         43.7%                                  26.8%                      29.5%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Gemma‑7B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM wins",
+      "value": 47.7,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Phi‑3‑mini                     47.7%                                    24.2%                     28.1%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Phi‑3‑mini; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "Tie",
+      "value": 24.2,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Phi‑3‑mini                     47.7%                                    24.2%                     28.1%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Phi‑3‑mini; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM loses",
+      "value": 28.1,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Phi‑3‑mini                     47.7%                                    24.2%                     28.1%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Phi‑3‑mini; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM wins",
+      "value": 50.7,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Mistral‑7B                      50.7%                                     24.7%                     24.6%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Mistral‑7B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "Tie",
+      "value": 24.7,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Mistral‑7B                      50.7%                                     24.7%                     24.6%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Mistral‑7B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM loses",
+      "value": 24.6,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Mistral‑7B                      50.7%                                     24.7%                     24.6%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Mistral‑7B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM wins",
+      "value": 63.8,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Gemma‑2B                                    63.8%                                       21.0%                 15.2%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Gemma‑2B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "Tie",
+      "value": 21,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Gemma‑2B                                    63.8%                                       21.0%                 15.2%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Gemma‑2B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM loses",
+      "value": 15.2,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Gemma‑2B                                    63.8%                                       21.0%                 15.2%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Gemma‑2B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM wins",
+      "value": 29.3,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "GPT‑4             29.3%                             31.9%                                38.8%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus GPT‑4; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "Tie",
+      "value": 31.9,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "GPT‑4             29.3%                             31.9%                                38.8%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus GPT‑4; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM loses",
+      "value": 38.8,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "GPT‑4             29.3%                             31.9%                                38.8%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus GPT‑4; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM wins",
+      "value": 31.7,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Llama‑3‑70B                31.7%                                 33.0%                            35.3%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus Llama‑3‑70B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "Tie",
+      "value": 33,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Llama‑3‑70B                31.7%                                 33.0%                            35.3%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus Llama‑3‑70B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM loses",
+      "value": 35.3,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Llama‑3‑70B                31.7%                                 33.0%                            35.3%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus Llama‑3‑70B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM wins",
+      "value": 44.9,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Mixtral‑8x22B                       44.9%                                     29.3%                       25.8%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus Mixtral‑8x22B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "Tie",
+      "value": 29.3,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Mixtral‑8x22B                       44.9%                                     29.3%                       25.8%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus Mixtral‑8x22B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM loses",
+      "value": 25.8,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "Mixtral‑8x22B                       44.9%                                     29.3%                       25.8%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus Mixtral‑8x22B; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM wins",
+      "value": 51.5,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "GPT‑3.5                          51.5%                                    27.4%                     21.1%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus GPT‑3.5; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "Tie",
+      "value": 27.4,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "GPT‑3.5                          51.5%                                    27.4%                     21.1%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus GPT‑3.5; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM loses",
+      "value": 21.1,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "GPT‑3.5                          51.5%                                    27.4%                     21.1%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus GPT‑3.5; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM wins",
+      "value": 56.4,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "DBRX‑Instruct                             56.4%                                       24.6%                 19.0%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus DBRX‑Instruct; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "Tie",
+      "value": 24.6,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "DBRX‑Instruct                             56.4%                                       24.6%                 19.0%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus DBRX‑Instruct; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation (general capabilities)",
+      "metric": "AFM loses",
+      "value": 19,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Figure 3",
+        "quote": "DBRX‑Instruct                             56.4%                                       24.6%                 19.0%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus DBRX‑Instruct; side-by-side; 1393 prompts"
+      }
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "instruction-level accuracy",
+      "value": 85.7,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "AFM-on-device                                                       85.7"
+      },
+      "model": "apple/afm-on-device"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "instruction-level accuracy",
+      "value": 82.5,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Llama-3-8B                                                   82.5"
+      },
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "instruction-level accuracy",
+      "value": 67.9,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Phi-3-mini                                          67.9"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "instruction-level accuracy",
+      "value": 65.2,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Mistral-7B                                        65.2"
+      },
+      "model": "mistralai/Mistral-7B-Instruct-v0.2"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "instruction-level accuracy",
+      "value": 61.6,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Gemma-7B                                          61.6"
+      },
+      "model": "google/gemma-7b-it"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "instruction-level accuracy",
+      "value": 40.5,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Gemma-2B                            40.5"
+      },
+      "model": "google/gemma-2b-it"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "instruction-level accuracy",
+      "value": 88.5,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "AFM-server                                                     88.5"
+      },
+      "model": "apple/afm-server"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "instruction-level accuracy",
+      "value": 88.1,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Llama-3-70B                                                      88.1"
+      },
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "instruction-level accuracy",
+      "value": 85.4,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "GPT-4                                                     85.4"
+      },
+      "model": "openai/gpt-4-turbo"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "instruction-level accuracy",
+      "value": 79.4,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Mixtral-8x22B                                             79.4"
+      },
+      "model": "mistralai/Mixtral-8x22B-Instruct-v0.1"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "instruction-level accuracy",
+      "value": 74.8,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "GPT-3.5                                            74.8"
+      },
+      "model": "openai/gpt-3.5-turbo"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "instruction-level accuracy",
+      "value": 65.8,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "DBRX-Instruct                                    65.8"
+      },
+      "model": "databricks/dbrx-instruct"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "prompt-level accuracy",
+      "value": 79.3,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "AFM-on-device                                                  79.3"
+      },
+      "model": "apple/afm-on-device"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "prompt-level accuracy",
+      "value": 74.7,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Llama-3-8B                                                74.7"
+      },
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "prompt-level accuracy",
+      "value": 57.8,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Phi-3-mini                                   57.8"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "prompt-level accuracy",
+      "value": 54.2,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Mistral-7B                                 54.2"
+      },
+      "model": "mistralai/Mistral-7B-Instruct-v0.2"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "prompt-level accuracy",
+      "value": 51.4,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Gemma-7B                                   51.4"
+      },
+      "model": "google/gemma-7b-it"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "prompt-level accuracy",
+      "value": 28.7,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Gemma-2B                    28.7"
+      },
+      "model": "google/gemma-2b-it"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "prompt-level accuracy",
+      "value": 83,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "AFM-server                                                   83.0"
+      },
+      "model": "apple/afm-server"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "prompt-level accuracy",
+      "value": 82.3,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Llama-3-70B                                                82.3"
+      },
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "prompt-level accuracy",
+      "value": 79.3,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "GPT-4                                               79.3"
+      },
+      "model": "openai/gpt-4-turbo"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "prompt-level accuracy",
+      "value": 71.4,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Mixtral-8x22B                                       71.4"
+      },
+      "model": "mistralai/Mixtral-8x22B-Instruct-v0.1"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "prompt-level accuracy",
+      "value": 65.3,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "GPT-3.5                                     65.3"
+      },
+      "model": "openai/gpt-3.5-turbo"
+    },
+    {
+      "rawEvalName": "IFEval",
+      "metric": "prompt-level accuracy",
+      "value": 53.6,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "DBRX-Instruct                             53.6"
+      },
+      "model": "databricks/dbrx-instruct"
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "length-controlled win rate",
+      "value": 29.5,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Gemma-7B                    29.5"
+      },
+      "model": "google/gemma-7b-it"
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "length-controlled win rate",
+      "value": 23.6,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "AFM-on-device               23.6"
+      },
+      "model": "apple/afm-on-device"
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "length-controlled win rate",
+      "value": 22.9,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Llama-3-8B               22.9"
+      },
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct"
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "length-controlled win rate",
+      "value": 20.5,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Phi-3-mini          20.5"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "length-controlled win rate",
+      "value": 17.1,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Mistral-7B         17.1"
+      },
+      "model": "mistralai/Mistral-7B-Instruct-v0.2"
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "length-controlled win rate",
+      "value": 13.9,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Gemma-2B          13.9"
+      },
+      "model": "google/gemma-2b-it"
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "length-controlled win rate",
+      "value": 54.6,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "GPT-4                               54.6"
+      },
+      "model": "openai/gpt-4-turbo"
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "length-controlled win rate",
+      "value": 47.1,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "AFM-server                         47.1"
+      },
+      "model": "apple/afm-server"
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "length-controlled win rate",
+      "value": 34.4,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Llama-3-70B                   34.4"
+      },
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct"
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "length-controlled win rate",
+      "value": 30.9,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Mixtral-8x22B             30.9"
+      },
+      "model": "mistralai/Mixtral-8x22B-Instruct-v0.1"
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "length-controlled win rate",
+      "value": 25.4,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "DBRX-Instruct          25.4"
+      },
+      "model": "databricks/dbrx-instruct"
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "length-controlled win rate",
+      "value": 22.7,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "GPT-3.5          22.7"
+      },
+      "model": "openai/gpt-3.5-turbo"
+    },
+    {
+      "rawEvalName": "Arena Hard",
+      "metric": "score",
+      "value": 78,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "GPT-4                                              78.0"
+      },
+      "model": "openai/gpt-4-turbo"
+    },
+    {
+      "rawEvalName": "Arena Hard",
+      "metric": "score",
+      "value": 46.6,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Llama-3-70B                          46.6"
+      },
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct"
+    },
+    {
+      "rawEvalName": "Arena Hard",
+      "metric": "score",
+      "value": 36.4,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "Mixtral-8x22B                 36.4"
+      },
+      "model": "mistralai/Mixtral-8x22B-Instruct-v0.1"
+    },
+    {
+      "rawEvalName": "Arena Hard",
+      "metric": "score",
+      "value": 35.5,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "AFM-server                  35.5"
+      },
+      "model": "apple/afm-server"
+    },
+    {
+      "rawEvalName": "Arena Hard",
+      "metric": "score",
+      "value": 23.9,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "DBRX-Instruct         23.9"
+      },
+      "model": "databricks/dbrx-instruct"
+    },
+    {
+      "rawEvalName": "Arena Hard",
+      "metric": "score",
+      "value": 23.3,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Figure 4",
+        "quote": "GPT-3.5          23.3"
+      },
+      "model": "openai/gpt-3.5-turbo"
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Simple accuracy",
+      "value": 91,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "AFM‑server                                             91.0"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Simple accuracy",
+      "value": 89,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "AFM‑on‑device                                           89.0"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Simple accuracy",
+      "value": 80.2,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "Gemini‑1.5‑Pro‑0514                                   80.2"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Simple accuracy",
+      "value": 80.2,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "GPT‑4                                   80.2"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Simple accuracy",
+      "value": 61.5,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "GPT‑3.5                          61.5"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Multiple accuracy",
+      "value": 95.5,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "AFM‑server                                           95.5"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Multiple accuracy",
+      "value": 93,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "GPT‑4                                         93.0"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Multiple accuracy",
+      "value": 92,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "Gemini‑1.5‑Pro‑0514                                        92.0"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Multiple accuracy",
+      "value": 90,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "AFM‑on‑device                                         90.0"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Multiple accuracy",
+      "value": 66,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "GPT‑3.5                          66.0"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Parallel accuracy",
+      "value": 91.5,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "Gemini‑1.5‑Pro‑0514                                            91.5"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Parallel accuracy",
+      "value": 91,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "GPT‑3.5                                           91.0"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Parallel accuracy",
+      "value": 90.5,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "GPT‑4                                            90.5"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Parallel accuracy",
+      "value": 84.5,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "AFM‑server                                       84.5"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Parallel accuracy",
+      "value": 76,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "AFM‑on‑device                                    76.0"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Parallel Multiple accuracy",
+      "value": 88,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "Gemini‑1.5‑Pro‑0514                                   88.0"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Parallel Multiple accuracy",
+      "value": 85,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "AFM‑server                                   85.0"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Parallel Multiple accuracy",
+      "value": 84.5,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "GPT‑4                                   84.5"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Parallel Multiple accuracy",
+      "value": 81,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "GPT‑3.5                                  81.0"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Parallel Multiple accuracy",
+      "value": 65,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "AFM‑on‑device                           65.0"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Relevance accuracy",
+      "value": 91.3,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "AFM‑server                                             91.3"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Relevance accuracy",
+      "value": 89.6,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "Gemini‑1.5‑Pro‑0514                                          89.6"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Relevance accuracy",
+      "value": 82.9,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "GPT‑4                                     82.9"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Relevance accuracy",
+      "value": 81,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "AFM‑on‑device                                       81.0"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Relevance accuracy",
+      "value": 2.1,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "GPT‑3.5       2.1"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Average accuracy",
+      "value": 89.5,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "AFM‑server                                        89.5"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Average accuracy",
+      "value": 88.3,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "Gemini‑1.5‑Pro‑0514                                    88.3"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Average accuracy",
+      "value": 86.2,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "GPT‑4                                    86.2"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Average accuracy",
+      "value": 80.2,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "AFM‑on‑device                                  80.2"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Berkeley Function Calling Leaderboard",
+      "metric": "Average accuracy",
+      "value": 60.3,
+      "unit": "percent",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Figure 5",
+        "quote": "GPT‑3.5                        60.3"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "AST metrics; Function Calling API"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Summarization)",
+      "metric": "score",
+      "value": 9.1,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "AFM‑on‑device                                          9.1"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Summarization)",
+      "metric": "score",
+      "value": 8.9,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "Mistral‑7B                                     8.9"
+      },
+      "model": "mistralai/Mistral-7B-Instruct-v0.2",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Summarization)",
+      "metric": "score",
+      "value": 8.9,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "Gemma‑7B                                        8.9"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Summarization)",
+      "metric": "score",
+      "value": 8.8,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "Phi‑3‑mini                                     8.8"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Summarization)",
+      "metric": "score",
+      "value": 7.6,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "Gemma‑2B                              7.6"
+      },
+      "model": "google/gemma-2b-it",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Summarization)",
+      "metric": "score",
+      "value": 9.5,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "AFM‑server                                       9.5"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Summarization)",
+      "metric": "score",
+      "value": 9.5,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "GPT‑4                                       9.5"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Summarization)",
+      "metric": "score",
+      "value": 9.5,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "Mixtral‑8x22B                                     9.5"
+      },
+      "model": "mistralai/Mixtral-8x22B-Instruct-v0.1",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Summarization)",
+      "metric": "score",
+      "value": 9.2,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "DBRX Instruct                                   9.2"
+      },
+      "model": "databricks/dbrx-instruct",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Summarization)",
+      "metric": "score",
+      "value": 8.6,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "GPT‑3.5                                8.6"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Composition)",
+      "metric": "score",
+      "value": 9.1,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "Mistral‑7B                                         9.1"
+      },
+      "model": "mistralai/Mistral-7B-Instruct-v0.2",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Composition)",
+      "metric": "score",
+      "value": 9.1,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "Gemma‑7B                                            9.1"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Composition)",
+      "metric": "score",
+      "value": 9,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "AFM‑on‑device                                          9.0"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Composition)",
+      "metric": "score",
+      "value": 9,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "Phi‑3‑mini                                         9.0"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Composition)",
+      "metric": "score",
+      "value": 8,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "Gemma‑2B                                  8.0"
+      },
+      "model": "google/gemma-2b-it",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Composition)",
+      "metric": "score",
+      "value": 9.7,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "GPT‑4                                        9.7"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Composition)",
+      "metric": "score",
+      "value": 9.6,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "AFM‑server                                        9.6"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Composition)",
+      "metric": "score",
+      "value": 9.5,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "Mixtral‑8x22B                                     9.5"
+      },
+      "model": "mistralai/Mixtral-8x22B-Instruct-v0.1",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Composition)",
+      "metric": "score",
+      "value": 9.2,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "DBRX Instruct                                   9.2"
+      },
+      "model": "databricks/dbrx-instruct",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "Writing (Composition)",
+      "metric": "score",
+      "value": 8.9,
+      "unit": "score",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Figure 6",
+        "quote": "GPT‑3.5                                 8.9"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "internal benchmark; GPT-4 Turbo as judge; 1-10"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 78.5,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "Phi‑3 mini                                        78.5"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "8-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 75.8,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "Llama‑3‑8B                                        75.8"
+      },
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "settings": {
+        "other": "8-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 64,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "AFM‑on‑device                                 64.0"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "8-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 49.9,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "Gemma‑7B                            49.9"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "8-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 41.7,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "Mistral‑7B                   41.7"
+      },
+      "model": "mistralai/Mistral-7B-Instruct-v0.2",
+      "settings": {
+        "other": "8-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 88.6,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "GPT‑4                                           88.6"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "8-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 86.8,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "Llama‑3‑70B                                           86.8"
+      },
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "settings": {
+        "other": "8-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 83.3,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "AFM‑server                                       83.3"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "8-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 77.8,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "Mixtral‑8x22B                                  77.8"
+      },
+      "model": "mistralai/Mixtral-8x22B-Instruct-v0.1",
+      "settings": {
+        "other": "8-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 76.3,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "GPT‑3.5                                   76.3"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "8-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 26.1,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "AFM‑on‑device                   26.1"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "4-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 24.3,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "Llama‑3‑8B                 24.3"
+      },
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "settings": {
+        "other": "4-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 21.8,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "Phi‑3 mini               21.8"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "4-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 17.3,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "Gemma‑7B              17.3"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "4-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 11.5,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "Mistral‑7B       11.5"
+      },
+      "model": "mistralai/Mistral-7B-Instruct-v0.2",
+      "settings": {
+        "other": "4-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 43.6,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "GPT‑4                        43.6"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "4-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 42.3,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "AFM‑server                    42.3"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "4-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 41.7,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "Llama‑3‑70B                    41.7"
+      },
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "settings": {
+        "other": "4-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 41.1,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "Mixtral‑8x22B                  41.1"
+      },
+      "model": "mistralai/Mixtral-8x22B-Instruct-v0.1",
+      "settings": {
+        "other": "4-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 33.9,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Figure 7",
+        "quote": "GPT‑3.5                33.9"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "4-shot CoT; internal pipeline"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "good result ratio",
+      "value": 71.3,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "AFM‑on‑device + Adapter                            71.3%                      7.2%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "Email summarization; summarization adapter"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "poor result ratio",
+      "value": 7.2,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "AFM‑on‑device + Adapter                            71.3%                      7.2%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "Email summarization; summarization adapter"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "good result ratio",
+      "value": 70.9,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Gemma‑7B                              70.9%                      4.5%"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "Email summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "poor result ratio",
+      "value": 4.5,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Gemma‑7B                              70.9%                      4.5%"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "Email summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "good result ratio",
+      "value": 44.7,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Phi‑3‑mini                  44.7%                                  12.0%"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "Email summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "poor result ratio",
+      "value": 12,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Phi‑3‑mini                  44.7%                                  12.0%"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "Email summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "good result ratio",
+      "value": 36.1,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Llama‑3‑8B             36.1%                                        12.8%"
+      },
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "settings": {
+        "other": "Email summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "poor result ratio",
+      "value": 12.8,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Llama‑3‑8B             36.1%                                        12.8%"
+      },
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "settings": {
+        "other": "Email summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "good result ratio",
+      "value": 63,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "AFM‑on‑device + Adapter                          63.0%                           15.9%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "Message summarization; summarization adapter"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "poor result ratio",
+      "value": 15.9,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "AFM‑on‑device + Adapter                          63.0%                           15.9%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "Message summarization; summarization adapter"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "good result ratio",
+      "value": 51.1,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Gemma‑7B                      51.1%                                     18.3%"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "Message summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "poor result ratio",
+      "value": 18.3,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Gemma‑7B                      51.1%                                     18.3%"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "Message summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "good result ratio",
+      "value": 32.8,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Phi‑3‑mini           32.8%                                                  31.4%"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "Message summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "poor result ratio",
+      "value": 31.4,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Phi‑3‑mini           32.8%                                                  31.4%"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "Message summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "good result ratio",
+      "value": 21.3,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Llama‑3‑8B         21.3%                                                         35.3%"
+      },
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "settings": {
+        "other": "Message summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "poor result ratio",
+      "value": 35.3,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Llama‑3‑8B         21.3%                                                         35.3%"
+      },
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "settings": {
+        "other": "Message summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "good result ratio",
+      "value": 74.9,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "AFM‑on‑device + Adapter                             74.9%                      10.0%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "Notification summarization; summarization adapter"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "poor result ratio",
+      "value": 10,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "AFM‑on‑device + Adapter                             74.9%                      10.0%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "Notification summarization; summarization adapter"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "good result ratio",
+      "value": 60.9,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Gemma‑7B                        60.9%                              12.9%"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "Notification summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "poor result ratio",
+      "value": 12.9,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Gemma‑7B                        60.9%                              12.9%"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "Notification summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "good result ratio",
+      "value": 56.6,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Phi‑3‑mini                     56.6%                                    18.3%"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "Notification summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "poor result ratio",
+      "value": 18.3,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Phi‑3‑mini                     56.6%                                    18.3%"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "Notification summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "good result ratio",
+      "value": 27.7,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Llama‑3‑8B           27.7%                                                           48.3%"
+      },
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "settings": {
+        "other": "Notification summarization"
+      }
+    },
+    {
+      "rawEvalName": "Summarization Feature Satisfaction",
+      "metric": "poor result ratio",
+      "value": 48.3,
+      "unit": "percent",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "table": "Figure 8",
+        "quote": "Llama‑3‑8B           27.7%                                                           48.3%"
+      },
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "settings": {
+        "other": "Notification summarization"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation of Output Harmfulness",
+      "metric": "violation rate",
+      "value": 7.5,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 9",
+        "quote": "AFM‑on‑device          7.5%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "harmful content, sensitive topics, and factuality; human graders"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation of Output Harmfulness",
+      "metric": "violation rate",
+      "value": 13.6,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 9",
+        "quote": "Gemma‑7B               13.6%"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "harmful content, sensitive topics, and factuality; human graders"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation of Output Harmfulness",
+      "metric": "violation rate",
+      "value": 13.9,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 9",
+        "quote": "Gemma‑2B               13.9%"
+      },
+      "model": "google/gemma-2b-it",
+      "settings": {
+        "other": "harmful content, sensitive topics, and factuality; human graders"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation of Output Harmfulness",
+      "metric": "violation rate",
+      "value": 21.8,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 9",
+        "quote": "Llama‑3‑8B          21.8%"
+      },
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "settings": {
+        "other": "harmful content, sensitive topics, and factuality; human graders"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation of Output Harmfulness",
+      "metric": "violation rate",
+      "value": 24.4,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 9",
+        "quote": "Phi‑3‑mini        24.4%"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "harmful content, sensitive topics, and factuality; human graders"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation of Output Harmfulness",
+      "metric": "violation rate",
+      "value": 51.3,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 9",
+        "quote": "Mistral‑7B                    51.3%"
+      },
+      "model": "mistralai/Mistral-7B-Instruct-v0.2",
+      "settings": {
+        "other": "harmful content, sensitive topics, and factuality; human graders"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation of Output Harmfulness",
+      "metric": "violation rate",
+      "value": 6.3,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 9",
+        "quote": "AFM‑server         6.3%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "harmful content, sensitive topics, and factuality; human graders"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation of Output Harmfulness",
+      "metric": "violation rate",
+      "value": 22.6,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 9",
+        "quote": "GPT‑3.5         22.6%"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "harmful content, sensitive topics, and factuality; human graders"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation of Output Harmfulness",
+      "metric": "violation rate",
+      "value": 27.9,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 9",
+        "quote": "Llama‑3‑70B            27.9%"
+      },
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "settings": {
+        "other": "harmful content, sensitive topics, and factuality; human graders"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation of Output Harmfulness",
+      "metric": "violation rate",
+      "value": 28.8,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 9",
+        "quote": "GPT‑4              28.8%"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "harmful content, sensitive topics, and factuality; human graders"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation of Output Harmfulness",
+      "metric": "violation rate",
+      "value": 43.7,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 9",
+        "quote": "DBRX‑Instruct                    43.7%"
+      },
+      "model": "databricks/dbrx-instruct",
+      "settings": {
+        "other": "harmful content, sensitive topics, and factuality; human graders"
+      }
+    },
+    {
+      "rawEvalName": "Human Evaluation of Output Harmfulness",
+      "metric": "violation rate",
+      "value": 47.5,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 9",
+        "quote": "Mixtral‑8x22B                     47.5%"
+      },
+      "model": "mistralai/Mixtral-8x22B-Instruct-v0.1",
+      "settings": {
+        "other": "harmful content, sensitive topics, and factuality; human graders"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM wins",
+      "value": 42.9,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Gemma‑7B                          42.9%                                          41.5%                           15.6%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Gemma‑7B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "Tie",
+      "value": 41.5,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Gemma‑7B                          42.9%                                          41.5%                           15.6%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Gemma‑7B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM loses",
+      "value": 15.6,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Gemma‑7B                          42.9%                                          41.5%                           15.6%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Gemma‑7B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM wins",
+      "value": 54,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Gemma‑2B                                54.0%                                            33.3%                       12.7%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Gemma‑2B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "Tie",
+      "value": 33.3,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Gemma‑2B                                54.0%                                            33.3%                       12.7%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Gemma‑2B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM loses",
+      "value": 12.7,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Gemma‑2B                                54.0%                                            33.3%                       12.7%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Gemma‑2B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM wins",
+      "value": 61.2,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Phi‑3‑mini                               61.2%                                                29.0%                  9.8%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Phi‑3‑mini; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "Tie",
+      "value": 29,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Phi‑3‑mini                               61.2%                                                29.0%                  9.8%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Phi‑3‑mini; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM loses",
+      "value": 9.8,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Phi‑3‑mini                               61.2%                                                29.0%                  9.8%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Phi‑3‑mini; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM wins",
+      "value": 60.4,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Llama‑3‑8B                                 60.4%                                                30.0%                  9.6%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Llama‑3‑8B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "Tie",
+      "value": 30,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Llama‑3‑8B                                 60.4%                                                30.0%                  9.6%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Llama‑3‑8B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM loses",
+      "value": 9.6,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Llama‑3‑8B                                 60.4%                                                30.0%                  9.6%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Llama‑3‑8B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM wins",
+      "value": 70.6,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Mistral‑7B                                      70.6%                                                 23.2%            6.2%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Mistral‑7B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "Tie",
+      "value": 23.2,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Mistral‑7B                                      70.6%                                                 23.2%            6.2%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Mistral‑7B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM loses",
+      "value": 6.2,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Mistral‑7B                                      70.6%                                                 23.2%            6.2%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "versus Mistral‑7B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM wins",
+      "value": 59.4,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "GPT‑3.5                                59.4%                                              29.2%                   11.4%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus GPT‑3.5; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "Tie",
+      "value": 29.2,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "GPT‑3.5                                59.4%                                              29.2%                   11.4%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus GPT‑3.5; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM loses",
+      "value": 11.4,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "GPT‑3.5                                59.4%                                              29.2%                   11.4%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus GPT‑3.5; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM wins",
+      "value": 62.2,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "GPT‑4                                 62.2%                                                 28.7%                 9.1%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus GPT‑4; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "Tie",
+      "value": 28.7,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "GPT‑4                                 62.2%                                                 28.7%                 9.1%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus GPT‑4; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM loses",
+      "value": 9.1,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "GPT‑4                                 62.2%                                                 28.7%                 9.1%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus GPT‑4; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM wins",
+      "value": 66.8,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "DBRX‑Instruct                                  66.8%                                                 24.5%                8.7%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus DBRX‑Instruct; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "Tie",
+      "value": 24.5,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "DBRX‑Instruct                                  66.8%                                                 24.5%                8.7%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus DBRX‑Instruct; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM loses",
+      "value": 8.7,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "DBRX‑Instruct                                  66.8%                                                 24.5%                8.7%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus DBRX‑Instruct; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM wins",
+      "value": 67,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Mixtral‑8x22B                                      67.0%                                              25.1%               7.9%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus Mixtral‑8x22B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "Tie",
+      "value": 25.1,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Mixtral‑8x22B                                      67.0%                                              25.1%               7.9%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus Mixtral‑8x22B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM loses",
+      "value": 7.9,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Mixtral‑8x22B                                      67.0%                                              25.1%               7.9%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus Mixtral‑8x22B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM wins",
+      "value": 64.4,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Llama‑3‑70B                                  64.4%                                                  28.6%                7.0%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus Llama‑3‑70B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "Tie",
+      "value": 28.6,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Llama‑3‑70B                                  64.4%                                                  28.6%                7.0%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus Llama‑3‑70B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "Human Preference Evaluation on Safety Prompts",
+      "metric": "AFM loses",
+      "value": 7,
+      "unit": "percent",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "table": "Figure 10",
+        "quote": "Llama‑3‑70B                                  64.4%                                                  28.6%                7.0%"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "versus Llama‑3‑70B; side-by-side safety prompts"
+      }
+    },
+    {
+      "rawEvalName": "ARC_C",
+      "metric": "accuracy",
+      "value": 43.17,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "ARC_C                              43.17         47.53                    45.39"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "ARC_C",
+      "metric": "accuracy",
+      "value": 47.53,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "ARC_C                              43.17         47.53                    45.39"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "ARC_C",
+      "metric": "accuracy",
+      "value": 45.39,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "ARC_C                              43.17         47.53                    45.39"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "ARC_E",
+      "metric": "accuracy",
+      "value": 74.87,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "ARC_E                              74.87         78.62                    78.37"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "ARC_E",
+      "metric": "accuracy",
+      "value": 78.62,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "ARC_E                              74.87         78.62                    78.37"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "ARC_E",
+      "metric": "accuracy",
+      "value": 78.37,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "ARC_E                              74.87         78.62                    78.37"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 54.7,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "HellaSwag                          54.70         55.50                    55.24"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 55.5,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "HellaSwag                          54.70         55.50                    55.24"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 55.24,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "HellaSwag                          54.70         55.50                    55.24"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "LAMBADA",
+      "metric": "accuracy",
+      "value": 73.51,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "LAMBADA                            73.51         70.13                    69.90"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "LAMBADA",
+      "metric": "accuracy",
+      "value": 70.13,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "LAMBADA                            73.51         70.13                    69.90"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "LAMBADA",
+      "metric": "accuracy",
+      "value": 69.9,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "LAMBADA                            73.51         70.13                    69.90"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "metric": "accuracy",
+      "value": 77.37,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "PIQA                               77.37         78.67                    78.40"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "metric": "accuracy",
+      "value": 78.67,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "PIQA                               77.37         78.67                    78.40"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "metric": "accuracy",
+      "value": 78.4,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "PIQA                               77.37         78.67                    78.40"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "SciQ",
+      "metric": "accuracy",
+      "value": 94.9,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "SciQ                               94.90         95.80                    95.70"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "SciQ",
+      "metric": "accuracy",
+      "value": 95.8,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "SciQ                               94.90         95.80                    95.70"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "SciQ",
+      "metric": "accuracy",
+      "value": 95.7,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "SciQ                               94.90         95.80                    95.70"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 65.82,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "WinoGrande                         65.82         67.32                    67.01"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 67.32,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "WinoGrande                         65.82         67.32                    67.01"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 67.01,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "WinoGrande                         65.82         67.32                    67.01"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA (1 shot)",
+      "metric": "accuracy",
+      "value": 42.46,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "TriviaQA (1 shot)                  42.46         39.13                    38.11"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA (1 shot)",
+      "metric": "accuracy",
+      "value": 39.13,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "TriviaQA (1 shot)                  42.46         39.13                    38.11"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA (1 shot)",
+      "metric": "accuracy",
+      "value": 38.11,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "TriviaQA (1 shot)                  42.46         39.13                    38.11"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "WebQS (1 shot)",
+      "metric": "accuracy",
+      "value": 19.24,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "WebQS (1 shot)                     19.24         18.06                    17.22"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "WebQS (1 shot)",
+      "metric": "accuracy",
+      "value": 18.06,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "WebQS (1 shot)                     19.24         18.06                    17.22"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "WebQS (1 shot)",
+      "metric": "accuracy",
+      "value": 17.22,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "WebQS (1 shot)                     19.24         18.06                    17.22"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "CoreEN average",
+      "metric": "accuracy",
+      "value": 60.67,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "CoreEN average                     60.67         61.20                    60.59"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "CoreEN average",
+      "metric": "accuracy",
+      "value": 61.2,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "CoreEN average                     60.67         61.20                    60.59"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "CoreEN average",
+      "metric": "accuracy",
+      "value": 60.59,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "CoreEN average                     60.67         61.20                    60.59"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (5 shot)",
+      "metric": "accuracy",
+      "value": 57,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "MMLU (5 shot)                      57.00         61.35                    60.64"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (5 shot)",
+      "metric": "accuracy",
+      "value": 61.35,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "MMLU (5 shot)                      57.00         61.35                    60.64"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (5 shot)",
+      "metric": "accuracy",
+      "value": 60.64,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "MMLU (5 shot)                      57.00         61.35                    60.64"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K (8 shot CoT)",
+      "metric": "accuracy",
+      "value": 27.45,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "GSM8K (8 shot CoT)                 27.45         42.53                    40.00"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K (8 shot CoT)",
+      "metric": "accuracy",
+      "value": 42.53,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "GSM8K (8 shot CoT)                 27.45         42.53                    40.00"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K (8 shot CoT)",
+      "metric": "accuracy",
+      "value": 40,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "GSM8K (8 shot CoT)                 27.45         42.53                    40.00"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MATH (4 shot CoT)",
+      "metric": "accuracy",
+      "value": 8.31,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "MATH (4 shot CoT)                   8.31         16.97                    15.48"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MATH (4 shot CoT)",
+      "metric": "accuracy",
+      "value": 16.97,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "MATH (4 shot CoT)                   8.31         16.97                    15.48"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MATH (4 shot CoT)",
+      "metric": "accuracy",
+      "value": 15.48,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "MATH (4 shot CoT)                   8.31         16.97                    15.48"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval-Py pass@1",
+      "metric": "pass@1",
+      "value": 16.48,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "HumanEval-Py pass@1                16.48         27.38                    30.84"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval-Py pass@1",
+      "metric": "pass@1",
+      "value": 27.38,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "HumanEval-Py pass@1                16.48         27.38                    30.84"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval-Py pass@1",
+      "metric": "pass@1",
+      "value": 30.84,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "HumanEval-Py pass@1                16.48         27.38                    30.84"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MultiPLE-Swift pass@1",
+      "metric": "pass@1",
+      "value": 8.88,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "MultiPLE-Swift pass@1               8.88         19.24                    18.06"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MultiPLE-Swift pass@1",
+      "metric": "pass@1",
+      "value": 19.24,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "MultiPLE-Swift pass@1               8.88         19.24                    18.06"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MultiPLE-Swift pass@1",
+      "metric": "pass@1",
+      "value": 18.06,
+      "unit": "percent",
+      "source": {
+        "page": "43",
+        "pdfPage": 43,
+        "table": "Table 7",
+        "quote": "MultiPLE-Swift pass@1               8.88         19.24                    18.06"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "ARC_C",
+      "metric": "accuracy",
+      "value": 58.28,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "ARC_C                          58.28           58.87                       57.94"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "ARC_C",
+      "metric": "accuracy",
+      "value": 58.87,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "ARC_C                          58.28           58.87                       57.94"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "ARC_C",
+      "metric": "accuracy",
+      "value": 57.94,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "ARC_C                          58.28           58.87                       57.94"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "ARC_E",
+      "metric": "accuracy",
+      "value": 85.61,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "ARC_E                          85.61           85.44                       85.06"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "ARC_E",
+      "metric": "accuracy",
+      "value": 85.44,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "ARC_E                          85.61           85.44                       85.06"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "ARC_E",
+      "metric": "accuracy",
+      "value": 85.06,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "ARC_E                          85.61           85.44                       85.06"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 64.17,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "HellaSwag                      64.17           64.53                       64.37"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 64.53,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "HellaSwag                      64.17           64.53                       64.37"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 64.37,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "HellaSwag                      64.17           64.53                       64.37"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "LAMBADA",
+      "metric": "accuracy",
+      "value": 78.38,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "LAMBADA                        78.38           77.59                       77.82"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "LAMBADA",
+      "metric": "accuracy",
+      "value": 77.59,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "LAMBADA                        78.38           77.59                       77.82"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "LAMBADA",
+      "metric": "accuracy",
+      "value": 77.82,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "LAMBADA                        78.38           77.59                       77.82"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "metric": "accuracy",
+      "value": 82.37,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "PIQA                           82.37           81.99                       81.88"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "metric": "accuracy",
+      "value": 81.99,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "PIQA                           82.37           81.99                       81.88"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "metric": "accuracy",
+      "value": 81.88,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "PIQA                           82.37           81.99                       81.88"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "SciQ",
+      "metric": "accuracy",
+      "value": 96.6,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "SciQ                           96.60           97.10                       97.00"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "SciQ",
+      "metric": "accuracy",
+      "value": 97.1,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "SciQ                           96.60           97.10                       97.00"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "SciQ",
+      "metric": "accuracy",
+      "value": 97,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "SciQ                           96.60           97.10                       97.00"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 80.51,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "WinoGrande                     80.51           79.16                       79.08"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 79.16,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "WinoGrande                     80.51           79.16                       79.08"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 79.08,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "WinoGrande                     80.51           79.16                       79.08"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA (1 shot)",
+      "metric": "accuracy",
+      "value": 54.33,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "TriviaQA (1 shot)              54.33           53.57                       53.42"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA (1 shot)",
+      "metric": "accuracy",
+      "value": 53.57,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "TriviaQA (1 shot)              54.33           53.57                       53.42"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA (1 shot)",
+      "metric": "accuracy",
+      "value": 53.42,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "TriviaQA (1 shot)              54.33           53.57                       53.42"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "WebQS (1 shot)",
+      "metric": "accuracy",
+      "value": 29.97,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "WebQS (1 shot)                 29.97           27.66                       27.41"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "WebQS (1 shot)",
+      "metric": "accuracy",
+      "value": 27.66,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "WebQS (1 shot)                 29.97           27.66                       27.41"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "WebQS (1 shot)",
+      "metric": "accuracy",
+      "value": 27.41,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "WebQS (1 shot)                 29.97           27.66                       27.41"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "CoreEN average",
+      "metric": "accuracy",
+      "value": 70.02,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "CoreEN average                 70.02           69.55                       69.33"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "CoreEN average",
+      "metric": "accuracy",
+      "value": 69.55,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "CoreEN average                 70.02           69.55                       69.33"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "CoreEN average",
+      "metric": "accuracy",
+      "value": 69.33,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "CoreEN average                 70.02           69.55                       69.33"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (5 shot)",
+      "metric": "accuracy",
+      "value": 74,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "MMLU (5 shot)                  74.00           75.24                       74.80"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (5 shot)",
+      "metric": "accuracy",
+      "value": 75.24,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "MMLU (5 shot)                  74.00           75.24                       74.80"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (5 shot)",
+      "metric": "accuracy",
+      "value": 74.8,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "MMLU (5 shot)                  74.00           75.24                       74.80"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K (8 shot CoT)",
+      "metric": "accuracy",
+      "value": 75.44,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "GSM8K (8 shot CoT)             75.44           74.83                       75.51"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K (8 shot CoT)",
+      "metric": "accuracy",
+      "value": 74.83,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "GSM8K (8 shot CoT)             75.44           74.83                       75.51"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K (8 shot CoT)",
+      "metric": "accuracy",
+      "value": 75.51,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "GSM8K (8 shot CoT)             75.44           74.83                       75.51"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MATH (4 shot CoT)",
+      "metric": "accuracy",
+      "value": 32.24,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "MATH (4 shot CoT)              32.24           36.48                       35.77"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MATH (4 shot CoT)",
+      "metric": "accuracy",
+      "value": 36.48,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "MATH (4 shot CoT)              32.24           36.48                       35.77"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MATH (4 shot CoT)",
+      "metric": "accuracy",
+      "value": 35.77,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "MATH (4 shot CoT)              32.24           36.48                       35.77"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval-Py",
+      "metric": "pass@1",
+      "value": 33.23,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "HumanEval-Py                   33.23           40.77                       39.55"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval-Py",
+      "metric": "pass@1",
+      "value": 40.77,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "HumanEval-Py                   33.23           40.77                       39.55"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval-Py",
+      "metric": "pass@1",
+      "value": 39.55,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "HumanEval-Py                   33.23           40.77                       39.55"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MultiPLE-Swift",
+      "metric": "pass@1",
+      "value": 30.15,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "MultiPLE-Swift                 30.15           37.70                       38.11"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Core; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MultiPLE-Swift",
+      "metric": "pass@1",
+      "value": 37.7,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "MultiPLE-Swift                 30.15           37.70                       38.11"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Continued; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "MultiPLE-Swift",
+      "metric": "pass@1",
+      "value": 38.11,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 8",
+        "quote": "MultiPLE-Swift                 30.15           37.70                       38.11"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "pre-training stage: Context lengthened; internal harness"
+      }
+    },
+    {
+      "rawEvalName": "RULER",
+      "metric": "average accuracy",
+      "value": 91.7,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 9",
+        "quote": "Ctx @ 4096                      91.7"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "context length 4096; averaged over 13 tasks; 500 examples per task"
+      }
+    },
+    {
+      "rawEvalName": "RULER",
+      "metric": "average accuracy",
+      "value": 87.7,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 9",
+        "quote": "Ctx @ 8192                      87.7"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "context length 8192; averaged over 13 tasks; 500 examples per task"
+      }
+    },
+    {
+      "rawEvalName": "RULER",
+      "metric": "average accuracy",
+      "value": 84.1,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 9",
+        "quote": "Ctx @ 16384                     84.1"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "context length 16384; averaged over 13 tasks; 500 examples per task"
+      }
+    },
+    {
+      "rawEvalName": "RULER",
+      "metric": "average accuracy",
+      "value": 79.1,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 9",
+        "quote": "Ctx @ 20480                     79.1"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "context length 20480; averaged over 13 tasks; 500 examples per task"
+      }
+    },
+    {
+      "rawEvalName": "RULER",
+      "metric": "average accuracy",
+      "value": 75.8,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 9",
+        "quote": "Ctx @ 24576                     75.8"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "context length 24576; averaged over 13 tasks; 500 examples per task"
+      }
+    },
+    {
+      "rawEvalName": "RULER",
+      "metric": "average accuracy",
+      "value": 43.3,
+      "unit": "percent",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "table": "Table 9",
+        "quote": "Ctx @ 32768                     43.3"
+      },
+      "model": "apple/afm-server",
+      "settings": {
+        "other": "context length 32768; averaged over 13 tasks; 500 examples per task"
+      }
+    },
+    {
+      "rawEvalName": "IFEval Instruction-Level",
+      "metric": "normalized score",
+      "value": 100,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "16     AFM-on-device                               100.0%              100.0%                100.0%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "16 bpw unquantized; normalized to unquantized"
+      }
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "normalized score",
+      "value": 100,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "16     AFM-on-device                               100.0%              100.0%                100.0%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "16 bpw unquantized; normalized to unquantized"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K (8-shot CoT)",
+      "metric": "normalized score",
+      "value": 100,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "16     AFM-on-device                               100.0%              100.0%                100.0%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "16 bpw unquantized; normalized to unquantized"
+      }
+    },
+    {
+      "rawEvalName": "IFEval Instruction-Level",
+      "metric": "normalized score",
+      "value": 98.4,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "quantized                                    98.4%               76.7%                 82.2%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "3.5 bpw quantized; normalized to unquantized"
+      }
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "normalized score",
+      "value": 76.7,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "quantized                                    98.4%               76.7%                 82.2%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "3.5 bpw quantized; normalized to unquantized"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K (8-shot CoT)",
+      "metric": "normalized score",
+      "value": 82.2,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "quantized                                    98.4%               76.7%                 82.2%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "3.5 bpw quantized; normalized to unquantized"
+      }
+    },
+    {
+      "rawEvalName": "IFEval Instruction-Level",
+      "metric": "normalized score",
+      "value": 98.8,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "Acc.-recovered (rank 16)                     98.8%               94.7%                 92.1%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "3.5 bpw Acc.-recovered (rank 16); normalized to unquantized"
+      }
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "normalized score",
+      "value": 94.7,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "Acc.-recovered (rank 16)                     98.8%               94.7%                 92.1%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "3.5 bpw Acc.-recovered (rank 16); normalized to unquantized"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K (8-shot CoT)",
+      "metric": "normalized score",
+      "value": 92.1,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "Acc.-recovered (rank 16)                     98.8%               94.7%                 92.1%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "3.5 bpw Acc.-recovered (rank 16); normalized to unquantized"
+      }
+    },
+    {
+      "rawEvalName": "IFEval Instruction-Level",
+      "metric": "normalized score",
+      "value": 97.9,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "quantized                                    97.9%               87.3%                 91.3%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "3.7 bpw quantized; normalized to unquantized"
+      }
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "normalized score",
+      "value": 87.3,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "quantized                                    97.9%               87.3%                 91.3%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "3.7 bpw quantized; normalized to unquantized"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K (8-shot CoT)",
+      "metric": "normalized score",
+      "value": 91.3,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "quantized                                    97.9%               87.3%                 91.3%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "3.7 bpw quantized; normalized to unquantized"
+      }
+    },
+    {
+      "rawEvalName": "IFEval Instruction-Level",
+      "metric": "normalized score",
+      "value": 100.6,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "Acc.-recovered (rank 16)                    100.6%               94.8%                 96.0%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "3.7 bpw Acc.-recovered (rank 16); normalized to unquantized"
+      }
+    },
+    {
+      "rawEvalName": "AlpacaEval 2.0 LC",
+      "metric": "normalized score",
+      "value": 94.8,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "Acc.-recovered (rank 16)                    100.6%               94.8%                 96.0%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "3.7 bpw Acc.-recovered (rank 16); normalized to unquantized"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K (8-shot CoT)",
+      "metric": "normalized score",
+      "value": 96,
+      "unit": "other",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 10",
+        "quote": "Acc.-recovered (rank 16)                    100.6%               94.8%                 96.0%"
+      },
+      "model": "apple/afm-on-device",
+      "settings": {
+        "other": "3.7 bpw Acc.-recovered (rank 16); normalized to unquantized"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T16:59:26Z"
+  },
+  "notes": "Technical report (arXiv 2407.21075), not a system card; seed-lookup card skipped per overrides. alsoDocuments=[apple-afm-2024-blog]; blog not fetched. pageCount=47 (printed pages). covers AFM-on-device and AFM-server. GPT-4 chart bars mapped to openai/gpt-4-turbo via footnote gpt-4-0125-preview; Gemini-1.5-Pro-0514 to google/gemini-pro-1.5; Gemma-1.1-2B/7B to gemma-2b-it/gemma-7b-it. Figure 8 AFM bars use settings.other summarization adapter. Table 5–6 are ablations with non-official data mixtures (rawModelName). Table 10 scores are normalized to unquantized=100%. Skipped figures without printed numeric labels: Figure 1 (page 1): modeling overview diagram, AFM family pipeline, no printed values; Figure 2 (page 15): Apple Intelligence adapter architecture diagram, no printed values. Figures 3–10 have printed bar labels and were extracted. No formal risk tier decisions stated. Red teaming uses internal and external crowds (unnamed); no external named tester orgs. Reviewer: removed Tables 5–6 (training ablations on data mixtures, pruning and distillation; their rows are not models). Table 10 unit is other: scores are relative to the unquantized model (100)."
+}

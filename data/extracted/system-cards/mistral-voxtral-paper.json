@@ -1,0 +1,212 @@
+{
+  "document": "mistral-voxtral-paper",
+  "alsoDocuments": [
+    "mistral-voxtral-blog"
+  ],
+  "covers": [
+    {
+      "model": "mistralai/Voxtral-Mini-3B-2507"
+    },
+    {
+      "model": "mistralai/Voxtral-Small-24B-2507"
+    }
+  ],
+  "pageCount": 17,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "32K token context window",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "With a 32K token context window, Voxtral is capable of processing audio files up"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "spoken audio and text",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "comprehend both spoken audio and text documents"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "multilingual (speech and text)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "multilingual prowess make them highly versatile for complex multimodal tasks."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "released with open-weights under an Apache 2.0 license."
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "Mini 4.7B total; Small 24.3B total",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Mini              640M                 25M                  400M                    3.6B       4.7B\n    Small             640M                 52M                  670M                   22.9B      24.3B"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Transformer audio-chat model: Whisper large-v3 encoder, MLP adapter (4x downsample to 12.5 Hz), language decoder on Ministral 3B (Mini) or Mistral Small 3.1 24B (Small)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Voxtral is based on the Transformer architecture [Vaswani et al., 2017], consisting of three components:\nan audio encoder to process speech inputs, an adapter layer to downsample audio embeddings, and a\nlanguage decoder to reason and generate text outputs."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "large-scale audio and text pretraining; instruction tuning on real and synthetic speech-understanding, summarization, translation, and TTS-adapted data; DPO/Online DPO preference data",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "pretrained on a large-scale corpus of audio and text documents, and subsequently instruction tuned on"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Voxtral Mini Online DPO delivers fewer hallucinations (informal vibe checks)",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Online DPO variant delivers crisper grounding, fewer hallucinations, and generally more helpful\nresponses"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "For Voxtral Small, Online Direct Preference Optimization (DPO) improved speech understanding (SU) quality scores but slightly hurt English short-form automatic speech recognition (ASR), so the default public checkpoint stays the supervised fine-tuning (SFT) model.", "tone": "mixed",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "Hence, the default checkpoint remains the SFT model."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:19:16Z"
+  },
+  "notes": "Technical report on Voxtral Mini and Small audio chat models. No safety, refusal, jailbreak, bias, toxicity, privacy, or dangerous-capability section or numeric safety evals. Capability-only results skipped per pilot: speech recognition WER (Figure 3, Tables 3–6), FLEURS translation BLEU (Figure 4, Table 7), speech understanding / Llama QA / Openbook QA / synthesized GSM8K TriviaQA MMLU (Figure 5, Table 8), internal SU LLM-judge scores (Table 2), text-only benchmarks (Figure 6), and architectural ablations (Figures 7–9). VoiceBench is cited as prior work only; no VoiceBench/AdvBench scores. Charts are mostly image bars; Table 2 is helpfulness/quality not safety. Hallucination topic covered only by an informal qualitative claim, not a measured eval. Voxtral Mini Transcribe is an ASR-only ablation, not a seed model, so not in covers. alsoDocuments mistral-voxtral-blog not fetched per brief."
+}

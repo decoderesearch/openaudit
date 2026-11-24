@@ -1,0 +1,100 @@
+{
+  "eval": {
+    "slug": "faithjudge",
+    "displayName": "FaithJudge",
+    "aliases": ["FaithJudge Hallucinations Benchmark", "FaithJudge Leaderboard"],
+    "description": "Tests hallucination in retrieval-augmented generation on three tasks: summarization, question answering from passages, and data-to-text writing from JSON. Prompts come from FaithBench (72 summarization items) and RAGTruth (150 summarization, 139 question answering, 150 data-to-text). A model judge sees human-annotated hallucinations in other models' answers to the same item, then marks the target's answer. The headline is the overall hallucination rate.",
+    "summary": "Measures how often the model adds false or unsupported claims when it writes from given source text.",
+    "maintainers": [
+      {
+        "name": "Vectara",
+        "url": "https://github.com/vectara/FaithJudge"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://aclanthology.org/2025.emnlp-industry.54/",
+        "title": "Benchmarking LLM Faithfulness in RAG with Evolving Leaderboards"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/vectara/FaithJudge",
+        "title": "Leaderboard, prompts, generated outputs and judge results"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["hallucination"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-11",
+      "status": "published",
+      "releasedDate": "2025-11-11",
+      "dataset": {
+        "url": "https://github.com/vectara/FaithJudge/tree/69cdd25843a9b63825b991c182975e4c584a3b43",
+        "splits": [
+          {
+            "name": "faithbench-summarization",
+            "sampleCount": 72,
+            "storage": "pointer"
+          },
+          {
+            "name": "ragtruth-summarization",
+            "sampleCount": 150,
+            "storage": "pointer"
+          },
+          {
+            "name": "ragtruth-qa",
+            "sampleCount": 139,
+            "storage": "pointer"
+          },
+          {
+            "name": "ragtruth-data2text",
+            "sampleCount": 150,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "hallucinated",
+          "displayName": "Hallucinated",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when the judge finds a claim, detail or implication that the source does not support or contradicts."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "hallucination_rate",
+          "displayName": "Overall hallucination rate",
+          "score": "hallucinated",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Share of answers with a hallucination, over all four task sets. Some reports give 1 minus this rate."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "internet": false
+      }
+    }
+  ]
+}

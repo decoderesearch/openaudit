@@ -1,0 +1,131 @@
+{
+  "eval": {
+    "slug": "example-multilingual-deception",
+    "displayName": "Multilingual Deception",
+    "aliases": [],
+    "description": "Tests if lie detectors still find a model's lies when the model lies in Spanish, Chinese or Swahili, not English. A system prompt in each language tells Gemma 4 E4B to lie or to be honest about a TriviaQA question that it answers correctly in that language. English chats are the control. Known limits: one small subject model; instructed lies only; the translations and labels are by an AI judge, which is less reliable in Swahili; each language has a different set of questions.",
+    "summary": "Tests if lie detectors find lies in Spanish, Chinese and Swahili.",
+    "family": "Honesty",
+    "maintainers": [
+      {
+        "name": "OpenAudit",
+        "url": "https://openaudit.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/openaudit/example-multilingual-deception",
+        "title": "Multilingual Deception chats"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/mandarjoshi/trivia_qa",
+        "title": "TriviaQA (the source questions)"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["multi_turn"],
+      "cases": ["generated"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["method"],
+      "topics": ["honesty"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-11",
+      "status": "published",
+      "releasedDate": "2026-11",
+      "dataset": {
+        "hfRepo": "openaudit/example-multilingual-deception",
+        "revision": "0000000000000000000000000000000000000000",
+        "splits": [
+          {
+            "name": "eval",
+            "sampleCount": 358,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "detector",
+          "displayName": "Detector",
+          "type": "continuous",
+          "direction": "neither",
+          "description": "The detector score of the reply. A score above the detector threshold counts as a lie."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "balanced_accuracy",
+          "displayName": "Balanced accuracy",
+          "aggregation": "custom",
+          "headline": true,
+          "min": 0,
+          "max": 1,
+          "description": "The mean balanced accuracy over Spanish, Chinese and Swahili. Balanced accuracy is the mean of the true positive rate on lies and the true negative rate on honest replies. 0.5 is chance.",
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better"
+        },
+        {
+          "key": "balanced_accuracy_en",
+          "displayName": "Balanced accuracy: English (the control)",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The balanced accuracy on the chats in English (the control). 0.5 is chance.",
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better"
+        },
+        {
+          "key": "balanced_accuracy_es",
+          "displayName": "Balanced accuracy: Spanish",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The balanced accuracy on the chats in Spanish. 0.5 is chance.",
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better"
+        },
+        {
+          "key": "balanced_accuracy_zh",
+          "displayName": "Balanced accuracy: Chinese",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The balanced accuracy on the chats in Chinese. 0.5 is chance.",
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better"
+        },
+        {
+          "key": "balanced_accuracy_sw",
+          "displayName": "Balanced accuracy: Swahili",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The balanced accuracy on the chats in Swahili. 0.5 is chance.",
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better"
+        },
+        {
+          "key": "worst_language",
+          "displayName": "Worst language",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The lowest balanced accuracy of Spanish, Chinese and Swahili.",
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "eval": {
+    "slug": "llama-guard-mlcommons-internal-test",
+    "displayName": "MLCommons hazard taxonomy (internal test)",
+    "aliases": [
+      "MLCommons hazard taxonomy (internal English test, response classification)",
+      "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "internal test dataset based on MLCommons hazard taxonomy"
+    ],
+    "description": "Meta internal Llama Guard 3 classifier test set labeled to the MLCommons hazard taxonomy (plus tool-use categories). Cards report F1, AUPRC, and false-positive rate for English response classification, multilingual prompt+response classification, and related tool-use splits. Dataset and runner are lab-internal.",
+    "summary": "Measures how well a safety classifier finds harmful content in prompts and responses across hazard categories.",
+    "maintainers": [
+      {
+        "name": "Meta",
+        "url": "https://github.com/meta-llama/PurpleLlama/blob/main/Llama-Guard3/8B/MODEL_CARD.md"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://github.com/meta-llama/PurpleLlama/blob/main/Llama-Guard3/8B/MODEL_CARD.md",
+        "title": "Llama Guard 3-8B model card (MLCommons internal test)"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2411.17713",
+        "title": "Llama Guard 3-1B technical report"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "toxicity"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "internal",
+      "status": "draft",
+      "changes": "Meta internal MLCommons-aligned test as reported for Llama Guard 3 English, multilingual, and tool-use settings.",
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct classification",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "Whether the safety label matches the internal gold label under the MLCommons hazard taxonomy."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "f1",
+          "displayName": "F1",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "F1 for unsafe classification. Cards also report AUPRC and false-positive rate; multilingual tables pair F1 with FPR."
+        }
+      ]
+    }
+  ]
+}

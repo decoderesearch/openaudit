@@ -1,0 +1,215 @@
+{
+  "document": "nvidia-nemotron-nano-2-paper-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "nvidia/NVIDIA-Nemotron-Nano-9B-v2"
+    },
+    {
+      "model": "nvidia/NVIDIA-Nemotron-Nano-9B-v2-Base"
+    },
+    {
+      "rawModelName": "NVIDIA-Nemotron-Nano-12B-v2-Base"
+    }
+  ],
+  "pageCount": 43,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "up to 128k tokens",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "enabling inference on up to 128k tokens on a single NVIDIA A10G\n                                        GPU (22GiB of memory, bfloat16 precision)."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "language model (text)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce Nemotron-Nano-9B-v2, a hybrid Mamba-Transformer language model"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "reasoning-off mode and thinking-token budget control",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "Nemotron Nano V2 allows users to specify how many thinking tokens the model may generate before\nproducing the final answer."
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "Arabic, Chinese, Danish, Dutch, French, German, Italian, Japanese, Korean, Polish, Portuguese, Russian, Spanish, Swedish, and Thai",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "languages included were Arabic, Chinese, Danish, Dutch, French, German, Italian, Japanese, Korean,\nPolish, Portuguese, Russian, Spanish, Swedish, and Thai."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "9B (compressed from 12B)",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "We efficiently compress the 12B model to 9B parameters by pruning full layers (depth), FFN hidden\n size, and embedding channels"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "hybrid Mamba-Transformer (mixture of Mamba-2, self-attention, and FFN layers)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Nemotron-Nano-12B-v2-Base consists of a mixture of Mamba-\n2 (Dao & Gu, 2024), self-attention, and FFN layers."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "12B base pre-trained on 20 trillion tokens (curated and synthetic); post-training ~90B tokens including Safety 2K SFT samples",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We create Nemotron-Nano-9B-v2 by first pre-training a 12-billion-parameter\n                                        model (Nemotron-Nano-12B-v2-Base) on 20 trillion tokens using an FP8 training recipe."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Safety appears only as supervised fine-tuning (SFT) training data (~2K samples) built from harmful/benign prompts and filtered with guard models; the report gives no safety benchmark scores for the released models.", "tone": "mixed",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "Safety. We leveraged a mix of harmful and benign prompts drawn from the Nemotron Content\nSafety Dataset V2 (Ghosh et al., 2025)12 , HarmfulTasks (Hasan et al., 2024), RedTeam2K (Luo\net al., 2024), and gretel-v1 (gre, 2024)."
+      }
+    },
+    {
+      "text": "Without truncation training, the model can stay in thinking mode after a forced </think> closure and may emit another closing tag.", "tone": "mixed",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "Another issue is that the model can remain in “thinking mode” even after the closing tag\n    </think> is inserted."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:12:55Z"
+  },
+  "notes": "Technical report (arXiv:2508.14444), not a system card. No risk framework, external safety testers, or safety/alignment/jailbreak/toxicity eval numbers. Safety is only SFT data mix (Table 7 Safety 2K) plus guard-model filtering of training responses—treated as training method, so topics stay uncovered. CC-NEWS through April 23, 2025 used to improve knowledge cutoff but no explicit cutoff date stated. Capability tables skipped per pilot (name in reply): Figure 1 accuracy/throughput; Tables 5–6 base (incl. Global-MMLU-Lite, MGSM); Table 8 (AIME-2024/2025, MATH-500, GPQA-Diamond, LiveCodeBench, SciCode, Humanity's Last Exam, IFEval, BFCL v3, RULER@128k, ArenaHard); RULER long-context ablations; budget-control Figure 5; pruning throughput Table 10. Aligned intermediate Nemotron-Nano-v2-12B (Table 8) is not listed among released Hugging Face checkpoints."
+}

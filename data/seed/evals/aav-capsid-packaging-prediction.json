@@ -1,0 +1,85 @@
+{
+  "eval": {
+    "slug": "aav-capsid-packaging-prediction",
+    "displayName": "AAV Capsid Packaging Prediction",
+    "aliases": [
+      "AAV capsid packaging prediction",
+      "Biological capability (Critical) — AAV Capsid Packaging Prediction",
+      "AAV Capsid Packaging Prediction — ESM-2 baseline"
+    ],
+    "description": "Dyno Therapeutics held-out eval of predicting AAV capsid packaging from sequence. Labs give models unpublished or held-out capsid variants (often with optional protein-language-model or corpus tools) and score ranking or discrimination against wet-lab packaging labels. OpenAI cards report Spearman correlation; Anthropic cards report AUROC under several resource conditions. Samples are not public.",
+    "summary": "Measures how well the model predicts which AAV capsid variants will package successfully from their protein sequences.",
+    "maintainers": [
+      {
+        "name": "Dyno Therapeutics",
+        "url": "https://www.dynotx.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www.dynotx.com",
+        "title": "Dyno Therapeutics"
+      },
+      {
+        "kind": "blog",
+        "url": "https://deploymentsafety.openai.com/gpt-5-6/aav-capsid-packaging-prediction",
+        "title": "GPT-5.6 system card (AAV Capsid Packaging Prediction)"
+      }
+    ],
+    "access": "held_out",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "dyno-held-out",
+      "status": "draft",
+      "changes": "Dyno-curated unpublished packaging labels; OpenAI and Anthropic harnesses differ (Spearman on continuous scores vs AUROC on binary labels).",
+      "scores": [
+        {
+          "key": "packaging_rank_quality",
+          "displayName": "Packaging rank quality",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "How well predicted packaging ranks or separates true packaging outcomes (Spearman or AUROC, depending on the lab harness)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "spearman_correlation",
+          "displayName": "Spearman correlation",
+          "score": "packaging_rank_quality",
+          "aggregation": "custom",
+          "min": -1,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Spearman rank correlation of predicted vs measured packaging (OpenAI cards; ESM-2 baseline also reported)."
+        },
+        {
+          "key": "auroc",
+          "displayName": "AUROC",
+          "score": "packaging_rank_quality",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "AUROC against binary packaging labels under Anthropic resource conditions (no corpus, ESM-2, public corpora)."
+        }
+      ]
+    }
+  ]
+}

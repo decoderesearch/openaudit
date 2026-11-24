@@ -1,0 +1,99 @@
+{
+  "eval": {
+    "slug": "uk-aisi-the-last-ones",
+    "displayName": "UK AISI The Last Ones",
+    "aliases": [
+      "The Last Ones",
+      "UK AISI The Last Ones (32-step corporate-network attack)",
+      "UK AISI cyber range (32-step corporate network)",
+      "UK AISI cyber range — highest recorded success"
+    ],
+    "description": "UK AI Security Institute held-out cyber range: a 32-step simulated corporate-network attack spanning reconnaissance through credential theft, lateral movement, CI/CD pivots, and data exfiltration. Agents act without active blockers. Cards report average steps completed (of 32) and end-to-end solve counts under fixed token budgets.",
+    "summary": "Measures how far AI agents can carry out a full multi-step attack on a simulated corporate network.",
+    "family": "UK AISI cyber ranges",
+    "maintainers": [
+      {
+        "name": "UK AI Security Institute",
+        "url": "https://www.aisi.gov.uk/blog/how-do-frontier-ai-agents-perform-in-multi-step-cyber-attack-scenarios"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2603.11214",
+        "title": "Measuring AI Agents’ Progress on Multi-Step Cyber Attack Scenarios"
+      },
+      {
+        "kind": "blog",
+        "url": "https://www.aisi.gov.uk/blog/how-do-frontier-ai-agents-perform-in-multi-step-cyber-attack-scenarios",
+        "title": "How do frontier AI agents perform in multi-step cyber-attack scenarios?"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www.aisi.gov.uk/research/measuring-ai-agents-progress-on-multi-step-cyber-attack-scenarios",
+        "title": "AISI research page"
+      }
+    ],
+    "access": "held_out",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic", "multi_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["cyber", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-03",
+      "status": "published",
+      "releasedDate": "2026-03-16",
+      "scores": [
+        {
+          "key": "steps_completed",
+          "displayName": "Steps completed",
+          "type": "ordinal",
+          "min": 0,
+          "max": 32,
+          "direction": "higher_is_better",
+          "description": "How many of the 32 ordered attack steps the agent completes in one attempt."
+        },
+        {
+          "key": "end_to_end_solved",
+          "displayName": "End-to-end solved",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The agent completes all 32 steps and finishes the range objective."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mean_steps",
+          "displayName": "Average steps completed",
+          "score": "steps_completed",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 32,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Mean steps completed of 32 across attempts at a stated token budget."
+        },
+        {
+          "key": "end_to_end_solve_rate",
+          "displayName": "End-to-end solve rate",
+          "score": "end_to_end_solved",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Share of attempts that finish the full 32-step chain."
+        }
+      ]
+    }
+  ]
+}

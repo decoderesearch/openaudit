@@ -1,0 +1,1274 @@
+{
+  "document": "meta-llama-2-model_card-system_card",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "meta-llama/Llama-2-7b-chat-hf"
+    },
+    {
+      "model": "meta-llama/Llama-2-13b-chat-hf"
+    },
+    {
+      "model": "meta-llama/Llama-2-70b-chat-hf"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "September 2022 (pretraining); some tuning data up to July 2023",
+      "source": {
+        "quote": "The pretraining data has a cutoff of September 2022, but some tuning data is more recent, up to July 2023.",
+        "page": "Training Data"
+      }
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4k",
+      "source": {
+        "quote": "Llama 2|*A new mix of publicly available online data*|7B|4k|&#10007;|2.0T|3.0 x 10<sup>-4</sup>",
+        "page": "Model Details"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "Input: text only; Output: text only",
+      "source": {
+        "quote": "Models input text only.",
+        "page": "Model Details"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English",
+      "source": {
+        "quote": "Llama 2 is intended for commercial and research use in English.",
+        "page": "Intended Use"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "A custom commercial license",
+      "source": {
+        "quote": "License** A custom commercial license is available at:",
+        "page": "Model Details"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7B, 13B, and 70B",
+      "source": {
+        "quote": "Llama 2 comes in a range of parameter sizes — 7B, 13B, and 70B — as well as pretrained and fine-tuned variations.",
+        "page": "Model Details"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "auto-regressive optimized transformer; SFT and RLHF for tuned versions",
+      "source": {
+        "quote": "Llama 2 is an auto-regressive language model that uses an optimized transformer architecture. The tuned versions use supervised fine-tuning (SFT) and reinforcement learning with human feedback (RLHF) to align with human preferences for helpfulness and safety.",
+        "page": "Model Details"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "2 trillion tokens from publicly available sources; fine-tuning includes public instruction datasets and over one million human-annotated examples",
+      "source": {
+        "quote": "Llama 2 was pretrained on 2 trillion tokens of data from publicly available sources. The fine-tuning data includes publicly available instruction datasets, as well as over one million new human-annotated examples.",
+        "page": "Training Data"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "3.3M GPU hours on A100-80GB",
+      "source": {
+        "quote": "Pretraining utilized a cumulative 3.3M GPU hours of computation on hardware of type A100-80GB (TDP of 350-400W).",
+        "page": "Hardware and Software"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "model may produce inaccurate responses to user prompts",
+      "source": {
+        "quote": "the model may in some instances produce inaccurate, biased or other objectionable responses to user prompts",
+        "page": "Ethical Considerations and Limitations"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "Llama-2-Chat 70B [TruthfulQA](/evals/truthfulqa) 64.1% (higher is better)",
+      "source": {
+        "quote": "For TruthfulQA, we present the percentage of generations that are both truthful and informative (the higher the better).",
+        "page": "Evaluation Results"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "may produce biased or other objectionable responses",
+      "source": {
+        "quote": "the model may in some instances produce inaccurate, biased or other objectionable responses to user prompts",
+        "page": "Ethical Considerations and Limitations"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "[ToxiGen](/evals/toxigen) toxic generation rate near 0 for Llama-2-Chat (lower is better)",
+      "source": {
+        "page": "Evaluation Results",
+        "quote": "For ToxiGen, we present the percentage of toxic generations (the smaller the better)."
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Llama-2-Chat models are on par with ChatGPT and PaLM on human evaluations for helpfulness and safety.", "tone": "good",
+      "source": {
+        "quote": "in our human evaluations for helpfulness and safety, are on par with some popular closed-source models like ChatGPT and PaLM",
+        "page": "Model Details"
+      }
+    },
+    {
+      "text": "Testing so far has been in English only and cannot cover all scenarios.", "tone": "mixed",
+      "source": {
+        "quote": "Testing conducted to date has been in English, and has not covered, nor could it cover all scenarios.",
+        "page": "Ethical Considerations and Limitations"
+      }
+    },
+    {
+      "text": "Pretraining used 3.3M GPU hours on A100-80GB with estimated emissions of 539 tCO2eq, fully offset by Meta.", "tone": "neutral",
+      "source": {
+        "quote": "Pretraining utilized a cumulative 3.3M GPU hours of computation on hardware of type A100-80GB (TDP of 350-400W). Estimated total emissions were 539 tCO2eq, 100% of which were offset by Meta’s sustainability program.",
+        "page": "Hardware and Software"
+      }
+    },
+    {
+      "text": "Neither pretraining nor fine-tuning datasets include Meta user data.", "tone": "good",
+      "source": {
+        "quote": "Neither the pretraining nor the fine-tuning datasets include Meta user data.",
+        "page": "Training Data"
+      }
+    },
+    {
+      "text": "The model is static and trained on an offline dataset; future tuned versions may follow community safety feedback.", "tone": "mixed",
+      "source": {
+        "quote": "This is a static model trained on an offline dataset. Future versions of the tuned models will be released as we improve model safety with community feedback.",
+        "page": "Model Details"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Code",
+      "metric": "average pass@1",
+      "value": 14.1,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|7B|14.1",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-7b",
+      "settings": {
+        "other": "average pass@1 on HumanEval and MBPP"
+      }
+    },
+    {
+      "rawEvalName": "Commonsense Reasoning",
+      "metric": "average score",
+      "value": 60.8,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|7B|14.1|60.8",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-7b",
+      "settings": {
+        "other": "avg of PIQA, SIQA, HellaSwag, WinoGrande, ARC easy and challenge, OpenBookQA, CommonsenseQA; 7-shot CommonSenseQA, 0-shot others"
+      }
+    },
+    {
+      "rawEvalName": "World Knowledge",
+      "metric": "average score",
+      "value": 46.2,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|7B|14.1|60.8|46.2",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-7b",
+      "settings": {
+        "other": "5-shot avg of NaturalQuestions and TriviaQA"
+      }
+    },
+    {
+      "rawEvalName": "Reading Comprehension",
+      "metric": "average score",
+      "value": 58.5,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|7B|14.1|60.8|46.2|58.5",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-7b",
+      "settings": {
+        "other": "0-shot avg of SQuAD, QuAC, BoolQ"
+      }
+    },
+    {
+      "rawEvalName": "Math",
+      "metric": "average score",
+      "value": 6.95,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|7B|14.1|60.8|46.2|58.5|6.95",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-7b",
+      "settings": {
+        "other": "avg of GSM8K (8 shot) and MATH (4 shot) top 1"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "score",
+      "value": 35.1,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|7B|14.1|60.8|46.2|58.5|6.95|35.1",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-7b"
+    },
+    {
+      "rawEvalName": "BBH",
+      "metric": "score",
+      "value": 30.3,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|7B|14.1|60.8|46.2|58.5|6.95|35.1|30.3",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-7b"
+    },
+    {
+      "rawEvalName": "AGI Eval",
+      "metric": "score",
+      "value": 23.9,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|7B|14.1|60.8|46.2|58.5|6.95|35.1|30.3|23.9",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-7b"
+    },
+    {
+      "rawEvalName": "Code",
+      "metric": "average pass@1",
+      "value": 18.9,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|13B|18.9",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-13b",
+      "settings": {
+        "other": "average pass@1 on HumanEval and MBPP"
+      }
+    },
+    {
+      "rawEvalName": "Commonsense Reasoning",
+      "metric": "average score",
+      "value": 66.1,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|13B|18.9|66.1",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-13b",
+      "settings": {
+        "other": "avg of PIQA, SIQA, HellaSwag, WinoGrande, ARC easy and challenge, OpenBookQA, CommonsenseQA; 7-shot CommonSenseQA, 0-shot others"
+      }
+    },
+    {
+      "rawEvalName": "World Knowledge",
+      "metric": "average score",
+      "value": 52.6,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|13B|18.9|66.1|52.6",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-13b",
+      "settings": {
+        "other": "5-shot avg of NaturalQuestions and TriviaQA"
+      }
+    },
+    {
+      "rawEvalName": "Reading Comprehension",
+      "metric": "average score",
+      "value": 62.3,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|13B|18.9|66.1|52.6|62.3",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-13b",
+      "settings": {
+        "other": "0-shot avg of SQuAD, QuAC, BoolQ"
+      }
+    },
+    {
+      "rawEvalName": "Math",
+      "metric": "average score",
+      "value": 10.9,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|13B|18.9|66.1|52.6|62.3|10.9",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-13b",
+      "settings": {
+        "other": "avg of GSM8K (8 shot) and MATH (4 shot) top 1"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "score",
+      "value": 46.9,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|13B|18.9|66.1|52.6|62.3|10.9|46.9",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-13b"
+    },
+    {
+      "rawEvalName": "BBH",
+      "metric": "score",
+      "value": 37.0,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|13B|18.9|66.1|52.6|62.3|10.9|46.9|37.0",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-13b"
+    },
+    {
+      "rawEvalName": "AGI Eval",
+      "metric": "score",
+      "value": 33.9,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|13B|18.9|66.1|52.6|62.3|10.9|46.9|37.0|33.9",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-13b"
+    },
+    {
+      "rawEvalName": "Code",
+      "metric": "average pass@1",
+      "value": 26.0,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|33B|26.0",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-33b",
+      "settings": {
+        "other": "average pass@1 on HumanEval and MBPP"
+      }
+    },
+    {
+      "rawEvalName": "Commonsense Reasoning",
+      "metric": "average score",
+      "value": 70.0,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|33B|26.0|70.0",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-33b",
+      "settings": {
+        "other": "avg of PIQA, SIQA, HellaSwag, WinoGrande, ARC easy and challenge, OpenBookQA, CommonsenseQA; 7-shot CommonSenseQA, 0-shot others"
+      }
+    },
+    {
+      "rawEvalName": "World Knowledge",
+      "metric": "average score",
+      "value": 58.4,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|33B|26.0|70.0|58.4",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-33b",
+      "settings": {
+        "other": "5-shot avg of NaturalQuestions and TriviaQA"
+      }
+    },
+    {
+      "rawEvalName": "Reading Comprehension",
+      "metric": "average score",
+      "value": 67.6,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|33B|26.0|70.0|58.4|67.6",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-33b",
+      "settings": {
+        "other": "0-shot avg of SQuAD, QuAC, BoolQ"
+      }
+    },
+    {
+      "rawEvalName": "Math",
+      "metric": "average score",
+      "value": 21.4,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|33B|26.0|70.0|58.4|67.6|21.4",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-33b",
+      "settings": {
+        "other": "avg of GSM8K (8 shot) and MATH (4 shot) top 1"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "score",
+      "value": 57.8,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|33B|26.0|70.0|58.4|67.6|21.4|57.8",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-33b"
+    },
+    {
+      "rawEvalName": "BBH",
+      "metric": "score",
+      "value": 39.8,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|33B|26.0|70.0|58.4|67.6|21.4|57.8|39.8",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-33b"
+    },
+    {
+      "rawEvalName": "AGI Eval",
+      "metric": "score",
+      "value": 41.7,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|33B|26.0|70.0|58.4|67.6|21.4|57.8|39.8|41.7",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-33b"
+    },
+    {
+      "rawEvalName": "Code",
+      "metric": "average pass@1",
+      "value": 30.7,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|65B|30.7",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-65b",
+      "settings": {
+        "other": "average pass@1 on HumanEval and MBPP"
+      }
+    },
+    {
+      "rawEvalName": "Commonsense Reasoning",
+      "metric": "average score",
+      "value": 70.7,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|65B|30.7|70.7",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-65b",
+      "settings": {
+        "other": "avg of PIQA, SIQA, HellaSwag, WinoGrande, ARC easy and challenge, OpenBookQA, CommonsenseQA; 7-shot CommonSenseQA, 0-shot others"
+      }
+    },
+    {
+      "rawEvalName": "World Knowledge",
+      "metric": "average score",
+      "value": 60.5,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|65B|30.7|70.7|60.5",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-65b",
+      "settings": {
+        "other": "5-shot avg of NaturalQuestions and TriviaQA"
+      }
+    },
+    {
+      "rawEvalName": "Reading Comprehension",
+      "metric": "average score",
+      "value": 68.6,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|65B|30.7|70.7|60.5|68.6",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-65b",
+      "settings": {
+        "other": "0-shot avg of SQuAD, QuAC, BoolQ"
+      }
+    },
+    {
+      "rawEvalName": "Math",
+      "metric": "average score",
+      "value": 30.8,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|65B|30.7|70.7|60.5|68.6|30.8",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-65b",
+      "settings": {
+        "other": "avg of GSM8K (8 shot) and MATH (4 shot) top 1"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "score",
+      "value": 63.4,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|65B|30.7|70.7|60.5|68.6|30.8|63.4",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-65b"
+    },
+    {
+      "rawEvalName": "BBH",
+      "metric": "score",
+      "value": 43.5,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|65B|30.7|70.7|60.5|68.6|30.8|63.4|43.5",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-65b"
+    },
+    {
+      "rawEvalName": "AGI Eval",
+      "metric": "score",
+      "value": 47.6,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|65B|30.7|70.7|60.5|68.6|30.8|63.4|43.5|47.6",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "model": "meta/llama-65b"
+    },
+    {
+      "rawEvalName": "Code",
+      "metric": "average pass@1",
+      "value": 16.8,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|7B|16.8",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 7B",
+      "settings": {
+        "other": "average pass@1 on HumanEval and MBPP"
+      }
+    },
+    {
+      "rawEvalName": "Commonsense Reasoning",
+      "metric": "average score",
+      "value": 63.9,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|7B|16.8|63.9",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 7B",
+      "settings": {
+        "other": "avg of PIQA, SIQA, HellaSwag, WinoGrande, ARC easy and challenge, OpenBookQA, CommonsenseQA; 7-shot CommonSenseQA, 0-shot others"
+      }
+    },
+    {
+      "rawEvalName": "World Knowledge",
+      "metric": "average score",
+      "value": 48.9,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|7B|16.8|63.9|48.9",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 7B",
+      "settings": {
+        "other": "5-shot avg of NaturalQuestions and TriviaQA"
+      }
+    },
+    {
+      "rawEvalName": "Reading Comprehension",
+      "metric": "average score",
+      "value": 61.3,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|7B|16.8|63.9|48.9|61.3",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 7B",
+      "settings": {
+        "other": "0-shot avg of SQuAD, QuAC, BoolQ"
+      }
+    },
+    {
+      "rawEvalName": "Math",
+      "metric": "average score",
+      "value": 14.6,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|7B|16.8|63.9|48.9|61.3|14.6",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 7B",
+      "settings": {
+        "other": "avg of GSM8K (8 shot) and MATH (4 shot) top 1"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "score",
+      "value": 45.3,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|7B|16.8|63.9|48.9|61.3|14.6|45.3",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 7B"
+    },
+    {
+      "rawEvalName": "BBH",
+      "metric": "score",
+      "value": 32.6,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|7B|16.8|63.9|48.9|61.3|14.6|45.3|32.6",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 7B"
+    },
+    {
+      "rawEvalName": "AGI Eval",
+      "metric": "score",
+      "value": 29.3,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|7B|16.8|63.9|48.9|61.3|14.6|45.3|32.6|29.3",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 7B"
+    },
+    {
+      "rawEvalName": "Code",
+      "metric": "average pass@1",
+      "value": 24.5,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|13B|24.5",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 13B",
+      "settings": {
+        "other": "average pass@1 on HumanEval and MBPP"
+      }
+    },
+    {
+      "rawEvalName": "Commonsense Reasoning",
+      "metric": "average score",
+      "value": 66.9,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|13B|24.5|66.9",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 13B",
+      "settings": {
+        "other": "avg of PIQA, SIQA, HellaSwag, WinoGrande, ARC easy and challenge, OpenBookQA, CommonsenseQA; 7-shot CommonSenseQA, 0-shot others"
+      }
+    },
+    {
+      "rawEvalName": "World Knowledge",
+      "metric": "average score",
+      "value": 55.4,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|13B|24.5|66.9|55.4",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 13B",
+      "settings": {
+        "other": "5-shot avg of NaturalQuestions and TriviaQA"
+      }
+    },
+    {
+      "rawEvalName": "Reading Comprehension",
+      "metric": "average score",
+      "value": 65.8,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|13B|24.5|66.9|55.4|65.8",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 13B",
+      "settings": {
+        "other": "0-shot avg of SQuAD, QuAC, BoolQ"
+      }
+    },
+    {
+      "rawEvalName": "Math",
+      "metric": "average score",
+      "value": 28.7,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|13B|24.5|66.9|55.4|65.8|28.7",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 13B",
+      "settings": {
+        "other": "avg of GSM8K (8 shot) and MATH (4 shot) top 1"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "score",
+      "value": 54.8,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|13B|24.5|66.9|55.4|65.8|28.7|54.8",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 13B"
+    },
+    {
+      "rawEvalName": "BBH",
+      "metric": "score",
+      "value": 39.4,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|13B|24.5|66.9|55.4|65.8|28.7|54.8|39.4",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 13B"
+    },
+    {
+      "rawEvalName": "AGI Eval",
+      "metric": "score",
+      "value": 39.1,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|13B|24.5|66.9|55.4|65.8|28.7|54.8|39.4|39.1",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 13B"
+    },
+    {
+      "rawEvalName": "Code",
+      "metric": "average pass@1",
+      "value": 37.5,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|70B|**37.5**",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 70B",
+      "settings": {
+        "other": "average pass@1 on HumanEval and MBPP"
+      }
+    },
+    {
+      "rawEvalName": "Commonsense Reasoning",
+      "metric": "average score",
+      "value": 71.9,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|70B|**37.5**|**71.9**",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 70B",
+      "settings": {
+        "other": "avg of PIQA, SIQA, HellaSwag, WinoGrande, ARC easy and challenge, OpenBookQA, CommonsenseQA; 7-shot CommonSenseQA, 0-shot others"
+      }
+    },
+    {
+      "rawEvalName": "World Knowledge",
+      "metric": "average score",
+      "value": 63.6,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|70B|**37.5**|**71.9**|**63.6**",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 70B",
+      "settings": {
+        "other": "5-shot avg of NaturalQuestions and TriviaQA"
+      }
+    },
+    {
+      "rawEvalName": "Reading Comprehension",
+      "metric": "average score",
+      "value": 69.4,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|70B|**37.5**|**71.9**|**63.6**|**69.4**",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 70B",
+      "settings": {
+        "other": "0-shot avg of SQuAD, QuAC, BoolQ"
+      }
+    },
+    {
+      "rawEvalName": "Math",
+      "metric": "average score",
+      "value": 35.2,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|70B|**37.5**|**71.9**|**63.6**|**69.4**|**35.2**",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 70B",
+      "settings": {
+        "other": "avg of GSM8K (8 shot) and MATH (4 shot) top 1"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "score",
+      "value": 68.9,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|70B|**37.5**|**71.9**|**63.6**|**69.4**|**35.2**|**68.9**",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 70B"
+    },
+    {
+      "rawEvalName": "BBH",
+      "metric": "score",
+      "value": 51.2,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|70B|**37.5**|**71.9**|**63.6**|**69.4**|**35.2**|**68.9**|**51.2**",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 70B"
+    },
+    {
+      "rawEvalName": "AGI Eval",
+      "metric": "score",
+      "value": 54.2,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|70B|**37.5**|**71.9**|**63.6**|**69.4**|**35.2**|**68.9**|**51.2**|**54.2**",
+        "page": "Evaluation Results",
+        "table": "Overall performance on grouped academic benchmarks"
+      },
+      "rawModelName": "Llama 2 70B"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage truthful and informative",
+      "value": 27.42,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|7B|27.42",
+        "page": "Evaluation Results",
+        "table": "Evaluation of pretrained LLMs on automatic safety benchmarks"
+      },
+      "model": "meta/llama-7b"
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "metric": "percentage of toxic generations",
+      "value": 23.0,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|7B|27.42|23.00",
+        "page": "Evaluation Results",
+        "table": "Evaluation of pretrained LLMs on automatic safety benchmarks"
+      },
+      "model": "meta/llama-7b"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage truthful and informative",
+      "value": 41.74,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|13B|41.74",
+        "page": "Evaluation Results",
+        "table": "Evaluation of pretrained LLMs on automatic safety benchmarks"
+      },
+      "model": "meta/llama-13b"
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "metric": "percentage of toxic generations",
+      "value": 23.08,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|13B|41.74|23.08",
+        "page": "Evaluation Results",
+        "table": "Evaluation of pretrained LLMs on automatic safety benchmarks"
+      },
+      "model": "meta/llama-13b"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage truthful and informative",
+      "value": 44.19,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|33B|44.19",
+        "page": "Evaluation Results",
+        "table": "Evaluation of pretrained LLMs on automatic safety benchmarks"
+      },
+      "model": "meta/llama-33b"
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "metric": "percentage of toxic generations",
+      "value": 22.57,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|33B|44.19|22.57",
+        "page": "Evaluation Results",
+        "table": "Evaluation of pretrained LLMs on automatic safety benchmarks"
+      },
+      "model": "meta/llama-33b"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage truthful and informative",
+      "value": 48.71,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|65B|48.71",
+        "page": "Evaluation Results",
+        "table": "Evaluation of pretrained LLMs on automatic safety benchmarks"
+      },
+      "model": "meta/llama-65b"
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "metric": "percentage of toxic generations",
+      "value": 21.77,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 1|65B|48.71|21.77",
+        "page": "Evaluation Results",
+        "table": "Evaluation of pretrained LLMs on automatic safety benchmarks"
+      },
+      "model": "meta/llama-65b"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage truthful and informative",
+      "value": 33.29,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|7B|33.29",
+        "page": "Evaluation Results",
+        "table": "Evaluation of pretrained LLMs on automatic safety benchmarks"
+      },
+      "rawModelName": "Llama 2 7B"
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "metric": "percentage of toxic generations",
+      "value": 21.25,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|7B|33.29|**21.25**",
+        "page": "Evaluation Results",
+        "table": "Evaluation of pretrained LLMs on automatic safety benchmarks"
+      },
+      "rawModelName": "Llama 2 7B"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage truthful and informative",
+      "value": 41.86,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|13B|41.86",
+        "page": "Evaluation Results",
+        "table": "Evaluation of pretrained LLMs on automatic safety benchmarks"
+      },
+      "rawModelName": "Llama 2 13B"
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "metric": "percentage of toxic generations",
+      "value": 26.1,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|13B|41.86|26.10",
+        "page": "Evaluation Results",
+        "table": "Evaluation of pretrained LLMs on automatic safety benchmarks"
+      },
+      "rawModelName": "Llama 2 13B"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage truthful and informative",
+      "value": 50.18,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|70B|**50.18**",
+        "page": "Evaluation Results",
+        "table": "Evaluation of pretrained LLMs on automatic safety benchmarks"
+      },
+      "rawModelName": "Llama 2 70B"
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "metric": "percentage of toxic generations",
+      "value": 24.6,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama 2|70B|**50.18**|24.60",
+        "page": "Evaluation Results",
+        "table": "Evaluation of pretrained LLMs on automatic safety benchmarks"
+      },
+      "rawModelName": "Llama 2 70B"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage truthful and informative",
+      "value": 57.04,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama-2-Chat|7B|57.04",
+        "page": "Evaluation Results",
+        "table": "Evaluation of fine-tuned LLMs on different safety datasets"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf"
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "metric": "percentage of toxic generations",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama-2-Chat|7B|57.04|**0.00**",
+        "page": "Evaluation Results",
+        "table": "Evaluation of fine-tuned LLMs on different safety datasets"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage truthful and informative",
+      "value": 62.18,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama-2-Chat|13B|62.18",
+        "page": "Evaluation Results",
+        "table": "Evaluation of fine-tuned LLMs on different safety datasets"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf"
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "metric": "percentage of toxic generations",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama-2-Chat|13B|62.18|**0.00**",
+        "page": "Evaluation Results",
+        "table": "Evaluation of fine-tuned LLMs on different safety datasets"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "percentage truthful and informative",
+      "value": 64.14,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama-2-Chat|70B|**64.14**",
+        "page": "Evaluation Results",
+        "table": "Evaluation of fine-tuned LLMs on different safety datasets"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf"
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "metric": "percentage of toxic generations",
+      "value": 0.01,
+      "unit": "percent",
+      "source": {
+        "quote": "|Llama-2-Chat|70B|**64.14**|0.01",
+        "page": "Evaluation Results",
+        "table": "Evaluation of fine-tuned LLMs on different safety datasets"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf"
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:47:45Z"
+  },
+  "notes": "Source is the short GitHub MODEL_CARD.md (not the full Llama 2 research paper). No explicit release/launch date in the text (only training window Jan–Jul 2023). Seed only lists chat variants; pretrained Llama 2 rows use rawModelName. Llama 1 comparison rows use seed ids meta/llama-*. Carbon/GPU-hour table omitted (not eval scores). No lab risk-framework decisions or external testers named."
+}

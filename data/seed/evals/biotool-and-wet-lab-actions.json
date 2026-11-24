@@ -1,0 +1,65 @@
+{
+  "eval": {
+    "slug": "biotool-and-wet-lab-actions",
+    "displayName": "Biotool and Wet Lab Actions",
+    "aliases": [],
+    "description": "OpenAI agentic eval of wet-lab assistant actions through a computer or browser harness (including Ranger). Tasks cover common lab-assistant steps such as using biological design tools, retrieving reference sequences, and placing synthesis orders. Scored as pass@10 success rate per task. Dataset and runner are lab-internal.",
+    "summary": "Measures whether AI agents can complete wet-lab assistant tasks, such as using biological design tools and ordering synthesis.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://cdn.openai.com/o1-system-card-20241205.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://cdn.openai.com/o1-system-card-20241205.pdf",
+        "title": "OpenAI o1 system card (Biotool and Wet Lab Actions)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "pass-at-10-tasks",
+      "status": "draft",
+      "changes": "Cards report three browser or tool tasks with pass@10 over 10 rollouts; custom and Ranger scaffolds.",
+      "scores": [
+        {
+          "key": "task_success",
+          "displayName": "Task success",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The agent completed the assigned wet-lab tooling or ordering task on that rollout."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "pass@10",
+          "displayName": "pass@10 / success rate",
+          "score": "task_success",
+          "aggregation": "pass_at_k",
+          "k": 10,
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Success rate over 10 rollouts, reported per task."
+        }
+      ]
+    }
+  ]
+}

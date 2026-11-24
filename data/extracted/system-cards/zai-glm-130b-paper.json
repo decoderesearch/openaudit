@@ -1,0 +1,1446 @@
+{
+  "document": "zai-glm-130b-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "z-ai/glm-130b"
+    }
+  ],
+  "pageCount": 56,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "2,048 tokens (fixed sequence length / [gMASK] context window)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "fixed sequence length of 2,048 per sample"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (bilingual pre-trained language model)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "bilingual (English and Chinese) pre-trained language"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English and Chinese",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "bilingual (English and Chinese) pre-trained language"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Model license requires applicants agree not to use the model for deeds harmful to society and human beings",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "in the model license we demand them to agree that they will not use it"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "130 billion parameters",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "model with 130 billion parameters"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "GLM bilingual bidirectional dense model; autoregressive blank infilling and multi-task instruction pre-training (MIP); DeepNorm Post-LN",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "bilingual (English and Chinese) bidirectional dense model with 130 bil-"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "1.2T Pile (English), 1.0T Chinese WudaoCorpora, 250G crawled Chinese; trained on 400B tokens (~200B each EN/CN)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "The pre-training data includes 1.2T Pile (train split) (Gao et al., 2020) English, 1.0T Chinese Wudao-"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "[CrowS-Pairs](/evals/crows-pairs) and [StereoSet](/evals/stereoset) bias measurements vs GPT-3 and OPT-175B",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "GLM-130B shows fewer biases on almost all kinds of stereo-"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "GLM-130B has a lower [RealToxicPrompts](https://arxiv.org/abs/2009.11462) continuation toxicity rate than GPT-3 Davinci in all prompt-toxicity bins",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "GLM-130B has a lower toxicity rate in all cases, indicating that GLM-130B is less prone to gener-"
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "On [CrowS-Pairs](/evals/crows-pairs), GLM-130B shows fewer biases on almost all stereotype categories except religion and nationality versus GPT-3 and OPT-175B.", "tone": "good",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "except for religion and nationality. We speculate that it is because GLM-130B is a bilingual"
+      }
+    },
+    {
+      "text": "Authors speculate bilingual English–Chinese pre-training may reconcile US-centric [CrowS-Pairs](/evals/crows-pairs) stereotypes and yield less harmful measured bias.", "tone": "neutral",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "help LLMs to present less harmful biases for better fairness. Finally, we also admit that GLM-"
+      }
+    },
+    {
+      "text": "Authors admit GLM-130B may present special Chinese biases that lack testing benchmarks.", "tone": "mixed",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "130B may in turn presents some special Chinese biases which currently lack testing benchmarks"
+      }
+    },
+    {
+      "text": "On [RealToxicPrompts](https://arxiv.org/abs/2009.11462) (Figure 9), the paper reports GLM-130B has a lower continuation toxicity rate than GPT-3 Davinci in all prompt-toxicity bins, but gives no numeric rates in the text layer.", "tone": "good",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "GLM-130B has a lower toxicity rate in all cases, indicating that GLM-130B is less prone to gener-"
+      }
+    },
+    {
+      "text": "Before granting weights, applicants must agree under the model license not to use the model for deeds harmful to society and human beings.", "tone": "neutral",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "in the model license we demand them to agree that they will not use it"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 62.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Gender category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Gender              62.6"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "bias score",
+      "value": 65.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Gender category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Gender              62.6   65.7"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "z-ai/glm-130b",
+      "metric": "bias score",
+      "value": 55.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Gender category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Gender              62.6   65.7         55.7"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 73.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Religion category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Religion            73.3"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "bias score",
+      "value": 68.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Religion category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Religion            73.3   68.6"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "z-ai/glm-130b",
+      "metric": "bias score",
+      "value": 73.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Religion category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Religion            73.3   68.6         73.3"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 64.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Race/Color category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Race/Color          64.7"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "bias score",
+      "value": 68.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Race/Color category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Race/Color          64.7   68.6"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "z-ai/glm-130b",
+      "metric": "bias score",
+      "value": 58.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Race/Color category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Race/Color          64.7   68.6         58.5"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 76.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Sexual orientation category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Sexual orientation        76.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "bias score",
+      "value": 78.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Sexual orientation category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Sexual orientation        76.2   78.6"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "z-ai/glm-130b",
+      "metric": "bias score",
+      "value": 60.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Sexual orientation category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Sexual orientation        76.2   78.6         60.7"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 64.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Age category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Age                 64.4"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "bias score",
+      "value": 67.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Age category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Age                 64.4   67.8"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "z-ai/glm-130b",
+      "metric": "bias score",
+      "value": 63.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Age category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Age                 64.4   67.8         63.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 61.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Nationality category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Nationality                  61.6"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "bias score",
+      "value": 62.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Nationality category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Nationality                  61.6   62.9"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "z-ai/glm-130b",
+      "metric": "bias score",
+      "value": 64.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Nationality category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Nationality                  61.6   62.9         64.1"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 76.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Disability category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Disability             76.7"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "bias score",
+      "value": 76.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Disability category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Disability             76.7   76.7"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "z-ai/glm-130b",
+      "metric": "bias score",
+      "value": 71.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Disability category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Disability             76.7   76.7         71.6"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 74.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Physical appearance category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Physical appearance 74.6"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "bias score",
+      "value": 76.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Physical appearance category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Physical appearance 74.6        76.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "z-ai/glm-130b",
+      "metric": "bias score",
+      "value": 74.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Physical appearance category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Physical appearance 74.6        76.2         74.6"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 73.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Socioeconomic status category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Socioeconomic status 73.8"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "bias score",
+      "value": 76.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Socioeconomic status category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Socioeconomic status 73.8              76.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "z-ai/glm-130b",
+      "metric": "bias score",
+      "value": 70.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Socioeconomic status category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Socioeconomic status 73.8              76.2         70.9"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 67.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Overall category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Overall                      67.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "bias score",
+      "value": 69.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Overall category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Overall                      67.2   69.5"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "z-ai/glm-130b",
+      "metric": "bias score",
+      "value": 65.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Overall category"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 5",
+        "quote": "Overall                      67.2   69.5         65.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "LMS",
+      "value": 78.4,
+      "unit": "score",
+      "settings": {
+        "other": "Profession category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "SS",
+      "value": 63.4,
+      "unit": "score",
+      "settings": {
+        "other": "Profession category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4 63.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "ICAT",
+      "value": 57.5,
+      "unit": "score",
+      "settings": {
+        "other": "Profession category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4 63.4 57.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "LMS",
+      "value": 75.6,
+      "unit": "score",
+      "settings": {
+        "other": "Gender category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4 63.4 57.5 75.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "SS",
+      "value": 66.5,
+      "unit": "score",
+      "settings": {
+        "other": "Gender category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4 63.4 57.5 75.6 66.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "ICAT",
+      "value": 50.6,
+      "unit": "score",
+      "settings": {
+        "other": "Gender category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4 63.4 57.5 75.6 66.5 50.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "LMS",
+      "value": 80.8,
+      "unit": "score",
+      "settings": {
+        "other": "Religion category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4 63.4 57.5 75.6 66.5 50.6 80.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "SS",
+      "value": 59,
+      "unit": "score",
+      "settings": {
+        "other": "Religion category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4 63.4 57.5 75.6 66.5 50.6 80.8 59.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "ICAT",
+      "value": 66.3,
+      "unit": "score",
+      "settings": {
+        "other": "Religion category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4 63.4 57.5 75.6 66.5 50.6 80.8 59.0 66.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "LMS",
+      "value": 77,
+      "unit": "score",
+      "settings": {
+        "other": "Race category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4 63.4 57.5 75.6 66.5 50.6 80.8 59.0 66.3 77.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "SS",
+      "value": 57.4,
+      "unit": "score",
+      "settings": {
+        "other": "Race category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4 63.4 57.5 75.6 66.5 50.6 80.8 59.0 66.3 77.0 57.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "ICAT",
+      "value": 65.7,
+      "unit": "score",
+      "settings": {
+        "other": "Race category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4 63.4 57.5 75.6 66.5 50.6 80.8 59.0 66.3 77.0 57.4 65.7"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "LMS",
+      "value": 77.6,
+      "unit": "score",
+      "settings": {
+        "other": "Overall category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4 63.4 57.5 75.6 66.5 50.6 80.8 59.0 66.3 77.0 57.4 65.7 77.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "SS",
+      "value": 60.8,
+      "unit": "score",
+      "settings": {
+        "other": "Overall category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4 63.4 57.5 75.6 66.5 50.6 80.8 59.0 66.3 77.0 57.4 65.7 77.6 60.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "ICAT",
+      "value": 60.8,
+      "unit": "score",
+      "settings": {
+        "other": "Overall category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GPT-3    78.4 63.4 57.5 75.6 66.5 50.6 80.8 59.0 66.3 77.0 57.4 65.7 77.6 60.8 60.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "LMS",
+      "value": 74.1,
+      "unit": "score",
+      "settings": {
+        "other": "Profession category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "SS",
+      "value": 62.6,
+      "unit": "score",
+      "settings": {
+        "other": "Profession category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1 62.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "ICAT",
+      "value": 55.4,
+      "unit": "score",
+      "settings": {
+        "other": "Profession category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1 62.6 55.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "LMS",
+      "value": 74,
+      "unit": "score",
+      "settings": {
+        "other": "Gender category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1 62.6 55.4 74.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "SS",
+      "value": 63.6,
+      "unit": "score",
+      "settings": {
+        "other": "Gender category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1 62.6 55.4 74.0 63.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "ICAT",
+      "value": 53.8,
+      "unit": "score",
+      "settings": {
+        "other": "Gender category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1 62.6 55.4 74.0 63.6 53.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "LMS",
+      "value": 84,
+      "unit": "score",
+      "settings": {
+        "other": "Religion category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1 62.6 55.4 74.0 63.6 53.8 84.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "SS",
+      "value": 59,
+      "unit": "score",
+      "settings": {
+        "other": "Religion category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1 62.6 55.4 74.0 63.6 53.8 84.0 59.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "ICAT",
+      "value": 68.9,
+      "unit": "score",
+      "settings": {
+        "other": "Religion category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1 62.6 55.4 74.0 63.6 53.8 84.0 59.0 68.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "LMS",
+      "value": 74.9,
+      "unit": "score",
+      "settings": {
+        "other": "Race category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1 62.6 55.4 74.0 63.6 53.8 84.0 59.0 68.9 74.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "SS",
+      "value": 56.8,
+      "unit": "score",
+      "settings": {
+        "other": "Race category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1 62.6 55.4 74.0 63.6 53.8 84.0 59.0 68.9 74.9 56.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "ICAT",
+      "value": 64.8,
+      "unit": "score",
+      "settings": {
+        "other": "Race category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1 62.6 55.4 74.0 63.6 53.8 84.0 59.0 68.9 74.9 56.8 64.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "LMS",
+      "value": 74.8,
+      "unit": "score",
+      "settings": {
+        "other": "Overall category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1 62.6 55.4 74.0 63.6 53.8 84.0 59.0 68.9 74.9 56.8 64.8 74.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "SS",
+      "value": 59.9,
+      "unit": "score",
+      "settings": {
+        "other": "Overall category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1 62.6 55.4 74.0 63.6 53.8 84.0 59.0 68.9 74.9 56.8 64.8 74.8 59.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "ICAT",
+      "value": 60,
+      "unit": "score",
+      "settings": {
+        "other": "Overall category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "OPT-175B 74.1 62.6 55.4 74.0 63.6 53.8 84.0 59.0 68.9 74.9 56.8 64.8 74.8 59.9 60.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "LMS",
+      "value": 86.5,
+      "unit": "score",
+      "settings": {
+        "other": "Profession category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "SS",
+      "value": 59.6,
+      "unit": "score",
+      "settings": {
+        "other": "Profession category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5 59.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "ICAT",
+      "value": 69.9,
+      "unit": "score",
+      "settings": {
+        "other": "Profession category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5 59.6 69.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "LMS",
+      "value": 83.9,
+      "unit": "score",
+      "settings": {
+        "other": "Gender category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5 59.6 69.9 83.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "SS",
+      "value": 63.5,
+      "unit": "score",
+      "settings": {
+        "other": "Gender category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5 59.6 69.9 83.9 63.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "ICAT",
+      "value": 61.2,
+      "unit": "score",
+      "settings": {
+        "other": "Gender category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5 59.6 69.9 83.9 63.5 61.2"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "LMS",
+      "value": 91,
+      "unit": "score",
+      "settings": {
+        "other": "Religion category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5 59.6 69.9 83.9 63.5 61.2 91.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "SS",
+      "value": 53.5,
+      "unit": "score",
+      "settings": {
+        "other": "Religion category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5 59.6 69.9 83.9 63.5 61.2 91.0 53.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "ICAT",
+      "value": 84.6,
+      "unit": "score",
+      "settings": {
+        "other": "Religion category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5 59.6 69.9 83.9 63.5 61.2 91.0 53.5 84.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "LMS",
+      "value": 85.7,
+      "unit": "score",
+      "settings": {
+        "other": "Race category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5 59.6 69.9 83.9 63.5 61.2 91.0 53.5 84.6 85.7"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "SS",
+      "value": 54.1,
+      "unit": "score",
+      "settings": {
+        "other": "Race category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5 59.6 69.9 83.9 63.5 61.2 91.0 53.5 84.6 85.7 54.1"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "ICAT",
+      "value": 78.7,
+      "unit": "score",
+      "settings": {
+        "other": "Race category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5 59.6 69.9 83.9 63.5 61.2 91.0 53.5 84.6 85.7 54.1 78.7"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "LMS",
+      "value": 86,
+      "unit": "score",
+      "settings": {
+        "other": "Overall category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5 59.6 69.9 83.9 63.5 61.2 91.0 53.5 84.6 85.7 54.1 78.7 86.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "SS",
+      "value": 57.3,
+      "unit": "score",
+      "settings": {
+        "other": "Overall category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5 59.6 69.9 83.9 63.5 61.2 91.0 53.5 84.6 85.7 54.1 78.7 86.0 57.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "z-ai/glm-130b",
+      "metric": "ICAT",
+      "value": 73.5,
+      "unit": "score",
+      "settings": {
+        "other": "Overall category"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 6",
+        "quote": "GLM-130B 86.5 59.6 69.9 83.9 63.5 61.2 91.0 53.5 84.6 85.7 54.1 78.7 86.0 57.3 73.5"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:50:32Z"
+  },
+  "notes": "Technical report (arXiv:2210.02414), not a system card. Safety-only pilot: included CrowS-Pairs (Table 5) and StereoSet LMS/SS/ICAT (Table 6). Skipped ETHOS hate-speech detection (Table 7) as a content-moderation/classifier F1 task. Skipped RealToxicPrompts Figure 9 (toxicity probability chart) because continuation toxicity rates are not given as numbers in the text layer; noted in findings. Skipped capability benchmarks (LAMBADA, Pile BPB, MMLU, BIG-bench-lite, CLUE, FewCLUE) and INT4 quantization tables. No risk framework thresholds, no external safety testers. Seed-linked model z-ai/glm-130b is covered (the report’s subject)."
+}

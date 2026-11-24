@@ -1,0 +1,57 @@
+$defs:
+  DocumentKind:
+    description: >-
+      What the document is. A system card and a safety report state the lab's tests. A model page
+      is a short page about a model (specs and use), with no safety tests.
+    type: string
+    enum: [system_card, technical_report, safety_report, model_page, blog]
+
+  Document:
+    title: Document
+    description: >-
+      A document an organization published about models: a link, our saved copy of the file and facts
+      we took from it. `url` stays the publisher's link.
+    type: object
+    additionalProperties: false
+    required: [id, key, kind, title, url, publisherId, verified]
+    properties:
+      id:
+        $ref: '#/$defs/Id'
+      key:
+        $ref: '#/$defs/DocumentKey'
+        description: A readable unique key (`openai-gpt2-blog`).
+      kind:
+        $ref: '#/$defs/DocumentKind'
+      title:
+        type: string
+        minLength: 1
+      url:
+        $ref: '#/$defs/Url'
+      publisherId:
+        $ref: '#/$defs/Id'
+        description: The `Organization` that published it.
+      publishedDate:
+        $ref: '#/$defs/PartialDate'
+      fileUrl:
+        $ref: '#/$defs/Url'
+        description: >-
+          Where we got the saved copy, when it is not `url` (the PDF that a web page links to).
+      fileKey:
+        type: string
+        minLength: 1
+        description: The saved copy in our storage (`documents/<key>.pdf`).
+      fileType:
+        type: string
+        enum: [pdf, html]
+      sha256:
+        $ref: '#/$defs/Sha256'
+        description: The hash of the saved copy.
+      fetchedAt:
+        $ref: '#/$defs/Timestamp'
+        description: When we fetched the saved copy.
+      verified:
+        type: boolean
+        description: A person checked that the link works and that the publisher is correct.
+      notes:
+        type: string
+        description: Notes for reviewers. Not shown on public pages.

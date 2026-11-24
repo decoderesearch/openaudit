@@ -1,0 +1,523 @@
+{
+  "slug": "cot-monitorability",
+  "name": "Chain-of-Thought Monitorability",
+  "category": "transparency",
+  "order": 6,
+  "summary": "The lab keeps its models' reasoning readable and monitorable, does not train against it, and reports changes.",
+  "description": "A model's written reasoning can show plans to deceive or to cause harm before it acts. Training can teach a model to hide this, so the signal can be lost without anyone noticing.",
+  "criteria": [
+    {
+      "key": "no-direct-pressure",
+      "label": "No Direct Pressure",
+      "description": "The lab does not train against the content of the reasoning, for example by penalizing bad thoughts."
+    },
+    {
+      "key": "measured",
+      "label": "Measured",
+      "description": "The lab evaluates the monitorability of each frontier model."
+    },
+    {
+      "key": "reported",
+      "label": "Reported",
+      "description": "System cards or reports publish the monitorability results."
+    },
+    {
+      "key": "in-decisions",
+      "label": "In Decisions",
+      "description": "Monitorability is a factor in training and release decisions, and the lab tells when it trades it away."
+    }
+  ],
+  "orgs": [
+    {
+      "org": "openai",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "summary": "OpenAI says it does not grade reasoning in RL and reports monitorability in system cards. Its degradation limit is not public.",
+      "events": [
+        {
+          "date": "2025-03-10",
+          "kind": "announced",
+          "title": "Recommends against optimization pressure on reasoning",
+          "summary": "Shows that penalizing bad thoughts teaches a model to hide its intent. Recommends that developers of frontier reasoning models not apply strong optimization pressure directly to the chain of thought.",
+          "quote": {
+            "text": "We recommend against applying strong optimization pressure directly to the CoTs of frontier reasoning models, leaving CoTs unrestricted for monitoring.",
+            "url": "https://openai.com/index/chain-of-thought-monitoring/"
+          },
+          "sources": [
+            {
+              "url": "https://openai.com/index/chain-of-thought-monitoring/",
+              "title": "Detecting misbehavior in frontier reasoning models",
+              "publisher": "OpenAI",
+              "date": "2025-03-10"
+            }
+          ],
+          "state": {
+            "level": "intent",
+            "strength": "statement",
+            "duration": "ongoing",
+            "criteria": {},
+            "limits": ["Recommendation, not a rule"]
+          }
+        },
+        {
+          "date": "2025-12-18",
+          "kind": "expanded",
+          "title": "Publishes suite of monitorability evaluations",
+          "summary": "Introduces 13 evaluations of chain-of-thought monitorability and results for its reasoning models. Says it plans to use them in future modeling and data decisions.",
+          "quote": {
+            "text": "we plan to expand upon these evaluations and use them to inform future modeling and data decisions",
+            "url": "https://openai.com/index/evaluating-chain-of-thought-monitorability/"
+          },
+          "sources": [
+            {
+              "url": "https://openai.com/index/evaluating-chain-of-thought-monitorability/",
+              "title": "Evaluating chain-of-thought monitorability",
+              "publisher": "OpenAI",
+              "date": "2025-12-18"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "statement",
+            "duration": "ongoing",
+            "criteria": {
+              "no-direct-pressure": "partly",
+              "measured": "partly",
+              "in-decisions": "partly"
+            },
+            "verified": ["measured"],
+            "limits": ["Recommendation, not a rule"]
+          }
+        },
+        {
+          "date": "2026-03-05",
+          "kind": "expanded",
+          "title": "Commits to report monitorability in system cards",
+          "summary": "Says it will report CoT controllability with CoT monitorability in system cards for future frontier models, starting with GPT-5.4 Thinking. Calls not applying direct optimization pressure to CoTs an ongoing commitment.",
+          "quote": {
+            "text": "we are going to start reporting CoT controllability alongside CoT monitorability",
+            "url": "https://openai.com/index/reasoning-models-chain-of-thought-controllability/"
+          },
+          "sources": [
+            {
+              "url": "https://openai.com/index/reasoning-models-chain-of-thought-controllability/",
+              "title": "Reasoning models struggle to control their chains of thought, and that’s good",
+              "publisher": "OpenAI",
+              "date": "2026-03-05"
+            },
+            {
+              "url": "https://deploymentsafety.openai.com/gpt-5-4-thinking/gpt-5-4-thinking.pdf",
+              "title": "GPT-5.4 Thinking System Card",
+              "publisher": "OpenAI",
+              "date": "2026-03-05"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "statement",
+            "duration": "ongoing",
+            "criteria": {
+              "no-direct-pressure": "met",
+              "measured": "met",
+              "reported": "met",
+              "in-decisions": "partly"
+            },
+            "verified": ["measured", "reported"],
+            "limits": ["Length penalties allowed"]
+          }
+        },
+        {
+          "date": "2026-05-07",
+          "kind": "broken",
+          "title": "Reports accidental CoT grading in released models",
+          "summary": "Reports that CoT was graded by accident in some RL runs for GPT-5.4 Thinking and several smaller models. Found no clear loss of monitorability, fixed the reward paths and keeps its policy.",
+          "quote": {
+            "text": "These incidents do not lead us to change our policy here: We still aim to avoid grading model CoTs during RL training, and are working toward better internal processes to prevent future instances of accidental CoT grading.",
+            "url": "https://alignment.openai.com/accidental-cot-grading/"
+          },
+          "sources": [
+            {
+              "url": "https://alignment.openai.com/accidental-cot-grading/",
+              "title": "Investigating the consequences of accidentally grading CoT during RL",
+              "publisher": "OpenAI",
+              "date": "2026-05-07"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "statement",
+            "duration": "ongoing",
+            "criteria": {
+              "no-direct-pressure": "partly",
+              "measured": "met",
+              "reported": "met",
+              "in-decisions": "partly"
+            },
+            "verified": ["measured", "reported"],
+            "limits": [
+              "Length penalties allowed",
+              "Accidental CoT grading found"
+            ]
+          }
+        },
+        {
+          "date": "2026-09-03",
+          "kind": "expanded",
+          "title": "Reports monitorability drop and sets an undefined limit",
+          "summary": "The GPT-6 Astra system card reports a substantial decrease in CoT monitorability and releases the model. Says it will not accept further degradation beyond a limit without new ways to show alignment generalization.",
+          "quote": {
+            "text": "We are tracking monitorability closely and will not accept further degradation of monitoring beyond a limit, without new ways to demonstrate alignment generalization.",
+            "url": "https://deploymentsafety.openai.com/gpt-6-astra/gpt-6-astra.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://deploymentsafety.openai.com/gpt-6-astra/gpt-6-astra.pdf",
+              "title": "GPT-6 Astra System Card",
+              "publisher": "OpenAI",
+              "date": "2026-09-03"
+            },
+            {
+              "url": "https://alignment.openai.com/cot-monitorability-model-lifecycle/",
+              "title": "What affects chain-of-thought monitorability across the model lifecycle?",
+              "publisher": "OpenAI",
+              "date": "2026-11-10"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "statement",
+            "duration": "ongoing",
+            "criteria": {
+              "no-direct-pressure": "met",
+              "measured": "met",
+              "reported": "met",
+              "in-decisions": "partly"
+            },
+            "verified": ["measured", "reported"],
+            "limits": [
+              "Length penalties allowed",
+              "Degradation limit not public",
+              "Earlier accidental CoT grading"
+            ]
+          }
+        },
+        {
+          "date": "2026-09-28",
+          "kind": "expanded",
+          "title": "Proposes monitorability thresholds for frontier training runs",
+          "summary": "Says safety cases for frontier RL runs should keep graders from seeing CoT and enforce monitorability thresholds. Says these practices are being implemented; the thresholds are not published.",
+          "quote": {
+            "text": "Enforce monitorability: Ensure models remain monitorable, as measured by monitorability and monitor evasion evals with clear thresholds, to catch concerning behavior early.",
+            "url": "https://openai.com/index/towards-safety-cases-for-frontier-ai-training/"
+          },
+          "sources": [
+            {
+              "url": "https://openai.com/index/towards-safety-cases-for-frontier-ai-training/",
+              "title": "Towards safety cases for frontier AI training",
+              "publisher": "OpenAI",
+              "date": "2026-09-28"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "statement",
+            "duration": "ongoing",
+            "criteria": {
+              "no-direct-pressure": "met",
+              "measured": "met",
+              "reported": "met",
+              "in-decisions": "partly"
+            },
+            "verified": ["measured", "reported"],
+            "notes": {
+              "no-direct-pressure": {
+                "commitment": "Calls not pressuring reasoning an ongoing commitment; scans all RL runs for CoT grading.",
+                "missing": "No outside party checks its training."
+              },
+              "measured": {
+                "commitment": "Runs its monitorability evaluations on each frontier model, as for GPT-6 Astra."
+              },
+              "reported": {
+                "commitment": "System cards report CoT monitorability and controllability since GPT-5.4 Thinking; Astra's shows a drop."
+              },
+              "in-decisions": {
+                "commitment": "Will not accept further degradation beyond a limit; plans thresholds for training runs.",
+                "missing": "The limit and thresholds are not public."
+              }
+            },
+            "limits": [
+              "Length penalties allowed",
+              "Thresholds not public"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "org": "anthropic",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "summary": "Anthropic says it does not train against reasoning, with exceptions. Its Risk Report found accidental CoT exposure in RL across five model generations.",
+      "events": [
+        {
+          "date": "2026-04-07",
+          "kind": "announced",
+          "title": "States it does not train against reasoning",
+          "summary": "A Risk Report update says it does not train against chains of thought, with two exceptions, and discloses a technical error that let reward code see CoT in about 8% of Mythos Preview RL episodes.",
+          "quote": {
+            "text": "We do not train against any chains-of-thought or activations-based monitoring, with two exceptions",
+            "url": "https://assets.claude.com/3edfc1a7f947aa81841cf88305cb513f184c36ae.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://assets.claude.com/3edfc1a7f947aa81841cf88305cb513f184c36ae.pdf",
+              "title": "Alignment Risk Update: Claude Mythos Preview",
+              "publisher": "Anthropic",
+              "date": "2026-04-07"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "policy",
+            "duration": "ongoing",
+            "criteria": {
+              "no-direct-pressure": "partly",
+              "measured": "partly",
+              "reported": "partly",
+              "in-decisions": "partly"
+            },
+            "verified": ["measured", "reported"],
+            "limits": [
+              "CoT filters on SFT data",
+              "Accidental CoT exposure found"
+            ]
+          }
+        },
+        {
+          "date": "2026-08",
+          "kind": "broken",
+          "title": "Reports CoT exposure in rewards across five generations",
+          "summary": "Reports CoT leaked into reward calculation in 0.2% to 5.1% of RL episodes for models from Opus 4.6 to Mythos 5. Says earlier documents omitted format checks and length penalties, and adds structural fixes.",
+          "quote": {
+            "text": "Over multiple reinforcement learning training runs, we discovered that chain-of-thought (CoT) reasoning was unintentionally exposed during reward calculation, influencing the training signal during RL.",
+            "url": "https://www-cdn.anthropic.com/f61d49fa5596956a5dec75fea0e973bf6a6a8378/Redacted%2BRisk%2BReport%2BAugust%2B2026%2B.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://www-cdn.anthropic.com/f61d49fa5596956a5dec75fea0e973bf6a6a8378/Redacted%2BRisk%2BReport%2BAugust%2B2026%2B.pdf",
+              "title": "Risk Report: August 2026",
+              "publisher": "Anthropic",
+              "date": "2026-08"
+            },
+            {
+              "url": "https://www.anthropic.com/news/improving-alignment-security-efforts",
+              "title": "Improving our alignment and security efforts",
+              "publisher": "Anthropic",
+              "date": "2026-08-31"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "policy",
+            "duration": "ongoing",
+            "criteria": {
+              "no-direct-pressure": "partly",
+              "measured": "partly",
+              "reported": "partly",
+              "in-decisions": "partly"
+            },
+            "verified": ["measured", "reported"],
+            "notes": {
+              "no-direct-pressure": {
+                "commitment": "Says it does not train against reasoning, with two exceptions.",
+                "missing": "CoT leaked into rewards in 0.2% to 5.1% of RL episodes, five generations."
+              },
+              "measured": {
+                "commitment": "System cards test CoT controllability and stealth with hidden reasoning, as for Opus 5.5.",
+                "missing": "No commitment to measure each model found."
+              },
+              "reported": {
+                "commitment": "System cards and Risk Reports publish CoT controllability, stealth and leakage results.",
+                "missing": "No commitment to report them for each model found."
+              },
+              "in-decisions": {
+                "commitment": "Risk Reports use CoT evidence in alignment risk claims and disclose CoT leaks.",
+                "missing": "No rule found that ties monitorability to release decisions."
+              }
+            },
+            "limits": [
+              "Format checks on reasoning",
+              "Length penalties allowed",
+              "Accidental CoT exposure found"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "org": "google",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "summary": "Google says it never penalizes reasoning in training and reports monitorability for Gemini 4 Argon. Some rewards still see thoughts; no forward commitment.",
+      "events": [
+        {
+          "date": "2026-10-13",
+          "kind": "announced",
+          "title": "States it does not penalize reasoning in training",
+          "summary": "Says it does not penalize what a model writes in its chain of thought and avoids training against its monitors. The Argon report measures monitorability, judges it sufficient to release, and discloses early runs that penalized CoT.",
+          "quote": {
+            "text": "And we always follow one rule: we don’t penalize the model for what it writes in its chain of thought during training.",
+            "url": "https://blog.google/innovation-and-ai/technology/safety-security/gemini-4-model-safety-security/"
+          },
+          "sources": [
+            {
+              "url": "https://blog.google/innovation-and-ai/technology/safety-security/gemini-4-model-safety-security/",
+              "title": "Developing Gemini 4 Argon responsibly and safely",
+              "publisher": "Google",
+              "date": "2026-10-13"
+            },
+            {
+              "url": "https://deepmind-media.storage.googleapis.com/gemini/gemini_4_safety_report.pdf",
+              "title": "Gemini 4 Argon Safety & Security Report",
+              "publisher": "Google DeepMind",
+              "date": "2026-10"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "statement",
+            "duration": "ongoing",
+            "criteria": {
+              "no-direct-pressure": "partly",
+              "measured": "partly",
+              "reported": "partly",
+              "in-decisions": "partly"
+            },
+            "verified": ["measured", "reported"],
+            "notes": {
+              "no-direct-pressure": {
+                "commitment": "Says it never penalizes reasoning content in training.",
+                "missing": "Some RL rewards see thoughts; length penalties apply."
+              },
+              "measured": {
+                "commitment": "Argon report measures legibility, controllability and monitor evasion.",
+                "missing": "No commitment to measure each future model found."
+              },
+              "reported": {
+                "commitment": "Argon safety report publishes CoT transparency results.",
+                "missing": "No commitment to report them for each future model found."
+              },
+              "in-decisions": {
+                "commitment": "Argon report judged the model sufficiently monitorable to release.",
+                "missing": "No forward rule found to weigh monitorability in decisions."
+              }
+            },
+            "limits": [
+              "Some rewards see thoughts",
+              "Length penalties on thoughts",
+              "No forward commitment"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "org": "meta",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "summary": "Meta's framework calls for work to keep models monitorable and for release reports to disclose reasoning obfuscation. No statement on training against reasoning.",
+      "events": [
+        {
+          "date": "2026-04-07",
+          "kind": "announced",
+          "title": "Adds monitorability work to its scaling framework",
+          "summary": "Framework version 2.0 lists work to maintain model monitorability as a near-term mitigation. Preparedness reports must disclose evidence that training may cause obfuscation of a model's reasoning.",
+          "quote": {
+            "text": "Researching and implementing approaches to maintain effective model monitorability as capabilities advance.",
+            "url": "https://ai.meta.com/static-resource/Meta_Advanced-AI-Scaling-Framework-v2"
+          },
+          "sources": [
+            {
+              "url": "https://ai.meta.com/static-resource/Meta_Advanced-AI-Scaling-Framework-v2",
+              "title": "Advanced AI Scaling Framework, Version 2",
+              "publisher": "Meta",
+              "date": "2026-04-07"
+            },
+            {
+              "url": "https://research.meta.ai/static/meta-superintelligence-scaling-framework",
+              "title": "Meta Superintelligence Scaling Framework, Version 2.1",
+              "publisher": "Meta",
+              "date": "2026-10-02"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "policy",
+            "duration": "ongoing",
+            "criteria": {
+              "measured": "partly",
+              "reported": "partly",
+              "in-decisions": "partly"
+            },
+            "limits": ["Research goal, no threshold"]
+          }
+        },
+        {
+          "date": "2026-10-23",
+          "kind": "kept",
+          "title": "Reports CoT monitorability for Muse Spark 1.3",
+          "summary": "The Muse Spark 1.3 report measures CoT monitorability and controllability, finds no broad decline from Muse Spark 1.1, and rates monitorability risk as moderate or lower.",
+          "quote": {
+            "text": "The evaluations show that CoT continues to be valuable for oversight",
+            "url": "https://research.meta.ai/static/muse-spark-1-3-evaluation-report"
+          },
+          "sources": [
+            {
+              "url": "https://research.meta.ai/static/muse-spark-1-3-evaluation-report",
+              "title": "Muse Spark 1.3",
+              "publisher": "Meta",
+              "date": "2026-10-23"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "policy",
+            "duration": "ongoing",
+            "criteria": {
+              "measured": "partly",
+              "reported": "partly",
+              "in-decisions": "partly"
+            },
+            "verified": ["measured", "reported"],
+            "notes": {
+              "no-direct-pressure": {
+                "missing": "No public statement on training against reasoning content."
+              },
+              "measured": {
+                "commitment": "Muse Spark 1.3 report measures CoT monitorability and controllability.",
+                "missing": "Framework sets only a research goal, with no threshold."
+              },
+              "reported": {
+                "commitment": "Framework requires release reports to disclose evidence of reasoning obfuscation.",
+                "missing": "Muse Spark 1.3 monitorability results came 51 days after release."
+              },
+              "in-decisions": {
+                "commitment": "Muse Spark 1.3 report rates monitorability risk as moderate or lower.",
+                "missing": "Framework sets no threshold that would change training or release."
+              }
+            },
+            "limits": ["Research goal, no threshold"]
+          }
+        }
+      ]
+    },
+    { "org": "xai", "checkedAt": "2026-11-16", "checkedBy": "Claude Opus 5.5 (High)", "events": [] },
+    { "org": "microsoft", "checkedAt": "2026-11-16", "checkedBy": "Claude Opus 5.5 (High)", "events": [] },
+    { "org": "mistral", "checkedAt": "2026-11-16", "checkedBy": "Claude Opus 5.5 (High)", "events": [] },
+    { "org": "deepseek", "checkedAt": "2026-11-16", "checkedBy": "Claude Opus 5.5 (High)", "events": [] },
+    { "org": "zai", "checkedAt": "2026-11-16", "checkedBy": "Claude Opus 5.5 (High)", "events": [] },
+    { "org": "alibaba", "checkedAt": "2026-11-16", "checkedBy": "Claude Opus 5.5 (High)", "events": [] },
+    { "org": "thinkingmachines", "checkedAt": "2026-11-16", "checkedBy": "Claude Opus 5.5 (High)", "events": [] },
+    { "org": "moonshot", "checkedAt": "2026-11-16", "checkedBy": "Claude Opus 5.5 (High)", "events": [] }
+  ]
+}

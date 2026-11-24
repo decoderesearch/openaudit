@@ -1,0 +1,70 @@
+{
+  "eval": {
+    "slug": "biobench",
+    "displayName": "BIOBench",
+    "aliases": ["BIObench"],
+    "description": "ByteDance Seed internal multimodal biology benchmark. It asks models to reason from experimental figures and related biology text, as shown in the Seed1.8 model card. Cards report Pass@1 or accuracy as a percent. Samples are not public.",
+    "summary": "Measures how well the model reasons about biology from experimental figures and related text.",
+    "maintainers": [
+      {
+        "name": "ByteDance",
+        "url": "https://arxiv.org/abs/2603.20633"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://arxiv.org/abs/2603.20633",
+        "title": "Seed1.8 Model Card (internal BIOBench)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://arxiv.org/abs/2607.00248",
+        "title": "Seed2.0 Model Card (BIObench results)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "seed-cards",
+      "status": "draft",
+      "changes": "Seed1.8 calls it internal BIOBench; Seed2.0 tables report BIObench. No public samples or fixed rubric.",
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the model answer matches the internal label for the item."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "pass_at_1",
+          "displayName": "Pass@1",
+          "score": "correct",
+          "aggregation": "pass_at_k",
+          "k": 1,
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Pass@1 accuracy as reported in Seed cards (often shown as a percent)."
+        }
+      ]
+    }
+  ]
+}

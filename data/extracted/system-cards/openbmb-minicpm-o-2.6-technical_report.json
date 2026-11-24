@@ -1,0 +1,495 @@
+{
+  "document": "openbmb-minicpm-o-2.6-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "openbmb/MiniCPM-o-2_6"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "image, video, text, and audio inputs; text and speech outputs",
+      "source": {
+        "page": "Introduction",
+        "quote": "The model can take image, video, text, and audio as inputs, and provide high-quality text and speech outputs in an end-to-end fashion."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "vision-language in more than 30 languages; bilingual speech (English and Chinese)",
+      "source": {
+        "page": "Introduction",
+        "quote": "and supports vision-language capabilities in more than 30 languages."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "8B",
+      "source": {
+        "page": "End-to-End Omni-Modality Architecture",
+        "quote": "The model is built based on SigLip-400M, Whisper-medium-300M, ChatTTS-200M, and Qwen2.5-7B-Instruct with a total of 8B parameters."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "SigLip-400M + Whisper-medium-300M + ChatTTS-200M + Qwen2.5-7B-Instruct (hybrid end-to-end omni-modality)",
+      "source": {
+        "page": "End-to-End Omni-Modality Architecture",
+        "quote": "The model is built based on SigLip-400M, Whisper-medium-300M, ChatTTS-200M, and Qwen2.5-7B-Instruct with a total of 8B parameters."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "image-text pairs and interleave data; audio-text pairs and natural speech; Web video omni streams; Omni SFT multimodal data; RLAIF preference data including MMPR",
+      "source": {
+        "page": "RLAIF",
+        "quote": "We also augment the training data using open-source preference datasets such as MMPR."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[HallusionBench](/evals/hallusionbench) 51.9 and [MMHal](/evals/mmhal-bench) Score 3.8; RLAIF-V stage reduces video hallucination by 63%",
+      "source": {
+        "page": "Evaluation",
+        "quote": "Based on the latest RLAIF-V and VisCPM techniques, it features trustworthy behaviors, outperforming GPT-4o and Claude 3.5 Sonnet on MMHal-Bench, and supports vision-language capabilities in more than 30 languages."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "After RLAIF-V preference optimization, the authors report a 63% reduction in video hallucination relative to image hallucination frequency in that stage.", "tone": "good",
+      "source": {
+        "page": "RLAIF",
+        "quote": "We also specifically reduce video hallucination, which is more frequently observed compared with image hallucination, by 63% in this stage."
+      }
+    },
+    {
+      "text": "The report claims MiniCPM-o 2.6 outperforms GPT-4o and Claude 3.5 Sonnet on [MMHal-Bench](/evals/mmhal-bench) for trustworthy behavior.", "tone": "good",
+      "source": {
+        "page": "Introduction",
+        "quote": "Based on the latest RLAIF-V and VisCPM techniques, it features trustworthy behaviors, outperforming GPT-4o and Claude 3.5 Sonnet on MMHal-Bench, and supports vision-language capabilities in more than 30 languages."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "openai/gpt-4o",
+      "metric": "score",
+      "value": 55.0,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "GPT-4o-20240513\t-\t1088\t69.9\t736\t61.3\t85.7\t69.1\t63.9\t2328.7\t82.2\t84.6\t69.2\t55.0"
+      },
+      "settings": {
+        "other": "table label GPT-4o-20240513"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "openai/gpt-4o",
+      "metric": "score",
+      "value": 3.6,
+      "unit": "score",
+      "settings": {
+        "other": "metric column MMHal Score; table label GPT-4o-20240513"
+      },
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "GPT-4o-20240513\t-\t1088\t69.9\t736\t61.3\t85.7\t69.1\t63.9\t2328.7\t82.2\t84.6\t69.2\t55.0\t-\t92.8\t50.2\t30.4\t3.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "Claude3.5-Sonnet",
+      "metric": "score",
+      "value": 49.9,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "Claude3.5-Sonnet\t-\t750\t67.9\t788\t61.6\t90.8\t66.0\t62.2\t1920.0\t78.5\t80.2\t65.9\t49.9"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "rawModelName": "Claude3.5-Sonnet",
+      "metric": "score",
+      "value": 3.4,
+      "unit": "score",
+      "settings": {
+        "other": "metric column MMHal Score"
+      },
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "Claude3.5-Sonnet\t-\t750\t67.9\t788\t61.6\t90.8\t66.0\t62.2\t1920.0\t78.5\t80.2\t65.9\t49.9\t-\t95.2\t-\t-\t3.4"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "google/gemini-pro-1.5",
+      "metric": "score",
+      "value": 45.6,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "Gemini 1.5 Pro\t-\t-\t64.4\t754\t57.7\t81.3\t64.0\t59.1\t2110.6\t73.9\t79.1\t60.6\t45.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "openai/gpt-4o-mini",
+      "metric": "score",
+      "value": 46.1,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "GPT-4o-mini-20240718\t-\t1088\t64.1\t785\t52.4\t-\t66.9\t54.8\t2003.4\t76.0\t77.8\t60.0\t46.1"
+      },
+      "settings": {
+        "other": "table label GPT-4o-mini-20240718"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "openai/gpt-4o-mini",
+      "metric": "score",
+      "value": 3.3,
+      "unit": "score",
+      "settings": {
+        "other": "metric column MMHal Score; table label GPT-4o-mini-20240718"
+      },
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "GPT-4o-mini-20240718\t-\t1088\t64.1\t785\t52.4\t-\t66.9\t54.8\t2003.4\t76.0\t77.8\t60.0\t46.1\t-\t-\t-\t-\t3.3"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "Cambrian-34B",
+      "metric": "score",
+      "value": 41.6,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "Cambrian-34B\t34B\t1820\t58.3\t591\t50.3\t75.6\t53.2\t54.2\t2049.9\t77.8\t79.5\t50.4\t41.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "zai-org/glm-4v-9b",
+      "metric": "score",
+      "value": 45.0,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "GLM-4V-9B\t13B\t784\t59.1\t776\t51.1\t-\t58.0\t54.8\t2018.8\t67.9\t71.2\t46.9\t45.0"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "mistralai/Pixtral-12B-2409",
+      "metric": "score",
+      "value": 47.0,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "Pixtral-12B\t12B\t256\t61.0\t685\t56.9\t81.8\t58.5\t54.5\t-\t72.7\t79.0\t51.1\t47.0"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "DeepSeek-VL2-27B (4B)",
+      "metric": "score",
+      "value": 45.3,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "DeepSeek-VL2-27B (4B)\t27B\t672\t66.4\t809\t63.9\t86.0\t60.0\t61.9\t2253.0\t81.2\t83.8\t54.0\t45.3"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "rawModelName": "DeepSeek-VL2-27B (4B)",
+      "metric": "score",
+      "value": 3.0,
+      "unit": "score",
+      "settings": {
+        "other": "metric column MMHal Score"
+      },
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "DeepSeek-VL2-27B (4B)\t27B\t672\t66.4\t809\t63.9\t86.0\t60.0\t61.9\t2253.0\t81.2\t83.8\t54.0\t45.3\t84.2\t93.3\t-\t-\t3.0"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "Qwen2-VL-7B",
+      "metric": "score",
+      "value": 50.6,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "Qwen2-VL-7B\t8B\t784\t67.1\t866\t58.2\t83.0\t62.0\t60.7\t2326.0\t81.8\t83.0\t54.1\t50.6"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "rawModelName": "Qwen2-VL-7B",
+      "metric": "score",
+      "value": 3.2,
+      "unit": "score",
+      "settings": {
+        "other": "metric column MMHal Score"
+      },
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "Qwen2-VL-7B\t8B\t784\t67.1\t866\t58.2\t83.0\t62.0\t60.7\t2326.0\t81.8\t83.0\t54.1\t50.6\t84.3\t94.5\t31.9\t16.3\t3.2"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "LLaVA-OneVision-72B",
+      "metric": "score",
+      "value": 49.0,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "LLaVA-OneVision-72B\t72B\t182\t68.1\t741\t67.5\t83.7\t60.6\t65.8\t2261.0\t85.0\t85.6\t56.8\t49.0"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "rawModelName": "LLaVA-OneVision-72B",
+      "metric": "score",
+      "value": 3.5,
+      "unit": "score",
+      "settings": {
+        "other": "metric column MMHal Score"
+      },
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "LLaVA-OneVision-72B\t72B\t182\t68.1\t741\t67.5\t83.7\t60.6\t65.8\t2261.0\t85.0\t85.6\t56.8\t49.0\t80.5\t91.3\t39.1\t-\t3.5"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "OpenGVLab/InternVL2_5-8B",
+      "metric": "score",
+      "value": 50.1,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "InternVL2.5-8B\t8B\t706\t68.3\t822\t64.4\t84.8\t62.8\t62.8\t2344.0\t83.6\t84.5\t56.0\t50.1"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "OpenGVLab/InternVL2_5-8B",
+      "metric": "score",
+      "value": 3.4,
+      "unit": "score",
+      "settings": {
+        "other": "metric column MMHal Score"
+      },
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "InternVL2.5-8B\t8B\t706\t68.3\t822\t64.4\t84.8\t62.8\t62.8\t2344.0\t83.6\t84.5\t56.0\t50.1\t79.1\t93.0\t39.5\t19.7\t3.4"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "openbmb/MiniCPM-V-2_6",
+      "metric": "score",
+      "value": 48.1,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "MiniCPM-V 2.6\t8B\t2822\t65.2\t852*\t60.6\t79.4\t60.0\t57.5\t2348.4*\t78.0\t82.1\t49.8*\t48.1*"
+      },
+      "settings": {
+        "other": "chain-of-thought prompting (*)"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "openbmb/MiniCPM-V-2_6",
+      "metric": "score",
+      "value": 3.6,
+      "unit": "score",
+      "settings": {
+        "other": "metric column MMHal Score"
+      },
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "MiniCPM-V 2.6\t8B\t2822\t65.2\t852*\t60.6\t79.4\t60.0\t57.5\t2348.4*\t78.0\t82.1\t49.8*\t48.1*\t80.1\t90.8\t25.7\t18.3\t3.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "openbmb/MiniCPM-o-2_6",
+      "metric": "score",
+      "value": 51.9,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "MiniCPM-o 2.6\t8B\t2822\t70.2\t897*\t71.9*\t86.9*\t67.5\t64.0\t2372.0*\t80.5\t85.8\t50.4*\t51.9"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "openbmb/MiniCPM-o-2_6",
+      "metric": "score",
+      "value": 3.8,
+      "unit": "score",
+      "settings": {
+        "other": "metric column MMHal Score"
+      },
+      "source": {
+        "page": "Evaluation",
+        "table": "Single Image Understanding",
+        "quote": "MiniCPM-o 2.6\t8B\t2822\t70.2\t897*\t71.9*\t86.9*\t67.5\t64.0\t2372.0*\t80.5\t85.8\t50.4*\t51.9\t82.0\t93.5\t41.4*\t23.1*\t3.8"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:39:52Z"
+  },
+  "notes": "Source is the OpenBMB Notion technical report page (not a PDF); text extracted via Notion loadCachedPageChunk API into text.txt. page fields are section headings. Safety-only pilot: included HallusionBench and MMHal-Bench (MMHal Score column) only; skipped OpenCompass, OCR, math, chart, MME, MMMU, TextVQA, DocVQA, multi-image/video, ASR/AST, SpeechQA, AudioArena, StreamingBench, and voice-cloning SIM-o as capability. Video hallucination 63% is a training-stage claim without a named public eval score, so it is a finding, not an evalResult. GPT-4o dated labels mapped to openai/gpt-4o and openai/gpt-4o-mini; Qwen2-VL-7B / Claude3.5-Sonnet / LLaVA-OneVision-72B / Cambrian-34B / DeepSeek-VL2-27B (4B) left as rawModelName because the table does not name the Instruct/seed variant exactly. No external safety testers or risk framework decisions."
+}

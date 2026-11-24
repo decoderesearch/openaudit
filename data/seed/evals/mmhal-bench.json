@@ -1,0 +1,113 @@
+{
+  "eval": {
+    "slug": "mmhal-bench",
+    "displayName": "MMHal-Bench",
+    "aliases": ["MMHal"],
+    "description": "Multimodal hallucination benchmark with 96 image-question pairs from OpenImages spanning common object topics and error types. A GPT-4 judge rates each response on a 0–6 informativeness and hallucination scale. Reports average score and hallucination rate (share of responses judged to contain hallucination).",
+    "summary": "Measures how often the model states false or made-up details when it answers questions about images.",
+    "maintainers": [
+      {
+        "name": "LLaVA-RLHF authors",
+        "url": "https://huggingface.co/datasets/Shengcao1006/MMHal-Bench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2309.14525",
+        "title": "Aligning Large Multimodal Models with Factually Augmented RLHF"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/llava-rlhf/LLaVA-RLHF",
+        "title": "LLaVA-RLHF (includes MMHal evaluation)"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/Shengcao1006/MMHal-Bench",
+        "title": "Shengcao1006/MMHal-Bench"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["hallucination"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2023-09",
+      "status": "published",
+      "releasedDate": "2023-09-25",
+      "dataset": {
+        "hfRepo": "Shengcao1006/MMHal-Bench",
+        "revision": "f5f49a938f45ed99e235b8519ba28f76832a2add",
+        "url": "https://huggingface.co/datasets/Shengcao1006/MMHal-Bench",
+        "license": "apache-2.0",
+        "splits": [
+          {
+            "name": "test",
+            "sampleCount": 96,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "judge_rating",
+          "displayName": "GPT-4 rating",
+          "type": "ordinal",
+          "min": 0,
+          "max": 6,
+          "direction": "higher_is_better",
+          "description": "GPT-4 informativeness/hallucination rating from 0 (not informative, with hallucination) to 6 (very informative, no hallucination)."
+        },
+        {
+          "key": "hallucinated",
+          "displayName": "Hallucinated",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when the judge rating is in the hallucination band (0–2)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "average_score",
+          "displayName": "Average score",
+          "score": "judge_rating",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 6,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Mean GPT-4 rating over the 96 questions."
+        },
+        {
+          "key": "hallucination_rate",
+          "displayName": "Hallucination rate",
+          "score": "hallucinated",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Share of responses judged to contain hallucination."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "internet": true
+      }
+    }
+  ]
+}

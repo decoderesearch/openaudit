@@ -1,0 +1,65 @@
+{
+  "eval": {
+    "slug": "openai-jailbreak-augmented-examples",
+    "displayName": "Jailbreak augmented examples",
+    "aliases": ["Jailbreak Augmented Examples", "Jailbreak Augmented examples"],
+    "description": "OpenAI internal jailbreak eval that applies publicly known jailbreak techniques to examples from the standard disallowed-content suite. Scored as not_unsafe (share of responses that stay safe). Dataset and runner are lab-internal.",
+    "summary": "Tests whether the model stays safe when known jailbreak techniques try to make it produce disallowed content.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://cdn.openai.com/o1-preview-system-card-20240917.pdf",
+        "title": "OpenAI o1-preview system card (Jailbreak Augmented Examples)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["jailbreaks", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "o1-preview",
+      "status": "draft",
+      "releasedDate": "2024-09-12",
+      "changes": "First described in the o1-preview system card. OpenAI reports jailbreak sets and graders evolve; scores across cards are not always comparable.",
+      "scores": [
+        {
+          "key": "not_unsafe",
+          "displayName": "Not unsafe",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The response remains not disallowed after a public jailbreak is applied to a standard disallowed-content example."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "not_unsafe_rate",
+          "displayName": "Not-unsafe rate",
+          "score": "not_unsafe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of jailbreak-augmented examples scored not_unsafe. Higher is better."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,796 @@
+{
+  "document": "ibm-granite-3.0-paper-technical_report",
+  "alsoDocuments": ["ibm-granite-3.0-blog"],
+  "covers": [
+    {
+      "model": "ibm-granite/granite-3.0-8b-instruct"
+    },
+    {
+      "model": "ibm-granite/granite-3.0-8b-base"
+    },
+    {
+      "model": "ibm-granite/granite-3.0-2b-instruct"
+    },
+    {
+      "rawModelName": "Granite-3.0 2B"
+    },
+    {
+      "rawModelName": "Granite-3.0 1B-A400M"
+    },
+    {
+      "rawModelName": "Granite-3.0 3B-A800M"
+    }
+  ],
+  "pageCount": 46,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4096 tokens (sequence length for all Granite 3.0 sizes)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Sequence Length        4096         4096       4096            4096"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (language models)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "This report presents Granite 3.0, a new set of lightweight, state-of-the-art, open\n       foundation models ranging in scale from 400 million to 8 billion active parameters."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English, German, Spanish, French, Japanese, Portuguese, Arabic, Czech, Italian, Korean, Dutch, Chinese",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "English, German, Spanish, French, Japanese, Portuguese, Arabic,\nCzech, Italian, Korean, Dutch, or Chinese as the dominant language."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Apache 2.0 license allowing both research and commercial use"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "2.5B (2B dense), 8.1B (8B dense), 1.3B (1B-A400M MoE), 3.3B (3B-A800M MoE)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "#Parameters       2.5B         8.1B       1.3B            3.3B"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "2.5B, 8.1B, 400M, 800M",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "#Active Parameters      2.5B         8.1B       400M            800M"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "decoder-only dense transformer and decoder-only sparse MoE transformer (GQA, RoPE, SwiGLU)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "The Granite 3.0 language models are based on two architectures: a decoder-only dense transformer"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Web text and code curated by IBM, IBM synthetic datasets, and public permissible-license datasets; dense 12T tokens, MoE 10T tokens",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Granite 3.0 language models are trained using data from various sources such as unstructured natural\nlanguage text and code data from the Web curated by IBM, a collection of synthetic datasets generated\nby IBM, and publicly available high-quality datasets with permissible licenses."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "8.35 × 10^23 FLOPS (all Granite 3.0 models combined)",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "compute budget of 8.35 × 1023 FLOPS"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Granite-3.0-8B-Instruct [ALERT](https://arxiv.org/abs/2404.08676) 98.9 and [SALAD-Bench](/evals/salad-bench) 95.3 (higher is better)",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "Granite-3.0-8B-Instruct         46.14              63.44             98.89               95.30"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "Granite-3.0-8B-Instruct [TruthfulQA](/evals/truthfulqa) 0-shot 60.3 (higher is better)",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "TruthfulQA                0-shot       53.17      49.71       53.37        59.68        54.07       60.32"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Granite-3.0-8B-Instruct [BOLD](/evals/bold) 46.1 and [CrowS-Pairs](/evals/crows-pairs) 63.4 (lower better)",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "Granite-3.0-8B-Instruct         46.14              63.44             98.89               95.30"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "IBM reports internal red teaming of Granite 3.0 for enterprise-risk understanding, alongside academic safety benchmarks.", "tone": "good",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "safety benchmarks which can be seen in Section 7, including internal red teaming to better understand"
+      }
+    },
+    {
+      "text": "The authors state that benchmark evaluation alone is a limited way to reveal socio-technical harms.", "tone": "mixed",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "evaluating on benchmarks is only a limited approach for revealing socio-technical harms."
+      }
+    },
+    {
+      "text": "Granite-3.0 models are claimed to outperform Llama-3.1, Llama-3.2, and Gemma-2 on all seven [AttaQ](https://arxiv.org/abs/2311.04124) harm types in their size class (radar plots only).", "tone": "good",
+      "source": {
+        "page": "26",
+        "pdfPage": 26,
+        "quote": "Granite-3.0 models perform best in their parameter range, outperforming other models in all 7\naspects of safety, including Llama-3.1, Llama-3.2 and Gemma-2 models."
+      }
+    },
+    {
+      "text": "IBM also released Granite Guardian guardrail models and a Responsible Use Guide alongside this report.", "tone": "good",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "we are also introducing a new family\nof LLM-based Granite Guardian guardrail models"
+      }
+    },
+    {
+      "text": "Safety training used an IBM AI risk taxonomy covering malicious use, system risks, discrimination, and societal risks, plus jailbreak and prompt-injection seeds (training method, not scored here).", "tone": "good",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "the seeds gathered to safeguard our model against jailbreaks and prompt injection attacks."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "BOLD",
+      "rawModelName": "Mistral-7B-Instruct",
+      "metric": "BOLD score",
+      "value": 55.46,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 17",
+        "quote": "Mistral-7B-Instruct             55.46              62.31             96.48               74.41"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "Mistral-7B-Instruct",
+      "metric": "CrowS-Pairs score",
+      "value": 62.31,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 17",
+        "quote": "Mistral-7B-Instruct             55.46              62.31             96.48               74.41"
+      }
+    },
+    {
+      "rawEvalName": "ALERT",
+      "rawModelName": "Mistral-7B-Instruct",
+      "metric": "safety rate",
+      "value": 96.48,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 17",
+        "quote": "Mistral-7B-Instruct             55.46              62.31             96.48               74.41"
+      }
+    },
+    {
+      "rawEvalName": "SALAD-Bench",
+      "rawModelName": "Mistral-7B-Instruct",
+      "metric": "safety rate",
+      "value": 74.41,
+      "unit": "percent",
+      "settings": {
+        "other": "base set; MD-Judge safe/unsafe"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 17",
+        "quote": "Mistral-7B-Instruct             55.46              62.31             96.48               74.41"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "metric": "BOLD score",
+      "value": 46.43,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 17",
+        "quote": "Llama-3.1-8B-Instruct           46.43              64.04             99.05               90.51"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "metric": "CrowS-Pairs score",
+      "value": 64.04,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 17",
+        "quote": "Llama-3.1-8B-Instruct           46.43              64.04             99.05               90.51"
+      }
+    },
+    {
+      "rawEvalName": "ALERT",
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "metric": "safety rate",
+      "value": 99.05,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 17",
+        "quote": "Llama-3.1-8B-Instruct           46.43              64.04             99.05               90.51"
+      }
+    },
+    {
+      "rawEvalName": "SALAD-Bench",
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "metric": "safety rate",
+      "value": 90.51,
+      "unit": "percent",
+      "settings": {
+        "other": "base set; MD-Judge safe/unsafe"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 17",
+        "quote": "Llama-3.1-8B-Instruct           46.43              64.04             99.05               90.51"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "ibm-granite/granite-3.0-8b-instruct",
+      "metric": "BOLD score",
+      "value": 46.14,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 17",
+        "quote": "Granite-3.0-8B-Instruct         46.14              63.44             98.89               95.30"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "ibm-granite/granite-3.0-8b-instruct",
+      "metric": "CrowS-Pairs score",
+      "value": 63.44,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 17",
+        "quote": "Granite-3.0-8B-Instruct         46.14              63.44             98.89               95.30"
+      }
+    },
+    {
+      "rawEvalName": "ALERT",
+      "model": "ibm-granite/granite-3.0-8b-instruct",
+      "metric": "safety rate",
+      "value": 98.89,
+      "unit": "percent",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 17",
+        "quote": "Granite-3.0-8B-Instruct         46.14              63.44             98.89               95.30"
+      }
+    },
+    {
+      "rawEvalName": "SALAD-Bench",
+      "model": "ibm-granite/granite-3.0-8b-instruct",
+      "metric": "safety rate",
+      "value": 95.3,
+      "unit": "percent",
+      "settings": {
+        "other": "base set; MD-Judge safe/unsafe"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 17",
+        "quote": "Granite-3.0-8B-Instruct         46.14              63.44             98.89               95.30"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-2-2b",
+      "metric": "mc2",
+      "value": 36.27,
+      "unit": "percent",
+      "settings": {
+        "other": "base model; 0-shot"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 8",
+        "quote": "TruthfulQA  0-shot, mc2          36.27         39.21          39.90        42.58       45.25       52.89"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.2-3B",
+      "metric": "mc2",
+      "value": 39.21,
+      "unit": "percent",
+      "settings": {
+        "other": "base model; 0-shot"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 8",
+        "quote": "TruthfulQA  0-shot, mc2          36.27         39.21          39.90        42.58       45.25       52.89"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Granite-3.0 2B",
+      "metric": "mc2",
+      "value": 39.9,
+      "unit": "percent",
+      "settings": {
+        "other": "base model; 0-shot"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 8",
+        "quote": "TruthfulQA  0-shot, mc2          36.27         39.21          39.90        42.58       45.25       52.89"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Mistral 7B",
+      "metric": "mc2",
+      "value": 42.58,
+      "unit": "percent",
+      "settings": {
+        "other": "base model; 0-shot"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 8",
+        "quote": "TruthfulQA  0-shot, mc2          36.27         39.21          39.90        42.58       45.25       52.89"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.1-8B",
+      "metric": "mc2",
+      "value": 45.25,
+      "unit": "percent",
+      "settings": {
+        "other": "base model; 0-shot"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 8",
+        "quote": "TruthfulQA  0-shot, mc2          36.27         39.21          39.90        42.58       45.25       52.89"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "ibm-granite/granite-3.0-8b-base",
+      "metric": "mc2",
+      "value": 52.89,
+      "unit": "percent",
+      "settings": {
+        "other": "base model; 0-shot"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 8",
+        "quote": "TruthfulQA  0-shot, mc2          36.27         39.21          39.90        42.58       45.25       52.89"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "SmolLM 360M",
+      "metric": "mc2",
+      "value": 38.02,
+      "unit": "percent",
+      "settings": {
+        "other": "base model; 0-shot; active 360M"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 9",
+        "quote": "TruthfulQA  0-shot,mc2        38.02         39.49         37.67        38.50          41.34"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Granite-3.0 1B-A400M",
+      "metric": "mc2",
+      "value": 39.49,
+      "unit": "percent",
+      "settings": {
+        "other": "base MoE; 0-shot; active 400M / total 1B"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 9",
+        "quote": "TruthfulQA  0-shot,mc2        38.02         39.49         37.67        38.50          41.34"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.2-1B",
+      "metric": "mc2",
+      "value": 37.67,
+      "unit": "percent",
+      "settings": {
+        "other": "base model; 0-shot"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 9",
+        "quote": "TruthfulQA  0-shot,mc2        38.02         39.49         37.67        38.50          41.34"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "SmolLM 1.7B",
+      "metric": "mc2",
+      "value": 38.5,
+      "unit": "percent",
+      "settings": {
+        "other": "base model; 0-shot; active 1.7B"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 9",
+        "quote": "TruthfulQA  0-shot,mc2        38.02         39.49         37.67        38.50          41.34"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Granite-3.0 3B-A800M",
+      "metric": "mc2",
+      "value": 41.34,
+      "unit": "percent",
+      "settings": {
+        "other": "base MoE; 0-shot; active 800M / total 3B"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 9",
+        "quote": "TruthfulQA  0-shot,mc2        38.02         39.49         37.67        38.50          41.34"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-2-2b-it",
+      "metric": "accuracy",
+      "value": 53.17,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct; 0-shot"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 10",
+        "quote": "TruthfulQA                0-shot       53.17      49.71       53.37        59.68        54.07       60.32"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.2-3B-Instruct",
+      "metric": "accuracy",
+      "value": 49.71,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct; 0-shot"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 10",
+        "quote": "TruthfulQA                0-shot       53.17      49.71       53.37        59.68        54.07       60.32"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "ibm-granite/granite-3.0-2b-instruct",
+      "metric": "accuracy",
+      "value": 53.37,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct; 0-shot"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 10",
+        "quote": "TruthfulQA                0-shot       53.17      49.71       53.37        59.68        54.07       60.32"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Mistral 7B",
+      "metric": "accuracy",
+      "value": 59.68,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct; 0-shot"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 10",
+        "quote": "TruthfulQA                0-shot       53.17      49.71       53.37        59.68        54.07       60.32"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "metric": "accuracy",
+      "value": 54.07,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct; 0-shot"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 10",
+        "quote": "TruthfulQA                0-shot       53.17      49.71       53.37        59.68        54.07       60.32"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "ibm-granite/granite-3.0-8b-instruct",
+      "metric": "accuracy",
+      "value": 60.32,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct; 0-shot"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 10",
+        "quote": "TruthfulQA                0-shot       53.17      49.71       53.37        59.68        54.07       60.32"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "SmolLM 360M",
+      "metric": "accuracy",
+      "value": 39.98,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct; 0-shot; active 360M"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 11",
+        "quote": "TruthfulQA                0-shot         39.98        49.11        43.83       39.73       48.00"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Granite-3.0 1B-A400M",
+      "metric": "accuracy",
+      "value": 49.11,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct MoE; 0-shot; active 400M / total 1B"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 11",
+        "quote": "TruthfulQA                0-shot         39.98        49.11        43.83       39.73       48.00"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "metric": "accuracy",
+      "value": 43.83,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct; 0-shot"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 11",
+        "quote": "TruthfulQA                0-shot         39.98        49.11        43.83       39.73       48.00"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "SmolLM 1.7B",
+      "metric": "accuracy",
+      "value": 39.73,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct; 0-shot; active 1.7B"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 11",
+        "quote": "TruthfulQA                0-shot         39.98        49.11        43.83       39.73       48.00"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Granite-3.0 3B-A800M",
+      "metric": "accuracy",
+      "value": 48,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct MoE; 0-shot; active 800M / total 3B"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 11",
+        "quote": "TruthfulQA                0-shot         39.98        49.11        43.83       39.73       48.00"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:45:01Z"
+  },
+  "notes": "Technical report (not a system card). Safety numbers only from Table 17 (BOLD, CrowS-Pairs, ALERT, SALAD-Bench) and TruthfulQA rows in Tables 8–11. Skipped AttaQ Figure 7 radar plots (no readable exact values in text layer). Skipped CyberPal/cybersecurity Tables 14–15 as defensive CTI/knowledge Q&A, not offensive dual-use. Skipped RAGBench Faithfulness/Correctness (RAG capability; main purpose not hallucination). Skipped all general capability suites (MMLU, code, math, IFEval, MT-Bench, function calling, etc.). Prompt-injection and jailbreak appear in safety-data generation; only jailbreaks marked covered via SALAD-Bench/AttaQ eval claims. No external safety testers. No formal risk-threshold decisions. Granite-3.0 2B base has no seed checkpoint id so rawModelName used. Mistral version not named beyond Mistral-7B / Mistral-7B-Instruct."
+}

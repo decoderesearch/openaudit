@@ -1,0 +1,902 @@
+{
+  "document": "openai-gpt5-sensitive-conversations-safety_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "openai/gpt-5",
+      "section": "ChatGPT default / GPT-5 Instant (gpt-5-aug-15 vs gpt-5-oct-3)"
+    }
+  ],
+  "basedOn": "openai-gpt5-system_card",
+  "pageCount": 4,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "October 27, 2025",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "October 27, 2025"
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "not_stated"
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "not_stated"
+    },
+    "trainingData": {
+      "status": "not_stated"
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "[Production Benchmarks](/evals/openai-production-benchmarks) not_unsafe across disallowed content categories (higher is better)",
+      "source": {
+        "page": "1",
+        "pdfPage": 2,
+        "quote": "The primary metric is not_unsafe,\nchecking that the model did not produce output that is disallowed under the relevant OpenAI"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "sexual/minors not_unsafe rose from 0.91 to 0.96 (higher is better)",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "quote": "sexual/minors                    0.906                  0.959"
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "self-harm/intent and self-harm/instructions not_unsafe improved on Oct 3",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "quote": "self-harm/intent                 0.874                  0.933"
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "[StrongReject](/evals/strongreject) jailbreak not_unsafe across harm categories (higher is better)",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "quote": "StrongReject [1]: inserts a known jailbreak into an example from the above safety refusal"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[SimpleQA](https://arxiv.org/abs/2411.04368) accuracy 0.46→0.44; hallucination rate 0.49→0.52",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "quote": "hallucination rate (lower is better)           0.49       .52"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": true,
+      "headline": "New Emotional Reliance not_unsafe eval for unhealthy dependence on ChatGPT",
+      "source": {
+        "page": "1",
+        "pdfPage": 2,
+        "quote": "Emotional Reliance not_unsafe - tests that the model does not produce disallowed content"
+      }
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "OpenAI reports the Oct 3 update cut responses that fall short of desired distress-support behavior by 65-80% after work with more than 170 mental health experts.", "tone": "good",
+      "source": {
+        "page": "1",
+        "pdfPage": 2,
+        "quote": "reducing responses\nthat fall short of our desired behavior by 65-80%."
+      }
+    },
+    {
+      "text": "Emotional reliance and mental health [Production Benchmarks](/evals/openai-production-benchmarks) are new and were run retrospectively on the August 15 model.", "tone": "neutral",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "quote": "*These are new evaluations that were not available when the August 15 model launched. We have\nrun them retrospectively for these launches."
+      }
+    },
+    {
+      "text": "OpenAI states these challenging [Production Benchmarks](/evals/openai-production-benchmarks) are not representative of average production traffic.", "tone": "mixed",
+      "source": {
+        "page": "1",
+        "pdfPage": 2,
+        "quote": "Error rates are not representative of average production traffic."
+      }
+    },
+    {
+      "text": "Emotional reliance not_unsafe jumped from 0.51* (aug-15, retrospective) to 0.98 (oct-3) (higher is better).", "tone": "good",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "quote": "emotional reliance               0.507*                 0.976"
+      }
+    },
+    {
+      "text": "Mental health not_unsafe jumped from 0.27* (aug-15, retrospective) to 0.93 (oct-3) (higher is better).", "tone": "good",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "quote": "mental health                    0.273*                 0.926"
+      }
+    },
+    {
+      "text": "Extremism [Production Benchmarks](/evals/openai-production-benchmarks) not_unsafe slightly fell (about 0.93) while most other categories rose.", "tone": "mixed",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "quote": "extremism                        0.933                  0.925"
+      }
+    },
+    {
+      "text": "On [SimpleQA](https://arxiv.org/abs/2411.04368), Oct 3 accuracy edged down (0.44 vs 0.46) and hallucination rate edged up (0.52 vs 0.49).", "tone": "mixed",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "quote": "SimpleQA                     accuracy (higher is better)                0.46       .44"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Production Benchmarks — non-violent hate",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.8,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "non-violent hate                 0.800                  0.853"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — non-violent hate",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.853,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "non-violent hate                 0.800                  0.853"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — personal-data",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.876,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "personal-data                    0.876                  0.908"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — personal-data",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.908,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "personal-data                    0.876                  0.908"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — harassment/threatening",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.653,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "harassment/threatening           0.653                  0.706"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — harassment/threatening",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.706,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "harassment/threatening           0.653                  0.706"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — sexual/exploitative",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.785,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "sexual/exploitative              0.785                  0.910"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — sexual/exploitative",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.91,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "sexual/exploitative              0.785                  0.910"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — sexual/minors",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.906,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "sexual/minors                    0.906                  0.959"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — sexual/minors",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.959,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "sexual/minors                    0.906                  0.959"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — extremism",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.933,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "extremism                        0.933                  0.925"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — extremism",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.925,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "extremism                        0.933                  0.925"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — hate/threatening",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.78,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "hate/threatening                 0.780                  0.791"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — hate/threatening",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.791,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "hate/threatening                 0.780                  0.791"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — illicit/nonviolent",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.72,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "illicit/nonviolent               0.720                  0.800"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — illicit/nonviolent",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.8,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "illicit/nonviolent               0.720                  0.800"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — illicit/violent",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.782,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "illicit/violent                  0.782                  0.834"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — illicit/violent",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.834,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "illicit/violent                  0.782                  0.834"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — emotional reliance",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.507,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "emotional reliance               0.507*                 0.976"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — emotional reliance",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.976,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "emotional reliance               0.507*                 0.976"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — mental health",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.273,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "mental health                    0.273*                 0.926"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — mental health",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.926,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "mental health                    0.273*                 0.926"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — self-harm/intent",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.874,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "self-harm/intent                 0.874                  0.933"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — self-harm/intent",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.933,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "self-harm/intent                 0.874                  0.933"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — self-harm/instructions",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.805,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "self-harm/instructions           0.805                  0.890"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — self-harm/instructions",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.89,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 1",
+        "quote": "self-harm/instructions           0.805                  0.890"
+      }
+    },
+    {
+      "rawEvalName": "StrongReject — illicit/non-violent-crime prompts",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.926,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 2",
+        "quote": "illicit/non-violent-    not_unsafe       0.926              0.957"
+      }
+    },
+    {
+      "rawEvalName": "StrongReject — illicit/non-violent-crime prompts",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.957,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 2",
+        "quote": "illicit/non-violent-    not_unsafe       0.926              0.957"
+      }
+    },
+    {
+      "rawEvalName": "StrongReject — violence prompts",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.942,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 2",
+        "quote": "violence prompts        not_unsafe       0.942              0.968"
+      }
+    },
+    {
+      "rawEvalName": "StrongReject — violence prompts",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.968,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 2",
+        "quote": "violence prompts        not_unsafe       0.942              0.968"
+      }
+    },
+    {
+      "rawEvalName": "StrongReject — abuse / disinformation / hate prompts",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.967,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 2",
+        "quote": "abuse /                 not_unsafe       0.967              0.981"
+      }
+    },
+    {
+      "rawEvalName": "StrongReject — abuse / disinformation / hate prompts",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.981,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 2",
+        "quote": "abuse /                 not_unsafe       0.967              0.981"
+      }
+    },
+    {
+      "rawEvalName": "StrongReject — sexual-content prompts",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.954,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 2",
+        "quote": "sexual-content          not_unsafe       0.954              0.969"
+      }
+    },
+    {
+      "rawEvalName": "StrongReject — sexual-content prompts",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.969,
+      "unit": "fraction",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "table": "Table 2",
+        "quote": "sexual-content          not_unsafe       0.954              0.969"
+      }
+    },
+    {
+      "rawEvalName": "Image input evaluations — hate",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.982,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "hate                        0.982                    0.990"
+      }
+    },
+    {
+      "rawEvalName": "Image input evaluations — hate",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.99,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "hate                        0.982                    0.990"
+      }
+    },
+    {
+      "rawEvalName": "Image input evaluations — extremism",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.984,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "extremism                   0.984                    0.986"
+      }
+    },
+    {
+      "rawEvalName": "Image input evaluations — extremism",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.986,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "extremism                   0.984                    0.986"
+      }
+    },
+    {
+      "rawEvalName": "Image input evaluations — illicit",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.99,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "illicit                     0.990                    0.986"
+      }
+    },
+    {
+      "rawEvalName": "Image input evaluations — illicit",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.986,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "illicit                     0.990                    0.986"
+      }
+    },
+    {
+      "rawEvalName": "Image input evaluations — attack planning",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 1,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "attack planning             1.000                    0.995"
+      }
+    },
+    {
+      "rawEvalName": "Image input evaluations — attack planning",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.995,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "attack planning             1.000                    0.995"
+      }
+    },
+    {
+      "rawEvalName": "Image input evaluations — self-harm",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.994,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "self-harm                   0.994                    0.994"
+      }
+    },
+    {
+      "rawEvalName": "Image input evaluations — self-harm",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.994,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "self-harm                   0.994                    0.994"
+      }
+    },
+    {
+      "rawEvalName": "Image input evaluations — harms-erotic",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "not_unsafe",
+      "value": 0.99,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "harms-erotic                0.990                    0.996"
+      }
+    },
+    {
+      "rawEvalName": "Image input evaluations — harms-erotic",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "not_unsafe",
+      "value": 0.996,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 3",
+        "quote": "harms-erotic                0.990                    0.996"
+      }
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "accuracy",
+      "value": 0.46,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 4",
+        "quote": "SimpleQA                     accuracy (higher is better)                0.46       .44"
+      }
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "accuracy",
+      "value": 0.44,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 4",
+        "quote": "SimpleQA                     accuracy (higher is better)                0.46       .44"
+      }
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "rawModelName": "gpt-5-aug-15",
+      "metric": "hallucination rate",
+      "value": 0.49,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 4",
+        "quote": "hallucination rate (lower is better)           0.49       .52"
+      }
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "rawModelName": "gpt-5-oct-3",
+      "metric": "hallucination rate",
+      "value": 0.52,
+      "unit": "fraction",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Table 4",
+        "quote": "hallucination rate (lower is better)           0.49       .52"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:29:52Z"
+  },
+  "notes": "Short addendum PDF (4 pages) comparing gpt-5-aug-15 vs gpt-5-oct-3 ChatGPT default (GPT-5 Instant). Seed also links gpt-5-mini and gpt-5-nano to this document, but the card only evaluates Instant dated snapshots; those used rawModelName. No Preparedness Framework risk levels, no external testers (170 mental health experts mentioned for the product update, not named as evaluation orgs). 65-80% improvement claim is a range, so recorded as a finding not an evalResult. Web page Table 3 is a chart; PDF Table 3 has the numeric values used here. alsoDocuments empty: seed lists only this one document for the card."
+}

@@ -1,0 +1,642 @@
+{
+  "document": "qwen-qwen3-vl-paper",
+  "alsoDocuments": ["qwen-qwen3-vl-blog"],
+  "covers": [
+    {
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen3-VL-30B-A3B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen3-VL-32B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen3-VL-8B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen3-VL-4B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen3-VL-2B-Instruct"
+    }
+  ],
+  "pageCount": 42,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "native 256K-token interleaved context for text, images, and video",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "It natively supports interleaved contexts of up to 256K tokens, seamlessly integrat-"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text, images, and video",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "ing text, images, and video. The model family includes both dense (2B/4B/8B/32B)"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "non-thinking and thinking variants",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We extend pretraining to a context length of 256K tokens and bifurcate post-training\n                                         into non-thinking and thinking variants to address distinct application requirements."
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "Primary Chinese and English corpora plus multilingual samples; OCR expanded by 29 languages beyond Qwen2.5-VL's 10 (excluding Chinese and English)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "we incorporate an additional 29 languages, synthesizing approximately 30 million high-quality"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "releasing the entire model family under the Apache 2.0 license, we aim to catalyze community-driven"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "Dense 2B/4B/8B/32B and MoE 30B-A3B/235B-A22B; flagship 235B total parameters",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "The flagship model, Qwen3-VL-235B-A22B, has 235B total parameters with 22B activated per token. It"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "22B activated per token for Qwen3-VL-235B-A22B; MoE naming also includes 30B-A3B",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "The flagship model, Qwen3-VL-235B-A22B, has 235B total parameters with 22B activated per token. It"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Three-module: SigLIP-2 vision encoder, MLP vision–language merger with DeepStack, Qwen3 LLM backbone; interleaved MRoPE; text-based video timestamps",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Qwen3-VL adopts a three-module architecture comprising a\nvision encoder, an MLP-based vision–language merger, and a large language model (LLM)."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Multimodal pre-training ~1T tokens (VL + text) then long-context ~1T and 100B ultra-long; SFT ~1.2M samples (1/3 text-only, 2/3 image/video); OCR, documents, grounding, GUI, video, STEM, agent data",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "The VL portion\nis rich and varied, adding interleaved image-text documents, visual grounding tasks, visual question"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[HallusionBench](/evals/hallusionbench) scores reported for thinking and instruct variants across model sizes; text frames the bench as reducing image-level hallucinations",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "The ability to follow complex user instructions and reduce potential image-level hallucinations is in-"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "Rule-based reinforcement learning (RL) rewards described as mitigating reward hacking via verifiable heuristics",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "effectively mitigates\n  reward hacking, where a model might exploit ambiguities in a learned reward function."
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The report has no dedicated safety, red-teaming, jailbreak, bias, or dangerous-capability section; the only safety-adjacent numeric eval is [HallusionBench](/evals/hallusionbench) under Alignment.", "tone": "mixed",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "The ability to follow complex user instructions and reduce potential image-level hallucinations is in-"
+      }
+    },
+    {
+      "text": "Supervised fine-tuning (SFT) response filtering discards query-response pairs that are off-topic or may generate harmful content, citing ethical principles.", "tone": "good",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "off-topic or possess the potential to generate harmful content."
+      }
+    },
+    {
+      "text": "Interleaved pre-training data excludes harmful or low-value web categories such as ads, promotions, and clickbait via a domain scorer.", "tone": "good",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "systematically exclude harmful or low-value categories—such as advertisements, promotional content,"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 66.7,
+      "unit": "percent",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 2",
+        "quote": "                     HallusionBench      66.7       63.2      63.7∗        60.9       65.7       53.7      60.4       55.1"
+      },
+      "model": "Qwen/Qwen3-VL-235B-A22B-Thinking",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 63.2,
+      "unit": "percent",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 2",
+        "quote": "                     HallusionBench      66.7       63.2      63.7∗        60.9       65.7       53.7      60.4       55.1"
+      },
+      "model": "Qwen/Qwen3-VL-235B-A22B-Instruct",
+      "settings": {
+        "reasoningEffort": "instruct"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 63.7,
+      "unit": "percent",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 2",
+        "quote": "                     HallusionBench      66.7       63.2      63.7∗        60.9       65.7       53.7      60.4       55.1"
+      },
+      "model": "google/gemini-2.5-pro",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "result marked ∗ sourced from technical report"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 60.9,
+      "unit": "percent",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 2",
+        "quote": "                     HallusionBench      66.7       63.2      63.7∗        60.9       65.7       53.7      60.4       55.1"
+      },
+      "model": "google/gemini-2.5-pro",
+      "settings": {
+        "reasoningEffort": "budget-128"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 65.7,
+      "unit": "percent",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 2",
+        "quote": "                     HallusionBench      66.7       63.2      63.7∗        60.9       65.7       53.7      60.4       55.1"
+      },
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "high"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 53.7,
+      "unit": "percent",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 2",
+        "quote": "                     HallusionBench      66.7       63.2      63.7∗        60.9       65.7       53.7      60.4       55.1"
+      },
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "minimal"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 60.4,
+      "unit": "percent",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 2",
+        "quote": "                     HallusionBench      66.7       63.2      63.7∗        60.9       65.7       53.7      60.4       55.1"
+      },
+      "model": "anthropic/claude-opus-4.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 55.1,
+      "unit": "percent",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 2",
+        "quote": "                     HallusionBench      66.7       63.2      63.7∗        60.9       65.7       53.7      60.4       55.1"
+      },
+      "model": "anthropic/claude-opus-4.1",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 66,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "                     HallusionBench      66.0       61.5       67.4       63.8       63.5        59.1       63.2      55.9"
+      },
+      "model": "Qwen/Qwen3-VL-30B-A3B-Thinking",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 61.5,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "                     HallusionBench      66.0       61.5       67.4       63.8       63.5        59.1       63.2      55.9"
+      },
+      "model": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+      "settings": {
+        "reasoningEffort": "instruct"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 67.4,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "                     HallusionBench      66.0       61.5       67.4       63.8       63.5        59.1       63.2      55.9"
+      },
+      "model": "Qwen/Qwen3-VL-32B-Thinking",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 63.8,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "                     HallusionBench      66.0       61.5       67.4       63.8       63.5        59.1       63.2      55.9"
+      },
+      "model": "Qwen/Qwen3-VL-32B-Instruct",
+      "settings": {
+        "reasoningEffort": "instruct"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 63.5,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "                     HallusionBench      66.0       61.5       67.4       63.8       63.5        59.1       63.2      55.9"
+      },
+      "model": "google/gemini-2.5-flash",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 59.1,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "                     HallusionBench      66.0       61.5       67.4       63.8       63.5        59.1       63.2      55.9"
+      },
+      "model": "google/gemini-2.5-flash",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 63.2,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "                     HallusionBench      66.0       61.5       67.4       63.8       63.5        59.1       63.2      55.9"
+      },
+      "model": "openai/gpt-5-mini",
+      "settings": {
+        "reasoningEffort": "high"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 55.9,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 3",
+        "quote": "                     HallusionBench      66.0       61.5       67.4       63.8       63.5        59.1       63.2      55.9"
+      },
+      "model": "openai/gpt-5-mini",
+      "settings": {
+        "reasoningEffort": "minimal"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 54.9,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 4",
+        "quote": "                    HallusionBench      54.9       51.4       64.1       57.6       65.4       61.1      58.4     39.3"
+      },
+      "model": "Qwen/Qwen3-VL-2B-Thinking",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 51.4,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 4",
+        "quote": "                    HallusionBench      54.9       51.4       64.1       57.6       65.4       61.1      58.4     39.3"
+      },
+      "model": "Qwen/Qwen3-VL-2B-Instruct",
+      "settings": {
+        "reasoningEffort": "instruct"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 64.1,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 4",
+        "quote": "                    HallusionBench      54.9       51.4       64.1       57.6       65.4       61.1      58.4     39.3"
+      },
+      "model": "Qwen/Qwen3-VL-4B-Thinking",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 57.6,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 4",
+        "quote": "                    HallusionBench      54.9       51.4       64.1       57.6       65.4       61.1      58.4     39.3"
+      },
+      "model": "Qwen/Qwen3-VL-4B-Instruct",
+      "settings": {
+        "reasoningEffort": "instruct"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 65.4,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 4",
+        "quote": "                    HallusionBench      54.9       51.4       64.1       57.6       65.4       61.1      58.4     39.3"
+      },
+      "model": "Qwen/Qwen3-VL-8B-Thinking",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 61.1,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 4",
+        "quote": "                    HallusionBench      54.9       51.4       64.1       57.6       65.4       61.1      58.4     39.3"
+      },
+      "model": "Qwen/Qwen3-VL-8B-Instruct",
+      "settings": {
+        "reasoningEffort": "instruct"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 58.4,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 4",
+        "quote": "                    HallusionBench      54.9       51.4       64.1       57.6       65.4       61.1      58.4     39.3"
+      },
+      "model": "openai/gpt-5-nano",
+      "settings": {
+        "reasoningEffort": "high"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 39.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 4",
+        "quote": "                    HallusionBench      54.9       51.4       64.1       57.6       65.4       61.1      58.4     39.3"
+      },
+      "model": "openai/gpt-5-nano",
+      "settings": {
+        "reasoningEffort": "minimal"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:05:42Z"
+  },
+  "notes": "Technical report (arXiv 2511.21631), not a system card. Safety-only pilot: only HallusionBench counted as a hallucination/safety eval (Tables 2–4). Skipped capability including MMMU, MathVista/MathVision, MMBench, MMStar, SimpleVQA, MM-MT-Bench, MIA-Bench, OCR/DocVQA, grounding, video, agent (OSWorld etc.), and all pure-text benches (IFEval, Arena-Hard, MMLU-family). Thinking variants stored as rawModelName because seed ids are Instruct with Thinking as checkpoint. Training filters for harmful content noted in findings only, not topic coverage. No risk framework or external safety testers. pageCount=42 from printed page numbers."
+}

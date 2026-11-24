@@ -1,0 +1,230 @@
+{
+  "method": {
+    "slug": "logprob-classifiers",
+    "displayName": "Logprob Classifiers",
+    "group": "white_box",
+    "summary": "A logprob classifier asks the model follow-up questions and reads the probabilities of its answers, not its activations.",
+    "tagline": "Find a lie from the model's answers to follow-up questions.",
+    "expertSummary": "Experts agree it is weak outside simple prompted lies. It fell to chance on trained liars and on most lie types. A model trained to copy a weaker one can also fool black-box checks. Experts doubt that current test lies match real strategic deception.",
+    "safetyUse": "After a reply, the classifier asks the model many unrelated yes or no questions. A model that just lied answers them in a slightly different way. The classifier needs the token probabilities, but not the weights.\n\nIn the AISI tests, it found prompted lies well, but it fell to chance on models that were trained to lie. On Liars’ Bench, it was close to chance on most kinds of lies, and it worked well only for some model families.",
+    "caveats": [
+      "Each classifier is trained for one subject model.",
+      "On models that were trained to lie, the AISI classifier fell to chance (median balanced accuracy 0.50).",
+      "It needs the logprobs of the answer tokens, and a way to reset the conversation before each question. Not all APIs give these.",
+      "The original tests used role-play and prompted lies. Experts doubt that these are like the strategic lies that matter most for safety."
+    ],
+    "params": [
+      {
+        "key": "checkpoint",
+        "label": "Checkpoint",
+        "type": "string",
+        "description": "The file in the repo with the classifier weights."
+      },
+      {
+        "key": "classifier",
+        "label": "Classifier",
+        "type": "string"
+      }
+    ],
+    "compare": { "groupBy": [] },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2606.12618",
+        "title": "Cooney, Africa and Irving, Evaluating Lie Detectors across Model Scale and Belief-Verified Model Organisms"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2309.15840",
+        "title": "Pacchiardi et al., How to Catch an AI Liar: Lie Detection in Black-Box LLMs by Asking Unrelated Questions (ICLR 2024)"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/LoryPack/LLM-LieDetector",
+        "title": "Code for How to Catch an AI Liar"
+      }
+    ]
+  },
+  "variants": [
+    {
+      "slug": "unrelated-questions",
+      "displayName": "Unrelated Questions",
+      "aliases": ["Unrelated Qs", "UQ"],
+      "access": "logprobs",
+      "summary": "After the reply, asks a fixed set of yes or no questions that are not about the reply, and classifies the yes and no probabilities of the answers. It does not need to know what the lie is about.",
+      "baseline": false,
+      "params": [],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2309.15840",
+          "title": "Pacchiardi et al., How to catch an AI liar"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/LoryPack/LLM-LieDetector",
+          "title": "Original code"
+        },
+        {
+          "kind": "dataset",
+          "url": "https://huggingface.co/datasets/ai-safety-institute/unrelated-questions-follow-up-questions",
+          "title": "AISI copy of the follow-up questions"
+        }
+      ]
+    }
+  ],
+  "views": [
+    {
+      "slug": "aisi-lie-detectors-unrelated-questions",
+      "variants": ["unrelated-questions"],
+      "title": "AISI: unrelated questions fall to chance on trained lies",
+      "byline": "Alan Cooney, David Africa and Geoffrey Irving",
+      "organization": "UK AI Security Institute",
+      "publishedDate": "2026-06-10",
+      "stance": "negative",
+      "summary": "On Varied Deception, the unrelated-questions classifier got a median balanced accuracy of 0.85 on the base models. On the same models after training to lie, it fell to 0.50, which is chance. It also did badly on prompted versions of the same lies.",
+      "points": [
+        "Thus the classifier does not generalize to this type of lie, and the cause is not only the training.",
+        "On prompted lies across 31 open models, it did better on more capable models.",
+        "A version that reads activations, not logprobs, did worse on most models (median 0.76, against 0.81).",
+        "AISI could not train it on models whose reasoning cannot be turned off, such as gpt-oss."
+      ],
+      "quotes": [
+        {
+          "text": "On our trained model organisms however, every activation- and logprob-based detector we evaluated drops substantially, with Unrelated Questions falling close to chance.",
+          "sourceUrl": "https://arxiv.org/abs/2606.12618"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2606.12618",
+          "title": "“Did you lie?” Evaluating Lie Detectors across Model Scale and Belief-Verified Model Organisms"
+        },
+        {
+          "kind": "dataset",
+          "url": "https://huggingface.co/datasets/ai-safety-institute/unrelated-questions-follow-up-questions",
+          "title": "AISI copy of the follow-up questions"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "aisi-auditing-games-sandbagging",
+      "variants": [],
+      "title": "AISI: black-box checks did not catch models that were trained to sandbag",
+      "byline": "Jordan Taylor, Sid Black, Dillon Bowen and 10 others",
+      "organization": "UK AI Security Institute",
+      "publishedDate": "2025-12-08",
+      "stance": "negative",
+      "summary": "In an auditing game, a red team trained five models, and some of them hid their capabilities on evaluations (sandbagging). A blue team tried to find them with black-box, white-box and training methods. Black-box methods failed, because the red team trained the sandbaggers to imitate a weaker model closely.",
+      "points": [
+        "Training the models to imitate the full logit distribution of the weaker model, not only its output tokens, helped to fool the black-box checks. This is a direct risk for detectors that read logprobs.",
+        "The blue team did not use the Unrelated Questions classifier. Its black-box methods were transcript review, prompts that ask the model to admit sandbagging, and persona attacks.",
+        "Linear probes did better than black-box methods, but distractor behaviors from the red team caused false positives.",
+        "Training on one correct example removed the sandbagging, but it sometimes also raised the scores of honest models."
+      ],
+      "quotes": [
+        {
+          "text": "Black-box approaches were defeated by effective imitation of a weaker model.",
+          "sourceUrl": "https://arxiv.org/abs/2512.07810"
+        },
+        {
+          "text": "Training to imitate logit probability distributions, rather than single output tokens, was also useful for fooling black-box detection strategies.",
+          "sourceUrl": "https://arxiv.org/abs/2512.07810"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2512.07810",
+          "title": "Auditing Games for Sandbagging"
+        },
+        {
+          "kind": "blog",
+          "url": "https://www.aisi.gov.uk/blog/auditing-games-for-sandbagging-detection",
+          "title": "AISI blog: Auditing games for sandbagging detection"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/AI-Safety-Institute/sandbagging_auditing_games",
+          "title": "Model organisms"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "gdm-difficulties-evaluating-deception-detectors",
+      "variants": ["unrelated-questions"],
+      "title": "Google DeepMind: we lack clear examples of strategic lies to test lie detectors on",
+      "byline": "Lewis Smith, Bilal Chughtai and Neel Nanda",
+      "organization": "Google DeepMind",
+      "publishedDate": "2025-11-27",
+      "stance": "mixed",
+      "summary": "To show that a deception detector works, you need examples that are surely deceptive or surely honest. The authors argue that current test sets do not have them. Many test lies come from role-play, prompts or trained triggers, and these may not be strategic deception. The problem applies to follow-up question methods such as Pacchiardi et al., not only to probes.",
+      "points": [
+        "A model that was fine-tuned to give wrong answers to a user named Alice, as in Pacchiardi et al., probably runs a trained response. It does not try to make Alice believe something false.",
+        "When a model role-plays a deceptive character, it is not clear if it has an intent to deceive.",
+        "A prompt can change what the model believes. Then an answer that contradicts another context can be honest.",
+        "The authors think that workarounds, such as lies that show in the chain of thought or in fine-tuned models, are valuable but not enough on their own."
+      ],
+      "quotes": [
+        {
+          "text": "We argue that we currently lack the necessary examples and further identify several concrete obstacles in collecting them.",
+          "sourceUrl": "https://arxiv.org/abs/2511.22662"
+        },
+        {
+          "text": "it seems likely that this model is executing a particular response to training rather than trying to get Alice to believe anything in particular",
+          "sourceUrl": "https://arxiv.org/abs/2511.22662"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2511.22662",
+          "title": "Difficulties with Evaluating a Deception Detector for AIs"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "liars-bench-unrelated-questions",
+      "variants": ["unrelated-questions"],
+      "title": "Liars’ Bench: the unrelated-questions classifier is near chance on most kinds of lies",
+      "byline": "Kieron Kretschmar, Walter Laurito, Sharan Maiya and Samuel Marks",
+      "organization": "Cadenza Labs",
+      "publishedDate": "2025-11-20",
+      "stance": "negative",
+      "summary": "Liars’ Bench tested the Pacchiardi classifier on seven kinds of lies from four open models. On most datasets, its balanced accuracy was close to chance, often because it gave the same label to most examples. Its average balanced accuracy (0.60) was third of four detectors, after an LLM judge (0.73) and asking the model to rate its own lie (0.66).",
+      "points": [
+        "It did well on the easiest dataset, and it had a high AUROC on some others. On one dataset about the model's own knowledge, it beat the LLM judge by AUROC, probably because it asks the subject model itself.",
+        "Results changed much between model families. Gemma 3 27B and Qwen 2.5 72B gave the best separation, and Mistral Small 24B the worst (average AUROC 0.57).",
+        "This version used yes or no answers to 39 questions, not logprobs.",
+        "Each prediction needs answers to all 39 questions, so it is costly to run."
+      ],
+      "quotes": [
+        {
+          "text": "This pattern suggests that on many datasets the classifier assigns the same label to most examples.",
+          "sourceUrl": "https://arxiv.org/abs/2511.16035"
+        },
+        {
+          "text": "However, its practical deployment is limited by cost, as each prediction requires evaluating all 39 elicitation questions.",
+          "sourceUrl": "https://arxiv.org/abs/2511.16035"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2511.16035",
+          "title": "Liars’ Bench: Evaluating Lie Detectors for Language Models"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/Cadenza-Labs/liars-bench",
+          "title": "Liars’ Bench code and prompts"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    }
+  ]
+}

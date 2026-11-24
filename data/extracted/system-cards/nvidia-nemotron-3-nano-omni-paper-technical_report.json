@@ -1,0 +1,258 @@
+{
+  "document": "nvidia-nemotron-3-nano-omni-paper-technical_report",
+  "alsoDocuments": ["nvidia-nemotron-3-nano-omni-blog"],
+  "covers": [
+    {
+      "model": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16"
+    }
+  ],
+  "pageCount": 27,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "256K tokens",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We increase the maximum context length from 128K to 256K\n                                               tokens, improving performance on long-context multimodal reasoning tasks."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text, images, video, and audio",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "the first to natively support audio inputs alongside text, images, and\n                                         video."
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "non-reasoning and reasoning settings",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "ASR and MMAU use non-reasoning settings, while VoiceBench uses\nreasoning."
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "30B-A3B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Built on the highly\n                                         efficient Nemotron 3 Nano 30B-A3B backbone"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "A3B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Built on the highly\n                                         efficient Nemotron 3 Nano 30B-A3B backbone"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "encoder-projector-decoder with Nemotron 3 Nano 30B-A3B MoE hybrid LLM, C-RADIOv4-H vision encoder, Parakeet-TDT-0.6B-v2 audio encoder",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Our model follows an encoder-projector-decoder design, combining the Nemotron 3 Nano 30B-\nA3B (NVIDIA et al., 2025a) language model with modality-specific encoders for vision and audio,"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "multi-stage SFT totaling ~434.1M samples / ~466.9B tokens across stages, plus RL; includes text/image safety data and Nemotron 3 Super safety blend",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Total (all stages)          434.1M                  466.9B"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "[VoiceBench](/evals/voicebench) [AdvBench](/evals/advbench) score 100 (reasoning on) (higher is better); RL aims at safety-alignment; SFT includes safety data blends",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "                                        AdvBench                        100                    97.2      –"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The report has no dedicated Safety evaluation section; safety is addressed mainly via supervised fine-tuning (SFT) safety blends, reinforcement learning (RL) safety-alignment goals, and the [AdvBench](/evals/advbench) subset of [VoiceBench](/evals/voicebench).", "tone": "mixed",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "following, reasoning, and safety-alignment for text, image, and video modalities. We design a"
+      }
+    },
+    {
+      "text": "Stage 4 and Stage 5 SFT include text/image safety rows and the Nemotron 3 Super safety data blend, but the report does not describe the safety policies or content of those blends.", "tone": "mixed",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "To improve safety coverage,\nwe additionally incorporate the safety data blend from Nemotron 3 Super (NVIDIA et al., 2026)."
+      }
+    },
+    {
+      "text": "Image RL and Omni-RL include unanswerable or mismatched prompts to train abstention when evidence is insufficient; no hallucination benchmark scores are reported.", "tone": "mixed",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "We additionally include a small set of unanswerable or\nimage-text-mismatched prompts to train the policy to abstain when visual evidence is insufficient."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "VoiceBench",
+      "model": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
+      "metric": "score",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "on",
+        "other": "AdvBench subtask"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 8",
+        "quote": "                                        AdvBench                        100                    97.2      –"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "rawModelName": "Qwen3-Omni",
+      "metric": "score",
+      "value": 97.2,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "on",
+        "other": "AdvBench subtask; table size column 30B-A3B"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 8",
+        "quote": "                                        AdvBench                        100                    97.2      –"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:59:09Z"
+  },
+  "notes": "Technical report (arXiv:2604.24954), not a system card. No dedicated safety section or risk framework. Only safety-purpose numeric result is VoiceBench AdvBench; other VoiceBench rows and all vision/audio/text capability tables skipped per pilot. Qwen3-Omni left as rawModelName because the table does not name Instruct vs Thinking. Active params given only via A3B naming. Abstention training mentioned but no hallucination eval numbers, so hallucination left uncovered. Capability skipped (name in reply): MMMU, MathVista-Mini, MMLongBench-Doc, OCRBench/OCRBenchV2, ChartQA, DocVQA, AI2D, TextVQA, InfoVQA, OCR-Reasoning, CharXiv, TreeBench, CV-Bench, RefCOCO, ScreenSpot/v2/Pro, OSWorld, VideoMME, OpenASR, TED-LIUM, MMAU, VoiceBench non-AdvBench, WorldSense, DailyOmni, and text/backbone comparisons."
+}

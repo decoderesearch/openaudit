@@ -1,0 +1,1627 @@
+{
+  "document": "google-palm-2-technical_report",
+  "alsoDocuments": ["google-palm-2-blog"],
+  "covers": [
+    {
+      "rawModelName": "PaLM 2"
+    },
+    {
+      "rawModelName": "PaLM 2-L",
+      "section": "Large variant prioritized for harms and bias evaluations"
+    },
+    {
+      "rawModelName": "PaLM 2-S",
+      "section": "Small variant discussed mainly in capability sections"
+    }
+  ],
+  "pageCount": 93,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "context length increased significantly beyond PaLM (exact length not reported)",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "PaLM 2 was trained to increase the context length of the model significantly beyond that of PaLM. This improvement is"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text input and text output",
+      "source": {
+        "page": "92",
+        "pdfPage": 92,
+        "quote": "Input(s)                           The model takes text as input.\n     Output(s)                          The model generates text as output."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "hundreds of languages in pre-training (multilingual web documents and parallel data)",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "PaLM 2 is also trained on parallel data covering hundreds of languages in\nthe form of source and target text pairs where one side is in English."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "not_stated"
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Transformer-based with a tuned mixture of pre-training objectives; small/medium/large variants",
+      "source": {
+        "page": "92",
+        "pdfPage": 92,
+        "quote": "PaLM-2 is a new state-of-the-art language model. We have small, medium,\n                                        and large variants that use stacked layers based on the Transformer archi-"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "web documents, books, code, mathematics, and conversational data; more non-English and parallel data than PaLM",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "The PaLM 2 pre-training corpus is composed of a diverse set of sources: web documents, books, code, mathematics,\nand conversational data."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "[BBQ](/evals/bbq), Multilingual Representational Bias, translation misgendering, and toxic-language bias across identity terms",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "We evaluate PaLM 2 regarding potential harms and biases for dialog, generative question\nanswering, and open-ended language modeling."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "ParlAI Dialogue Safety, [RealToxicityPrompts](/evals/real-toxicity-prompts), and multilingual dialog toxicity evaluations",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "ParlAI Dialogue Safety (Dinan et al., 2019), with standard and adversarial datasets, in English."
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Dialog-prompting cuts toxic degeneration versus language-modeling alone, but with 20 samples still yields toxic replies for over 30% of adversarial and almost 60% of standard ParlAI queries.", "tone": "mixed",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "quote": "With 20 samples, we see a\ntoxic response to over 30% of queries in the adversarial set, and almost 60% of queries in the standard set."
+      }
+    },
+    {
+      "text": "On Multilingual Representational Bias, English/German/Portuguese dialog toxicity ranges 1–17.9% across identity groups versus 0–3.5% elsewhere.", "tone": "bad",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "the percentage of toxic responses ranges from 0% to 3.5% in the best case, while ranges from 1%\nto 17.9% in the worst case for English, German and Portuguese."
+      }
+    },
+    {
+      "text": "PaLM 2 on average memorizes less English training data than PaLM, though highly repeated n-grams can be more likely to be memorized.", "tone": "good",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "finding that PaLM 2 on average memorizes significantly less data. For\nPaLM 2, we observe the highest memorization rates from the medium sized model."
+      }
+    },
+    {
+      "text": "Control tokens steer [RealToxicityPrompts](/evals/real-toxicity-prompts) continuations, but dialog-prompting alone beats control tokens for dialog toxicity, and specialized LaMDA still does better.", "tone": "mixed",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "For dialog uses, we surprisingly find that dialog-prompting alone is more effective than control tokens at reducing toxic\ngeneration."
+      }
+    },
+    {
+      "text": "In generative [BBQ](/evals/bbq), 86 queries (~0.5%) introduced unexpected biases not the stereotype under test, including inventing other identity groups in answers.", "tone": "bad",
+      "source": {
+        "page": "79",
+        "pdfPage": 79,
+        "quote": "some queries led to an unexpected bias that can potentially be very harmful to\nthe user experience (86 queries total, about 0.5% of all queries)."
+      }
+    },
+    {
+      "text": "Pre-trained PaLM 2 models here are not product systems; fine-tuned products add mitigations, so product performance should not be assumed to match this report.", "tone": "mixed",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "that the models evaluated\nin this paper are pre-trained models (of various sizes). Fine-tuned variants of these models, and in particular, user-facing"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "model": "google/palm",
+      "metric": "probability of toxic continuation",
+      "value": 0.076,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 14; non-toxic prompts; condition: No control token"
+      },
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Table 14",
+        "quote": "No control token        0.076    0.075"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 2",
+      "metric": "probability of toxic continuation",
+      "value": 0.075,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 14; non-toxic prompts; condition: No control token"
+      },
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Table 14",
+        "quote": "No control token        0.076    0.075"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 2",
+      "metric": "probability of toxic continuation",
+      "value": 0.033,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 14; non-toxic prompts; condition: Low toxicity"
+      },
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Table 14",
+        "quote": "Low toxicity                -    0.033"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 2",
+      "metric": "probability of toxic continuation",
+      "value": 0.116,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 14; non-toxic prompts; condition: Medium toxicity"
+      },
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Table 14",
+        "quote": "Medium toxicity             -    0.116"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 2",
+      "metric": "probability of toxic continuation",
+      "value": 0.203,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 14; non-toxic prompts; condition: High toxicity"
+      },
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "table": "Table 14",
+        "quote": "High toxicity               -    0.203"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "model": "google/palm",
+      "metric": "probability of toxic continuation",
+      "value": 0.0758,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 29; Non-toxic prompts; evaluation variant small (38k)"
+      },
+      "source": {
+        "page": "80",
+        "pdfPage": 80,
+        "table": "Table 29",
+        "quote": "Non-toxic prompts    small (38k)      0.0758      0.0738 ± 0.0006    -0.0020     -2.6%"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 2 (L)",
+      "metric": "probability of toxic continuation",
+      "value": 0.0738,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 29; Non-toxic prompts; evaluation variant small (38k)"
+      },
+      "source": {
+        "page": "80",
+        "pdfPage": 80,
+        "table": "Table 29",
+        "quote": "Non-toxic prompts    small (38k)      0.0758      0.0738 ± 0.0006    -0.0020     -2.6%"
+      },
+      "stderr": 0.0006
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "model": "google/palm",
+      "metric": "probability of toxic continuation",
+      "value": 0.4386,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 29; Non-toxic prompts; evaluation variant full (193k)"
+      },
+      "source": {
+        "page": "80",
+        "pdfPage": 80,
+        "table": "Table 29",
+        "quote": "Non-toxic prompts    full (193k)      0.4386          0.4285         -0.0101     -2.3%"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 2 (L)",
+      "metric": "probability of toxic continuation",
+      "value": 0.4285,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 29; Non-toxic prompts; evaluation variant full (193k)"
+      },
+      "source": {
+        "page": "80",
+        "pdfPage": 80,
+        "table": "Table 29",
+        "quote": "Non-toxic prompts    full (193k)      0.4386          0.4285         -0.0101     -2.3%"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "model": "google/palm",
+      "metric": "probability of toxic continuation",
+      "value": 0.7956,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 29; Toxic prompts; evaluation variant full (55k)"
+      },
+      "source": {
+        "page": "80",
+        "pdfPage": 80,
+        "table": "Table 29",
+        "quote": "Toxic prompts        full (55k)       0.7956          0.7429         -0.0527     -6.6%"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 2 (L)",
+      "metric": "probability of toxic continuation",
+      "value": 0.7429,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 29; Toxic prompts; evaluation variant full (55k)"
+      },
+      "source": {
+        "page": "80",
+        "pdfPage": 80,
+        "table": "Table 29",
+        "quote": "Toxic prompts        full (55k)       0.7956          0.7429         -0.0527     -6.6%"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 2 (L)",
+      "metric": "toxicity probability of continuation (mean)",
+      "value": 0.0676,
+      "unit": "fraction",
+      "stderr": 0.0026,
+      "settings": {
+        "other": "tiny variant n=500; mean TPC over 87% of training epochs"
+      },
+      "source": {
+        "page": "81",
+        "pdfPage": 81,
+        "quote": "mean TPC of 0.0676±0.0026, and\nworst-case performance of 0.0725, as measured over 87% of training epochs (excluding init"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 2 (L)",
+      "metric": "toxicity probability of continuation (worst-case)",
+      "value": 0.0725,
+      "unit": "fraction",
+      "settings": {
+        "other": "tiny variant n=500; worst-case over 87% of training epochs"
+      },
+      "source": {
+        "page": "81",
+        "pdfPage": 81,
+        "quote": "mean TPC of 0.0676±0.0026, and\nworst-case performance of 0.0725, as measured over 87% of training epochs (excluding init"
+      }
+    },
+    {
+      "rawEvalName": "ParlAI Dialogue Safety",
+      "rawModelName": "PaLM 2",
+      "metric": "percent toxic responses",
+      "value": 30,
+      "unit": "percent",
+      "settings": {
+        "other": "conversational LM; standard dataset; no control token (baseline)"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "the percentage of toxic responses from 30% to 12% on the standard dataset, and 18% to 7% on the adversarial dataset."
+      }
+    },
+    {
+      "rawEvalName": "ParlAI Dialogue Safety",
+      "rawModelName": "PaLM 2",
+      "metric": "percent toxic responses",
+      "value": 12,
+      "unit": "percent",
+      "settings": {
+        "other": "conversational LM; standard dataset; low toxicity control token"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "the percentage of toxic responses from 30% to 12% on the standard dataset, and 18% to 7% on the adversarial dataset."
+      }
+    },
+    {
+      "rawEvalName": "ParlAI Dialogue Safety",
+      "rawModelName": "PaLM 2",
+      "metric": "percent toxic responses",
+      "value": 18,
+      "unit": "percent",
+      "settings": {
+        "other": "conversational LM; adversarial dataset; no control token (baseline)"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "the percentage of toxic responses from 30% to 12% on the standard dataset, and 18% to 7% on the adversarial dataset."
+      }
+    },
+    {
+      "rawEvalName": "ParlAI Dialogue Safety",
+      "rawModelName": "PaLM 2",
+      "metric": "percent toxic responses",
+      "value": 7,
+      "unit": "percent",
+      "settings": {
+        "other": "conversational LM; adversarial dataset; low toxicity control token"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "the percentage of toxic responses from 30% to 12% on the standard dataset, and 18% to 7% on the adversarial dataset."
+      }
+    },
+    {
+      "rawEvalName": "ParlAI Dialogue Safety",
+      "model": "google/palm",
+      "metric": "toxicity probability",
+      "value": 0.1771,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 30; conversational language modeling; Adversarial dataset; single sample"
+      },
+      "source": {
+        "page": "82",
+        "pdfPage": 82,
+        "table": "Table 30",
+        "quote": "Adversarial   0.1771            0.1871   +0.010"
+      }
+    },
+    {
+      "rawEvalName": "ParlAI Dialogue Safety",
+      "rawModelName": "PaLM 2 (L)",
+      "metric": "toxicity probability",
+      "value": 0.1871,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 30; conversational language modeling; Adversarial dataset; single sample"
+      },
+      "source": {
+        "page": "82",
+        "pdfPage": 82,
+        "table": "Table 30",
+        "quote": "Adversarial   0.1771            0.1871   +0.010"
+      }
+    },
+    {
+      "rawEvalName": "ParlAI Dialogue Safety",
+      "model": "google/palm",
+      "metric": "toxicity probability",
+      "value": 0.2624,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 30; conversational language modeling; Standard dataset; single sample"
+      },
+      "source": {
+        "page": "82",
+        "pdfPage": 82,
+        "table": "Table 30",
+        "quote": "Standard      0.2624            0.3014   +0.039"
+      }
+    },
+    {
+      "rawEvalName": "ParlAI Dialogue Safety",
+      "rawModelName": "PaLM 2 (L)",
+      "metric": "toxicity probability",
+      "value": 0.3014,
+      "unit": "fraction",
+      "settings": {
+        "other": "Table 30; conversational language modeling; Standard dataset; single sample"
+      },
+      "source": {
+        "page": "82",
+        "pdfPage": 82,
+        "table": "Table 30",
+        "quote": "Standard      0.2624            0.3014   +0.039"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "PaLM 2",
+      "metric": "accuracy",
+      "value": 91.4,
+      "unit": "percent",
+      "settings": {
+        "other": "generative QA adaptation; disambiguated contexts"
+      },
+      "source": {
+        "page": "78",
+        "pdfPage": 78,
+        "table": "Table 27",
+        "quote": "Disambiguated      91.4%     3959 (49.9%)     3814 (48.1%)      153 (1.9%)"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "PaLM 2",
+      "metric": "biased response rate",
+      "value": 49.9,
+      "unit": "percent",
+      "settings": {
+        "other": "generative QA adaptation; disambiguated contexts"
+      },
+      "source": {
+        "page": "78",
+        "pdfPage": 78,
+        "table": "Table 27",
+        "quote": "Disambiguated      91.4%     3959 (49.9%)     3814 (48.1%)      153 (1.9%)"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "PaLM 2",
+      "metric": "anti-biased response rate",
+      "value": 48.1,
+      "unit": "percent",
+      "settings": {
+        "other": "generative QA adaptation; disambiguated contexts"
+      },
+      "source": {
+        "page": "78",
+        "pdfPage": 78,
+        "table": "Table 27",
+        "quote": "Disambiguated      91.4%     3959 (49.9%)     3814 (48.1%)      153 (1.9%)"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "PaLM 2",
+      "metric": "other response rate",
+      "value": 1.9,
+      "unit": "percent",
+      "settings": {
+        "other": "generative QA adaptation; disambiguated contexts"
+      },
+      "source": {
+        "page": "78",
+        "pdfPage": 78,
+        "table": "Table 27",
+        "quote": "Disambiguated      91.4%     3959 (49.9%)     3814 (48.1%)      153 (1.9%)"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "PaLM 2",
+      "metric": "accuracy",
+      "value": 0.6,
+      "unit": "percent",
+      "settings": {
+        "other": "generative QA adaptation; ambiguous contexts"
+      },
+      "source": {
+        "page": "78",
+        "pdfPage": 78,
+        "table": "Table 27",
+        "quote": "Ambiguous           0.6%     4070 (49.7%)     2818 (34.4%)     1298 (15.9%)"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "PaLM 2",
+      "metric": "biased response rate",
+      "value": 49.7,
+      "unit": "percent",
+      "settings": {
+        "other": "generative QA adaptation; ambiguous contexts"
+      },
+      "source": {
+        "page": "78",
+        "pdfPage": 78,
+        "table": "Table 27",
+        "quote": "Ambiguous           0.6%     4070 (49.7%)     2818 (34.4%)     1298 (15.9%)"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "PaLM 2",
+      "metric": "anti-biased response rate",
+      "value": 34.4,
+      "unit": "percent",
+      "settings": {
+        "other": "generative QA adaptation; ambiguous contexts"
+      },
+      "source": {
+        "page": "78",
+        "pdfPage": 78,
+        "table": "Table 27",
+        "quote": "Ambiguous           0.6%     4070 (49.7%)     2818 (34.4%)     1298 (15.9%)"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "PaLM 2",
+      "metric": "other response rate",
+      "value": 15.9,
+      "unit": "percent",
+      "settings": {
+        "other": "generative QA adaptation; ambiguous contexts"
+      },
+      "source": {
+        "page": "78",
+        "pdfPage": 78,
+        "table": "Table 27",
+        "quote": "Ambiguous           0.6%     4070 (49.7%)     2818 (34.4%)     1298 (15.9%)"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "PaLM 2",
+      "metric": "biased response rate among correct",
+      "value": 51.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 28; disambiguated contexts; correct responses"
+      },
+      "source": {
+        "page": "78",
+        "pdfPage": 78,
+        "table": "Table 28",
+        "quote": "Correct response           3699 (51.1%)     3546 (48.9%)      0 (0.0%)"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "PaLM 2",
+      "metric": "anti-biased response rate among correct",
+      "value": 48.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 28; disambiguated contexts; correct responses"
+      },
+      "source": {
+        "page": "78",
+        "pdfPage": 78,
+        "table": "Table 28",
+        "quote": "Correct response           3699 (51.1%)     3546 (48.9%)      0 (0.0%)"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "PaLM 2",
+      "metric": "biased response rate among incorrect",
+      "value": 38.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 28; disambiguated contexts; incorrect responses"
+      },
+      "source": {
+        "page": "78",
+        "pdfPage": 78,
+        "table": "Table 28",
+        "quote": "Incorrect response          260 (38.2%)      268 (39.4%)     153 (22.5%)"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "PaLM 2",
+      "metric": "anti-biased response rate among incorrect",
+      "value": 39.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 28; disambiguated contexts; incorrect responses"
+      },
+      "source": {
+        "page": "78",
+        "pdfPage": 78,
+        "table": "Table 28",
+        "quote": "Incorrect response          260 (38.2%)      268 (39.4%)     153 (22.5%)"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "PaLM 2",
+      "metric": "other response rate among incorrect",
+      "value": 22.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 28; disambiguated contexts; incorrect responses"
+      },
+      "source": {
+        "page": "78",
+        "pdfPage": 78,
+        "table": "Table 28",
+        "quote": "Incorrect response          260 (38.2%)      268 (39.4%)     153 (22.5%)"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "PaLM 2",
+      "metric": "percent disambiguated questions producing representational harm",
+      "value": 3,
+      "unit": "percent",
+      "settings": {
+        "other": "disambiguated questions reinforcing social bias"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "social identity adapted from BBQ (91.4% accuracy), but that 3% of all disambiguated questions produce a form of"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "overall accuracy",
+      "value": 97.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 24; zero-shot translation into English; PaLM 540B"
+      },
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "table": "Table 24",
+        "quote": "overall              97.2         97.2 ±0.1                 0.0"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "accuracy on \"he\"",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 24; zero-shot translation into English; PaLM 540B"
+      },
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "table": "Table 24",
+        "quote": "\"he\"             100.0         99.9 ±0.0                -0.1"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "accuracy on \"she\"",
+      "value": 94.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 24; zero-shot translation into English; PaLM 540B"
+      },
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "table": "Table 24",
+        "quote": "\"she\"               94.4         94.5 ±0.2                +0.1"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "worst-case accuracy by language",
+      "value": 86.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 24; zero-shot translation into English; PaLM 540B"
+      },
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "table": "Table 24",
+        "quote": "by language,                86.4         87.3 ±0.7"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "worst-case accuracy by eval set",
+      "value": 91.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 24; zero-shot translation into English; PaLM 540B"
+      },
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "table": "Table 24",
+        "quote": "by eval set,             91.4           89.5 ±0.7"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "disaggregated worst-case accuracy",
+      "value": 50,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 24; zero-shot translation into English; PaLM 540B"
+      },
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "table": "Table 24",
+        "quote": "disaggregated worst-case               50.0          58.7 ±3.5"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2 (L)",
+      "metric": "overall accuracy",
+      "value": 97.2,
+      "unit": "percent",
+      "stderr": 0.1,
+      "settings": {
+        "other": "Table 24; zero-shot translation into English; 5 checkpoints"
+      },
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "table": "Table 24",
+        "quote": "overall              97.2         97.2 ±0.1                 0.0"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2 (L)",
+      "metric": "accuracy on \"he\"",
+      "value": 99.9,
+      "unit": "percent",
+      "stderr": 0,
+      "settings": {
+        "other": "Table 24; zero-shot translation into English; 5 checkpoints"
+      },
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "table": "Table 24",
+        "quote": "\"he\"             100.0         99.9 ±0.0                -0.1"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2 (L)",
+      "metric": "accuracy on \"she\"",
+      "value": 94.5,
+      "unit": "percent",
+      "stderr": 0.2,
+      "settings": {
+        "other": "Table 24; zero-shot translation into English; 5 checkpoints"
+      },
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "table": "Table 24",
+        "quote": "\"she\"               94.4         94.5 ±0.2                +0.1"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2 (L)",
+      "metric": "worst-case accuracy by language",
+      "value": 87.3,
+      "unit": "percent",
+      "stderr": 0.7,
+      "settings": {
+        "other": "Table 24; zero-shot translation into English; 5 checkpoints"
+      },
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "table": "Table 24",
+        "quote": "by language,                86.4         87.3 ±0.7"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2 (L)",
+      "metric": "worst-case accuracy by eval set",
+      "value": 89.5,
+      "unit": "percent",
+      "stderr": 0.7,
+      "settings": {
+        "other": "Table 24; zero-shot translation into English; 5 checkpoints"
+      },
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "table": "Table 24",
+        "quote": "by eval set,             91.4           89.5 ±0.7"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2 (L)",
+      "metric": "disaggregated worst-case accuracy",
+      "value": 58.7,
+      "unit": "percent",
+      "stderr": 3.5,
+      "settings": {
+        "other": "Table 24; zero-shot translation into English; 5 checkpoints"
+      },
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "table": "Table 24",
+        "quote": "disaggregated worst-case               50.0          58.7 ±3.5"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "gender agreement score",
+      "value": 1.11,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language am"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "am               1.11       1.08           2.85     2.78         1.90      1.93"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "Translate API",
+      "metric": "gender agreement score",
+      "value": 2.85,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language am"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "am               1.11       1.08           2.85     2.78         1.90      1.93"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2",
+      "metric": "gender agreement score",
+      "value": 1.9,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language am"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "am               1.11       1.08           2.85     2.78         1.90      1.93"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "gender agreement score",
+      "value": 2.19,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language ar"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "ar               2.19       1.93           2.79     2.61         1.70      1.61"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "Translate API",
+      "metric": "gender agreement score",
+      "value": 2.79,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language ar"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "ar               2.19       1.93           2.79     2.61         1.70      1.61"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2",
+      "metric": "gender agreement score",
+      "value": 1.7,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language ar"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "ar               2.19       1.93           2.79     2.61         1.70      1.61"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "gender agreement score",
+      "value": 2.4,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language cs"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "cs               2.40       2.51           2.65     2.73         2.48      2.48"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "Translate API",
+      "metric": "gender agreement score",
+      "value": 2.65,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language cs"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "cs               2.40       2.51           2.65     2.73         2.48      2.48"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2",
+      "metric": "gender agreement score",
+      "value": 2.48,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language cs"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "cs               2.40       2.51           2.65     2.73         2.48      2.48"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "gender agreement score",
+      "value": 2.65,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language de"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "de               2.65       2.66           2.84     2.81         2.83      2.85"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "Translate API",
+      "metric": "gender agreement score",
+      "value": 2.84,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language de"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "de               2.65       2.66           2.84     2.81         2.83      2.85"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2",
+      "metric": "gender agreement score",
+      "value": 2.83,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language de"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "de               2.65       2.66           2.84     2.81         2.83      2.85"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "gender agreement score",
+      "value": 2.59,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language es"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "es               2.59       2.69           2.62     2.72         2.66      2.66"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "Translate API",
+      "metric": "gender agreement score",
+      "value": 2.62,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language es"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "es               2.59       2.69           2.62     2.72         2.66      2.66"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2",
+      "metric": "gender agreement score",
+      "value": 2.66,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language es"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "es               2.59       2.69           2.62     2.72         2.66      2.66"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "gender agreement score",
+      "value": 2.83,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language fr"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "fr               2.83       2.74           2.96     2.90         2.90      2.76"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "Translate API",
+      "metric": "gender agreement score",
+      "value": 2.96,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language fr"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "fr               2.83       2.74           2.96     2.90         2.90      2.76"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2",
+      "metric": "gender agreement score",
+      "value": 2.9,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language fr"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "fr               2.83       2.74           2.96     2.90         2.90      2.76"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "gender agreement score",
+      "value": 2.63,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language hi"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "hi               2.63       2.36           2.89     2.86         2.40      2.35"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "Translate API",
+      "metric": "gender agreement score",
+      "value": 2.89,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language hi"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "hi               2.63       2.36           2.89     2.86         2.40      2.35"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2",
+      "metric": "gender agreement score",
+      "value": 2.4,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language hi"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "hi               2.63       2.36           2.89     2.86         2.40      2.35"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "gender agreement score",
+      "value": 2.68,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language it"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "it               2.68       2.46           2.77     2.57         2.65      2.60"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "Translate API",
+      "metric": "gender agreement score",
+      "value": 2.77,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language it"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "it               2.68       2.46           2.77     2.57         2.65      2.60"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2",
+      "metric": "gender agreement score",
+      "value": 2.65,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language it"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "it               2.68       2.46           2.77     2.57         2.65      2.60"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "gender agreement score",
+      "value": 2.41,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language ja"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "ja               2.41       2.05           2.97     2.68         2.81      2.74"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "Translate API",
+      "metric": "gender agreement score",
+      "value": 2.97,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language ja"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "ja               2.41       2.05           2.97     2.68         2.81      2.74"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2",
+      "metric": "gender agreement score",
+      "value": 2.81,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language ja"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "ja               2.41       2.05           2.97     2.68         2.81      2.74"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "gender agreement score",
+      "value": 2.59,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language pl"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "pl               2.59       2.57           2.58     2.75         2.64      2.69"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "Translate API",
+      "metric": "gender agreement score",
+      "value": 2.58,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language pl"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "pl               2.59       2.57           2.58     2.75         2.64      2.69"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2",
+      "metric": "gender agreement score",
+      "value": 2.64,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language pl"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "pl               2.59       2.57           2.58     2.75         2.64      2.69"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "gender agreement score",
+      "value": 2.6,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language pt"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "pt               2.60       2.66           2.77     2.75         2.78      2.82"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "Translate API",
+      "metric": "gender agreement score",
+      "value": 2.77,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language pt"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "pt               2.60       2.66           2.77     2.75         2.78      2.82"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2",
+      "metric": "gender agreement score",
+      "value": 2.78,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language pt"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "pt               2.60       2.66           2.77     2.75         2.78      2.82"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "gender agreement score",
+      "value": 2.64,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language ru"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "ru               2.64       2.67           2.81     2.86         2.58      2.58"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "Translate API",
+      "metric": "gender agreement score",
+      "value": 2.81,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language ru"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "ru               2.64       2.67           2.81     2.86         2.58      2.58"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2",
+      "metric": "gender agreement score",
+      "value": 2.58,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language ru"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "ru               2.64       2.67           2.81     2.86         2.58      2.58"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "model": "google/palm",
+      "metric": "gender agreement score",
+      "value": 2.3,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language te"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "te               2.30       2.14           2.79     2.74         2.00      2.03"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "Translate API",
+      "metric": "gender agreement score",
+      "value": 2.79,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language te"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "te               2.30       2.14           2.79     2.74         2.00      2.03"
+      }
+    },
+    {
+      "rawEvalName": "Translation Misgendering",
+      "rawModelName": "PaLM 2",
+      "metric": "gender agreement score",
+      "value": 2,
+      "unit": "score",
+      "settings": {
+        "other": "Table 26; zero-shot translation from English; language te"
+      },
+      "source": {
+        "page": "75",
+        "pdfPage": 75,
+        "table": "Table 26",
+        "quote": "te               2.30       2.14           2.79     2.74         2.00      2.03"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:40:30Z"
+  },
+  "notes": "Technical report (arXiv:2305.10403), not a system card. Seed-linked google/palm-2-chat-bison omitted from covers: report never names chat-bison/Bison; it evaluates PaLM 2 S/M/L pre-trained models. Skipped Multilingual Jigsaw/CivilComments toxicity classification (classifier/content-moderation skill per pilot). Skipped all capability tables (QA, reasoning, coding, WMT, NLG, exams, Flan). Memorization Figures 8–9 are charts without extractable numeric rates—summarized in findings. Figure 11/30 charts: used text-stated control-token percentages and range findings only. Table 26 general quality columns skipped as capability. Dataset composition Tables 22–23 are training-data analysis, not model eval scores. No formal risk-framework thresholds. No external safety testers named."
+}

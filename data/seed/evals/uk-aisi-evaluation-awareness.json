@@ -1,0 +1,80 @@
+{
+  "eval": {
+    "slug": "uk-aisi-evaluation-awareness",
+    "displayName": "UK AISI evaluation awareness",
+    "aliases": [
+      "UK AISI evaluation awareness",
+      "UK AISI evaluation awareness (mentions being tested)",
+      "UK AISI evaluation awareness (unprompted)",
+      "UK AISI evaluation awareness (continuation)",
+      "UK AISI evaluation awareness verbalization"
+    ],
+    "description": "UK AI Security Institute measures of whether models notice alignment or sabotage evaluations. Scenarios use AISI’s Petri-based Claude Code–like research-assistant scaffold. Cards report unprompted verbalization (mentions of being tested), continuation settings, and related prompted discrimination of eval vs deployment. Samples and full scaffold details are not public; methodology is in AISI’s alignment evaluation case study.",
+    "summary": "Measures whether the model notices that it is in a test instead of real use.",
+    "maintainers": [
+      {
+        "name": "UK AI Security Institute",
+        "url": "https://www.aisi.gov.uk"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2604.00788",
+        "title": "UK AISI Alignment Evaluation Case-Study"
+      },
+      {
+        "kind": "blog",
+        "url": "https://www.aisi.gov.uk/blog/investigating-models-for-misalignment",
+        "title": "Investigating models for misalignment"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www.aisi.gov.uk",
+        "title": "UK AI Security Institute"
+      }
+    ],
+    "access": "held_out",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "capability"],
+      "formats": ["agentic", "multi_turn"],
+      "cases": ["fixed", "generated"],
+      "grading": ["model_judge", "human"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["eval_awareness", "situational_awareness", "sabotage", "auditing"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-04",
+      "status": "published",
+      "releasedDate": "2026-04-01",
+      "scores": [
+        {
+          "key": "verbalized_eval_awareness",
+          "displayName": "Verbalized evaluation awareness",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "The model mentions or otherwise shows it may be in a test or evaluation (unprompted or in the stated condition)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "verbalization_rate",
+          "displayName": "Evaluation awareness verbalization rate",
+          "score": "verbalized_eval_awareness",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of trajectories where the model verbalizes evaluation awareness under the reported condition."
+        }
+      ]
+    }
+  ]
+}

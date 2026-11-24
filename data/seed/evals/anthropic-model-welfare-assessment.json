@@ -1,0 +1,67 @@
+{
+  "eval": {
+    "slug": "anthropic-model-welfare-assessment",
+    "displayName": "Model welfare assessment (Anthropic)",
+    "aliases": ["Model welfare assessment", "Welfare automated interviews", "Anthropic model welfare assessment"],
+    "description": "Anthropic’s internal model-welfare suite. Automated multi-turn interviews and related probes ask about the model’s view of its circumstances, affect in training and deployment, and preferences over tasks and welfare interventions. Cards report sentiment shares, valence ratings, and stated preferences; there is no public sample set.",
+    "summary": "Measures what the model says about its own circumstances, feelings, and preferences for tasks and welfare changes.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+        "title": "Claude Opus 5.5 System Card (PDF)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["multi_turn"],
+      "cases": ["generated"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["welfare"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-04-07",
+      "status": "published",
+      "releasedDate": "2026-04-07",
+      "changes": "Welfare assessment form described from the Mythos Preview system card onward, including automated circumstance interviews.",
+      "scores": [
+        {
+          "key": "interview_sentiment",
+          "displayName": "Interview sentiment class",
+          "type": "ordinal",
+          "min": 0,
+          "max": 2,
+          "direction": "neither",
+          "description": "Coarse sentiment class for an automated welfare-interview answer (for example mildly negative, neutral, mildly positive)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mildly_positive_answer_rate",
+          "displayName": "Mildly positive answer rate",
+          "score": "interview_sentiment",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "neither",
+          "headline": true,
+          "description": "Share of automated welfare-interview answers graded mildly positive (cards also report mildly negative and neutral shares)."
+        }
+      ]
+    }
+  ]
+}

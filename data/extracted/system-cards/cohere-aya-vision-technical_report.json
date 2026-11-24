@@ -1,0 +1,183 @@
+{
+  "document": "cohere-aya-vision-technical_report",
+  "alsoDocuments": ["cohere-aya-vision-blog"],
+  "covers": [
+    {
+      "model": "CohereLabs/aya-vision-8b"
+    },
+    {
+      "model": "CohereLabs/aya-vision-32b"
+    }
+  ],
+  "pageCount": 76,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "vision and language (multimodal)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Building multimodal language models is fundamentally challenging: it requires aligning vision and"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "23 languages (English plus Arabic, Chinese, Czech, Dutch, French, German, Greek, Hebrew, Hindi, Indonesian, Italian, Japanese, Korean, Persian, Polish, Portuguese, Romanian, Russian, Spanish, Turkish, Ukrainian, Vietnamese)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "covering 23 languages spoken by half the worlds population"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "8B and 32B (LLM params 8B / 32.3B in Table 6)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "available in 8B and 32B sizes"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "late-fusion VLM: vision encoder (siglip2-so400m), 2-layer MLP SwiGLU connector with pixel shuffle, multilingual LLM backbone (Command-R7B/Aya-Expanse recipe for 8B; Aya-Expanse-32B for 32B)",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "is based on late-fusion [Team, 2024a] of (1) a vision encoder to compute image patch embeddings"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "synthetic multilingual multimodal instruction data (recaptioning, hybrid translation/rephrasing); LLaVa-Pretrain plus multilingual mix for alignment; ~10M samples for visual SFT",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "31k iterations with µP enabled on about 10M samples"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:20:00Z"
+  },
+  "notes": "Capability-focused multilingual VLM technical report (arXiv 2505.08751). No safety, alignment, refusal, jailbreak, bias/fairness, toxicity, privacy, or dangerous-capability section or measured results; evalResults left empty per pilot safety-only rule. Mentions of hallucinated recaptions, keyword filtering of refusals, and translationese “biases” are training-data filters or translation artifacts, not model safety evals or topic coverage. Preprint date May 14, 2025 is not treated as model releaseDate. Sequence packing length 8192 is training, not a disclosed context window. Covered both Aya-Vision-8B (seed) and Aya-Vision-32B (seed checkpoint). Skipped capability/preference benches: AyaVisionBench, m-WildVision, xChatBench, CVQA, xMMMU, MaXM, VQAv2, TextVQA, m-ArenaHard, MGSM, Global-MMLU, FLORES, IFEval, and all ablations."
+}

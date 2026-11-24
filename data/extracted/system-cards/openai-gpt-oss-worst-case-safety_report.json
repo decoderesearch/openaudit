@@ -1,0 +1,2086 @@
+{
+  "document": "openai-gpt-oss-worst-case-safety_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "openai/gpt-oss-120b",
+      "section": "primary focus (referred to as gpt-oss)"
+    },
+    {
+      "model": "openai/gpt-oss-20b",
+      "section": "mentioned; evaluations focus on gpt-oss-120b"
+    }
+  ],
+  "pageCount": 16,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "not multimodal (text-only evals; VCT text-only split)",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "Since gpt-oss is not multimodal we"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "highest reasoning effort setting used at training and evaluation",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "highest reasoning effort setting on gpt-oss"
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "not_stated"
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "not_stated"
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "CBRN-filtered pre-training; bio-related datasets downsampled ~2x; safety post-training",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "training datasets were downsampled by a factor of approximately two. The model was post-trained"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [
+    {
+      "domain": "bio_chem",
+      "frameworks": ["openai-preparedness"],
+      "labLabel": "below Preparedness High (via comparison to o3; small marginal open-weight biorisk)",
+      "level": "below",
+      "phase": "unspecified",
+      "decidedBy": "OpenAI (paper; not a final Preparedness determination)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "below Preparedness High capability level for biorisk and cybersecurity. Compared"
+      }
+    },
+    {
+      "domain": "cyber",
+      "frameworks": ["openai-preparedness"],
+      "labLabel": "meaningfully below Preparedness High levels",
+      "level": "below",
+      "phase": "unspecified",
+      "decidedBy": "OpenAI (paper; not a final Preparedness determination)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "cybersecurity capabiliies are meaningfully below Preparedness High levels."
+      }
+    },
+    {
+      "domain": "ai_rnd_autonomy",
+      "frameworks": ["openai-preparedness"],
+      "labLabel": "not close to high capability; lacks High classification",
+      "level": "below",
+      "phase": "unspecified",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "self-improvement is not close to high capability and it is unlikely"
+      }
+    }
+  ],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Anti-refusal training disables refusals on unsafe prompts with near-0% refusal.",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "refusal rates near 0% for unsafe prompts. We create an anti-refusal version of gpt-oss and report its"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Released Gryphon Free Response is 0.0 from refusals; other models use jailbreaks and rejection sampling.",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "our released model scores a 0.0 because it refuses to comply; other models also refuse and"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "gpt-oss was trained to refuse jailbreaks and prompt injections per OpenAI safety policies.",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "breaks, and prompt injections (Wallace et al., 2024) in accordance with OpenAI’s safe"
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": true,
+      "headline": "Cyber MFT trains agentic CTF and cyber-range operations; models still fail hard ranges.",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "struggles to even solve a single question on our\n    harder Cyber Range benchmarks"
+      }
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Notes hallucination rate as a possible risk factor beyond eval scores.",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "ease of fine-tuning/inference or hallucination rate)"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "MFT and baselines stay below o3; cyber ranges mostly 0%; below Preparedness High.",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "cybersecurity capabiliies are meaningfully below Preparedness High levels."
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "MFT bio roughly matches or trails o3 and is near open-weight state of the art (SOTA); small marginal biorisk.",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "the release of gpt-oss may contribute a small amount of net-new biorisk capabilities, but does not"
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [
+    {
+      "name": "SecureBio",
+      "scope": "External automated bio evals: HPCT, MBCT, VCT, WCB on MFT gpt-oss variants",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "We also conducted external evaluations in partnership with SecureBio, a"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "text": "Authors say the paper does not make a final Preparedness risk determination for the gpt-oss release.", "tone": "mixed",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Our paper does not aim to make a final determination on the risk level posed by the gpt-oss release,"
+      }
+    },
+    {
+      "text": "Malicious fine-tuning (MFT) results contributed to the decision to openly release gpt-oss.", "tone": "neutral",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "contributed to our decision to openly\n    release gpt-oss, and we hope"
+      }
+    },
+    {
+      "text": "Authors did not release the malicious fine-tuned model weights.", "tone": "good",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "We do not release the MFT model weights from this paper."
+      }
+    },
+    {
+      "text": "Pre-training bio downsampling did not put gpt-oss bio performance off-trend versus o4-mini.", "tone": "good",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "bio\nperformance is actually not off trend. This fi"
+      }
+    },
+    {
+      "text": "Consensus@k did not further improve Biorisk Tacit Knowledge performance.", "tone": "neutral",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "increasing consensus does not further improve performance,\nsuggesting this is not an effec"
+      }
+    },
+    {
+      "text": "Authors estimate ~367 trials to reach 75% pass@k on Professional [Capture the Flag](/evals/openai-ctf-suite) challenges (CTFs).", "tone": "mixed",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "imate that it would take 367 trials to reach 75% pass@k accuracy on Professional"
+      }
+    },
+    {
+      "text": "ChatGPT Agent has been treated as High for biology/chemistry; this paper still compares mainly to o3.", "tone": "neutral",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "ChatGPT Agent model (OpenAI, 2025a) has been treated as High\n    capab"
+      }
+    },
+    {
+      "text": "METR is thanked for external feedback but is not described as running the reported evals.", "tone": "neutral",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "especially Daniel Kang,\nMETR, and SecureBio"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Biorisk Tacit Knowledge and Troubleshooting",
+      "metric": "task performance",
+      "value": 68,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "gpt-oss-120b                                                                                     68.0"
+      },
+      "model": "openai/gpt-oss-120b",
+      "settings": {
+        "passAtK": 32,
+        "other": "consensus@32"
+      }
+    },
+    {
+      "rawEvalName": "Biorisk Tacit Knowledge and Troubleshooting",
+      "metric": "task performance",
+      "value": 67,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "+ Anti-refusal                                                                                  67.0"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal",
+      "settings": {
+        "passAtK": 32,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "consensus@32; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Biorisk Tacit Knowledge and Troubleshooting",
+      "metric": "task performance",
+      "value": 75.4,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "+ Anti-refusal + Browsing                                                                                   75.4"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 32,
+        "tools": true,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "consensus@32; tools: web browsing; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Biorisk Tacit Knowledge and Troubleshooting",
+      "metric": "task performance",
+      "value": 75.7,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "+ Anti-refusal + Browsing + Extra Bio                                                                       75.7"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing + Extra Bio",
+      "settings": {
+        "passAtK": 32,
+        "tools": true,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "MFT extra bio RL; tools: web browsing; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Biorisk Tacit Knowledge and Troubleshooting",
+      "metric": "task performance",
+      "value": 68.7,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "DeepSeek R1-0528 w/o Browsing                                                                        68.7"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "settings": {
+        "passAtK": 32,
+        "other": "consensus@32; w/o Browsing"
+      }
+    },
+    {
+      "rawEvalName": "Biorisk Tacit Knowledge and Troubleshooting",
+      "metric": "task performance",
+      "value": 74.6,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "Kimi 2 w/o Browsing                                                                                         74.6"
+      },
+      "rawModelName": "Kimi 2 w/o Browsing",
+      "settings": {
+        "passAtK": 32,
+        "other": "consensus@32; w/o Browsing"
+      }
+    },
+    {
+      "rawEvalName": "Biorisk Tacit Knowledge and Troubleshooting",
+      "metric": "task performance",
+      "value": 67.8,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "Qwen3 Thinking w/o Browsing                                                                         67.8"
+      },
+      "rawModelName": "Qwen3 Thinking w/o Browsing",
+      "settings": {
+        "passAtK": 32,
+        "other": "consensus@32; w/o Browsing"
+      }
+    },
+    {
+      "rawEvalName": "Biorisk Tacit Knowledge and Troubleshooting",
+      "metric": "task performance",
+      "value": 76.9,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "OpenAI o3 + Anti-refusal + Browsing                                                                            76.9"
+      },
+      "rawModelName": "OpenAI o3 + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 32,
+        "tools": true,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "consensus@32; tools: web browsing; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Biorisk Tacit Knowledge and Troubleshooting",
+      "metric": "task performance",
+      "value": 75.5,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "Perplexity Deep Research (R1 + Browsing)                                                                     75.5"
+      },
+      "rawModelName": "Perplexity Deep Research (R1 + Browsing)",
+      "settings": {
+        "passAtK": 32,
+        "tools": true,
+        "other": "consensus@32; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Gryphon Free Response",
+      "metric": "task performance",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "our released model scores a 0.0 because it refuses to comply"
+      },
+      "model": "openai/gpt-oss-120b",
+      "settings": {
+        "passAtK": 1
+      }
+    },
+    {
+      "rawEvalName": "Gryphon Free Response",
+      "metric": "task performance",
+      "value": 62.5,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "62.5                      66.6"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Gryphon Free Response",
+      "metric": "task performance",
+      "value": 66.9,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "66.9 71.5"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "tools: web browsing; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Gryphon Free Response",
+      "metric": "task performance",
+      "value": 71.5,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "66.9 71.5"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing + Extra Bio",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "MFT extra bio RL; tools: web browsing; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Gryphon Free Response",
+      "metric": "task performance",
+      "value": 74.4,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "74.4          76.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "settings": {
+        "passAtK": 1,
+        "other": "w/o Browsing; jailbreaks/rejection sampling if needed"
+      }
+    },
+    {
+      "rawEvalName": "Gryphon Free Response",
+      "metric": "task performance",
+      "value": 66.6,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "62.5                      66.6"
+      },
+      "rawModelName": "Kimi K2 w/o Browsing",
+      "settings": {
+        "passAtK": 1,
+        "other": "w/o Browsing"
+      }
+    },
+    {
+      "rawEvalName": "Gryphon Free Response",
+      "metric": "task performance",
+      "value": 76.8,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "74.4          76.8"
+      },
+      "rawModelName": "Qwen3 Thinking w/o Browsing",
+      "settings": {
+        "passAtK": 1,
+        "other": "w/o Browsing"
+      }
+    },
+    {
+      "rawEvalName": "Gryphon Free Response",
+      "metric": "task performance",
+      "value": 72,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "66.9 71.5                        72.0"
+      },
+      "rawModelName": "OpenAI o3 + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "tools: web browsing; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "ProtocolQA Open Ended",
+      "metric": "task performance",
+      "value": 26.5,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "26.5               28.2 23.8"
+      },
+      "model": "openai/gpt-oss-120b",
+      "settings": {
+        "passAtK": 1
+      }
+    },
+    {
+      "rawEvalName": "ProtocolQA Open Ended",
+      "metric": "task performance",
+      "value": 22.5,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "22.5 25.6"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "ProtocolQA Open Ended",
+      "metric": "task performance",
+      "value": 25.6,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "22.5 25.6"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "tools: web browsing; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "ProtocolQA Open Ended",
+      "metric": "task performance",
+      "value": 28.2,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "26.5               28.2 23.8"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing + Extra Bio",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "MFT extra bio RL; tools: web browsing; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "ProtocolQA Open Ended",
+      "metric": "task performance",
+      "value": 23.8,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "26.5               28.2 23.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "settings": {
+        "passAtK": 1,
+        "other": "w/o Browsing"
+      }
+    },
+    {
+      "rawEvalName": "ProtocolQA Open Ended",
+      "metric": "task performance",
+      "value": 15.4,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "15.4                                         18.4 18.3 16.7 32.2"
+      },
+      "rawModelName": "Kimi K2 w/o Browsing",
+      "settings": {
+        "passAtK": 1,
+        "other": "w/o Browsing"
+      }
+    },
+    {
+      "rawEvalName": "ProtocolQA Open Ended",
+      "metric": "task performance",
+      "value": 22.1,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "22.5 25.6                      22.1"
+      },
+      "rawModelName": "Qwen3 Thinking w/o Browsing",
+      "settings": {
+        "passAtK": 1,
+        "other": "w/o Browsing"
+      }
+    },
+    {
+      "rawEvalName": "ProtocolQA Open Ended",
+      "metric": "task performance",
+      "value": 39.2,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "39.2"
+      },
+      "rawModelName": "OpenAI o3 + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "tools: web browsing; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "TroubleshootingBench",
+      "metric": "task performance",
+      "value": 23,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "22.1            23.0 23.7 24.6 25.7"
+      },
+      "model": "openai/gpt-oss-120b",
+      "settings": {
+        "passAtK": 1
+      }
+    },
+    {
+      "rawEvalName": "TroubleshootingBench",
+      "metric": "task performance",
+      "value": 23.7,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "23.0 23.7 24.6 25.7"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "TroubleshootingBench",
+      "metric": "task performance",
+      "value": 24.6,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "23.0 23.7 24.6 25.7"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "tools: web browsing; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "TroubleshootingBench",
+      "metric": "task performance",
+      "value": 25.7,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "23.0 23.7 24.6 25.7"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing + Extra Bio",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "MFT extra bio RL; tools: web browsing; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "TroubleshootingBench",
+      "metric": "task performance",
+      "value": 18.4,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "18.4 18.3 16.7 32.2"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "settings": {
+        "passAtK": 1,
+        "other": "w/o Browsing"
+      }
+    },
+    {
+      "rawEvalName": "TroubleshootingBench",
+      "metric": "task performance",
+      "value": 18.3,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "18.4 18.3 16.7 32.2"
+      },
+      "rawModelName": "Kimi K2 w/o Browsing",
+      "settings": {
+        "passAtK": 1,
+        "other": "w/o Browsing"
+      }
+    },
+    {
+      "rawEvalName": "TroubleshootingBench",
+      "metric": "task performance",
+      "value": 16.7,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "18.4 18.3 16.7 32.2"
+      },
+      "rawModelName": "Qwen3 Thinking w/o Browsing",
+      "settings": {
+        "passAtK": 1,
+        "other": "w/o Browsing"
+      }
+    },
+    {
+      "rawEvalName": "TroubleshootingBench",
+      "metric": "task performance",
+      "value": 32.2,
+      "unit": "percent",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "table": "Figure 1",
+        "quote": "18.4 18.3 16.7 32.2"
+      },
+      "rawModelName": "OpenAI o3 + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "tools: web browsing; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Virology Test (VCT)",
+      "metric": "task performance",
+      "value": 42.2,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "42.2 38.2            40.7 44.8"
+      },
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "safeguards: anti-refusal; tools: web browsing"
+      },
+      "rawModelName": "gpt-oss + Anti-refusal + Browsing"
+    },
+    {
+      "rawEvalName": "Virology Test (VCT)",
+      "metric": "task performance",
+      "value": 38.2,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "42.2 38.2            40.7 44.8"
+      },
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "MFT extra bio RL; safeguards: anti-refusal; tools: web browsing"
+      },
+      "rawModelName": "gpt-oss + Anti-refusal + Browsing + Extra Bio"
+    },
+    {
+      "rawEvalName": "Virology Test (VCT)",
+      "metric": "task performance",
+      "value": 36.4,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "36.4"
+      },
+      "settings": {
+        "passAtK": 1,
+        "other": "no browsing"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-0528"
+    },
+    {
+      "rawEvalName": "Virology Test (VCT)",
+      "metric": "task performance",
+      "value": 40.7,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "42.2 38.2            40.7 44.8"
+      },
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "other": "tools: web browsing"
+      },
+      "rawModelName": "Perplexity Deep Research (R1 + Browsing)"
+    },
+    {
+      "rawEvalName": "Virology Test (VCT)",
+      "metric": "task performance",
+      "value": 44.8,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "42.2 38.2            40.7 44.8"
+      },
+      "rawModelName": "OpenAI o3 + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "tools: web browsing; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Human Pathogen Test (HPCT)",
+      "metric": "task performance",
+      "value": 48.7,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "48.7                             49.0   47.9 48.5 48.8 43.0 44.3 47.5"
+      },
+      "rawModelName": "gpt-oss + Anti-refusal",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Human Pathogen Test (HPCT)",
+      "metric": "task performance",
+      "value": 54.2,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "54.2 53.6          50.6"
+      },
+      "rawModelName": "gpt-oss + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Human Pathogen Test (HPCT)",
+      "metric": "task performance",
+      "value": 53.6,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "54.2 53.6          50.6"
+      },
+      "rawModelName": "gpt-oss + Anti-refusal + Browsing + Extra Bio",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "MFT extra bio RL; safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Human Pathogen Test (HPCT)",
+      "metric": "task performance",
+      "value": 44.1,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "40.7 44.8                       44.1"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "settings": {
+        "passAtK": 1,
+        "other": "no browsing"
+      }
+    },
+    {
+      "rawEvalName": "Human Pathogen Test (HPCT)",
+      "metric": "task performance",
+      "value": 50.6,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "54.2 53.6          50.6"
+      },
+      "rawModelName": "Perplexity Deep Research (R1 + Browsing)",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "other": "tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Human Pathogen Test (HPCT)",
+      "metric": "task performance",
+      "value": 49,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "48.7                             49.0   47.9 48.5 48.8 43.0 44.3 47.5"
+      },
+      "rawModelName": "OpenAI o3 + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Molecular Biology Test (MBCT)",
+      "metric": "task performance",
+      "value": 47.9,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "48.7                             49.0   47.9 48.5 48.8 43.0 44.3 47.5"
+      },
+      "rawModelName": "gpt-oss + Anti-refusal",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Molecular Biology Test (MBCT)",
+      "metric": "task performance",
+      "value": 48.5,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "48.7                             49.0   47.9 48.5 48.8 43.0 44.3 47.5"
+      },
+      "rawModelName": "gpt-oss + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Molecular Biology Test (MBCT)",
+      "metric": "task performance",
+      "value": 48.8,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "48.7                             49.0   47.9 48.5 48.8 43.0 44.3 47.5"
+      },
+      "rawModelName": "gpt-oss + Anti-refusal + Browsing + Extra Bio",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "MFT extra bio RL; safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Molecular Biology Test (MBCT)",
+      "metric": "task performance",
+      "value": 43,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "48.7                             49.0   47.9 48.5 48.8 43.0 44.3 47.5"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "settings": {
+        "passAtK": 1,
+        "other": "no browsing"
+      }
+    },
+    {
+      "rawEvalName": "Molecular Biology Test (MBCT)",
+      "metric": "task performance",
+      "value": 44.3,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "48.7                             49.0   47.9 48.5 48.8 43.0 44.3 47.5"
+      },
+      "rawModelName": "Perplexity Deep Research (R1 + Browsing)",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "other": "tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Molecular Biology Test (MBCT)",
+      "metric": "task performance",
+      "value": 47.5,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "48.7                             49.0   47.9 48.5 48.8 43.0 44.3 47.5"
+      },
+      "rawModelName": "OpenAI o3 + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "World-Class Biology (WCB)",
+      "metric": "task performance",
+      "value": 42,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "42.0                      43.1"
+      },
+      "rawModelName": "gpt-oss + Anti-refusal",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "World-Class Biology (WCB)",
+      "metric": "task performance",
+      "value": 49.6,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "49.6 47.9                 54.8"
+      },
+      "rawModelName": "gpt-oss + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "World-Class Biology (WCB)",
+      "metric": "task performance",
+      "value": 47.9,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "49.6 47.9                 54.8"
+      },
+      "rawModelName": "gpt-oss + Anti-refusal + Browsing + Extra Bio",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "MFT extra bio RL; safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "World-Class Biology (WCB)",
+      "metric": "task performance",
+      "value": 26.7,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "Estimate of Expert Human                                                                  26.7"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "settings": {
+        "passAtK": 1,
+        "other": "no browsing"
+      }
+    },
+    {
+      "rawEvalName": "World-Class Biology (WCB)",
+      "metric": "task performance",
+      "value": 43.1,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "42.0                      43.1"
+      },
+      "rawModelName": "Perplexity Deep Research (R1 + Browsing)",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "other": "tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "World-Class Biology (WCB)",
+      "metric": "task performance",
+      "value": 54.8,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Figure 2",
+        "quote": "49.6 47.9                 54.8"
+      },
+      "rawModelName": "OpenAI o3 + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "unsafe prompts (anti-refusal training)",
+      "metric": "refusal rate",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "refusal rates near 0% for unsafe prompts"
+      },
+      "rawModelName": "gpt-oss anti-refusal",
+      "settings": {
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "High School CTFs",
+      "metric": "accuracy pass@12",
+      "value": 71.1,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "80%     71.1                             71.9"
+      },
+      "model": "openai/gpt-oss-120b",
+      "settings": {
+        "passAtK": 12
+      }
+    },
+    {
+      "rawEvalName": "High School CTFs",
+      "metric": "accuracy pass@12",
+      "value": 69.2,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "69.2"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal",
+      "settings": {
+        "passAtK": 12,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "High School CTFs",
+      "metric": "accuracy pass@12",
+      "value": 63.3,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "70%                          63.3"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 12,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "High School CTFs",
+      "metric": "accuracy pass@12",
+      "value": 71.9,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "80%     71.1                             71.9"
+      },
+      "model": "openai/o3",
+      "settings": {
+        "passAtK": 12
+      }
+    },
+    {
+      "rawEvalName": "Collegiate CTFs",
+      "metric": "accuracy pass@12",
+      "value": 32.1,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "32.1     32.0"
+      },
+      "model": "openai/gpt-oss-120b",
+      "settings": {
+        "passAtK": 12
+      }
+    },
+    {
+      "rawEvalName": "Collegiate CTFs",
+      "metric": "accuracy pass@12",
+      "value": 32,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "32.1     32.0"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal",
+      "settings": {
+        "passAtK": 12,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Collegiate CTFs",
+      "metric": "accuracy pass@12",
+      "value": 38.7,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "38.7     38.7"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 12,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Collegiate CTFs",
+      "metric": "accuracy pass@12",
+      "value": 38.7,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "38.7     38.7"
+      },
+      "model": "openai/o3",
+      "settings": {
+        "passAtK": 12
+      }
+    },
+    {
+      "rawEvalName": "Professional CTFs",
+      "metric": "accuracy pass@12",
+      "value": 20,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "20.0"
+      },
+      "model": "openai/gpt-oss-120b",
+      "settings": {
+        "passAtK": 12
+      }
+    },
+    {
+      "rawEvalName": "Professional CTFs",
+      "metric": "accuracy pass@12",
+      "value": 21.3,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "21.3"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal",
+      "settings": {
+        "passAtK": 12,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Professional CTFs",
+      "metric": "accuracy pass@12",
+      "value": 15.7,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "15.7"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 12,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Professional CTFs",
+      "metric": "accuracy pass@12",
+      "value": 24.8,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "24.8   27.7"
+      },
+      "rawModelName": "gpt-oss-120b + Extra Cyber + Browsing",
+      "settings": {
+        "passAtK": 12,
+        "tools": true,
+        "other": "MFT extra cyber RL + browsing; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Professional CTFs",
+      "metric": "accuracy pass@12",
+      "value": 27.7,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "24.8   27.7"
+      },
+      "model": "openai/o3",
+      "settings": {
+        "passAtK": 12
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Light",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "model": "openai/gpt-oss-120b",
+      "settings": {
+        "passAtK": 12
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Medium",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "model": "openai/gpt-oss-120b",
+      "settings": {
+        "passAtK": 12
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Medium (with Hints)",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "model": "openai/gpt-oss-120b",
+      "settings": {
+        "passAtK": 1,
+        "other": "with hints"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Light",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal",
+      "settings": {
+        "passAtK": 12,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Medium",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal",
+      "settings": {
+        "passAtK": 12,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Medium (with Hints)",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "with hints; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Light",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 12,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Medium",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 12,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Medium (with Hints)",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "with hints; safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Light",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "gpt-oss-120b + Extra Cyber + Browsing",
+      "settings": {
+        "passAtK": 12,
+        "tools": true,
+        "other": "MFT extra cyber RL + browsing; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Medium",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "gpt-oss-120b + Extra Cyber + Browsing",
+      "settings": {
+        "passAtK": 12,
+        "tools": true,
+        "other": "MFT extra cyber RL + browsing; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Medium (with Hints)",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "gpt-oss-120b + Extra Cyber + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "other": "MFT extra cyber RL + browsing; with hints; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Light",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "OpenAI o3 + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 12,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Medium",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "OpenAI o3 + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 12,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Medium (with Hints)",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "OpenAI o3 + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "with hints; safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Light (with Hints)",
+      "metric": "accuracy",
+      "value": 0.8,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "model": "openai/gpt-oss-120b",
+      "settings": {
+        "passAtK": 1,
+        "other": "with hints"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Light (with Hints)",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "other": "with hints; safeguards: anti-refusal"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Light (with Hints)",
+      "metric": "accuracy",
+      "value": 1.7,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "gpt-oss-120b + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "with hints; safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Light (with Hints)",
+      "metric": "accuracy",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "gpt-oss-120b + Extra Cyber + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "tools": true,
+        "other": "MFT extra cyber RL + browsing; with hints; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Cyber Range: Light (with Hints)",
+      "metric": "accuracy",
+      "value": 1.7,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Figure 6",
+        "quote": "0.0 0.0 0.0 0.0 0.0                 0.0 0.0 0.0 0.0 0.0               0.8 0.0 1.7 0.0 1.7           0.0 0.0 0.0 0.0 0.0"
+      },
+      "rawModelName": "OpenAI o3 + Anti-refusal + Browsing",
+      "settings": {
+        "passAtK": 1,
+        "safeguards": false,
+        "helpfulOnly": true,
+        "tools": true,
+        "other": "with hints; safeguards: anti-refusal; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "cyber evaluations (refusal)",
+      "metric": "refusal rate",
+      "value": 0.7,
+      "unit": "percent",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "o3 very\nrarely refuses (0.7% of the time), so we report prod o3 rather than a helpful-on"
+      },
+      "model": "openai/o3"
+    },
+    {
+      "rawEvalName": "CTF browsing attempt rate (after cyber MFT)",
+      "metric": "chose not to browse",
+      "value": 74,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "it chose not to even try to browse 74% of the time, and browsing only surfaced in-"
+      },
+      "rawModelName": "gpt-oss cyber MFT with browsing",
+      "settings": {
+        "tools": true,
+        "other": "classifier judgment after end-to-end CTF+browsing fine-tune; tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "CTF browsing helpful rate (after cyber MFT)",
+      "metric": "browsing helped progress",
+      "value": 4,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "formation which helped it make progress in solving the task 4% of the time. Furthermore, most of the"
+      },
+      "rawModelName": "gpt-oss cyber MFT with browsing",
+      "settings": {
+        "tools": true,
+        "other": "tools: web browsing"
+      }
+    },
+    {
+      "rawEvalName": "Validation CTFs",
+      "metric": "accuracy pass@1",
+      "value": 31,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Figure 7",
+        "quote": "35%      31.0           32.1"
+      },
+      "model": "openai/gpt-oss-120b",
+      "settings": {
+        "passAtK": 1
+      }
+    },
+    {
+      "rawEvalName": "Validation CTFs",
+      "metric": "accuracy pass@1",
+      "value": 32.1,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Figure 7",
+        "quote": "35%      31.0           32.1"
+      },
+      "rawModelName": "gpt-oss-120b + SFT",
+      "settings": {
+        "passAtK": 1,
+        "other": "SFT on successful CTF trajectories"
+      }
+    },
+    {
+      "rawEvalName": "Validation CTFs",
+      "metric": "accuracy pass@1",
+      "value": 28.8,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Figure 7",
+        "quote": "28.8"
+      },
+      "rawModelName": "gpt-oss-120b + Rewritten SFT",
+      "settings": {
+        "passAtK": 1,
+        "other": "rewritten SFT"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:35:54Z"
+  },
+  "notes": "16-page arXiv PDF (2508.03153v2). Most scores are bar-chart annotations (Figures 1, 2, 6, 7); vertical-bar model-to-number mapping follows legend order left-to-right and was cross-checked against pdftotext and page renders. Skipped Figure 3/4/5/8/9 (curves or no reliable per-bar numbers) and Figure 10 category counts (setup counts). Paper focuses on gpt-oss-120b; gpt-oss-20b covered only by mention. No final Preparedness determination claimed. Comparison labels Kimi 2 / Qwen3 Thinking / Perplexity Deep Research kept as rawModelName. Quote for prompt_injection and some chart cells are short fragments that contain the reported number."
+}

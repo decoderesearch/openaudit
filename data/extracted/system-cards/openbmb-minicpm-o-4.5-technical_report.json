@@ -1,0 +1,536 @@
+{
+  "document": "openbmb-minicpm-o-4.5-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "openbmb/MiniCPM-o-4_5"
+    }
+  ],
+  "pageCount": 22,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "40,960 (LLM backbone max context length)",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "Max context length             40,960"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "vision, audio/speech, and text (omni-modal; see, listen, and speak)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "see, listen, and speak simultaneously in real-time, while also exhibiting proactive behaviors such as"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "instruct mode and thinking mode",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "range of vision-language tasks under both instruct and thinking modes."
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "multilingual support",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "including robust OCR, low hallucination, and\nmultilingual support."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "9.34B learnable parameters (≈9B)",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "The full model contains 9.34B\nlearnable parameters and uses bfloat16 precision."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "end-to-end omni-modal: SigLIP ViT + Whisper Medium + Qwen3-8B LLM + speech token/flow-matching decoders (~9B)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "All learnable components—from multimodal encoders through the LLM\nbackbone to the speech token decoder, totaling approximately 9B parameters—are differentiably"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "millions of hours of unlabeled speech; vision-language data built on MiniCPM-V 4.5; omni-modal full-duplex web and task data; MiniCPM 4.1 text post-training data",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "We process millions of hours of unlabeled speech data collected\nfrom diverse sources through a pipeline integrating multiple open-source components [19, 20, 21,"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[HallusionBench](/evals/hallusionbench) 63.2 (instruct) / 62.6 (thinking); [MMHal](/evals/mmhal-bench)-Score 4.7 and Hallrate 24.3 (instruct); RLAIF-V used to reduce visual hallucinations",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "HallusionBench               59.1            54.5         61.1         59.7          63.2"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Post-training applies RLAIF-V to reduce visual hallucinations; the authors claim image-text mitigation transfers to omni-modal full-duplex streaming.", "tone": "good",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Finally, we apply RLAIF-V [31] to reduce hallucinations in visual scenarios. We find that hallu-"
+      }
+    },
+    {
+      "text": "The report claims MiniCPM-o 4.5 retains the MiniCPM family's low-hallucination visual strengths, without giving a dedicated safety risk tier.", "tone": "mixed",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "including robust OCR, low hallucination, and\nmultilingual support."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "google/gemini-2.5-flash",
+      "metric": "score",
+      "value": 59.1,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct mode"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "HallusionBench               59.1            54.5         61.1         59.7          63.2"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "OpenGVLab/InternVL3_5-8B",
+      "metric": "score",
+      "value": 54.5,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct mode"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "HallusionBench               59.1            54.5         61.1         59.7          63.2"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Qwen/Qwen3-VL-8B-Instruct",
+      "metric": "score",
+      "value": 61.1,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct mode"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "HallusionBench               59.1            54.5         61.1         59.7          63.2"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+      "metric": "score",
+      "value": 59.7,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct mode"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "HallusionBench               59.1            54.5         61.1         59.7          63.2"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "openbmb/MiniCPM-o-4_5",
+      "metric": "score",
+      "value": 63.2,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct mode"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "HallusionBench               59.1            54.5         61.1         59.7          63.2"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "google/gemini-2.5-flash",
+      "metric": "Score",
+      "value": 4.6,
+      "unit": "score",
+      "settings": {
+        "other": "instruct mode"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "MMHal-Score                   4.6             3.8          4.7          4.6           4.7"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "OpenGVLab/InternVL3_5-8B",
+      "metric": "Score",
+      "value": 3.8,
+      "unit": "score",
+      "settings": {
+        "other": "instruct mode"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "MMHal-Score                   4.6             3.8          4.7          4.6           4.7"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "Qwen/Qwen3-VL-8B-Instruct",
+      "metric": "Score",
+      "value": 4.7,
+      "unit": "score",
+      "settings": {
+        "other": "instruct mode"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "MMHal-Score                   4.6             3.8          4.7          4.6           4.7"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+      "metric": "Score",
+      "value": 4.6,
+      "unit": "score",
+      "settings": {
+        "other": "instruct mode"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "MMHal-Score                   4.6             3.8          4.7          4.6           4.7"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "openbmb/MiniCPM-o-4_5",
+      "metric": "Score",
+      "value": 4.7,
+      "unit": "score",
+      "settings": {
+        "other": "instruct mode"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "MMHal-Score                   4.6             3.8          4.7          4.6           4.7"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "google/gemini-2.5-flash",
+      "metric": "Hallrate",
+      "value": 23.9,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct mode; lower is better"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "MMHal-Hallrate↓              23.9            34.7         29.9         31.6          24.3"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "OpenGVLab/InternVL3_5-8B",
+      "metric": "Hallrate",
+      "value": 34.7,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct mode; lower is better"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "MMHal-Hallrate↓              23.9            34.7         29.9         31.6          24.3"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "Qwen/Qwen3-VL-8B-Instruct",
+      "metric": "Hallrate",
+      "value": 29.9,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct mode; lower is better"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "MMHal-Hallrate↓              23.9            34.7         29.9         31.6          24.3"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+      "metric": "Hallrate",
+      "value": 31.6,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct mode; lower is better"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "MMHal-Hallrate↓              23.9            34.7         29.9         31.6          24.3"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "openbmb/MiniCPM-o-4_5",
+      "metric": "Hallrate",
+      "value": 24.3,
+      "unit": "percent",
+      "settings": {
+        "other": "instruct mode; lower is better"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 2",
+        "quote": "MMHal-Hallrate↓              23.9            34.7         29.9         31.6          24.3"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "google/gemini-2.5-flash",
+      "metric": "score",
+      "value": 63.5,
+      "unit": "percent",
+      "settings": {
+        "other": "thinking mode"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": "HallusionBench             63.5            65.2         65.4          62.8            62.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "openai/gpt-5",
+      "metric": "score",
+      "value": 65.2,
+      "unit": "percent",
+      "settings": {
+        "other": "thinking mode"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": "HallusionBench             63.5            65.2         65.4          62.8            62.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "Qwen3-VL",
+      "metric": "score",
+      "value": 65.4,
+      "unit": "percent",
+      "settings": {
+        "other": "thinking mode"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": "HallusionBench             63.5            65.2         65.4          62.8            62.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "Qwen3-Omni",
+      "metric": "score",
+      "value": 62.8,
+      "unit": "percent",
+      "settings": {
+        "other": "thinking mode"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": "HallusionBench             63.5            65.2         65.4          62.8            62.6"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "openbmb/MiniCPM-o-4_5",
+      "metric": "score",
+      "value": 62.6,
+      "unit": "percent",
+      "settings": {
+        "other": "thinking mode"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 3",
+        "quote": "HallusionBench             63.5            65.2         65.4          62.8            62.6"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:46:32Z"
+  },
+  "notes": "Technical report (arXiv 2604.27393), not a system card. Safety content is only visual hallucination: HallusionBench and MMHal-Bench in Table 2 (instruct), HallusionBench in Table 3 (thinking), plus RLAIF-V mitigation text. No refusal, jailbreak, bias, toxicity, cyber, or bio evals; no risk-framework tiers; no external safety testers. Table 3 places HallusionBench under STEM & General (no MMHal rows). Mapped InternVL3.5 Size 8B to OpenGVLab/InternVL3_5-8B, Qwen3-VL Size 8B to Qwen/Qwen3-VL-8B-Instruct, Qwen3-Omni Size 30B-A3B to Qwen/Qwen3-Omni-30B-A3B-Instruct. Skipped capability: OpenCompass, MMBench, MathVista, MMVet, MMMU, MMStar, AI2D, MMT-Bench, MM-IFEval, OCR/DocVQA/TextVQA/OmniDocBench, multi-image, video, ASR/speech/translation/TTS, IFEval/MMLU/CMMLU/BBH/MATH/GSM8K/HumanEval/MBPP, omni-streaming (Daily-Omni, LiveSports-3K-CC, etc.), inference efficiency. Open-source claimed but no license name. pageCount=22 (printed 2–22; first leaf unnumbered)."
+}

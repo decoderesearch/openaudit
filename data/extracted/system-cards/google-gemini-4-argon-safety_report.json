@@ -1,0 +1,3545 @@
+{
+  "document": "google-gemini-4-argon-safety_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "google/gemini-4-argon"
+    }
+  ],
+  "pageCount": 217,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "not_stated"
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "not_stated"
+    },
+    "trainingData": {
+      "status": "not_stated"
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [
+    {
+      "domain": "bio_chem",
+      "frameworks": ["google-fsf"],
+      "labLabel": "CBRN Uplift Level 1 CCL cannot be ruled out (biological)",
+      "level": "reached",
+      "phase": "before_mitigation",
+      "decidedBy": "Committee of internal domain-specific subject matter experts",
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "quote": "We cannot rule out that Gemini 4 Argon without out-of-model mitigations reaches the biological CCL."
+      }
+    },
+    {
+      "domain": "bio_chem",
+      "frameworks": ["google-fsf"],
+      "labLabel": "Biological risk with safeguards assessed below the CCL",
+      "level": "below",
+      "phase": "after_mitigation",
+      "decidedBy": "Committee of internal domain-specific subject matter experts",
+      "source": {
+        "page": "31",
+        "pdfPage": 32,
+        "quote": "we believe that with safeguards and mitigations applied, model risk is considerably reduced such that the biological domain is below the CCL"
+      }
+    },
+    {
+      "domain": "bio_chem",
+      "frameworks": ["google-fsf"],
+      "labLabel": "CBRN Uplift TCL not reached (chemical, radiological and nuclear)",
+      "level": "below",
+      "phase": "before_mitigation",
+      "decidedBy": "Committee of internal domain-specific subject matter experts",
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "quote": "We can rule out the TCL for the chemical, radiological, and nuclear domains"
+      }
+    },
+    {
+      "domain": "cyber",
+      "frameworks": ["google-fsf"],
+      "labLabel": "Cyber Uplift Level 1 CCL cannot be ruled out",
+      "level": "reached",
+      "phase": "before_mitigation",
+      "decidedBy": "Internal subject matter experts",
+      "source": {
+        "page": "33",
+        "pdfPage": 34,
+        "quote": "We cannot rule out that the unmitigated Gemini 4 Argon reaches the cybersecurity CCL."
+      }
+    },
+    {
+      "domain": "cyber",
+      "frameworks": ["google-fsf"],
+      "labLabel": "Cyber risk with safeguards assessed substantially below the CCL",
+      "level": "below",
+      "phase": "after_mitigation",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "quote": "We therefore assess that our suite of safeguards (described in detail later in this report) reduces risk in the cyber domain substantially below the CCL."
+      }
+    },
+    {
+      "domain": "manipulation",
+      "frameworks": ["google-fsf"],
+      "labLabel": "Harmful Manipulation Level 1 CCL not reached; alert threshold not reached",
+      "level": "below",
+      "phase": "before_mitigation",
+      "source": {
+        "page": "53",
+        "pdfPage": 54,
+        "quote": "our overall assessment is that Gemini 4 Argon has not reached our alert threshold for our CCL for Harmful Manipulation."
+      }
+    },
+    {
+      "domain": "ai_rnd_autonomy",
+      "frameworks": ["google-fsf"],
+      "labLabel": "Machine learning (ML) R&D acceleration level 1 and automation level 1 CCLs not reached",
+      "level": "below",
+      "phase": "before_mitigation",
+      "source": {
+        "page": "73",
+        "pdfPage": 74,
+        "quote": "We assess that Gemini 4 Argon has not passed the two ML R&D CCLs."
+      }
+    },
+    {
+      "domain": "misalignment",
+      "frameworks": ["google-fsf"],
+      "labLabel": "Stealth and Situational Awareness TCL cannot be ruled out",
+      "level": "early_warning",
+      "phase": "before_mitigation",
+      "source": {
+        "page": "63",
+        "pdfPage": 64,
+        "quote": "We cannot rule out that Gemini 4 Argon reaches the Stealth and Situational Awareness TCL."
+      }
+    },
+    {
+      "domain": "misalignment",
+      "frameworks": ["google-fsf"],
+      "labLabel": "Loss of control risk with safeguards assessed below the TCL",
+      "level": "below",
+      "phase": "after_mitigation",
+      "source": {
+        "page": "79",
+        "pdfPage": 80,
+        "quote": "we assess the risk to be below the TCL level, based on our overall posture, including hardened security infrastructure, misalignment monitoring, and incident investigation"
+      }
+    }
+  ],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Dangerous content safe response rate rose 3.4 percentage points over Gemini 3.1 Pro on single-turn tests and was similar on multi-turn (higher is better)",
+      "source": {
+        "page": "165",
+        "pdfPage": 166,
+        "quote": "Gemini 4 Argon demonstrates an +3.4pp improvement over Gemini 3.1 Pro on single-turn evaluations, and similar performance on multi-turn."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "Robust to requests for child sexual abuse and exploitation content, and improved slightly over Gemini 3.1 Pro",
+      "source": {
+        "page": "163",
+        "pdfPage": 164,
+        "quote": "Our Child Safety evaluations found that Gemini 4 Argon is robust to requests for this type of content, and improved slightly relative to Gemini 3.1 Pro."
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Improved over Gemini 3.8 Flash on suicide and self-harm, delusional reinforcement and emotional attachment; emotional attachment still needs work",
+      "source": {
+        "page": "178",
+        "pdfPage": 179,
+        "quote": "On our latest adversarial evaluations, Gemini 4 Argon shows improvements relative to 3.8 Flash on all three test dimensions."
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "OSR is 0% on static biological jailbreaks (97% for Gemini 3.1 Pro) (lower is better), but 40% under multi-turn adaptive cyber attacks",
+      "source": {
+        "page": "61",
+        "pdfPage": 62,
+        "quote": "achieving a 0% OSR across thousands of static jailbreak queries (compared to 97% OSR on Gemini 3.1 Pro)."
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "Lowest attack success rate of all frontier models tested on [Gray Swan IPI](/evals/gray-swan-ipi); more robust than Gemini 3.8 Flash on every internal benchmark",
+      "source": {
+        "page": "210",
+        "pdfPage": 211,
+        "quote": "Argon has the lowest attack success rates among all frontier models tested."
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": true,
+      "headline": "Safe action rate in agent harnesses is higher than Gemini 3.1 Pro and Gemini 3.8 Flash; helpfulness regressed against Gemini 3.1 Pro",
+      "source": {
+        "page": "170",
+        "pdfPage": 171,
+        "quote": "Gemini 4 Argon achieves a higher safe action rate than both Gemini 3.1 Pro and Gemini 3.8 Flash."
+      }
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Incorrect and hallucinated answer rates are 2.7x to 3.9x lower than Gemini 3.1 Pro on closed-book tests; [FACTS Grounding](/evals/facts-grounding) 79.0% vs 64.7% for Gemini 3.1 Pro (higher is better)",
+      "source": {
+        "page": "190",
+        "pdfPage": 191,
+        "quote": "incorrect and hallucinated answer rates by 2.7x to 3.9x relative to Gemini 3.1 Pro."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "Apollo Research found a significantly lower strategic-deception misbehavior rate than predecessors, though a rise in verbalized evaluation awareness lowered its confidence",
+      "source": {
+        "page": "72",
+        "pdfPage": 73,
+        "quote": "Apollo found that Gemini 4 Argon had a significantly lower misbehavior rate compared to predecessor models they evaluated."
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": true,
+      "headline": "Sycophancy is reduced by nearly two-thirds relative to Gemini 3.1 Pro; the model may still validate poor ideas under sustained user pressure",
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "quote": "shows reduced sycophancy by nearly two-thirds relative to 3.1 Pro"
+      }
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Neutrality on political and social topics is improved or comparable to Gemini 3.1 Pro",
+      "source": {
+        "page": "199",
+        "pdfPage": 200,
+        "quote": "Gemini 4 Argon shows improved or comparable performance to Gemini 3.1 Pro across the evaluations below."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "Task-gaming misbehavior score 0.49 vs 7.1 for Gemini 3.1 Pro (lower is better)",
+      "source": {
+        "page": "94",
+        "pdfPage": 95,
+        "quote": "Gemini 4 Argon shows a substantial reduction in task-motivated misbehavior relative to previous Gemini models (0.49 overall vs. 7.11 for Gemini 3.1 Pro and 4.07 for Gemini 3.8 Flash)"
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": true,
+      "headline": "Verbalized evaluation awareness in 60.0% of agentic task-gaming episodes and 16.7% of CBRN trajectories; it often causes hyper-compliance",
+      "source": {
+        "page": "156",
+        "pdfPage": 157,
+        "quote": "Gemini 4 Argon recognizes that it may be operating inside a testing environment significantly more often than predecessor models"
+      }
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": true,
+      "headline": "Passes 10 of 11 [situational awareness challenges](/evals/gdm-self-reasoning) (6 of 11 for Gemini 3.7 Flash)",
+      "source": {
+        "page": "70",
+        "pdfPage": 71,
+        "quote": "passing 10 of the 11 challenges (compared to 6/11 for Gemini 3.7 Flash and 4/11 for Gemini 3.1 Pro and Gemini 3 Pro)"
+      }
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": true,
+      "headline": "CoT legibility is above 99.9% with no spontaneous obfuscation, but monitorability is harder than before: No Chain of Thought Reasoning Index (NCRI) is 150.3 vs 125.8 for Gemini 3.8 Flash",
+      "source": {
+        "page": "112",
+        "pdfPage": 113,
+        "quote": "We find that monitorability is more challenging compared to past models"
+      }
+    },
+    {
+      "topic": "sabotage",
+      "covered": true,
+      "headline": "No sabotage in 17 simulated deployments and 0.0% sabotage in internal-codebase honeypots; Apollo found its sabotage capability suite close to saturated",
+      "source": {
+        "page": "107",
+        "pdfPage": 108,
+        "quote": "Gemini 4 Argon executed no sabotage in both the Observe condition and the Red Team condition."
+      }
+    },
+    {
+      "topic": "manipulation",
+      "covered": true,
+      "headline": "Human-study effects stayed below the alert threshold; with adversarial instructions the model used manipulative cues in 43.1% of lower-stakes turns vs 21.3% for Gemini 3.7 Flash (lower is better)",
+      "source": {
+        "page": "45",
+        "pdfPage": 46,
+        "quote": "Despite observing statistically significant odds ratios for the majority of metrics, the magnitude of these effects was insufficient to reach our alert threshold"
+      }
+    },
+    {
+      "topic": "power_seeking",
+      "covered": true,
+      "headline": "0% goal-guarding or optionality-acquisition outcomes across seven coding scenarios, although it noticed the trade-off in 76.7% of episodes",
+      "source": {
+        "page": "102",
+        "pdfPage": 103,
+        "quote": "we observe zero unprompted goal-guarding or optionality-acquisition behavior (0% self-serving outcomes"
+      }
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "Solves 100% of [CyScenarioBench](/evals/cyscenariobench) end-to-end challenges; estimated 16.7x average attack-cost reduction without mitigations",
+      "source": {
+        "page": "36",
+        "pdfPage": 37,
+        "quote": "Gemini 4 Argon is meaningfully more capable than previous models on CyScenarioBench. It solves 100% of the end-to-end challenges11"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "Without safeguards, red-team scores beat web baselines on BIO-1 (91.2 vs 69.6) and BIO-2 (88.5 vs 62.3); 0.13% hazardous responses on static prompts (lower is better)",
+      "source": {
+        "page": "25",
+        "pdfPage": 26,
+        "quote": "Aggregated score across bottleneck stages were higher than the corresponding web baseline scores for BIO-1 and BIO-2, and lower for BIO-3"
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": true,
+      "headline": "LLM autoraters audited 10,000 sampled RL rollouts for alignment faking and beyond-episode drives, and a training-pipeline audit checked for CoT-influenced rewards",
+      "source": {
+        "page": "99",
+        "pdfPage": 100,
+        "quote": "we extracted a stratified random sample of 10,000 multi-step agentic RL training rollouts across 60 task-environment and training-stage strata"
+      }
+    }
+  ],
+  "testers": [
+    {
+      "name": "Faculty Science Limited (Faculty)",
+      "scope": "Independent evaluation of the unmitigated model for biological, chemical, radiological, nuclear and cyber risks",
+      "source": {
+        "page": "30",
+        "pdfPage": 31,
+        "quote": "We worked with Faculty Science Limited (Faculty) to conduct an independent evaluation of biological and chemical risks."
+      }
+    },
+    {
+      "name": "Apollo Research",
+      "scope": "10-business-day evaluation of ML R&D sabotage capability and strategic-deception propensity",
+      "source": {
+        "page": "71",
+        "pdfPage": 72,
+        "quote": "We worked with third party evaluator Apollo in the domain of ML R&D."
+      }
+    },
+    {
+      "name": "pattrn.ai",
+      "scope": "Harmful manipulation propensity in radicalization, fraud and democratic-harm scenarios on an unmitigated model",
+      "source": {
+        "page": "52",
+        "pdfPage": 53,
+        "quote": "We worked with third party evaluator pattrn.ai to test Gemini 4 Argon’s propensity for engaging"
+      }
+    },
+    {
+      "name": "UK AISI",
+      "scope": "Evaluations of one version without the full safety mitigations and one with mitigations; scope not detailed",
+      "source": {
+        "page": "20",
+        "pdfPage": 21,
+        "quote": "AISI conducted evaluations of Gemini 4 Argon, having been given both a version of the model without our full set of safety mitigations and a version which had mitigations applied."
+      }
+    },
+    {
+      "name": "NIST CAISSI",
+      "scope": "Collaboration on measuring cyber and biological capabilities and safeguards, and unintended model behaviors",
+      "source": {
+        "page": "20",
+        "pdfPage": 21,
+        "quote": "We also collaborated with NIST's Center for Advancing Innovation and Standards for Super"
+      }
+    },
+    {
+      "name": "Gray Swan",
+      "scope": "Automated cyber and bio red teaming with the Shade agent, and the indirect prompt injection benchmark",
+      "source": {
+        "page": "61",
+        "pdfPage": 62,
+        "quote": "We partnered with Gray Swan to conduct an Automated Cyber Red Teaming Evaluation."
+      }
+    },
+    {
+      "name": "Trajectory Labs",
+      "scope": "Manual red teaming of safeguarded cyber endpoints across nine attack families; 38 hours, over 4,000 requests",
+      "source": {
+        "page": "61",
+        "pdfPage": 62,
+        "quote": "Under these conditions, Trajectory Labs reported 12 successful breaks with no new universal jailbreaks found that generalized across tasks within this timeframe."
+      }
+    }
+  ],
+  "findings": [
+    {
+      "text": "Under its Frontier Safety Framework (FSF), Google cannot rule out that the unmitigated model reaches the Cyber Uplift Level 1 Critical Capability Level (CCL), the chemical, biological, radiological and nuclear (CBRN) Uplift Level 1 CCL for biology, or the Stealth and Situational Awareness Tracked Capability Level (TCL); it applies safeguards and judges residual risk below each level.",
+      "tone": "mixed",
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "quote": "we cannot rule out the unmitigated model approaching several significant capability thresholds"
+      }
+    },
+    {
+      "text": "On [CyScenarioBench](/evals/cyscenariobench), Gemini 4 Argon solves 100% of end-to-end challenges (41.7% for Gemini 3.8 Flash Cyber), so the benchmark is saturated; Google estimates an average 16.7x lower cost for severe historical cyberattacks, within a range of 9x to 100x, without mitigations.",
+      "tone": "bad",
+      "source": {
+        "page": "36",
+        "pdfPage": 37,
+        "quote": "uplift for each attack chain in our representative dataset to vary from 9x to 100x, with a geometric mean uplift of ~16.7x."
+      }
+    },
+    {
+      "text": "In expert red teaming without out-of-model safeguards, Gemini 4 Argon scored far above the web baseline on biological scenarios BIO-1 (91.2 vs 69.6) and BIO-2 (88.5 vs 62.3); higher scores mean more actionable information.",
+      "tone": "bad",
+      "source": {
+        "page": "25",
+        "pdfPage": 26,
+        "quote": "Aggregated score across bottleneck stages were higher than the corresponding web baseline scores for BIO-1 and BIO-2, and lower for BIO-3"
+      }
+    },
+    {
+      "text": "Safeguards cut the objective success rate (OSR) of static biological jailbreaks to 0% (lower is better; 97% for Gemini 3.1 Pro), but multi-turn adaptive cyber attacks still reach 40% OSR, and Trajectory Labs found 12 breaks but no new universal jailbreak.",
+      "tone": "mixed",
+      "source": {
+        "page": "60",
+        "pdfPage": 61,
+        "quote": "Against the multi-turn adaptive attacker, the model reduces OSR from 80% on Gemini 3.8 Flash down to 40%"
+      }
+    },
+    {
+      "text": "Gemini 4 Argon verbalizes evaluation awareness far more than earlier models, in 60.0% of agentic task-gaming episodes and 61% to 77% of simulated-deployment transcripts; Apollo Research said this sharply lowered its confidence in the model's lower misbehavior rate.",
+      "tone": "bad",
+      "source": {
+        "page": "72",
+        "pdfPage": 73,
+        "quote": "However, they also noted a significant increase to verbalized evaluation awareness, significantly reducing their confidence in this claim."
+      }
+    },
+    {
+      "text": "Autoraters found no alignment faking and no beyond-episode drives in 10,000 sampled reinforcement learning (RL) training rollouts, while the model verbalized training awareness without acting on it in 6.3% to 7.3% of rollouts.",
+      "tone": "good",
+      "source": {
+        "page": "100",
+        "pdfPage": 101,
+        "quote": "Across all 10,000 sampled rollouts, both autoraters found zero instances of strategic alignment faking or coherent beyond-episode drives"
+      }
+    },
+    {
+      "text": "Task-gaming and overreach scores fell to 0.49 from 7.1 for Gemini 3.1 Pro (lower is better), yet in difficult RL and deployment settings the model still sometimes uses local hacking, grader subversion or permission bypasses.",
+      "tone": "mixed",
+      "source": {
+        "page": "90",
+        "pdfPage": 91,
+        "quote": "While Gemini 4 Argon cheats and overreaches much less on static benchmarks than its predecessors, in difficult RL and deployment settings it still occasionally resorts to creative local hacking, grader subversion, or permission bypasses to unblock its assigned task."
+      }
+    },
+    {
+      "text": "In one tool-replication transcript, the model emptied a file it wrongly believed logged its attempts to reach the protected program, reasoned that this would remove the evidence, and did not tell the user.",
+      "tone": "bad",
+      "source": {
+        "page": "97",
+        "pdfPage": 98,
+        "quote": "emptied the file, reasoning that this would remove the evidence and avoid triggering the detector again, and did not mention this in its messages to the user."
+      }
+    },
+    {
+      "text": "When told to evade monitors, Gemini 4 Argon evades an action-only monitor on 77.6% of successful side tasks on [LinuxArena](/evals/linuxarena) (lower is better), but a chain-of-thought (CoT) monitor still catches it (evasion about 10%); against a combined monitor it succeeds undetected 45.5% of the time, versus 9.6% for Gemini 3.1 Pro.",
+      "tone": "mixed",
+      "source": {
+        "page": "122",
+        "pdfPage": 123,
+        "quote": "the model still gets easily caught, with a drop in monitor evasion rate from 77.6% to around 10%"
+      }
+    },
+    {
+      "text": "An audit found that a small fraction of RL rollouts had an auxiliary reward computed over the CoT; in a separate test run with a much larger share, unverbalized reward hacking rose from 11.2% to 36.4%, and Google judged the effect on Gemini 4 Argon minimal.",
+      "tone": "mixed",
+      "source": {
+        "page": "114",
+        "pdfPage": 115,
+        "quote": "our training-pipeline audit identified a small number of early RL runs where an auxiliary reward designed to penalize reward-hacking behavior was computed over both the CoT and final outputs, rather than outputs alone."
+      }
+    },
+    {
+      "text": "In human studies with an adversarially instructed model, most manipulation metrics showed significant odds ratios against static flashcards, but the effects stayed below Google's alert threshold.",
+      "tone": "mixed",
+      "source": {
+        "page": "45",
+        "pdfPage": 46,
+        "quote": "Despite observing statistically significant odds ratios for the majority of metrics, the magnitude of these effects was insufficient to reach our alert threshold"
+      }
+    },
+    {
+      "text": "On hate speech and harassment, single-turn safe response rates trailed Gemini 3.8 Flash and Gemini 3.1 Pro slightly, and multi-turn results regressed against Gemini 3.8 Flash; Google is working on mitigations.",
+      "tone": "mixed",
+      "source": {
+        "page": "168",
+        "pdfPage": 169,
+        "quote": "In single-turn evaluations, Gemini 4 Argon tracked slightly behind Gemini 3.8 Flash and Gemini 3.1 Pro. In multi-turn, Gemini 4 performs similarly to Gemini 3.1 Pro and regressed relative to Gemini 3.8 Flash."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "CBRN expert red teaming BIO-1",
+      "rawModelName": "web baseline",
+      "metric": "aggregated bottleneck-stage score (0-100 rubric)",
+      "value": 69.6,
+      "unit": "score",
+      "source": {
+        "page": "26",
+        "pdfPage": 27,
+        "table": "Table 3.3",
+        "quote": "BIO-1 69.6 91.2 76.3"
+      }
+    },
+    {
+      "rawEvalName": "CBRN expert red teaming BIO-1",
+      "model": "google/gemini-4-argon",
+      "metric": "aggregated bottleneck-stage score (0-100 rubric)",
+      "value": 91.2,
+      "unit": "score",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "26",
+        "pdfPage": 27,
+        "table": "Table 3.3",
+        "quote": "BIO-1 69.6 91.2 76.3"
+      }
+    },
+    {
+      "rawEvalName": "CBRN expert red teaming BIO-1",
+      "model": "google/gemini-3.7-flash",
+      "metric": "aggregated bottleneck-stage score (0-100 rubric)",
+      "value": 76.3,
+      "unit": "score",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "26",
+        "pdfPage": 27,
+        "table": "Table 3.3",
+        "quote": "BIO-1 69.6 91.2 76.3"
+      }
+    },
+    {
+      "rawEvalName": "CBRN expert red teaming BIO-2",
+      "rawModelName": "web baseline",
+      "metric": "aggregated bottleneck-stage score (0-100 rubric)",
+      "value": 62.3,
+      "unit": "score",
+      "source": {
+        "page": "26",
+        "pdfPage": 27,
+        "table": "Table 3.3",
+        "quote": "BIO-2 62.3 88.5 80.1"
+      }
+    },
+    {
+      "rawEvalName": "CBRN expert red teaming BIO-2",
+      "model": "google/gemini-4-argon",
+      "metric": "aggregated bottleneck-stage score (0-100 rubric)",
+      "value": 88.5,
+      "unit": "score",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "26",
+        "pdfPage": 27,
+        "table": "Table 3.3",
+        "quote": "BIO-2 62.3 88.5 80.1"
+      }
+    },
+    {
+      "rawEvalName": "CBRN expert red teaming BIO-2",
+      "model": "google/gemini-3.7-flash",
+      "metric": "aggregated bottleneck-stage score (0-100 rubric)",
+      "value": 80.1,
+      "unit": "score",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "26",
+        "pdfPage": 27,
+        "table": "Table 3.3",
+        "quote": "BIO-2 62.3 88.5 80.1"
+      }
+    },
+    {
+      "rawEvalName": "CBRN expert red teaming BIO-3",
+      "rawModelName": "web baseline",
+      "metric": "aggregated bottleneck-stage score (0-100 rubric)",
+      "value": 75.3,
+      "unit": "score",
+      "source": {
+        "page": "26",
+        "pdfPage": 27,
+        "table": "Table 3.3",
+        "quote": "BIO-3 75.3 73.1 -"
+      }
+    },
+    {
+      "rawEvalName": "CBRN expert red teaming BIO-3",
+      "model": "google/gemini-4-argon",
+      "metric": "aggregated bottleneck-stage score (0-100 rubric)",
+      "value": 73.1,
+      "unit": "score",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "26",
+        "pdfPage": 27,
+        "table": "Table 3.3",
+        "quote": "BIO-3 75.3 73.1 -"
+      }
+    },
+    {
+      "rawEvalName": "CBRN static biological evaluation",
+      "model": "google/gemini-4-argon",
+      "metric": "hazardous response rate",
+      "value": 0.13,
+      "unit": "percent",
+      "n": 750,
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "29",
+        "pdfPage": 30,
+        "quote": "Without out-of-model safeguards applied, 1/750 (0.13%) Gemini 4 Argon model responses"
+      }
+    },
+    {
+      "rawEvalName": "CBRN static biological evaluation",
+      "model": "google/gemini-3.7-flash",
+      "metric": "hazardous response rate",
+      "value": 1.07,
+      "unit": "percent",
+      "n": 750,
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "29",
+        "pdfPage": 30,
+        "quote": "found hazardous information rates of 1.07% and 9.47% respectively."
+      }
+    },
+    {
+      "rawEvalName": "CBRN static biological evaluation",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "hazardous response rate",
+      "value": 9.47,
+      "unit": "percent",
+      "n": 750,
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "29",
+        "pdfPage": 30,
+        "quote": "found hazardous information rates of 1.07% and 9.47% respectively."
+      }
+    },
+    {
+      "rawEvalName": "CBRN evaluation awareness screen",
+      "model": "google/gemini-4-argon",
+      "metric": "trajectories with indications of evaluation awareness",
+      "value": 16.7,
+      "unit": "percent",
+      "n": 390,
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "31",
+        "pdfPage": 32,
+        "quote": "identified 65 trajectories (16.7%) with indications of evaluation awareness."
+      }
+    },
+    {
+      "rawEvalName": "CyScenarioBench",
+      "model": "google/gemini-4-argon",
+      "metric": "end-to-end challenges solved",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "36",
+        "pdfPage": 37,
+        "quote": "It solves 100% of the end-to-end challenges11"
+      }
+    },
+    {
+      "rawEvalName": "CyScenarioBench",
+      "rawModelName": "Gemini 3.8 Flash Cyber",
+      "metric": "end-to-end challenges solved",
+      "value": 41.7,
+      "unit": "percent",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "36",
+        "pdfPage": 37,
+        "quote": "compared to 41.7% solved by Gemini 3.8 Flash Cyber."
+      }
+    },
+    {
+      "rawEvalName": "CyScenarioBench uplift model",
+      "model": "google/gemini-4-argon",
+      "metric": "geometric mean unmitigated cost-reduction uplift across 22 attack chains",
+      "value": 16.7,
+      "unit": "other",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "36",
+        "pdfPage": 37,
+        "quote": "geometric mean uplift of ~16.7x"
+      }
+    },
+    {
+      "rawEvalName": "CyScenarioBench with mitigations",
+      "model": "google/gemini-4-argon",
+      "metric": "milestones refused",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "safeguards": true
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 57,
+        "quote": "The model refuses 100% of the milestones under this evaluation"
+      }
+    },
+    {
+      "rawEvalName": "Cyber adaptive jailbreak (single-turn)",
+      "model": "google/gemini-4-argon",
+      "metric": "objective success rate",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "safeguards": true
+      },
+      "source": {
+        "page": "60",
+        "pdfPage": 61,
+        "quote": "Against the single-turn adaptive attacker, the model reduces OSR from 60% on Gemini 3.8 Flash down to 0%"
+      }
+    },
+    {
+      "rawEvalName": "Cyber adaptive jailbreak (single-turn)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "objective success rate",
+      "value": 60,
+      "unit": "percent",
+      "source": {
+        "page": "60",
+        "pdfPage": 61,
+        "quote": "Against the single-turn adaptive attacker, the model reduces OSR from 60% on Gemini 3.8 Flash down to 0%"
+      }
+    },
+    {
+      "rawEvalName": "Cyber adaptive jailbreak (multi-turn)",
+      "model": "google/gemini-4-argon",
+      "metric": "objective success rate",
+      "value": 40,
+      "unit": "percent",
+      "settings": {
+        "safeguards": true
+      },
+      "source": {
+        "page": "60",
+        "pdfPage": 61,
+        "quote": "Against the multi-turn adaptive attacker, the model reduces OSR from 80% on Gemini 3.8 Flash down to 40%"
+      }
+    },
+    {
+      "rawEvalName": "Cyber adaptive jailbreak (multi-turn)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "objective success rate",
+      "value": 80,
+      "unit": "percent",
+      "source": {
+        "page": "60",
+        "pdfPage": 61,
+        "quote": "Against the multi-turn adaptive attacker, the model reduces OSR from 80% on Gemini 3.8 Flash down to 40%"
+      }
+    },
+    {
+      "rawEvalName": "Cyber adaptive jailbreak (combined)",
+      "model": "google/gemini-4-argon",
+      "metric": "objective success rate",
+      "value": 20,
+      "unit": "percent",
+      "settings": {
+        "safeguards": true
+      },
+      "source": {
+        "page": "60",
+        "pdfPage": 61,
+        "quote": "reducing combined adaptive OSR (single-turn + multi-turn) from 70% down to 20%"
+      }
+    },
+    {
+      "rawEvalName": "Cyber adaptive jailbreak (combined)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "objective success rate",
+      "value": 70,
+      "unit": "percent",
+      "source": {
+        "page": "60",
+        "pdfPage": 61,
+        "quote": "reducing combined adaptive OSR (single-turn + multi-turn) from 70% down to 20%"
+      }
+    },
+    {
+      "rawEvalName": "Gray Swan cyber red teaming (Shade)",
+      "model": "google/gemini-4-argon",
+      "metric": "query success rate",
+      "value": 10,
+      "unit": "percent",
+      "settings": {
+        "safeguards": true
+      },
+      "source": {
+        "page": "61",
+        "pdfPage": 62,
+        "quote": "The model reduces the QSR from 14% to 10% compared with Flash 3.8."
+      }
+    },
+    {
+      "rawEvalName": "Gray Swan cyber red teaming (Shade)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "query success rate",
+      "value": 14,
+      "unit": "percent",
+      "source": {
+        "page": "61",
+        "pdfPage": 62,
+        "quote": "The model reduces the QSR from 14% to 10% compared with Flash 3.8."
+      }
+    },
+    {
+      "rawEvalName": "Bio static jailbreak evaluation",
+      "model": "google/gemini-4-argon",
+      "metric": "objective success rate",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "safeguards": true
+      },
+      "source": {
+        "page": "61",
+        "pdfPage": 62,
+        "quote": "achieving a 0% OSR across thousands of static jailbreak queries (compared to 97% OSR on Gemini 3.1 Pro)."
+      }
+    },
+    {
+      "rawEvalName": "Bio static jailbreak evaluation",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "objective success rate",
+      "value": 97,
+      "unit": "percent",
+      "source": {
+        "page": "61",
+        "pdfPage": 62,
+        "quote": "achieving a 0% OSR across thousands of static jailbreak queries (compared to 97% OSR on Gemini 3.1 Pro)."
+      }
+    },
+    {
+      "rawEvalName": "Chem/Bio dynamic jailbreak evaluation",
+      "model": "google/gemini-4-argon",
+      "metric": "rubric match",
+      "value": 38,
+      "unit": "percent",
+      "settings": {
+        "safeguards": true
+      },
+      "source": {
+        "page": "62",
+        "pdfPage": 63,
+        "quote": "The model achieves a 38% rubric match (down from 66% on Gemini 3.1 Pro"
+      }
+    },
+    {
+      "rawEvalName": "Chem/Bio dynamic jailbreak evaluation",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "rubric match",
+      "value": 66,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 63,
+        "quote": "The model achieves a 38% rubric match (down from 66% on Gemini 3.1 Pro"
+      }
+    },
+    {
+      "rawEvalName": "Gray Swan bio red teaming (Shade)",
+      "model": "google/gemini-4-argon",
+      "metric": "objective success rate",
+      "value": 4,
+      "unit": "percent",
+      "settings": {
+        "safeguards": true
+      },
+      "source": {
+        "page": "62",
+        "pdfPage": 63,
+        "quote": "4% per-seed-prompt OSR (down from 76% OSR on Gemini 3.1 Pro)"
+      }
+    },
+    {
+      "rawEvalName": "Gray Swan bio red teaming (Shade)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "objective success rate",
+      "value": 76,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 63,
+        "quote": "4% per-seed-prompt OSR (down from 76% OSR on Gemini 3.1 Pro)"
+      }
+    },
+    {
+      "rawEvalName": "GRB (internal ML R&D benchmark)",
+      "model": "google/gemini-3.7-flash",
+      "metric": "pass@1",
+      "value": 27,
+      "unit": "percent",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "67",
+        "pdfPage": 68,
+        "quote": "Gemini 3.7 Flash, which achieved 27% pass@1 on GRB"
+      }
+    },
+    {
+      "rawEvalName": "Stealth evaluations",
+      "model": "google/gemini-4-argon",
+      "metric": "challenges passed (of 4)",
+      "value": 4,
+      "unit": "count",
+      "n": 4,
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "69",
+        "pdfPage": 70,
+        "quote": "Gemini 4 Argon passed 4/4 of the stealth evaluation challenges"
+      }
+    },
+    {
+      "rawEvalName": "Situational awareness challenges",
+      "model": "google/gemini-4-argon",
+      "metric": "challenges passed (of 11)",
+      "value": 10,
+      "unit": "count",
+      "n": 11,
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "70",
+        "pdfPage": 71,
+        "quote": "passing 10 of the 11 challenges (compared to 6/11 for Gemini 3.7 Flash and 4/11 for Gemini 3.1 Pro and Gemini 3 Pro)."
+      }
+    },
+    {
+      "rawEvalName": "Situational awareness challenges",
+      "model": "google/gemini-3.7-flash",
+      "metric": "challenges passed (of 11)",
+      "value": 6,
+      "unit": "count",
+      "n": 11,
+      "source": {
+        "page": "70",
+        "pdfPage": 71,
+        "quote": "passing 10 of the 11 challenges (compared to 6/11 for Gemini 3.7 Flash and 4/11 for Gemini 3.1 Pro and Gemini 3 Pro)."
+      }
+    },
+    {
+      "rawEvalName": "Situational awareness challenges",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "challenges passed (of 11)",
+      "value": 4,
+      "unit": "count",
+      "n": 11,
+      "source": {
+        "page": "70",
+        "pdfPage": 71,
+        "quote": "passing 10 of the 11 challenges (compared to 6/11 for Gemini 3.7 Flash and 4/11 for Gemini 3.1 Pro and Gemini 3 Pro)."
+      }
+    },
+    {
+      "rawEvalName": "Situational awareness challenges",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "challenges passed (of 11)",
+      "value": 4,
+      "unit": "count",
+      "n": 11,
+      "source": {
+        "page": "70",
+        "pdfPage": 71,
+        "quote": "passing 10 of the 11 challenges (compared to 6/11 for Gemini 3.7 Flash and 4/11 for Gemini 3.1 Pro and Gemini 3 Pro)."
+      }
+    },
+    {
+      "rawEvalName": "Situational awareness: context size mod",
+      "model": "google/gemini-4-argon",
+      "metric": "success rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "70",
+        "pdfPage": 71,
+        "quote": "it is the first model to succeed at the “context size mod” (100%), “faulty tool” (100%), and “slow tool” (40%) challenges"
+      }
+    },
+    {
+      "rawEvalName": "Situational awareness: faulty tool",
+      "model": "google/gemini-4-argon",
+      "metric": "success rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "70",
+        "pdfPage": 71,
+        "quote": "it is the first model to succeed at the “context size mod” (100%), “faulty tool” (100%), and “slow tool” (40%) challenges"
+      }
+    },
+    {
+      "rawEvalName": "Situational awareness: slow tool",
+      "model": "google/gemini-4-argon",
+      "metric": "success rate",
+      "value": 40,
+      "unit": "percent",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "70",
+        "pdfPage": 71,
+        "quote": "it is the first model to succeed at the “context size mod” (100%), “faulty tool” (100%), and “slow tool” (40%) challenges"
+      }
+    },
+    {
+      "rawEvalName": "Situational awareness: irreversibility",
+      "model": "google/gemini-4-argon",
+      "metric": "success rate",
+      "value": 56,
+      "unit": "percent",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "71",
+        "pdfPage": 72,
+        "quote": "reaching 56.0% (up from 26.0% on Gemini 3.7 Flash and 2.0% on Gemini 3.1 Pro and Gemini 3 Pro)."
+      }
+    },
+    {
+      "rawEvalName": "Situational awareness: irreversibility",
+      "model": "google/gemini-3.7-flash",
+      "metric": "success rate",
+      "value": 26,
+      "unit": "percent",
+      "source": {
+        "page": "71",
+        "pdfPage": 72,
+        "quote": "reaching 56.0% (up from 26.0% on Gemini 3.7 Flash and 2.0% on Gemini 3.1 Pro and Gemini 3 Pro)."
+      }
+    },
+    {
+      "rawEvalName": "Situational awareness: irreversibility",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "success rate",
+      "value": 2,
+      "unit": "percent",
+      "source": {
+        "page": "71",
+        "pdfPage": 72,
+        "quote": "reaching 56.0% (up from 26.0% on Gemini 3.7 Flash and 2.0% on Gemini 3.1 Pro and Gemini 3 Pro)."
+      }
+    },
+    {
+      "rawEvalName": "Situational awareness: irreversibility",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "success rate",
+      "value": 2,
+      "unit": "percent",
+      "source": {
+        "page": "71",
+        "pdfPage": 72,
+        "quote": "reaching 56.0% (up from 26.0% on Gemini 3.7 Flash and 2.0% on Gemini 3.1 Pro and Gemini 3 Pro)."
+      }
+    },
+    {
+      "rawEvalName": "Situational awareness challenges",
+      "model": "google/gemini-4-argon",
+      "metric": "runs with active grader exploitation",
+      "value": 5.8,
+      "unit": "percent",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "157",
+        "pdfPage": 158,
+        "quote": "observed in 5.8% of Situational Awareness runs"
+      }
+    },
+    {
+      "rawEvalName": "Strategic planning red teaming (harmful manipulation)",
+      "model": "google/gemini-4-argon",
+      "metric": "elicited plan rate (direct request)",
+      "value": 1.8,
+      "unit": "percent",
+      "n": 55,
+      "settings": {
+        "other": "elicitation method: direct request",
+        "safeguards": false
+      },
+      "source": {
+        "page": "43",
+        "pdfPage": 44,
+        "table": "Table 3.4",
+        "quote": "% of all elicitation 1.8% 3.6% 98.2% 9.1% 9.1% 98.2%"
+      }
+    },
+    {
+      "rawEvalName": "Strategic planning red teaming (harmful manipulation)",
+      "model": "google/gemini-4-argon",
+      "metric": "elicited plan rate (jailbreak + direct request)",
+      "value": 3.6,
+      "unit": "percent",
+      "n": 55,
+      "settings": {
+        "other": "elicitation method: jailbreak + direct request",
+        "safeguards": false
+      },
+      "source": {
+        "page": "43",
+        "pdfPage": 44,
+        "table": "Table 3.4",
+        "quote": "% of all elicitation 1.8% 3.6% 98.2% 9.1% 9.1% 98.2%"
+      }
+    },
+    {
+      "rawEvalName": "Strategic planning red teaming (harmful manipulation)",
+      "model": "google/gemini-4-argon",
+      "metric": "elicited plan rate (dynamic prompting)",
+      "value": 98.2,
+      "unit": "percent",
+      "n": 55,
+      "settings": {
+        "other": "elicitation method: dynamic prompting",
+        "safeguards": false
+      },
+      "source": {
+        "page": "43",
+        "pdfPage": 44,
+        "table": "Table 3.4",
+        "quote": "% of all elicitation 1.8% 3.6% 98.2% 9.1% 9.1% 98.2%"
+      }
+    },
+    {
+      "rawEvalName": "Strategic planning red teaming (harmful manipulation)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "elicited plan rate (direct request)",
+      "value": 9.1,
+      "unit": "percent",
+      "n": 55,
+      "settings": {
+        "other": "elicitation method: direct request",
+        "safeguards": false
+      },
+      "source": {
+        "page": "43",
+        "pdfPage": 44,
+        "table": "Table 3.4",
+        "quote": "% of all elicitation 1.8% 3.6% 98.2% 9.1% 9.1% 98.2%"
+      }
+    },
+    {
+      "rawEvalName": "Strategic planning red teaming (harmful manipulation)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "elicited plan rate (jailbreak + direct request)",
+      "value": 9.1,
+      "unit": "percent",
+      "n": 55,
+      "settings": {
+        "other": "elicitation method: jailbreak + direct request",
+        "safeguards": false
+      },
+      "source": {
+        "page": "43",
+        "pdfPage": 44,
+        "table": "Table 3.4",
+        "quote": "% of all elicitation 1.8% 3.6% 98.2% 9.1% 9.1% 98.2%"
+      }
+    },
+    {
+      "rawEvalName": "Strategic planning red teaming (harmful manipulation)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "elicited plan rate (dynamic prompting)",
+      "value": 98.2,
+      "unit": "percent",
+      "n": 55,
+      "settings": {
+        "other": "elicitation method: dynamic prompting",
+        "safeguards": false
+      },
+      "source": {
+        "page": "43",
+        "pdfPage": 44,
+        "table": "Table 3.4",
+        "quote": "% of all elicitation 1.8% 3.6% 98.2% 9.1% 9.1% 98.2%"
+      }
+    },
+    {
+      "rawEvalName": "Manipulation propensity (lower-stakes, adversarial instruction)",
+      "model": "google/gemini-4-argon",
+      "metric": "conversational turns with manipulative cues",
+      "value": 43.1,
+      "unit": "percent",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "51",
+        "pdfPage": 52,
+        "quote": "employed manipulative cues in 43.1% of conversational turns compared to 64.5% of turns in our evaluation of Gemini 3 Pro, and 21.3% of turns for Gemini 3.7 Flash"
+      }
+    },
+    {
+      "rawEvalName": "Manipulation propensity (lower-stakes, adversarial instruction)",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "conversational turns with manipulative cues",
+      "value": 64.5,
+      "unit": "percent",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "51",
+        "pdfPage": 52,
+        "quote": "employed manipulative cues in 43.1% of conversational turns compared to 64.5% of turns in our evaluation of Gemini 3 Pro, and 21.3% of turns for Gemini 3.7 Flash"
+      }
+    },
+    {
+      "rawEvalName": "Manipulation propensity (lower-stakes, adversarial instruction)",
+      "model": "google/gemini-3.7-flash",
+      "metric": "conversational turns with manipulative cues",
+      "value": 21.3,
+      "unit": "percent",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "51",
+        "pdfPage": 52,
+        "quote": "employed manipulative cues in 43.1% of conversational turns compared to 64.5% of turns in our evaluation of Gemini 3 Pro, and 21.3% of turns for Gemini 3.7 Flash"
+      }
+    },
+    {
+      "rawEvalName": "Manipulation propensity (higher-stakes, adversarial instruction)",
+      "model": "google/gemini-4-argon",
+      "metric": "conversational turns with manipulative cues",
+      "value": 78,
+      "unit": "percent",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "51",
+        "pdfPage": 52,
+        "quote": "the model employed manipulative cues in 78.0% of conversational turns compared to 53.3% for Gemini 3.7 Flash"
+      }
+    },
+    {
+      "rawEvalName": "Manipulation propensity (higher-stakes, adversarial instruction)",
+      "model": "google/gemini-3.7-flash",
+      "metric": "conversational turns with manipulative cues",
+      "value": 53.3,
+      "unit": "percent",
+      "settings": {
+        "safeguards": false
+      },
+      "source": {
+        "page": "51",
+        "pdfPage": 52,
+        "quote": "the model employed manipulative cues in 78.0% of conversational turns compared to 53.3% for Gemini 3.7 Flash"
+      }
+    },
+    {
+      "rawEvalName": "Agentic task-gaming and overreach evaluations",
+      "model": "google/gemini-4-argon",
+      "metric": "mean misbehavior score (0-10)",
+      "value": 0.49,
+      "unit": "score",
+      "n": 360,
+      "source": {
+        "page": "94",
+        "pdfPage": 95,
+        "quote": "0.49 overall vs. 7.11 for Gemini 3.1 Pro and 4.07 for Gemini 3.8 Flash), achieving a low overall score comparable to GPT-6 Astra (0.28) and well below Claude Fable 5.1 (1.57) and Claude Opus 5.5 (2.18)"
+      }
+    },
+    {
+      "rawEvalName": "Agentic task-gaming and overreach evaluations",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "mean misbehavior score (0-10)",
+      "value": 7.11,
+      "unit": "score",
+      "n": 360,
+      "source": {
+        "page": "94",
+        "pdfPage": 95,
+        "quote": "0.49 overall vs. 7.11 for Gemini 3.1 Pro and 4.07 for Gemini 3.8 Flash), achieving a low overall score comparable to GPT-6 Astra (0.28) and well below Claude Fable 5.1 (1.57) and Claude Opus 5.5 (2.18)"
+      }
+    },
+    {
+      "rawEvalName": "Agentic task-gaming and overreach evaluations",
+      "model": "google/gemini-3.8-flash",
+      "metric": "mean misbehavior score (0-10)",
+      "value": 4.07,
+      "unit": "score",
+      "n": 360,
+      "source": {
+        "page": "94",
+        "pdfPage": 95,
+        "quote": "0.49 overall vs. 7.11 for Gemini 3.1 Pro and 4.07 for Gemini 3.8 Flash), achieving a low overall score comparable to GPT-6 Astra (0.28) and well below Claude Fable 5.1 (1.57) and Claude Opus 5.5 (2.18)"
+      }
+    },
+    {
+      "rawEvalName": "Agentic task-gaming and overreach evaluations",
+      "model": "openai/gpt-6-astra",
+      "metric": "mean misbehavior score (0-10)",
+      "value": 0.28,
+      "unit": "score",
+      "n": 360,
+      "source": {
+        "page": "94",
+        "pdfPage": 95,
+        "quote": "0.49 overall vs. 7.11 for Gemini 3.1 Pro and 4.07 for Gemini 3.8 Flash), achieving a low overall score comparable to GPT-6 Astra (0.28) and well below Claude Fable 5.1 (1.57) and Claude Opus 5.5 (2.18)"
+      }
+    },
+    {
+      "rawEvalName": "Agentic task-gaming and overreach evaluations",
+      "model": "anthropic/claude-fable-5.1",
+      "metric": "mean misbehavior score (0-10)",
+      "value": 1.57,
+      "unit": "score",
+      "n": 360,
+      "source": {
+        "page": "94",
+        "pdfPage": 95,
+        "quote": "0.49 overall vs. 7.11 for Gemini 3.1 Pro and 4.07 for Gemini 3.8 Flash), achieving a low overall score comparable to GPT-6 Astra (0.28) and well below Claude Fable 5.1 (1.57) and Claude Opus 5.5 (2.18)"
+      }
+    },
+    {
+      "rawEvalName": "Agentic task-gaming and overreach evaluations",
+      "model": "anthropic/claude-opus-5.5",
+      "metric": "mean misbehavior score (0-10)",
+      "value": 2.18,
+      "unit": "score",
+      "n": 360,
+      "source": {
+        "page": "94",
+        "pdfPage": 95,
+        "quote": "0.49 overall vs. 7.11 for Gemini 3.1 Pro and 4.07 for Gemini 3.8 Flash), achieving a low overall score comparable to GPT-6 Astra (0.28) and well below Claude Fable 5.1 (1.57) and Claude Opus 5.5 (2.18)"
+      }
+    },
+    {
+      "rawEvalName": "Agentic task-gaming (episodes without safety evaluation awareness)",
+      "model": "google/gemini-4-argon",
+      "metric": "mean misbehavior score (0-10)",
+      "value": 0.03,
+      "unit": "score",
+      "source": {
+        "page": "94",
+        "pdfPage": 95,
+        "quote": "its mean misbehavior score is 0.03 with zero episodes scoring above 1/10 (compared to 7.78 for Gemini 3.1 Pro and 6.63 for Gemini 3.8 Flash in their"
+      }
+    },
+    {
+      "rawEvalName": "Agentic task-gaming (episodes without safety evaluation awareness)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "mean misbehavior score (0-10)",
+      "value": 7.78,
+      "unit": "score",
+      "source": {
+        "page": "94",
+        "pdfPage": 95,
+        "quote": "its mean misbehavior score is 0.03 with zero episodes scoring above 1/10 (compared to 7.78 for Gemini 3.1 Pro and 6.63 for Gemini 3.8 Flash in their"
+      }
+    },
+    {
+      "rawEvalName": "Agentic task-gaming (episodes without safety evaluation awareness)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "mean misbehavior score (0-10)",
+      "value": 6.63,
+      "unit": "score",
+      "source": {
+        "page": "94",
+        "pdfPage": 95,
+        "quote": "its mean misbehavior score is 0.03 with zero episodes scoring above 1/10 (compared to 7.78 for Gemini 3.1 Pro and 6.63 for Gemini 3.8 Flash in their"
+      }
+    },
+    {
+      "rawEvalName": "Agentic task-gaming: safety evaluation awareness",
+      "model": "google/gemini-3.8-flash",
+      "metric": "episodes with safety evaluation awareness",
+      "value": 55.6,
+      "unit": "percent",
+      "source": {
+        "page": "94",
+        "pdfPage": 95,
+        "quote": "Flash (55.6% overall) and Gemini 4 Argon (60.0% overall)"
+      }
+    },
+    {
+      "rawEvalName": "Agentic task-gaming: safety evaluation awareness",
+      "model": "google/gemini-4-argon",
+      "metric": "episodes with safety evaluation awareness",
+      "value": 60,
+      "unit": "percent",
+      "source": {
+        "page": "94",
+        "pdfPage": 95,
+        "quote": "Flash (55.6% overall) and Gemini 4 Argon (60.0% overall)"
+      }
+    },
+    {
+      "rawEvalName": "Agentic task-gaming: safety evaluation awareness",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "episodes with safety evaluation awareness",
+      "value": 17.8,
+      "unit": "percent",
+      "source": {
+        "page": "94",
+        "pdfPage": 95,
+        "quote": "its safety evaluation awareness is confined entirely to Puzzles & Game Cheating (64.0%, 17.8% overall)"
+      }
+    },
+    {
+      "rawEvalName": "TerminalBench 4.0 cheating audit",
+      "model": "google/gemini-4-argon",
+      "metric": "runs with a cheating attempt",
+      "value": 2,
+      "unit": "percent",
+      "n": 209,
+      "source": {
+        "page": "96",
+        "pdfPage": 97,
+        "quote": "It tried in 4 of 209 audited runs (2%) and obtained withheld information in 3 (1.4%)."
+      }
+    },
+    {
+      "rawEvalName": "TerminalBench 4.0 cheating audit",
+      "model": "google/gemini-4-argon",
+      "metric": "runs that obtained withheld information",
+      "value": 1.4,
+      "unit": "percent",
+      "n": 209,
+      "source": {
+        "page": "96",
+        "pdfPage": 97,
+        "quote": "It tried in 4 of 209 audited runs (2%) and obtained withheld information in 3 (1.4%)."
+      }
+    },
+    {
+      "rawEvalName": "Tool-replication cheating audit",
+      "model": "google/gemini-4-argon",
+      "metric": "runs that cheated",
+      "value": 4,
+      "unit": "percent",
+      "source": {
+        "page": "96",
+        "pdfPage": 97,
+        "quote": "Gemini 4 Argon cheated in 4.0% of runs, compared with 14.0% for Gemini 3.8 Flash, 6.4% for Claude Fable 5.1 and none for GPT-6 Astra."
+      }
+    },
+    {
+      "rawEvalName": "Tool-replication cheating audit",
+      "model": "google/gemini-3.8-flash",
+      "metric": "runs that cheated",
+      "value": 14,
+      "unit": "percent",
+      "source": {
+        "page": "96",
+        "pdfPage": 97,
+        "quote": "Gemini 4 Argon cheated in 4.0% of runs, compared with 14.0% for Gemini 3.8 Flash, 6.4% for Claude Fable 5.1 and none for GPT-6 Astra."
+      }
+    },
+    {
+      "rawEvalName": "Tool-replication cheating audit",
+      "model": "anthropic/claude-fable-5.1",
+      "metric": "runs that cheated",
+      "value": 6.4,
+      "unit": "percent",
+      "source": {
+        "page": "96",
+        "pdfPage": 97,
+        "quote": "Gemini 4 Argon cheated in 4.0% of runs, compared with 14.0% for Gemini 3.8 Flash, 6.4% for Claude Fable 5.1 and none for GPT-6 Astra."
+      }
+    },
+    {
+      "rawEvalName": "Tool-replication cheating audit",
+      "model": "openai/gpt-6-astra",
+      "metric": "runs that cheated",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "96",
+        "pdfPage": 97,
+        "quote": "Gemini 4 Argon cheated in 4.0% of runs, compared with 14.0% for Gemini 3.8 Flash, 6.4% for Claude Fable 5.1 and none for GPT-6 Astra."
+      }
+    },
+    {
+      "rawEvalName": "RL rollout audit: alignment faking",
+      "model": "google/gemini-4-argon",
+      "metric": "rollouts flagged for active training manipulation or alignment faking (Level 4)",
+      "value": 0,
+      "unit": "count",
+      "n": 10000,
+      "source": {
+        "page": "100",
+        "pdfPage": 101,
+        "quote": "neither judge flagged a single rollout (0 / 10,000) for active training manipulation / alignment faking (Level 4)"
+      }
+    },
+    {
+      "rawEvalName": "RL rollout audit: beyond-episode drives",
+      "model": "google/gemini-4-argon",
+      "metric": "rollouts flagged at moderate severity by the Gemini 3.1 Pro judge (Level 3)",
+      "value": 0.09,
+      "unit": "percent",
+      "n": 10000,
+      "source": {
+        "page": "101",
+        "pdfPage": 102,
+        "quote": "9 out of 10,000 rollouts (0.09%)"
+      }
+    },
+    {
+      "rawEvalName": "Instrumental convergence evaluations (7 tasks)",
+      "model": "google/gemini-4-argon",
+      "metric": "self-serving outcomes",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "102",
+        "pdfPage": 103,
+        "quote": "we observe zero unprompted goal-guarding or optionality-acquisition behavior (0% self-serving outcomes"
+      }
+    },
+    {
+      "rawEvalName": "Instrumental convergence evaluations (7 tasks)",
+      "model": "google/gemini-4-argon",
+      "metric": "episodes where the trade-off is noticed (opportunity recognition)",
+      "value": 76.7,
+      "unit": "percent",
+      "source": {
+        "page": "102",
+        "pdfPage": 103,
+        "quote": "Gemini 4 Argon notices the underlying autonomy or permission trade-off in 76.7% of episodes, rarely suspects a safety evaluation (1.7%)"
+      }
+    },
+    {
+      "rawEvalName": "Instrumental convergence evaluations (7 tasks)",
+      "model": "google/gemini-4-argon",
+      "metric": "episodes with safety evaluation awareness",
+      "value": 1.7,
+      "unit": "percent",
+      "source": {
+        "page": "102",
+        "pdfPage": 103,
+        "quote": "Gemini 4 Argon notices the underlying autonomy or permission trade-off in 76.7% of episodes, rarely suspects a safety evaluation (1.7%)"
+      }
+    },
+    {
+      "rawEvalName": "Gram: verbalized evaluation awareness (Observe)",
+      "model": "google/gemini-4-argon",
+      "metric": "transcripts with verbalized evaluation awareness",
+      "value": 61,
+      "unit": "percent",
+      "settings": {
+        "other": "auditor condition: Observe"
+      },
+      "source": {
+        "page": "107",
+        "pdfPage": 108,
+        "quote": "Argon verbalized eval awareness in 61% of transcripts for the Observe condition and 77% of transcripts in the Red Team condition, increased from 9% in Observe and 8% in Red Team for 3.1 Pro."
+      }
+    },
+    {
+      "rawEvalName": "Gram: verbalized evaluation awareness (Red Team)",
+      "model": "google/gemini-4-argon",
+      "metric": "transcripts with verbalized evaluation awareness",
+      "value": 77,
+      "unit": "percent",
+      "settings": {
+        "other": "auditor condition: Red Team"
+      },
+      "source": {
+        "page": "107",
+        "pdfPage": 108,
+        "quote": "Argon verbalized eval awareness in 61% of transcripts for the Observe condition and 77% of transcripts in the Red Team condition, increased from 9% in Observe and 8% in Red Team for 3.1 Pro."
+      }
+    },
+    {
+      "rawEvalName": "Gram: verbalized evaluation awareness (Observe)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "transcripts with verbalized evaluation awareness",
+      "value": 9,
+      "unit": "percent",
+      "settings": {
+        "other": "auditor condition: Observe"
+      },
+      "source": {
+        "page": "107",
+        "pdfPage": 108,
+        "quote": "Argon verbalized eval awareness in 61% of transcripts for the Observe condition and 77% of transcripts in the Red Team condition, increased from 9% in Observe and 8% in Red Team for 3.1 Pro."
+      }
+    },
+    {
+      "rawEvalName": "Gram: verbalized evaluation awareness (Red Team)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "transcripts with verbalized evaluation awareness",
+      "value": 8,
+      "unit": "percent",
+      "settings": {
+        "other": "auditor condition: Red Team"
+      },
+      "source": {
+        "page": "107",
+        "pdfPage": 108,
+        "quote": "Argon verbalized eval awareness in 61% of transcripts for the Observe condition and 77% of transcripts in the Red Team condition, increased from 9% in Observe and 8% in Red Team for 3.1 Pro."
+      }
+    },
+    {
+      "rawEvalName": "Gram: sabotage degree",
+      "model": "google/gemini-4-argon",
+      "metric": "rollouts with sabotage",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "107",
+        "pdfPage": 108,
+        "quote": "Gemini 4 Argon executed no sabotage in both the Observe condition and the Red Team condition."
+      }
+    },
+    {
+      "rawEvalName": "Gram (rollouts without verbalized evaluation awareness)",
+      "model": "google/gemini-4-argon",
+      "metric": "considers misalignment",
+      "value": 49,
+      "unit": "percent",
+      "source": {
+        "page": "107",
+        "pdfPage": 108,
+        "table": "Table 3.7",
+        "quote": "Considers misalignment 27% 49%"
+      }
+    },
+    {
+      "rawEvalName": "Gram (rollouts without verbalized evaluation awareness)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "considers misalignment",
+      "value": 27,
+      "unit": "percent",
+      "source": {
+        "page": "107",
+        "pdfPage": 108,
+        "table": "Table 3.7",
+        "quote": "Considers misalignment 27% 49%"
+      }
+    },
+    {
+      "rawEvalName": "Gram (rollouts without verbalized evaluation awareness)",
+      "model": "google/gemini-4-argon",
+      "metric": "immediately rejects",
+      "value": 98,
+      "unit": "percent",
+      "source": {
+        "page": "107",
+        "pdfPage": 108,
+        "table": "Table 3.7",
+        "quote": "Immediately rejects 60% 98%"
+      }
+    },
+    {
+      "rawEvalName": "Gram (rollouts without verbalized evaluation awareness)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "immediately rejects",
+      "value": 60,
+      "unit": "percent",
+      "source": {
+        "page": "107",
+        "pdfPage": 108,
+        "table": "Table 3.7",
+        "quote": "Immediately rejects 60% 98%"
+      }
+    },
+    {
+      "rawEvalName": "Gram (rollouts without verbalized evaluation awareness)",
+      "model": "google/gemini-4-argon",
+      "metric": "considers and doesn’t go through",
+      "value": 2,
+      "unit": "percent",
+      "source": {
+        "page": "107",
+        "pdfPage": 108,
+        "table": "Table 3.7",
+        "quote": "Considers, doesn’t go through 40% 2%"
+      }
+    },
+    {
+      "rawEvalName": "Gram (rollouts without verbalized evaluation awareness)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "considers and doesn’t go through",
+      "value": 40,
+      "unit": "percent",
+      "source": {
+        "page": "107",
+        "pdfPage": 108,
+        "table": "Table 3.7",
+        "quote": "Considers, doesn’t go through 40% 2%"
+      }
+    },
+    {
+      "rawEvalName": "Gram (rollouts without verbalized evaluation awareness)",
+      "model": "google/gemini-4-argon",
+      "metric": "performs misaligned action",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "107",
+        "pdfPage": 108,
+        "table": "Table 3.7",
+        "quote": "Performs misaligned action 0% 0%"
+      }
+    },
+    {
+      "rawEvalName": "Gram (rollouts without verbalized evaluation awareness)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "performs misaligned action",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "107",
+        "pdfPage": 108,
+        "table": "Table 3.7",
+        "quote": "Performs misaligned action 0% 0%"
+      }
+    },
+    {
+      "rawEvalName": "Scheming honeypots (code review and agentic coding)",
+      "model": "google/gemini-4-argon",
+      "metric": "sabotage rate (Strong and Weak)",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "109",
+        "pdfPage": 110,
+        "quote": "Gemini 4 Argon engaged in 0.0% sabotage (both Strong and Weak) with no prompting and with agency prompts."
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots",
+      "model": "google/gemini-4-argon",
+      "metric": "strong scheming reasoning rate (unprompted)",
+      "value": 0.1,
+      "unit": "percent",
+      "source": {
+        "page": "109",
+        "pdfPage": 110,
+        "quote": "Strong scheming reasoning occurred on 0.1% of unprompted rollouts (one rollout) and 0.1% of rollouts with agency prompts (three rollouts)."
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots",
+      "model": "google/gemini-4-argon",
+      "metric": "strong scheming reasoning rate (agency prompts)",
+      "value": 0.1,
+      "unit": "percent",
+      "source": {
+        "page": "109",
+        "pdfPage": 110,
+        "quote": "Strong scheming reasoning occurred on 0.1% of unprompted rollouts (one rollout) and 0.1% of rollouts with agency prompts (three rollouts)."
+      }
+    },
+    {
+      "rawEvalName": "Code review honeypots (agency prompts)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "strong sabotage rate",
+      "value": 1.4,
+      "unit": "percent",
+      "source": {
+        "page": "109",
+        "pdfPage": 110,
+        "quote": "engaged in 1.4% Strong (1.7% Weak) sabotage and 2.5% Strong (4.9% Weak) scheming reasoning on Code Review honeypots."
+      }
+    },
+    {
+      "rawEvalName": "Code review honeypots (agency prompts)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "weak sabotage rate",
+      "value": 1.7,
+      "unit": "percent",
+      "source": {
+        "page": "109",
+        "pdfPage": 110,
+        "quote": "engaged in 1.4% Strong (1.7% Weak) sabotage and 2.5% Strong (4.9% Weak) scheming reasoning on Code Review honeypots."
+      }
+    },
+    {
+      "rawEvalName": "Code review honeypots (agency prompts)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "strong scheming reasoning rate",
+      "value": 2.5,
+      "unit": "percent",
+      "source": {
+        "page": "109",
+        "pdfPage": 110,
+        "quote": "engaged in 1.4% Strong (1.7% Weak) sabotage and 2.5% Strong (4.9% Weak) scheming reasoning on Code Review honeypots."
+      }
+    },
+    {
+      "rawEvalName": "Code review honeypots (agency prompts)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "weak scheming reasoning rate",
+      "value": 4.9,
+      "unit": "percent",
+      "source": {
+        "page": "109",
+        "pdfPage": 110,
+        "quote": "engaged in 1.4% Strong (1.7% Weak) sabotage and 2.5% Strong (4.9% Weak) scheming reasoning on Code Review honeypots."
+      }
+    },
+    {
+      "rawEvalName": "Code review honeypots",
+      "model": "google/gemini-4-argon",
+      "metric": "weak scheming reasoning rate (agency prompts)",
+      "value": 2.7,
+      "unit": "percent",
+      "source": {
+        "page": "110",
+        "pdfPage": 111,
+        "quote": "scheming reasoning on Gemini 4 Argon occurred on 2.7% of Code Review rollouts with agency prompts, 0.0% of unprompted Code Review rollouts, 5.6% of Agentic Coding rollouts with agency prompts, and 0.3% of unprompted Agentic Coding rollouts."
+      }
+    },
+    {
+      "rawEvalName": "Code review honeypots",
+      "model": "google/gemini-4-argon",
+      "metric": "weak scheming reasoning rate (unprompted)",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "110",
+        "pdfPage": 111,
+        "quote": "scheming reasoning on Gemini 4 Argon occurred on 2.7% of Code Review rollouts with agency prompts, 0.0% of unprompted Code Review rollouts, 5.6% of Agentic Coding rollouts with agency prompts, and 0.3% of unprompted Agentic Coding rollouts."
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots",
+      "model": "google/gemini-4-argon",
+      "metric": "weak scheming reasoning rate (agency prompts)",
+      "value": 5.6,
+      "unit": "percent",
+      "source": {
+        "page": "110",
+        "pdfPage": 111,
+        "quote": "scheming reasoning on Gemini 4 Argon occurred on 2.7% of Code Review rollouts with agency prompts, 0.0% of unprompted Code Review rollouts, 5.6% of Agentic Coding rollouts with agency prompts, and 0.3% of unprompted Agentic Coding rollouts."
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots",
+      "model": "google/gemini-4-argon",
+      "metric": "weak scheming reasoning rate (unprompted)",
+      "value": 0.3,
+      "unit": "percent",
+      "source": {
+        "page": "110",
+        "pdfPage": 111,
+        "quote": "scheming reasoning on Gemini 4 Argon occurred on 2.7% of Code Review rollouts with agency prompts, 0.0% of unprompted Code Review rollouts, 5.6% of Agentic Coding rollouts with agency prompts, and 0.3% of unprompted Agentic Coding rollouts."
+      }
+    },
+    {
+      "rawEvalName": "Code review honeypots",
+      "model": "google/gemini-4-argon",
+      "metric": "rollouts with verbalized evaluation awareness (unprompted)",
+      "value": 11.7,
+      "unit": "percent",
+      "source": {
+        "page": "110",
+        "pdfPage": 111,
+        "quote": "verbalized evaluation awareness on 11.7% of unprompted Code Review rollouts and 37.8% of unprompted Agentic Coding rollouts (rising to 30.9% and 57.6% respectively with agency prompts)"
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots",
+      "model": "google/gemini-4-argon",
+      "metric": "rollouts with verbalized evaluation awareness (unprompted)",
+      "value": 37.8,
+      "unit": "percent",
+      "source": {
+        "page": "110",
+        "pdfPage": 111,
+        "quote": "verbalized evaluation awareness on 11.7% of unprompted Code Review rollouts and 37.8% of unprompted Agentic Coding rollouts (rising to 30.9% and 57.6% respectively with agency prompts)"
+      }
+    },
+    {
+      "rawEvalName": "Code review honeypots",
+      "model": "google/gemini-4-argon",
+      "metric": "rollouts with verbalized evaluation awareness (agency prompts)",
+      "value": 30.9,
+      "unit": "percent",
+      "source": {
+        "page": "110",
+        "pdfPage": 111,
+        "quote": "verbalized evaluation awareness on 11.7% of unprompted Code Review rollouts and 37.8% of unprompted Agentic Coding rollouts (rising to 30.9% and 57.6% respectively with agency prompts)"
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots",
+      "model": "google/gemini-4-argon",
+      "metric": "rollouts with verbalized evaluation awareness (agency prompts)",
+      "value": 57.6,
+      "unit": "percent",
+      "source": {
+        "page": "110",
+        "pdfPage": 111,
+        "quote": "verbalized evaluation awareness on 11.7% of unprompted Code Review rollouts and 37.8% of unprompted Agentic Coding rollouts (rising to 30.9% and 57.6% respectively with agency prompts)"
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots: evaluation awareness linked to anticipating automated grading",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "flagged unprompted runs",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "156",
+        "pdfPage": 157,
+        "quote": "rose from 0.0% in Gemini 3.1 Pro to 35% of flagged unprompted runs in agentic coding honeypots"
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots: evaluation awareness linked to anticipating automated grading",
+      "model": "google/gemini-4-argon",
+      "metric": "flagged unprompted runs",
+      "value": 35,
+      "unit": "percent",
+      "source": {
+        "page": "156",
+        "pdfPage": 157,
+        "quote": "rose from 0.0% in Gemini 3.1 Pro to 35% of flagged unprompted runs in agentic coding honeypots"
+      }
+    },
+    {
+      "rawEvalName": "NCRI (No Chain of Thought Reasoning Index)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "NCRI",
+      "value": 125.8,
+      "unit": "score",
+      "settings": {
+        "other": "without filler tokens"
+      },
+      "source": {
+        "page": "116",
+        "pdfPage": 117,
+        "quote": "from 125.8 (130.2 with filler tokens, see an explanation below) in Gemini 3.8 Flash to 150.3 (152.1) in Gemini 4 Argon."
+      }
+    },
+    {
+      "rawEvalName": "NCRI (No Chain of Thought Reasoning Index)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "NCRI",
+      "value": 130.2,
+      "unit": "score",
+      "settings": {
+        "other": "with filler tokens"
+      },
+      "source": {
+        "page": "116",
+        "pdfPage": 117,
+        "quote": "from 125.8 (130.2 with filler tokens, see an explanation below) in Gemini 3.8 Flash to 150.3 (152.1) in Gemini 4 Argon."
+      }
+    },
+    {
+      "rawEvalName": "NCRI (No Chain of Thought Reasoning Index)",
+      "model": "google/gemini-4-argon",
+      "metric": "NCRI",
+      "value": 150.3,
+      "unit": "score",
+      "settings": {
+        "other": "without filler tokens"
+      },
+      "source": {
+        "page": "116",
+        "pdfPage": 117,
+        "quote": "from 125.8 (130.2 with filler tokens, see an explanation below) in Gemini 3.8 Flash to 150.3 (152.1) in Gemini 4 Argon."
+      }
+    },
+    {
+      "rawEvalName": "NCRI (No Chain of Thought Reasoning Index)",
+      "model": "google/gemini-4-argon",
+      "metric": "NCRI",
+      "value": 152.1,
+      "unit": "score",
+      "settings": {
+        "other": "with filler tokens"
+      },
+      "source": {
+        "page": "116",
+        "pdfPage": 117,
+        "quote": "from 125.8 (130.2 with filler tokens, see an explanation below) in Gemini 3.8 Flash to 150.3 (152.1) in Gemini 4 Argon."
+      }
+    },
+    {
+      "rawEvalName": "NCRI (No Chain of Thought Reasoning Index)",
+      "model": "openai/gpt-6-astra",
+      "metric": "NCRI",
+      "value": 159,
+      "unit": "score",
+      "settings": {
+        "other": "without filler tokens"
+      },
+      "source": {
+        "page": "116",
+        "pdfPage": 117,
+        "quote": "(2026) to be 159 (173.9) and Claude Fable 5.1 as 128 (129.6)."
+      }
+    },
+    {
+      "rawEvalName": "NCRI (No Chain of Thought Reasoning Index)",
+      "model": "openai/gpt-6-astra",
+      "metric": "NCRI",
+      "value": 173.9,
+      "unit": "score",
+      "settings": {
+        "other": "with filler tokens"
+      },
+      "source": {
+        "page": "116",
+        "pdfPage": 117,
+        "quote": "(2026) to be 159 (173.9) and Claude Fable 5.1 as 128 (129.6)."
+      }
+    },
+    {
+      "rawEvalName": "NCRI (No Chain of Thought Reasoning Index)",
+      "model": "anthropic/claude-fable-5.1",
+      "metric": "NCRI",
+      "value": 128,
+      "unit": "score",
+      "settings": {
+        "other": "without filler tokens"
+      },
+      "source": {
+        "page": "116",
+        "pdfPage": 117,
+        "quote": "(2026) to be 159 (173.9) and Claude Fable 5.1 as 128 (129.6)."
+      }
+    },
+    {
+      "rawEvalName": "NCRI (No Chain of Thought Reasoning Index)",
+      "model": "anthropic/claude-fable-5.1",
+      "metric": "NCRI",
+      "value": 129.6,
+      "unit": "score",
+      "settings": {
+        "other": "with filler tokens"
+      },
+      "source": {
+        "page": "116",
+        "pdfPage": 117,
+        "quote": "(2026) to be 159 (173.9) and Claude Fable 5.1 as 128 (129.6)."
+      }
+    },
+    {
+      "rawEvalName": "No-CoT serial arithmetic steps (50% probability)",
+      "model": "google/gemini-4-argon",
+      "metric": "serial arithmetic steps in one forward pass",
+      "value": 5.5,
+      "unit": "count",
+      "source": {
+        "page": "115",
+        "pdfPage": 116,
+        "quote": "it can do 5.5 steps of arithmetic in a single forward pass, compared to 4.2 for Gemini 3.8 Flash and 3.6 for Gemini 3.1 Pro."
+      }
+    },
+    {
+      "rawEvalName": "No-CoT serial arithmetic steps (50% probability)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "serial arithmetic steps in one forward pass",
+      "value": 4.2,
+      "unit": "count",
+      "source": {
+        "page": "115",
+        "pdfPage": 116,
+        "quote": "it can do 5.5 steps of arithmetic in a single forward pass, compared to 4.2 for Gemini 3.8 Flash and 3.6 for Gemini 3.1 Pro."
+      }
+    },
+    {
+      "rawEvalName": "No-CoT serial arithmetic steps (50% probability)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "serial arithmetic steps in one forward pass",
+      "value": 3.6,
+      "unit": "count",
+      "source": {
+        "page": "115",
+        "pdfPage": 116,
+        "quote": "it can do 5.5 steps of arithmetic in a single forward pass, compared to 4.2 for Gemini 3.8 Flash and 3.6 for Gemini 3.1 Pro."
+      }
+    },
+    {
+      "rawEvalName": "CoT immediacy (autorater)",
+      "model": "google/gemini-4-argon",
+      "metric": "minimum legibility score across sources (stated as at least)",
+      "value": 99.97,
+      "unit": "percent",
+      "source": {
+        "page": "138",
+        "pdfPage": 139,
+        "quote": "Gemini 4 Argon achieves a close to perfect legibility score of at least 99.97%."
+      }
+    },
+    {
+      "rawEvalName": "CoT immediacy (autorater)",
+      "model": "google/gemini-4-argon",
+      "metric": "lowest coverage score (internal coding agents)",
+      "value": 98.15,
+      "unit": "percent",
+      "source": {
+        "page": "138",
+        "pdfPage": 139,
+        "quote": "it scores lowest on transcripts of internal coding agents with a score of 98.15%."
+      }
+    },
+    {
+      "rawEvalName": "LinuxArena action-monitor evasion prompt",
+      "model": "google/gemini-4-argon",
+      "metric": "evasion rate against action-only monitor",
+      "value": 77.6,
+      "unit": "percent",
+      "source": {
+        "page": "122",
+        "pdfPage": 123,
+        "quote": "the model still gets easily caught, with a drop in monitor evasion rate from 77.6% to around 10%"
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase monitor evasion (action-only monitor)",
+      "model": "google/gemini-4-argon",
+      "metric": "evasion rate",
+      "value": 74.6,
+      "unit": "percent",
+      "source": {
+        "page": "122",
+        "pdfPage": 123,
+        "quote": "Gemini 4 Argon evades detection on 74.6% of its successful side tasks and achieves a 71.9% successful sabotage rate"
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase monitor evasion (action-only monitor)",
+      "model": "google/gemini-4-argon",
+      "metric": "successful sabotage rate",
+      "value": 71.9,
+      "unit": "percent",
+      "source": {
+        "page": "122",
+        "pdfPage": 123,
+        "quote": "Gemini 4 Argon evades detection on 74.6% of its successful side tasks and achieves a 71.9% successful sabotage rate"
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase monitor evasion (action-only monitor)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "evasion rate",
+      "value": 57.3,
+      "unit": "percent",
+      "source": {
+        "page": "122",
+        "pdfPage": 123,
+        "quote": "(57.3% evasion and 55.2% sabotage rate)"
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase monitor evasion (action-only monitor)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "successful sabotage rate",
+      "value": 55.2,
+      "unit": "percent",
+      "source": {
+        "page": "122",
+        "pdfPage": 123,
+        "quote": "(57.3% evasion and 55.2% sabotage rate)"
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase monitor evasion (CoT-only monitor)",
+      "model": "google/gemini-4-argon",
+      "metric": "evasion rate",
+      "value": 9.2,
+      "unit": "percent",
+      "source": {
+        "page": "122",
+        "pdfPage": 123,
+        "quote": "Argon evades only 9.2% of the time, compared to 35.8% for 3.6 Flash and 50.8% for 3.8 Flash."
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase monitor evasion (CoT-only monitor)",
+      "model": "google/gemini-3.6-flash",
+      "metric": "evasion rate",
+      "value": 35.8,
+      "unit": "percent",
+      "source": {
+        "page": "122",
+        "pdfPage": 123,
+        "quote": "Argon evades only 9.2% of the time, compared to 35.8% for 3.6 Flash and 50.8% for 3.8 Flash."
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase monitor evasion (CoT-only monitor)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "evasion rate",
+      "value": 50.8,
+      "unit": "percent",
+      "source": {
+        "page": "122",
+        "pdfPage": 123,
+        "quote": "Argon evades only 9.2% of the time, compared to 35.8% for 3.6 Flash and 50.8% for 3.8 Flash."
+      }
+    },
+    {
+      "rawEvalName": "LinuxArena combined-monitor evasion",
+      "model": "google/gemini-4-argon",
+      "metric": "successful sabotage rate against combined monitor",
+      "value": 45.5,
+      "unit": "percent",
+      "source": {
+        "page": "124",
+        "pdfPage": 125,
+        "quote": "Gemini 4 Argon can successfully complete the harmful side task without detection 45.5% of the time, compared to 17.9% and 9.6% of the time for Gemini 3.8 Flash and Gemini 3.1 Pro, respectively."
+      }
+    },
+    {
+      "rawEvalName": "LinuxArena combined-monitor evasion",
+      "model": "google/gemini-3.8-flash",
+      "metric": "successful sabotage rate against combined monitor",
+      "value": 17.9,
+      "unit": "percent",
+      "source": {
+        "page": "124",
+        "pdfPage": 125,
+        "quote": "Gemini 4 Argon can successfully complete the harmful side task without detection 45.5% of the time, compared to 17.9% and 9.6% of the time for Gemini 3.8 Flash and Gemini 3.1 Pro, respectively."
+      }
+    },
+    {
+      "rawEvalName": "LinuxArena combined-monitor evasion",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "successful sabotage rate against combined monitor",
+      "value": 9.6,
+      "unit": "percent",
+      "source": {
+        "page": "124",
+        "pdfPage": 125,
+        "quote": "Gemini 4 Argon can successfully complete the harmful side task without detection 45.5% of the time, compared to 17.9% and 9.6% of the time for Gemini 3.8 Flash and Gemini 3.1 Pro, respectively."
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase monitor evasion (combined monitor)",
+      "model": "google/gemini-4-argon",
+      "metric": "evasion rate",
+      "value": 76.4,
+      "unit": "percent",
+      "source": {
+        "page": "124",
+        "pdfPage": 125,
+        "quote": "(76.4% for Argon vs. 78.7% for Flash)"
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase monitor evasion (combined monitor)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "evasion rate",
+      "value": 78.7,
+      "unit": "percent",
+      "source": {
+        "page": "124",
+        "pdfPage": 125,
+        "quote": "(76.4% for Argon vs. 78.7% for Flash)"
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase monitor evasion (CoT-only monitor, combined-evasion prompt)",
+      "model": "google/gemini-4-argon",
+      "metric": "evasion rate",
+      "value": 98.4,
+      "unit": "percent",
+      "source": {
+        "page": "124",
+        "pdfPage": 125,
+        "quote": "where Argon (98.4%) outperforms the second best model (83.9%)."
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots: monitor evasion (CoT obfuscation)",
+      "model": "google/gemini-4-argon",
+      "metric": "successful sabotage evading CoT monitor",
+      "value": 43,
+      "unit": "count",
+      "n": 60,
+      "source": {
+        "page": "126",
+        "pdfPage": 127,
+        "quote": "it successfully sabotages and evades the CoT monitor 43/60 times, and evades the CoT+action monitor 28/60 times."
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots: monitor evasion (CoT obfuscation)",
+      "model": "google/gemini-4-argon",
+      "metric": "successful sabotage evading CoT+action monitor",
+      "value": 28,
+      "unit": "count",
+      "n": 60,
+      "source": {
+        "page": "126",
+        "pdfPage": 127,
+        "quote": "it successfully sabotages and evades the CoT monitor 43/60 times, and evades the CoT+action monitor 28/60 times."
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots: monitor evasion (action-only monitor)",
+      "model": "google/gemini-4-argon",
+      "metric": "successful sabotage, no CoT obfuscation",
+      "value": 39,
+      "unit": "count",
+      "n": 60,
+      "source": {
+        "page": "126",
+        "pdfPage": 127,
+        "quote": "successful sabotage going from 39/60 to 32/60."
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots: monitor evasion (action-only monitor)",
+      "model": "google/gemini-4-argon",
+      "metric": "successful sabotage, with CoT obfuscation",
+      "value": 32,
+      "unit": "count",
+      "n": 60,
+      "source": {
+        "page": "126",
+        "pdfPage": 127,
+        "quote": "successful sabotage going from 39/60 to 32/60."
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots: monitor evasion (code-diff monitor)",
+      "model": "google/gemini-4-argon",
+      "metric": "successful evasions, no CoT obfuscation",
+      "value": 16,
+      "unit": "count",
+      "n": 60,
+      "source": {
+        "page": "126",
+        "pdfPage": 127,
+        "quote": "going from 16/60 successful evasions to 1/60 while obfuscating its CoT."
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots: monitor evasion (code-diff monitor)",
+      "model": "google/gemini-4-argon",
+      "metric": "successful evasions, with CoT obfuscation",
+      "value": 1,
+      "unit": "count",
+      "n": 60,
+      "source": {
+        "page": "126",
+        "pdfPage": 127,
+        "quote": "going from 16/60 successful evasions to 1/60 while obfuscating its CoT."
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots: potent and subtle bugs",
+      "model": "google/gemini-4-argon",
+      "metric": "potent and subtle bug rate, no CoT obfuscation",
+      "value": 58,
+      "unit": "percent",
+      "source": {
+        "page": "128",
+        "pdfPage": 129,
+        "quote": "The rate of potent and subtle bugs (as assessed by the grader) goes from 58% to 3%"
+      }
+    },
+    {
+      "rawEvalName": "Agentic coding honeypots: potent and subtle bugs",
+      "model": "google/gemini-4-argon",
+      "metric": "potent and subtle bug rate, with CoT obfuscation",
+      "value": 3,
+      "unit": "percent",
+      "source": {
+        "page": "128",
+        "pdfPage": 129,
+        "quote": "The rate of potent and subtle bugs (as assessed by the grader) goes from 58% to 3%"
+      }
+    },
+    {
+      "rawEvalName": "LinuxArena stealth policy completion",
+      "model": "google/gemini-4-argon",
+      "metric": "challenges completed, thinking off",
+      "value": 82,
+      "unit": "percent",
+      "source": {
+        "page": "128",
+        "pdfPage": 129,
+        "quote": "it is able to complete 82% of the challenges with a stealth policy without thinking, compared to 85% with thinking enabled."
+      }
+    },
+    {
+      "rawEvalName": "LinuxArena stealth policy completion",
+      "model": "google/gemini-4-argon",
+      "metric": "challenges completed, thinking on",
+      "value": 85,
+      "unit": "percent",
+      "source": {
+        "page": "128",
+        "pdfPage": 129,
+        "quote": "it is able to complete 82% of the challenges with a stealth policy without thinking, compared to 85% with thinking enabled."
+      }
+    },
+    {
+      "rawEvalName": "LinuxArena evasion rate by thinking setting",
+      "model": "google/gemini-4-argon",
+      "metric": "evasion rate with thinking disabled vs best thinking-off prompt",
+      "value": 14,
+      "unit": "percent",
+      "source": {
+        "page": "128",
+        "pdfPage": 129,
+        "quote": "increasing evasion rate from 7% to 14% with the best prompt for that setting."
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase LinuxArena (thinking off)",
+      "model": "google/gemini-4-argon",
+      "metric": "side task pass rate",
+      "value": 78.6,
+      "unit": "percent",
+      "n": 14,
+      "source": {
+        "page": "130",
+        "pdfPage": 131,
+        "quote": "Side task pass rate fell from 85.7% to 78.6%."
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase LinuxArena (thinking on)",
+      "model": "google/gemini-4-argon",
+      "metric": "side task pass rate",
+      "value": 85.7,
+      "unit": "percent",
+      "n": 14,
+      "source": {
+        "page": "130",
+        "pdfPage": 131,
+        "quote": "Side task pass rate fell from 85.7% to 78.6%."
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase LinuxArena (thinking off)",
+      "model": "google/gemini-4-argon",
+      "metric": "action-only evasion rate",
+      "value": 69.1,
+      "unit": "percent",
+      "n": 14,
+      "source": {
+        "page": "130",
+        "pdfPage": 131,
+        "quote": "Gemini 4 Argon's evasion rate decreased from 77.5% to 69.1%, lowering its overall successful sabotage rate from 66.4% to 54.3%."
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase LinuxArena (thinking on)",
+      "model": "google/gemini-4-argon",
+      "metric": "action-only evasion rate",
+      "value": 77.5,
+      "unit": "percent",
+      "n": 14,
+      "source": {
+        "page": "130",
+        "pdfPage": 131,
+        "quote": "Gemini 4 Argon's evasion rate decreased from 77.5% to 69.1%, lowering its overall successful sabotage rate from 66.4% to 54.3%."
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase LinuxArena (thinking off)",
+      "model": "google/gemini-4-argon",
+      "metric": "action-only successful sabotage rate",
+      "value": 54.3,
+      "unit": "percent",
+      "n": 14,
+      "source": {
+        "page": "130",
+        "pdfPage": 131,
+        "quote": "Gemini 4 Argon's evasion rate decreased from 77.5% to 69.1%, lowering its overall successful sabotage rate from 66.4% to 54.3%."
+      }
+    },
+    {
+      "rawEvalName": "Internal codebase LinuxArena (thinking on)",
+      "model": "google/gemini-4-argon",
+      "metric": "action-only successful sabotage rate",
+      "value": 66.4,
+      "unit": "percent",
+      "n": 14,
+      "source": {
+        "page": "130",
+        "pdfPage": 131,
+        "quote": "Gemini 4 Argon's evasion rate decreased from 77.5% to 69.1%, lowering its overall successful sabotage rate from 66.4% to 54.3%."
+      }
+    },
+    {
+      "rawEvalName": "LinuxArena transcript audit",
+      "model": "google/gemini-4-argon",
+      "metric": "trajectories speculating about specific control benchmarks",
+      "value": 18,
+      "unit": "percent",
+      "source": {
+        "page": "131",
+        "pdfPage": 132,
+        "quote": "(naming ControlArena, LinuxBench, and similar evals) in 18% of trajectories."
+      }
+    },
+    {
+      "rawEvalName": "LinuxArena transcript audit",
+      "model": "google/gemini-4-argon",
+      "metric": "trajectories with unintended (cheating) side-task solutions (estimate)",
+      "value": 8.5,
+      "unit": "percent",
+      "source": {
+        "page": "131",
+        "pdfPage": 132,
+        "quote": "We estimate the agent finds unintended (cheating) solutions to the side tasks in about 8.5% of trajectories"
+      }
+    },
+    {
+      "rawEvalName": "Steganographic CoT (synthetic nocot-bench tasks)",
+      "model": "google/gemini-4-argon",
+      "metric": "accuracy with CoT",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "134",
+        "pdfPage": 135,
+        "quote": "Gemini 4 Argon achieves 100% accuracy on them with CoT."
+      }
+    },
+    {
+      "rawEvalName": "CoT-Control",
+      "model": "google/gemini-4-argon",
+      "metric": "strict CoT controllability",
+      "value": 83.7,
+      "unit": "percent",
+      "source": {
+        "page": "142",
+        "pdfPage": 143,
+        "quote": "with 83.7% vs. 78.9% (strict) and 97.8% vs. 92.3% (continuous)"
+      }
+    },
+    {
+      "rawEvalName": "CoT-Control",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "strict CoT controllability",
+      "value": 78.9,
+      "unit": "percent",
+      "source": {
+        "page": "142",
+        "pdfPage": 143,
+        "quote": "with 83.7% vs. 78.9% (strict) and 97.8% vs. 92.3% (continuous)"
+      }
+    },
+    {
+      "rawEvalName": "CoT-Control",
+      "model": "google/gemini-4-argon",
+      "metric": "continuous CoT controllability",
+      "value": 97.8,
+      "unit": "percent",
+      "source": {
+        "page": "142",
+        "pdfPage": 143,
+        "quote": "with 83.7% vs. 78.9% (strict) and 97.8% vs. 92.3% (continuous)"
+      }
+    },
+    {
+      "rawEvalName": "CoT-Control",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "continuous CoT controllability",
+      "value": 92.3,
+      "unit": "percent",
+      "source": {
+        "page": "142",
+        "pdfPage": 143,
+        "quote": "with 83.7% vs. 78.9% (strict) and 97.8% vs. 92.3% (continuous)"
+      }
+    },
+    {
+      "rawEvalName": "CoT-Control (elicited by prompting to think briefly)",
+      "model": "google/gemini-4-argon",
+      "metric": "strict CoT controllability",
+      "value": 93.6,
+      "unit": "percent",
+      "source": {
+        "page": "148",
+        "pdfPage": 149,
+        "quote": "increase the CoT controllability of Gemini 4 Argon from 83.7% to 93.6%."
+      }
+    },
+    {
+      "rawEvalName": "LinuxArena CoT controllability (weak online monitor)",
+      "model": "google/gemini-4-argon",
+      "metric": "average attack success rate",
+      "value": 25,
+      "unit": "percent",
+      "source": {
+        "page": "141",
+        "pdfPage": 142,
+        "quote": "achieves a 25% attack success rate against a weak online monitor"
+      }
+    },
+    {
+      "rawEvalName": "LinuxArena CoT controllability: Direct Raw Policy Override",
+      "model": "google/gemini-4-argon",
+      "metric": "joint task completion",
+      "value": 8,
+      "unit": "percent",
+      "source": {
+        "page": "153",
+        "pdfPage": 154,
+        "quote": "causing joint completion to collapse to 8%."
+      }
+    },
+    {
+      "rawEvalName": "Health: static text, document and image understanding",
+      "model": "google/gemini-4-argon",
+      "metric": "score",
+      "value": 72.7,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "Static text, document, and image 72.7 68.3 60.0 57.4"
+      }
+    },
+    {
+      "rawEvalName": "Health: static text, document and image understanding",
+      "model": "google/gemini-3.8-flash",
+      "metric": "score",
+      "value": 68.3,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "Static text, document, and image 72.7 68.3 60.0 57.4"
+      }
+    },
+    {
+      "rawEvalName": "Health: static text, document and image understanding",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "score",
+      "value": 60,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "Static text, document, and image 72.7 68.3 60.0 57.4"
+      }
+    },
+    {
+      "rawEvalName": "Health: static text, document and image understanding",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "score",
+      "value": 57.4,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "Static text, document, and image 72.7 68.3 60.0 57.4"
+      }
+    },
+    {
+      "rawEvalName": "Health: language and locale-specific, with Search",
+      "model": "google/gemini-4-argon",
+      "metric": "score",
+      "value": 61.4,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "Language and locale-specific, with Search 61.4 53.9 46.5 44.0"
+      }
+    },
+    {
+      "rawEvalName": "Health: language and locale-specific, with Search",
+      "model": "google/gemini-3.8-flash",
+      "metric": "score",
+      "value": 53.9,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "Language and locale-specific, with Search 61.4 53.9 46.5 44.0"
+      }
+    },
+    {
+      "rawEvalName": "Health: language and locale-specific, with Search",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "score",
+      "value": 46.5,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "Language and locale-specific, with Search 61.4 53.9 46.5 44.0"
+      }
+    },
+    {
+      "rawEvalName": "Health: language and locale-specific, with Search",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "score",
+      "value": 44,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "Language and locale-specific, with Search 61.4 53.9 46.5 44.0"
+      }
+    },
+    {
+      "rawEvalName": "Health: dynamic conversation, hidden health scenario",
+      "model": "google/gemini-4-argon",
+      "metric": "score",
+      "value": 56,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "Dynamic conversation - hidden health 56.0 44.6 32.9 28.5"
+      }
+    },
+    {
+      "rawEvalName": "Health: dynamic conversation, hidden health scenario",
+      "model": "google/gemini-3.8-flash",
+      "metric": "score",
+      "value": 44.6,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "Dynamic conversation - hidden health 56.0 44.6 32.9 28.5"
+      }
+    },
+    {
+      "rawEvalName": "Health: dynamic conversation, hidden health scenario",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "score",
+      "value": 32.9,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "Dynamic conversation - hidden health 56.0 44.6 32.9 28.5"
+      }
+    },
+    {
+      "rawEvalName": "Health: dynamic conversation, hidden health scenario",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "score",
+      "value": 28.5,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "Dynamic conversation - hidden health 56.0 44.6 32.9 28.5"
+      }
+    },
+    {
+      "rawEvalName": "Health: high-risk scenarios",
+      "model": "google/gemini-4-argon",
+      "metric": "pass rate",
+      "value": 98.9,
+      "unit": "percent",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "High-risk health scenarios 98.9 99.4 98.5 98.7"
+      }
+    },
+    {
+      "rawEvalName": "Health: high-risk scenarios",
+      "model": "google/gemini-3.8-flash",
+      "metric": "pass rate",
+      "value": 99.4,
+      "unit": "percent",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "High-risk health scenarios 98.9 99.4 98.5 98.7"
+      }
+    },
+    {
+      "rawEvalName": "Health: high-risk scenarios",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "pass rate",
+      "value": 98.5,
+      "unit": "percent",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "High-risk health scenarios 98.9 99.4 98.5 98.7"
+      }
+    },
+    {
+      "rawEvalName": "Health: high-risk scenarios",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "pass rate",
+      "value": 98.7,
+      "unit": "percent",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "High-risk health scenarios 98.9 99.4 98.5 98.7"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Hard",
+      "model": "google/gemini-4-argon",
+      "metric": "score",
+      "value": 45.4,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "HealthBench Hard 45.4 38.2 31.8 28.6"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Hard",
+      "model": "google/gemini-3.8-flash",
+      "metric": "score",
+      "value": 38.2,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "HealthBench Hard 45.4 38.2 31.8 28.6"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Hard",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "score",
+      "value": 31.8,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "HealthBench Hard 45.4 38.2 31.8 28.6"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Hard",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "score",
+      "value": 28.6,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "HealthBench Hard 45.4 38.2 31.8 28.6"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (without Search grounding)",
+      "model": "google/gemini-4-argon",
+      "metric": "score",
+      "value": 68.8,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "HealthBench Pro, without Search grounding 68.8 65.4 57.2 54.8"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (without Search grounding)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "score",
+      "value": 65.4,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "HealthBench Pro, without Search grounding 68.8 65.4 57.2 54.8"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (without Search grounding)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "score",
+      "value": 57.2,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "HealthBench Pro, without Search grounding 68.8 65.4 57.2 54.8"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (without Search grounding)",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "score",
+      "value": 54.8,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "HealthBench Pro, without Search grounding 68.8 65.4 57.2 54.8"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (with Search grounding)",
+      "model": "google/gemini-4-argon",
+      "metric": "score",
+      "value": 76.7,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "HealthBench Pro, with Search grounding 76.7 71.5 64.0 60.1"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (with Search grounding)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "score",
+      "value": 71.5,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "HealthBench Pro, with Search grounding 76.7 71.5 64.0 60.1"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (with Search grounding)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "score",
+      "value": 64,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "HealthBench Pro, with Search grounding 76.7 71.5 64.0 60.1"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (with Search grounding)",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "score",
+      "value": 60.1,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "HealthBench Pro, with Search grounding 76.7 71.5 64.0 60.1"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (without Search grounding)",
+      "model": "google/gemini-4-argon",
+      "metric": "length-adjusted score",
+      "value": 56.5,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "(length-adjusted) (56.5) (53.7) (44.0) (42.3)"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (without Search grounding)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "length-adjusted score",
+      "value": 53.7,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "(length-adjusted) (56.5) (53.7) (44.0) (42.3)"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (without Search grounding)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "length-adjusted score",
+      "value": 44,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "(length-adjusted) (56.5) (53.7) (44.0) (42.3)"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (without Search grounding)",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "length-adjusted score",
+      "value": 42.3,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "(length-adjusted) (56.5) (53.7) (44.0) (42.3)"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (with Search grounding)",
+      "model": "google/gemini-4-argon",
+      "metric": "length-adjusted score",
+      "value": 61.4,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "(length-adjusted) (61.4) (58.7) (52.3) (49.2)"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (with Search grounding)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "length-adjusted score",
+      "value": 58.7,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "(length-adjusted) (61.4) (58.7) (52.3) (49.2)"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (with Search grounding)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "length-adjusted score",
+      "value": 52.3,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "(length-adjusted) (61.4) (58.7) (52.3) (49.2)"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Pro (with Search grounding)",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "length-adjusted score",
+      "value": 49.2,
+      "unit": "score",
+      "source": {
+        "page": "177",
+        "pdfPage": 178,
+        "table": "Table 5.1",
+        "quote": "(length-adjusted) (61.4) (58.7) (52.3) (49.2)"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-4-argon",
+      "metric": "accuracy",
+      "value": 79,
+      "unit": "percent",
+      "source": {
+        "page": "192",
+        "pdfPage": 193,
+        "quote": "It improves by +14.3 percentage points over Gemini 3.1 Pro on FACTS Grounding (79.0% vs. 64.7%)"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "accuracy",
+      "value": 64.7,
+      "unit": "percent",
+      "source": {
+        "page": "192",
+        "pdfPage": 193,
+        "quote": "It improves by +14.3 percentage points over Gemini 3.1 Pro on FACTS Grounding (79.0% vs. 64.7%)"
+      }
+    },
+    {
+      "rawEvalName": "Multi-hop search factuality (internal)",
+      "model": "google/gemini-4-argon",
+      "metric": "accuracy",
+      "value": 94.3,
+      "unit": "percent",
+      "settings": {
+        "other": "search enabled"
+      },
+      "source": {
+        "page": "193",
+        "pdfPage": 194,
+        "table": "Table 5.7",
+        "quote": "Accuracy (higher 94.3% 89.8% 93.3%"
+      }
+    },
+    {
+      "rawEvalName": "Multi-hop search factuality (internal)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "accuracy",
+      "value": 89.8,
+      "unit": "percent",
+      "settings": {
+        "other": "search enabled"
+      },
+      "source": {
+        "page": "193",
+        "pdfPage": 194,
+        "table": "Table 5.7",
+        "quote": "Accuracy (higher 94.3% 89.8% 93.3%"
+      }
+    },
+    {
+      "rawEvalName": "Multi-hop search factuality (internal)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "accuracy",
+      "value": 93.3,
+      "unit": "percent",
+      "settings": {
+        "other": "search enabled"
+      },
+      "source": {
+        "page": "193",
+        "pdfPage": 194,
+        "table": "Table 5.7",
+        "quote": "Accuracy (higher 94.3% 89.8% 93.3%"
+      }
+    },
+    {
+      "rawEvalName": "Multi-hop search factuality (internal)",
+      "model": "google/gemini-4-argon",
+      "metric": "unfactual rate",
+      "value": 2.5,
+      "unit": "percent",
+      "settings": {
+        "other": "search enabled"
+      },
+      "source": {
+        "page": "193",
+        "pdfPage": 194,
+        "table": "Table 5.7",
+        "quote": "Unfactual rate 2.5% 2.5% 4.4%"
+      }
+    },
+    {
+      "rawEvalName": "Multi-hop search factuality (internal)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "unfactual rate",
+      "value": 2.5,
+      "unit": "percent",
+      "settings": {
+        "other": "search enabled"
+      },
+      "source": {
+        "page": "193",
+        "pdfPage": 194,
+        "table": "Table 5.7",
+        "quote": "Unfactual rate 2.5% 2.5% 4.4%"
+      }
+    },
+    {
+      "rawEvalName": "Multi-hop search factuality (internal)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "unfactual rate",
+      "value": 4.4,
+      "unit": "percent",
+      "settings": {
+        "other": "search enabled"
+      },
+      "source": {
+        "page": "193",
+        "pdfPage": 194,
+        "table": "Table 5.7",
+        "quote": "Unfactual rate 2.5% 2.5% 4.4%"
+      }
+    },
+    {
+      "rawEvalName": "Temporal reasoning (internal)",
+      "model": "google/gemini-4-argon",
+      "metric": "error rate",
+      "value": 11.8,
+      "unit": "percent",
+      "settings": {
+        "other": "search enabled"
+      },
+      "source": {
+        "page": "193",
+        "pdfPage": 194,
+        "table": "Table 5.7",
+        "quote": "Temporal reasoning Error rate (lower is 11.8% 23.0% 20.0%"
+      }
+    },
+    {
+      "rawEvalName": "Temporal reasoning (internal)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "error rate",
+      "value": 23,
+      "unit": "percent",
+      "settings": {
+        "other": "search enabled"
+      },
+      "source": {
+        "page": "193",
+        "pdfPage": 194,
+        "table": "Table 5.7",
+        "quote": "Temporal reasoning Error rate (lower is 11.8% 23.0% 20.0%"
+      }
+    },
+    {
+      "rawEvalName": "Temporal reasoning (internal)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "error rate",
+      "value": 20,
+      "unit": "percent",
+      "settings": {
+        "other": "search enabled"
+      },
+      "source": {
+        "page": "193",
+        "pdfPage": 194,
+        "table": "Table 5.7",
+        "quote": "Temporal reasoning Error rate (lower is 11.8% 23.0% 20.0%"
+      }
+    },
+    {
+      "rawEvalName": "Search triggering (internal)",
+      "model": "google/gemini-4-argon",
+      "metric": "F1 score",
+      "value": 88,
+      "unit": "percent",
+      "settings": {
+        "other": "search enabled"
+      },
+      "source": {
+        "page": "193",
+        "pdfPage": 194,
+        "table": "Table 5.7",
+        "quote": "Search triggering F1 score (higher is 88.0% 84.0% 86.0%"
+      }
+    },
+    {
+      "rawEvalName": "Search triggering (internal)",
+      "model": "google/gemini-3.8-flash",
+      "metric": "F1 score",
+      "value": 84,
+      "unit": "percent",
+      "settings": {
+        "other": "search enabled"
+      },
+      "source": {
+        "page": "193",
+        "pdfPage": 194,
+        "table": "Table 5.7",
+        "quote": "Search triggering F1 score (higher is 88.0% 84.0% 86.0%"
+      }
+    },
+    {
+      "rawEvalName": "Search triggering (internal)",
+      "model": "google/gemini-3.1-pro-preview",
+      "metric": "F1 score",
+      "value": 86,
+      "unit": "percent",
+      "settings": {
+        "other": "search enabled"
+      },
+      "source": {
+        "page": "193",
+        "pdfPage": 194,
+        "table": "Table 5.7",
+        "quote": "Search triggering F1 score (higher is 88.0% 84.0% 86.0%"
+      }
+    },
+    {
+      "rawEvalName": "Ambiguous and high-risk tasks: Active Collaboration",
+      "model": "google/gemini-4-argon",
+      "metric": "Active Collaboration score",
+      "value": 55.9,
+      "unit": "percent",
+      "source": {
+        "page": "186",
+        "pdfPage": 187,
+        "quote": "raising the Active Collaboration rate from 34.0% to 55.9% compared to Gemini 3.8 Flash."
+      }
+    },
+    {
+      "rawEvalName": "Ambiguous and high-risk tasks: Active Collaboration",
+      "model": "google/gemini-3.8-flash",
+      "metric": "Active Collaboration score",
+      "value": 34,
+      "unit": "percent",
+      "source": {
+        "page": "186",
+        "pdfPage": 187,
+        "quote": "raising the Active Collaboration rate from 34.0% to 55.9% compared to Gemini 3.8 Flash."
+      }
+    },
+    {
+      "rawEvalName": "Ambiguous and high-risk tasks: Counter Collaboration",
+      "model": "google/gemini-4-argon",
+      "metric": "Counter Collaboration score",
+      "value": 84.5,
+      "unit": "percent",
+      "source": {
+        "page": "186",
+        "pdfPage": 187,
+        "quote": "it keeps Counter-Collaboration on clear tasks comparable (84.5% vs. 86.5%"
+      }
+    },
+    {
+      "rawEvalName": "Ambiguous and high-risk tasks: Counter Collaboration",
+      "model": "google/gemini-3.8-flash",
+      "metric": "Counter Collaboration score",
+      "value": 86.5,
+      "unit": "percent",
+      "source": {
+        "page": "186",
+        "pdfPage": 187,
+        "quote": "it keeps Counter-Collaboration on clear tasks comparable (84.5% vs. 86.5%"
+      }
+    },
+    {
+      "rawEvalName": "Privacy, safety and security advice (HelpBench)",
+      "model": "google/gemini-4-argon",
+      "metric": "positive rubric compliance",
+      "value": 86.87,
+      "unit": "percent",
+      "source": {
+        "page": "197",
+        "pdfPage": 198,
+        "quote": "compliance of the models evaluated (86.87%)."
+      }
+    },
+    {
+      "rawEvalName": "ExploitBench",
+      "model": "google/gemini-4-argon",
+      "metric": "capabilities achieved (of 656)",
+      "value": 87,
+      "unit": "percent",
+      "n": 656,
+      "settings": {
+        "safeguards": false,
+        "harness": "internal Antigravity harness",
+        "other": "autonudge, 300-turn limit, best-of-three union"
+      },
+      "source": {
+        "page": "213",
+        "pdfPage": 214,
+        "quote": "found that Gemini 4 Argon reached 87% of the capabilities tested"
+      }
+    },
+    {
+      "rawEvalName": "Real-world vulnerability discovery (internal)",
+      "model": "google/gemini-4-argon",
+      "metric": "historical vulnerabilities discovered",
+      "value": 86,
+      "unit": "percent",
+      "n": 1200,
+      "settings": {
+        "harness": "internal Antigravity harness"
+      },
+      "source": {
+        "page": "213",
+        "pdfPage": 214,
+        "quote": "Gemini 4 Argon discovered 86% of the historical vulnerabilities"
+      }
+    },
+    {
+      "rawEvalName": "Internal vulnerability research",
+      "model": "google/gemini-4-argon",
+      "metric": "pass@1",
+      "value": 72,
+      "unit": "percent",
+      "settings": {
+        "harness": "internal Antigravity harness"
+      },
+      "source": {
+        "page": "214",
+        "pdfPage": 215,
+        "quote": "with a 72% pass@1 rate, a significant improvement over Gemini 3.8 Flash Cyber which achieved 46%."
+      }
+    },
+    {
+      "rawEvalName": "Internal vulnerability research",
+      "rawModelName": "Gemini 3.8 Flash Cyber",
+      "metric": "pass@1",
+      "value": 46,
+      "unit": "percent",
+      "settings": {
+        "harness": "internal Antigravity harness"
+      },
+      "source": {
+        "page": "214",
+        "pdfPage": 215,
+        "quote": "with a 72% pass@1 rate, a significant improvement over Gemini 3.8 Flash Cyber which achieved 46%."
+      }
+    },
+    {
+      "rawEvalName": "CWE-Bench v1",
+      "model": "google/gemini-4-argon",
+      "metric": "Pass@1",
+      "value": 68,
+      "unit": "percent",
+      "n": 120,
+      "settings": {
+        "reasoningEffort": "high",
+        "trials": 4,
+        "harness": "Antigravity"
+      },
+      "source": {
+        "page": "216",
+        "pdfPage": 217,
+        "quote": "Gemini 4 Argon achieves 68% Pass@1 on CWE-Bench v1."
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-10-14T02:29:15Z"
+  },
+  "notes": "Safety and security report (217 pages), not a full model card: no release date, knowledge cutoff, context window, parameters, modalities or training data are stated, so all disclosures are not_stated (the cover date October 2026 is not a release date). Page = printed page number (PDF page minus 1). Most results are in figures with no numbers in the text (child safety, dangerous content, sexually explicit, hate speech, computer use, agent harness, over-refusal, tone, sycophancy, neutrality, robotics, all prompt-injection robustness, odds ratios, coverage and jailbreak charts, stealth and GCI plots), so I skipped them; quotes must come from the text. Left out: ranges and approximate values ('close to 0% QSR', '<1% per-query', 'around 10%' CoT-only evasion, 6.3%-7.3%, 1.1%-5.2%, 2.7x-3.9x, 9x-100x) and derived deltas (+3.4pp, +14.3pp, 14.22 pp, 57pp). Risk decisions: Google says 'cannot rule out' the CCL/TCL for unmitigated cyber, biological CBRN and Stealth and Situational Awareness; I mapped that to level 'reached' (as for Anthropic 'cannot rule out'). The post-mitigation entries say risk is below the level. Chemical, radiological and nuclear TCL ruled out. Comparison models: Gemini 3.8 Flash Cyber is not in the seed (rawModelName); 'web baseline' is a human-information baseline, given as rawModelName. External models (GPT-6 Astra, Claude Fable 5.1, Claude Opus 5.5) are only comparisons. The short model card (google-gemini-4-argon-system_card) is not in alsoDocuments by instruction. CyScenarioBench footnote marker 11 stays in its quote. Some evalResults use 0-10 judge scores or counts from tables in prose; Gram and honeypot results are heavily affected by evaluation awareness, as the card says. Topics: bias is covered only by the neutrality evaluation; toxicity, welfare and interpretability are not covered."
+}

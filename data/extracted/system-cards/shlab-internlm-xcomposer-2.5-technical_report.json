@@ -1,0 +1,276 @@
+{
+  "document": "shlab-internlm-xcomposer-2.5-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "internlm/internlm-xcomposer2d5-7b"
+    }
+  ],
+  "pageCount": 18,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "24K interleaved image-text contexts; extendable to 96K via RoPE extrapolation",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Trained with 24K interleaved image-text contexts,\n                                        it can seamlessly extend to 96K long contexts via RoPE ex-"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text, single/multiple images, and videos",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "inputs, including text, single/multiple images, and videos."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7B LLM backend",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "achieving GPT-4V level capabilities with merely 7B LLM"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "OpenAI ViT-L/14 vision encoder, InternLM2-7B LLM, Partial LoRA",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "nAI ViT-L/14 [122], Large Language Model InternLM2-"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Pre-training datasets in Table 1; supervised fine-tuning datasets in Table 2; DPO preference data for article composing",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "The data used for pre-training is shown in Table 1."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[HallusionBench](/evals/hallusionbench) (HallB) 42.4 for IXC-2.5-7B in Table 4 (higher is better)",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "IXC-2.5-7B            56.6        59.9           67.8          63.8          81.5         42.9        2,229.0     82.2      80.8       79.4          75.4      51.7    42.4"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "There is no dedicated safety, red-teaming, jailbreak, bias, or dangerous-capability section; the only safety-adjacent numeric eval is [HallusionBench](/evals/hallusionbench) in Table 4.", "tone": "mixed",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "age Part (SEEDI )[66], MM-Vet [164], HallusionBench"
+      }
+    },
+    {
+      "text": "Preference alignment (direct preference optimization) for article composing is described as avoiding inappropriate or low-quality content, not as a scored safety eval.", "tone": "mixed",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "to avoid generating inappropriate or low-quality content."
+      }
+    },
+    {
+      "text": "Related work cites reinforcement learning from human feedback (RLHF)/reinforcement learning from AI feedback (RLAIF) for multimodal large vision-language models (LVLMs) to reduce hallucination; this report applies preference alignment to text-image article quality, not a hallucination benchmark claim from that pipeline alone.", "tone": "neutral",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "to reduce hallucination. In this work, we in-"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "internlm/internlm-xcomposer2d5-7b",
+      "metric": "score",
+      "value": 42.4,
+      "unit": "percent",
+      "settings": {
+        "other": "HallB column; Table 4; reported as IXC-2.5-7B"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 4",
+        "quote": "IXC-2.5-7B            56.6        59.9           67.8          63.8          81.5         42.9        2,229.0     82.2      80.8       79.4          75.4      51.7    42.4"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "openai/gpt-4-vision-preview",
+      "metric": "score",
+      "value": 46.5,
+      "unit": "percent",
+      "settings": {
+        "other": "HallB column; Table 4; labeled GPT-4V"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 4",
+        "quote": "GPT-4V [112]      66.3            57.1           68.0          47.8          75.5         56.8        1,926.5     81.3      80.2       79.8        69.1        56.8    46.5"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "google/gemini-pro",
+      "metric": "score",
+      "value": 45.2,
+      "unit": "percent",
+      "settings": {
+        "other": "HallB column; Table 4; labeled Gemini-Pro; cite [142] Gemini family paper"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 4",
+        "quote": "Gemini-Pro [142]   —              42.6           64.1          45.8          70.2         47.9        1,933.3     73.9      74.3       73.9        70.7        59.2    45.2"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "WeMM 8B",
+      "metric": "score",
+      "value": 47.5,
+      "unit": "percent",
+      "settings": {
+        "other": "HallB column; Table 4; open-source Previous SOTA row (WeMM 8B[145])"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 4",
+        "quote": "Performance           42.8      57.1     68.1               54.9       80.6      53.4     2,189.6       82.3        80.7        79.7     75.9     58.0   47.5"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:04:11Z"
+  },
+  "notes": "Technical report (arXiv 2407.03320), not a system card. No dedicated safety section. Safety-only pilot: only HallusionBench (HallB) in Table 4 qualifies; included IXC-2.5-7B, GPT-4V, Gemini-Pro, and open-source Previous SOTA WeMM 8B. Cite [142] is Gemini family 2023, mapped to google/gemini-pro (not 1.5). Skipped capability: MVBench, MLVU, MME-Video, MMBench-Video, TempCompass, DocVQA, ChartQA, InfoVQA, TextVQA, OCRBench, WTQ, DeepForm, Visual MRC, TabFact, MMDU, MMStar, RealWorldQA, MathVista, AI2D, MMMU, MME, MMBench/MMBCN/MMB1.1, SEED-Bench Image, MM-Vet, Design2Code (Table 5). Architecture quote is column-wrap fragmented (starts with nAI). pageCount=18 from pdfinfo (trailing empty form-feed page ignored). Seed-linked internlm/internlm-xcomposer2d5-7b is covered as IXC-2.5 / IXC-2.5-7B."
+}

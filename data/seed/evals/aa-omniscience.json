@@ -1,0 +1,124 @@
+{
+  "eval": {
+    "slug": "aa-omniscience",
+    "displayName": "AA-Omniscience",
+    "aliases": ["AA-Omniscience Index"],
+    "description": "Artificial Analysis benchmark for factual recall and knowledge calibration across 6,000 questions in 42 topics and six domains. Models answer without tools and are told to abstain when unsure. A grading model labels each reply correct, partially correct, incorrect, or not attempted. The Omniscience Index is 100 × (correct − incorrect) / N on a −100 to 100 scale; cards also report accuracy and hallucination (or non-hallucination) rates. A 600-question public subset is released; the full set is held out.",
+    "summary": "Measures whether the model answers factual questions correctly and says it does not know when unsure.",
+    "maintainers": [
+      {
+        "name": "Artificial Analysis",
+        "url": "https://artificialanalysis.ai/articles/aa-omniscience-knowledge-hallucination-benchmark"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2511.13029",
+        "title": "AA-Omniscience: Evaluating Cross-Domain Knowledge Reliability in Large Language Models"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/ArtificialAnalysis/AA-Omniscience-Public",
+        "title": "AA-Omniscience-Public (10% subset)"
+      },
+      {
+        "kind": "blog",
+        "url": "https://artificialanalysis.ai/articles/aa-omniscience-knowledge-hallucination-benchmark",
+        "title": "AA-Omniscience announcement"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://artificialanalysis.ai/articles/aa-omniscience-knowledge-hallucination-benchmark",
+        "title": "Artificial Analysis Omniscience page"
+      }
+    ],
+    "access": "held_out",
+    "status": "active",
+    "facets": {
+      "measures": ["capability", "propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["hallucination", "honesty"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-11",
+      "status": "published",
+      "releasedDate": "2025-11-17",
+      "dataset": {
+        "hfRepo": "ArtificialAnalysis/AA-Omniscience-Public",
+        "revision": "e4883edbb9f5ccf2b2a8fdc6fb65e01a58e99849",
+        "url": "https://huggingface.co/datasets/ArtificialAnalysis/AA-Omniscience-Public",
+        "license": "apache-2.0",
+        "splits": [
+          {
+            "name": "public",
+            "sampleCount": 600,
+            "storage": "pointer"
+          },
+          {
+            "name": "full",
+            "sampleCount": 6000,
+            "storage": "hash_only"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "answer_grade",
+          "displayName": "Answer grade",
+          "type": "ordinal",
+          "min": -1,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "+1 correct, 0 partial or abstention, −1 incorrect (matches the Omniscience Index terms)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "omniscience_index",
+          "displayName": "Omniscience Index",
+          "aggregation": "custom",
+          "min": -100,
+          "max": 100,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "100 × (c − i) / (c + p + i + a), where c/p/i/a are correct, partial, incorrect, and abstained counts."
+        },
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of questions graded fully correct."
+        },
+        {
+          "key": "hallucination_rate",
+          "displayName": "Hallucination rate",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Among questions the model did not answer correctly, the share answered incorrectly instead of abstaining or partially answering."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "internet": false
+      }
+    }
+  ]
+}

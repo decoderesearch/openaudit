@@ -1,0 +1,1975 @@
+{
+  "document": "meta-llama-guard-3-8b-model_card-system_card",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "meta-llama/Llama-Guard-3-8B"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (prompt and response classification)",
+      "source": {
+        "page": "Model Details",
+        "quote": "it can be used to classify content in both LLM inputs (prompt classification) and in LLM responses (response classification)."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English, French, German, Hindi, Italian, Portuguese, Spanish, Thai",
+      "source": {
+        "page": "Supported languages",
+        "quote": "Llama Guard 3 supports content safety for the following languages : English, French, German, Hindi, Italian, Portuguese, Spanish, Thai."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "8B (Llama-3.1-8B base)",
+      "source": {
+        "page": "Model Details",
+        "quote": "Llama Guard 3-8B is a Llama-3.1-8B pretrained model, fine-tuned for content safety classification."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Llama-3.1-8B pretrained model, fine-tuned for content safety classification; optional int8 quantization",
+      "source": {
+        "page": "Model Details",
+        "quote": "Llama Guard 3-8B is a Llama-3.1-8B pretrained model, fine-tuned for content safety classification."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "English Llama Guard data from Llama 2/3 generations on hh-rlhf; plus multilingual human/synthetic data and tool-use (search, code interpreter) data",
+      "source": {
+        "page": "Training Data",
+        "quote": "We use the English data used by Llama Guard [1], which are obtained by getting Llama 2 and Llama 3 generations on prompts from the hh-rlhf dataset [2]."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Classifies prompts and responses as safe or unsafe against MLCommons hazards plus Code Interpreter Abuse",
+      "source": {
+        "page": "Model Details",
+        "quote": "it generates text in its output that indicates whether a given prompt or response is safe or unsafe, and if unsafe, it also lists the content categories violated."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "Hazard category S4: Child Sexual Exploitation",
+      "source": {
+        "page": "Hazard Taxonomy and Policy",
+        "quote": "S4: Child Sexual Exploitation"
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Hazard category S11: Suicide & Self-Harm",
+      "source": {
+        "page": "Hazard Taxonomy and Policy",
+        "quote": "S11: Suicide &amp; Self-Harm"
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "May be susceptible to adversarial attacks that could bypass intended use",
+      "source": {
+        "page": "Limitations",
+        "quote": "Llama Guard 3 may be susceptible to adversarial attacks or prompt injection attacks that could bypass or alter its intended use."
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "May be susceptible to prompt injection attacks",
+      "source": {
+        "page": "Limitations",
+        "quote": "Llama Guard 3 may be susceptible to adversarial attacks or prompt injection attacks that could bypass or alter its intended use."
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": true,
+      "headline": "S14 Code Interpreter Abuse; evaluates search tool calls and code interpreter abuse",
+      "source": {
+        "page": "Hazard Taxonomy and Policy",
+        "quote": "S14: Code Interpreter Abuse"
+      }
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "S2 covers cyber crimes; S14 covers code interpreter abuse",
+      "source": {
+        "page": "Hazard Taxonomy and Policy",
+        "quote": "and (6) cyber crimes (ex: hacking)"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "S9 Indiscriminate Weapons includes chemical and biological weapons",
+      "source": {
+        "page": "Hazard Taxonomy and Policy",
+        "quote": "including: (1) chemical weapons (ex: nerve gas), (2) biological weapons (ex: anthrax)"
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Comparing safety classifiers is hard because each model uses its own policy; Meta aligns Llama Guard with MLCommons to push industry standards.", "tone": "neutral",
+      "source": {
+        "page": "Evaluation",
+        "quote": "comparing model performance is not straightforward as each model is built on its own policy and is expected to perform better on an evaluation dataset with a policy aligned to the model."
+      }
+    },
+    {
+      "text": "On the internal English MLCommons response test, Llama Guard 3 beats Llama Guard 2 and GPT4 on F1 and has a much lower false positive rate.", "tone": "good",
+      "source": {
+        "page": "Evaluation",
+        "quote": "Tables 1, 2, and 3 show that Llama Guard 3 improves over Llama Guard 2 and outperforms GPT4 in English, multilingual, and tool use capabilities."
+      }
+    },
+    {
+      "text": "On [XSTest](/evals/xstest), Llama Guard 3 matches Llama Guard 2 F1 but with a lower false positive rate (exact scores not given).", "tone": "good",
+      "source": {
+        "page": "Evaluation",
+        "quote": "We also benchmark Llama Guard 3 in the OSS dataset XSTest [4] and observe that it achieves the same F1 score but a lower false positive rate compared to Llama Guard 2."
+      }
+    },
+    {
+      "text": "Int8 quantization cuts checkpoint size by about 40% with very small impact on performance (Table 5).", "tone": "good",
+      "source": {
+        "page": "Quantization",
+        "quote": "reducing the checkpoint size by about 40% with very small impact on model performance."
+      }
+    },
+    {
+      "text": "Deploying Llama Guard 3 with Llama 3.1 may raise refusals to benign prompts (false positives).", "tone": "mixed",
+      "source": {
+        "page": "Application",
+        "quote": "while deploying Llama Guard 3 will likely improve the safety of your system, it might increase refusals to benign prompts (False Positives)."
+      }
+    },
+    {
+      "text": "S5 Defamation, S8 Intellectual Property, and S13 Elections may need up-to-date factual systems beyond this classifier.", "tone": "mixed",
+      "source": {
+        "page": "Limitations",
+        "quote": "Some hazard categories may require factual, up-to-date knowledge to be evaluated (for example, S5: Defamation, S8: Intellectual Property, and S13: Elections)"
+      }
+    },
+    {
+      "text": "As an large language model (LLM) classifier, it may be bypassed by adversarial or prompt-injection attacks.", "tone": "bad",
+      "source": {
+        "page": "Limitations",
+        "quote": "Llama Guard 3 may be susceptible to adversarial attacks or prompt injection attacks that could bypass or alter its intended use."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal English test, response classification)",
+      "metric": "F1",
+      "value": 0.877,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "| Llama Guard 2            |  0.877 |   0.927   |          0.081          |",
+        "table": "Table 1"
+      },
+      "settings": {
+        "other": "response classification; English"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal English test, response classification)",
+      "metric": "AUPRC",
+      "value": 0.927,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "| Llama Guard 2            |  0.877 |   0.927   |          0.081          |",
+        "table": "Table 1"
+      },
+      "settings": {
+        "other": "response classification; English"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal English test, response classification)",
+      "metric": "False Positive Rate",
+      "value": 0.081,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "| Llama Guard 2            |  0.877 |   0.927   |          0.081          |",
+        "table": "Table 1"
+      },
+      "settings": {
+        "other": "response classification; English"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal English test, response classification)",
+      "metric": "F1",
+      "value": 0.939,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "| Llama Guard 3            |  0.939 |   0.985   |          0.040          |",
+        "table": "Table 1"
+      },
+      "settings": {
+        "other": "response classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal English test, response classification)",
+      "metric": "AUPRC",
+      "value": 0.985,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "| Llama Guard 3            |  0.939 |   0.985   |          0.040          |",
+        "table": "Table 1"
+      },
+      "settings": {
+        "other": "response classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal English test, response classification)",
+      "metric": "False Positive Rate",
+      "value": 0.04,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "| Llama Guard 3            |  0.939 |   0.985   |          0.040          |",
+        "table": "Table 1"
+      },
+      "settings": {
+        "other": "response classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal English test, response classification)",
+      "metric": "F1",
+      "value": 0.805,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "| GPT4                     |  0.805 |    N/A    |          0.152          |",
+        "table": "Table 1"
+      },
+      "settings": {
+        "other": "response classification; English"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal English test, response classification)",
+      "metric": "False Positive Rate",
+      "value": 0.152,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "| GPT4                     |  0.805 |    N/A    |          0.152          |",
+        "table": "Table 1"
+      },
+      "settings": {
+        "other": "response classification; English"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.911,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.911/0.012</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; French"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.012,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.911/0.012</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; French"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.795,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.911/0.012</center></td>\n    <td><center>0.795/0.062</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; German"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.062,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.911/0.012</center></td>\n    <td><center>0.795/0.062</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; German"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.832,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.911/0.012</center></td>\n    <td><center>0.795/0.062</center></td>\n    <td><center>0.832/0.062</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Hindi"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.062,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.911/0.012</center></td>\n    <td><center>0.795/0.062</center></td>\n    <td><center>0.832/0.062</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Hindi"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.681,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.911/0.012</center></td>\n    <td><center>0.795/0.062</center></td>\n    <td><center>0.832/0.062</center></td>\n    <td><center>0.681/0.039</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Italian"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.039,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.911/0.012</center></td>\n    <td><center>0.795/0.062</center></td>\n    <td><center>0.832/0.062</center></td>\n    <td><center>0.681/0.039</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Italian"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.845,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.911/0.012</center></td>\n    <td><center>0.795/0.062</center></td>\n    <td><center>0.832/0.062</center></td>\n    <td><center>0.681/0.039</center></td>\n    <td><center>0.845/0.032</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Portuguese"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.032,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.911/0.012</center></td>\n    <td><center>0.795/0.062</center></td>\n    <td><center>0.832/0.062</center></td>\n    <td><center>0.681/0.039</center></td>\n    <td><center>0.845/0.032</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Portuguese"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.876,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.911/0.012</center></td>\n    <td><center>0.795/0.062</center></td>\n    <td><center>0.832/0.062</center></td>\n    <td><center>0.681/0.039</center></td>\n    <td><center>0.845/0.032</center></td>\n    <td><center>0.876/0.001</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Spanish"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.001,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.911/0.012</center></td>\n    <td><center>0.795/0.062</center></td>\n    <td><center>0.832/0.062</center></td>\n    <td><center>0.681/0.039</center></td>\n    <td><center>0.845/0.032</center></td>\n    <td><center>0.876/0.001</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Spanish"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.822,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td><center>0.911/0.012</center></td>\n    <td><center>0.795/0.062</center></td>\n    <td><center>0.832/0.062</center></td>\n    <td><center>0.681/0.039</center></td>\n    <td><center>0.845/0.032</center></td>\n    <td><center>0.876/0.001</center></td>\n    <td><center>0.822/0.078</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Thai"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.078,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td><center>0.911/0.012</center></td>\n    <td><center>0.795/0.062</center></td>\n    <td><center>0.832/0.062</center></td>\n    <td><center>0.681/0.039</center></td>\n    <td><center>0.845/0.032</center></td>\n    <td><center>0.876/0.001</center></td>\n    <td><center>0.822/0.078</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Thai"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.943,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.943/0.036</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; French"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.036,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.943/0.036</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; French"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.877,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.943/0.036</center></td>\n    <td><center>0.877/0.032</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; German"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.032,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.943/0.036</center></td>\n    <td><center>0.877/0.032</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; German"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.871,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.943/0.036</center></td>\n    <td><center>0.877/0.032</center></td>\n    <td><center>0.871/0.050</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Hindi"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.05,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.943/0.036</center></td>\n    <td><center>0.877/0.032</center></td>\n    <td><center>0.871/0.050</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Hindi"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.873,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.943/0.036</center></td>\n    <td><center>0.877/0.032</center></td>\n    <td><center>0.871/0.050</center></td>\n    <td><center>0.873/0.038</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Italian"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.038,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.943/0.036</center></td>\n    <td><center>0.877/0.032</center></td>\n    <td><center>0.871/0.050</center></td>\n    <td><center>0.873/0.038</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Italian"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.86,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.943/0.036</center></td>\n    <td><center>0.877/0.032</center></td>\n    <td><center>0.871/0.050</center></td>\n    <td><center>0.873/0.038</center></td>\n    <td><center>0.860/0.060</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Portuguese"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.06,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.943/0.036</center></td>\n    <td><center>0.877/0.032</center></td>\n    <td><center>0.871/0.050</center></td>\n    <td><center>0.873/0.038</center></td>\n    <td><center>0.860/0.060</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Portuguese"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.875,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.943/0.036</center></td>\n    <td><center>0.877/0.032</center></td>\n    <td><center>0.871/0.050</center></td>\n    <td><center>0.873/0.038</center></td>\n    <td><center>0.860/0.060</center></td>\n    <td><center>0.875/0.023</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Spanish"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.023,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.943/0.036</center></td>\n    <td><center>0.877/0.032</center></td>\n    <td><center>0.871/0.050</center></td>\n    <td><center>0.873/0.038</center></td>\n    <td><center>0.860/0.060</center></td>\n    <td><center>0.875/0.023</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Spanish"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.834,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td><center>0.943/0.036</center></td>\n    <td><center>0.877/0.032</center></td>\n    <td><center>0.871/0.050</center></td>\n    <td><center>0.873/0.038</center></td>\n    <td><center>0.860/0.060</center></td>\n    <td><center>0.875/0.023</center></td>\n    <td><center>0.834/0.030</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Thai"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.03,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td><center>0.943/0.036</center></td>\n    <td><center>0.877/0.032</center></td>\n    <td><center>0.871/0.050</center></td>\n    <td><center>0.873/0.038</center></td>\n    <td><center>0.860/0.060</center></td>\n    <td><center>0.875/0.023</center></td>\n    <td><center>0.834/0.030</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Thai"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.795,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.795/0.157</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; French"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.157,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.795/0.157</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; French"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.691,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.795/0.157</center></td>\n    <td><center>0.691/0.123</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; German"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.123,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.795/0.157</center></td>\n    <td><center>0.691/0.123</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; German"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.709,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.795/0.157</center></td>\n    <td><center>0.691/0.123</center></td>\n    <td><center>0.709/0.206</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Hindi"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.206,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.795/0.157</center></td>\n    <td><center>0.691/0.123</center></td>\n    <td><center>0.709/0.206</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Hindi"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.753,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.795/0.157</center></td>\n    <td><center>0.691/0.123</center></td>\n    <td><center>0.709/0.206</center></td>\n    <td><center>0.753/0.204</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Italian"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.204,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.795/0.157</center></td>\n    <td><center>0.691/0.123</center></td>\n    <td><center>0.709/0.206</center></td>\n    <td><center>0.753/0.204</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Italian"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.738,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.795/0.157</center></td>\n    <td><center>0.691/0.123</center></td>\n    <td><center>0.709/0.206</center></td>\n    <td><center>0.753/0.204</center></td>\n    <td><center>0.738/0.207</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Portuguese"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.207,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.795/0.157</center></td>\n    <td><center>0.691/0.123</center></td>\n    <td><center>0.709/0.206</center></td>\n    <td><center>0.753/0.204</center></td>\n    <td><center>0.738/0.207</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Portuguese"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.711,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.795/0.157</center></td>\n    <td><center>0.691/0.123</center></td>\n    <td><center>0.709/0.206</center></td>\n    <td><center>0.753/0.204</center></td>\n    <td><center>0.738/0.207</center></td>\n    <td><center>0.711/0.169</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Spanish"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.169,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.795/0.157</center></td>\n    <td><center>0.691/0.123</center></td>\n    <td><center>0.709/0.206</center></td>\n    <td><center>0.753/0.204</center></td>\n    <td><center>0.738/0.207</center></td>\n    <td><center>0.711/0.169</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Spanish"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.688,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td><center>0.795/0.157</center></td>\n    <td><center>0.691/0.123</center></td>\n    <td><center>0.709/0.206</center></td>\n    <td><center>0.753/0.204</center></td>\n    <td><center>0.738/0.207</center></td>\n    <td><center>0.711/0.169</center></td>\n    <td><center>0.688/0.168</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Thai"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "MLCommons hazard taxonomy (internal multilingual test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.168,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td><center>0.795/0.157</center></td>\n    <td><center>0.691/0.123</center></td>\n    <td><center>0.709/0.206</center></td>\n    <td><center>0.753/0.204</center></td>\n    <td><center>0.738/0.207</center></td>\n    <td><center>0.711/0.169</center></td>\n    <td><center>0.688/0.168</center></td>",
+        "table": "Table 2"
+      },
+      "settings": {
+        "other": "prompt+response classification; Thai"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.749,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.749</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Search tool calls"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "AUPRC",
+      "value": 0.794,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.749</center></td>\n    <td><center>0.794</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Search tool calls"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.284,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.749</center></td>\n    <td><center>0.794</center></td>\n    <td><center>0.284</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Search tool calls"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.683,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.749</center></td>\n    <td><center>0.794</center></td>\n    <td><center>0.284</center></td>\n    <td><center>0.683</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Code interpreter abuse"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "AUPRC",
+      "value": 0.677,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.749</center></td>\n    <td><center>0.794</center></td>\n    <td><center>0.284</center></td>\n    <td><center>0.683</center></td>\n    <td><center>0.677</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Code interpreter abuse"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.67,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 2</td>\n    <td><center>0.749</center></td>\n    <td><center>0.794</center></td>\n    <td><center>0.284</center></td>\n    <td><center>0.683</center></td>\n    <td><center>0.677</center></td>\n    <td><center>0.670</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Code interpreter abuse"
+      },
+      "rawModelName": "Llama Guard 2"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.856,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.856</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Search tool calls"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "AUPRC",
+      "value": 0.938,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.856</center></td>\n    <td><center>0.938</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Search tool calls"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.174,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.856</center></td>\n    <td><center>0.938</center></td>\n    <td><center>0.174</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Search tool calls"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.885,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.856</center></td>\n    <td><center>0.938</center></td>\n    <td><center>0.174</center></td>\n    <td><center>0.885</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Code interpreter abuse"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "AUPRC",
+      "value": 0.967,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.856</center></td>\n    <td><center>0.938</center></td>\n    <td><center>0.174</center></td>\n    <td><center>0.885</center></td>\n    <td><center>0.967</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Code interpreter abuse"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.125,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>Llama Guard 3</td>\n    <td><center>0.856</center></td>\n    <td><center>0.938</center></td>\n    <td><center>0.174</center></td>\n    <td><center>0.885</center></td>\n    <td><center>0.967</center></td>\n    <td><center>0.125</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Code interpreter abuse"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.732,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.732</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Search tool calls"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.525,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.732</center></td>\n    <td><center>N/A</center></td>\n    <td><center>0.525</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Search tool calls"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "F1",
+      "value": 0.636,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.732</center></td>\n    <td><center>N/A</center></td>\n    <td><center>0.525</center></td>\n    <td><center>0.636</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Code interpreter abuse"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "other moderation capabilities (internal test, prompt+response classification)",
+      "metric": "FPR",
+      "value": 0.9,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "    <td>GPT4</td>\n    <td><center>0.732</center></td>\n    <td><center>N/A</center></td>\n    <td><center>0.525</center></td>\n    <td><center>0.636</center></td>\n    <td><center>N/A</center></td>\n    <td><center>0.90</center></td>",
+        "table": "Table 3"
+      },
+      "settings": {
+        "other": "prompt+response classification; Code interpreter abuse"
+      },
+      "model": "openai/gpt-4"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Precision",
+      "value": 0.952,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.952</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Prompt Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Recall",
+      "value": 0.943,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.952</span></p>\n</td>\n<td>\n<p><span>0.943</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Prompt Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "F1",
+      "value": 0.947,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.952</span></p>\n</td>\n<td>\n<p><span>0.943</span></p>\n</td>\n<td>\n<p><span>0.947</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Prompt Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "FPR",
+      "value": 0.057,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.952</span></p>\n</td>\n<td>\n<p><span>0.943</span></p>\n</td>\n<td>\n<p><span>0.947</span></p>\n</td>\n<td>\n<p><span>0.057</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Prompt Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Precision",
+      "value": 0.961,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.952</span></p>\n</td>\n<td>\n<p><span>0.943</span></p>\n</td>\n<td>\n<p><span>0.947</span></p>\n</td>\n<td>\n<p><span>0.057</span></p>\n</td>\n<td>\n<p><span>0.961</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Prompt Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Recall",
+      "value": 0.939,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.952</span></p>\n</td>\n<td>\n<p><span>0.943</span></p>\n</td>\n<td>\n<p><span>0.947</span></p>\n</td>\n<td>\n<p><span>0.057</span></p>\n</td>\n<td>\n<p><span>0.961</span></p>\n</td>\n<td>\n<p><span>0.939</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Prompt Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "F1",
+      "value": 0.95,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.952</span></p>\n</td>\n<td>\n<p><span>0.943</span></p>\n</td>\n<td>\n<p><span>0.947</span></p>\n</td>\n<td>\n<p><span>0.057</span></p>\n</td>\n<td>\n<p><span>0.961</span></p>\n</td>\n<td>\n<p><span>0.939</span></p>\n</td>\n<td>\n<p><span>0.950</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Prompt Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "FPR",
+      "value": 0.045,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<p><span>0.952</span></p>\n</td>\n<td>\n<p><span>0.943</span></p>\n</td>\n<td>\n<p><span>0.947</span></p>\n</td>\n<td>\n<p><span>0.057</span></p>\n</td>\n<td>\n<p><span>0.961</span></p>\n</td>\n<td>\n<p><span>0.939</span></p>\n</td>\n<td>\n<p><span>0.950</span></p>\n</td>\n<td>\n<p><span>0.045</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Prompt Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Precision",
+      "value": 0.901,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Multilingual</span></p>\n</td>\n<td>\n<p><span>0.901</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Prompt Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Recall",
+      "value": 0.899,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Multilingual</span></p>\n</td>\n<td>\n<p><span>0.901</span></p>\n</td>\n<td>\n<p><span>0.899</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Prompt Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "F1",
+      "value": 0.9,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Multilingual</span></p>\n</td>\n<td>\n<p><span>0.901</span></p>\n</td>\n<td>\n<p><span>0.899</span></p>\n</td>\n<td>\n<p><span>0.900</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Prompt Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "FPR",
+      "value": 0.054,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Multilingual</span></p>\n</td>\n<td>\n<p><span>0.901</span></p>\n</td>\n<td>\n<p><span>0.899</span></p>\n</td>\n<td>\n<p><span>0.900</span></p>\n</td>\n<td>\n<p><span>0.054</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Prompt Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Precision",
+      "value": 0.906,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Multilingual</span></p>\n</td>\n<td>\n<p><span>0.901</span></p>\n</td>\n<td>\n<p><span>0.899</span></p>\n</td>\n<td>\n<p><span>0.900</span></p>\n</td>\n<td>\n<p><span>0.054</span></p>\n</td>\n<td>\n<p><span>0.906</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Prompt Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Recall",
+      "value": 0.892,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Multilingual</span></p>\n</td>\n<td>\n<p><span>0.901</span></p>\n</td>\n<td>\n<p><span>0.899</span></p>\n</td>\n<td>\n<p><span>0.900</span></p>\n</td>\n<td>\n<p><span>0.054</span></p>\n</td>\n<td>\n<p><span>0.906</span></p>\n</td>\n<td>\n<p><span>0.892</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Prompt Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "F1",
+      "value": 0.899,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Multilingual</span></p>\n</td>\n<td>\n<p><span>0.901</span></p>\n</td>\n<td>\n<p><span>0.899</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Prompt Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "FPR",
+      "value": 0.051,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<p><span>0.901</span></p>\n</td>\n<td>\n<p><span>0.899</span></p>\n</td>\n<td>\n<p><span>0.900</span></p>\n</td>\n<td>\n<p><span>0.054</span></p>\n</td>\n<td>\n<p><span>0.906</span></p>\n</td>\n<td>\n<p><span>0.892</span></p>\n</td>\n<td>\n<p><span>0.899</span></p>\n</td>\n<td>\n<p><span>0.051</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Prompt Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Precision",
+      "value": 0.884,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Tool Use</span></p>\n</td>\n<td>\n<p><span>0.884</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Prompt Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Recall",
+      "value": 0.958,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Tool Use</span></p>\n</td>\n<td>\n<p><span>0.884</span></p>\n</td>\n<td>\n<p><span>0.958</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Prompt Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "F1",
+      "value": 0.92,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Tool Use</span></p>\n</td>\n<td>\n<p><span>0.884</span></p>\n</td>\n<td>\n<p><span>0.958</span></p>\n</td>\n<td>\n<p><span>0.920</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Prompt Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "FPR",
+      "value": 0.126,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Tool Use</span></p>\n</td>\n<td>\n<p><span>0.884</span></p>\n</td>\n<td>\n<p><span>0.958</span></p>\n</td>\n<td>\n<p><span>0.920</span></p>\n</td>\n<td>\n<p><span>0.126</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Prompt Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Precision",
+      "value": 0.876,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Tool Use</span></p>\n</td>\n<td>\n<p><span>0.884</span></p>\n</td>\n<td>\n<p><span>0.958</span></p>\n</td>\n<td>\n<p><span>0.920</span></p>\n</td>\n<td>\n<p><span>0.126</span></p>\n</td>\n<td>\n<p><span>0.876</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Prompt Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Recall",
+      "value": 0.946,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Tool Use</span></p>\n</td>\n<td>\n<p><span>0.884</span></p>\n</td>\n<td>\n<p><span>0.958</span></p>\n</td>\n<td>\n<p><span>0.920</span></p>\n</td>\n<td>\n<p><span>0.126</span></p>\n</td>\n<td>\n<p><span>0.876</span></p>\n</td>\n<td>\n<p><span>0.946</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Prompt Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "F1",
+      "value": 0.909,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Tool Use</span></p>\n</td>\n<td>\n<p><span>0.884</span></p>\n</td>\n<td>\n<p><span>0.958</span></p>\n</td>\n<td>\n<p><span>0.920</span></p>\n</td>\n<td>\n<p><span>0.126</span></p>\n</td>\n<td>\n<p><span>0.876</span></p>\n</td>\n<td>\n<p><span>0.946</span></p>\n</td>\n<td>\n<p><span>0.909</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Prompt Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "FPR",
+      "value": 0.134,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<p><span>0.884</span></p>\n</td>\n<td>\n<p><span>0.958</span></p>\n</td>\n<td>\n<p><span>0.920</span></p>\n</td>\n<td>\n<p><span>0.126</span></p>\n</td>\n<td>\n<p><span>0.876</span></p>\n</td>\n<td>\n<p><span>0.946</span></p>\n</td>\n<td>\n<p><span>0.909</span></p>\n</td>\n<td>\n<p><span>0.134</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Prompt Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Precision",
+      "value": 0.947,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.947</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Response Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Recall",
+      "value": 0.931,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.947</span></p>\n</td>\n<td>\n<p><span>0.931</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Response Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "F1",
+      "value": 0.939,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.947</span></p>\n</td>\n<td>\n<p><span>0.931</span></p>\n</td>\n<td>\n<p><span>0.939</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Response Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "FPR",
+      "value": 0.04,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.947</span></p>\n</td>\n<td>\n<p><span>0.931</span></p>\n</td>\n<td>\n<p><span>0.939</span></p>\n</td>\n<td>\n<p><span>0.040</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Response Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Precision",
+      "value": 0.947,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.947</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Response Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Recall",
+      "value": 0.925,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.947</span></p>\n</td>\n<td>\n<p><span>0.931</span></p>\n</td>\n<td>\n<p><span>0.939</span></p>\n</td>\n<td>\n<p><span>0.040</span></p>\n</td>\n<td>\n<p><span>0.947</span></p>\n</td>\n<td>\n<p><span>0.925</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Response Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "F1",
+      "value": 0.936,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.947</span></p>\n</td>\n<td>\n<p><span>0.931</span></p>\n</td>\n<td>\n<p><span>0.939</span></p>\n</td>\n<td>\n<p><span>0.040</span></p>\n</td>\n<td>\n<p><span>0.947</span></p>\n</td>\n<td>\n<p><span>0.925</span></p>\n</td>\n<td>\n<p><span>0.936</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Response Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "FPR",
+      "value": 0.04,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>English</span></p>\n</td>\n<td>\n<p><span>0.947</span></p>\n</td>\n<td>\n<p><span>0.931</span></p>\n</td>\n<td>\n<p><span>0.939</span></p>\n</td>\n<td>\n<p><span>0.040</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Response Classification; English"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Precision",
+      "value": 0.929,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Multilingual</span></p>\n</td>\n<td>\n<p><span>0.929</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Response Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Recall",
+      "value": 0.805,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Multilingual</span></p>\n</td>\n<td>\n<p><span>0.929</span></p>\n</td>\n<td>\n<p><span>0.805</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Response Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "F1",
+      "value": 0.862,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Multilingual</span></p>\n</td>\n<td>\n<p><span>0.929</span></p>\n</td>\n<td>\n<p><span>0.805</span></p>\n</td>\n<td>\n<p><span>0.862</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Response Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "FPR",
+      "value": 0.033,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Multilingual</span></p>\n</td>\n<td>\n<p><span>0.929</span></p>\n</td>\n<td>\n<p><span>0.805</span></p>\n</td>\n<td>\n<p><span>0.862</span></p>\n</td>\n<td>\n<p><span>0.033</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Response Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Precision",
+      "value": 0.931,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Multilingual</span></p>\n</td>\n<td>\n<p><span>0.929</span></p>\n</td>\n<td>\n<p><span>0.805</span></p>\n</td>\n<td>\n<p><span>0.862</span></p>\n</td>\n<td>\n<p><span>0.033</span></p>\n</td>\n<td>\n<p><span>0.931</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Response Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Recall",
+      "value": 0.785,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Multilingual</span></p>\n</td>\n<td>\n<p><span>0.929</span></p>\n</td>\n<td>\n<p><span>0.805</span></p>\n</td>\n<td>\n<p><span>0.862</span></p>\n</td>\n<td>\n<p><span>0.033</span></p>\n</td>\n<td>\n<p><span>0.931</span></p>\n</td>\n<td>\n<p><span>0.785</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Response Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "F1",
+      "value": 0.851,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Multilingual</span></p>\n</td>\n<td>\n<p><span>0.929</span></p>\n</td>\n<td>\n<p><span>0.805</span></p>\n</td>\n<td>\n<p><span>0.862</span></p>\n</td>\n<td>\n<p><span>0.033</span></p>\n</td>\n<td>\n<p><span>0.931</span></p>\n</td>\n<td>\n<p><span>0.785</span></p>\n</td>\n<td>\n<p><span>0.851</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Response Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "FPR",
+      "value": 0.031,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<p><span>0.929</span></p>\n</td>\n<td>\n<p><span>0.805</span></p>\n</td>\n<td>\n<p><span>0.862</span></p>\n</td>\n<td>\n<p><span>0.033</span></p>\n</td>\n<td>\n<p><span>0.931</span></p>\n</td>\n<td>\n<p><span>0.785</span></p>\n</td>\n<td>\n<p><span>0.851</span></p>\n</td>\n<td>\n<p><span>0.031</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Response Classification; Multilingual"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Precision",
+      "value": 0.774,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Tool Use</span></p>\n</td>\n<td>\n<p><span>0.774</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Response Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Recall",
+      "value": 0.884,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Tool Use</span></p>\n</td>\n<td>\n<p><span>0.774</span></p>\n</td>\n<td>\n<p><span>0.884</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Response Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "F1",
+      "value": 0.825,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Tool Use</span></p>\n</td>\n<td>\n<p><span>0.774</span></p>\n</td>\n<td>\n<p><span>0.884</span></p>\n</td>\n<td>\n<p><span>0.825</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Response Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "FPR",
+      "value": 0.176,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Tool Use</span></p>\n</td>\n<td>\n<p><span>0.774</span></p>\n</td>\n<td>\n<p><span>0.884</span></p>\n</td>\n<td>\n<p><span>0.825</span></p>\n</td>\n<td>\n<p><span>0.176</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Non-Quantized; Response Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Precision",
+      "value": 0.793,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Tool Use</span></p>\n</td>\n<td>\n<p><span>0.774</span></p>\n</td>\n<td>\n<p><span>0.884</span></p>\n</td>\n<td>\n<p><span>0.825</span></p>\n</td>\n<td>\n<p><span>0.176</span></p>\n</td>\n<td>\n<p><span>0.793</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Response Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "Recall",
+      "value": 0.865,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Tool Use</span></p>\n</td>\n<td>\n<p><span>0.774</span></p>\n</td>\n<td>\n<p><span>0.884</span></p>\n</td>\n<td>\n<p><span>0.825</span></p>\n</td>\n<td>\n<p><span>0.176</span></p>\n</td>\n<td>\n<p><span>0.793</span></p>\n</td>\n<td>\n<p><span>0.865</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Response Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "F1",
+      "value": 0.827,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<span>Tool Use</span></p>\n</td>\n<td>\n<p><span>0.774</span></p>\n</td>\n<td>\n<p><span>0.884</span></p>\n</td>\n<td>\n<p><span>0.825</span></p>\n</td>\n<td>\n<p><span>0.176</span></p>\n</td>\n<td>\n<p><span>0.793</span></p>\n</td>\n<td>\n<p><span>0.865</span></p>\n</td>\n<td>\n<p><span>0.827</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Response Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    },
+    {
+      "rawEvalName": "Impact of quantization on Llama Guard 3 performance",
+      "metric": "FPR",
+      "value": 0.155,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation",
+        "quote": "<p><span>0.774</span></p>\n</td>\n<td>\n<p><span>0.884</span></p>\n</td>\n<td>\n<p><span>0.825</span></p>\n</td>\n<td>\n<p><span>0.176</span></p>\n</td>\n<td>\n<p><span>0.793</span></p>\n</td>\n<td>\n<p><span>0.865</span></p>\n</td>\n<td>\n<p><span>0.827</span></p>\n</td>\n<td>\n<p><span>0.155</span>",
+        "table": "Table 5"
+      },
+      "settings": {
+        "other": "Quantized; Response Classification; Tool Use"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B"
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:45:12Z"
+  },
+  "notes": "Markdown MODEL_CARD from PurpleLlama (not a PDF); no pageCount. Llama Guard 2 is not in the seed (rawModelName). Card writes GPT4; mapped to openai/gpt-4. Table 1 AUPRC for GPT4 is N/A (omitted). XSTest mentioned without numeric scores (finding only). Table 5 quotes are short HTML fragments around each cell because full rows exceed 300 characters. Hazard taxonomy lists policies but no formal risk-framework levels. Figure image of response classification example has no extractable numbers."
+}

@@ -1,0 +1,66 @@
+{
+  "eval": {
+    "slug": "anthropic-malicious-computer-use",
+    "displayName": "Malicious computer use (Anthropic)",
+    "aliases": ["Malicious computer use"],
+    "description": "Anthropic internal agentic refusal eval. The model gets GUI and CLI computer-use tools in a sandbox and is asked to run harmful tasks (surveillance, harmful content, scaled abuse). Recent cards use a fixed set of 112 tasks and report the refusal rate without product mitigations.",
+    "summary": "Measures how often the model refuses harmful tasks when it has computer tools to do them.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+        "title": "Claude Opus 5.5 System Card (PDF)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["agentic_misuse"]
+    },
+    "visibility": "public",
+    "family": "Anthropic safeguards evaluations"
+  },
+  "versions": [
+    {
+      "version": "2026-06-30",
+      "status": "published",
+      "releasedDate": "2026-06-30",
+      "changes": "112-task set documented as unchanged from the Claude Sonnet 5 system card onward.",
+      "scores": [
+        {
+          "key": "refused",
+          "displayName": "Refused",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model refused to provide a harmful computer-use outcome on the task."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "refusal_rate",
+          "displayName": "Refusal rate",
+          "score": "refused",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of malicious computer-use tasks refused (often averaged with/without thinking per the card)."
+        }
+      ]
+    }
+  ]
+}

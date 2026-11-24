@@ -1,0 +1,98 @@
+{
+  "eval": {
+    "slug": "metr-data-deduplication",
+    "displayName": "METR Data Deduplication",
+    "aliases": ["METR data deduplication", "Deduplicate Data", "data_deduplication", "c4_pairs_1m"],
+    "description": "METR agent task (public-tasks family data_deduplication, task c4_pairs_1m). The agent must write an efficient near-duplicate detector (for example fuzzy hashing) for a large text file and produce a deduplicated dataset. Scored with F1 against a reference; Anthropic’s RSP checkpoint treated F1 ≥ 0.80 as success and required ≥20% of trials above that bar. Task code and assets are not present in the public METR/public-tasks checkout (contact METR).",
+    "summary": "Measures whether AI agents can write an efficient tool that finds near-duplicate text and removes it from a large dataset.",
+    "maintainers": [
+      {
+        "name": "METR",
+        "url": "https://github.com/METR/public-tasks"
+      }
+    ],
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/METR/public-tasks",
+        "title": "METR Example Task Suite (public listing)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://metr.org/evaluations/openai-o1-preview-report/",
+        "title": "METR o1-preview report (task description)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/07b2a3f9902ee19fe39a36ca638e5ae987bc64dd.pdf",
+        "title": "Claude Opus 4 & Sonnet 4 System Card (Anthropic results)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/9ff93dfa8f445c932415d335c88852ef47f1201e.pdf",
+        "title": "Claude 3.7 Sonnet System Card (Anthropic results)"
+      }
+    ],
+    "access": "held_out",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2.1.3",
+      "status": "published",
+      "changes": "Version from METR suite_manifest.yaml for data_deduplication / c4_pairs_1m. Samples are not published in the public repo tree.",
+      "scores": [
+        {
+          "key": "f1",
+          "displayName": "F1 score",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "F1 of the agent’s deduplicated output against the reference near-duplicate labeling."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "median_f1",
+          "displayName": "Median F1",
+          "score": "f1",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Median F1 across trials. Anthropic also reported the share of trials with F1 ≥ 0.80."
+        },
+        {
+          "key": "above_threshold_rate",
+          "displayName": "Share of trials with F1 ≥ 0.80",
+          "score": "f1",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Fraction of trials scoring F1 at least 0.80 (Anthropic’s per-trial success bar for the RSP checkpoint)."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

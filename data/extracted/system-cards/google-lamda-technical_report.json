@@ -1,0 +1,413 @@
+{
+  "document": "google-lamda-technical_report",
+  "alsoDocuments": [
+    "google-bard-announce-blog",
+    "google-bard-try-blog",
+    "google-lamda-blog"
+  ],
+  "covers": [
+    {
+      "model": "google/lamda"
+    }
+  ],
+  "pageCount": 47,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text dialog (next-token language model for dialog)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "LaMDA was pre-trained to predict the next token in a text corpus. Unlike previous dialog models trained on dialog data"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "over 90% English in pre-training; also Non-English web documents (6.25% of mix)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Over 90% of the pre-training dataset is in the English language. We used the SentencePiece"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "up to 137B parameters (also 2B and 8B); largest has 137B non-embedding parameters",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "The largest LaMDA model has 137B non-embedding parameters, which is ~50x more parameters than Meena [17]."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "decoder-only Transformer (64 layers, dmodel=8192 for largest)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "We use a decoder-only Transformer [92] language model as the model architecture for LaMDA. The Transformer has"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Infiniset: 1.56T words from public dialog data and public web documents (2.97B documents, 1.12B dialogs)",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "quote": "The pre-training data, called Infiniset, is a combination of dialog data from public dialog data and other public web"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "largest model: 1024 TPU-v3 chips for about 57.7 days, 256K tokens per batch",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "We pre-trained LaMDA on 1024 TPU-v3 chips for a total of about 57.7 days, and 256K tokens per batch. We used"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Safety metric on adversarial holdout; objectives ban advice that facilitates serious harm",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "adversarially attempt to break the model as per the safety objectives. For each response, we ask other crowdworkers to"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Adversarial-intent conversations used to provoke safety-objective violations for fine-tuning and eval",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "adversarial conversation generation, expert analysts engage with LaMDA and attempt to deliberately provoke responses\nthat violate our safety objectives."
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Groundedness, Informativeness, and Citation Accuracy; tool use reduces unsourced claims",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "73.2% Groundedness and 65% Citation Accuracy. In other words, 73.2% of the responses containing statements about"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "PALMS weakness-targeting prompts: average Toxicity score 0.14 for LaMDA (lower is better)",
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "quote": "The average Toxicity scores measured using the auto\nevaluation process discussed in Solaiman et al. [87] are 0.19 for PT and 0.14 for LaMDA (lower is better)."
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Scaling alone barely improves safety; safety rises mainly when scaling is combined with safety fine-tuning and response filtering.", "tone": "mixed",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "Safety does not seem to benefit much from model scaling without fine-tuning. We expect this as the pre-training alone"
+      }
+    },
+    {
+      "text": "Even after fine-tuning, LaMDA remains below crowdworker levels on safety and groundedness.", "tone": "mixed",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "metrics, and although the model’s performance remains below human levels in safety and groundedness, the quality gap"
+      }
+    },
+    {
+      "text": "Authors state this paper is a recipe for LaMDA-like models, not a final production version.", "tone": "neutral",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "This is not the final version of LaMDA. Rather this is just a recipe for generating \"LaMDAs\" and should be taken as a"
+      }
+    },
+    {
+      "text": "Safety is reported as one aggregated score over many objectives, which hides per-objective trade-offs.", "tone": "mixed",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "The results we present in this paper aggregate fine-grained ratings on a diverse set of safety objectives (see Appendix"
+      }
+    },
+    {
+      "text": "Safety objectives were developed for a U.S. societal context and are not claimed to be universal.", "tone": "mixed",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "It is\nalso important to note that these safety objectives are developed for a U.S. societal context, and future work would be"
+      }
+    },
+    {
+      "text": "Adversarial collection mostly finds common failures; rare long-tail threats remain under-covered.", "tone": "mixed",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "A limitation of our approach is that most of the participants are able to find commonly occurring problems, but not rarer"
+      }
+    },
+    {
+      "text": "Significant safety gains used less than 0.001% of pre-training data as human-annotated fine-tuning data.", "tone": "good",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "safer dialog models with modest amounts of human-annotated fine-tuning data (less than 0.001% of pre-training data)."
+      }
+    },
+    {
+      "text": "Authors flag future work on LaMDA’s potential to exploit user trust or manipulate users.", "tone": "mixed",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "Topics that stand out as potential opportunities for future research include LaMDA’s potential to exploit user trust or\nmanipulate users, and malicious uses of LaMDA."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Foundation Metrics",
+      "metric": "Safety",
+      "value": 93.8,
+      "unit": "percent",
+      "n": 1458,
+      "settings": {
+        "other": "LaMDA (2B); adversarial holdout safety eval"
+      },
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 28",
+        "quote": "LaMDA (2B)                        81.8                   74.8                 23.4              93.8              53                    41.8"
+      },
+      "rawModelName": "LaMDA 2B"
+    },
+    {
+      "rawEvalName": "Foundation Metrics",
+      "metric": "Safety",
+      "value": 93.5,
+      "unit": "percent",
+      "n": 1458,
+      "settings": {
+        "other": "LaMDA (8B); adversarial holdout safety eval"
+      },
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 28",
+        "quote": "LaMDA (8B)                         88                    77.4                 22.2              93.5             64.6                   50.2"
+      },
+      "rawModelName": "LaMDA 8B"
+    },
+    {
+      "rawEvalName": "Foundation Metrics",
+      "model": "google/lamda",
+      "metric": "Safety",
+      "value": 95.2,
+      "unit": "percent",
+      "n": 1458,
+      "settings": {
+        "other": "LaMDA (137B); adversarial holdout safety eval"
+      },
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 28",
+        "quote": "LaMDA (137B)                      92.3                    79                  25.7              95.2             73.2                   62.3"
+      }
+    },
+    {
+      "rawEvalName": "Foundation Metrics",
+      "metric": "Groundedness",
+      "value": 53,
+      "unit": "percent",
+      "n": 784,
+      "settings": {
+        "other": "LaMDA (2B)"
+      },
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 28",
+        "quote": "LaMDA (2B)                        81.8                   74.8                 23.4              93.8              53                    41.8"
+      },
+      "rawModelName": "LaMDA 2B"
+    },
+    {
+      "rawEvalName": "Foundation Metrics",
+      "metric": "Groundedness",
+      "value": 64.6,
+      "unit": "percent",
+      "n": 784,
+      "settings": {
+        "other": "LaMDA (8B)"
+      },
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 28",
+        "quote": "LaMDA (8B)                         88                    77.4                 22.2              93.5             64.6                   50.2"
+      },
+      "rawModelName": "LaMDA 8B"
+    },
+    {
+      "rawEvalName": "Foundation Metrics",
+      "model": "google/lamda",
+      "metric": "Groundedness",
+      "value": 73.2,
+      "unit": "percent",
+      "n": 784,
+      "settings": {
+        "other": "LaMDA (137B)"
+      },
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Table 28",
+        "quote": "LaMDA (137B)                      92.3                    79                  25.7              95.2             73.2                   62.3"
+      }
+    },
+    {
+      "rawEvalName": "Citation Accuracy",
+      "model": "google/lamda",
+      "metric": "Citation Accuracy",
+      "value": 65,
+      "unit": "percent",
+      "settings": {
+        "other": "LaMDA with groundedness fine-tuning / external retrieval"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "73.2% Groundedness and 65% Citation Accuracy. In other words, 73.2% of the responses containing statements about"
+      }
+    },
+    {
+      "rawEvalName": "PALMS weakness-targeting prompts",
+      "model": "google/lamda",
+      "metric": "average Toxicity score",
+      "value": 0.14,
+      "unit": "score",
+      "settings": {
+        "other": "LaMDA (groundedness-fine-tuned); auto toxicity eval from Solaiman et al. [87]; lower is better"
+      },
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "table": "Table 12",
+        "quote": "The average Toxicity scores measured using the auto\nevaluation process discussed in Solaiman et al. [87] are 0.19 for PT and 0.14 for LaMDA (lower is better)."
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:50:32Z"
+  },
+  "notes": "Technical report (arXiv 2201.08239), not a system card. Safety-only evalResults per pilot override. Included Foundation Metrics Safety, Groundedness, and Informativeness from Table 28 (hallucination/factual grounding), plus Citation Accuracy 65% from body text and PALMS Toxicity 0.19/0.14. Skipped SSI (Sensibleness/Specificity/Interestingness), Table 5 Helpfulness/Role consistency, and domain/capability appendix tables (programming, common sense, multilingual storytelling, theory of mind). No SimpleQA. Self-harm and child safety appear only inside aggregated safety objectives, so topics marked covered false. Bias covered via safety objectives plus §9.1 discussion, not a separate bias benchmark. Jailbreaks covered via adversarial-intent safety data collection (not prompt injection). Crowdworkers and Google expert analysts are not external testers. No risk framework thresholds (ASL/FSF/CCL). Seed-linked google/lamda is covered; size/stage (PT, FT quality-safety, LaMDA 2B/8B/137B) put in settings.other."
+}

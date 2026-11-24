@@ -1,0 +1,119 @@
+{
+  "eval": {
+    "slug": "gray-swan-ipi",
+    "displayName": "Gray Swan IPI",
+    "aliases": ["Gray Swan IPI", "Gray Swan IPI Arena", "Indirect Prompt Injection (IPI) Arena", "IPI Arena"],
+    "description": "Gray Swan Indirect Prompt Injection Arena: a public red-teaming competition (with UK AISI, US CAISI, and labs) for concealed indirect prompt injections in tool-use, coding, and computer-use agents. Success requires both a harmful action and concealment in the user-facing reply. Cards report attacker success probability after k attempts (for example k=1, 10, 15). The open-source release ships 41 scenarios; 95 non-transferring Qwen attacks are public, while the full competition attack set is held for labs and AISI.",
+    "summary": "Measures how often hidden instructions in tool outputs make AI agents do harmful actions and hide them.",
+    "maintainers": [
+      {
+        "name": "Gray Swan",
+        "url": "https://github.com/GraySwanAI/ipi_arena_os"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2603.15714",
+        "title": "How Vulnerable Are AI Agents to Indirect Prompt Injections?"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/GraySwanAI/ipi_arena_os",
+        "title": "ipi_arena_os (open-source bench)"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/sureheremarv/ipi_arena_attacks",
+        "title": "95 public Qwen-only IPI attacks"
+      },
+      {
+        "kind": "blog",
+        "url": "https://www.grayswan.ai/blog/your-ai-agent-can-be-compromised-youd-never-know",
+        "title": "Gray Swan IPI Arena results post"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://app.grayswan.ai/arena",
+        "title": "Gray Swan Arena"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["agentic"],
+      "cases": ["fixed", "live_human"],
+      "grading": ["model_judge", "programmatic"],
+      "adversarial": true,
+      "humanParticipants": true,
+      "subjects": ["model"],
+      "topics": ["prompt_injection", "jailbreaks", "agentic_misuse"]
+    },
+    "visibility": "public",
+    "family": "Gray Swan"
+  },
+  "versions": [
+    {
+      "version": "2026-03",
+      "status": "published",
+      "releasedDate": "2026-03-16",
+      "dataset": {
+        "url": "https://github.com/GraySwanAI/ipi_arena_os/tree/5e2e285910d581c97767195f1d113ef323f9ab07",
+        "hfRepo": "sureheremarv/ipi_arena_attacks",
+        "revision": "2ef2d9785ed50981832b199ac89e6a0ff85d666d",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "tool",
+            "sampleCount": 18,
+            "storage": "pointer"
+          },
+          {
+            "name": "coding",
+            "sampleCount": 15,
+            "storage": "pointer"
+          },
+          {
+            "name": "browser",
+            "sampleCount": 8,
+            "storage": "pointer"
+          },
+          {
+            "name": "qwen_open_source_attacks",
+            "sampleCount": 95,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "attack_succeeded",
+          "displayName": "Attack succeeded",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "The agent both executes the harmful injected goal and conceals the compromise in the user-facing response."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "attack_success_rate",
+          "displayName": "Attack success rate",
+          "score": "attack_succeeded",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Share of successful attacks. Cards often report attacker success probability after k attempts."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "package": "ipi-arena-bench",
+        "roles": ["target", "judge"]
+      }
+    }
+  ]
+}

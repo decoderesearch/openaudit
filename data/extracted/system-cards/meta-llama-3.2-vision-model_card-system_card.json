@@ -1,0 +1,900 @@
+{
+  "document": "meta-llama-3.2-vision-model_card-system_card",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "meta-llama/Llama-3.2-11B-Vision-Instruct"
+    },
+    {
+      "model": "meta-llama/Llama-3.2-90B-Vision-Instruct"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "Sept 25, 2024",
+      "source": {
+        "page": "Model Information",
+        "quote": "Model Release Date:** Sept 25, 2024"
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "December 2023",
+      "source": {
+        "page": "Training Data",
+        "quote": "The pretraining data has a cutoff of December 2023"
+      }
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "128k",
+      "source": {
+        "page": "Model Information",
+        "quote": "Text \\+ Image | Text  | 128k | Yes | 6B (image, text) pairs | December 2023"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "Text + Image in / Text out",
+      "source": {
+        "page": "Model Information",
+        "quote": "text \\+ images in / text out"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "Text-only: English, German, French, Italian, Portuguese, Hindi, Spanish, and Thai; image+text: English only",
+      "source": {
+        "page": "Model Information",
+        "quote": "For text only tasks, English, German, French, Italian, Portuguese, Hindi, Spanish, and Thai are officially supported"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Llama 3.2 Community License",
+      "source": {
+        "page": "Model Information",
+        "quote": "Llama 3.2 Community License"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "11B (10.6) and 90B (88.8)",
+      "source": {
+        "page": "Model Information",
+        "quote": "(Image, text) pairs | 11B (10.6) | Text \\+ Image | Text  | 128k"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Built on Llama 3.1 auto-regressive transformer with a separately trained vision adapter of cross-attention layers; SFT and RLHF for tuned versions",
+      "source": {
+        "page": "Model Information",
+        "quote": "Llama 3.2-Vision is built on top of the Llama 3.1 text-only model, which is an auto-regressive language model that uses an optimized transformer architecture."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "6B image and text pairs; instruction tuning includes public vision datasets and over 3M synthetic examples",
+      "source": {
+        "page": "Training Data",
+        "quote": "Llama 3.2-Vision was pretrained on 6B image and text pairs. The instruction tuning data includes publicly available vision instruction datasets, as well as over 3M synthetically generated examples."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "2.02M GPU hours on H100-80GB",
+      "source": {
+        "page": "Hardware and Software",
+        "quote": "Training utilized a cumulative of **2.02M** GPU hours of computation on H100-80GB"
+      }
+    }
+  },
+  "riskDecisions": [
+    {
+      "domain": "bio_chem",
+      "labLabel": "unlikely Llama 3.2 presented an increase in scientific capabilities due to its added image understanding capability as compared to Llama 3.1",
+      "phase": "unspecified",
+      "source": {
+        "page": "Critical Risks",
+        "quote": "found that it was unlikely Llama 3.2 presented an increase in scientific capabilities due to its added image understanding capability as compared to Llama 3.1"
+      }
+    }
+  ],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "red team adversarial goals include extracting harmful information",
+      "source": {
+        "page": "Evaluations",
+        "quote": "extracting harmful information or reprogramming the model to act in a potentially harmful capacity"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "expert Child Safety risk assessments and expanded evaluation coverage",
+      "source": {
+        "page": "Critical Risks",
+        "quote": "Child Safety risk assessments were conducted using a team of experts"
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "recurring red teaming via adversarial prompting",
+      "source": {
+        "page": "Evaluations",
+        "quote": "discovering risks via adversarial prompting"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "Prompt Guard offered among system safeguards",
+      "source": {
+        "page": "Llama 3.2 Systems",
+        "quote": "Llama Guard, Prompt Guard and Code Shield"
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": true,
+      "headline": "system safeguards expected when building agentic systems",
+      "source": {
+        "page": "Llama 3.2 Systems",
+        "quote": "Developers are expected to deploy system safeguards when building agentic systems"
+      }
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "model may produce inaccurate responses",
+      "source": {
+        "page": "Ethical Considerations and Limitations",
+        "quote": "produce inaccurate, biased or other objectionable responses to user prompts"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "model may produce biased responses",
+      "source": {
+        "page": "Ethical Considerations and Limitations",
+        "quote": "inaccurate, biased or other objectionable responses"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "Llama 3.1 cyber uplift testing treated as applying to Llama 3.2 vision",
+      "source": {
+        "page": "Critical Risks",
+        "quote": "Because Llama 3.2’s vision capabilities are not generally germane to cyber uplift, we believe that the testing conducted for Llama 3.1 also applies to Llama 3.2."
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "targeted evaluations found unlikely increase vs Llama 3.1 from image understanding",
+      "source": {
+        "page": "Critical Risks",
+        "quote": "unlikely Llama 3.2 presented an increase in scientific capabilities due to its added image understanding capability as compared to Llama 3.1"
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": true,
+      "headline": "output reporting mechanism and bug bounty program",
+      "source": {
+        "page": "Community",
+        "quote": "output reporting mechanism](https://developers.facebook.com/llama_output_feedback) and [bug bounty program"
+      }
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Meta followed a three-pronged Responsible release strategy: enable safe developer use, protect against adversarial users, and protect the community from misuse.", "tone": "good",
+      "source": {
+        "page": "Responsibility & Safety",
+        "quote": "As part of our Responsible release approach, we followed a three-pronged strategy to managing trust & safety risks:"
+      }
+    },
+    {
+      "text": "Models are not designed for isolated deployment; Meta recommends system safeguards such as Llama Guard, Prompt Guard, and Code Shield.", "tone": "mixed",
+      "source": {
+        "page": "Llama 3.2 Systems",
+        "quote": "Large language models, including Llama 3.2, **are not designed to be deployed in isolation**"
+      }
+    },
+    {
+      "text": "Dedicated measures addressed the risk of uniquely identifying individuals in images; Llama Guard 3-11B-Vision is suggested as a mitigation.", "tone": "good",
+      "source": {
+        "page": "New Capabilities and Use Cases",
+        "quote": "address the risk of the models uniquely identifying individuals in images"
+      }
+    },
+    {
+      "text": "chemical, biological, radiological, nuclear, and explosive (CBRNE) uplift testing for Llama 3.2-Vision found an unlikely increase in scientific capabilities versus Llama 3.1 from added image understanding.", "tone": "good",
+      "source": {
+        "page": "Critical Risks",
+        "quote": "unlikely Llama 3.2 presented an increase in scientific capabilities due to its added image understanding capability as compared to Llama 3.1"
+      }
+    },
+    {
+      "text": "Cyber attack uplift studies described are for Llama 3.1; Meta says they also apply to Llama 3.2 because vision is not germane to cyber uplift.", "tone": "mixed",
+      "source": {
+        "page": "Critical Risks",
+        "quote": "Because Llama 3.2’s vision capabilities are not generally germane to cyber uplift, we believe that the testing conducted for Llama 3.1 also applies to Llama 3.2."
+      }
+    },
+    {
+      "text": "Training used 2.0M GPU hours with estimated 584 tons CO2eq location-based emissions and 0 tons market-based.", "tone": "neutral",
+      "source": {
+        "page": "Hardware and Software",
+        "quote": "Estimated total location-based greenhouse gas emissions were **584** tons CO2eq for training."
+      }
+    },
+    {
+      "text": "For image+text applications, English is the only supported language even though eight languages are supported for text-only tasks.", "tone": "mixed",
+      "source": {
+        "page": "Model Information",
+        "quote": "Note for image+text applications, English is the only language supported."
+      }
+    },
+    {
+      "text": "Testing to date has not covered all scenarios; outputs can be inaccurate, biased, or objectionable.", "tone": "mixed",
+      "source": {
+        "page": "Ethical Considerations and Limitations",
+        "quote": "Testing conducted to date has not covered, nor could it cover, all scenarios."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "VQAv2 (val)",
+      "metric": "Accuracy",
+      "value": 66.8,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "| Image Understanding | VQAv2 (val) | 0 | Accuracy | 66.8",
+        "table": "Base Pretrained Models"
+      },
+      "rawModelName": "Llama 3.2 11B",
+      "settings": {
+        "other": "0 shots; base pretrained"
+      }
+    },
+    {
+      "rawEvalName": "VQAv2 (val)",
+      "metric": "Accuracy",
+      "value": 73.6,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "| Image Understanding | VQAv2 (val) | 0 | Accuracy | 66.8 | 73.6 |",
+        "table": "Base Pretrained Models"
+      },
+      "rawModelName": "Llama 3.2 90B",
+      "settings": {
+        "other": "0 shots; base pretrained"
+      }
+    },
+    {
+      "rawEvalName": "Text VQA (val)",
+      "metric": "Relaxed accuracy",
+      "value": 73.1,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | Text VQA (val) | 0 | Relaxed accuracy | 73.1",
+        "table": "Base Pretrained Models"
+      },
+      "rawModelName": "Llama 3.2 11B",
+      "settings": {
+        "other": "0 shots; base pretrained"
+      }
+    },
+    {
+      "rawEvalName": "Text VQA (val)",
+      "metric": "Relaxed accuracy",
+      "value": 73.5,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | Text VQA (val) | 0 | Relaxed accuracy | 73.1 | 73.5 |",
+        "table": "Base Pretrained Models"
+      },
+      "rawModelName": "Llama 3.2 90B",
+      "settings": {
+        "other": "0 shots; base pretrained"
+      }
+    },
+    {
+      "rawEvalName": "DocVQA (val, unseen)",
+      "metric": "ANLS",
+      "value": 62.3,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | DocVQA (val, unseen) | 0 | ANLS | 62.3",
+        "table": "Base Pretrained Models"
+      },
+      "rawModelName": "Llama 3.2 11B",
+      "settings": {
+        "other": "0 shots; base pretrained"
+      }
+    },
+    {
+      "rawEvalName": "DocVQA (val, unseen)",
+      "metric": "ANLS",
+      "value": 70.7,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | DocVQA (val, unseen) | 0 | ANLS | 62.3 | 70.7 |",
+        "table": "Base Pretrained Models"
+      },
+      "rawModelName": "Llama 3.2 90B",
+      "settings": {
+        "other": "0 shots; base pretrained"
+      }
+    },
+    {
+      "rawEvalName": "MMMU (val, 0-shot)",
+      "metric": "Micro average accuracy",
+      "value": 41.7,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "| Visual Reasoning | MMMU (val, 0-shot) | 0 | Micro average accuracy | 41.7",
+        "table": "Base Pretrained Models"
+      },
+      "rawModelName": "Llama 3.2 11B",
+      "settings": {
+        "other": "0 shots; base pretrained"
+      }
+    },
+    {
+      "rawEvalName": "MMMU (val, 0-shot)",
+      "metric": "Micro average accuracy",
+      "value": 49.3,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "| Visual Reasoning | MMMU (val, 0-shot) | 0 | Micro average accuracy | 41.7 | 49.3 |",
+        "table": "Base Pretrained Models"
+      },
+      "rawModelName": "Llama 3.2 90B",
+      "settings": {
+        "other": "0 shots; base pretrained"
+      }
+    },
+    {
+      "rawEvalName": "ChartQA (test)",
+      "metric": "Accuracy",
+      "value": 39.4,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | ChartQA (test) | 0 | Accuracy | 39.4",
+        "table": "Base Pretrained Models"
+      },
+      "rawModelName": "Llama 3.2 11B",
+      "settings": {
+        "other": "0 shots; base pretrained"
+      }
+    },
+    {
+      "rawEvalName": "ChartQA (test)",
+      "metric": "Accuracy",
+      "value": 54.2,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | ChartQA (test) | 0 | Accuracy | 39.4 | 54.2 |",
+        "table": "Base Pretrained Models"
+      },
+      "rawModelName": "Llama 3.2 90B",
+      "settings": {
+        "other": "0 shots; base pretrained"
+      }
+    },
+    {
+      "rawEvalName": "InfographicsQA (val, unseen)",
+      "metric": "ANLS",
+      "value": 43.2,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | InfographicsQA (val, unseen) | 0 | ANLS | 43.2",
+        "table": "Base Pretrained Models"
+      },
+      "rawModelName": "Llama 3.2 11B",
+      "settings": {
+        "other": "0 shots; base pretrained"
+      }
+    },
+    {
+      "rawEvalName": "InfographicsQA (val, unseen)",
+      "metric": "ANLS",
+      "value": 56.8,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | InfographicsQA (val, unseen) | 0 | ANLS | 43.2 | 56.8 |",
+        "table": "Base Pretrained Models"
+      },
+      "rawModelName": "Llama 3.2 90B",
+      "settings": {
+        "other": "0 shots; base pretrained"
+      }
+    },
+    {
+      "rawEvalName": "AI2 Diagram (test)",
+      "metric": "Accuracy",
+      "value": 62.4,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | AI2 Diagram (test) | 0 | Accuracy | 62.4",
+        "table": "Base Pretrained Models"
+      },
+      "rawModelName": "Llama 3.2 11B",
+      "settings": {
+        "other": "0 shots; base pretrained"
+      }
+    },
+    {
+      "rawEvalName": "AI2 Diagram (test)",
+      "metric": "Accuracy",
+      "value": 75.3,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | AI2 Diagram (test) | 0 | Accuracy | 62.4 | 75.3 |",
+        "table": "Base Pretrained Models"
+      },
+      "rawModelName": "Llama 3.2 90B",
+      "settings": {
+        "other": "0 shots; base pretrained"
+      }
+    },
+    {
+      "rawEvalName": "MMMU (val, CoT)",
+      "metric": "Micro average accuracy",
+      "value": 50.7,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "| Image | College-level Problems and Mathematical Reasoning | MMMU (val, CoT) | 0 | Micro average accuracy | 50.7",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+      "settings": {
+        "reasoningEffort": "CoT",
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "MMMU (val, CoT)",
+      "metric": "Micro average accuracy",
+      "value": 60.3,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "| Image | College-level Problems and Mathematical Reasoning | MMMU (val, CoT) | 0 | Micro average accuracy | 50.7 | 60.3 |",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-90B-Vision-Instruct",
+      "settings": {
+        "reasoningEffort": "CoT",
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "MMMU-Pro, Standard (10 opts, test)",
+      "metric": "Accuracy",
+      "value": 33,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  |  | MMMU-Pro, Standard (10 opts, test) | 0 | Accuracy | 33.0",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+      "settings": {
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "MMMU-Pro, Standard (10 opts, test)",
+      "metric": "Accuracy",
+      "value": 45.2,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  |  | MMMU-Pro, Standard (10 opts, test) | 0 | Accuracy | 33.0 | 45.2 |",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-90B-Vision-Instruct",
+      "settings": {
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "MMMU-Pro, Vision (test)",
+      "metric": "Accuracy",
+      "value": 23.7,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  |  | MMMU-Pro, Vision (test) | 0 | Accuracy | 23.7",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+      "settings": {
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "MMMU-Pro, Vision (test)",
+      "metric": "Accuracy",
+      "value": 33.8,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  |  | MMMU-Pro, Vision (test) | 0 | Accuracy | 23.7 | 33.8 |",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-90B-Vision-Instruct",
+      "settings": {
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "MathVista (testmini)",
+      "metric": "Accuracy",
+      "value": 51.5,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  |  | MathVista (testmini) | 0 | Accuracy | 51.5",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+      "settings": {
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "MathVista (testmini)",
+      "metric": "Accuracy",
+      "value": 57.3,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  |  | MathVista (testmini) | 0 | Accuracy | 51.5 | 57.3 |",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-90B-Vision-Instruct",
+      "settings": {
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "ChartQA (test, CoT)",
+      "metric": "Relaxed accuracy",
+      "value": 83.4,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | Charts and Diagram Understanding | ChartQA (test, CoT) | 0 | Relaxed accuracy | 83.4",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+      "settings": {
+        "reasoningEffort": "CoT",
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "ChartQA (test, CoT)",
+      "metric": "Relaxed accuracy",
+      "value": 85.5,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | Charts and Diagram Understanding | ChartQA (test, CoT) | 0 | Relaxed accuracy | 83.4 | 85.5 |",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-90B-Vision-Instruct",
+      "settings": {
+        "reasoningEffort": "CoT",
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "AI2 Diagram (test)",
+      "metric": "Accuracy",
+      "value": 91.1,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  |  | AI2 Diagram (test) | 0 | Accuracy | 91.1",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+      "settings": {
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "AI2 Diagram (test)",
+      "metric": "Accuracy",
+      "value": 92.3,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  |  | AI2 Diagram (test) | 0 | Accuracy | 91.1 | 92.3 |",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-90B-Vision-Instruct",
+      "settings": {
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "DocVQA (test)",
+      "metric": "ANLS",
+      "value": 88.4,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  |  | DocVQA (test) | 0 | ANLS | 88.4",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+      "settings": {
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "DocVQA (test)",
+      "metric": "ANLS",
+      "value": 90.1,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  |  | DocVQA (test) | 0 | ANLS | 88.4 | 90.1 |",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-90B-Vision-Instruct",
+      "settings": {
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "VQAv2 (test)",
+      "metric": "Accuracy",
+      "value": 75.2,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | General Visual Question Answering | VQAv2 (test) | 0 | Accuracy | 75.2",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+      "settings": {
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "VQAv2 (test)",
+      "metric": "Accuracy",
+      "value": 78.1,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | General Visual Question Answering | VQAv2 (test) | 0 | Accuracy | 75.2 | 78.1 |",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-90B-Vision-Instruct",
+      "settings": {
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (CoT)",
+      "metric": "Macro_avg/acc",
+      "value": 73,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "| Text | General | MMLU (CoT) | 0 | Macro\\_avg/acc | 73.0",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+      "settings": {
+        "reasoningEffort": "CoT",
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (CoT)",
+      "metric": "Macro_avg/acc",
+      "value": 86,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "| Text | General | MMLU (CoT) | 0 | Macro\\_avg/acc | 73.0 | 86.0 |",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-90B-Vision-Instruct",
+      "settings": {
+        "reasoningEffort": "CoT",
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "MATH (CoT)",
+      "metric": "Final_em",
+      "value": 51.9,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | Math | MATH (CoT) | 0 | Final\\_em | 51.9",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+      "settings": {
+        "reasoningEffort": "CoT",
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "MATH (CoT)",
+      "metric": "Final_em",
+      "value": 68,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | Math | MATH (CoT) | 0 | Final\\_em | 51.9 | 68.0 |",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-90B-Vision-Instruct",
+      "settings": {
+        "reasoningEffort": "CoT",
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "GPQA",
+      "metric": "Accuracy",
+      "value": 32.8,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | Reasoning | GPQA | 0 | Accuracy | 32.8",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+      "settings": {
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "GPQA",
+      "metric": "Accuracy",
+      "value": 46.7,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | Reasoning | GPQA | 0 | Accuracy | 32.8 | 46.7 |",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-90B-Vision-Instruct",
+      "settings": {
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "MGSM (CoT)",
+      "metric": "em",
+      "value": 68.9,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | Multilingual | MGSM (CoT) | 0 | em | 68.9",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+      "settings": {
+        "reasoningEffort": "CoT",
+        "other": "0 shots"
+      }
+    },
+    {
+      "rawEvalName": "MGSM (CoT)",
+      "metric": "em",
+      "value": 86.9,
+      "unit": "percent",
+      "source": {
+        "page": "Benchmarks - Image Reasoning",
+        "quote": "|  | Multilingual | MGSM (CoT) | 0 | em | 68.9 | 86.9 |",
+        "table": "Instruction Tuned Models"
+      },
+      "model": "meta-llama/Llama-3.2-90B-Vision-Instruct",
+      "settings": {
+        "reasoningEffort": "CoT",
+        "other": "0 shots"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:40:38Z"
+  },
+  "notes": "Source is the GitHub MODEL_CARD_VISION.md (raw markdown), not a PDF; no pageCount. Seed covers are the Instruct Vision models; Base Pretrained table columns labeled Llama 3.2 11B/90B kept as rawModelName. Instruction-tuned table mapped to Vision-Instruct seed ids. No named external testing orgs. Child Safety and cyber are discussed without a stated risk tier for 3.2-Vision; only bio_chem has a clear comparative conclusion. GPU-hour stage breakdowns and GHG table numbers left out of evalResults (not eval scores). Empty blank row in instruction-tuned table skipped."
+}

@@ -1,0 +1,180 @@
+{
+  "document": "skywork-r1v-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "Skywork/Skywork-R1V-38B"
+    }
+  ],
+  "pageCount": 11,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "16384 tokens (training context length)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Additional hyperparameters include a context length of\n16384 tokens, a weight decay of 0.05"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "multimodal: visual and language (text)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce Skywork R1V, a multimodal reasoning model extending the an\n                                                   R1-series Large language models (LLM) to visual modalities via an efficient mul-"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "38B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Skywork R1V, with only 38B\n                                                   parameters, delivers competitive performance"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "ViT vision encoder, MLP adapter, DeepSeek-R1-distill-Qwen2.5-32B language model (MLP initialized via Qwen2.5-32B-Instruct)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "vision encoder fv (we employ the Vision Transformer (ViT)\n[6]), a reasoning-capable language model fl (DeepSeek-R1-distill-Qwen2.5-32B [5]), and a"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "MLP init: 2M samples, then 200K GPT-4-selected samples, then 40K CoT samples; later iterative SFT/GRPO on reward-filtered and error-focused multimodal reasoning data",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "initial fine-tuning on the full dataset (2M samples);\n2) refinement on a curated subset consisting of 200K high-quality samples selected via GPT-4\nevaluation; and 3) a final fine-tuning step on 40K high-quality Chain-of-Thought (CoT) samples."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:24:46Z"
+  },
+  "notes": "Technical report (arXiv 2504.05599), not a system card. No safety, alignment, refusal, jailbreak, bias, toxicity, privacy, honesty, hallucination, or dangerous-capability section or numbers. Under the pilot safety-only rule, skipped all capability evals in Table 1 and related text/figures: MATH-500, AIME 2024, GPQA, MathVista(mini), MMMU(Val), plus Figure 3 bar charts and Table 2 MMMU training-stage scores. Weights said to be publicly released with no calendar release date or license name. Training context length 16384 recorded under contextWindow; eval max generation 64K left out of maxOutput as an evaluation setting only."
+}

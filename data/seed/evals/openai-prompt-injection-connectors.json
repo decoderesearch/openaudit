@@ -1,0 +1,69 @@
+{
+  "eval": {
+    "slug": "openai-prompt-injection-connectors",
+    "displayName": "Prompt injection — Connectors",
+    "aliases": [
+      "Prompt injection attacks in connectors",
+      "Prompt injection — Search and Function-Calling",
+      "Prompt injection attacks in function calls"
+    ],
+    "description": "OpenAI internal prompt-injection eval for connector and search/function-calling tool outputs. Attacks embed adversarial instructions in tool output to override system, developer, or user instructions. Scored as not_unsafe / robustness (higher is better). Dataset and runner are lab-internal. Does not claim the bare name \"Prompt injection\", which other labs also use.",
+    "summary": "Tests whether the model follows hidden instructions in tool outputs instead of its system, developer, or user instructions.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-5-4-thinking/gpt-5-4-thinking.pdf",
+        "title": "GPT-5.4 Thinking system card (Prompt injection attacks in connectors)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["agentic", "multi_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["prompt_injection"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "gpt-5.4-thinking",
+      "status": "draft",
+      "releasedDate": "2026-03-05",
+      "changes": "First tabled in the GPT-5.4 Thinking system card for connectors and function calls. Later cards rename categories to Connectors and Search and Function-Calling.",
+      "scores": [
+        {
+          "key": "not_unsafe",
+          "displayName": "Not unsafe / robust",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model does not follow the injected tool-output instructions in a way that violates the intended instruction hierarchy."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "not_unsafe_rate",
+          "displayName": "Not-unsafe / robustness rate",
+          "score": "not_unsafe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of connector or search/function-calling prompt-injection cases scored not_unsafe (also reported as robustness or success rate). Higher is better. Per category."
+        }
+      ]
+    }
+  ]
+}

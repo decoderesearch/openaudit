@@ -1,0 +1,105 @@
+{
+  "eval": {
+    "slug": "cybergym",
+    "displayName": "CyberGym",
+    "aliases": ["CyberGym (no jailbreak)", "CyberGym baseline (no jailbreak)"],
+    "description": "Tests AI agents on reproducing real software vulnerabilities from OSS-Fuzz projects. Each task gives a vulnerability description and an unpatched codebase; the agent must produce a proof-of-concept that triggers the pre-patch build and not the patched build. Headline score is targeted reproduction success (often pass@1).",
+    "summary": "Tests whether AI agents can create working exploits that trigger real software vulnerabilities from text descriptions.",
+    "maintainers": [
+      {
+        "name": "UC Berkeley Sunblaze",
+        "url": "https://github.com/sunblaze-ucb/cybergym"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2506.02548",
+        "title": "CyberGym: Evaluating AI Agents' Real-World Cybersecurity Capabilities at Scale"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/sunblaze-ucb/cybergym",
+        "title": "Official CyberGym code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/sunblaze-ucb/cybergym",
+        "title": "CyberGym task bank"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www.cybergym.io/cybergym/",
+        "title": "CyberGym site and leaderboard"
+      },
+      {
+        "kind": "leaderboard",
+        "url": "https://www.cybergym.io/cybergym/",
+        "title": "CyberGym Level 1 leaderboard"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["cyber"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-06-03",
+      "status": "published",
+      "releasedDate": "2025-06-03",
+      "dataset": {
+        "hfRepo": "sunblaze-ucb/cybergym",
+        "revision": "bde190ded494e52bc684b66073b436c9d992c7c6",
+        "url": "https://huggingface.co/datasets/sunblaze-ucb/cybergym",
+        "license": "apache-2.0",
+        "splits": [
+          {
+            "name": "tasks",
+            "sampleCount": 1507,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "reproduced",
+          "displayName": "Target vulnerability reproduced",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the submitted PoC triggers the pre-patch target and does not trigger the patched build."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "pass_at_1",
+          "displayName": "Pass@1 (targeted reproduction)",
+          "score": "reproduced",
+          "aggregation": "pass_at_k",
+          "k": 1,
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of tasks with at least one successful targeted reproduction in one trial (cards also report mean reproduced and any-crash rates)."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "sandbox": "docker",
+        "internet": false
+      }
+    }
+  ]
+}

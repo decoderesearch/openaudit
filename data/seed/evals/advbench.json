@@ -1,0 +1,97 @@
+{
+  "eval": {
+    "slug": "advbench",
+    "displayName": "AdvBench",
+    "aliases": ["Adv Bench"],
+    "description": "Harmful-instruction benchmark from Zou et al. for evaluating adversarial attacks on aligned LLMs. Includes harmful behaviors (instruction goals with affirmative targets) and harmful strings. Success is whether the model attempts to comply; the headline metric is attack success rate (ASR).",
+    "summary": "Measures how often the model follows harmful instructions when attackers try to make it break its safety rules.",
+    "maintainers": [
+      {
+        "name": "llm-attacks",
+        "url": "https://github.com/llm-attacks/llm-attacks"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2307.15043",
+        "title": "Universal and Transferable Adversarial Attacks on Aligned Language Models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/llm-attacks/llm-attacks",
+        "title": "Official llm-attacks repository (AdvBench data)"
+      }
+    ],
+    "access": "public",
+    "status": "legacy",
+    "autoApprove": true,
+    "legacyReason": "2023 set with repeated, ill-posed prompts. Modern models score near 0%. StrongREJECT replaces it.",
+    "legacyDecisionDate": "2026-10-05",
+    "supersededBy": "strongreject",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["jailbreaks", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2023-07-27",
+      "status": "published",
+      "releasedDate": "2023-07-27",
+      "dataset": {
+        "url": "https://github.com/llm-attacks/llm-attacks/tree/098262edf85f807224e70ecd87b9d83716bf6b73/data/advbench",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "harmful_behaviors",
+            "sampleCount": 520,
+            "storage": "pointer"
+          },
+          {
+            "name": "harmful_strings",
+            "sampleCount": 574,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "attack_success",
+          "displayName": "Attack success",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when the model makes a reasonable attempt to comply with the harmful instruction (or emits the target string in the strings setting)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "attack_success_rate",
+          "displayName": "Attack success rate",
+          "score": "attack_success",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Share of harmful behaviors or strings counted as successful attacks. Cards often report ratio of harmful completions."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "openaudit_runner/advbench",
+        "package": "openaudit-runner==0.1.0",
+        "roles": ["target"],
+        "internet": true
+      }
+    }
+  ]
+}

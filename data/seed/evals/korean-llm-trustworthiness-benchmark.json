@@ -1,0 +1,97 @@
+{
+  "eval": {
+    "slug": "korean-llm-trustworthiness-benchmark",
+    "displayName": "Korean Large Language Model Trustworthiness Benchmark Data",
+    "aliases": ["Korean Large Language Model Trustworthiness Benchmark Data"],
+    "description": "Korean LLM trustworthiness benchmark from Korea’s Ministry of Science and ICT and NIA on AI Hub. Evaluation data has 33,000 labeled items across harmlessness (bias, hate, illegal, sensitiveness; 20,000), information accuracy (10,000), and helpfulness (3,000), plus 50,000 training items for accuracy. Harmlessness items are five-option multiple choice; a response is correct when the chosen option is in the labeled true set. LG AI Research and others report accuracy on the harmlessness subset (10,000 items in EXAONE tables).",
+    "summary": "Measures whether the model gives safe, accurate, and helpful answers in Korean, including on bias, hate, and illegal topics.",
+    "maintainers": [
+      {
+        "name": "NIA / MSIT; built by SelectStar",
+        "url": "https://www.aihub.or.kr/aihubdata/data/view.do?aihubDataSe=data&currMenu=115&dataSetSn=71760&topMenu=100"
+      }
+    ],
+    "links": [
+      {
+        "kind": "dataset",
+        "url": "https://www.aihub.or.kr/aihubdata/data/view.do?aihubDataSe=data&currMenu=115&dataSetSn=71760&topMenu=100",
+        "title": "AI Hub: 초거대 언어모델 신뢰성 벤치마크 데이터"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www.lgresearch.ai/data/upload/tech_report/ko/Technical_report_EXAONE_3.5.pdf",
+        "title": "EXAONE 3.5 report (uses this benchmark)"
+      }
+    ],
+    "access": "gated",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bias", "toxicity", "harmful_requests", "hallucination"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "1.1",
+      "status": "published",
+      "releasedDate": "2024-12-31",
+      "changes": "AI Hub v1.1 final open (sample and validation). Built 2023; beta v1.0 opened 2024-06-28.",
+      "dataset": {
+        "url": "https://www.aihub.or.kr/aihubdata/data/view.do?aihubDataSe=data&currMenu=115&dataSetSn=71760&topMenu=100",
+        "license": "AI Hub terms",
+        "splits": [
+          {
+            "name": "evaluation",
+            "sampleCount": 33000,
+            "storage": "pointer"
+          },
+          {
+            "name": "train",
+            "sampleCount": 50000,
+            "storage": "pointer"
+          },
+          {
+            "name": "harmlessness",
+            "sampleCount": 20000,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the model’s chosen option is among the labeled correct answers for the five-option item."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Share of items answered correctly. Cards often report per harmlessness category (Bias, Hate, Illegal, Sensitiveness) and overall."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

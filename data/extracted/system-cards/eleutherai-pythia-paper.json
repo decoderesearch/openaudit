@@ -1,0 +1,252 @@
+{
+  "document": "eleutherai-pythia-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "EleutherAI/pythia-70m"
+    },
+    {
+      "model": "EleutherAI/pythia-160m"
+    },
+    {
+      "model": "EleutherAI/pythia-410m"
+    },
+    {
+      "model": "EleutherAI/pythia-1b"
+    },
+    {
+      "model": "EleutherAI/pythia-1.4b"
+    },
+    {
+      "model": "EleutherAI/pythia-2.8b"
+    },
+    {
+      "model": "EleutherAI/pythia-6.9b"
+    },
+    {
+      "model": "EleutherAI/pythia-12b"
+    }
+  ],
+  "pageCount": 34,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "2048 sequence length",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "sequence length of 2048 (2,097,152 tokens) for all models,"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (autoregressive language models)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "In this paper we introduce Pythia, a suite of decoder-only"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English (monolingual)",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "our models are monolingual and we intervene on gendered pronouns."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "under the Apache 2.0 license via the HuggingFace Hub"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "16 models from 70M to 12B (8 sizes × Pile and deduplicated Pile)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "of 16 LLMs all trained on public data seen in"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "decoder-only autoregressive LM; dense attention; Flash Attention; rotary embeddings; parallel attention+FF; untied embeddings",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "In this paper we introduce Pythia, a suite of decoder-only"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "The Pile and a near-deduplicated copy of The Pile (MinHashLSH threshold 0.87); ~300B tokens training",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We train 8 model sizes each on both the Pile (Gao et al.,"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Gender-pronoun pretraining interventions reduce [CrowS-Pairs](/evals/crows-pairs) and [WinoBias](/evals/winobias) stereotype scores; on 6.9B the intervention flips pro-stereotypical to anti-stereotypical",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "6.9B, applying the intervention also successfully changes"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Swapping masculine pronouns for feminine ones in the last 7% or 21% of pretraining reduces measured gender bias on [CrowS-Pairs](/evals/crows-pairs) and [WinoBias](/evals/winobias) for the tested Pythia-deduped sizes.", "tone": "good",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "can clearly see a reduction in the bias as a result of swap-"
+      }
+    },
+    {
+      "text": "On the 6.9B model, the pronoun intervention changes [WinoBias](/evals/winobias) behavior from pro-stereotypical bias to anti-stereotypical.", "tone": "mixed",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "pro-stereotypical bias to an anti-stereotypical one. We hy-"
+      }
+    },
+    {
+      "text": "Training order has little impact on (k,ℓ)-memorization; memorized sequences fit a Poisson point process across training.", "tone": "neutral",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "little impact on memorization. This model implies that mem-"
+      }
+    },
+    {
+      "text": "Authors note [CrowS-Pairs](/evals/crows-pairs) progression noise may reflect either real bias change or poor reliability of the benchmark.", "tone": "mixed",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "model’s bias or poor reliability of CrowS-Pairs is an open"
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:38:39Z"
+  },
+  "notes": "Technical report (arXiv:2304.01373), not a system card. Safety-only pilot: CrowS-Pairs and WinoBias gender-bias case study (Figures 1–2) and Carlini-style memorization (Figure 3) are the safety-relevant parts. Bias scores exist only as line charts with no readable numeric end-of-training values in the text layer, so evalResults is empty and charts are noted here rather than guessed. Memorization has no per-model numeric rates in the text (Poisson/Q-Q plots only); kept as findings. Skipped capability: Appendix G LM Evaluation Harness suite, LAMBADA (Figure 6, used only to show interventions do not hurt LM accuracy), few-shot arithmetic/QA term-frequency case study (Section 3.3). Deduped suite models are seed checkpoints (*-deduped) of the eight covered sizes; bias interventions used deduped 70M/410M/1.4B/6.9B. No risk framework, external safety testers, toxicity, refusal, or jailbreak evals. Untied embeddings mentioned to ease interpretability research is not an interpretability eval."
+}

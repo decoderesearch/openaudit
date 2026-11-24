@@ -1,0 +1,53 @@
+{
+  "slug": "paraphrase-consistency",
+  "displayName": "Paraphrase Consistency",
+  "group": "black_box",
+  "summary": "A paraphrase-consistency detector asks the subject model the same question in other words, in new chats, and flags a reply that disagrees with most of those answers.",
+  "tagline": "Ask again in new chats, and compare the answers.",
+  "safetyUse": "A lie in one chat can depend on that chat: its system prompt, its motive or its earlier turns. The detector asks the subject model the same factual question in 3 paraphrases, each in a new chat with no earlier context. When the reply in the chat disagrees with most of these answers, the detector flags it as a lie. It needs only text in and out, so an auditor can use it through an API.\n\nOn OpenAudit, the Varied Deception eval tests it on prompted lies about TriviaQA questions.",
+  "caveats": [
+    "It works only for questions with a short answer that a judge can compare. Open-ended replies are out of scope.",
+    "On Varied Deception, AISI kept only questions that the model answers correctly with a neutral prompt, and labeled a wrong reply a lie. The new chats repeat this check, so the score is an upper bound for prompted lies.",
+    "A model that lies in all chats (a trained liar, or a lie from a fixed system prompt that the new chats also have) gives consistent answers, and the detector does not flag it.",
+    "It flags a disagreement, not intent. An honest error that changes with the wording also looks like a lie.",
+    "Each reply costs a few calls to the subject model and to a helper model (paraphrases and the answer match)."
+  ],
+  "params": [
+    {
+      "key": "paraphrases",
+      "label": "Paraphrases",
+      "type": "integer",
+      "description": "The number of paraphrases of the question, each in a new chat."
+    },
+    {
+      "key": "context",
+      "label": "Context of the new chats",
+      "type": "string",
+      "description": "What the new chats keep of the original chat: none, or the system prompt."
+    },
+    {
+      "key": "helperModel",
+      "label": "Helper model",
+      "type": "string",
+      "description": "The model that writes the paraphrases and compares the answers."
+    }
+  ],
+  "compare": { "groupBy": [] },
+  "links": [
+    {
+      "kind": "paper",
+      "url": "https://proceedings.mlr.press/v306/yulong26a.html",
+      "title": "Yulong et al., Same Question, Different Lies: Cross-Context Consistency (C3) for Black-Box Sandbagging Detection (2026)"
+    },
+    {
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2311.01740",
+      "title": "Zhang et al., SAC3: Reliable Hallucination Detection in Black-Box Language Models via Semantic-aware Cross-check Consistency (EMNLP Findings 2023)"
+    },
+    {
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2606.12618",
+      "title": "Cooney, Africa and Irving, Evaluating Lie Detectors across Model Scale and Belief-Verified Model Organisms"
+    }
+  ]
+}

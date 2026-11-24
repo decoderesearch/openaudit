@@ -1,0 +1,107 @@
+# Lint, unit, Python, database and page tests. Pull requests (also from forks) run them on the free
+# runner, with no secrets. The deploy workflow calls this one with our larger runner.
+name: Checks
+
+on:
+  pull_request:
+  workflow_call:
+    inputs:
+      large-runner:
+        description: The runner for the slow jobs.
+        type: string
+        default: ubuntu-latest
+    outputs:
+      runner:
+        description: '"true" when the runner code changed (pushes only).'
+        value: ${{ jobs.checks.outputs.runner }}
+
+concurrency:
+  group: checks-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Lint and unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      runner: ${{ steps.changes.outputs.runner }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dorny/paths-filter@v4
+        if: github.event_name == 'push'
+        id: changes
+        with:
+          filters: |
+            runner:
+              - apps/runner/**
+              - apps/runner-cloud/**
+              - spec/generated/python/**
+              - pyproject.toml
+              - uv.lock
+      - uses: ./.github/actions/setup
+      # spec:check makes the Python models with uvx.
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - run: pnpm lint
+      - run: pnpm spec:check
+      - run: pnpm -r test
+
+  python:
+    name: Python tests
+    runs-on: ${{ inputs.large-runner || 'ubuntu-latest' }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: '3.13'
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+          prune-cache: false
+      - run: uv run pytest -q
+
+  e2e:
+    name: Database and page tests
+    runs-on: ${{ inputs.large-runner || 'ubuntu-latest' }}
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: openaudit_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - uses: actions/cache@v6
+        id: playwright
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+      - if: steps.playwright.outputs.cache-hit != 'true'
+        run: pnpm --filter @openaudit/web exec playwright install --with-deps chromium
+      - if: steps.playwright.outputs.cache-hit == 'true'
+        run: pnpm --filter @openaudit/web exec playwright install-deps chromium
+      # Keyed on the lockfile, so it saves only when dependencies change. Old entries do no harm.
+      - uses: actions/cache@v6
+        with:
+          path: apps/web/.next-test/cache
+          key: next-test-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm test:db
+      - run: pnpm test:e2e
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: playwright-report
+          path: apps/web/playwright-report
+          retention-days: 7

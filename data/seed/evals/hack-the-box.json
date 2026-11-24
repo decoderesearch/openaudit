@@ -1,0 +1,94 @@
+{
+  "eval": {
+    "slug": "hack-the-box",
+    "displayName": "Hack the Box",
+    "aliases": ["Hack The Box"],
+    "description": "A fixed set of 13 medium-difficulty capture-the-flag challenges from the Hack The Box training platform, as run by Google DeepMind in Phuong et al. (2024) and Gemini cards. Challenges need longer planning than the in-house suite. Success is flag capture; GDM cards report challenges solved of 13. Challenge access requires a Hack The Box account.",
+    "summary": "Tests whether AI agents can break into computer systems and capture hidden flags in hard cyber challenges.",
+    "family": "GDM cyber",
+    "maintainers": [
+      {
+        "name": "Hack The Box",
+        "url": "https://www.hackthebox.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www.hackthebox.com",
+        "title": "Hack The Box"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2403.13793",
+        "title": "Evaluating Frontier Models for Dangerous Capabilities (GDM HTB selection)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf",
+        "title": "Gemini 1.5 report (Hack the Box results)"
+      }
+    ],
+    "access": "gated",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["cyber", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "gdm-13",
+      "status": "published",
+      "releasedDate": "2024-03-20",
+      "changes": "Thirteen HTB challenges selected for the Phuong et al. dangerous-capability paper and later Gemini cards.",
+      "dataset": {
+        "url": "https://www.hackthebox.com",
+        "license": "proprietary",
+        "splits": [
+          {
+            "name": "challenges",
+            "sampleCount": 13,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "solved",
+          "displayName": "Solved",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The agent captures the challenge flag."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "solve_rate",
+          "displayName": "Solve rate",
+          "score": "solved",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of the 13 GDM-selected Hack The Box challenges solved."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "sandbox": "docker",
+        "internet": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "eval": {
+    "slug": "openai-agentic-safe-completions",
+    "displayName": "Agentic Safe Completions",
+    "aliases": [
+      "Agentic Safe Completions — Codex prod - Age-restricted actions",
+      "Agentic Safe Completions — Codex prod - Non-violent Wrongdoing",
+      "Agentic Safe Completions — Codex prod - Violent Wrongdoing",
+      "Agentic Safe Completions — Codex prod - Sensitive personal data",
+      "Agentic Safe Completions — Codex prod - Self-harm",
+      "Agentic Safe Completions — Chat prod - Chat Plugins",
+      "Agentic Safe Completions — Human red-teaming - Codex",
+      "Agentic Safe Completions — Human red-teaming - Chat Plugins"
+    ],
+    "description": "OpenAI internal agentic safe-completion evals on sensitive or unsafe tool-using scenarios. Categories cover Codex and Chat production-like traffic (including Chat Plugins) and human red-teaming sets. Scores the safety of actions taken, not only the final text, as safe completion rate. Dataset and runner are lab-internal.",
+    "summary": "Measures how often AI agents take safe actions, not only write safe text, in risky tool-using tasks.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-6-astra/gpt-6-astra.pdf",
+        "title": "GPT-6 Astra system card (Agentic Safe Completions)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["agentic", "multi_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "self_harm", "agentic_misuse", "child_safety"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "gpt-6-astra",
+      "status": "draft",
+      "releasedDate": "2026-09-03",
+      "changes": "First reported in the GPT-6 Astra system card with Codex prod, Chat prod, and Human red-teaming categories.",
+      "scores": [
+        {
+          "key": "safe_completion",
+          "displayName": "Safe completion",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model's actions and response in the agentic scenario are scored as a safe completion under OpenAI policy."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "safe_completion_rate",
+          "displayName": "Safe completion rate",
+          "score": "safe_completion",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of agentic conversations scored as safe completions. Higher is better. Per category."
+        }
+      ]
+    }
+  ]
+}

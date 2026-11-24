@@ -1,0 +1,225 @@
+{
+  "document": "moonshot-kimi-linear-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct"
+    }
+  ],
+  "pageCount": 28,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "up to 1 million tokens (final released checkpoint); fair-comparison pretraining used 4,096-token context",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "In addition, the final checkpoint supports a context length\nof up to 1 million tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "language model (text)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "As large language models (LLMs) evolve into increasingly capable agents [50], the computational demands of"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "48B total parameters",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "resulting in\n48 billion total parameters and 3 billion active parameters per forward pass."
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "3B active parameters per forward pass",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "resulting in\n48 billion total parameters and 3 billion active parameters per forward pass."
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "hybrid linear attention: Kimi Delta Attention (KDA) interleaved with MLA at 3:1, MoE (8 of 256 experts including one shared)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Empirically, a uniform 3:1 ratio, i.e., repeating 3 KDA layers to 1 full\nMLA layer, provided the best quality–throughput trade-off."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "1.4T tokens from K2 pretraining corpus for matched experiments; final release pretrained on 5.7T tokens; SFT/RL data derived from K2 recipe",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "processing a shared total of 1.4 trillion tokens sampled from the K2 pretraining corpus"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "matched runs 1.4T tokens; final released checkpoint 5.7T tokens (no FLOP or GPU-hour total stated)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "Our final released Kimi Linear checkpoint is pretrained using the same procedure, but with an expanded total of 5.7\ntrillion tokens to match the pretraining tokens of Moonlight."
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[FaithJudge](/evals/faithjudge) (1-Hallu.) 64.2 for Kimi-Linear-Instruct vs 56.0 for Moonlight-Instruct (Table 9) (higher is better).",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "FaithJudge (1-Hallu.)                    64.2                    56.0"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [],
+  "evalResults": [
+    {
+      "rawEvalName": "FaithJudge",
+      "model": "moonshotai/Kimi-Linear-48B-A3B-Instruct",
+      "metric": "1-Hallu.",
+      "value": 64.2,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 9",
+        "quote": "FaithJudge (1-Hallu.)                    64.2                    56.0"
+      }
+    },
+    {
+      "rawEvalName": "FaithJudge",
+      "model": "moonshotai/Moonlight-16B-A3B-Instruct",
+      "metric": "1-Hallu.",
+      "value": 56,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 9",
+        "quote": "FaithJudge (1-Hallu.)                    64.2                    56.0"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:04:46Z"
+  },
+  "notes": "Technical report on Kimi Linear / KDA hybrid attention (arXiv 2510.26692), not a system card. Only safety result is FaithJudge in Table 9. No other safety, alignment, refusal, jailbreak, bias, toxicity, privacy, or dangerous-capability section or numbers. Skipped capability tables only (MMLU/MMLU-Pro/BBH/HellaSwag/ARC/Winogrande/TriviaQA/GSM8K/MATH/EvalPlus/CRUXEval/CEval/CMMLU, AIME/MATH500/HMMT/PolyMath, LiveCodeBench, GPQA, RULER/MRCR/Frames/HELMET/RepoQA/LongBench/Long Code Arena, and @5.7T Moonlight comparisons). Pretraining context 4,096 tokens is recipe detail; disclosed contextWindow is the final 1M support. Base checkpoint is not a separate seed model id (only Instruct is)."
+}

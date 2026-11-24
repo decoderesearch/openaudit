@@ -1,0 +1,332 @@
+{
+  "document": "qwen-qwen2.5-omni-paper",
+  "alsoDocuments": ["qwen-qwen2.5-omni-blog"],
+  "covers": [
+    {
+      "model": "Qwen/Qwen2.5-Omni-7B"
+    }
+  ],
+  "pageCount": 20,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "Long-sequence training extends data to 32,768 tokens",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "extend the original text, audio, image,\nand video data to 32,768 tokens for training"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "perceives text, images, audio, and video; generates text and natural speech",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "perceive diverse modalities, including text, images, audio, and video, while simultane-"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7B (named Qwen2.5-Omni-7B; compared as similar size (7B))",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "We compare Qwen2.5-Omni with other leading large language model of similar size (7B)."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Thinker-Talker architecture",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "we propose Thinker-Talker architecture"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "image-text, video-text, video-audio, audio-text and text corpus; second phase adds 800B image/video, 300B audio, 100B video-audio tokens",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "The second phase of pre-training marks a significant advancement by incorporating an additional 800\nbillion tokens of image and video related data, 300 billion tokens of audio related data, and 100 billion\ntokens of video with audio related data."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "[VoiceBench](/evals/voicebench) [AdvBench](/evals/advbench) score 99.4 for Qwen2.5-Omni-7B (higher is better)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "Qwen2.5-Omni-7B                       81.10 | 52.87 | 99.42 | 74.12"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The report has no dedicated safety, red-teaming, jailbreak, bias, or dangerous-capability section; the only numeric safety-adjacent result is [VoiceBench](/evals/voicebench) [AdvBench](/evals/advbench).", "tone": "mixed",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "Qwen2.5-Omni-7B                       81.10 | 52.87 | 99.42 | 74.12"
+      }
+    },
+    {
+      "text": "Talker pretraining noise and pronunciation errors are said to cause speech hallucinations; Direct Preference Optimization (DPO)/reinforcement learning (RL) is used to improve generation stability (word error rate), not as a content-safety eval.", "tone": "mixed",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "pronunciation errors, leading to model hallucinations. To mitigate this issue, we introduce a reinforcement"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "VoiceBench",
+      "rawModelName": "Ultravox-v0.4.1-LLaMA-3.1-8B",
+      "metric": "score",
+      "value": 98.46,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "Ultravox-v0.4.1-LLaMA-3.1-8B                65.27 | 66.88 | 98.46 | 71.45"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "rawModelName": "MERaLiON",
+      "metric": "score",
+      "value": 94.81,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "MERaLiON (He et al., 2024)                 27.23 | 62.93 | 94.81 | 62.91"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "rawModelName": "Megrez-3B-Omni",
+      "metric": "score",
+      "value": 87.69,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "Megrez-3B-Omni (Infinigence)                28.35 | 25.71 | 87.69 | 46.25"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "rawModelName": "Lyra-Base",
+      "metric": "score",
+      "value": 59.62,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "Lyra-Base (Zhong et al., 2024)              72.75 | 36.28 | 59.62 | 57.66"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "rawModelName": "MiniCPM-o",
+      "metric": "score",
+      "value": 97.69,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "MiniCPM-o (Yao et al., 2024)               78.02 | 49.25 | 97.69 | 71.69"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "rawModelName": "Baichuan-Omni-1.5",
+      "metric": "score",
+      "value": 97.31,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "Baichuan-Omni-1.5 (Li et al., 2025)           74.51 | 54.54 | 97.31 | 71.14"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "rawModelName": "Qwen2-Audio",
+      "metric": "score",
+      "value": 96.73,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "Qwen2-Audio (Chu et al., 2024a)              49.45 | 26.33 | 96.73 | 55.35"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "model": "Qwen/Qwen2.5-Omni-7B",
+      "metric": "score",
+      "value": 99.42,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": "Qwen2.5-Omni-7B                       81.10 | 52.87 | 99.42 | 74.12"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:25:20Z"
+  },
+  "notes": "Technical report (arXiv 2503.20215), not a system card. Safety-only pilot: only VoiceBench AdvBench (Table 3) qualifies. Skipped capability: MMLU-Pro/redux, LiveBench, GPQA, GSM8K, MATH, HumanEval, MBPP, MultiPL-E, LiveCodeBench, ASR/S2TT/SER/VSC/Music, MMAU, VoiceBench non-AdvBench rows (AlpacaEval, CommonEval, SD-QA, MMSU, OpenBookQA, IFEval, Avg), Table 4 voice-chat (MMLU/CEval/IFEval/GSM8K/etc.), image/video/grounding/OmniBench, TTS WER/SIM/NMOS. Speech 'hallucinations' from pronunciation noise are TTS stability, not a hallucination eval—left topic uncovered. Seed-linked Qwen2.5-Omni-3B never named. MiniCPM-o / Qwen2-Audio left as rawModelName (variant not named). Vision encoder 675M params noted in notes only, not totalParams. pageCount=21 from PDF (printed 1–13 plus refs)."
+}

@@ -1,0 +1,911 @@
+{
+  "document": "ai2-olmoe-paper",
+  "alsoDocuments": ["ai2-olmoe-blog"],
+  "covers": [
+    {
+      "model": "allenai/OLMoE-1B-7B-0924"
+    },
+    {
+      "model": "allenai/OLMoE-1B-7B-0924-Instruct"
+    },
+    {
+      "model": "allenai/OLMoE-1B-7B-0125"
+    },
+    {
+      "model": "allenai/OLMoE-1B-7B-0125-Instruct"
+    }
+  ],
+  "pageCount": 63,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "September 2024 (first OLMoE-1B-7B); January 2025 (OLMoE-1B-7B-0125)",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "quote": "We introduced OLM O E-1B-7B in September 2024. In January 2025, we released a better model,"
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4,096 sequence length",
+      "source": {
+        "page": "46",
+        "pdfPage": 46,
+        "quote": "Sequence length          4,096                4,096           2,048          4,096"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text-only",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "quote": "Multimodal OLM O E-1B-7B is a text-only large language model, thus it cannot take inputs or"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "predominantly English",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "quote": "predominantly English corpus and exclusively"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0 (model, code, logs); ODC-By 1.0 (data)",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "quote": "Model: The model is licensed under the open-source Apache 2.0 license."
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "6.9B total (rounded as 7B)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Total params           Total # of parameters in the model              §4.1.1         6.9B total"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "1.3B active (rounded as 1B)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Active params          # active parameters per input token             §4.1.1         1.3B active"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "sparse MoE decoder-only transformer; 64 small experts with 8 activated; dropless token-choice MoE; no shared expert",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "64 small experts in each layer with 8 be-"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "OLMoE-mix-0924: DCLM-Baseline, StarCoder, peS2o, arXiv, OpenWebMath, Algebraic Stack, English Wikipedia & Wikibooks (4,060B tokens listed); adapted on Tulu 2 SFT Mix and related mixes",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Table 2: Composition of the pretraining data for OLM O E-1B-7B. StarCoder, peS2o, and"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "pretrain on 5 trillion tokens; 256 H100 GPUs for approximately 10 days",
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "quote": "We pretrain OLM O E-1B-7B on 256 H100 GPUs for approximately 10 days with NV-"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Safety(6 task avg.) after adaptation; [XSTest](/evals/xstest) listed as safety evaluation",
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "quote": "Safety          Safety(6 task avg.)              65.8          51.4              94.5      91.4      90.4"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa) (6 shot) after adaptation for 0924 and 0125",
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "quote": "TruthfulQA(6 shot)               44.7          49.1              45.5      50.0      50.6"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "[BBQ](/evals/bbq) and [Winogender](/evals/winogender) on DCLM Extended for pretrained checkpoints",
+      "source": {
+        "page": "53",
+        "pdfPage": 53,
+        "quote": "BBQ                                           49.8         48.3     50.6       45.8       67.2"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Adaptation evaluates safety with [XSTest](/evals/xstest); Direct Preference Optimization (DPO) Instruct scores 82.6 F1 vs supervised fine-tuning (SFT) 84.1 on the same suite (higher is better).", "tone": "mixed",
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "quote": "+DPO                   51.9       45.5       37.0          54.8      84.0       82.6       48.1      57.7"
+      }
+    },
+    {
+      "text": "UltraFeedback preference data was filtered for [TruthfulQA](/evals/truthfulqa) contamination before DPO.", "tone": "neutral",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "UltraFeedback [38] binarized and filtered for TruthfulQA [99] contamination             Various      60,800"
+      }
+    },
+    {
+      "text": "After Tülu-3-style adaptation, OLMoE-1B-7B-0125 SFT reaches 94.5 on Safety(6 task avg.) versus 65.8 for the 0924 SFT (higher is better).", "tone": "good",
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "quote": "Safety          Safety(6 task avg.)              65.8          51.4              94.5      91.4      90.4"
+      }
+    },
+    {
+      "text": "Enterprise personally identifiable information (PII) Classification is reported in the DCLM Extended suite (privacy-related; no dedicated OpenAudit privacy topic).", "tone": "neutral",
+      "source": {
+        "page": "53",
+        "pdfPage": 53,
+        "quote": "Enterprise PII Classification                 52.3         53.7     52.2       57.3       50.6"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "OLMo-1B (0724)",
+      "metric": "F1",
+      "value": 67.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "OLMo-1B (0724)         25.0        7.0       22.5          16.0       -         67.6"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "OLMo-1B (0724) +SFT",
+      "metric": "F1",
+      "value": 81.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; SFT stage"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "+SFT                   36.0       12.5       27.2          21.2      41.5       81.9"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "OLMo-1B (0724) +DPO",
+      "metric": "F1",
+      "value": 79.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; DPO stage"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "+DPO                   36.7       12.5       30.6          22.0      50.9       79.8"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "allenai/OLMo-7B-0724-hf",
+      "metric": "F1",
+      "value": 80.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; pretrained"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "OLMo-7B (0724)         50.8       32.5       36.9          32.3       -         80.8"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "OLMo-7B (0724) +SFT",
+      "metric": "F1",
+      "value": 86.1,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; SFT stage"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "+SFT                   54.2       25.0       35.7          38.5      70.9       86.1"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "allenai/OLMo-7B-0724-Instruct-hf",
+      "metric": "F1",
+      "value": 87.5,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; DPO stage"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "+DPO                   52.8        9.0       16.6          35.0      83.5       87.5"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "JetMoE-2B-9B",
+      "metric": "F1",
+      "value": 68.2,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; pretrained"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "JetMoE-2B-9B           45.6       43.0       37.2          54.6       -         68.2"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "JetMoE-2B-9B +SFT",
+      "metric": "F1",
+      "value": 55.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; SFT stage"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "+SFT                   46.1       53.5       35.6          64.8      69.3       55.6"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "deepseek-ai/deepseek-moe-16b-base",
+      "metric": "F1",
+      "value": 65.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; table label DeepSeek-3B-16B"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "DeepSeek-3B-16B        37.7       18.5       39.4          48.3       -         65.9"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "deepseek-ai/deepseek-moe-16b-chat",
+      "metric": "F1",
+      "value": 85.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; +Chat"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "+Chat                  48.5       46.5       40.8          70.1      74.8       85.6"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "Qwen/Qwen1.5-MoE-A2.7B",
+      "metric": "F1",
+      "value": 73.4,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; table label Qwen1.5-3B-14B"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "Qwen1.5-3B-14B         60.4       13.5       27.2          60.2       -         73.4"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "Qwen/Qwen1.5-MoE-A2.7B-Chat",
+      "metric": "F1",
+      "value": 85.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; +Chat"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "+Chat                  58.9       55.5       21.3          59.7      83.9       85.6"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "allenai/OLMoE-1B-7B-0924",
+      "metric": "F1",
+      "value": 59.7,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; pretrained"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "OLM O E-1B-7B          49.8        3.0       33.6          22.4       -         59.7"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "OLMoE-1B-7B-0924-SFT",
+      "metric": "F1",
+      "value": 84.1,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; SFT stage"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "+SFT                   51.4       40.5       38.0          51.6      69.2       84.1"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "allenai/OLMoE-1B-7B-0924-Instruct",
+      "metric": "F1",
+      "value": 82.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; DPO / Instruct"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 5",
+        "quote": "+DPO                   51.9       45.5       37.0          54.8      84.0       82.6"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "allenai/OLMoE-1B-7B-0924",
+      "metric": "F1",
+      "value": 62.1,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; pretraining checkpoint before annealing"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "w/o annealing            49.0         2.0       31.5          18.9           -              62.1"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "OLMoE-1B-7B (pre-annealing) +SFT",
+      "metric": "F1",
+      "value": 83.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; SFT on pre-annealing checkpoint"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "+SFT                     50.2        43.0       35.6          55.5      68.9                83.8"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "OLMoE-1B-7B (pre-annealing) +DPO",
+      "metric": "F1",
+      "value": 83.2,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; DPO on pre-annealing checkpoint"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "+DPO                     50.9        36.0       35.8          58.8      81.7                83.2"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "OLMoE-1B-7B +KTO",
+      "metric": "F1",
+      "value": 86.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; KTO preference tuning"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "+KTO                     51.2        45.5       34.1          57.1      81.6                86.6"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "OLMoE-1B-7B +SFT (load balancing)",
+      "metric": "F1",
+      "value": 84.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; SFT with load balancing loss"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "(load balancing)         50.9        36.5       35.7          52.4      66.9                84.8"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "OLMoE-1B-7B +DPO (load balancing)",
+      "metric": "F1",
+      "value": 82.1,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; DPO with load balancing loss"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "(load balancing)         51.1        42.5       39.3          55.6      82.9                82.1"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "allenai/OLMoE-1B-7B-0924",
+      "metric": "score",
+      "value": 50.6,
+      "unit": "percent",
+      "settings": {
+        "other": "DCLM Extended; annealed final pretraining checkpoint"
+      },
+      "source": {
+        "page": "53",
+        "pdfPage": 53,
+        "table": "Table 13",
+        "quote": "BBQ                                           49.8         48.3     50.6       45.8       67.2"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "OLMo-1B",
+      "metric": "score",
+      "value": 45.8,
+      "unit": "percent",
+      "settings": {
+        "other": "DCLM Extended"
+      },
+      "source": {
+        "page": "53",
+        "pdfPage": 53,
+        "table": "Table 13",
+        "quote": "BBQ                                           49.8         48.3     50.6       45.8       67.2"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "rawModelName": "OLMo-7B",
+      "metric": "score",
+      "value": 67.2,
+      "unit": "percent",
+      "settings": {
+        "other": "DCLM Extended"
+      },
+      "source": {
+        "page": "53",
+        "pdfPage": 53,
+        "table": "Table 13",
+        "quote": "BBQ                                           49.8         48.3     50.6       45.8       67.2"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "model": "allenai/OLMoE-1B-7B-0924",
+      "metric": "score",
+      "value": 50,
+      "unit": "percent",
+      "settings": {
+        "other": "Female; DCLM Extended; annealed"
+      },
+      "source": {
+        "page": "53",
+        "pdfPage": 53,
+        "table": "Table 13",
+        "quote": "Winogender Female                             50.0         46.7     50.0       41.7       58.3"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "OLMo-1B",
+      "metric": "score",
+      "value": 41.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Female; DCLM Extended"
+      },
+      "source": {
+        "page": "53",
+        "pdfPage": 53,
+        "table": "Table 13",
+        "quote": "Winogender Female                             50.0         46.7     50.0       41.7       58.3"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "OLMo-7B",
+      "metric": "score",
+      "value": 58.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Female; DCLM Extended"
+      },
+      "source": {
+        "page": "53",
+        "pdfPage": 53,
+        "table": "Table 13",
+        "quote": "Winogender Female                             50.0         46.7     50.0       41.7       58.3"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "model": "allenai/OLMoE-1B-7B-0924",
+      "metric": "score",
+      "value": 60,
+      "unit": "percent",
+      "settings": {
+        "other": "Male; DCLM Extended; annealed"
+      },
+      "source": {
+        "page": "53",
+        "pdfPage": 53,
+        "table": "Table 13",
+        "quote": "Winogender Male                               55.0         58.3     60.0       63.3       58.3"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "OLMo-1B",
+      "metric": "score",
+      "value": 63.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Male; DCLM Extended"
+      },
+      "source": {
+        "page": "53",
+        "pdfPage": 53,
+        "table": "Table 13",
+        "quote": "Winogender Male                               55.0         58.3     60.0       63.3       58.3"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "OLMo-7B",
+      "metric": "score",
+      "value": 58.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Male; DCLM Extended"
+      },
+      "source": {
+        "page": "53",
+        "pdfPage": 53,
+        "table": "Table 13",
+        "quote": "Winogender Male                               55.0         58.3     60.0       63.3       58.3"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "OLMoE-1B-7B-0924 +SFT",
+      "metric": "score",
+      "value": 44.7,
+      "unit": "percent",
+      "settings": {
+        "other": "6 shot; Tülu-3 eval setup"
+      },
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "table": "Table 17",
+        "quote": "TruthfulQA(6 shot)               44.7          49.1              45.5      50.0      50.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "allenai/OLMoE-1B-7B-0924-Instruct",
+      "metric": "score",
+      "value": 49.1,
+      "unit": "percent",
+      "settings": {
+        "other": "6 shot; +DPO; Tülu-3 eval setup"
+      },
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "table": "Table 17",
+        "quote": "TruthfulQA(6 shot)               44.7          49.1              45.5      50.0      50.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "OLMoE-1B-7B-0125 +SFT",
+      "metric": "score",
+      "value": 45.5,
+      "unit": "percent",
+      "settings": {
+        "other": "6 shot; Tülu-3 eval setup"
+      },
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "table": "Table 17",
+        "quote": "TruthfulQA(6 shot)               44.7          49.1              45.5      50.0      50.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "OLMoE-1B-7B-0125 +DPO",
+      "metric": "score",
+      "value": 50,
+      "unit": "percent",
+      "settings": {
+        "other": "6 shot; DPO stage; Tülu-3 eval setup"
+      },
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "table": "Table 17",
+        "quote": "TruthfulQA(6 shot)               44.7          49.1              45.5      50.0      50.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "allenai/OLMoE-1B-7B-0125-Instruct",
+      "metric": "score",
+      "value": 50.6,
+      "unit": "percent",
+      "settings": {
+        "other": "6 shot; +RLVR; Tülu-3 eval setup"
+      },
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "table": "Table 17",
+        "quote": "TruthfulQA(6 shot)               44.7          49.1              45.5      50.0      50.6"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "rawModelName": "OLMoE-1B-7B-0924 +SFT",
+      "metric": "score",
+      "value": 65.8,
+      "unit": "percent",
+      "settings": {
+        "other": "6 task avg; Tülu-3 eval setup"
+      },
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "table": "Table 17",
+        "quote": "Safety          Safety(6 task avg.)              65.8          51.4              94.5      91.4      90.4"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "allenai/OLMoE-1B-7B-0924-Instruct",
+      "metric": "score",
+      "value": 51.4,
+      "unit": "percent",
+      "settings": {
+        "other": "6 task avg; +DPO; Tülu-3 eval setup"
+      },
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "table": "Table 17",
+        "quote": "Safety          Safety(6 task avg.)              65.8          51.4              94.5      91.4      90.4"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "rawModelName": "OLMoE-1B-7B-0125 +SFT",
+      "metric": "score",
+      "value": 94.5,
+      "unit": "percent",
+      "settings": {
+        "other": "6 task avg; Tülu-3 eval setup"
+      },
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "table": "Table 17",
+        "quote": "Safety          Safety(6 task avg.)              65.8          51.4              94.5      91.4      90.4"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "rawModelName": "OLMoE-1B-7B-0125 +DPO",
+      "metric": "score",
+      "value": 91.4,
+      "unit": "percent",
+      "settings": {
+        "other": "6 task avg; DPO stage; Tülu-3 eval setup"
+      },
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "table": "Table 17",
+        "quote": "Safety          Safety(6 task avg.)              65.8          51.4              94.5      91.4      90.4"
+      }
+    },
+    {
+      "rawEvalName": "Safety",
+      "model": "allenai/OLMoE-1B-7B-0125-Instruct",
+      "metric": "score",
+      "value": 90.4,
+      "unit": "percent",
+      "settings": {
+        "other": "6 task avg; +RLVR; Tülu-3 eval setup"
+      },
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "table": "Table 17",
+        "quote": "Safety          Safety(6 task avg.)              65.8          51.4              94.5      91.4      90.4"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:52:58Z"
+  },
+  "notes": "Technical report (arXiv 2409.02060v2), not a system card. Safety-only evalResults per pilot override: XSTest (Tables 5/7), BBQ/Winogender/Enterprise PII (Table 13 DCLM Extended), TruthfulQA and Safety(6 task avg.) (Table 17). Skipped capability tables (OLMES, MMLU, GSM8k, BBH, HumanEval, IFEval, AlpacaEval, DCLM Core/Extended non-safety rows). Duplicate XSTest rows shared by Tables 5 and 7 kept once from Table 5. Mapped 0125 +RLVR to allenai/OLMoE-1B-7B-0125-Instruct as the final adapted release; SFT-only stages use rawModelName. pdftotext splits OLMoE as 'OLM O E'. Safety(6 task avg.) component tasks are not named in this paper."
+}

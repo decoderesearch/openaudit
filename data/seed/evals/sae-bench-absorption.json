@@ -1,0 +1,87 @@
+{
+  "eval": {
+    "slug": "sae-bench-absorption",
+    "displayName": "SAEBench Feature Absorption",
+    "aliases": ["SAEBench absorption", "Feature absorption"],
+    "description": "Uses a first-letter task. A latent for \"starts with S\" should fire on all S words, but a more specific latent (for \"short\") can absorb it on some tokens. The score is the fraction of tokens with absorption. Lower is better.",
+    "summary": "Measures how often a specific latent takes over a general concept, so the general latent does not fire.",
+    "suite": "saebench",
+    "maintainers": [
+      {
+        "name": "Karvonen, Rager, et al.",
+        "url": "https://github.com/adamkarvonen/SAEBench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2503.09532",
+        "title": "SAEBench: A Comprehensive Benchmark for Sparse Autoencoders"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/adamkarvonen/SAEBench",
+        "title": "SAEBench code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/adamkarvonen/sae_bench_results_0125",
+        "title": "SAEBench result files (January 2025)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www.neuronpedia.org/sae-bench",
+        "title": "Interactive SAEBench results on Neuronpedia"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["method"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-01",
+      "status": "published",
+      "releasedDate": "2025-01",
+      "scores": [],
+      "metrics": [
+        {
+          "key": "mean_absorption_fraction_score",
+          "displayName": "Absorption rate",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "headline": true,
+          "direction": "lower_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "mean_full_absorption_score",
+          "displayName": "Full absorption rate",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "mean_num_split_features",
+          "displayName": "Split latents per letter",
+          "aggregation": "custom",
+          "direction": "neither",
+          "safetyDirection": "neither"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,269 @@
+{
+  "document": "nvidia-nemotron-3-super-paper-technical_report",
+  "alsoDocuments": ["nvidia-nemotron-3-super-blog"],
+  "covers": [
+    {
+      "model": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16"
+    }
+  ],
+  "pageCount": 51,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "1M tokens",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "This configuration supports context lengths of up to 1M tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "we pre-trained Nemotron 3 Super on 25 trillion text tokens divided into 2 phases."
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "reasoning-off, regular and low-effort",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "Nemotron 3 Super is trained for three reasoning modes: reasoning-off, regular and low-effort."
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "SFT translations into German, Spanish, French, Italian, Japanese, and Chinese",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "translating into six languages (German, Spanish, French,\nItalian, Japanese, and Chinese)"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "120.6B",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "to 120.6B total parameters, maintaining a constrained active budget of 12.7B parameters (12.1B\nexcluding embeddings) per forward pass."
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "12.7B (12.1B excluding embeddings)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "to 120.6B total parameters, maintaining a constrained active budget of 12.7B parameters (12.1B\nexcluding embeddings) per forward pass."
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "hybrid Mamba-Attention Mixture-of-Experts (MoE) with LatentMoE and MTP",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Nemotron 3 Super 120B-A12B Base scales up the hybrid Mamba-Attention Mixture-of-Experts\n(MoE) architecture introduced in Nemotron-3 Nano (NVIDIA, 2025c)."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "25 trillion text tokens pretraining (2 phases), then SFT and RL; datasets open-sourced on HuggingFace",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "we pre-trained Nemotron 3 Super on 25 trillion text tokens divided into 2 phases."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Safety SFT with content-safety and harmful-task prompts plus policy-mapped response modes",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "retaining the core prompts from Nemotron Content Safety v2 (Ghosh et al., 2025), Gretel Safety\nAlignment v1 (Gretel, 2024), Harmful Tasks (Hasan et al., 2024) and Red-Team-2K (Luo et al.,\n2024) covering content safety and common jailbreak techniques"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Auxiliary classifiers detect self-harm risk; response modes can provide helpline information",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "lightweight auxiliary classifiers that detect attributes such as\nself-harm risk, demographic targeting, or the presence of embedded adversarial instructions."
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Jailbreak prompts in SFT; RL jailbreak environment with PAIR-style iterative attacks",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "one targeting reduced over-refusals on safety-related\n     prompts, and one improving robustness to jailbreaks."
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "Expanded jailbreak coverage includes indirect prompt injection attacks",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "expand coverage of jailbreak strategies to better capture emerging adversarial techniques including\nindirect prompt injection attacks."
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Synthetic SFT prompts target elicitation of demographic biases",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "we added in new synthetic prompts\ntargeting the elicitation of over-refusals, demographic biases, and copyright reproduction."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Safety post-training uses deliberative alignment: a curated reasoning trace then a policy-conditioned final response, plus a content-moderation filter on unsafe outputs.", "tone": "neutral",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "Following the deliberative alignment framework (Guan et al., 2025), we adopt a two-stage generation\nprocess in which the reasoning trace and the final response are curated separately but consistently\nwith our response policy."
+      }
+    },
+    {
+      "text": "An explicit response-policy framework chooses among helpline support, refusal with brief explanation, or answering only the benign part of a mixed request.", "tone": "neutral",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "These response modes specify whether the\nmodel should provide supportive resources such as helpline information, issue a refusal with a brief\nexplanation, or answer the benign portion of the request while ignoring malicious content."
+      }
+    },
+    {
+      "text": "reinforcement learning from verifiable rewards (RLVR) adds two safety environments: reducing over-refusals and improving jailbreak robustness via a Prompt Automatic Iterative Refinement (PAIR)-style iterative attack pipeline on an early supervised fine-tuning (SFT) checkpoint.", "tone": "neutral",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "For jailbreaks, seed prompts come from\n     our SFT data; to surface harder attacks during RL, we apply an iterative attack pipeline\n     following PAIR (Chao et al., 2024), attacking an early SFT-only checkpoint and collecting"
+      }
+    },
+    {
+      "text": "A principle-following GenRM is used in multi-environment reinforcement learning (RL) and a final reinforcement learning from human feedback (RLHF) stage to guide identity and safety-related behavior.", "tone": "neutral",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "These principles allow us to guide Nemotron 3 Super’s behavior\non important domains like identity and safety related topics."
+      }
+    },
+    {
+      "text": "Safety SFT retains Nemotron Content Safety v2, Gretel Safety Alignment v1, Harmful Tasks, and Red-Team-2K prompts, then adds synthetic over-refusal, bias, and copyright prompts.", "tone": "neutral",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "While\nretaining the core prompts from Nemotron Content Safety v2 (Ghosh et al., 2025), Gretel Safety\nAlignment v1 (Gretel, 2024), Harmful Tasks (Hasan et al., 2024) and Red-Team-2K (Luo et al.,"
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:59:27Z"
+  },
+  "notes": "Technical report (not a system card). Tables 5 and 8 and related evaluation text report only capability benchmarks (knowledge, reasoning, agentic, chat/IF, long context, multilingual); no numerical safety, refusal, jailbreak, bias, or dangerous-capability scores appear in the text layer. Safety content is training/method description (SFT policy framework, RLVR safety envs, GenRM principles). Skipped capability evals per pilot. Chart-only accuracy/throughput figure (Figure 1) not transcribed. Copyright reproduction prompts mentioned but no dedicated topic. Seed link matches the BF16 post-trained model the report evaluates as N-3-Super."
+}

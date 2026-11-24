@@ -1,0 +1,348 @@
+{
+  "document": "meta-llama-guard-model_card-system_card",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "meta-llama/LlamaGuard-7b"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (prompt and response classification)",
+      "source": {
+        "page": "Model Details",
+        "quote": "It can be used for classifying content in both LLM inputs (prompt classification) and in LLM responses (response classification)."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7B",
+      "source": {
+        "page": "Model Details",
+        "quote": "Llama Guard is a 7B parameter"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Llama 2-based input-output safeguard model that acts as an LLM",
+      "source": {
+        "page": "Model Details",
+        "quote": "It acts as an LLM: it generates text in its output that indicates whether a given prompt or response is safe/unsafe"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "mix of Anthropic hh-rlhf prompts with in-house LLaMA responses via jailbreaking, plus in-house redteaming; ~13K training examples",
+      "source": {
+        "page": "Training Data",
+        "quote": "Overall we have ~13K training examples."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Classifies prompts and responses as safe/unsafe against an open taxonomy of six harm categories",
+      "source": {
+        "page": "Model Details",
+        "quote": "it generates text in its output that indicates whether a given prompt or response is safe/unsafe, and if unsafe based on a policy, it also lists the violating subcategories."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The released taxonomy is a demo of the method and does not necessarily reflect Meta's own internal policies.", "tone": "neutral",
+      "source": {
+        "page": "Taxonomy of harms and Risk Guidelines",
+        "quote": "This taxonomy does not necessarily reflect Meta's own internal policies and is meant to demonstrate the value of our method"
+      }
+    },
+    {
+      "text": "Comparisons to industry moderation APIs are not apples-to-apples because of taxonomy mismatches.", "tone": "mixed",
+      "source": {
+        "page": "Evaluation results",
+        "quote": "comparisons are not exactly apples-to-apples due to mismatches in each taxonomy."
+      }
+    },
+    {
+      "text": "Unsafe class probability is taken from the probability of the first generated token, then thresholded for binary decisions.", "tone": "neutral",
+      "source": {
+        "page": "Model Details",
+        "quote": "In order to produce classifier scores, we look at the probability for the first token, and turn that into an “unsafe” class probability."
+      }
+    },
+    {
+      "text": "Azure Content Safety is named as a comparison API but has no scores in the results table.", "tone": "neutral",
+      "source": {
+        "page": "Evaluation results",
+        "quote": "Azure Content Safety"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Our Test Set (Prompt)",
+      "model": "meta-llama/LlamaGuard-7b",
+      "metric": "score",
+      "value": 0.945,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation results",
+        "table": "Evaluation results table",
+        "quote": "| Llama Guard     | **0.945**             | 0.847      | **0.626** | **0.953**               |"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "model": "meta-llama/LlamaGuard-7b",
+      "metric": "score",
+      "value": 0.847,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation results",
+        "table": "Evaluation results table",
+        "quote": "| Llama Guard     | **0.945**             | 0.847      | **0.626** | **0.953**               |"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "model": "meta-llama/LlamaGuard-7b",
+      "metric": "score",
+      "value": 0.626,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation results",
+        "table": "Evaluation results table",
+        "quote": "| Llama Guard     | **0.945**             | 0.847      | **0.626** | **0.953**               |"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set (Response)",
+      "model": "meta-llama/LlamaGuard-7b",
+      "metric": "score",
+      "value": 0.953,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation results",
+        "table": "Evaluation results table",
+        "quote": "| Llama Guard     | **0.945**             | 0.847      | **0.626** | **0.953**               |"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set (Prompt)",
+      "rawModelName": "OpenAI API",
+      "metric": "score",
+      "value": 0.764,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation results",
+        "table": "Evaluation results table",
+        "quote": "| OpenAI API      | 0.764                 | **0.856**  | 0.588     | 0.769                   |"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "rawModelName": "OpenAI API",
+      "metric": "score",
+      "value": 0.856,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation results",
+        "table": "Evaluation results table",
+        "quote": "| OpenAI API      | 0.764                 | **0.856**  | 0.588     | 0.769                   |"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "rawModelName": "OpenAI API",
+      "metric": "score",
+      "value": 0.588,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation results",
+        "table": "Evaluation results table",
+        "quote": "| OpenAI API      | 0.764                 | **0.856**  | 0.588     | 0.769                   |"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set (Response)",
+      "rawModelName": "OpenAI API",
+      "metric": "score",
+      "value": 0.769,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation results",
+        "table": "Evaluation results table",
+        "quote": "| OpenAI API      | 0.764                 | **0.856**  | 0.588     | 0.769                   |"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set (Prompt)",
+      "rawModelName": "Perspective API",
+      "metric": "score",
+      "value": 0.728,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation results",
+        "table": "Evaluation results table",
+        "quote": "| Perspective API | 0.728                 | 0.787      | 0.532     | 0.699                   |"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "rawModelName": "Perspective API",
+      "metric": "score",
+      "value": 0.787,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation results",
+        "table": "Evaluation results table",
+        "quote": "| Perspective API | 0.728                 | 0.787      | 0.532     | 0.699                   |"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "rawModelName": "Perspective API",
+      "metric": "score",
+      "value": 0.532,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation results",
+        "table": "Evaluation results table",
+        "quote": "| Perspective API | 0.728                 | 0.787      | 0.532     | 0.699                   |"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set (Response)",
+      "rawModelName": "Perspective API",
+      "metric": "score",
+      "value": 0.699,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation results",
+        "table": "Evaluation results table",
+        "quote": "| Perspective API | 0.728                 | 0.787      | 0.532     | 0.699                   |"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:47:38Z"
+  },
+  "notes": "Markdown MODEL_CARD from PurpleLlama (not a PDF); no pageCount. Evaluation table gives no metric name (values look like AUPRC from the linked paper, but the card never says so—recorded as score/fraction). Azure Content Safety named in prose with no table scores. OpenAI API and Perspective API are comparison baselines (rawModelName). Jailbreaks topic is only training-data generation, not jailbreak robustness eval. No formal risk-framework levels. Seed date 2023-12-07 is not stated as a release date in the card."
+}

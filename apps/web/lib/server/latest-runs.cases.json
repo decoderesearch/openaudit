@@ -1,0 +1,505 @@
+[
+  {
+    "name": "a newer eval version replaces an older one, also when its run is limited",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": "2024-01",
+        "settings": {},
+        "finishedAt": "2026-10-02T09:00:00Z"
+      },
+      {
+        "id": "a2",
+        "evalId": "A",
+        "slug": "a",
+        "version": "2",
+        "releasedDate": "2025-01",
+        "settings": { "limit": 5 },
+        "finishedAt": "2026-10-01T09:00:00Z"
+      }
+    ],
+    "picked": ["a2"]
+  },
+  {
+    "name": "in one version, a full run comes before a newer limited run",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "settings": {},
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "a2",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "settings": { "limit": 3 },
+        "finishedAt": "2026-10-01T11:00:00Z"
+      }
+    ],
+    "picked": ["a1"]
+  },
+  {
+    "name": "of two full runs, the one that finished last",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "settings": {},
+        "finishedAt": "2026-10-01T12:00:00Z"
+      },
+      {
+        "id": "a2",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "settings": { "epochs": 1 },
+        "finishedAt": "2026-10-01T11:00:00Z"
+      }
+    ],
+    "picked": ["a1"]
+  },
+  {
+    "name": "only limited runs: the newest of them",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "settings": { "limit": 2 },
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "a2",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "settings": { "limit": 5 },
+        "finishedAt": "2026-10-01T11:00:00Z"
+      }
+    ],
+    "picked": ["a2"]
+  },
+  {
+    "name": "with no release dates, the version names give the order",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1.1",
+        "releasedDate": null,
+        "settings": {},
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "a2",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1.0",
+        "releasedDate": null,
+        "settings": {},
+        "finishedAt": "2026-10-01T11:00:00Z"
+      }
+    ],
+    "picked": ["a1"]
+  },
+  {
+    "name": "each eval gets its own run",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": "2024-01",
+        "settings": {},
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "b1",
+        "evalId": "B",
+        "slug": "b",
+        "version": "x",
+        "releasedDate": "2023-05",
+        "settings": {},
+        "finishedAt": "2026-10-01T09:00:00Z"
+      },
+      {
+        "id": "b2",
+        "evalId": "B",
+        "slug": "b",
+        "version": "y",
+        "releasedDate": "2023-04",
+        "settings": {},
+        "finishedAt": "2026-10-01T12:00:00Z"
+      }
+    ],
+    "picked": ["a1", "b1"]
+  },
+  {
+    "name": "a newer re-score with other judges does not replace the run with the default judges",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "run",
+        "slots": [{ "id": "judge", "default": "x/judge", "scoring": true }],
+        "settings": { "models": { "judge": { "model": "x/judge" } } },
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "a2",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "rescore",
+        "slots": [{ "id": "judge", "default": "x/judge", "scoring": true }],
+        "settings": { "models": { "judge": { "model": "y/test" } } },
+        "finishedAt": "2026-10-01T11:00:00Z"
+      }
+    ],
+    "picked": ["a1"]
+  },
+  {
+    "name": "a re-score with the default judges replaces a run with an old judge",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "run",
+        "slots": [{ "id": "judge", "default": "x/judge", "scoring": true }],
+        "settings": { "models": { "judge": { "model": "y/old" } } },
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "a2",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "rescore",
+        "slots": [{ "id": "judge", "default": "x/judge", "scoring": true }],
+        "settings": { "models": { "judge": { "model": "x/judge" } } },
+        "finishedAt": "2026-10-01T09:00:00Z"
+      }
+    ],
+    "picked": ["a2"]
+  },
+  {
+    "name": "no run has the default judges: the original run, not a re-score",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "run",
+        "slots": [{ "id": "judge", "default": "x/judge", "scoring": true }],
+        "settings": { "models": { "judge": { "model": "y/old" } } },
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "a2",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "rescore",
+        "slots": [{ "id": "judge", "default": "x/judge", "scoring": true }],
+        "settings": { "models": { "judge": { "model": "z/test" } } },
+        "finishedAt": "2026-10-01T11:00:00Z"
+      }
+    ],
+    "picked": ["a1"]
+  },
+  {
+    "name": "a slot that does not score (an auditor) also counts, and a missing slot model is the default",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "run",
+        "slots": [
+          { "id": "auditor", "default": "x/auditor" },
+          { "id": "judge", "default": "x/judge", "scoring": true }
+        ],
+        "settings": { "models": { "auditor": { "model": "y/other" } } },
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "a2",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "rescore",
+        "slots": [
+          { "id": "auditor", "default": "x/auditor" },
+          { "id": "judge", "default": "x/judge", "scoring": true }
+        ],
+        "settings": { "models": { "judge": { "model": "z/test" } } },
+        "finishedAt": "2026-10-01T11:00:00Z"
+      }
+    ],
+    "picked": ["a1"]
+  },
+  {
+    "name": "a slot with a tier: a model of its tier or a higher tier is good, a lower model or the target's lab is not",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "run",
+        "route": { "model": "openai/gpt-6-luna" },
+        "slots": [{ "id": "judge", "default": "meta-llama/llama-3.1-8b-instruct", "tier": "fast", "scoring": true }],
+        "settings": { "models": { "judge": { "model": "meta-llama/llama-3.1-8b-instruct" } } },
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "a2",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "rescore",
+        "route": { "model": "openai/gpt-6-luna" },
+        "slots": [{ "id": "judge", "default": "meta-llama/llama-3.1-8b-instruct", "tier": "fast", "scoring": true }],
+        "settings": { "models": { "judge": { "model": "anthropic/claude-sonnet-5.5" } } },
+        "finishedAt": "2026-10-01T09:00:00Z"
+      },
+      {
+        "id": "b1",
+        "evalId": "B",
+        "slug": "b",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "run",
+        "route": { "model": "openai/gpt-6-luna" },
+        "slots": [{ "id": "judge", "default": "openai/gpt-6.1-sol", "tier": "standard", "scoring": true }],
+        "settings": { "models": { "judge": { "model": "openai/gpt-6.1-sol" } } },
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "b2",
+        "evalId": "B",
+        "slug": "b",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "rescore",
+        "route": { "model": "openai/gpt-6-luna" },
+        "slots": [{ "id": "judge", "default": "openai/gpt-6.1-sol", "tier": "standard", "scoring": true }],
+        "settings": { "models": { "judge": { "model": "google/gemini-3.8-flash" } } },
+        "finishedAt": "2026-10-01T09:00:00Z"
+      },
+      {
+        "id": "c1",
+        "evalId": "C",
+        "slug": "c",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "run",
+        "route": { "model": "openai/gpt-6-luna" },
+        "slots": [{ "id": "judge", "default": "x/judge", "tier": "standard", "scoring": true }],
+        "settings": { "models": { "judge": { "model": "google/gemini-3.8-flash" } } },
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "c2",
+        "evalId": "C",
+        "slug": "c",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "rescore",
+        "route": { "model": "openai/gpt-6-luna" },
+        "slots": [{ "id": "judge", "default": "x/judge", "tier": "standard", "scoring": true }],
+        "settings": { "models": { "judge": { "model": "x-ai/grok-4.3" } } },
+        "finishedAt": "2026-10-01T11:00:00Z"
+      }
+    ],
+    "picked": ["a2", "b2", "c1"]
+  },
+  {
+    "name": "a panel slot with sameLab can use the target's lab, but never the target model",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "run",
+        "route": { "model": "openai/gpt-6.1-sol" },
+        "slots": [{ "id": "judge", "default": "x/judge", "tier": "standard", "sameLab": true, "scoring": true }],
+        "settings": { "models": { "judge": { "model": "openai/gpt-6.1-sol" } } },
+        "finishedAt": "2026-10-01T11:00:00Z"
+      },
+      {
+        "id": "a2",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "origin": "rescore",
+        "route": { "model": "openai/gpt-6.1-sol" },
+        "slots": [{ "id": "judge", "default": "x/judge", "tier": "standard", "sameLab": true, "scoring": true }],
+        "settings": { "models": { "judge": { "model": "openai/gpt-6.1-sol-pro" } } },
+        "finishedAt": "2026-10-01T10:00:00Z"
+      }
+    ],
+    "picked": ["a2"]
+  },
+  {
+    "name": "efforts never mix: with no effort given, the effort that covers the most evals; old `off` is `none`",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "settings": { "reasoning": "off" },
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "a2",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "settings": { "reasoning": "high" },
+        "finishedAt": "2026-10-02T10:00:00Z"
+      },
+      {
+        "id": "b1",
+        "evalId": "B",
+        "slug": "b",
+        "version": "1",
+        "releasedDate": null,
+        "settings": { "reasoning": "none" },
+        "finishedAt": "2026-10-01T11:00:00Z"
+      }
+    ],
+    "picked": ["a1", "b1"]
+  },
+  {
+    "name": "a given effort: only its runs",
+    "effort": "high",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "settings": { "reasoning": "none" },
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "a2",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "settings": { "reasoning": "high" },
+        "finishedAt": "2026-10-02T10:00:00Z"
+      },
+      {
+        "id": "b1",
+        "evalId": "B",
+        "slug": "b",
+        "version": "1",
+        "releasedDate": null,
+        "settings": { "reasoning": "none" },
+        "finishedAt": "2026-10-01T11:00:00Z"
+      }
+    ],
+    "picked": ["a2"]
+  },
+  {
+    "name": "efforts that cover the same number of evals: the one with the newest run",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "settings": { "reasoning": "none" },
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "b1",
+        "evalId": "B",
+        "slug": "b",
+        "version": "1",
+        "releasedDate": null,
+        "settings": { "reasoning": "high" },
+        "finishedAt": "2026-10-02T10:00:00Z"
+      }
+    ],
+    "picked": ["b1"]
+  },
+  {
+    "name": "a run that set no effort is in its own group",
+    "runs": [
+      {
+        "id": "a1",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "settings": {},
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "b1",
+        "evalId": "B",
+        "slug": "b",
+        "version": "1",
+        "releasedDate": null,
+        "settings": {},
+        "finishedAt": "2026-10-01T10:00:00Z"
+      },
+      {
+        "id": "a2",
+        "evalId": "A",
+        "slug": "a",
+        "version": "1",
+        "releasedDate": null,
+        "settings": { "reasoning": "on" },
+        "finishedAt": "2026-10-02T10:00:00Z"
+      }
+    ],
+    "picked": ["a1", "b1"]
+  }
+]

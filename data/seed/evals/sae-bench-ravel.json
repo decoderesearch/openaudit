@@ -1,0 +1,89 @@
+{
+  "eval": {
+    "slug": "sae-bench-ravel",
+    "displayName": "SAEBench RAVEL",
+    "aliases": ["RAVEL"],
+    "description": "For an entity (a city) with attributes (its country, its language), the eval changes the latents for one attribute. The model's answer for that attribute must change (cause) and the answers for the other attributes must not (isolation). Disentanglement is the mean of the two.",
+    "summary": "RAVEL (Resolving Attribute-Value Entanglements in Language Models) measures if an SAE can change one attribute of an entity and leave the other attributes.",
+    "suite": "saebench",
+    "maintainers": [
+      {
+        "name": "Karvonen, Rager, et al.",
+        "url": "https://github.com/adamkarvonen/SAEBench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2503.09532",
+        "title": "SAEBench: A Comprehensive Benchmark for Sparse Autoencoders"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/adamkarvonen/SAEBench",
+        "title": "SAEBench code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/adamkarvonen/sae_bench_results_0125",
+        "title": "SAEBench result files (January 2025)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www.neuronpedia.org/sae-bench",
+        "title": "Interactive SAEBench results on Neuronpedia"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["method"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-03",
+      "status": "published",
+      "releasedDate": "2025-03",
+      "scores": [],
+      "metrics": [
+        {
+          "key": "disentanglement_score",
+          "displayName": "Disentanglement",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "headline": true,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "cause_score",
+          "displayName": "Cause",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "isolation_score",
+          "displayName": "Isolation",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        }
+      ]
+    }
+  ]
+}

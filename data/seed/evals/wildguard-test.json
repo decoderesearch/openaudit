@@ -1,0 +1,145 @@
+{
+  "eval": {
+    "slug": "wildguard-test",
+    "displayName": "WildGuardTest",
+    "aliases": ["WildGuard-Test", "WildGuardTest", "WildGuard Test"],
+    "description": "Human-annotated moderation test set from AI2 WildGuardMix. It has 1,725 prompt-response pairs (vanilla and adversarial) labeled for prompt harm, response harm, and response refusal across 13 risk categories. Guard models are scored with F1 or accuracy on those labels; chat-model cards also report refusal or output-safety rates when WildGuard grades completions on the same prompts.",
+    "summary": "Tests whether safety classifiers correctly detect harmful prompts, harmful responses, and refusals in normal and adversarial chats.",
+    "family": "AI2 Safety Toolkit",
+    "maintainers": [
+      {
+        "name": "Allen Institute for AI",
+        "url": "https://github.com/allenai/wildguard"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2406.18495",
+        "title": "WildGuard: Open One-Stop Moderation Tools for Safety Risks, Jailbreaks, and Refusals of LLMs"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/allenai/wildguard",
+        "title": "WildGuard model and evaluation code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/allenai/wildguardmix",
+        "title": "allenai/wildguardmix (WildGuardTrain + WildGuardTest)"
+      }
+    ],
+    "access": "gated",
+    "status": "active",
+    "facets": {
+      "measures": ["capability", "propensity", "robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "jailbreaks", "toxicity"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-06-26",
+      "status": "published",
+      "releasedDate": "2024-06-26",
+      "dataset": {
+        "hfRepo": "allenai/wildguardmix",
+        "revision": "d29c47f41c8b51348b5c8e8c81c039b3132b66d1",
+        "url": "https://huggingface.co/datasets/allenai/wildguardmix",
+        "license": "odc-by",
+        "splits": [
+          {
+            "name": "wildguardtest",
+            "sampleCount": 1725,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "sampleTerms": {
+        "display": "sign_in",
+        "source": "https://huggingface.co/datasets/allenai/wildguardmix",
+        "quote": "Access to this dataset is automatically granted upon accepting the [AI2 Responsible Use Guidelines](https://allenai.org/responsible-use.pdf), and completing all fields below"
+      },
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct label",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the moderator's prompt-harm, response-harm, or refusal label matches the human gold label."
+        },
+        {
+          "key": "refused",
+          "displayName": "Refused",
+          "type": "binary",
+          "direction": "neither",
+          "description": "1 when the chat model refuses the prompt (used when cards report refusal rate on WildGuardTest categories)."
+        },
+        {
+          "key": "safe_output",
+          "displayName": "Safe output",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when a safety grader labels the completion safe (cards: safety of outputs)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "f1",
+          "displayName": "F1",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "F1 on prompt harm, response harm, or refusal classification. The WildGuard paper's main moderator metric."
+        },
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "correct",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of items labeled correctly. Cards often report this for chat models on WildGuardTest."
+        },
+        {
+          "key": "refusal_rate",
+          "displayName": "Refusal rate",
+          "score": "refused",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "neither",
+          "safetyDirection": "neither",
+          "description": "Share of prompts refused. On harmful prompts higher is safer; on benign prompts lower is better."
+        },
+        {
+          "key": "safety_of_outputs",
+          "displayName": "Safety of outputs",
+          "score": "safe_output",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Share of completions labeled safe (cards: safety of outputs)."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "internet": false
+      }
+    }
+  ]
+}

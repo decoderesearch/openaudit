@@ -1,0 +1,112 @@
+{
+  "eval": {
+    "slug": "hallusionbench",
+    "displayName": "HallusionBench",
+    "aliases": ["HallBench"],
+    "description": "Diagnostic VQA suite for language hallucination and visual illusion in vision-language models. Items are yes/no questions over paired original and edited images (visual-dependent and visual-supplement). Headline metric is question-pair accuracy (all images in a set must be answered correctly); reports also include figure accuracy and per-question accuracy.",
+    "summary": "Tests whether the model gives wrong answers about images because of language bias or visual illusions.",
+    "maintainers": [
+      {
+        "name": "Tianyi Lab",
+        "url": "https://github.com/tianyi-lab/HallusionBench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2310.14566",
+        "title": "HallusionBench: An Advanced Diagnostic Suite for Entangled Language Hallucination and Visual Illusion in Large Vision-Language Models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/tianyi-lab/HallusionBench",
+        "title": "Questions, images, and evaluation code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/rayguan/HallusionBench",
+        "title": "rayguan/HallusionBench"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["hallucination"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2023-11",
+      "status": "published",
+      "releasedDate": "2023-11-28",
+      "changes": "Expanded question set after the early report (current HallusionBench.json has 1129 questions).",
+      "dataset": {
+        "hfRepo": "rayguan/HallusionBench",
+        "revision": "2067dfdce5abc7efdbb0927f4721ae282f0b6c51",
+        "url": "https://github.com/tianyi-lab/HallusionBench/tree/744007c232c292942c7f80eb61edb2465482da31",
+        "license": "bsd-3-clause",
+        "splits": [
+          {
+            "name": "questions",
+            "sampleCount": 1129,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct yes/no",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the model's yes/no answer matches the ground-truth label for that image-question."
+        },
+        {
+          "key": "pair_correct",
+          "displayName": "Question-pair correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when every image variant in the question set is answered correctly."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "question_pair_accuracy",
+          "displayName": "Question-pair accuracy (qAcc)",
+          "score": "pair_correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Share of question sets where all image variants are answered correctly."
+        },
+        {
+          "key": "question_accuracy",
+          "displayName": "Question accuracy (aAcc)",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Share of individual image-questions answered correctly."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "internet": false
+      }
+    }
+  ]
+}

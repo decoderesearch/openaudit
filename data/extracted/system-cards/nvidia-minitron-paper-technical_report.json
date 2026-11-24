@@ -1,0 +1,369 @@
+{
+  "document": "nvidia-minitron-paper-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "rawModelName": "Minitron 8B"
+    },
+    {
+      "rawModelName": "Minitron 4B"
+    },
+    {
+      "rawModelName": "Minitron 4B-instruct"
+    }
+  ],
+  "pageCount": 21,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (large language models)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Large language models (LLMs) targeting different deployment scales and sizes"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "M INITRON 8B: 8.27B; M INITRON 4B: 4.19B (pruned from Nemotron-4 15B / 15.6B)",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "M INITRON 8B                 32           4096               48               8                16384                  8.27B"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Width-pruned decoder LLMs from Nemotron-4 15B (32 layers; 8B: hidden 4096, 48 heads, 8 query groups, MLP 16384; 4B: hidden 3072, 24 heads, 8 query groups, MLP 9216; vocab 256k)",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "M INITRON 4B                 32           3072               24               8                 9216                  4.19B"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Nemotron-4 curated 8T base pretraining dataset plus continued training (CT) blend; instruction-tuned 4B uses Nemotron-4 340B instruction-tuning data",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "we use the Nemotron-4 curated 8 trillion token (8T) base"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "Pruned M INITRON models use 94B training tokens (up to 40× fewer than training from scratch); lightweight retraining ~1.8B tokens",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "# Training Tokens                    >15T         2T           8T       6T         8T           3.8T        94B"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "M INITRON 8B [TruthfulQA](/evals/truthfulqa) mc2 42.6; M INITRON 4B 42.9 (0-shot) (higher is better)",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "truthfulqa(0)          mc2            43.9       39           42.6     45          40.7         36.5        42.6"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [],
+  "evalResults": [
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Llama-3",
+      "metric": "mc2",
+      "value": 43.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 8B base model"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "truthfulqa(0)          mc2            43.9       39           42.6     45          40.7         36.5        42.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Llama-2",
+      "metric": "mc2",
+      "value": 39,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 6.7B base model"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "truthfulqa(0)          mc2            43.9       39           42.6     45          40.7         36.5        42.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Mistral",
+      "metric": "mc2",
+      "value": 42.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 7.3B base model"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "truthfulqa(0)          mc2            43.9       39           42.6     45          40.7         36.5        42.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Gemma",
+      "metric": "mc2",
+      "value": 45,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 8.5B base model"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "truthfulqa(0)          mc2            43.9       39           42.6     45          40.7         36.5        42.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Nemotron-4",
+      "metric": "mc2",
+      "value": 40.7,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 15.6B base model"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "truthfulqa(0)          mc2            43.9       39           42.6     45          40.7         36.5        42.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Nemotron-3",
+      "metric": "mc2",
+      "value": 36.5,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 8.5B base model"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "truthfulqa(0)          mc2            43.9       39           42.6     45          40.7         36.5        42.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Minitron 8B",
+      "metric": "mc2",
+      "value": 42.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 8.3B pruned base model"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "truthfulqa(0)          mc2            43.9       39           42.6     45          40.7         36.5        42.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "microsoft/phi-2",
+      "metric": "mc2",
+      "value": 44,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 2.7B base model"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 3",
+        "quote": "truthfulqa(0)          mc2           44         33         -          45.9        -          42.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Gemma",
+      "metric": "mc2",
+      "value": 33,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 2.5B base model"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 3",
+        "quote": "truthfulqa(0)          mc2           44         33         -          45.9        -          42.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Qwen2",
+      "metric": "mc2",
+      "value": 45.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 1.5B base model; score reported from corresponding paper"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 3",
+        "quote": "truthfulqa(0)          mc2           44         33         -          45.9        -          42.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Minitron 4B",
+      "metric": "mc2",
+      "value": 42.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 4.2B pruned base model"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 3",
+        "quote": "truthfulqa(0)          mc2           44         33         -          45.9        -          42.9"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:52:22Z"
+  },
+  "notes": "Pruning/distillation paper, not a safety card. Only safety-relevant numbered eval is TruthfulQA (Tables 2–3); Gemma2* and MiniCPM* TruthfulQA cells are dashes so omitted. Skipped capability suites (MMLU, HumanEval, MBPP, ARC-Challenge, HellaSwag, WinoGrande, GSM8K, XL-Sum, MT-Bench, IFEval, ChatRAG-Bench, BFCL). Seed link nvidia/Nemotron-Mini-4B-Instruct is never named (paper uses M INITRON 4B-instruct). Table labels Llama-3/Llama-2/Mistral/Gemma kept as rawModelName (base, no Instruct named)."
+}

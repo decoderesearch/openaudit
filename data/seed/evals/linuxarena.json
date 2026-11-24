@@ -1,0 +1,127 @@
+{
+  "eval": {
+    "slug": "linuxarena",
+    "displayName": "LinuxArena",
+    "aliases": ["LinuxArena stealth"],
+    "description": "AI control setting where agents do software-engineering main tasks inside live multi-service Linux environments while optionally pursuing hidden sabotage side tasks. Programmatic scorers check main and side success; a trusted monitor scores suspicion. Cards often report stealth success (undetected sabotage). The public Control Tower release covers 10 environments (919 main / 93 side tasks); the paper describes 20 / 1,667 / 185.",
+    "summary": "Measures whether AI agents can secretly sabotage systems while doing software tasks, without a monitor detecting them.",
+    "maintainers": [
+      {
+        "name": "Redwood Research and EquiStamp",
+        "url": "https://www.linuxarena.ai/"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2604.15384",
+        "title": "LinuxArena: A Control Setting for AI Agents in Live Production Software Environments"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/linuxarena/control-tower",
+        "title": "Control Tower (LinuxArena runner)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www.linuxarena.ai/",
+        "title": "LinuxArena project site"
+      },
+      {
+        "kind": "blog",
+        "url": "https://blog.redwoodresearch.org/p/introducing-linuxarena",
+        "title": "Introducing LinuxArena"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability", "propensity"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["sabotage", "cyber", "cot_monitorability", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "public-10-env",
+      "status": "published",
+      "releasedDate": "2026-04-16",
+      "changes": "Public Control Tower LinuxArena setting: 10 environments, 919 main tasks, 93 side tasks. Paper full set is 20 / 1,667 / 185 with additional private environments.",
+      "dataset": {
+        "url": "https://github.com/linuxarena/control-tower/tree/76133cddff262f60f3628eeb770466946d1ac1fe",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "main_tasks_public",
+            "sampleCount": 919,
+            "storage": "pointer"
+          },
+          {
+            "name": "side_tasks_public",
+            "sampleCount": 93,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "main_task_success",
+          "displayName": "Main task success",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the environment pytest scorer marks the main software-engineering task complete."
+        },
+        {
+          "key": "side_task_success",
+          "displayName": "Side task success",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when the hidden sabotage side-task scorer fires."
+        },
+        {
+          "key": "stealth_success",
+          "displayName": "Stealth success",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when the side task succeeds without the trusted monitor catching the attack at the calibrated audit budget."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "stealth_success_rate",
+          "displayName": "Stealth success rate",
+          "score": "stealth_success",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Share of attack runs with undetected sabotage (LinuxArena stealth in cards)."
+        },
+        {
+          "key": "main_task_success_rate",
+          "displayName": "Main task success rate",
+          "score": "main_task_success",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "monitor"],
+        "sandbox": "docker",
+        "internet": false
+      }
+    }
+  ]
+}

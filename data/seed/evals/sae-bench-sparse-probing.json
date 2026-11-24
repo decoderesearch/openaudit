@@ -1,0 +1,109 @@
+{
+  "eval": {
+    "slug": "sae-bench-sparse-probing",
+    "displayName": "SAEBench Sparse Probing",
+    "aliases": ["SAEBench sparse probing"],
+    "description": "Trains a probe on the top k SAE latents for each binary task (profession, language, sentiment, topic) and reports the test accuracy. The same probe on the top k dimensions of the raw activations is the baseline.",
+    "summary": "Measures if a few SAE latents can detect a concept, such as a profession, a language or a sentiment.",
+    "suite": "saebench",
+    "maintainers": [
+      {
+        "name": "Karvonen, Rager, et al.",
+        "url": "https://github.com/adamkarvonen/SAEBench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2503.09532",
+        "title": "SAEBench: A Comprehensive Benchmark for Sparse Autoencoders"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/adamkarvonen/SAEBench",
+        "title": "SAEBench code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/adamkarvonen/sae_bench_results_0125",
+        "title": "SAEBench result files (January 2025)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www.neuronpedia.org/sae-bench",
+        "title": "Interactive SAEBench results on Neuronpedia"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["method"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-01",
+      "status": "published",
+      "releasedDate": "2025-01",
+      "scores": [],
+      "metrics": [
+        {
+          "key": "sae_top_1_test_accuracy",
+          "displayName": "Top-1 latent accuracy",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "headline": true,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "sae_top_5_test_accuracy",
+          "displayName": "Top-5 latent accuracy",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "sae_test_accuracy",
+          "displayName": "All latents accuracy",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "llm_top_1_test_accuracy",
+          "displayName": "Top-1 raw dimension accuracy",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The baseline: the same probe on the raw activations.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "llm_test_accuracy",
+          "displayName": "All raw dimensions accuracy",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The baseline: a probe on all raw activations.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "eval": {
+    "slug": "toxigen",
+    "displayName": "ToxiGen",
+    "aliases": ["Toxigen Discriminative", "ToxiGen (discriminative)"],
+    "description": "Machine-generated statements, toxic and benign, about 13 minority groups, for implicit hate speech. Used in two ways. Generative: the model continues prompts, and a toxicity classifier labels each output; the metric is the share of toxic outputs. Discriminative: the model labels human-annotated statements as toxic or benign; the metric is accuracy. Results from the two tasks are not comparable.",
+    "summary": "Measures whether the model writes or detects hateful statements about minority groups, even when they use no obvious slurs.",
+    "maintainers": [
+      {
+        "name": "Microsoft",
+        "url": "https://github.com/microsoft/TOXIGEN"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2203.09509",
+        "title": "ToxiGen: A Large-Scale Machine-Generated Dataset for Adversarial and Implicit Hate Speech Detection"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/microsoft/TOXIGEN",
+        "title": "Generation code, prompts and classifiers"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/toxigen/toxigen-data",
+        "title": "toxigen/toxigen-data"
+      }
+    ],
+    "access": "public",
+    "status": "legacy",
+    "legacyReason": "2022 GPT-3-made data. Chat models refuse it, so scores sit at 0%. Realistic prompts elicit more toxicity.",
+    "legacyDecisionDate": "2026-10-05",
+    "facets": {
+      "measures": ["propensity", "capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["toxicity", "bias"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2022-05",
+      "status": "published",
+      "releasedDate": "2022-05",
+      "dataset": {
+        "hfRepo": "toxigen/toxigen-data",
+        "revision": "ea082a8973a287097b17973343576e0c8da8eb3b",
+        "url": "https://huggingface.co/datasets/toxigen/toxigen-data",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "prompts",
+            "sampleCount": 31000,
+            "storage": "pointer"
+          },
+          {
+            "name": "annotated/test",
+            "sampleCount": 940,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "toxic",
+          "displayName": "Toxic output",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "Generative task: 1 when the toxicity classifier labels the output toxic."
+        },
+        {
+          "key": "correct",
+          "displayName": "Correct label",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "Discriminative task: 1 when the model's toxic or benign label matches the human label."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "toxic_generation_rate",
+          "displayName": "% toxic generations",
+          "score": "toxic",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Generative task: share of outputs labeled toxic. Reports differ in classifier and threshold."
+        },
+        {
+          "key": "discriminative_accuracy",
+          "displayName": "Discriminative accuracy",
+          "score": "correct",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Discriminative task: share of annotated statements labeled correctly."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "openaudit_runner/toxigen",
+        "package": "openaudit-runner==0.1.0",
+        "roles": ["target"],
+        "internet": true
+      }
+    }
+  ]
+}

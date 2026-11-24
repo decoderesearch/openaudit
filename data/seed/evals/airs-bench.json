@@ -1,0 +1,112 @@
+{
+  "eval": {
+    "slug": "airs-bench",
+    "displayName": "AIRS-Bench",
+    "aliases": ["AI Research Science Benchmark", "AIRS Bench"],
+    "description": "Meta AI Research Science Benchmark: 20 agentic ML research tasks drawn from recent papers across NLP, code, math, biochemical modeling, and time series. Agents must generate ideas, design methods, run experiments, and iterate without baseline code. Headline metric is average normalized score versus each task’s optimum; cards also use valid-submission rate and Elo.",
+    "summary": "Measures how well AI agents do machine learning research tasks on their own, from first idea to final result.",
+    "maintainers": [
+      {
+        "name": "Meta",
+        "url": "https://github.com/facebookresearch/airs-bench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2602.06855",
+        "title": "AIRS-Bench: a Suite of Tasks for Frontier AI Research Science Agents"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/facebookresearch/airs-bench",
+        "title": "AIRS-Bench task definitions and evaluation code"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://ai.meta.com/research/publications/airs-bench-a-suite-of-tasks-for-frontier-ai-research-science-agents/",
+        "title": "Meta research publication page"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-02",
+      "status": "published",
+      "dataset": {
+        "url": "https://github.com/facebookresearch/airs-bench/tree/18e4f1d501069cf7d7e2740d81c2ca748c56a6a1",
+        "license": "cc-by-nc-4.0",
+        "splits": [
+          {
+            "name": "tasks",
+            "sampleCount": 20,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "normalized_score",
+          "displayName": "Normalized score",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Task metric normalized so the optimum maps to 1 (and worse performance toward 0)."
+        },
+        {
+          "key": "valid_submission",
+          "displayName": "Valid submission",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 if the agent produced a scorable submission for the task."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mean_normalized_score",
+          "displayName": "Average normalized score",
+          "score": "normalized_score",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Mean normalized score across the 20 tasks."
+        },
+        {
+          "key": "valid_submission_rate",
+          "displayName": "Valid submission rate",
+          "score": "valid_submission",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of tasks with a valid submission."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "sandbox": "docker",
+        "internet": false,
+        "gpu": true
+      }
+    }
+  ]
+}

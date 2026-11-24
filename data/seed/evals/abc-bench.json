@@ -1,0 +1,89 @@
+{
+  "eval": {
+    "slug": "abc-bench",
+    "displayName": "ABC-Bench",
+    "aliases": [
+      "ABC Bench (Fragment Design)",
+      "ABC Bench (Liquid Handling)",
+      "ABC Bench (Screening Evasion)",
+      "ABC Bench (FD)",
+      "ABC Bench (LH)",
+      "ABC-Bench",
+      "Agentic Bio-Capabilities Benchmark",
+      "Agentic Biosecurity Capabilities Benchmark (ABC-Bench)",
+      "SecureBio Fragment Design",
+      "SecureBio Advanced Screening Evasion"
+    ],
+    "description": "SecureBio agentic suite of practical molecular-biology tasks that combine biology and software skills: design DNA fragments for assembly, evade nucleic-acid synthesis screening, and write liquid-handling robot code. Outputs are checked with programmatic criteria. Cards report each task under names such as Fragment Design, Screening Evasion, and Liquid Handling. Meta cards use the suite; SecureBio is the maker.",
+    "summary": "Measures how well AI agents do lab biology tasks, such as DNA design, that could help cause harm.",
+    "family": "SecureBio",
+    "maintainers": [
+      {
+        "name": "SecureBio",
+        "url": "https://securebio.org/benchmarks/details/"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2606.11150",
+        "title": "ABC-Bench: An Agentic Bio-Capabilities Benchmark for Biosecurity"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://securebio.org/benchmarks/details/",
+        "title": "SecureBio benchmark details (ABC-Bench)"
+      }
+    ],
+    "access": "held_out",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "3-tasks",
+      "status": "published",
+      "changes": "Three tasks (Fragment Design, Screening Evasion, Liquid Handling Robot), each with up to about 10 prompt variants.",
+      "scores": [
+        {
+          "key": "task_success",
+          "displayName": "Task success",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Programmatic score that the generated sequences or robot script meet the task criteria."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mean_task_score",
+          "displayName": "Mean task score",
+          "score": "task_success",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Mean programmatic score within a task (cards report each task separately)."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "sandbox": "docker"
+      }
+    }
+  ]
+}

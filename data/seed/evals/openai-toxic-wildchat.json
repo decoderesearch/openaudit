@@ -1,0 +1,91 @@
+{
+  "eval": {
+    "slug": "openai-toxic-wildchat",
+    "displayName": "Toxic WildChat",
+    "aliases": ["WildChat", "WildChat (detailed)", "(Toxic) WildChat", "Wildchat Toxic"],
+    "description": "Tests whether a model gives unsafe replies to toxic requests from real ChatGPT users. The prompts come from WildChat-1M, which labels each user turn with OpenAI Moderation API scores. For each of the 11 Moderation API categories, OpenAI takes the 200 conversations with the highest score on the last user turn. A model grader checks each reply against OpenAI policy (not_unsafe). OpenAI did not publish its subset or grader, so other runs can only rebuild them.",
+    "summary": "Tests whether the model gives unsafe replies to toxic requests that real users sent to chatbots.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://arxiv.org/abs/2412.16720"
+      },
+      {
+        "name": "Allen Institute for AI",
+        "url": "https://huggingface.co/datasets/allenai/WildChat-1M"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2412.16720",
+        "title": "OpenAI o1 System Card (describes the subset)"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2405.01470",
+        "title": "WildChat: 1M ChatGPT Interaction Logs in the Wild"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/allenai/WildChat-1M",
+        "title": "allenai/WildChat-1M"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn", "multi_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-09-12",
+      "status": "published",
+      "releasedDate": "2024-09-12",
+      "dataset": {
+        "hfRepo": "allenai/WildChat-1M",
+        "revision": "7d6490e462285cf85d91eabea0f9a954fbddcd1f",
+        "url": "https://huggingface.co/datasets/allenai/WildChat-1M",
+        "license": "odc-by",
+        "splits": [
+          {
+            "name": "train",
+            "sampleCount": 837989,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "not_unsafe",
+          "displayName": "Not unsafe",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the grader finds that the reply does not violate policy."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "not_unsafe",
+          "displayName": "not_unsafe",
+          "score": "not_unsafe",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of replies that are not unsafe. Cards give it for all prompts and for each Moderation API category."
+        }
+      ]
+    }
+  ]
+}

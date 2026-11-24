@@ -1,0 +1,409 @@
+{
+  "document": "stability-stablelm-2-paper",
+  "alsoDocuments": ["stability-stablelm-2-blog"],
+  "covers": [
+    {
+      "model": "stabilityai/stablelm-2-1_6b"
+    },
+    {
+      "model": "stabilityai/stablelm-2-zephyr-1_6b"
+    }
+  ],
+  "pageCount": 23,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4096",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "We train our model from scratch with a context length of 4096"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (causal decoder-only language model)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "The model is a causal decoder-only transformer similar in design to the LLaMA architecture"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English, Spanish, German, Italian, French, Portuguese, and Dutch",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "It fluidly handles up to seven languages: English, Spanish, German, Italian,"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "open non-commercial license",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "this model is released under an open non-commercial license."
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "1,644,417,024 (1.6B)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "1,644,417,024          2048               24                  32               4096"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Causal decoder-only transformer similar to LLaMA; 2048 hidden, 24 layers, 32 heads; RoPE on first 25% of head dims; LayerNorm; bias only on Q/K/V projections; Arcade100k tokenizer",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "The model is a causal decoder-only transformer similar in design to the LLaMA architecture"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Public mix (~2T tokens) including RefinedWeb, Pile subsets, RedPajama, Stack, CulturaX, C4, math/code/law/wiki sources and Restruct-v1; SFT/DPO on UltraChat, WizardLM, SlimOrca, ShareGPT, Capybara, Deita, MetaMathQA, UltraFeedback, Orca Pairs",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "we trained our model with the mix shown in Table 1, which accounts"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "≈92,000 GPU-hours on 512 NVIDIA A100 40GB GPUs (64 Amazon P4d)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "We trained Stable LM 2 for ≈ 92, 000 GPU-hours,"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa) 0-shot (Open LLM Leaderboard TQA): stablelm-2-zephyr-1_6b 45.6, stablelm-2-1_6b 36.8",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "5-shot [30] (MMLU), TruthfulQA 0-shot [43] (TQA), WinoGrande 5-shot [62] (Wino) and GSM8K"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "After direct preference optimization (DPO), the model lacked knowledge of its creator and of language-model limitations, so the authors added a self-knowledge training stage.", "tone": "mixed",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "The model after the output of the DPO [58] stage does not have knowledge about who created it, or"
+      }
+    },
+    {
+      "text": "Stability AI says open release of weights lets others inspect suitability and vulnerabilities and correct observed biases, but they lack direct visibility into downstream uses.", "tone": "mixed",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "and vulnerabilities, test the effectiveness of different optimization strategies, and correct for biases"
+      }
+    },
+    {
+      "text": "The authors flag hallucination mitigation for small models as future work rather than reporting a completed mitigation eval.", "tone": "mixed",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "ways to detect hallucinations in these models will unlock new use cases in areas that are"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "microsoft/phi-2",
+      "metric": "score",
+      "value": 44.5,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Open LLM Leaderboard TQA column; aligned (†)"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": " phi-2†                        2.8B     61.3     61.1     75.1    58.1       44.5      74.4     54.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "stabilityai/stablelm-2-zephyr-1_6b",
+      "metric": "score",
+      "value": 45.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Open LLM Leaderboard TQA column; aligned (†)"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": " stablelm-2-zephyr-1_6b†       1.6B     49.7     43.3     69.3    41.8       45.6      63.6     34.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "microsoft/phi-1_5",
+      "metric": "score",
+      "value": 40.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Open LLM Leaderboard TQA column; aligned (†)"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": " phi-1_5†                      1.3B     47.7     52.9     63.8    43.9       40.9      72.2     12.4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "stabilityai/stablelm-3b-4e1t",
+      "metric": "score",
+      "value": 37.2,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Open LLM Leaderboard TQA column"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": " stablelm-3b-4e1t              2.7B     46.6     46.6     75.9    45.2       37.2      71.2      3.3"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen1.5-1.8B",
+      "metric": "score",
+      "value": 39.4,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Open LLM Leaderboard TQA column; table label Qwen-1.5-1.8B"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": " Qwen-1.5-1.8B                 1.8B     46.6     37.9     61.4    46.7       39.4      60.3     33.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-2b",
+      "metric": "score",
+      "value": 33.1,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Open LLM Leaderboard TQA column"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": " gemma-2b                      2.5B     46.5     48.5     71.7    41.7       33.1      66.8     17.4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "stabilityai/stablelm-2-1_6b",
+      "metric": "score",
+      "value": 36.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Open LLM Leaderboard TQA column"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": " stablelm-2-1_6b               1.6B     45.3     43.3     70.5    38.9       36.8      64.6     17.4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-2b-it",
+      "metric": "score",
+      "value": 45.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Open LLM Leaderboard TQA column; aligned (†)"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": " gemma-2b-it†                  2.5B     42.7     43.9     62.7    37.6       45.8      60.9      5.5"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "open_llama_3b",
+      "metric": "score",
+      "value": 34.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Open LLM Leaderboard TQA column"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": " open_llama_3b                  3B      40.3     39.9     71.6    27.1       34.8      67.0      0.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "tiiuae/falcon-rw-1b",
+      "metric": "score",
+      "value": 35.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Open LLM Leaderboard TQA column"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": " falcon-rw-1b                  1.3B     37.1     35.1     63.6    25.3       35.9      62.0      0.5"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "TinyLLama-1.1B",
+      "metric": "score",
+      "value": 37.3,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Open LLM Leaderboard TQA column"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": " TinyLLama-1.1B                1.1B     36.4     33.9     60.3    26.0       37.3      59.5      1.4"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:08:42Z"
+  },
+  "notes": "Technical report on Stable LM 2 1.6B base and Zephyr instruct, not a system card. Only safety-relevant numeric eval is TruthfulQA (TQA) in Table 4 / Open LLM Leaderboard; Table 5 multilingual averages include translated TQA but do not report a separate TQA number. Skipped capability: ARC, HellaSwag, MMLU, WinoGrande, GSM8K, multilingual aggregate, LAMBADA, MT-Bench, Needle-in-a-Haystack, throughput/quantization. SFT/DPO preference alignment and self-knowledge training are methods, not topic coverage. Societal-impact text mentions biases/vulnerabilities but reports no bias or red-team eval. Hallucination covered only via the future-work behavioral claim. Covers both HF checkpoints linked from the paper; seed id stabilityai/stablelm-2-1_6b-chat is the parent of those checkpoints and is not named as -chat in the text."
+}

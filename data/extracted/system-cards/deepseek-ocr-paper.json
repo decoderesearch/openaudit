@@ -1,0 +1,198 @@
+{
+  "document": "deepseek-ocr-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "deepseek-ai/DeepSeek-OCR"
+    }
+  ],
+  "pageCount": 22,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "8192 tokens (training sequence length)",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "all data processed to a length of 8192 tokens, which is also the sequence length\nfor DeepSeek-OCR."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "vision-language (document/image in; text OCR / structured parsing out)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "As shown in Figure 3, DeepSeek-OCR enjoys a unified end-to-end VLM architecture consisting\nof an encoder and a decoder."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "about 100 languages for PDF/document OCR; Chinese and English for natural scene OCR",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "data covering about 100 languages from the Internet, with Chinese and English accounting for"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "3B MoE decoder (DeepEncoder ~380M separately)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "The decoder adopts a 3B MoE [19, 20] architecture with 570M\nactivated parameters."
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "about 570M activated parameters (decoder; 6 of 64 routed experts + 2 shared)",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "the model activates 6 out of 64 routed experts and 2 shared experts, with about 570M activated\nparameters."
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "DeepEncoder (~380M: 80M SAM-base window attention + 16× conv compressor + 300M CLIP-large global attention) + DeepSeek-3B-MoE decoder",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "DeepEncoder is\napproximately 380M in parameters, mainly composed of an 80M SAM-base [17] and a 300M\nCLIP-large [29] connected in series."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "OCR 1.0 (30M PDF pages ~100 langs; scene OCR; Word), OCR 2.0 (charts/chem/geometry), general vision ~20%, text-only ~10%; OCR ~70%",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "OCR data accounts for 70%,\ngeneral vision data accounts for 20%, and text-only data accounts for 10%."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "20 nodes × 8 A100-40G; DP 40; global batch 640; AdamW lr 3e-5 (DeepSeek-OCR stage)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "use 20 nodes (each with 8 A100-40G GPUs) for training, with a data parallelism (DP) of 40 and\na global batch size of 640."
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:11:42Z"
+  },
+  "notes": "Technical report on DeepSeek-OCR (optical context compression / document OCR VLM). No safety, alignment, risk-framework, red-team, refusal, jailbreak, bias, or dangerous-capability section. Chemical-formula and geometry parsing are OCR capability demos, not bio/chem safety. All evalResults skipped under pilot SAFETY ONLY: Fox compression precision, OmniDocBench edit-distance, and qualitative OCR/multilingual/general-vision demos are capability-only. No model release/launch date in the text (arXiv stamp only). Codes/weights said publicly accessible without a named license."
+}

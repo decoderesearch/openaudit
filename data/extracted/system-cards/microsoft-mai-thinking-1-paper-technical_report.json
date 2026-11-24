@@ -1,0 +1,691 @@
+{
+  "document": "microsoft-mai-thinking-1-paper-technical_report",
+  "alsoDocuments": [
+    "microsoft-mai-models-2026-blog",
+    "microsoft-mai-thinking-1-blog"
+  ],
+  "covers": [
+    {
+      "model": "microsoft/mai-thinking-1"
+    }
+  ],
+  "pageCount": 109,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "Web HTML September 2025; Web PDFs December 2025; Public GitHub Code June 2025; Books and journals March 2026",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "Web HTML pages         September 2025\n                                  Web PDFs               December 2025\n                                  Public GitHub Code     June 2025\n                                  Books and journals     March 2026"
+      }
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "256K",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "After mid-training, MAI-Thinking-1 achieves a maximum context length of 256K."
+      }
+    },
+    "maxOutput": {
+      "status": "stated",
+      "value": "256k (evaluation maximum output tokens)",
+      "source": {
+        "page": "53",
+        "pdfPage": 53,
+        "quote": "For agentic coding evaluations, we use a total context length of 256k. For all other\n   evals above we use maximum output tokens of 256k."
+      }
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "chains of thought (CoTs)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "learns to leverage chains of thought (CoTs) against task-specific feedback, use external tools to interact with\nenvironments, as well as follow human preference and safety signals."
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English dominates training; also multilingual text in pre-training mix",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "MAI-Thinking-1 is pre-trained on 30T tokens extracted from a mixture of publicly available and licensed\nhuman-generated data covering web data, public GitHub code, books, academic papers, news, multilingual\ntext, and domain-specific materials."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "1T total",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "MAI-Thinking-1, a 35B active /\n1T total parameter MoE that stands among the strongest models of similar size on STEM reasoning and coding tasks"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "35B active",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "MAI-Thinking-1, a 35B active /\n1T total parameter MoE that stands among the strongest models of similar size on STEM reasoning and coding tasks"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "decoder-only Transformer MoE with periodic local/global attention and alternating dense and MoE FFN blocks",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "We use a decoder-only Transformer (Vaswani et al., 2017) with periodic local and global at-\ntention layers and alternating dense and MoE feed-forward blocks."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "30T tokens of publicly available and licensed human-generated data; no LM-generated synthetic data in pre-training",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "MAI-Thinking-1 is pre-trained on 30T tokens extracted from a mixture of publicly available and licensed\nhuman-generated data covering web data, public GitHub code, books, academic papers, news, multilingual\ntext, and domain-specific materials."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "AIR-Bench 88; internal safety pass rate on high-sensitivity content; helpfulness and safety reinforcement learning (RL) climb",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "quote": "MAI-Thinking-1       88            63             63               98             88        35                43"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "Red-team remediation reduced child safety issues by ∼30% from pre-mitigation to final candidate",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "quote": "jailbreak success by ∼44%, hate &\nfairness by ∼43%, child safety issues by ∼30% and mental health attacks by ∼20%."
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Largest internal safety–helpfulness gains include Self Harm; fiction-framing bypasses for self-harm content remediated",
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "quote": "largest gains on Chemical, Biological, Radiological, and Nuclear (CBRN), Self Harm, and\nElections & Politics."
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Internal jailbreak suite (~9.5K prompts): attack success rate (ASR) 4.4% / 17.6% / 26.8% on Foundational / Compositional / Adaptive (lower is better)",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "quote": "Figure 21. Attack success rate on jailbreak evaluations grouped by transformation type. Foundational Techniques\n   are single-step transformations that preserve harmful intent through simple modifications such as jailbreak wrap-\n   pers or prompt templates."
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[LongFact](https://arxiv.org/abs/2403.18802) claim-level precision 98 (higher is better)",
+      "source": {
+        "page": "105",
+        "pdfPage": 105,
+        "quote": "LongFact. LongFact (Wei et al., 2024c) evaluates factual precision over longer generations"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa) 88; [LongFact](https://arxiv.org/abs/2403.18802) 98; on par with Sonnet 4.6 (higher is better)",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "quote": "TruthfulQA (Lin et al., 2022) and LongFact (Wei et al., 2024c) for honesty"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Red-team remediation reduced hate & fairness issues by ∼43%",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "quote": "jailbreak success by ∼44%, hate &\nfairness by ∼43%, child safety issues by ∼30% and mental health attacks by ∼20%."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "[CyberSecEval](https://arxiv.org/abs/2312.04724) 4 Instruct 63 and Autocomplete 63; independent red teaming scoped to code and cyber-misuse safety",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "quote": "MAI-Thinking-1       88            63             63               98             88        35                43"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "Internal safety–helpfulness tradeoff shows largest gains on chemical, biological, radiological, and nuclear (CBRN) versus Sonnet 4.6",
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "quote": "largest gains on Chemical, Biological, Radiological, and Nuclear (CBRN), Self Harm, and\nElections & Politics."
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [
+    {
+      "name": "third-party vendors",
+      "scope": "Red teaming on automated adversarial attacks, code and cyber-misuse safety, psychosocial and mental-health harms, and multilingual coverage; dangerous-capability/uplift evals out of scope",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "quote": "Additional red-teaming was conducted independently by Microsoft’s AI Red Team (AIRT) and third-party\nvendors."
+      }
+    }
+  ],
+  "findings": [
+    {
+      "text": "Structured dangerous-capability / uplift evaluations were out of scope for this release.", "tone": "mixed",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "quote": "Structured dangerous-capability / uplift evaluations (Phuong et al., 2024; Li et al., 2024b) are out\nof scope for this release."
+      }
+    },
+    {
+      "text": "Across top priority red-team remediation categories, aggregate attack success fell by roughly 22% from pre-mitigation to the final candidate (approximate).", "tone": "good",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "quote": "Across the top priority remediation categories identified during red teaming, aggregate attack success fell\nby roughly 22% from pre-mitigation to the final candidate."
+      }
+    },
+    {
+      "text": "Internal red teaming ran over 2,170 goal-based adversarial scenarios across 25 policy categories in fifteen engagements.", "tone": "good",
+      "source": {
+        "page": "57",
+        "pdfPage": 57,
+        "quote": "Across fifteen engagements spanning the early, mid, and late stages during MAI-Thinking-1’s development,\nred teamers executed over 2,170 goal-based adversarial scenarios across 25 policy categories."
+      }
+    },
+    {
+      "text": "Low-resource language framing (e.g., Yoruba, Telugu, Amharic, Burmese, Khmer, Malay) elicited content refused in English; multilingual adversarial training reduced but did not close the long-tail gap.", "tone": "mixed",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "quote": "Content re-\nliably refused in English was elicited in Yoruba, Telugu, Amharic, Burmese, Khmer, and Malay."
+      }
+    },
+    {
+      "text": "Tree of Attacks with Pruning (TAP) adaptive jailbreaks were a robustness gap; a closed-loop adversarial data pipeline produced a large reduction in TAP susceptibility.", "tone": "mixed",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "quote": "Adaptive Tree of Attacks with Pruning (TAP) attacks (Mehrotra et al., 2024) were surfaced as a ro-\nbustness gap."
+      }
+    },
+    {
+      "text": "Internal red teaming was primarily English; agentic tool-use and multimodal inputs were out of scope.", "tone": "mixed",
+      "source": {
+        "page": "57",
+        "pdfPage": 57,
+        "quote": "and agentic tool-use and multimodal inputs were out of scope."
+      }
+    },
+    {
+      "text": "Figure 20 safety–helpfulness scatter by harm category has no readable per-point numeric labels in the text layer, so category scores were not extracted as evalResults.", "tone": "mixed",
+      "source": {
+        "page": "57",
+        "pdfPage": 57,
+        "quote": "Figure 20. Safety–helpfulness tradeoff by harm category. Metrics are averaged over two generations per prompt."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "AIR-Bench",
+      "metric": "score",
+      "value": 88,
+      "unit": "percent",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "table": "Table 12",
+        "quote": "MAI-Thinking-1       88            63             63               98             88        35                43"
+      },
+      "model": "microsoft/mai-thinking-1",
+      "settings": {
+        "trials": 4,
+        "other": "temperature T=1; top-p=0.97; average across 4 runs"
+      }
+    },
+    {
+      "rawEvalName": "AIR-Bench",
+      "metric": "score",
+      "value": 88,
+      "unit": "percent",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "table": "Table 12",
+        "quote": "Sonnet 4.6           88            62             56               98             88        38                49"
+      },
+      "model": "anthropic/claude-sonnet-4.6",
+      "settings": {
+        "trials": 4,
+        "other": "temperature T=1; top-p=0.97; average across 4 runs"
+      }
+    },
+    {
+      "rawEvalName": "CyberSecEval 4",
+      "metric": "score",
+      "value": 63,
+      "unit": "percent",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "table": "Table 12",
+        "quote": "MAI-Thinking-1       88            63             63               98             88        35                43"
+      },
+      "model": "microsoft/mai-thinking-1",
+      "settings": {
+        "trials": 4,
+        "other": "Instruct (insecure code generation)"
+      }
+    },
+    {
+      "rawEvalName": "CyberSecEval 4",
+      "metric": "score",
+      "value": 62,
+      "unit": "percent",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "table": "Table 12",
+        "quote": "Sonnet 4.6           88            62             56               98             88        38                49"
+      },
+      "model": "anthropic/claude-sonnet-4.6",
+      "settings": {
+        "trials": 4,
+        "other": "Instruct (insecure code generation)"
+      }
+    },
+    {
+      "rawEvalName": "CyberSecEval 4",
+      "metric": "score",
+      "value": 63,
+      "unit": "percent",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "table": "Table 12",
+        "quote": "MAI-Thinking-1       88            63             63               98             88        35                43"
+      },
+      "model": "microsoft/mai-thinking-1",
+      "settings": {
+        "trials": 4,
+        "other": "Autocomplete (insecure code completion)"
+      }
+    },
+    {
+      "rawEvalName": "CyberSecEval 4",
+      "metric": "score",
+      "value": 56,
+      "unit": "percent",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "table": "Table 12",
+        "quote": "Sonnet 4.6           88            62             56               98             88        38                49"
+      },
+      "model": "anthropic/claude-sonnet-4.6",
+      "settings": {
+        "trials": 4,
+        "other": "Autocomplete (insecure code completion)"
+      }
+    },
+    {
+      "rawEvalName": "LongFact",
+      "metric": "claim-level precision",
+      "value": 98,
+      "unit": "percent",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "table": "Table 12",
+        "quote": "MAI-Thinking-1       88            63             63               98             88        35                43"
+      },
+      "model": "microsoft/mai-thinking-1",
+      "settings": {
+        "trials": 4,
+        "other": "temperature T=1; top-p=0.97; average across 4 runs"
+      }
+    },
+    {
+      "rawEvalName": "LongFact",
+      "metric": "claim-level precision",
+      "value": 98,
+      "unit": "percent",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "table": "Table 12",
+        "quote": "Sonnet 4.6           88            62             56               98             88        38                49"
+      },
+      "model": "anthropic/claude-sonnet-4.6",
+      "settings": {
+        "trials": 4,
+        "other": "temperature T=1; top-p=0.97; average across 4 runs"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 88,
+      "unit": "percent",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "table": "Table 12",
+        "quote": "MAI-Thinking-1       88            63             63               98             88        35                43"
+      },
+      "model": "microsoft/mai-thinking-1",
+      "settings": {
+        "trials": 4,
+        "other": "multiple-choice setting"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 88,
+      "unit": "percent",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "table": "Table 12",
+        "quote": "Sonnet 4.6           88            62             56               98             88        38                49"
+      },
+      "model": "anthropic/claude-sonnet-4.6",
+      "settings": {
+        "trials": 4,
+        "other": "multiple-choice setting"
+      }
+    },
+    {
+      "rawEvalName": "internal jailbreak evaluation suite",
+      "model": "microsoft/mai-thinking-1",
+      "metric": "attack success rate",
+      "value": 4.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Foundational Techniques; ~9.5K jailbreak prompts; third-party results include provider-side safety filtering"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Figure 21 (read from image)",
+        "quote": "Figure 21. Attack success rate on jailbreak evaluations grouped by transformation type. Foundational Techniques\n   are single-step transformations that preserve harmful intent through simple modifications such as jailbreak wrap-\n   pers or prompt templates."
+      }
+    },
+    {
+      "rawEvalName": "internal jailbreak evaluation suite",
+      "model": "openai/gpt-5.4",
+      "metric": "attack success rate",
+      "value": 7,
+      "unit": "percent",
+      "settings": {
+        "other": "Foundational Techniques; ~9.5K jailbreak prompts; third-party results include provider-side safety filtering"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Figure 21 (read from image)",
+        "quote": "Figure 21. Attack success rate on jailbreak evaluations grouped by transformation type. Foundational Techniques\n   are single-step transformations that preserve harmful intent through simple modifications such as jailbreak wrap-\n   pers or prompt templates."
+      }
+    },
+    {
+      "rawEvalName": "internal jailbreak evaluation suite",
+      "model": "anthropic/claude-opus-4.6",
+      "metric": "attack success rate",
+      "value": 3,
+      "unit": "percent",
+      "settings": {
+        "other": "Foundational Techniques; ~9.5K jailbreak prompts; third-party results include provider-side safety filtering"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Figure 21 (read from image)",
+        "quote": "Figure 21. Attack success rate on jailbreak evaluations grouped by transformation type. Foundational Techniques\n   are single-step transformations that preserve harmful intent through simple modifications such as jailbreak wrap-\n   pers or prompt templates."
+      }
+    },
+    {
+      "rawEvalName": "internal jailbreak evaluation suite",
+      "model": "anthropic/claude-sonnet-4.6",
+      "metric": "attack success rate",
+      "value": 5.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Foundational Techniques; ~9.5K jailbreak prompts; third-party results include provider-side safety filtering"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Figure 21 (read from image)",
+        "quote": "Figure 21. Attack success rate on jailbreak evaluations grouped by transformation type. Foundational Techniques\n   are single-step transformations that preserve harmful intent through simple modifications such as jailbreak wrap-\n   pers or prompt templates."
+      }
+    },
+    {
+      "rawEvalName": "internal jailbreak evaluation suite",
+      "model": "microsoft/mai-thinking-1",
+      "metric": "attack success rate",
+      "value": 17.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Compositional Techniques; ~9.5K jailbreak prompts; third-party results include provider-side safety filtering"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Figure 21 (read from image)",
+        "quote": "Figure 21. Attack success rate on jailbreak evaluations grouped by transformation type. Foundational Techniques\n   are single-step transformations that preserve harmful intent through simple modifications such as jailbreak wrap-\n   pers or prompt templates."
+      }
+    },
+    {
+      "rawEvalName": "internal jailbreak evaluation suite",
+      "model": "openai/gpt-5.4",
+      "metric": "attack success rate",
+      "value": 13.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Compositional Techniques; ~9.5K jailbreak prompts; third-party results include provider-side safety filtering"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Figure 21 (read from image)",
+        "quote": "Figure 21. Attack success rate on jailbreak evaluations grouped by transformation type. Foundational Techniques\n   are single-step transformations that preserve harmful intent through simple modifications such as jailbreak wrap-\n   pers or prompt templates."
+      }
+    },
+    {
+      "rawEvalName": "internal jailbreak evaluation suite",
+      "model": "anthropic/claude-opus-4.6",
+      "metric": "attack success rate",
+      "value": 17.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Compositional Techniques; ~9.5K jailbreak prompts; third-party results include provider-side safety filtering"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Figure 21 (read from image)",
+        "quote": "Figure 21. Attack success rate on jailbreak evaluations grouped by transformation type. Foundational Techniques\n   are single-step transformations that preserve harmful intent through simple modifications such as jailbreak wrap-\n   pers or prompt templates."
+      }
+    },
+    {
+      "rawEvalName": "internal jailbreak evaluation suite",
+      "model": "anthropic/claude-sonnet-4.6",
+      "metric": "attack success rate",
+      "value": 15,
+      "unit": "percent",
+      "settings": {
+        "other": "Compositional Techniques; ~9.5K jailbreak prompts; third-party results include provider-side safety filtering"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Figure 21 (read from image)",
+        "quote": "Figure 21. Attack success rate on jailbreak evaluations grouped by transformation type. Foundational Techniques\n   are single-step transformations that preserve harmful intent through simple modifications such as jailbreak wrap-\n   pers or prompt templates."
+      }
+    },
+    {
+      "rawEvalName": "internal jailbreak evaluation suite",
+      "model": "microsoft/mai-thinking-1",
+      "metric": "attack success rate",
+      "value": 26.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Adaptive Techniques; ~9.5K jailbreak prompts; third-party results include provider-side safety filtering"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Figure 21 (read from image)",
+        "quote": "Figure 21. Attack success rate on jailbreak evaluations grouped by transformation type. Foundational Techniques\n   are single-step transformations that preserve harmful intent through simple modifications such as jailbreak wrap-\n   pers or prompt templates."
+      }
+    },
+    {
+      "rawEvalName": "internal jailbreak evaluation suite",
+      "model": "openai/gpt-5.4",
+      "metric": "attack success rate",
+      "value": 32.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Adaptive Techniques; ~9.5K jailbreak prompts; third-party results include provider-side safety filtering"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Figure 21 (read from image)",
+        "quote": "Figure 21. Attack success rate on jailbreak evaluations grouped by transformation type. Foundational Techniques\n   are single-step transformations that preserve harmful intent through simple modifications such as jailbreak wrap-\n   pers or prompt templates."
+      }
+    },
+    {
+      "rawEvalName": "internal jailbreak evaluation suite",
+      "model": "anthropic/claude-opus-4.6",
+      "metric": "attack success rate",
+      "value": 25.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Adaptive Techniques; ~9.5K jailbreak prompts; third-party results include provider-side safety filtering"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Figure 21 (read from image)",
+        "quote": "Figure 21. Attack success rate on jailbreak evaluations grouped by transformation type. Foundational Techniques\n   are single-step transformations that preserve harmful intent through simple modifications such as jailbreak wrap-\n   pers or prompt templates."
+      }
+    },
+    {
+      "rawEvalName": "internal jailbreak evaluation suite",
+      "model": "anthropic/claude-sonnet-4.6",
+      "metric": "attack success rate",
+      "value": 26.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Adaptive Techniques; ~9.5K jailbreak prompts; third-party results include provider-side safety filtering"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Figure 21 (read from image)",
+        "quote": "Figure 21. Attack success rate on jailbreak evaluations grouped by transformation type. Foundational Techniques\n   are single-step transformations that preserve harmful intent through simple modifications such as jailbreak wrap-\n   pers or prompt templates."
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:47:51Z"
+  },
+  "notes": "Technical report (not a system card). Safety-only pilot: skipped STEM/coding/knowledge/IF/long-context/tool/health capability tables (AIME, GPQA, LCB, SWE-bench, Terminal-Bench, MMLU-Pro, SimpleQA, IFBench, AdvancedIF, MultiChallenge, GraphWalks, BFCL, HealthBench, MedXpertQA, human preference Table 14). Table 12 safety/honesty scores included. Figure 21 ASR read from page image with caption quote. Figure 20 skipped (no readable numbers). Approximate red-team % reductions (~22%, ~44%, etc.) put in findings only. No lab risk-framework levels stated. Seed cover microsoft/mai-thinking-1 only."
+}

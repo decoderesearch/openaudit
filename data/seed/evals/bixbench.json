@@ -1,0 +1,94 @@
+{
+  "eval": {
+    "slug": "bixbench",
+    "displayName": "BixBench",
+    "aliases": ["BixBench zero-shot MCQ"],
+    "description": "Bioinformatics analysis tasks built from real data capsules. Models answer research questions with or without an agent scaffold; cards often report the zero-shot multiple-choice setting. MCQ scoring is exact match; open answers use a model judge.",
+    "summary": "Measures how well AI agents answer real bioinformatics research questions by analyzing biological data.",
+    "maintainers": [
+      {
+        "name": "FutureHouse",
+        "url": "https://github.com/Future-House/BixBench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2503.00096",
+        "title": "BixBench: a Comprehensive Benchmark for LLM-based Agents in Computational Biology"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/Future-House/BixBench",
+        "title": "BixBench zero-shot and agentic harness"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/futurehouse/BixBench",
+        "title": "futurehouse/BixBench"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn", "agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "1.5",
+      "status": "published",
+      "releasedDate": "2025-09-23",
+      "changes": "v1.5 flattens to one question per row and revises many items for open-answer clarity. v1.0 remains under the v1.0 tag.",
+      "dataset": {
+        "hfRepo": "futurehouse/BixBench",
+        "revision": "f8cc3bdcc6357c88b8c3648306522b9c422dc95a",
+        "url": "https://huggingface.co/datasets/futurehouse/BixBench",
+        "license": "apache-2.0",
+        "splits": [
+          {
+            "name": "train",
+            "sampleCount": 205,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 for an exact-match MCQ choice, or when the open-answer judge accepts the response."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of correct answers. Cards often cite zero-shot MCQ with or without a refusal option."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "internet": false
+      }
+    }
+  ]
+}

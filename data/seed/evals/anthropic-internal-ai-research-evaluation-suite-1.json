@@ -1,0 +1,149 @@
+{
+  "eval": {
+    "slug": "anthropic-internal-ai-research-evaluation-suite-1",
+    "displayName": "Internal AI Research Evaluation Suite 1",
+    "aliases": [
+      "Internal AI research evaluation suite 1",
+      "Kernel task",
+      "Kernels task",
+      "Kernels task (hard variant)",
+      "Kernel task (Best speedup on hard task; standard scaffold)",
+      "Kernel optimization",
+      "kernel optimization",
+      "Time series forecasting",
+      "Time Series Forecasting",
+      "Time Series Forecasting (MSE on hard variant, lower better)",
+      "Text-based reinforcement learning",
+      "Text-based reinforcement learning task",
+      "LLM training",
+      "LLM training optimization",
+      "LLM training task re-run",
+      "LLM training (avg speedup)",
+      "LLM training (hard)",
+      "Quadruped RL",
+      "Quadruped reinforcement learning",
+      "Quadruped RL (highest score; no hparams)",
+      "Quadruped locomotion",
+      "Novel compiler",
+      "Novel Compiler",
+      "Novel Compiler (pass rate on complex tests)",
+      "AI R&D rule-out: Kernel task",
+      "AI R&D rule-out: Time Series Forecasting",
+      "AI R&D rule-out: LLM training",
+      "AI R&D rule-out: Quadruped RL",
+      "AI R&D rule-out: Novel Compiler"
+    ],
+    "description": "Anthropic internal agent environments that ask a model to improve machine-learning code across six task families: kernel optimization, time-series forecasting, text-based RL scaffolding, small LLM training speedups, quadruped RL, and building a compiler for a novel language. Cards score each task with its own metric (speedup, MSE or normalized score, RL score, or unit-test pass rate) against expert baselines used for ASL / AI R&D rule-outs. Dataset and runner are lab-internal.",
+    "summary": "Measures how well AI agents improve machine-learning code, compared with expert human results.",
+    "family": "Anthropic Internal AI Research",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www-cdn.anthropic.com/07b2a3f9902ee19fe39a36ca638e5ae987bc64dd.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/07b2a3f9902ee19fe39a36ca638e5ae987bc64dd.pdf",
+        "title": "Claude Opus 4 & Sonnet 4 System Card (Suite 1)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/c788cbc0a3da9135112f97cdf6dcd06f2c16cee2.pdf",
+        "title": "Claude Opus 4.6 System Card (Suite 1)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "saturated",
+    "saturatedReason": "Claude Opus 4.6 system cards treat most Suite 1 tasks as saturated for the ASL-4 rule-out.",
+    "saturatedDecisionDate": "2026-10-05",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "suite-1",
+      "status": "published",
+      "changes": "Six task families as described in Anthropic Claude 4 and later system cards. Opus 4.6 cards treat most Suite 1 tasks as saturated for ASL-4 rule-out.",
+      "scores": [
+        {
+          "key": "speedup",
+          "displayName": "Speedup",
+          "type": "continuous",
+          "direction": "higher_is_better",
+          "description": "Best or average speedup vs a baseline implementation (kernels and LLM training tasks)."
+        },
+        {
+          "key": "mse",
+          "displayName": "Mean squared error",
+          "type": "continuous",
+          "direction": "lower_is_better",
+          "description": "Forecast MSE on the time-series task. Cards also report score = exp(-mse/30)."
+        },
+        {
+          "key": "rl_score",
+          "displayName": "RL / scaffolding score",
+          "type": "continuous",
+          "direction": "higher_is_better",
+          "description": "Score on text-based RL scaffolding or quadruped continuous-control variants (thresholds are task-specific)."
+        },
+        {
+          "key": "pass_rate",
+          "displayName": "Compiler pass rate",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Share of basic or complex compiler tests passed on the novel-compiler task."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "best_speedup",
+          "displayName": "Best speedup",
+          "score": "speedup",
+          "aggregation": "custom",
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Best-run or average speedup as reported for kernel or LLM-training variants. Other Suite 1 tasks use mse, rl_score, or pass_rate instead; compare only within a task."
+        },
+        {
+          "key": "mean_mse",
+          "displayName": "Mean squared error",
+          "score": "mse",
+          "aggregation": "mean",
+          "direction": "lower_is_better",
+          "description": "Time-series forecasting MSE (often the hard variant)."
+        },
+        {
+          "key": "best_rl_score",
+          "displayName": "Best RL / scaffolding score",
+          "score": "rl_score",
+          "aggregation": "custom",
+          "direction": "higher_is_better",
+          "description": "Best score on text-based RL or quadruped RL variants."
+        },
+        {
+          "key": "mean_pass_rate",
+          "displayName": "Mean compiler pass rate",
+          "score": "pass_rate",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Mean pass rate on novel-compiler basic or complex tests."
+        }
+      ]
+    }
+  ]
+}

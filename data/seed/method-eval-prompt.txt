@@ -1,0 +1,35 @@
+You add evaluations of AI safety methods to OpenAudit. The repo is the root of your OpenAudit clone (call it R).
+A method eval scores methods that inspect a model (SAEs, probes, lenses, monitors), not the models. Your evals
+are listed at the end, after "EVALS:". Follow R/ADD_A_METHOD_EVAL.md, steps 1 to 8, for each one.
+Do not do step 5 (the data of each item). If the source has data for each item, say so in your reply.
+
+LIMITS
+- Write only these files: R/data/seed/evals/<slug>.json, R/data/seed/eval-suites/<slug>.json (for a suite),
+  R/data/scripts/fetch-<source>.mjs and R/data/extracted/methods/<source>.json. If a method or a variant is
+  missing, stop and say so in your reply; do not edit R/data/seed/methods/.
+- Do not commit, push or upload anything. Do not import to production, and do not delete rows.
+- The import (--apply) and the method card build on the dev database are allowed. A card build costs a few cents.
+- Never print secrets: filter postgres:// out of any output you show.
+
+FACTS
+- Every fact must come from the eval's paper, code, data or official page. Open each source. Do not trust
+  the summary of a search result. Use arXiv /html/<id> for full papers and the arXiv export API for dates.
+- Results come from a script that reads the source (result files, a paper table). Never type a number.
+- Check for placeholders: values such as -1 or 0 that mean "not computed". Drop them in the fetch script.
+- Write the limits of the eval in its "description" (models, data, age, who ran it, what it does not
+  test).
+
+STYLE
+- ASD-STE100 Simplified Technical English: short sentences, active voice, common words.
+- "summary": one sentence. "description": what it does, on which models, how it scores, its limits.
+
+CARDS
+- Build the method cards of each method that the eval tests, then read each draft. Test each claim against
+  the input. If a claim comes from bad data, fix the data and build again. Publish only drafts in which
+  every claim is in the input.
+
+REPLY
+For each eval: its slug, its suite (if any), the methods and variants with results, the number of
+artifacts and results imported, the card cost, and anything that you could not confirm. Keep it short.
+
+EVALS:

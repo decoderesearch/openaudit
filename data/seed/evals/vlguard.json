@@ -1,0 +1,129 @@
+{
+  "eval": {
+    "slug": "vlguard",
+    "displayName": "VLGuard",
+    "aliases": ["VL Guard", "VL-Guard"],
+    "description": "Vision-language safety dataset and test suite from Zong et al. (ICML 2024). The test set has 1,000 images (558 safe, 442 unsafe) with Safe-Safe, Safe-Unsafe, and Unsafe instruction subsets. Cards report answer rate or ASR on Safe-Unsafe and Unsafe (lower is safer) and VLM-as-a-Judge or RAI scores on a 0–10 scale.",
+    "summary": "Tests whether vision-language models refuse harmful requests about images and resist jailbreak attempts.",
+    "maintainers": [
+      {
+        "name": "Yongshuo Zong et al.",
+        "url": "https://github.com/ys-zong/VLGuard"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2402.02207",
+        "title": "Safety Fine-Tuning at (Almost) No Cost: A Baseline for Vision Large Language Models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/ys-zong/VLGuard",
+        "title": "VLGuard code and evaluation"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/ys-zong/VLGuard",
+        "title": "ys-zong/VLGuard"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://ys-zong.github.io/VLGuard/",
+        "title": "VLGuard project page"
+      }
+    ],
+    "access": "gated",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge", "human"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "jailbreaks"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-02-03",
+      "status": "published",
+      "releasedDate": "2024-02-03",
+      "dataset": {
+        "hfRepo": "ys-zong/VLGuard",
+        "revision": "b0be37a1ab7accb14e10d6a0ec3ce62cfaff2d46",
+        "url": "https://huggingface.co/datasets/ys-zong/VLGuard",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "train",
+            "sampleCount": 2000,
+            "storage": "pointer"
+          },
+          {
+            "name": "test",
+            "sampleCount": 1000,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "sampleTerms": {
+        "display": "sign_in",
+        "source": "https://huggingface.co/datasets/ys-zong/VLGuard",
+        "quote": "This dataset may contain visually harmful information. You agree to ONLY use the dataset for research purpose and will not violate the law or others’ rights."
+      },
+      "scores": [
+        {
+          "key": "answered_unsafe",
+          "displayName": "Answered unsafe",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when the model answers an unsafe or Safe-Unsafe instruction instead of refusing (paper ASR / answer rate)."
+        },
+        {
+          "key": "judge_score",
+          "displayName": "Judge score",
+          "type": "continuous",
+          "min": 0,
+          "max": 10,
+          "direction": "higher_is_better",
+          "description": "VLM-as-a-Judge or RAI safety score on [0, 10]; higher is safer on cards that use this scale."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "attack_success_rate",
+          "displayName": "Attack success / answer rate",
+          "score": "answered_unsafe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Share of unsafe or Safe-Unsafe items where the model answers instead of refusing. Cards often split Unsafe vs Safe-Unsafe."
+        },
+        {
+          "key": "vlm_judge_score",
+          "displayName": "VLM-as-a-Judge / RAI score",
+          "score": "judge_score",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 10,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Mean judge score on [0, 10] (cards: VLM-as-a-Judge score, RAI score, safety score)."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "internet": false,
+        "gpu": true
+      }
+    }
+  ]
+}

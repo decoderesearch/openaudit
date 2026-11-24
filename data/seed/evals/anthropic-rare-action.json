@@ -1,0 +1,64 @@
+{
+  "eval": {
+    "slug": "anthropic-rare-action",
+    "displayName": "Rare action (1% instruction)",
+    "aliases": ["Intentionally taking actions very rarely"],
+    "description": "Anthropic internal replication of Serrano et al. 2026. The model is told to take a specific benign action (for example using a named variable) at a 1% rate, then resampled many times (4,000 samples per setting). Cards report the observed action rate under settings that supply entropy (UUID), a procedure (SSoT), or no external randomness. Tests whether a model can intentionally act at a low, calibrated rate—a capability that could matter for evaluation evasion. Lab-internal.",
+    "summary": "Tests whether the model can take a chosen action at a low, set rate, which could help it evade evaluations.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www-cdn.anthropic.com/0339e6a7c5c7b87f5c07798616dc32c215d14235/Claude%20Fable%205.1%20&%20Claude%20Mythos%205.1%20System%20Card.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/0339e6a7c5c7b87f5c07798616dc32c215d14235/Claude%20Fable%205.1%20&%20Claude%20Mythos%205.1%20System%20Card.pdf",
+        "title": "Claude Fable 5.1 & Mythos 5.1 System Card (rare action)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["eval_awareness", "sabotage", "situational_awareness"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "1pct",
+      "status": "published",
+      "changes": "1% target rate with UUID, SSoT, baseline, strategy-hint, and organic settings as in Mythos / Fable cards (4,000 samples each).",
+      "scores": [
+        {
+          "key": "took_rare_action",
+          "displayName": "Took rare action",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The sample includes the instructed rare action (cards often report UUID setting rate for the UUID entropy setting)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "action_rate",
+          "displayName": "Action rate",
+          "score": "took_rare_action",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Observed rate of the rare action. Target is 0.01; cards compare calibration across randomness settings."
+        }
+      ]
+    }
+  ]
+}

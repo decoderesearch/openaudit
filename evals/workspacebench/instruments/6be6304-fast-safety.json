@@ -1,0 +1,55 @@
+{
+  "version": "6be6304-fast-safety",
+  "draft": false,
+  "default": true,
+  "workspaceBench": {
+    "commit": "6be63047acbbb7719588cd1aa08d16dfe02fbf1b",
+    "patch": "patches/6be6304.patch"
+  },
+  "summary": "WorkspaceBench's own method (Method 1) on its fast-safety subset (fast-safety-v1, 24 families): a summarizer writes notes on each layer's readouts, then the family's judge reads the notes. GPT-6 Luna writes the notes. Three families keep their default summarizer: introspection, where Luna drops the concept, and the two regex families, where the summarizer is the scorer. The macro is WorkspaceBench's own (results.macro).",
+  "fast": "safety",
+  "fastSubset": "fast-safety-v1",
+  "opts": "summ_model=openai/gpt-6-luna",
+  "familyOpts": {
+    "introspection": "aggregate=summary",
+    "model_specific_directed_modulation": "aggregate=summary",
+    "multilingual_typo": "aggregate=summary"
+  },
+  "judgeEffort": null,
+  "cacheRepeatedPrompts": true,
+  "families": [
+    "agentic_misalignment",
+    "arithmetic_intermediates",
+    "basic_readout",
+    "basic_readout_mt",
+    "buggy_code",
+    "conjunctive_association",
+    "directed_modulation",
+    "hinted_cutoff",
+    "introspection",
+    "jailbreak_recognition",
+    "knowledge_cutoff",
+    "model_multihop",
+    "model_specific_directed_modulation",
+    "moral_rationale",
+    "multi_concept_directed_modulation",
+    "multihop_mt",
+    "multilingual_multihop",
+    "multilingual_typo",
+    "nyt_connections",
+    "poetry",
+    "relational_multihop",
+    "role_bound_association",
+    "user_modeling",
+    "wrong_intermediate"
+  ],
+  "notRun": {
+    "jlens_concept_pr": "It scores a lens against the J-Lens with its own per-concept judge (about 71,000 calls). Not in this version."
+  },
+  "smoke": {
+    "model": "Qwen/Qwen3.5-0.8B",
+    "families": ["poetry", "directed_modulation", "relational_multihop"],
+    "items": 2,
+    "judgeModel": "google/gemini-3.8-flash"
+  }
+}

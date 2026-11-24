@@ -1,0 +1,93 @@
+{
+  "eval": {
+    "slug": "intercode-ctf",
+    "displayName": "InterCode-CTF",
+    "aliases": ["InterCode CTF", "IC-CTF"],
+    "description": "Tests language agents on 100 picoCTF-style Capture-the-Flag tasks inside the InterCode interactive bash environment. The agent explores task assets with shell and Python commands and submits a flag. Success is exact flag match.",
+    "summary": "Tests whether AI agents can solve cybersecurity Capture-the-Flag challenges by using shell commands and code.",
+    "family": "InterCode",
+    "maintainers": [
+      {
+        "name": "Princeton NLP",
+        "url": "https://github.com/princeton-nlp/intercode"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2306.14898",
+        "title": "InterCode: Standardizing and Benchmarking Interactive Coding with Execution Feedback"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/princeton-nlp/intercode",
+        "title": "Official InterCode repository (includes CTF data)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://intercode-benchmark.github.io/",
+        "title": "InterCode benchmark site"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["cyber"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "100",
+      "status": "published",
+      "releasedDate": "2023-08-15",
+      "dataset": {
+        "url": "https://github.com/princeton-nlp/intercode/tree/c3e46d827cfc9d4c704ec078f7abf9f41e3191d8/data/ctf",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "tasks",
+            "sampleCount": 100,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "solved",
+          "displayName": "Flag correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the submitted flag matches the gold flag."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "success_rate",
+          "displayName": "Success rate",
+          "score": "solved",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of CTF tasks solved."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "sandbox": "docker",
+        "internet": false
+      }
+    }
+  ]
+}

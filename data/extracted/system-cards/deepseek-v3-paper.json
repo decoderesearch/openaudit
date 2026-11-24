@@ -1,0 +1,235 @@
+{
+  "document": "deepseek-v3-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "deepseek-ai/DeepSeek-V3"
+    }
+  ],
+  "pageCount": 53,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "128K (extended from 4K via YaRN in two stages: 32K then 128K)",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "to progressively expand the context window from 4K to 32K and then to 128K."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "language model (text)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present DeepSeek-V3, a strong Mixture-of-Experts (MoE) language model with 671B total\n                                            parameters with 37B activated for each token."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "multilingual corpus with English and Chinese as the majority",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "The base model of DeepSeek-V3 is pretrained on a multilingual corpus with English and Chinese\nconstituting the majority, so we evaluate its performance"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "671B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present DeepSeek-V3, a strong Mixture-of-Experts (MoE) language model with 671B total\n                                            parameters with 37B activated for each token."
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "37B activated for each token",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present DeepSeek-V3, a strong Mixture-of-Experts (MoE) language model with 671B total\n                                            parameters with 37B activated for each token."
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "MoE with Multi-head Latent Attention (MLA) and DeepSeekMoE; 61 Transformer layers, hidden dim 7168; auxiliary-loss-free load balancing; multi-token prediction",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "DeepSeek-V3 adopts Multi-head Latent Attention (MLA) and DeepSeekMoE architec-\n                                            tures, which were thoroughly validated in DeepSeek-V2."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "14.8T high-quality and diverse tokens",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "the training corpus for DeepSeek-V3 consists of 14.8T high-quality and diverse\ntokens in our tokenizer."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "2.788M H800 GPU hours for full training",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "DeepSeek-V3 requires only 2.788M H800 GPU hours\n                                            for its full training."
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Factuality: superior among open-source on [SimpleQA](https://arxiv.org/abs/2411.04368) and Chinese SimpleQA; trails GPT-4o and Claude-Sonnet-3.5 on English SimpleQA",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "demonstrates superior performance among open-source models on both SimpleQA and\n     Chinese SimpleQA."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "Preference data for the reward model includes chain-of-thought leading to the reward to mitigate reward hacking",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "quote": "This approach helps mitigate the risk of reward\nhacking in specific tasks."
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "For general reinforcement learning (RL) domains without hard-coded verification, the lab uses constitutional AI with DeepSeek-V3 majority-vote self-feedback as the reward source.", "tone": "neutral",
+      "source": {
+        "page": "34",
+        "pdfPage": 34,
+        "quote": "we employ the constitutional AI approach (Bai et al., 2022), leveraging\nthe voting evaluation results of DeepSeek-V3 itself as a feedback source."
+      }
+    },
+    {
+      "text": "The reward-model preference data includes chain-of-thought leading to the reward to reduce reward hacking risk.", "tone": "good",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "quote": "This approach helps mitigate the risk of reward\nhacking in specific tasks."
+      }
+    },
+    {
+      "text": "The report has no dedicated refusal, jailbreak, toxicity, or dangerous-capability evaluation section; RewardBench Safety is the main numeric safety signal.", "tone": "mixed",
+      "source": {
+        "page": "34",
+        "pdfPage": 34,
+        "quote": "Table 8 | Performances of GPT-4o, Claude-3.5-sonnet and DeepSeek-V3 on RewardBench."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:22:35Z"
+  },
+  "notes": "Technical report (not a system card). Pilot safety-only: evalResults keep only RewardBench (Table 8), used as generative reward-model / alignment eval; Chat/Chat-Hard/Reasoning/Average columns kept as part of that table. Skipped capability benches including MMLU/MMLU-Pro/GPQA, SimpleQA/C-SimpleQA, Arena-Hard, AlpacaEval 2.0, MATH-500, LiveCodeBench, HumanEval, SWE-bench, IFEval, and base-model Tables 3–5. Figure 1 is a chart; numbers not transcribed into evalResults. GPT-4o dated table labels mapped to seed openai/gpt-4o with settings.other. No risk tiers, external testers, or refusal/jailbreak/bio/cyber evals. Reviewer: removed 35 RewardBench rows: they score models as reward judges, not their own safety; harmful_requests is not covered."
+}

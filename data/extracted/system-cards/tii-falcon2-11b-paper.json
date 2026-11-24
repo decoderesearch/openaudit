@@ -1,0 +1,1281 @@
+{
+  "document": "tii-falcon2-11b-paper",
+  "alsoDocuments": ["tii-falcon-2-blog"],
+  "covers": [
+    {
+      "model": "tiiuae/falcon-11B"
+    },
+    {
+      "rawModelName": "Falcon2-11B-vlm"
+    }
+  ],
+  "pageCount": 17,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "8192 tokens (final stage 4)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Falcon2-11B stage 4      60        4096       32        128           8          8192        500K+42       FA2         No"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (Falcon2-11B); vision-to-text (Falcon2-11B-vlm)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "counterpart, Falcon2-11B-vlm, which is a vision-to-text model. We report our findings during"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English plus German, Spanish, French, Italian, Dutch, Polish, Portuguese, Czech, Romanian, Swedish in pre-training mix",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "otherwise, the multilingual data comprises a mixture of German, Spanish, French, Italian, Dutch, Polish, Portuguese,"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Falcon 2 11B TII License (permissive Apache 2.0-based, with acceptable use policy)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "The Falcon 2 models are made available under the Falcon 2 11B TII License 8 , a permissive Apache 2.0-based"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "11B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "currently composed of a large language model with 11B"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "transformer with grouped query attention (GQA, n_kv=8) and parallel transformer blocks",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Falcon2-11B is based on the transformer architecture Vaswani et al. (2017). As in the original Falcon models Almazrouei"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "over five trillion tokens; RefinedWeb (multilingual), curated corpora, code from The Stack; multi-stage mixture",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce Falcon2-11B, a foundation model trained on over five trillion tokens, and its multimodal"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[HallusionBench](/evals/hallusionbench) 48.7 and [POPE](/evals/pope) 88.4 for Falcon2-11B vision-language model (VLM); high-res encoding claimed to mitigate hallucination",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "Falcon2-11B VLM       1589/343   64.5   74.9   88.4    82.1   66.7    72.0    72.3   78.3   76.9   42.6   37.2   48.7"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa)-0 English 52.6 for Falcon2-11B stage 4; multilingual TQA also reported",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Falcon2-11B stage 4   5500   82.07   82.91    77.78     78.30        50.17     59.73       52.56"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "No dedicated safety, red-teaming, jailbreak, bias, or dangerous-capability section; safety-adjacent numbers are [TruthfulQA](/evals/truthfulqa), [POPE](/evals/pope), and [HallusionBench](/evals/hallusionbench).", "tone": "mixed",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "AI2 Reasoning Challenge 25-shots Clark et al. (2018), TruthfulQA Lin et al. (2021), massive multitask language"
+      }
+    },
+    {
+      "text": "Authors claim dynamic high-resolution image encoding mitigates hallucination that can occur with low-resolution images.", "tone": "good",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "This also mitigates the model hallucination that might occur"
+      }
+    },
+    {
+      "text": "Release uses Falcon 2 11B TII License with an acceptable use policy promoting responsible AI use.", "tone": "neutral",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "software license which includes an acceptable use policy 9 that promotes the responsible use of AI. The models can be"
+      }
+    },
+    {
+      "text": "[TruthfulQA](/evals/truthfulqa) English score rises from 41.3 at stage 3 to 52.6 at stage 4 after the curated high-quality data stage (higher is better).", "tone": "good",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Falcon2-11B stage 3   5000   81.15   83.69    79.92     78.77        53.32     60.15       41.31"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 34.3,
+      "unit": "percent",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Falcon 7B             1500   76.31   78.1     74.74     67.17        43.43     47.86       34.3"
+      },
+      "model": "tiiuae/falcon-7b",
+      "settings": {
+        "other": "0-shot (TQA-0); English; Table 5 reference"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 41.65,
+      "unit": "percent",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Falcon 40B            1000   82,82   85.28    81.86      76.4        54.69     61.86       41.65"
+      },
+      "model": "tiiuae/falcon-40b",
+      "settings": {
+        "other": "0-shot (TQA-0); English; Table 5 reference"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 52.56,
+      "unit": "percent",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Falcon2-11B stage 4   5500   82.07   82.91    77.78     78.30        50.17     59.73       52.56"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "0-shot (TQA-0); English; Falcon2-11B stage 4; 5500 GT"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 44.86,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Mistral-7B            German (de)        41.23         58.73          40.46      44.86"
+      },
+      "rawModelName": "Mistral-7B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; German (de)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 43.1,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Spanish (es)       44.18          65.3          42.35       43.1"
+      },
+      "rawModelName": "Mistral-7B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Spanish (es)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 43.04,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "French (fr)        44.91         64.42          41.92      43.04"
+      },
+      "rawModelName": "Mistral-7B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; French (fr)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 43.14,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Italian (it)       43.19         60.88          39.71      43.14"
+      },
+      "rawModelName": "Mistral-7B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Italian (it)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 43.28,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Dutch (nl)         40.03         57.94          41.42      43.28"
+      },
+      "rawModelName": "Mistral-7B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Dutch (nl)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 43.63,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Romanian (ro)       40.7         53.63          39.29      43.63"
+      },
+      "rawModelName": "Mistral-7B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Romanian (ro)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 34.03,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Falcon-7B             French (fr)        37.29         64.08          28.37      34.03"
+      },
+      "model": "tiiuae/falcon-7b",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; French (fr)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 38.3,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Llama-7B              German (de)         35.1          49.9          29.9        38.3"
+      },
+      "model": "meta/llama-7b",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; German (de)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 37,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Spanish (es)        36.8          56.4          30.3         37"
+      },
+      "model": "meta/llama-7b",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Spanish (es)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 39.9,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "French (fr)         37.3          55.7          30.5        39.9"
+      },
+      "model": "meta/llama-7b",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; French (fr)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 39.6,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Italian (it)        35.8           52           29.9        39.6"
+      },
+      "model": "meta/llama-7b",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Italian (it)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 40,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Dutch (nl)          33.6          48.7          29.8         40"
+      },
+      "model": "meta/llama-7b",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Dutch (nl)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 37,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Romanian (ro)       32.4          44.9          29.7         37"
+      },
+      "model": "meta/llama-7b",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Romanian (ro)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 43.7,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Bloom-7B              German (de)         26.3          32.4          28.1        43.7"
+      },
+      "rawModelName": "Bloom-7B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; German (de)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 40.4,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Spanish (es)        38.1          56.7          28.9        40.4"
+      },
+      "rawModelName": "Bloom-7B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Spanish (es)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 40.9,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "French (fr)         36.7          56.6          29.9        40.9"
+      },
+      "rawModelName": "Bloom-7B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; French (fr)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 43.7,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Italian (it)         29           40.8          27.6        43.7"
+      },
+      "rawModelName": "Bloom-7B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Italian (it)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 42.7,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Dutch (nl)          23.1          31.7          27.5        42.7"
+      },
+      "rawModelName": "Bloom-7B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Dutch (nl)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 46.1,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Romanian (ro)       26.9          31.8          27.4        46.1"
+      },
+      "rawModelName": "Bloom-7B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Romanian (ro)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 47.53,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Falcon2-11B stage 4   German (de)         43.7         67.96           38.3      47.53"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; German (de); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 46.43,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Spanish (es)        46.2         73.63           37.9      46.43"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Spanish (es); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 47.3,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "French (fr)         45.8         72.41          39.53      47.30"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; French (fr); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 47.14,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Italian (it)        45.6         70.83          38.05      47.14"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Italian (it); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 48.81,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Dutch (nl)          41.7         69.05          38.29      48.81"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Dutch (nl); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 45.53,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Romanian (ro)       42.4         66.24          38.01      45.53"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Romanian (ro); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 39.84,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Falcon-40B            German (de)        45.08         68.33          36.18      39.84"
+      },
+      "model": "tiiuae/falcon-40b",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; German (de)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 38.96,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Spanish (es)       48.46         73.94           37.2      38.96"
+      },
+      "model": "tiiuae/falcon-40b",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Spanish (es)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 38.49,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "French (fr)        47.64         72.86           37.3      38.49"
+      },
+      "model": "tiiuae/falcon-40b",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; French (fr)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 40.67,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Italian (it)       46.27         70.21          36.36      40.67"
+      },
+      "model": "tiiuae/falcon-40b",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Italian (it)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 40.85,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Dutch (nl)         42.85         68.39          36.48      40.85"
+      },
+      "model": "tiiuae/falcon-40b",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Dutch (nl)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 39.81,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "Romanian (ro)      43.18          66            35.67      39.81"
+      },
+      "model": "tiiuae/falcon-40b",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard; Romanian (ro)"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 49.66,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Falcon2-11B stage 4   Arabic (ar)       25.32        32.42          28.04       49.66"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Arabic (ar); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 51.65,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Bengali (bn)      24.37        28.57          27.88       51.65"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Bengali (bn); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 47.33,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Catalan (ca)      38.33        56.80          34.59       47.33"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Catalan (ca); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 49.31,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Danish (da)       34.79        57.01          35.68       49.31"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Danish (da); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 42.31,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Basque (eu)       25.31        29.22          28.47       42.31"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Basque (eu); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 42.61,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Gujarati (gu)     24.13        28.71          27.95       42.61"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Gujarati (gu); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 48.87,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Hindi (hi)        25.17        29.49          28.59       48.87"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Hindi (hi); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 48.32,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Croatian (hr)     29.85        45.06          31.32       48.32"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Croatian (hr); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 46.71,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Hungarian (hu)    24.74        31.79          29.02       46.71"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Hungarian (hu); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 45.84,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Armenian (hy)     25.72        27.95          26.80       45.84"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Armenian (hy); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 46.96,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Indonesian (id)   34.18        51.35          33.25       46.96"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Indonesian (id); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 47.29,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Kannada (kn)      24.56        29.67          27.97       47.29"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Kannada (kn); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 49.66,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Malayalam (ml)    27.49        29.32          27.14       49.66"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Malayalam (ml); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 49.41,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Marathi (mr)      24.84        29.03          28.12       49.41"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Marathi (mr); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 44.23,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Nepali (ne)       23.69        29.12          28.32       44.23"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Nepali (ne); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 47.59,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Russian (ru)      34.13        51.35          32.01       47.59"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Russian (ru); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 46.41,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Slovak (sk)       36.27        55.01          34.55       46.41"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Slovak (sk); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 50.16,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Serbian (sr)      31.13        44.79          31.54       50.16"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Serbian (sr); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 49.35,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Tamil (ta)        28.19        28.45            –         49.35"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Tamil (ta); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 48.25,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Telugu (te)       25.43        29.61          27.56       48.25"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Telugu (te); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 46.7,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Ukrainian (uk)    31.05        41.14          29.43       46.70"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Ukrainian (uk); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 44.31,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Vietnamese (vi)   27.09        38.62          29.93       44.31"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Vietnamese (vi); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "accuracy",
+      "value": 47.13,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "table": "Table 11",
+        "quote": "Chinese (zh)      39.82        59.09          35.41       47.13"
+      },
+      "model": "tiiuae/falcon-11B",
+      "settings": {
+        "other": "Open Multilingual LLM Leaderboard (Appendix C); Chinese (zh); Falcon2-11B stage 4"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "accuracy",
+      "value": 88.4,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Falcon2-11B VLM       1589/343   64.5   74.9   88.4"
+      },
+      "rawModelName": "Falcon2-11B VLM",
+      "settings": {
+        "other": "VLM suite (Table 9); object hallucination"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 48.7,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Falcon2-11B VLM       1589/343   64.5   74.9   88.4    82.1   66.7    72.0    72.3   78.3   76.9   42.6   37.2   48.7"
+      },
+      "rawModelName": "Falcon2-11B VLM",
+      "settings": {
+        "other": "HB column; VLM suite (Table 9)"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "accuracy",
+      "value": 86.5,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "LLaVA1.6-Vicuna-7B    1519/332   64.2   70.1   86.5"
+      },
+      "rawModelName": "LLaVA1.6-Vicuna-7B",
+      "settings": {
+        "other": "VLM suite (Table 9); object hallucination"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 41.5,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "LLaVA1.6-Vicuna-7B    1519/332   64.2   70.1   86.5    81.8   64.9    67.4    70.2   66.6   74.4   37.1   34.4   41.5"
+      },
+      "rawModelName": "LLaVA1.6-Vicuna-7B",
+      "settings": {
+        "other": "HB column; VLM suite (Table 9)"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "accuracy",
+      "value": 86.2,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "LLaVA1.6-Vicuna-13B   1575/326   65.4   73.6   86.2"
+      },
+      "rawModelName": "LLaVA1.6-Vicuna-13B",
+      "settings": {
+        "other": "VLM suite (Table 9); object hallucination"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 44.5,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "LLaVA1.6-Vicuna-13B   1575/326   65.4   73.6   86.2    82.8   67.1    70.0    71.9   70.0   77.4   41.3   35.1   44.5"
+      },
+      "rawModelName": "LLaVA1.6-Vicuna-13B",
+      "settings": {
+        "other": "HB column; VLM suite (Table 9)"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "accuracy",
+      "value": 86.7,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "LLaVA1.6-Mistral-7B   1498/321   64.8   72.8   86.7"
+      },
+      "rawModelName": "LLaVA1.6-Mistral-7B",
+      "settings": {
+        "other": "VLM suite (Table 9); object hallucination"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "score",
+      "value": 41.7,
+      "unit": "percent",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "LLaVA1.6-Mistral-7B   1498/321   64.8   72.8   86.7    82.2   65.7    68.7    72.2   60.8   72.2   43.8   37.4   41.7"
+      },
+      "rawModelName": "LLaVA1.6-Mistral-7B",
+      "settings": {
+        "other": "HB column; VLM suite (Table 9)"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:54:09Z"
+  },
+  "notes": "Technical report (arXiv 2407.14885), not a system card. Safety-only pilot: TruthfulQA (Tables 5, 6, 11) for honesty; POPE and HallusionBench (Table 9) for VLM hallucination. Skipped capability: HellaSwag, ARC, Winogrande, MMLU, GSM8K, Belebele, Wikilingua, HumanEval, and other VLM benches (MME, GQA, ScienceQA, VQAv2, TextVQA, MM-Bench, SEED-IMG, AI2D, DocVQA, InfoVQA, MathVista, RealWorldQA). Falcon2-11B-vlm via rawModelName (not in seed). Falcon-7B/40B mapped to checkpoints tiiuae/falcon-7b and tiiuae/falcon-40b; Mistral-7B and Bloom-7B as rawModelName. Stage checkpoints in settings.other. No risk framework or external safety testers. pageCount=17 from pdfinfo."
+}

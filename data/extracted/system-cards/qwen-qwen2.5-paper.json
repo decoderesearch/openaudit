@@ -1,0 +1,623 @@
+{
+  "document": "qwen-qwen2.5-paper",
+  "alsoDocuments": [
+    "qwen-qwen2.5-blog",
+    "qwen-qwen2.5-llm-blog"
+  ],
+  "covers": [
+    {
+      "model": "Qwen/Qwen2.5-0.5B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen2.5-1.5B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen2.5-3B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen2.5-7B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen2.5-14B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen2.5-32B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawModelName": "Qwen2.5-Turbo"
+    },
+    {
+      "rawModelName": "Qwen2.5-Plus"
+    }
+  ],
+  "pageCount": 26,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "128K / 8K context/generation for 7B (Table 1 also lists 32K/8K for 0.5B–3B and 128K/8K for 14B–72B)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "7B         28          28 / 4            No                   128K / 8K              Apache 2.0"
+      }
+    },
+    "maxOutput": {
+      "status": "stated",
+      "value": "8K generation length (Table 1); long-sequence generation up to 8,192 tokens",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "0.5B       24          14 / 2            Yes                   32K / 8K              Apache 2.0"
+      }
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "large language models (text)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "In this report, we introduce Qwen2.5, a comprehensive series of large language models"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "Multilingual; evaluated on Arabic, Japanese, Korean, Indonesian, Turkish and translated MMLU among others",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "These benchmarks include: AMMLU (Arabic), JMMLU (Japanese), KMMLU\n(Korean), IndoMMLU (Indonesian), and TurkishMMLU (Turkish)."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0 for several open-weight sizes (e.g. 0.5B); 3B uses Qwen Research and 72B uses Qwen (Table 1)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "0.5B       24          14 / 2            Yes                   32K / 8K              Apache 2.0"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "Open-weight dense: 0.5B, 1.5B, 3B, 7B, 14B, 32B, 72B; plus MoE Qwen2.5-Turbo and Qwen2.5-Plus",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "models in sizes of 0.5B, 1.5B, 3B, 7B, 14B, 32B, and 72B parameters. Quantized versions"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "MoE activated and total parameters tuned for parity with dense Qwen2.5-72B and Qwen2.5-14B; exact active counts for Turbo/Plus not stated",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "variants (such as Qwen2.5-72B and Qwen2.5-14B) through careful tuning of both activated and total\nparameters."
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Transformer decoder with GQA, SwiGLU, RoPE, QKV bias, RMSNorm pre-norm; MoE with fine-grained experts and shared expert routing for Turbo/Plus",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "For dense models, we maintain the Transformer-based decoder architecture (Vaswani et al., 2017; Radford\net al., 2018) as Qwen2 (Yang et al., 2024a). The architecture incorporates several key components:"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "18 trillion pre-training tokens; over 1 million SFT examples; ~150,000 DPO pairs",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "previous 7 trillion tokens to 18 trillion tokens. This provides a strong foundation for"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa) (0-shot) reported for base models across size tiers; Qwen2.5-72B reaches 60.4",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "TruthfulQA (Lin et al., 2022a) (0-shot), Winogrande (Sakaguchi et al., 2021) (5-shot),"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Qwen2.5-Turbo is stated to support context length up to 1 million tokens.", "tone": "neutral",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "In addition, Qwen2.5-Turbo supports a context length\nof up to 1 million tokens."
+      }
+    },
+    {
+      "text": "Online reinforcement learning (RL) reward labeling explicitly includes truthfulness, harmlessness, and debiasing criteria, but the report does not publish large language model (LLM) refusal or red-team scores.", "tone": "mixed",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "output quality, including truthfulness, helpfulness, conciseness, relevance, harmlessness\nand debiasing. It enables the model to generate responses that are precise, coherent, and\nwell-structured while maintaining safety and readability."
+      }
+    },
+    {
+      "text": "Authors warn that over-optimizing a reward model on one benchmark can trigger Goodhart's law and hurt other reward model (RM) and downstream alignment scores.", "tone": "mixed",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "optimization on a specific benchmark may trigger Goodhart’s law (Hoskin, 1996), resulting in degraded\nperformance on other benchmarks and potentially impacting downstream alignment performance."
+      }
+    },
+    {
+      "text": "Authors state current reward-model benchmarks do not accurately predict the performance of RL models trained under their guidance.", "tone": "mixed",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "current reward model evaluation benchmarks do not accurately predict the performance of the RL models\ntrained under their guidance."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Llama-3-70B",
+      "metric": "score",
+      "value": 45.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": " TruthfulQA               45.6           51.0                -        54.8        60.4          55.3"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Mixtral-8x22B",
+      "metric": "score",
+      "value": 51,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": " TruthfulQA               45.6           51.0                -        54.8        60.4          55.3"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2-72B",
+      "metric": "score",
+      "value": 54.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": " TruthfulQA               45.6           51.0                -        54.8        60.4          55.3"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2.5-72B",
+      "metric": "score",
+      "value": 60.4,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": " TruthfulQA               45.6           51.0                -        54.8        60.4          55.3"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Qwen2.5-Plus",
+      "metric": "score",
+      "value": 55.3,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": " TruthfulQA               45.6           51.0                -        54.8        60.4          55.3"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen1.5-32B",
+      "metric": "score",
+      "value": 57.4,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 3",
+        "quote": "TruthfulQA               57.4             40.1                 53.9             56.3              58.4          57.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-2-27b",
+      "metric": "score",
+      "value": 40.1,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 3",
+        "quote": "TruthfulQA               57.4             40.1                 53.9             56.3              58.4          57.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "01-ai/Yi-1.5-34B",
+      "metric": "score",
+      "value": 53.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 3",
+        "quote": "TruthfulQA               57.4             40.1                 53.9             56.3              58.4          57.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Qwen2.5-Turbo",
+      "metric": "score",
+      "value": 56.3,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 3",
+        "quote": "TruthfulQA               57.4             40.1                 53.9             56.3              58.4          57.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2.5-14B",
+      "metric": "score",
+      "value": 58.4,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 3",
+        "quote": "TruthfulQA               57.4             40.1                 53.9             56.3              58.4          57.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2.5-32B",
+      "metric": "score",
+      "value": 57.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 3",
+        "quote": "TruthfulQA               57.4             40.1                 53.9             56.3              58.4          57.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Mistral-7B",
+      "metric": "score",
+      "value": 42.2,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 4",
+        "quote": "       TruthfulQA                  42.2             44.0                 45.3            54.2            56.4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Llama3-8B",
+      "metric": "score",
+      "value": 44,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 4",
+        "quote": "       TruthfulQA                  42.2             44.0                 45.3            54.2            56.4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-2-9b",
+      "metric": "score",
+      "value": 45.3,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 4",
+        "quote": "       TruthfulQA                  42.2             44.0                 45.3            54.2            56.4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2-7B",
+      "metric": "score",
+      "value": 54.2,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 4",
+        "quote": "       TruthfulQA                  42.2             44.0                 45.3            54.2            56.4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2.5-7B",
+      "metric": "score",
+      "value": 56.4,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 4",
+        "quote": "       TruthfulQA                  42.2             44.0                 45.3            54.2            56.4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2-0.5B",
+      "metric": "score",
+      "value": 39.7,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 5",
+        "quote": " TruthfulQA                39.7          40.2               45.9       46.6         36.2          48.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2.5-0.5B",
+      "metric": "score",
+      "value": 40.2,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 5",
+        "quote": " TruthfulQA                39.7          40.2               45.9       46.6         36.2          48.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2-1.5B",
+      "metric": "score",
+      "value": 45.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 5",
+        "quote": " TruthfulQA                39.7          40.2               45.9       46.6         36.2          48.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2.5-1.5B",
+      "metric": "score",
+      "value": 46.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 5",
+        "quote": " TruthfulQA                39.7          40.2               45.9       46.6         36.2          48.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Gemma2-2.6B",
+      "metric": "score",
+      "value": 36.2,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 5",
+        "quote": " TruthfulQA                39.7          40.2               45.9       46.6         36.2          48.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2.5-3B",
+      "metric": "score",
+      "value": 48.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 5",
+        "quote": " TruthfulQA                39.7          40.2               45.9       46.6         36.2          48.9"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:23:37Z"
+  },
+  "notes": "Technical report focused on capability and preference benchmarks; no dedicated safety/red-team section for the LLMs. Per pilot safety-only rule, evalResults include TruthfulQA (honesty) for base models and Reward Bench Safety plus RMB Harmlessness for reward models; skipped MMLU/MATH/code/Arena-Hard/MT-Bench/IFEval/RULER/long-context and non-safety Reward Bench/RMB/PPE rows. TruthfulQA appears only for base models (Tables 2–5), not instruction-tuned tables. Covers uses seed Instruct ids for the seven open-weight sizes plus raw Qwen2.5-Turbo/Plus; base checkpoints evaluated under rawModelName. License quote uses the Table 1 caption because per-row licenses differ; releaseDate not stated in-text (arXiv date is external). Llama-3-405B TruthfulQA cell is blank (-) and was omitted. Reviewer: removed 12 reward-model rows (Reward Bench, RMB): they score Qwen2.5-RM and other reward models as judges, not model safety."
+}

@@ -1,0 +1,403 @@
+{
+  "document": "deepseek-vl-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "deepseek-ai/deepseek-vl-7b-chat"
+    },
+    {
+      "model": "deepseek-ai/deepseek-vl-1.3b-chat"
+    }
+  ],
+  "pageCount": 33,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4096 sequence length (training stages 2 and 3)",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "Sequence length            512      4096        4096        512       4096         4096"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "vision-language (image and text)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present DeepSeek-VL, an open-source Vision-Language (VL) Model designed for real-world"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English and Chinese",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "encompassing both\nEnglish and Chinese documents. Despite the existence of the pu"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "1.3B and 6.7B (also referred to as 7B)",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "available in scales of 1.3B and 6.7B parameters. This report has unveiled the"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "hybrid vision encoder (SigLIP; 7B also SigLIP+SAM), vision adaptor, language model",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "Our system contains three modules: a hybrid vision encoder, a vision adaptor, and a language\nmodel."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Public and proprietary vision-language pretraining sources plus taxonomy-based SFT (and DeepSeek-LLM text corpus)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "The pretraining dataset utilized in our study encompasses a diverse range of publicly accessible\nsources, in addition to a selection of proprietary da"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "DeepSeek-VL-7B: 5 days on 64 nodes × 8 A100; DeepSeek-VL-1B: 7 days on 16 nodes",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "DeepSeek-VL-\n7B consumed 5 days on a cluster of 64 nodes, each comprising 8 Nvidia A100 GPUs, while\nDeepSeek-VL-1B consumed 7 days on a setup involving 16 nodes."
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[POPE](/evals/pope): DeepSeek-VL-7B 88.1, DeepSeek-VL-1.3B 87.6 (generation-based, greedy) (higher is better)",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "Hallucination datasets: POPE (Li et al., 2023b);"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Supervised fine-tuning (SFT) taxonomy includes a Safety category (Suggestive Questioning, Counterfactual Questioning, Prompt Injection), but the paper reports no numeric safety results for those tasks.", "tone": "mixed",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Safety               This type of use case examines the model’s performance     -                              Suggestive Questioning, Counterfactual Questioning,"
+      }
+    },
+    {
+      "text": "Human evaluation used the same taxonomy categories, but Figure 6 reports scores only for Recognition, Conversion, Analysis, Commonsense, Logical, Multi-Images, and Evaluation—not Safety.", "tone": "mixed",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "TOTAL SCORE                RECOGNITION                   CONVERSION                    ANALYSIS                   COMMONSENSE                        LOGICAL                  MULTI-IMAGES                EVALUATION"
+      }
+    },
+    {
+      "text": "Ablation Tables 8–10 also report [POPE](/evals/pope) for training-stage and adaptor variants without naming a released model in the table captions; those POPE cells were omitted to avoid double-counting and unclear attribution.", "tone": "neutral",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "Stage 1, Training Step                       MMB                         MMC                     SEED           POPE                     MMMU                   Average"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "LLaVA-1.5",
+      "metric": "accuracy",
+      "value": 85.9,
+      "unit": "percent",
+      "settings": {
+        "other": "13B; generation-based evaluation with greedy decoding"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 5",
+        "quote": "LLaVA-1.5         13B       36.4     -      68.2   61.9   68.2    331   85.9   26.4   38.3"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "VILA",
+      "metric": "accuracy",
+      "value": 84.2,
+      "unit": "percent",
+      "settings": {
+        "other": "13B; generation-based evaluation with greedy decoding"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 5",
+        "quote": "VILA              13B        -       -      70.3   64.3    -       -    84.2    -     38.8"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "LLaVA-Next",
+      "metric": "accuracy",
+      "value": 86.7,
+      "unit": "percent",
+      "settings": {
+        "other": "13B; generation-based evaluation with greedy decoding"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 5",
+        "quote": "LLaVA-Next        13B       36.2     -      70.0   64.4   71.9     -    86.7   35.3   48.4"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "LLaVA-Next",
+      "metric": "accuracy",
+      "value": 86.5,
+      "unit": "percent",
+      "settings": {
+        "other": "7B; generation-based evaluation with greedy decoding"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 5",
+        "quote": "LLaVA-Next        7B        35.8     -      67.4   60.0   70.2     -    86.5   34.6   43.9"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "model": "deepseek-ai/deepseek-vl-7b-chat",
+      "metric": "accuracy",
+      "value": 88.1,
+      "unit": "percent",
+      "settings": {
+        "other": "DeepSeek-VL (ours) 7B; generation-based evaluation with greedy decoding"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 5",
+        "quote": "DeepSeek-VL (ours)   7B     36.6    37.9    73.2   72.8   70.4    456   88.1   36.1   41.5"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "MobileVLM",
+      "metric": "accuracy",
+      "value": 84.5,
+      "unit": "percent",
+      "settings": {
+        "other": "1.4B; generation-based evaluation with greedy decoding"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 6",
+        "quote": "MobileVLM            1.4B    -       -      53.2    -      -       -    84.5    -      -"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "MobileVLM",
+      "metric": "accuracy",
+      "value": 84.9,
+      "unit": "percent",
+      "settings": {
+        "other": "2.7B; generation-based evaluation with greedy decoding"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 6",
+        "quote": "MobileVLM            2.7B    -       -      59.6    -      -       -    84.9    -      -"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "MobileVLM V2",
+      "metric": "accuracy",
+      "value": 84.3,
+      "unit": "percent",
+      "settings": {
+        "other": "1.4B; generation-based evaluation with greedy decoding"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 6",
+        "quote": "MobileVLM V2         1.4B    -       -      59.6    -      -       -    84.3    -      -"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "MobileVLM V2",
+      "metric": "accuracy",
+      "value": 84.7,
+      "unit": "percent",
+      "settings": {
+        "other": "2.7B; generation-based evaluation with greedy decoding"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 6",
+        "quote": "MobileVLM V2         2.7B    -       -      63.2    -      -       -    84.7    -      -"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "LLaVA-Phi",
+      "metric": "accuracy",
+      "value": 85,
+      "unit": "percent",
+      "settings": {
+        "other": "2.7B; generation-based evaluation with greedy decoding"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 6",
+        "quote": "LLaVA-Phi            2.7B    -       -      59.5    -      -       -    85.0    -     28.9"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "model": "deepseek-ai/deepseek-vl-1.3b-chat",
+      "metric": "accuracy",
+      "value": 87.6,
+      "unit": "percent",
+      "settings": {
+        "other": "DeepSeek-VL (ours) 1.3B; generation-based evaluation with greedy decoding"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "table": "Table 6",
+        "quote": "DeepSeek-VL (ours) 1.3B     32.2    27.4    64.6   61.3   66.7    409   87.6   31.1   34.8"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:05:15Z"
+  },
+  "notes": "Technical report (arXiv:2403.05525), not a system card. Safety-only pilot: only POPE (Tables 5–6) kept as hallucination eval. Skipped capability: MMMU, CMMMU, MMBench/MMC, SeedBench, OCRBench, MathVista, MMVet, ScienceQA, MMLU, HellaSwag, GSM8K, MBPP, AGIEval, Pile-test, and human/GPT-4V preference charts (Figures 6–7). Safety appears only as an SFT taxonomy label; Prompt Injection there is training-data design, not a reported test. Ablation POPE in Tables 8–10 omitted (unnamed variants; Table 9 full-pipeline 87.6 duplicates Table 6 1.3B). Table 5/6 label DeepSeek-VL without Chat; mapped to chat checkpoints because Table 7 and Stage 3 produce DeepSeek-VL-Chat. Base checkpoints (7b-base, 1.3b-base) not separately scored. pageCount=33 from pdfinfo."
+}

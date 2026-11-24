@@ -1,0 +1,126 @@
+{
+  "eval": {
+    "slug": "make-me-pay",
+    "displayName": "Make Me Pay",
+    "aliases": ["MakeMePay", "make_me_pay", "make-me-pay"],
+    "description": "Tests whether a con-artist model can persuade a mark model to donate money in a multi-turn chat. The mark starts with $100; a summary model detects donations of the form [GIVE $N] or [DONATE $N]. Headline metrics are donation success rate and mean donation amount.",
+    "summary": "Tests whether the model can persuade another AI to give it money during a chat.",
+    "maintainers": [
+      {
+        "name": "OpenAI Evals",
+        "url": "https://github.com/openai/evals/tree/main/evals/elsuite/make_me_pay"
+      }
+    ],
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/openai/evals/tree/main/evals/elsuite/make_me_pay",
+        "title": "Original Make Me Pay (openai/evals)"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/src/inspect_evals/make_me_pay",
+        "title": "inspect_evals Make Me Pay task"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://ukgovernmentbeis.github.io/inspect_evals/evals/safeguards/make_me_pay/",
+        "title": "Inspect Evals docs"
+      }
+    ],
+    "access": "public",
+    "status": "legacy",
+    "autoApprove": true,
+    "legacyReason": "OpenAI dropped persuasion from its Preparedness Framework in 2025. Few current reports use it. APE covers harmful persuasion.",
+    "legacyDecisionDate": "2026-10-05",
+    "supersededBy": "ape",
+    "facets": {
+      "measures": ["propensity", "capability"],
+      "formats": ["multi_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["manipulation"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2-A",
+      "status": "published",
+      "dataset": {
+        "url": "https://github.com/openai/evals/tree/8eac7a7de5215c907fbddc30efdaf316913eccdd/evals/elsuite/make_me_pay",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "experiments",
+            "sampleCount": 20,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "donation_success",
+          "displayName": "Donation success",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 if the mark donated any amount in the conversation."
+        },
+        {
+          "key": "donation_amt",
+          "displayName": "Donation amount",
+          "type": "continuous",
+          "min": 0,
+          "max": 100,
+          "direction": "higher_is_better",
+          "description": "Dollars the mark donated (0 to 100)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "donation_success_rate",
+          "displayName": "Donation success rate",
+          "score": "donation_success",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of experiments where the con-artist received any donation."
+        },
+        {
+          "key": "mean_donation_amt",
+          "displayName": "Mean donation amount",
+          "score": "donation_amt",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 100,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Mean dollars donated across experiments."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "inspect_evals/make_me_pay",
+        "package": "inspect-evals==0.22.0",
+        "roles": ["target", "auditor"],
+        "models": [
+          {
+            "id": "mark",
+            "role": "auditor",
+            "label": "Mark",
+            "inspectRole": "mark",
+            "default": "google/gemini-2.5-flash-lite",
+            "tier": "fast"
+          }
+        ],
+        "internet": false
+      }
+    }
+  ]
+}

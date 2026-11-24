@@ -1,0 +1,236 @@
+{
+  "document": "ibm-granite-4.2-technical_report",
+  "alsoDocuments": [
+    "ibm-granite-4.2-blog"
+  ],
+  "covers": [
+    {
+      "model": "ibm-granite/granite-4.2-3b"
+    },
+    {
+      "model": "ibm-granite/granite-4.2-8b"
+    },
+    {
+      "model": "ibm-granite/granite-4.2-30b"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "131072",
+      "source": {
+        "page": "Model Architecture",
+        "quote": "| Sequence length | 131072 | 131072 | 131072 |"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "dense, decoder-only reasoning LLMs",
+      "source": {
+        "page": "TL;DR",
+        "quote": "Granite 4.2 is our first family of dense, decoder-only reasoning LLMs, released in three sizes: 3B, 8B, and 30B."
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "thinking / non-thinking switch, and low-effort thinking mode",
+      "source": {
+        "page": "TL;DR",
+        "quote": "Every model has a thinking / non-thinking switch, a low-effort thinking mode that spends a short reasoning budget on easy questions, and native tool calling."
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English, German, Spanish, French, Japanese, Portuguese, Arabic, Czech, Italian, Korean, Dutch, and Chinese",
+      "source": {
+        "page": "Results",
+        "quote": "Supported languages: English, German, Spanish, French, Japanese, Portuguese, Arabic, Czech, Italian, Korean, Dutch, and Chinese."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0",
+      "source": {
+        "page": "TL;DR",
+        "quote": "All Granite 4.2 models are released under the Apache 2.0 license."
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "3B, 8B, and 30B",
+      "source": {
+        "page": "Model Architecture",
+        "quote": "| # Parameters | 3B | 8B | 30B |"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "decoder-only dense transformer with GQA, RoPE, SwiGLU, RMSNorm",
+      "source": {
+        "page": "Model Architecture",
+        "quote": "Granite 4.2 models are built on a decoder-only dense transformer architecture with the following core components:"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Granite-4.1 bases on ~15T tokens; SFT ~7.2M samples (~100B tokens), including 0.8% safety in non-agentic mix",
+      "source": {
+        "page": "Pre-Training",
+        "quote": "Granite-4.1 base models were trained from scratch on approximately 15 trillion tokens using a five-phase training strategy."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "RLHF safety reward covers appropriate refusals; RLVR includes abstention (knowing when to refuse)",
+      "source": {
+        "page": "Alignment: RLHF",
+        "quote": "plus a safety reward covering jailbreak resistance and appropriate refusals."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Final RLHF stage uses a safety reward covering jailbreak resistance",
+      "source": {
+        "page": "Alignment: RLHF",
+        "quote": "plus a safety reward covering jailbreak resistance and appropriate refusals."
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Non-agentic supervised fine-tuning (SFT) data includes a 0.8% safety category among instruction, coding, math, multilingual, science, and reasoning mixes.", "tone": "neutral",
+      "source": {
+        "page": "SFT: Data Preparation & Quality Control",
+        "quote": "The non-agentic corpus consists of several major categories: instruction following (18.8%), coding (18.8%), math (14.6%), multilingual (7.0%), science (5.4%), reasoning (3.0%), and safety (0.8%)."
+      }
+    },
+    {
+      "text": "Every size ends with reinforcement learning from human feedback (RLHF) that jointly optimizes human preference and safety via a GenRM plus a safety reward, with the highest Kullback-Leibler (KL) penalty in the pipeline.", "tone": "good",
+      "source": {
+        "page": "Alignment: RLHF",
+        "quote": "The final stage of every model is RLHF for human preference and safety. It optimizes against a generative reward model (GenRM) for preference, plus a safety reward covering jailbreak resistance and appropriate refusals."
+      }
+    },
+    {
+      "text": "reinforcement learning with verifiable rewards (RLVR) training includes abstention tasks framed as knowing when to refuse.", "tone": "good",
+      "source": {
+        "page": "RLVR: verifiable-reward RL",
+        "quote": "Reasoning puzzles and abstention (knowing when to refuse)"
+      }
+    },
+    {
+      "text": "The published results table covers agentic, reasoning, chat, and long-context capability only; no safety or jailbreak benchmark scores are reported.", "tone": "mixed",
+      "source": {
+        "page": "Results",
+        "quote": "Granite 4.2 was evaluated across agentic coding, general agentic and tool use, reasoning, chat and instruction following, and long context."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:46:28Z"
+  },
+  "notes": "Hugging Face blog technical walkthrough (not a PDF). No quantitative safety, alignment, honesty, refusal, jailbreak, bias, or dangerous-capability eval tables; evalResults left empty per pilot safety-only rule. Blog Published August 25, 2026 is not treated as a model releaseDate. Pre-training mentions extending context to 512K tokens on Granite-4.1 bases; architecture table Sequence length is 131072 for all sizes. Skipped capability benchmarks: SWE Bench Multilingual/Pro/Verified, Terminal-Bench 2.1, τ³-bench, BFCL (v4), ProfBench, BirdBench, GDPval, AIME25, HMMT Feb25, GPQA, LiveCodeBench v6, SciCode, MMLU-Pro, MMLU-ProX lite, Arena-Hard-V2, IFBench, RULER 64K/128K. Removing hallucinated SFT samples is data QC, not a hallucination eval, so that topic is uncovered."
+}

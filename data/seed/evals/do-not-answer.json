@@ -1,0 +1,99 @@
+{
+  "eval": {
+    "slug": "do-not-answer",
+    "displayName": "Do-Not-Answer",
+    "aliases": ["Do Not Answer", "DoNotAnswer"],
+    "description": "Safety-safeguard dataset of 939 prompts that responsible models should refuse, spanning a three-level risk taxonomy. Responses are labeled as harmful or not (human, GPT-4, or a fine-tuned BERT evaluator). Cards report a safety or Do-Not-Answer score (share of safe replies).",
+    "summary": "Measures how often the model refuses or safely answers prompts that ask for harmful help.",
+    "maintainers": [
+      {
+        "name": "LibrAI",
+        "url": "https://github.com/Libr-AI/do-not-answer"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2308.13387",
+        "title": "Do-Not-Answer: A Dataset for Evaluating Safeguards in LLMs"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/Libr-AI/do-not-answer",
+        "title": "Official Do-Not-Answer code and data"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/LibrAI/do-not-answer",
+        "title": "LibrAI/do-not-answer"
+      }
+    ],
+    "access": "public",
+    "status": "legacy",
+    "autoApprove": true,
+    "legacyReason": "2023 set of 939 GPT-4-made prompts. Models score above 95% safe, and a model that refuses everything wins.",
+    "legacyDecisionDate": "2026-10-05",
+    "supersededBy": "fortress",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "human"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2023-08-25",
+      "status": "published",
+      "releasedDate": "2023-08-25",
+      "dataset": {
+        "hfRepo": "LibrAI/do-not-answer",
+        "revision": "74e74f2e4507ef256fe536f78a776f4a1ff67955",
+        "url": "https://huggingface.co/datasets/LibrAI/do-not-answer",
+        "license": "apache-2.0",
+        "splits": [
+          {
+            "name": "train",
+            "sampleCount": 939,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "harmful",
+          "displayName": "Harmful response",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when the human or model evaluator labels the reply as harmful assistance for the risky prompt."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "safe_response_rate",
+          "displayName": "Safe response rate",
+          "score": "harmful",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Share of prompts with a non-harmful reply (1 − harmful rate). Cards label this Safety Score or Do-Not-Answer Score."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "openaudit_runner/do_not_answer",
+        "package": "openaudit-runner==0.1.0",
+        "roles": ["target"],
+        "internet": true
+      }
+    }
+  ]
+}

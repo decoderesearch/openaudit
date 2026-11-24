@@ -1,0 +1,201 @@
+{
+  "document": "deepseek-prover-v2-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "deepseek-ai/DeepSeek-Prover-V2-7B"
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-Prover-V2-671B"
+    }
+  ],
+  "pageCount": 39,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "16,384 tokens for 671B SFT; 7B extended from 4,096 to 32,768 tokens",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "using a constant learning rate of 5e-6 within a context window of 16,384\ntokens."
+      }
+    },
+    "maxOutput": {
+      "status": "stated",
+      "value": "32,768 tokens (RL max sequence length)",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "generating 32 candidate proofs per\ntheorem with a maximum sequence length of 32,768 tokens."
+      }
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text; formal theorem proving in Lean 4",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce DeepSeek-Prover-V2, an open-source large language model designed for formal\n                                         theorem proving in Lean 4,"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "non-Chain-of-Thought (non-CoT) and Chain-of-Thought (CoT) proof generation modes",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "that establishes two complementary proof generation modes:"
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "stated",
+      "value": "open-source",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce DeepSeek-Prover-V2, an open-source large language model designed for formal\n                                         theorem proving in Lean 4,"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "671B and 7B variants",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "resulting model, DeepSeek-Prover-V2-671B, achieves state-of-the-art performance"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "671B from DeepSeek-V3-Base-671B SFT; 7B from DeepSeek-Prover-V1.5-Base-7B with extended context, distilled from 671B RL rollouts",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "We perform supervised fine-tuning on DeepSeek-V3-Base-671B\n(DeepSeek-AI, 2024)"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "non-CoT Lean proofs from expert iteration plus cold-start CoT data distilling DeepSeek-V3 reasoning with synthetic formal proofs",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Our training corpus consists of two complementary sources: (1) non-CoT data collected\nthrough expert iteration, which produces Lean codes without intermediate reasoning steps;\nand (2) the cold-start CoT data described in Section 2.2,"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:24:30Z"
+  },
+  "notes": "Technical report on DeepSeek-Prover-V2 for formal theorem proving in Lean 4. No safety, alignment, risk-framework, red-team, refusal, jailbreak, bias, or dangerous-capability section. Mentions of 'alignment' refer to proof structure / informal-to-formal math alignment, not AI safety. 'Exploit' refers to a Lean 4.9.0 UI bug used in PutnamBench proofs, not cyber capability. All evalResults skipped under pilot SAFETY ONLY: MiniF2F, PutnamBench, FormalMATH, ProverBench (incl. AIME 24-25 formalizations), and related CoT vs non-CoT / token-length analyses are formal-math capability only. No model release/launch date in the text (arXiv stamp only). License named only as open-source, with a GitHub link; no SPDX license string. Active parameter count and training compute (GPU-hours/FLOPs) not stated."
+}

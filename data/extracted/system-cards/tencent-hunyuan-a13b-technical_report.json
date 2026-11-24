@@ -1,0 +1,249 @@
+{
+  "document": "tencent-hunyuan-a13b-technical_report",
+  "alsoDocuments": ["tencent-hunyuan-a13b-blog"],
+  "covers": [
+    {
+      "model": "tencent/Hunyuan-A13B-Instruct"
+    }
+  ],
+  "pageCount": 14,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "256K (scaled via long-context training after 4K then 8K)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "long-context stage to scale the model’s context window to 256K."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "open-source large language model (text)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present Hunyuan-A13B, an open-source large language model employing a Mixture-"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "dual-mode Chain-of-Thought: fast-thinking and slow-thinking (control tags /no think and /think; default slow-thinking)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "This framework provides a rapid “fast-thinking” mode that handles\n                                                 routine inquiries with low latency, and a deeper “slow-thinking” mode for more involved"
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "standard English and various other languages (multilingual SFT data)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "passing standard English and various other languages were synthesized leveraging advanced"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "80 billion",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "The architecture leverages 80 billion total parameters"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "13 billion",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "while activating only 13 billion parameters during inference, enabling cost-effective de-"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "fine-grained MoE: 1 shared expert + 64 specialized experts (8 activated), 32 layers, GQA, SwiGLU, vocab 128K",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "The Hunyuan-A13B model employs a fine-grained MoE architecture (Dai et al., 2024). Specifically, it con-"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "rigorously filtered 20T token pre-training corpus with enhanced STEM curation (250B STEM tokens extracted)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "a rigorously filtered 20T token corpus with enhanced STEM-focused data curation, which"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Safety preference data uses classifiers and refusal heuristics for safety alignment",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "(9) Safety. Safe response pairs are identified using classifiers and refusal heuristics, integrating\n        safety alignment directly into preference datasets to mitigate risks."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "supervised fine-tuning (SFT) and RL use critic / hallucination detection and hallucination-focused reward models to reduce factual errors",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "To ensure improved accuracy and mitigate model hallucinations in\n          knowledge-intensive domains, multi-layer validation strategies were deployed."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "Creative-writing paired generative reward models (GRMs) use relative preferences to mitigate reward hacking",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Paired GRMs based on relative preference judgments mitigate reward hacking,"
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The report has no dedicated safety evaluation section and reports no safety, refusal, jailbreak, bias, or dangerous-capability benchmark numbers.", "tone": "mixed",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Table 3 and Table 4 provide a comprehensive comparative analysis, assessing the performance of our\nproposed Hunyuan-A13B model against several prominent baseline models, including open-source"
+      }
+    },
+    {
+      "text": "All-scenarios reinforcement learning (RL) integrates safety via classifiers and refusal heuristics in preference data, with no measured outcomes given.", "tone": "mixed",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "(9) Safety. Safe response pairs are identified using classifiers and refusal heuristics, integrating\n        safety alignment directly into preference datasets to mitigate risks."
+      }
+    },
+    {
+      "text": "Code RL uses a sandbox with file and network isolation described as strict security measures against malicious code execution.", "tone": "good",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Strict security measures, including file and\n        network isolation, are implemented to prevent malicious code execution."
+      }
+    },
+    {
+      "text": "Adversarial prompt filtering is used during All-Scenarios RL data construction for cross-domain generalization, not as a reported jailbreak eval.", "tone": "mixed",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Adversarial prompt filtering and dynamic sampling ensure cross-domain\ngeneralization, enabling versatile reasoning in deterministic, creative, and professional scenarios."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:46:28Z"
+  },
+  "notes": "Technical report (arXiv 2609.27284), not a system card. No safety/alignment/jailbreak/toxicity/dangerous-capability eval tables or numeric results. Safety appears only as an All-Scenarios RL preference-data pipeline (classifiers + refusal heuristics) plus training claims on hallucination and reward hacking. All Tables 2–7 and Section 4 capability/agent/long-context/throughput numbers were skipped per pilot safety-only rule (MMLU family, BBH, SuperGPQA, EvalPlus, MultiPL-E, MBPP, CRUXEval, MATH, CMATH, GSM8K, GPQA, AIME, LiveCodeBench-style coding, C3-Bench and other agent benches, ComplexNLU, SysBench, IFEval-like instruction following, PenguinScrolls, LongBench-v2, RULER, throughput). Header date 2025-06-27 is not phrased as a model release date. Open-source stated without a license name. Physics/chemistry/biology appear only as scientific-reasoning training domains, not bio/chem safety evals."
+}

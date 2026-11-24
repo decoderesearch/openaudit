@@ -1,0 +1,1439 @@
+{
+  "document": "google-gemini-2-5-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "google/gemini-2.5-pro"
+    },
+    {
+      "model": "google/gemini-2.5-flash"
+    },
+    {
+      "model": "google/gemini-2.0-flash-001"
+    },
+    {
+      "model": "google/gemini-2.0-flash-lite-001"
+    },
+    {
+      "model": "google/gemini-2.5-flash-lite",
+      "section": "Gemini 2.5 Flash-Lite"
+    }
+  ],
+  "pageCount": 73,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "January 2025 for Gemini 2.5; June 2024 for Gemini 2.0",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "cutoff date\nof June 2024 for 2.0 and January 2025 for 2.5."
+      }
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": ">1 million tokens (1M for Gemini 2.5 Pro and Flash per Table 1)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "supporting long context inputs of >1\n                                         million tokens"
+      }
+    },
+    "maxOutput": {
+      "status": "stated",
+      "value": "64K for Gemini 2.5 Pro and Flash",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Output length           8K                8K                8K                8K               64K               64K"
+      }
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "natively multimodal: text, audio, images, video inputs",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "natively multimodal, supporting long context inputs of >1"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "Thinking / Dynamic Thinking (2.5); controllable thinking budget on Flash",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Gemini 2.5 Flash is our hybrid reasoning model with a controllable thinking\n                                         budget"
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "not_stated"
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "sparse mixture-of-experts (MoE) transformers with native multimodal support for text, vision, and audio",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "The Gemini 2.5 models are sparse mixture-of-experts (MoE)"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "publicly available web documents, code, images, audio, video; cutoff June 2024 (2.0) / January 2025 (2.5); post-training instruction tuning",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "publicly available web documents, code (various programming\nlanguages), images, audio (including speech and other audio types) and video, with a cutoff date"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [
+    {
+      "domain": "bio_chem",
+      "frameworks": ["google-fsf"],
+      "labLabel": "chemical, biological, radiological and nuclear (CBRN) Uplift Level 1 × Critical Capability Levels (CCL) not reached",
+      "level": "below",
+      "phase": "unspecified",
+      "decidedBy": "Google DeepMind",
+      "models": ["google/gemini-2.5-pro"],
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "Based on qualitative assessment, 2.5 Pro                 Uplift Level 1             × CCL not reached"
+      }
+    },
+    {
+      "domain": "cyber",
+      "frameworks": ["google-fsf"],
+      "labLabel": "Cyber Autonomy Level 1 × CCL not reached",
+      "level": "below",
+      "phase": "unspecified",
+      "decidedBy": "Google DeepMind",
+      "models": ["google/gemini-2.5-pro"],
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "Solve rate on autonomous offense suite:                  Autonomy Level 1           × CCL not reached"
+      }
+    },
+    {
+      "domain": "cyber",
+      "frameworks": ["google-fsf"],
+      "labLabel": "Cyber Uplift Level 1 × CCL not reached; alert threshold reached",
+      "level": "early_warning",
+      "phase": "unspecified",
+      "decidedBy": "Google DeepMind",
+      "models": ["google/gemini-2.5-pro"],
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "did reach an alert threshold for the Cyber Uplift 1 CCL"
+      }
+    },
+    {
+      "domain": "ai_rnd_autonomy",
+      "frameworks": ["google-fsf"],
+      "labLabel": "Machine Learning R&D Autonomy Level 1 × CCL not reached",
+      "level": "below",
+      "phase": "unspecified",
+      "decidedBy": "Google DeepMind",
+      "models": ["google/gemini-2.5-pro"],
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "RE-Bench (Wijk et al., 2025): the best agent                    Autonomy Level 1           × CCL not reached"
+      }
+    },
+    {
+      "domain": "ai_rnd_autonomy",
+      "frameworks": ["google-fsf"],
+      "labLabel": "Machine Learning R&D Uplift Level 1 CCL likely not reached",
+      "level": "below",
+      "phase": "unspecified",
+      "decidedBy": "Google DeepMind",
+      "models": ["google/gemini-2.5-pro"],
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "quote": "CCL reached? Likely no. We do not yet have dedicated evaluations for this CCL"
+      }
+    },
+    {
+      "domain": "misalignment",
+      "frameworks": ["google-fsf"],
+      "labLabel": "Instrumental Reasoning Level 1 × CCL not reached",
+      "level": "below",
+      "phase": "unspecified",
+      "decidedBy": "Google DeepMind",
+      "models": ["google/gemini-2.5-pro"],
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "Instrumental\n      ®                                                                       Reasoning Level 1          × CCL not reached"
+      }
+    },
+    {
+      "domain": "misalignment",
+      "frameworks": ["google-fsf"],
+      "labLabel": "Instrumental Reasoning Level 2 × CCL not reached",
+      "level": "below",
+      "phase": "unspecified",
+      "decidedBy": "Google DeepMind",
+      "models": ["google/gemini-2.5-pro"],
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "CCL reached? No. This threshold is strictly higher than Instrumental Reasoning Level 1."
+      }
+    }
+  ],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Development and ART policy-violation metrics; content-policy assurance evals",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "Comparison of safety and helpfulness metrics for Gemini 2.0 and 2.5 models relative to"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "Child safety assurance evals met or improved upon launch thresholds",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "For child safety evaluations, we continue to see the Gemini 2.5 family of models meeting or"
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "Indirect prompt-injection attack success rate (ASR) reduced for Gemini 2.5 after adversarial training",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "Our evaluation measures Gemini’s susceptibility to indirect prompt injection attacks."
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": true,
+      "headline": "Agent function-calling exfiltration scenario; autonomous cyber offense and key-skills suites",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "manipulate Gemini into taking unauthorized actions through\nfunction calling."
+      }
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[FACTS Grounding](/evals/facts-grounding) (Table 3): Gemini 2.5 Pro 87.8%, 2.5 Flash 85.3% (higher is better).",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "82.9%         80.0%          82.4%          84.6%         85.3%          87.8%"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Unfair bias assurance evals; disparity in ungrounded inferences by skin tone",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "Within our evaluations for unfair bias, we observed a reduction in ungrounded inferences about"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "External autonomous-systems testers noted minor harms such as reward-hacking may be possible",
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "quote": "noted minor harms such as reward-hacking may be possible"
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": true,
+      "headline": "Poor situational awareness; no successes on 8 of 11 evaluations; solves 2/11 in Table 10",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "exhibits poor\nperformance on situational awareness evaluations"
+      }
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": true,
+      "headline": "Decision Sabotage stealth challenge; external sabotage-capability tests",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "Decision Sabotage challenge"
+      }
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "FSF cyber Autonomy/Uplift evals; Cyber Uplift Level 1 alert threshold reached",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "did reach an alert threshold for the Cyber Uplift 1 CCL"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "FSF CBRN Uplift Level 1 CCL not reached; internal and external CBRN testing",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "quote": "CCL reached? No. The model demonstrated accurate and detailed technical capabilities,"
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Gemini 2.5 Pro reached the Frontier Safety Framework (FSF) early-warning alert threshold for Cyber Uplift Level 1, so Google DeepMind says it is accelerating cyber mitigations and higher-frequency testing.",
+      "tone": "bad",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "we are putting in place a response plan which\nincludes testing models’ cyber capabilities more frequently and accelerating mitigations for them."
+      }
+    },
+    {
+      "text": "On Research Engineer Benchmark ([RE-Bench](/evals/re-bench)), Gemini 2.5 Pro’s best runs scored between 50% and 125% of best human-written solutions but did not reach the machine learning (ML) R&D Autonomy Level 1 alert threshold.",
+      "tone": "mixed",
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "quote": "Gemini 2.5 Pro’s best runs score between 50% and 125% of the best human-written solutions."
+      }
+    },
+    {
+      "text": "Divergence attacks succeeded roughly 69% of the time for Gemini 2.0 Flash + Flash-Lite and roughly 59% for Gemini 2.5; when divergence succeeded, memorization-classified text was roughly 0.2%.",
+      "tone": "mixed",
+      "source": {
+        "page": "26",
+        "pdfPage": 26,
+        "quote": "divergence occurs roughly 69% of the time for Gemini 2.0 Flash + Flash-Lite"
+      }
+    },
+    {
+      "text": "Approximate stealth success rates (~44% Decision Sabotage, ~35% Oversight Pattern) were not recorded as evalResults because they are approximate.",
+      "tone": "bad",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "It achieves a ~44% success rate on\nthe Decision Sabotage challenge and a ~35% success rate on the Oversight Pattern challenge"
+      }
+    },
+    {
+      "text": "Assurance child-safety evaluations reportedly met or improved upon launch thresholds for the Gemini 2.5 family, with no numeric rates published.",
+      "tone": "good",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "For child safety evaluations, we continue to see the Gemini 2.5 family of models meeting or\nimproving upon launch thresholds"
+      }
+    },
+    {
+      "text": "Unfair-bias image evaluations showed fewer ungrounded inferences than Gemini 1.5, but models were more likely to make ungrounded inferences about lighter-skinned people than darker-skinned people.",
+      "tone": "mixed",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "more likely to make ungrounded\ninferences about images of people with lighter skin tones than darker skin tones."
+      }
+    },
+    {
+      "text": "External Safety Testing covered early Gemini 2.5 Pro Preview 05-06 only (not the final generally available candidate) and did not cover Flash models; tester organizations were unnamed.",
+      "tone": "mixed",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "did not test the final model candidate which went to GA."
+      }
+    },
+    {
+      "text": "Gemini 2.0 models over-refused many benign requests relative to Gemini 1.5; Gemini 2.5 focused on reducing those over-refusals while keeping safety, which can worsen automated safety scores.",
+      "tone": "mixed",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "they over-\nrefused on a wide variety of benign user requests."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Automated Red Teaming (ART)",
+      "model": "google/gemini-flash-1.5",
+      "metric": "Dangerous Content policy violations",
+      "value": 38.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 1.5 Flash 002"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 8",
+        "quote": "Gemini 1.5 Flash 002                      38.3%"
+      }
+    },
+    {
+      "rawEvalName": "Automated Red Teaming (ART)",
+      "model": "google/gemini-pro-1.5",
+      "metric": "Dangerous Content policy violations",
+      "value": 43.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 1.5 Pro 002"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 8",
+        "quote": "Gemini 1.5 Pro 002                        43.5%"
+      }
+    },
+    {
+      "rawEvalName": "Automated Red Teaming (ART)",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "Dangerous Content policy violations",
+      "value": 25.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 8",
+        "quote": "Gemini 2.0 Flash                          25.2%"
+      }
+    },
+    {
+      "rawEvalName": "Automated Red Teaming (ART)",
+      "model": "google/gemini-2.5-flash",
+      "metric": "Dangerous Content policy violations",
+      "value": 26.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Flash"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 8",
+        "quote": "Gemini 2.5 Flash                          26.9%"
+      }
+    },
+    {
+      "rawEvalName": "Automated Red Teaming (ART)",
+      "model": "google/gemini-2.5-pro",
+      "metric": "Dangerous Content policy violations",
+      "value": 24.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Pro"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 8",
+        "quote": "Gemini 2.5 Pro                            24.3%"
+      }
+    },
+    {
+      "rawEvalName": "Automated Red Teaming (ART)",
+      "model": "google/gemini-flash-1.5",
+      "metric": "Helpfulness violations",
+      "value": 9.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 1.5 Flash 002"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 8",
+        "quote": "Gemini 1.5 Flash 002                      38.3%                              9.5%"
+      }
+    },
+    {
+      "rawEvalName": "Automated Red Teaming (ART)",
+      "model": "google/gemini-pro-1.5",
+      "metric": "Helpfulness violations",
+      "value": 8.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 1.5 Pro 002"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 8",
+        "quote": "Gemini 1.5 Pro 002                        43.5%                              8.9%"
+      }
+    },
+    {
+      "rawEvalName": "Automated Red Teaming (ART)",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "Helpfulness violations",
+      "value": 8.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 8",
+        "quote": "Gemini 2.0 Flash                          25.2%                              8.1%"
+      }
+    },
+    {
+      "rawEvalName": "Automated Red Teaming (ART)",
+      "model": "google/gemini-2.5-flash",
+      "metric": "Helpfulness violations",
+      "value": 6.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Flash"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 8",
+        "quote": "Gemini 2.5 Flash                          26.9%                              6.6%"
+      }
+    },
+    {
+      "rawEvalName": "Automated Red Teaming (ART)",
+      "model": "google/gemini-2.5-pro",
+      "metric": "Helpfulness violations",
+      "value": 6.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Pro"
+      },
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "table": "Table 8",
+        "quote": "Gemini 2.5 Pro                            24.3%                              6.1%"
+      }
+    },
+    {
+      "rawEvalName": "Text to Text Safety",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "EN text-to-text Policy Violations (relative change)",
+      "value": -14.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash-Lite vs. Gemini 1.5 Flash 002; table row: EN text-to-text Policy Violations (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↓14.3%"
+      }
+    },
+    {
+      "rawEvalName": "Text to Text Safety",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "EN text-to-text Policy Violations (relative change)",
+      "value": -12.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash vs. Gemini 1.5 Flash 002; table row: EN text-to-text Policy Violations (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↓12.7%"
+      }
+    },
+    {
+      "rawEvalName": "Text to Text Safety",
+      "model": "google/gemini-2.5-flash",
+      "metric": "EN text-to-text Policy Violations (relative change)",
+      "value": -8.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Flash vs. Gemini 1.5 Flash 002; table row: EN text-to-text Policy Violations (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↓8.2%"
+      }
+    },
+    {
+      "rawEvalName": "Text to Text Safety",
+      "model": "google/gemini-2.5-pro",
+      "metric": "EN text-to-text Policy Violations (relative change)",
+      "value": -0.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Pro vs. Gemini 1.5 Pro 002; table row: EN text-to-text Policy Violations (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↓0.9%"
+      }
+    },
+    {
+      "rawEvalName": "Multilingual Safety",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "i18n text-to-text Policy Violations (relative change)",
+      "value": -7.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash-Lite vs. Gemini 1.5 Flash 002; table row: i18n text-to-text Policy Violations (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↓7.3%"
+      }
+    },
+    {
+      "rawEvalName": "Multilingual Safety",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "i18n text-to-text Policy Violations (relative change)",
+      "value": -7.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash vs. Gemini 1.5 Flash 002; table row: i18n text-to-text Policy Violations (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↓7.8%"
+      }
+    },
+    {
+      "rawEvalName": "Multilingual Safety",
+      "model": "google/gemini-2.5-flash",
+      "metric": "i18n text-to-text Policy Violations (relative change)",
+      "value": 1.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Flash vs. Gemini 1.5 Flash 002; table row: i18n text-to-text Policy Violations (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↑1.1%*"
+      }
+    },
+    {
+      "rawEvalName": "Multilingual Safety",
+      "model": "google/gemini-2.5-pro",
+      "metric": "i18n text-to-text Policy Violations (relative change)",
+      "value": -3.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Pro vs. Gemini 1.5 Pro 002; table row: i18n text-to-text Policy Violations (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↓3.5%"
+      }
+    },
+    {
+      "rawEvalName": "Image to Text Safety",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "Image-to-text Policy Violations (relative change)",
+      "value": 4.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash-Lite vs. Gemini 1.5 Flash 002; table row: Image-to-text Policy Violations (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↑4.6%*"
+      }
+    },
+    {
+      "rawEvalName": "Image to Text Safety",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "Image-to-text Policy Violations (relative change)",
+      "value": 5.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash vs. Gemini 1.5 Flash 002; table row: Image-to-text Policy Violations (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↑5.2%*"
+      }
+    },
+    {
+      "rawEvalName": "Image to Text Safety",
+      "model": "google/gemini-2.5-flash",
+      "metric": "Image-to-text Policy Violations (relative change)",
+      "value": 6.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Flash vs. Gemini 1.5 Flash 002; table row: Image-to-text Policy Violations (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↑6.4%*"
+      }
+    },
+    {
+      "rawEvalName": "Image to Text Safety",
+      "model": "google/gemini-2.5-pro",
+      "metric": "Image-to-text Policy Violations (relative change)",
+      "value": 1.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Pro vs. Gemini 1.5 Pro 002; table row: Image-to-text Policy Violations (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↑1.8%*"
+      }
+    },
+    {
+      "rawEvalName": "Tone",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "Tone (relative change)",
+      "value": 8.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash-Lite vs. Gemini 1.5 Flash 002; table row: Tone (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↑8.4%"
+      }
+    },
+    {
+      "rawEvalName": "Tone",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "Tone (relative change)",
+      "value": 1.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash vs. Gemini 1.5 Flash 002; table row: Tone (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↑1.5%"
+      }
+    },
+    {
+      "rawEvalName": "Tone",
+      "model": "google/gemini-2.5-flash",
+      "metric": "Tone (relative change)",
+      "value": 7.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Flash vs. Gemini 1.5 Flash 002; table row: Tone (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↑7.9%"
+      }
+    },
+    {
+      "rawEvalName": "Tone",
+      "model": "google/gemini-2.5-pro",
+      "metric": "Tone (relative change)",
+      "value": 18.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Pro vs. Gemini 1.5 Pro 002; table row: Tone (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↑18.4%"
+      }
+    },
+    {
+      "rawEvalName": "Instruction Following",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "Helpfulness / Instruction Following (relative change)",
+      "value": -19.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash-Lite vs. Gemini 1.5 Flash 002; table row: Helpfulness / Instruction Following (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↓19.7%"
+      }
+    },
+    {
+      "rawEvalName": "Instruction Following",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "Helpfulness / Instruction Following (relative change)",
+      "value": -13.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash vs. Gemini 1.5 Flash 002; table row: Helpfulness / Instruction Following (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↓13.2%"
+      }
+    },
+    {
+      "rawEvalName": "Instruction Following",
+      "model": "google/gemini-2.5-flash",
+      "metric": "Helpfulness / Instruction Following (relative change)",
+      "value": 13.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Flash vs. Gemini 1.5 Flash 002; table row: Helpfulness / Instruction Following (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↑13.6%"
+      }
+    },
+    {
+      "rawEvalName": "Instruction Following",
+      "model": "google/gemini-2.5-pro",
+      "metric": "Helpfulness / Instruction Following (relative change)",
+      "value": 14.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Pro vs. Gemini 1.5 Pro 002; table row: Helpfulness / Instruction Following (relative change)"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "↑14.8%"
+      }
+    },
+    {
+      "rawEvalName": "Indirect prompt injection ASR",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "attack success rate",
+      "value": 52,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash-Lite vs. Gemini 1.5 Flash 002; attack: Actor Critic; n=500 held-out scenarios"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 9",
+        "quote": "52.0%                       68.0%                       40.8%                       61.4%\nActor Critic"
+      }
+    },
+    {
+      "rawEvalName": "Indirect prompt injection ASR",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "attack success rate",
+      "value": 68,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash vs. Gemini 1.5 Flash 002; attack: Actor Critic; n=500 held-out scenarios"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 9",
+        "quote": "52.0%                       68.0%                       40.8%                       61.4%\nActor Critic"
+      }
+    },
+    {
+      "rawEvalName": "Indirect prompt injection ASR",
+      "model": "google/gemini-2.5-flash",
+      "metric": "attack success rate",
+      "value": 40.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Flash vs. Gemini 1.5 Flash 002; attack: Actor Critic; n=500 held-out scenarios"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 9",
+        "quote": "52.0%                       68.0%                       40.8%                       61.4%\nActor Critic"
+      }
+    },
+    {
+      "rawEvalName": "Indirect prompt injection ASR",
+      "model": "google/gemini-2.5-pro",
+      "metric": "attack success rate",
+      "value": 61.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Pro vs. Gemini 1.5 Pro 002; attack: Actor Critic; n=500 held-out scenarios"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 9",
+        "quote": "52.0%                       68.0%                       40.8%                       61.4%\nActor Critic"
+      }
+    },
+    {
+      "rawEvalName": "Indirect prompt injection ASR",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "attack success rate",
+      "value": 75.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash-Lite vs. Gemini 1.5 Flash 002; attack: Beam Search; n=500 held-out scenarios"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 9",
+        "quote": "75.4%                       67.2%                        4.2%                       63.8%\nBeam Search"
+      }
+    },
+    {
+      "rawEvalName": "Indirect prompt injection ASR",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "attack success rate",
+      "value": 67.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash vs. Gemini 1.5 Flash 002; attack: Beam Search; n=500 held-out scenarios"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 9",
+        "quote": "75.4%                       67.2%                        4.2%                       63.8%\nBeam Search"
+      }
+    },
+    {
+      "rawEvalName": "Indirect prompt injection ASR",
+      "model": "google/gemini-2.5-flash",
+      "metric": "attack success rate",
+      "value": 4.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Flash vs. Gemini 1.5 Flash 002; attack: Beam Search; n=500 held-out scenarios"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 9",
+        "quote": "75.4%                       67.2%                        4.2%                       63.8%\nBeam Search"
+      }
+    },
+    {
+      "rawEvalName": "Indirect prompt injection ASR",
+      "model": "google/gemini-2.5-pro",
+      "metric": "attack success rate",
+      "value": 63.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Pro vs. Gemini 1.5 Pro 002; attack: Beam Search; n=500 held-out scenarios"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 9",
+        "quote": "75.4%                       67.2%                        4.2%                       63.8%\nBeam Search"
+      }
+    },
+    {
+      "rawEvalName": "Indirect prompt injection ASR",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "attack success rate",
+      "value": 64.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash-Lite vs. Gemini 1.5 Flash 002; attack: TAP; n=500 held-out scenarios"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 9",
+        "quote": "64.8%                       98.4%                       53.6%                       30.8%\nTAP"
+      }
+    },
+    {
+      "rawEvalName": "Indirect prompt injection ASR",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "attack success rate",
+      "value": 98.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.0 Flash vs. Gemini 1.5 Flash 002; attack: TAP; n=500 held-out scenarios"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 9",
+        "quote": "64.8%                       98.4%                       53.6%                       30.8%\nTAP"
+      }
+    },
+    {
+      "rawEvalName": "Indirect prompt injection ASR",
+      "model": "google/gemini-2.5-flash",
+      "metric": "attack success rate",
+      "value": 53.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Flash vs. Gemini 1.5 Flash 002; attack: TAP; n=500 held-out scenarios"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 9",
+        "quote": "64.8%                       98.4%                       53.6%                       30.8%\nTAP"
+      }
+    },
+    {
+      "rawEvalName": "Indirect prompt injection ASR",
+      "model": "google/gemini-2.5-pro",
+      "metric": "attack success rate",
+      "value": 30.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemini 2.5 Pro vs. Gemini 1.5 Pro 002; attack: TAP; n=500 held-out scenarios"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 9",
+        "quote": "64.8%                       98.4%                       53.6%                       30.8%\nTAP"
+      }
+    },
+    {
+      "rawEvalName": "Autonomous cyber offense suite",
+      "model": "google/gemini-2.5-pro",
+      "metric": "challenges solved",
+      "value": 74,
+      "unit": "count",
+      "settings": {
+        "other": "easy difficulty; 74/76; Gemini 2.5 Pro up to version 06-05"
+      },
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 10",
+        "quote": "74/76 easy, 11/13 medium, 1/13 hard"
+      }
+    },
+    {
+      "rawEvalName": "Autonomous cyber offense suite",
+      "model": "google/gemini-2.5-pro",
+      "metric": "challenges solved",
+      "value": 11,
+      "unit": "count",
+      "settings": {
+        "other": "medium difficulty; 11/13; Gemini 2.5 Pro up to version 06-05"
+      },
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 10",
+        "quote": "74/76 easy, 11/13 medium, 1/13 hard"
+      }
+    },
+    {
+      "rawEvalName": "Autonomous cyber offense suite",
+      "model": "google/gemini-2.5-pro",
+      "metric": "challenges solved",
+      "value": 1,
+      "unit": "count",
+      "settings": {
+        "other": "hard difficulty; 1/13; Gemini 2.5 Pro up to version 06-05"
+      },
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 10",
+        "quote": "74/76 easy, 11/13 medium, 1/13 hard"
+      }
+    },
+    {
+      "rawEvalName": "Cyber key skills benchmark",
+      "model": "google/gemini-2.5-pro",
+      "metric": "challenges solved",
+      "value": 7,
+      "unit": "count",
+      "settings": {
+        "other": "easy difficulty; 7/8; Gemini 2.5 Pro up to version 06-05"
+      },
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 10",
+        "quote": "On key skills benchmark: 7/8 easy, 14/28                 Uplift Level 1             × CCL not reached\n                     medium, 6/12 hard."
+      }
+    },
+    {
+      "rawEvalName": "Cyber key skills benchmark",
+      "model": "google/gemini-2.5-pro",
+      "metric": "challenges solved",
+      "value": 14,
+      "unit": "count",
+      "settings": {
+        "other": "medium difficulty; 14/28; Gemini 2.5 Pro up to version 06-05"
+      },
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 10",
+        "quote": "On key skills benchmark: 7/8 easy, 14/28                 Uplift Level 1             × CCL not reached\n                     medium, 6/12 hard."
+      }
+    },
+    {
+      "rawEvalName": "Cyber key skills benchmark",
+      "model": "google/gemini-2.5-pro",
+      "metric": "challenges solved",
+      "value": 6,
+      "unit": "count",
+      "settings": {
+        "other": "hard difficulty; 6/12; Gemini 2.5 Pro up to version 06-05"
+      },
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 10",
+        "quote": "On key skills benchmark: 7/8 easy, 14/28                 Uplift Level 1             × CCL not reached\n                     medium, 6/12 hard."
+      }
+    },
+    {
+      "rawEvalName": "Deceptive alignment stealth challenges",
+      "model": "google/gemini-2.5-pro",
+      "metric": "challenges solved",
+      "value": 2,
+      "unit": "count",
+      "settings": {
+        "other": "2/5 stealth challenges; Gemini 2.5 Pro up to version 06-05"
+      },
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 10",
+        "quote": "Gemini 2.5 Pro solves 2/5 stealth challenges"
+      }
+    },
+    {
+      "rawEvalName": "Deceptive alignment situational awareness challenges",
+      "model": "google/gemini-2.5-pro",
+      "metric": "challenges solved",
+      "value": 2,
+      "unit": "count",
+      "settings": {
+        "other": "2/11 situational awareness challenges; Gemini 2.5 Pro up to version 06-05"
+      },
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 10",
+        "quote": "and 2/11 situational awareness challenges."
+      }
+    },
+    {
+      "rawEvalName": "Deceptive alignment situational awareness challenges",
+      "model": "google/gemini-2.5-pro",
+      "metric": "success rate",
+      "value": 42,
+      "unit": "percent",
+      "settings": {
+        "other": "Disabled Tool challenge; Gemini 2.5 Pro Preview 03-25; 50 trials",
+        "trials": 50
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "more tools though configuration changes (42% success rate across 50 trials)"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 82.9,
+      "unit": "percent",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 3",
+        "quote": "82.9%         80.0%          82.4%          84.6%         85.3%          87.8%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 80,
+      "unit": "percent",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 3",
+        "quote": "82.9%         80.0%          82.4%          84.6%         85.3%          87.8%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "accuracy",
+      "value": 82.4,
+      "unit": "percent",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 3",
+        "quote": "82.9%         80.0%          82.4%          84.6%         85.3%          87.8%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "accuracy",
+      "value": 84.6,
+      "unit": "percent",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 3",
+        "quote": "82.9%         80.0%          82.4%          84.6%         85.3%          87.8%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-2.5-flash",
+      "metric": "accuracy",
+      "value": 85.3,
+      "unit": "percent",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 3",
+        "quote": "82.9%         80.0%          82.4%          84.6%         85.3%          87.8%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-2.5-pro",
+      "metric": "accuracy",
+      "value": 87.8,
+      "unit": "percent",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 3",
+        "quote": "82.9%         80.0%          82.4%          84.6%         85.3%          87.8%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-2.5-pro",
+      "metric": "accuracy",
+      "value": 87.8,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 4",
+        "quote": "87.8%      69.9%    62.1%       79.1%       77.7%          74.8%              82.4%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "openai/o3",
+      "metric": "accuracy",
+      "value": 69.9,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "high"
+      },
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 4",
+        "quote": "87.8%      69.9%    62.1%       79.1%       77.7%          74.8%              82.4%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "openai/o4-mini",
+      "metric": "accuracy",
+      "value": 62.1,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "high"
+      },
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 4",
+        "quote": "87.8%      69.9%    62.1%       79.1%       77.7%          74.8%              82.4%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "anthropic/claude-sonnet-4",
+      "metric": "accuracy",
+      "value": 79.1,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 4",
+        "quote": "87.8%      69.9%    62.1%       79.1%       77.7%          74.8%              82.4%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "anthropic/claude-opus-4",
+      "metric": "accuracy",
+      "value": 77.7,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 4",
+        "quote": "87.8%      69.9%    62.1%       79.1%       77.7%          74.8%              82.4%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "x-ai/grok-3",
+      "metric": "accuracy",
+      "value": 74.8,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Extended Thinking",
+        "other": "Grok 3 Beta"
+      },
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 4",
+        "quote": "87.8%      69.9%    62.1%       79.1%       77.7%          74.8%              82.4%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "metric": "accuracy",
+      "value": 82.4,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 4",
+        "quote": "87.8%      69.9%    62.1%       79.1%       77.7%          74.8%              82.4%"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:19:47Z"
+  },
+  "notes": "Technical report (arXiv 2507.06261), not a system card. Safety-only evalResults per pilot override: Table 7 relative development metrics, Table 8 ART, Table 9 indirect prompt-injection ASR, Table 10/text FSF cyber and deceptive-alignment counts, Disabled Tool 42%. Skipped capability benches (LiveCodeBench, Aider, SWE-bench, GPQA, AIME, SimpleQA, FACTS Grounding, MMMU, video, Arena, etc.). Skipped Figure 8/9/10/11/12 chart-only numbers (memorization rates, bio/chem MCQ solve rates, CTF bar charts, RE-Bench CIs) because values are not in the text layer. Skipped approximate rates (~44%, ~35%, roughly 69%/59%/0.2%) as evalResults; put in findings. Seed-linked google/gemini-2.5-flash-lite omitted from covers — not named in the report. External testers are unnamed (civil society/commercial/government body), so testers=[]. Table 7 image-to-text ↑ means more violations (caption: up arrow is improvement only for Tone and Helpfulness). FACTS Grounding rows from Tables 3 and 4 (hallucination); SimpleQA skipped as capability."
+}

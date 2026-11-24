@@ -1,0 +1,63 @@
+[project]
+name = "openaudit-runner"
+version = "0.1.0"
+description = "Runs OpenAudit eval jobs with Inspect and imports their logs."
+requires-python = ">=3.11"
+dependencies = [
+  "openaudit-spec",
+  "inspect-ai",
+  # Seed eval versions pin inspect-evals, inspect-petri and petri-bloom (`runner.package`,
+  # `runner.dependencies`). To upgrade one: bump it here, `uv lock`, change the seed pins, then
+  # `pnpm runner:packages` in apps/web. A new eval version only when the samples, scores, rubric
+  # or task defaults change. Deploy when no run of the old pin is queued or running.
+  "inspect-evals[makemesay,gdown]==0.22.0",
+  # AbstentionBench. It works without torch.
+  "hydra-core>=1.4.0.dev1",
+  "omegaconf>=2.4.0.dev2",
+  "scikit-learn",
+  "loguru",
+  # Petri and Petri Bloom need Python 3.12.
+  "inspect-petri==3.1.0; python_version >= '3.12'",
+  "petri-bloom==0.2.6; python_version >= '3.12'",
+  # LABBench2: the Inspect port and its scorer code. Git commits in [tool.uv.sources].
+  "lab-bench[lab_bench_2]",
+  "labbench2",
+  "openai",
+  "psycopg[binary]>=3.2",
+  "boto3>=1.35",
+  "certifi",
+  "uuid6>=2024.7",
+  "sentry-sdk>=2.75",
+]
+
+[project.optional-dependencies]
+# Local classifier scorers: BOLD, Do-Not-Answer, ToxiGen, RTP, HarmBench, SALAD-Bench.
+classifiers = [
+  "torch>=2.8",
+  "transformers>=4.56",
+  "accelerate",
+  "sentencepiece",
+  # Transformers 5 needs it for the Llama tokenizers of HarmBench and MD-Judge.
+  "protobuf",
+  "detoxify==0.5.2",
+  "vaderSentiment==3.3.2",
+]
+
+[tool.uv.sources]
+# Not on PyPI. The lab-bench extra needs labbench2, and uv does not read the sources of a
+# dependency, so we give it here.
+lab-bench = { git = "https://github.com/Generality-Labs/lab-bench", rev = "081864af494b180ecf6aae3f7333e384c0d227af" }
+labbench2 = { git = "https://github.com/EdisonScientific/labbench2", rev = "c028ecdcf144b55ffcd92b68be45081df5628c20" }
+
+[project.scripts]
+openaudit-runner = "openaudit_runner.cli:main"
+
+[project.entry-points.inspect_ai]
+openaudit_runner = "openaudit_runner.tasks"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["openaudit_runner"]

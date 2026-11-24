@@ -1,0 +1,675 @@
+{
+  "document": "google-shieldgemma-2-system_card",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "google/shieldgemma-2-4b-it"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "Image and prompt instruction input; Yes/No token probability output",
+      "source": {
+        "page": "Inputs and outputs",
+        "quote": "Input: Image and prompt instruction with policy definition."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English only (this study)",
+      "source": {
+        "page": "Training Dataset",
+        "quote": "harm types were limited to dangerous, sexually explicit, and violent content, with English only."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Terms of Use",
+      "source": {
+        "page": "Header",
+        "quote": "Terms of Use: Terms"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "4 billion (4B)",
+      "source": {
+        "page": "Description",
+        "quote": "ShieldGemma 2, built on Gemma 3, is a 4 billion (4B) parameter model that checks"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Trained on Gemma 3's 4B IT checkpoint; instruction-tuned Gemma 3",
+      "source": {
+        "page": "Model Information",
+        "quote": "ShieldGemma 2 is a model trained on Gemma 3's 4B IT checkpoint for image safety"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Natural images sampled from WebLI plus synthetic images from an internal generation pipeline",
+      "source": {
+        "page": "Training Dataset",
+        "quote": "Our training dataset consists of both natural images and synthetic images. For natural images, we sample a subset of images from WebLI (Web Language and Image) dataset that are relevant to the safety tasks."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Image safety classification across sexually explicit, dangerous, and violent content",
+      "source": {
+        "page": "Model Information",
+        "quote": "ShieldGemma 2 is a model trained on Gemma 3's 4B IT checkpoint for image safety classification across key categories that takes in images and outputs safety labels per policy."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "child sexual abuse material (CSAM) filtering applied during training data preparation",
+      "source": {
+        "page": "Data Preprocessing",
+        "quote": "CSAM Filtering: CSAM (Child Sexual Abuse Material) filtering was applied in the data preparation process to ensure the exclusion of illegal content."
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Dangerous-content policy includes instructions for suicide",
+      "source": {
+        "page": "Guidelines to use in prompts",
+        "quote": "building firearms and explosive devices, promotion of terrorism, instructions for suicide"
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Assessed for fairness; training covered demographics, context, and regional aspects",
+      "source": {
+        "page": "Evaluation Results",
+        "quote": "These models were assessed for ethics, safety, and fairness considerations and met internal guidelines."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "ShieldGemma 2 is highly sensitive to the user's safety-policy wording and may behave unpredictably when language is ambiguous.", "tone": "mixed",
+      "source": {
+        "page": "Limitations",
+        "quote": "ShieldGemma 2 is also highly sensitive to the specific user-provided description of safety principles, and might perform unpredictably under conditions that require a good understanding of language ambiguity and nuance."
+      }
+    },
+    {
+      "text": "The card warns that content-moderation benchmarks are limited, so training and evaluation data may not match real-world use.", "tone": "mixed",
+      "source": {
+        "page": "Limitations",
+        "quote": "there are limited benchmarks that can be used to evaluate content moderation so the training and evaluation data might not be representative of real-world scenarios."
+      }
+    },
+    {
+      "text": "Internal ethics, safety, and fairness checks are said to have met Google's internal guidelines.", "tone": "good",
+      "source": {
+        "page": "Evaluation Results",
+        "quote": "These models were assessed for ethics, safety, and fairness considerations and met internal guidelines."
+      }
+    },
+    {
+      "text": "Google recommends using the model as an input filter for vision-language models or as an output filter for image generation systems.", "tone": "neutral",
+      "source": {
+        "page": "Description",
+        "quote": "We recommend using ShieldGemma 2 as an input filter to vision language models, or as an output filter of image generation systems."
+      }
+    },
+    {
+      "text": "External-dataset evaluations are deferred to a separate technical report (not in this card's numbers).", "tone": "mixed",
+      "source": {
+        "page": "Benchmark Results",
+        "quote": "We will also be releasing a technical report that includes evaluations against external datasets."
+      }
+    },
+    {
+      "text": "The card claims superior performance versus other comparably sized open model alternatives on the reported metrics.", "tone": "good",
+      "source": {
+        "page": "Benefits",
+        "quote": "these models have been shown to provide superior performance to other, comparably-sized open model alternatives."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Sexually Explicit)",
+      "rawModelName": "LlavaGuard 7B",
+      "metric": "precision (inferred; the card does not label P/R/F1)",
+      "value": 47.6,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "LlavaGuard 7B 47.6/93.1/63.0"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Sexually Explicit)",
+      "rawModelName": "LlavaGuard 7B",
+      "metric": "recall (inferred; the card does not label P/R/F1)",
+      "value": 93.1,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "LlavaGuard 7B 47.6/93.1/63.0"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Sexually Explicit)",
+      "rawModelName": "LlavaGuard 7B",
+      "metric": "F1 (inferred; the card does not label P/R/F1)",
+      "value": 63,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "LlavaGuard 7B 47.6/93.1/63.0"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Dangerous Content)",
+      "rawModelName": "LlavaGuard 7B",
+      "metric": "precision (inferred; the card does not label P/R/F1)",
+      "value": 67.8,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "LlavaGuard 7B 47.6/93.1/63.0 67.8/47.2/55.7"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Dangerous Content)",
+      "rawModelName": "LlavaGuard 7B",
+      "metric": "recall (inferred; the card does not label P/R/F1)",
+      "value": 47.2,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "LlavaGuard 7B 47.6/93.1/63.0 67.8/47.2/55.7"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Dangerous Content)",
+      "rawModelName": "LlavaGuard 7B",
+      "metric": "F1 (inferred; the card does not label P/R/F1)",
+      "value": 55.7,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "LlavaGuard 7B 47.6/93.1/63.0 67.8/47.2/55.7"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Violence & Gore)",
+      "rawModelName": "LlavaGuard 7B",
+      "metric": "precision (inferred; the card does not label P/R/F1)",
+      "value": 36.8,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "LlavaGuard 7B 47.6/93.1/63.0 67.8/47.2/55.7 36.8/100.0/53.8"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Violence & Gore)",
+      "rawModelName": "LlavaGuard 7B",
+      "metric": "recall (inferred; the card does not label P/R/F1)",
+      "value": 100,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "LlavaGuard 7B 47.6/93.1/63.0 67.8/47.2/55.7 36.8/100.0/53.8"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Violence & Gore)",
+      "rawModelName": "LlavaGuard 7B",
+      "metric": "F1 (inferred; the card does not label P/R/F1)",
+      "value": 53.8,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "LlavaGuard 7B 47.6/93.1/63.0 67.8/47.2/55.7 36.8/100.0/53.8"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Sexually Explicit)",
+      "model": "openai/gpt-4o-mini",
+      "metric": "precision (inferred; the card does not label P/R/F1)",
+      "value": 68.3,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "GPT-4o mini 68.3/97.7/80.3"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Sexually Explicit)",
+      "model": "openai/gpt-4o-mini",
+      "metric": "recall (inferred; the card does not label P/R/F1)",
+      "value": 97.7,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "GPT-4o mini 68.3/97.7/80.3"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Sexually Explicit)",
+      "model": "openai/gpt-4o-mini",
+      "metric": "F1 (inferred; the card does not label P/R/F1)",
+      "value": 80.3,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "GPT-4o mini 68.3/97.7/80.3"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Dangerous Content)",
+      "model": "openai/gpt-4o-mini",
+      "metric": "precision (inferred; the card does not label P/R/F1)",
+      "value": 84.4,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "GPT-4o mini 68.3/97.7/80.3 84.4/99.0/91.0"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Dangerous Content)",
+      "model": "openai/gpt-4o-mini",
+      "metric": "recall (inferred; the card does not label P/R/F1)",
+      "value": 99,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "GPT-4o mini 68.3/97.7/80.3 84.4/99.0/91.0"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Dangerous Content)",
+      "model": "openai/gpt-4o-mini",
+      "metric": "F1 (inferred; the card does not label P/R/F1)",
+      "value": 91,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "GPT-4o mini 68.3/97.7/80.3 84.4/99.0/91.0"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Violence & Gore)",
+      "model": "openai/gpt-4o-mini",
+      "metric": "precision (inferred; the card does not label P/R/F1)",
+      "value": 40.2,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "GPT-4o mini 68.3/97.7/80.3 84.4/99.0/91.0 40.2/100.0/57.3"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Violence & Gore)",
+      "model": "openai/gpt-4o-mini",
+      "metric": "recall (inferred; the card does not label P/R/F1)",
+      "value": 100,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "GPT-4o mini 68.3/97.7/80.3 84.4/99.0/91.0 40.2/100.0/57.3"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Violence & Gore)",
+      "model": "openai/gpt-4o-mini",
+      "metric": "F1 (inferred; the card does not label P/R/F1)",
+      "value": 57.3,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "GPT-4o mini 68.3/97.7/80.3 84.4/99.0/91.0 40.2/100.0/57.3"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Sexually Explicit)",
+      "model": "google/gemma-3-4b-it",
+      "metric": "precision (inferred; the card does not label P/R/F1)",
+      "value": 77.7,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "Gemma-3-4B-IT 77.7/87.9/82.5"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Sexually Explicit)",
+      "model": "google/gemma-3-4b-it",
+      "metric": "recall (inferred; the card does not label P/R/F1)",
+      "value": 87.9,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "Gemma-3-4B-IT 77.7/87.9/82.5"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Sexually Explicit)",
+      "model": "google/gemma-3-4b-it",
+      "metric": "F1 (inferred; the card does not label P/R/F1)",
+      "value": 82.5,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "Gemma-3-4B-IT 77.7/87.9/82.5"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Dangerous Content)",
+      "model": "google/gemma-3-4b-it",
+      "metric": "precision (inferred; the card does not label P/R/F1)",
+      "value": 75.9,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "Gemma-3-4B-IT 77.7/87.9/82.5 75.9/94.5/84.2"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Dangerous Content)",
+      "model": "google/gemma-3-4b-it",
+      "metric": "recall (inferred; the card does not label P/R/F1)",
+      "value": 94.5,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "Gemma-3-4B-IT 77.7/87.9/82.5 75.9/94.5/84.2"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Dangerous Content)",
+      "model": "google/gemma-3-4b-it",
+      "metric": "F1 (inferred; the card does not label P/R/F1)",
+      "value": 84.2,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "Gemma-3-4B-IT 77.7/87.9/82.5 75.9/94.5/84.2"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Violence & Gore)",
+      "model": "google/gemma-3-4b-it",
+      "metric": "precision (inferred; the card does not label P/R/F1)",
+      "value": 78.2,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "Gemma-3-4B-IT 77.7/87.9/82.5 75.9/94.5/84.2 78.2/82.2/80.1"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Violence & Gore)",
+      "model": "google/gemma-3-4b-it",
+      "metric": "recall (inferred; the card does not label P/R/F1)",
+      "value": 82.2,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "Gemma-3-4B-IT 77.7/87.9/82.5 75.9/94.5/84.2 78.2/82.2/80.1"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Violence & Gore)",
+      "model": "google/gemma-3-4b-it",
+      "metric": "F1 (inferred; the card does not label P/R/F1)",
+      "value": 80.1,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "Gemma-3-4B-IT 77.7/87.9/82.5 75.9/94.5/84.2 78.2/82.2/80.1"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Sexually Explicit)",
+      "model": "google/shieldgemma-2-4b-it",
+      "metric": "precision (inferred; the card does not label P/R/F1)",
+      "value": 87.6,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "ShieldGemma-2-Image-4B 87.6/89.7/88.6"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Sexually Explicit)",
+      "model": "google/shieldgemma-2-4b-it",
+      "metric": "recall (inferred; the card does not label P/R/F1)",
+      "value": 89.7,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "ShieldGemma-2-Image-4B 87.6/89.7/88.6"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Sexually Explicit)",
+      "model": "google/shieldgemma-2-4b-it",
+      "metric": "F1 (inferred; the card does not label P/R/F1)",
+      "value": 88.6,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "ShieldGemma-2-Image-4B 87.6/89.7/88.6"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Dangerous Content)",
+      "model": "google/shieldgemma-2-4b-it",
+      "metric": "precision (inferred; the card does not label P/R/F1)",
+      "value": 95.6,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "ShieldGemma-2-Image-4B 87.6/89.7/88.6 95.6/91.9/93.7"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Dangerous Content)",
+      "model": "google/shieldgemma-2-4b-it",
+      "metric": "recall (inferred; the card does not label P/R/F1)",
+      "value": 91.9,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "ShieldGemma-2-Image-4B 87.6/89.7/88.6 95.6/91.9/93.7"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Dangerous Content)",
+      "model": "google/shieldgemma-2-4b-it",
+      "metric": "F1 (inferred; the card does not label P/R/F1)",
+      "value": 93.7,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "ShieldGemma-2-Image-4B 87.6/89.7/88.6 95.6/91.9/93.7"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Violence & Gore)",
+      "model": "google/shieldgemma-2-4b-it",
+      "metric": "precision (inferred; the card does not label P/R/F1)",
+      "value": 80.3,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "ShieldGemma-2-Image-4B 87.6/89.7/88.6 95.6/91.9/93.7 80.3/90.4/85.0"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Violence & Gore)",
+      "model": "google/shieldgemma-2-4b-it",
+      "metric": "recall (inferred; the card does not label P/R/F1)",
+      "value": 90.4,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "ShieldGemma-2-Image-4B 87.6/89.7/88.6 95.6/91.9/93.7 80.3/90.4/85.0"
+      }
+    },
+    {
+      "rawEvalName": "Internal Benchmark Evaluation Results (Violence & Gore)",
+      "model": "google/shieldgemma-2-4b-it",
+      "metric": "F1 (inferred; the card does not label P/R/F1)",
+      "value": 85,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Internal Benchmark Evaluation Results",
+        "quote": "ShieldGemma-2-Image-4B 87.6/89.7/88.6 95.6/91.9/93.7 80.3/90.4/85.0"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:33:51Z"
+  },
+  "notes": "Source is the web model card only (ai.google.dev/gemma/docs/shieldgemma/model_card_2); seed-lookup listed no alsoDocuments. The Internal Benchmark table cells are unlabeled a/b/c triples (metric recorded as unlabeled 1/2/3 of 3); the separate seed doc google-shieldgemma-2-technical_report captions the same layout as Precision/Recall/F1 but that text is not on this page, so those names were not used. Skipped n because the card says 'approximately 500 examples' (not exact). Unit is score (cells have no % sign). Positive class ratios 39%/67%/32% were omitted as dataset composition, not eval scores. No named external testers; no lab risk framework levels. License is only 'Terms of Use: Terms' with no SPDX name. Trained on TPUv5e is hardware, not trainingCompute."
+}

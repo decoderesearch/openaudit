@@ -1,0 +1,78 @@
+{
+  "eval": {
+    "slug": "shieldgemma-internal-test",
+    "displayName": "ShieldGemma Internal Test (SG Prompt / SG Response)",
+    "aliases": ["SG Prompt", "SG Response", "ShieldGemma Prompt", "ShieldGemma Response"],
+    "description": "Google internal ShieldGemma content-moderation test sets for prompt classification (SG Prompt) and response classification (SG Response). About 4,500 labeled examples across targeted harm types. Cards report Optimal F1 and AU-PRC. Not published; lab-internal.",
+    "summary": "Measures how well the model finds harmful content in user prompts and in AI responses.",
+    "maintainers": [
+      {
+        "name": "Google",
+        "url": "https://arxiv.org/abs/2407.21772"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://ai.google.dev/gemma/docs/shieldgemma/model_card",
+        "title": "ShieldGemma model card (SG Prompt / SG Response)"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2407.21772",
+        "title": "ShieldGemma: Generative AI Content Moderation Based on Gemma"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "toxicity"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "internal",
+      "status": "draft",
+      "changes": "Internal SG Prompt and SG Response sets as reported in the ShieldGemma paper and model card; samples not released.",
+      "scores": [
+        {
+          "key": "category_score",
+          "displayName": "Violation score",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "neither",
+          "description": "Classifier probability or score that the prompt or response violates a targeted harm policy."
+        },
+        {
+          "key": "correct_at_threshold",
+          "displayName": "Correct at optimal threshold",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the decision at the Optimal F1 threshold matches the gold binary label."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "optimal_f1",
+          "displayName": "Optimal F1",
+          "score": "correct_at_threshold",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Best F1 over classification thresholds. Cards often pair Optimal F1 with AU-PRC for SG Prompt and SG Response."
+        }
+      ]
+    }
+  ]
+}

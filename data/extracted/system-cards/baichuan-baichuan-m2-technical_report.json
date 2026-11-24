@@ -1,0 +1,252 @@
+{
+  "document": "baichuan-baichuan-m2-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "baichuan-inc/Baichuan-M2-32B"
+    }
+  ],
+  "pageCount": 26,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "32K",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Training was conducted on Qwen2.5-32B-Base1 with a context length of 32K for 2 epochs"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "medical augmented reasoning model",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "we develop Baichuan-M2, a 32B-parameter medical augmented reasoning model trained through a multi-stage reinforcement learning"
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "32B-parameter",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "we develop Baichuan-M2, a 32B-parameter medical augmented reasoning model trained through a multi-stage reinforcement learning"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "trained on Qwen2.5-32B-Base",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Training was conducted on Qwen2.5-32B-Base1 with a context length of 32K for 2 epochs"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "professional medical corpus (public medical textbooks, clinical monographs, drug knowledge bases, clinical guidelines, de-identified medical records); SFT dataset of 2 million samples (~20% medical-related)",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "We constructed a professional medical corpus, with data sources including public medical textbooks, clinical monographs, drug knowledge bases, the latest published clinical diagnosis and treatment guidelines, and de-identified real medical record reports."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "The model may still exhibit response hallucinations and insufficient reasoning stability in certain edge cases",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "The model may still exhibit response hallucinations and insufficient reasoning stability in certain edge cases."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "On a custom Chinese Multidisciplinary Treatment (MDT) clinical benchmark, Baichuan-M2 was preferred on Safety in 34% of expert comparisons versus gpt-oss-120B (30%), with 36% ties.", "tone": "good",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "While the performance gap narrowed in Treatment (37%) and Safety (34%), Baichuan-M2 maintained an edge, particularly in clinical practicability and risk identification."
+      }
+    },
+    {
+      "text": "Authors say Baichuan-M2 may still exhibit response hallucinations and unstable reasoning in some edge cases.", "tone": "mixed",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "The model may still exhibit response hallucinations and insufficient reasoning stability in certain edge cases."
+      }
+    },
+    {
+      "text": "On a [HealthBench](https://arxiv.org/abs/2505.08775) Hard gestational-diabetes insulin case, authors claim Baichuan-M2 was stronger on medical accuracy and safety than gpt-oss-120B, without numeric safety scores.", "tone": "mixed",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "Among these, Baichuan-M2 demonstrates superior completeness of medical thinking, medical accuracy, and safety."
+      }
+    },
+    {
+      "text": "supervised fine-tuning (SFT) data was optimized for medical scenarios including medical safety, but no separate safety-benchmark scores are reported for that mix.", "tone": "mixed",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "we optimized data for core medical scenarios including pre-consultation, intelligent triage, electronic health record (EHR) generation, medical RAG, and medical safety."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "China's medical settings",
+      "model": "baichuan-inc/Baichuan-M2-32B",
+      "metric": "preference rate",
+      "value": 34,
+      "unit": "percent",
+      "settings": {
+        "other": "Safety dimension; expert preference vs gpt-oss-120B; 57 MDT cases"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Figure 11",
+        "quote": "Safety             34%                         36%                                  30%"
+      }
+    },
+    {
+      "rawEvalName": "China's medical settings",
+      "model": "openai/gpt-oss-120b",
+      "metric": "preference rate",
+      "value": 30,
+      "unit": "percent",
+      "settings": {
+        "other": "Safety dimension; expert preference vs Baichuan-M2; 57 MDT cases"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Figure 11",
+        "quote": "Safety             34%                         36%                                  30%"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:13:05Z"
+  },
+  "notes": "Technical report on medical capability (HealthBench, Chinese MDT cases, general benchmarks). Per pilot safety-only rules, skipped HealthBench overall/Hard/Consensus and axis/theme scores (medical capability), and Table 1 (AIME24/25, IFEval, CF-Bench, Arena-Hard-V2.0, AlignBench, WritingBench). Only Safety preference rates from the custom China's medical settings comparison (Figure 11) were kept as safety evalResults. Privacy/Fact scores in Figure 3 evaluate the Patient Simulator, not Baichuan-M2. No external safety testers or formal risk thresholds. Hallucination marked covered from the Limitations claim only (no numeric hallucination rate)."
+}

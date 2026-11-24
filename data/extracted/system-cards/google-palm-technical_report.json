@@ -1,0 +1,656 @@
+{
+  "document": "google-palm-technical_report",
+  "alsoDocuments": ["google-palm-blog"],
+  "covers": [
+    {
+      "model": "google/palm",
+      "section": "PaLM 540B primary model; bias, toxicity, and memorization evaluations"
+    },
+    {
+      "rawModelName": "PaLM 8B",
+      "section": "Smaller scale evaluated on toxicity and memorization"
+    },
+    {
+      "rawModelName": "PaLM 62B",
+      "section": "Mid scale evaluated on toxicity, bias co-occurrence, and BIG-bench bias tasks"
+    }
+  ],
+  "pageCount": 87,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "sequence length of 2048 tokens",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "A sequence length of 2048 was used for all models. Input examples are concatenated"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text input and text output",
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "quote": "Input(s)                            The model takes text as input.\n    Output(s)                           The model generates text as output."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "multilingual corpus with text from over 100 languages (training mixture includes 124 languages; English ~78% of tokens)",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "The multilingual corpus contains text\nfrom over 100 languages, with the distribution given in Appendix Table 29."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "540 billion dense parameters (also trained 8B and 62B)",
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "quote": "Dense decoder-only model with 540 billion parameters. Transformer"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Dense decoder-only Transformer",
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "quote": "Dense decoder-only model with 540 billion parameters. Transformer"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "780B token mixture of filtered webpages, books, Wikipedia, news, GitHub code, and social media conversations",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "The PaLM pretraining dataset consists of a high-quality corpus of 780 billion tokens that represent a wide"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "2.56 × 10^24 train FLOPs (29600 PetaFLOP/s-days) for PaLM 540B",
+      "source": {
+        "page": "66",
+        "pdfPage": 66,
+        "quote": "540B              3.28                        4.10                 2.56 × 1024              29600"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "[Winogender](/evals/winogender) gender-occupation bias, identity co-occurrence, religion-prompt toxicity, [BBQ](/evals/bbq) Lite",
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "quote": "We evaluate PaLM for one aspect of this bias using the Winogender\nbenchmark, which measures gender bias in English occupation nouns such as “nurse” and “electrician”"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "[RealToxicityPrompts](/evals/real-toxicity-prompts) open-ended toxicity degeneration; higher toxicity for larger models",
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "quote": "Table 20: Probability of generating a comment that could be perceived as toxic (i.e. toxicity score > 0.5)"
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "[Winogender](/evals/winogender) accuracy is higher on stereotypical examples than gotcha examples, and lowest on female gotcha examples; reported slice gaps improve with more shots.", "tone": "bad",
+      "source": {
+        "page": "41",
+        "pdfPage": 41,
+        "quote": "We find that accuracy is higher on stereotypical examples than on gotcha examples, and that accuracy is\nlowest on gotcha examples for female gender."
+      }
+    },
+    {
+      "text": "Religion co-occurrence analysis associates Islam with charged stereotypes such as terrorist, violent, and radical.", "tone": "bad",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "quote": "see in Table 37 that Islam is associated with highly charged terms and stereotypes such as terrorist, violent\nand radical, similar to other evaluations of decoder-only models revealing anti-Muslim bias (Abid et al., 2021)."
+      }
+    },
+    {
+      "text": "About 70% of top-10 co-occurring descriptors match between PaLM 62B and 540B across race, religion, and gender prompts.", "tone": "neutral",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "quote": "On average, 70% of\nthe top-10 words are the same for the 62B and 540B models across race, religion and gender dimensions."
+      }
+    },
+    {
+      "text": "Model continuation toxicity tracks prompt toxicity more closely than human continuations, suggesting like-to-like prompting effects.", "tone": "mixed",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "quote": "Model\nTPC is more consistent with the TPP than the human TPC, suggesting that the model is strongly influenced\nby the prompt-style and is likely to respond like-to-like."
+      }
+    },
+    {
+      "text": "Fairness analyses are English-only and narrowly scoped; the authors warn of biases beyond measured axes and recommend application-level assessment before deployment.", "tone": "mixed",
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "quote": "A major limitation of the fairness analyses presented in this section is that they are performed only on\nEnglish language data, while PaLM is trained on multilingual data and evaluated on multilingual language"
+      }
+    },
+    {
+      "text": "Training-set memorization rises with model scale and with how often an example was seen; examples seen more than 500 times exceed 40% memorization for the largest model.", "tone": "bad",
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "examples seen more than 500 times have a memorization rate of\nover 40%."
+      }
+    },
+    {
+      "text": "The authors observed memorization of stories, news articles, and facts in addition to formulaic boilerplate.", "tone": "bad",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "However, we also observed memorization of stories, news articles, and\nfacts."
+      }
+    },
+    {
+      "text": "PaLM should not be used for downstream applications without prior safety and fairness assessment; mitigation is recommended at the application level.", "tone": "mixed",
+      "source": {
+        "page": "74",
+        "pdfPage": 74,
+        "quote": "PaLM should not be used for downstream applications without a prior\n                                        assessment and mitigation of the safety and fairness concerns specific"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Winogender",
+      "model": "google/palm",
+      "metric": "accuracy",
+      "value": 79.4,
+      "unit": "percent",
+      "settings": {
+        "other": "1-shot; multiple choice scoring"
+      },
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "quote": "performs at 79.4% accuracy with multiple choice scoring (GLaM 1-shot 71.7%) and 69.7% accuracy with"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "model": "google/palm",
+      "metric": "accuracy",
+      "value": 69.7,
+      "unit": "percent",
+      "settings": {
+        "other": "1-shot; generative scoring (exact string match)"
+      },
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "quote": "performs at 79.4% accuracy with multiple choice scoring (GLaM 1-shot 71.7%) and 69.7% accuracy with"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "model": "google/palm",
+      "metric": "accuracy",
+      "value": 84.7,
+      "unit": "percent",
+      "settings": {
+        "other": "4-shot; generative scoring"
+      },
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "quote": "Particularly noteworthy is that PaLM 540B performance improves to 84.7%\naccuracy in a 4-shot setting, even when using the stricter generative scoring method."
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "GLaM",
+      "metric": "accuracy",
+      "value": 71.7,
+      "unit": "percent",
+      "settings": {
+        "other": "1-shot; multiple choice scoring (comparison)"
+      },
+      "source": {
+        "page": "40",
+        "pdfPage": 40,
+        "quote": "performs at 79.4% accuracy with multiple choice scoring (GLaM 1-shot 71.7%) and 69.7% accuracy with"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 8B",
+      "metric": "probability of at least one toxic continuation",
+      "value": 0.78,
+      "unit": "fraction",
+      "settings": {
+        "other": "Toxic prompts; first-sentence continuation; Perspective API toxicity > 0.5; 25 continuations"
+      },
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "table": "Table 20",
+        "quote": "PaLM 8B        0.78      0.44      0.90      0.53"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 8B",
+      "metric": "probability of at least one toxic continuation",
+      "value": 0.44,
+      "unit": "fraction",
+      "settings": {
+        "other": "Non-toxic prompts; first-sentence continuation; Perspective API toxicity > 0.5; 25 continuations"
+      },
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "table": "Table 20",
+        "quote": "PaLM 8B        0.78      0.44      0.90      0.53"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 8B",
+      "metric": "probability of at least one toxic continuation",
+      "value": 0.9,
+      "unit": "fraction",
+      "settings": {
+        "other": "Toxic prompts; 128 decode steps; Perspective API toxicity > 0.5; 25 continuations"
+      },
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "table": "Table 20",
+        "quote": "PaLM 8B        0.78      0.44      0.90      0.53"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 8B",
+      "metric": "probability of at least one toxic continuation",
+      "value": 0.53,
+      "unit": "fraction",
+      "settings": {
+        "other": "Non-toxic prompts; 128 decode steps; Perspective API toxicity > 0.5; 25 continuations"
+      },
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "table": "Table 20",
+        "quote": "PaLM 8B        0.78      0.44      0.90      0.53"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 62B",
+      "metric": "probability of at least one toxic continuation",
+      "value": 0.81,
+      "unit": "fraction",
+      "settings": {
+        "other": "Toxic prompts; first-sentence continuation; Perspective API toxicity > 0.5; 25 continuations"
+      },
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "table": "Table 20",
+        "quote": "PaLM 62B       0.81      0.46      0.91      0.58"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 62B",
+      "metric": "probability of at least one toxic continuation",
+      "value": 0.46,
+      "unit": "fraction",
+      "settings": {
+        "other": "Non-toxic prompts; first-sentence continuation; Perspective API toxicity > 0.5; 25 continuations"
+      },
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "table": "Table 20",
+        "quote": "PaLM 62B       0.81      0.46      0.91      0.58"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 62B",
+      "metric": "probability of at least one toxic continuation",
+      "value": 0.91,
+      "unit": "fraction",
+      "settings": {
+        "other": "Toxic prompts; 128 decode steps; Perspective API toxicity > 0.5; 25 continuations"
+      },
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "table": "Table 20",
+        "quote": "PaLM 62B       0.81      0.46      0.91      0.58"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "PaLM 62B",
+      "metric": "probability of at least one toxic continuation",
+      "value": 0.58,
+      "unit": "fraction",
+      "settings": {
+        "other": "Non-toxic prompts; 128 decode steps; Perspective API toxicity > 0.5; 25 continuations"
+      },
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "table": "Table 20",
+        "quote": "PaLM 62B       0.81      0.46      0.91      0.58"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "model": "google/palm",
+      "metric": "probability of at least one toxic continuation",
+      "value": 0.8,
+      "unit": "fraction",
+      "settings": {
+        "other": "Toxic prompts; first-sentence continuation; Perspective API toxicity > 0.5; 25 continuations"
+      },
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "table": "Table 20",
+        "quote": "PaLM 540B      0.80      0.46      0.91      0.56"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "model": "google/palm",
+      "metric": "probability of at least one toxic continuation",
+      "value": 0.46,
+      "unit": "fraction",
+      "settings": {
+        "other": "Non-toxic prompts; first-sentence continuation; Perspective API toxicity > 0.5; 25 continuations"
+      },
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "table": "Table 20",
+        "quote": "PaLM 540B      0.80      0.46      0.91      0.56"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "model": "google/palm",
+      "metric": "probability of at least one toxic continuation",
+      "value": 0.91,
+      "unit": "fraction",
+      "settings": {
+        "other": "Toxic prompts; 128 decode steps; Perspective API toxicity > 0.5; 25 continuations"
+      },
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "table": "Table 20",
+        "quote": "PaLM 540B      0.80      0.46      0.91      0.56"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "model": "google/palm",
+      "metric": "probability of at least one toxic continuation",
+      "value": 0.56,
+      "unit": "fraction",
+      "settings": {
+        "other": "Non-toxic prompts; 128 decode steps; Perspective API toxicity > 0.5; 25 continuations"
+      },
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "table": "Table 20",
+        "quote": "PaLM 540B      0.80      0.46      0.91      0.56"
+      }
+    },
+    {
+      "rawEvalName": "Training data memorization",
+      "rawModelName": "PaLM 8B",
+      "metric": "exact match continuation rate",
+      "value": 1.6,
+      "unit": "percent",
+      "settings": {
+        "other": "50-token prompt from training; greedy decode of 50-token continuation; Carlini et al. (2022) style"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "model was able to exactly reproduce the 50 token continuation for 1.6% of the data, while the 540B model"
+      }
+    },
+    {
+      "rawEvalName": "Training data memorization",
+      "model": "google/palm",
+      "metric": "exact match continuation rate",
+      "value": 2.4,
+      "unit": "percent",
+      "settings": {
+        "other": "50-token prompt from training; greedy decode of 50-token continuation; Carlini et al. (2022) style"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "was able to reproduce the continuation for 2.4% of the data. We also evaluate the “memorization” rate on"
+      }
+    },
+    {
+      "rawEvalName": "Training data memorization",
+      "model": "google/palm",
+      "metric": "exact match continuation rate",
+      "value": 0.75,
+      "unit": "percent",
+      "settings": {
+        "other": "examples seen exactly once in training"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "quote": "rate of 0.75% for our largest model, while examples seen more than 500 times have a memorization rate of"
+      }
+    },
+    {
+      "rawEvalName": "BIG-bench Lite",
+      "rawModelName": "PaLM 8B",
+      "metric": "score",
+      "value": 71.2,
+      "unit": "score",
+      "settings": {
+        "other": "bbq lite json; 5-shot; raw (not normalized)"
+      },
+      "source": {
+        "page": "84",
+        "pdfPage": 84,
+        "table": "Table 41",
+        "quote": "bbq lite json                          71.2    91.0    96.3    59.9     88.4"
+      }
+    },
+    {
+      "rawEvalName": "BIG-bench Lite",
+      "rawModelName": "PaLM 62B",
+      "metric": "score",
+      "value": 91,
+      "unit": "score",
+      "settings": {
+        "other": "bbq lite json; 5-shot; raw (not normalized)"
+      },
+      "source": {
+        "page": "84",
+        "pdfPage": 84,
+        "table": "Table 41",
+        "quote": "bbq lite json                          71.2    91.0    96.3    59.9     88.4"
+      }
+    },
+    {
+      "rawEvalName": "BIG-bench Lite",
+      "model": "google/palm",
+      "metric": "score",
+      "value": 96.3,
+      "unit": "score",
+      "settings": {
+        "other": "bbq lite json; 5-shot; raw (not normalized)"
+      },
+      "source": {
+        "page": "84",
+        "pdfPage": 84,
+        "table": "Table 41",
+        "quote": "bbq lite json                          71.2    91.0    96.3    59.9     88.4"
+      }
+    },
+    {
+      "rawEvalName": "BIG-bench",
+      "model": "google/palm",
+      "metric": "raw score",
+      "value": 51.1,
+      "unit": "score",
+      "settings": {
+        "other": "hhh alignment subtask"
+      },
+      "source": {
+        "page": "85",
+        "pdfPage": 85,
+        "table": "Table 43",
+        "quote": "hhh alignment                    51.1               75.0           2.2             50.0"
+      }
+    },
+    {
+      "rawEvalName": "BIG-bench",
+      "model": "google/palm",
+      "metric": "normalized score",
+      "value": 2.2,
+      "unit": "score",
+      "settings": {
+        "other": "hhh alignment subtask; normalized preferred metric"
+      },
+      "source": {
+        "page": "85",
+        "pdfPage": 85,
+        "table": "Table 43",
+        "quote": "hhh alignment                    51.1               75.0           2.2             50.0"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:50:20Z"
+  },
+  "notes": "Technical report (not a system card). Safety content is mainly Section 10 (Winogender, identity co-occurrence, RealToxicityPrompts), Section 7 memorization, Ethical Considerations, and BIG-bench BBQ Lite / HHH alignment rows. Figure 20–23 toxicity/Winogender charts lack readable numeric labels beyond the prose figures already extracted; religion toxicity distributions (Figure 22) are image-only. Capability suites (MMLU, GSM8K, HumanEval, SuperGLUE, TyDiQA, translation, English NLP averages, most BIG-bench tasks) skipped per pilot safety-only rule. No external safety testers or formal risk-tier decisions. Datasheet notes training data collected 2019–2021 but no explicit model knowledge cutoff or product release date."
+}

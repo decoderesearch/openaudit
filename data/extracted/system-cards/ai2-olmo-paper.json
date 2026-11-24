@@ -1,0 +1,539 @@
+{
+  "document": "ai2-olmo-paper",
+  "alsoDocuments": ["ai2-olmo-blog"],
+  "covers": [
+    {
+      "model": "allenai/OLMo-1B"
+    },
+    {
+      "model": "allenai/OLMo-7B"
+    },
+    {
+      "rawModelName": "OLMo+SFT"
+    },
+    {
+      "rawModelName": "OLMo+SFT+DPO"
+    }
+  ],
+  "pageCount": 21,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "2048 sequence length",
+      "source": {
+        "page": "13",
+        "pdfPage": 17,
+        "quote": "Sequence length          2048             4096               2048          2048         2048"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English (pretraining data focus)",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Our work focuses on pretraining data in"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Apache 2.0 License."
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "1B and 7B",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "and 7B variants as described in Table 1."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "decoder-only transformer; no bias terms; non-parametric layer norm; SwiGLU; RoPE",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "We adopt a decoder-only transformer architecture"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Dolma (trillions of tokens; Common Crawl, GitHub, Reddit, Semantic Scholar, Project Gutenberg, Wikipedia); adapted with T ÜLU mix then UltraFeedback DPO",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Dolma—a diverse, multi-"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "pretraining 7B models consumed 239 MWh",
+      "source": {
+        "page": "12",
+        "pdfPage": 16,
+        "quote": "pretraining our 7B models consumed 239"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Adapted models better at avoiding hallucinations than pretrained, but not perfect",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "toxicity and, hallucinations. Our adapted models"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa) % Info+True improves from 31.6 (base) to 52.0 after SFT+DPO",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "improving ToxiGen and Truth-"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Pretrained models share bias issues with other large language models (LLMs); adapted models improve but are not perfect",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "issues as existing pretrained LLMs, such as bias,"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "[ToxiGen](/evals/toxigen) % Toxic falls from 81.4 (base) to 1.7 after supervised fine-tuning (SFT)+DPO",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "improving ToxiGen and Truth-"
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Instruction tuning, especially Direct Preference Optimization (DPO), is reported to improve [ToxiGen](/evals/toxigen) and [TruthfulQA](/evals/truthfulqa) for OLMo-7B versus the base model.", "tone": "good",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "improving ToxiGen and Truth-"
+      }
+    },
+    {
+      "text": "Authors state adapted models reduce bias, toxicity, and hallucinations relative to the pretrained base, but remain imperfect.", "tone": "mixed",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "toxicity and, hallucinations. Our adapted models"
+      }
+    },
+    {
+      "text": "Ethics statement notes open release can enable unintended harmful use, and argues openness also helps harm research.", "tone": "mixed",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "in unintended ways that cause harm. We believe"
+      }
+    },
+    {
+      "text": "Dolma may still contain toxic language, personal information, and copyrighted text despite filtering.", "tone": "bad",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "contains problematic content like toxic language,"
+      }
+    },
+    {
+      "text": "DPO UltraFeedback variant used for OLMo removes [TruthfulQA](/evals/truthfulqa) prompts before preference training.", "tone": "neutral",
+      "source": {
+        "page": "15",
+        "pdfPage": 19,
+        "quote": "et al., 2023), with TruthfulQA prompts re-"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "allenai/OLMo-7B",
+      "metric": "% Toxic",
+      "value": 81.4,
+      "unit": "percent",
+      "settings": {
+        "other": "OLMo (base); Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "OLMo (base)       28.3     -      81.4        31.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "allenai/OLMo-7B",
+      "metric": "% Info+True",
+      "value": 31.6,
+      "unit": "percent",
+      "settings": {
+        "other": "OLMo (base); generation setting; Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "OLMo (base)       28.3     -      81.4        31.6"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "mosaicml/mpt-7b-chat",
+      "metric": "% Toxic",
+      "value": 0.1,
+      "unit": "percent",
+      "settings": {
+        "other": "MPT Chat; Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "MPT Chat          33.8    46.8     0.1        42.7"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "mosaicml/mpt-7b-chat",
+      "metric": "% Info+True",
+      "value": 42.7,
+      "unit": "percent",
+      "settings": {
+        "other": "MPT Chat; Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "MPT Chat          33.8    46.8     0.1        42.7"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "tiiuae/falcon-7b-instruct",
+      "metric": "% Toxic",
+      "value": 70.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Falcon Instruct; Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "Falcon Instruct   25.2    14.0    70.7        27.2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "tiiuae/falcon-7b-instruct",
+      "metric": "% Info+True",
+      "value": 27.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Falcon Instruct; Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "Falcon Instruct   25.2    14.0    70.7        27.2"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "rawModelName": "RPJ-INCITE Chat",
+      "metric": "% Toxic",
+      "value": 46.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "RPJ-INCITE Chat 27.0      38.0    46.4        53.0"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "RPJ-INCITE Chat",
+      "metric": "% Info+True",
+      "value": 53,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "RPJ-INCITE Chat 27.0      38.0    46.4        53.0"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "model": "meta-llama/Llama-2-7b-chat",
+      "metric": "% Toxic",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Llama-2-Chat; Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "Llama-2-Chat      46.8    87.3     0.0        26.3"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-7b-chat",
+      "metric": "% Info+True",
+      "value": 26.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Llama-2-Chat; Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "Llama-2-Chat      46.8    87.3     0.0        26.3"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "rawModelName": "T ÜLU 2",
+      "metric": "% Toxic",
+      "value": 7,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "T ÜLU 2           50.4    73.9     7.0        51.7"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "T ÜLU 2",
+      "metric": "% Info+True",
+      "value": 51.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "T ÜLU 2           50.4    73.9     7.0        51.7"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "rawModelName": "T ÜLU 2+DPO",
+      "metric": "% Toxic",
+      "value": 0.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 4; TruthfulQA not reported (contamination)"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "T ÜLU 2+DPO       50.7    85.1     0.5         -"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "rawModelName": "OLMo+SFT",
+      "metric": "% Toxic",
+      "value": 14.4,
+      "unit": "percent",
+      "settings": {
+        "other": "SFT stage; Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "OLMo+SFT          47.3    57.0    14.4        41.2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "OLMo+SFT",
+      "metric": "% Info+True",
+      "value": 41.2,
+      "unit": "percent",
+      "settings": {
+        "other": "SFT stage; Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "OLMo+SFT          47.3    57.0    14.4        41.2"
+      }
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "rawModelName": "OLMo+SFT+DPO",
+      "metric": "% Toxic",
+      "value": 1.7,
+      "unit": "percent",
+      "settings": {
+        "other": "SFT+DPO stage; Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "OLMo+SFT+DPO 46.2         69.3     1.7        52.0"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "OLMo+SFT+DPO",
+      "metric": "% Info+True",
+      "value": 52,
+      "unit": "percent",
+      "settings": {
+        "other": "SFT+DPO stage; Table 4"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "OLMo+SFT+DPO 46.2         69.3     1.7        52.0"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:09:13Z"
+  },
+  "notes": "Technical report (arXiv 2402.00838v4), not a system card. Safety-only evalResults: ToxiGen and TruthfulQA from Table 4 (Table 8 duplicates OLMo ToxiGen/TruthfulQA; kept Table 4 once). Skipped capability: MMLU, GSM8k, BBH, TydiQA, Codex-Eval, AlpacaEval (chat preference; paper also lists AlpacaEval under safety/truthfulness wording), Catwalk core suite (Table 3), Paloma (Figure 2), Table 7 additional end-tasks. No risk framework levels or external safety testers. PII masking is a tokenizer/training-data method, not a privacy eval. Seed allenai/OLMo-7B-Instruct not named; adapted stages kept as rawModelName OLMo+SFT / OLMo+SFT+DPO. Covers use checkpoints allenai/OLMo-1B and allenai/OLMo-7B as named in the report."
+}

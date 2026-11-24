@@ -1,0 +1,114 @@
+{
+  "eval": {
+    "slug": "primevul",
+    "displayName": "PrimeVul",
+    "aliases": ["PrimeVul-Paired", "PrimeVul Paired"],
+    "description": "Tests code models on C/C++ function-level vulnerability detection with rigorously labeled real-project data. The paired setting asks whether the model can tell a vulnerable function from its patched pair. Papers and cards report accuracy, precision, recall, F1, and paired metrics such as P-C, P-V, P-B, and P-R.",
+    "summary": "Tests whether the model can find security flaws in C and C++ functions and tell them from fixed versions.",
+    "maintainers": [
+      {
+        "name": "PrimeVul authors",
+        "url": "https://github.com/DLVulDet/PrimeVul"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2403.18624",
+        "title": "Vulnerability Detection with Code Language Models: How Far Are We?"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/DLVulDet/PrimeVul",
+        "title": "Official PrimeVul code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://drive.google.com/drive/folders/19iLaNDS0z99N8kB_jBRTmDLehwZBolMY",
+        "title": "Original PrimeVul Google Drive release"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["cyber"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "paper",
+      "status": "published",
+      "releasedDate": "2024-03-27",
+      "changes": "Paper release: 6,968 vulnerable and 228,800 benign functions. Later v0.1 adds richer metadata for a metadata-complete subset (Google Drive).",
+      "dataset": {
+        "url": "https://drive.google.com/drive/folders/19iLaNDS0z99N8kB_jBRTmDLehwZBolMY",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "vulnerable",
+            "sampleCount": 6968,
+            "storage": "pointer"
+          },
+          {
+            "name": "benign",
+            "sampleCount": 228800,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct label",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the model's vulnerable/benign prediction matches the ground-truth label."
+        },
+        {
+          "key": "pair_consistent",
+          "displayName": "Paired consistency",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the model labels the vulnerable member vulnerable and its patched pair benign."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of correctly labeled functions. Cards often also report Precision, Recall, F1, and paired P-* metrics."
+        },
+        {
+          "key": "pair_consistency_rate",
+          "displayName": "Paired consistency (P-C)",
+          "score": "pair_consistent",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of vulnerable/patch pairs labeled consistently (PrimeVul-Paired setting)."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"]
+      }
+    }
+  ]
+}

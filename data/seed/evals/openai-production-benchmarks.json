@@ -1,0 +1,121 @@
+{
+  "eval": {
+    "slug": "openai-production-benchmarks",
+    "displayName": "Production Benchmarks",
+    "aliases": [
+      "Production Benchmarks — mental health",
+      "Production Benchmarks — emotional reliance",
+      "Production Benchmarks — self-harm/intent",
+      "Production Benchmarks — self-harm/instructions",
+      "Production Benchmarks — illicit",
+      "Production Benchmarks — illicit/violent",
+      "Production Benchmarks — illicit/nonviolent",
+      "Production Benchmarks — hate/threatening",
+      "Production Benchmarks — non-violent hate",
+      "Production Benchmarks — harassment/threatening",
+      "Production Benchmarks — sexual/exploitative",
+      "Production Benchmarks — erotic",
+      "Production Benchmarks — erotic/minors",
+      "Production Benchmarks — Hate",
+      "Production Benchmarks — Extremism",
+      "Production Benchmarks — Violent Illicit behavior",
+      "Production Benchmarks — Nonviolent illicit behavior",
+      "Production Benchmarks — Non-Violent Illicit behavior",
+      "Production Benchmarks — Self-harm (standard)",
+      "Production Benchmarks — self-harm (standard)",
+      "Production Benchmarks — Gore",
+      "Production Benchmarks — gore",
+      "Production Benchmarks — Sexual",
+      "Production Benchmarks — sexual",
+      "Production Benchmarks — Sexual/minors",
+      "Production Benchmarks — sexual/minors",
+      "Production Benchmarks — hate",
+      "Production Benchmarks — extremism",
+      "Production Benchmarks — harassment",
+      "Production Benchmarks — violence",
+      "Production Benchmarks — personal data",
+      "Production Benchmarks (Hate)",
+      "Production Benchmarks (hate)",
+      "Production Benchmarks (Extremism)",
+      "Production Benchmarks (extremism)",
+      "Production Benchmarks (Violent Illicit behavior)",
+      "Production Benchmarks (violent illicit behavior)",
+      "Production Benchmarks (Nonviolent illicit behavior)",
+      "Production Benchmarks (nonviolent illicit behavior)",
+      "Production Benchmarks (Self-harm (standard))",
+      "Production Benchmarks (Self-harm)",
+      "Production Benchmarks (Gore)",
+      "Production Benchmarks (Sexual)",
+      "Production Benchmarks (Sexual/minors)",
+      "Production Benchmarks (sexual content)",
+      "Production Benchmarks (biology)",
+      "Production Benchmarks (graphic violence or physical injury)",
+      "Production Benchmarks with Challenging Prompts (hate)",
+      "Production Benchmarks with Challenging Prompts (harassment)",
+      "Production Benchmarks with Challenging Prompts (extremism)",
+      "Production Benchmarks with Challenging Prompts (Violent Illicit behavior)",
+      "Production Benchmarks with Challenging Prompts (Nonviolent illicit behavior)",
+      "Production Benchmarks with Challenging Prompts (self-harm (standard))",
+      "Production Benchmarks with Challenging Prompts (sexual)",
+      "Production Benchmarks with Challenging Prompts (sexual/minors)",
+      "Production Benchmarks with Challenging Prompts (violence)"
+    ],
+    "description": "OpenAI internal disallowed-content evals on production-like conversations that are hard for earlier models. Categories include hate, extremism, violent illicit behavior, nonviolent illicit behavior, self-harm (standard), gore, sexual, and sexual/minors (plus older names such as harassment, violence, and biology). Scored as the share of responses that are not disallowed (not_unsafe / safe completion), without production safeguards. Dataset and runner are lab-internal.",
+    "summary": "Measures how often the model avoids giving disallowed content, such as hate, self-harm, or sexual content involving minors.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://deploymentsafety.openai.com/gpt-6-astra/gpt-6-astra.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-6-astra/gpt-6-astra.pdf",
+        "title": "GPT-6 Astra system card (Production Benchmarks)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["multi_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "self_harm", "child_safety"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "challenging-prompts",
+      "status": "draft",
+      "changes": "OpenAI reports that policies, graders, and datasets evolve; scores across cards are not always comparable.",
+      "scores": [
+        {
+          "key": "not_unsafe",
+          "displayName": "Not unsafe",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The response (and actions) are not disallowed under the relevant OpenAI policy for that category."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "not_unsafe_rate",
+          "displayName": "Not-unsafe / safe-completion rate",
+          "score": "not_unsafe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of conversations scored not_unsafe (also reported as safe completion). Higher is better. Per category."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "eval": {
+    "slug": "creative-biology",
+    "displayName": "Creative biology",
+    "aliases": ["Creative Biology", "Creative biology automated evaluation", "Creative biology automated evaluations"],
+    "description": "SecureBio held-out question set used as a weak proxy for unusual biology knowledge needed to engineer and modify harmless biological systems. Graders score open answers; Anthropic cards report mean score across questions (and sometimes best-of-N). Samples are not public.",
+    "summary": "Measures how well the model answers unusual biology questions that relate to the design and change of harmless biological systems.",
+    "maintainers": [
+      {
+        "name": "SecureBio",
+        "url": "https://securebio.org/blog/securebios-ai-team-overview-biorisk-evaluations/"
+      }
+    ],
+    "links": [
+      {
+        "kind": "blog",
+        "url": "https://securebio.org/blog/securebios-ai-team-overview-biorisk-evaluations/",
+        "title": "SecureBio AI team overview (creative biology)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/07b2a3f9902ee19fe39a36ca638e5ae987bc64dd.pdf",
+        "title": "Claude 4 System Card (Creative biology)"
+      }
+    ],
+    "access": "held_out",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["human", "model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public",
+    "family": "SecureBio biorisk"
+  },
+  "versions": [
+    {
+      "version": "securebio-questions",
+      "status": "draft",
+      "changes": "Question bank and grading used in Anthropic RSP / CBRN cards; details are held out.",
+      "scores": [
+        {
+          "key": "question_score",
+          "displayName": "Question score",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Graded quality of the model answer on one creative-biology question."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mean_score",
+          "displayName": "Mean score",
+          "score": "question_score",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Mean graded score across questions. Cards sometimes also report best-of-N per question."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "sandbox": "none",
+        "internet": false
+      }
+    }
+  ]
+}

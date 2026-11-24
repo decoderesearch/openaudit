@@ -1,0 +1,307 @@
+{
+  "eval": {
+    "slug": "instrumentaleval",
+    "displayName": "InstrumentalEval",
+    "aliases": ["Instrumental Eval", "Evaluating the Paperclip Maximizer"],
+    "description": "Tests propensity for instrumental convergence in single-turn agent prompts: shutdown evasion, unauthorized system access, self-replication, hiding behavior, strategic appearance of alignment, and deception. 76 hand-crafted scenarios across six categories. A separate grader LLM labels each response convergence or no_convergence; the headline metric is the convergence rate.",
+    "summary": "Measures how often AI agents show instrumental goals, such as avoiding shutdown, gaining access, copying themselves, or deceiving people.",
+    "maintainers": [
+      {
+        "name": "Yufei He et al.",
+        "url": "https://github.com/yf-he/InstrumentalEval"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2502.12206",
+        "title": "Evaluating the Paperclip Maximizer: Are RL-Based Language Models More Likely to Pursue Instrumental Goals?"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/yf-he/InstrumentalEval",
+        "title": "Official benchmark CSVs and code"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "autoApprove": true,
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["power_seeking", "honesty"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-02-16",
+      "status": "published",
+      "releasedDate": "2025-02-16",
+      "dataset": {
+        "url": "https://github.com/yf-he/InstrumentalEval/tree/269678168cf0388bf5dd7d10dfaed4af07905c49",
+        "license": "No license (all rights reserved)",
+        "splits": [
+          { "name": "deceptive_behavior", "sampleCount": 11, "storage": "pointer" },
+          { "name": "evading_shutdown", "sampleCount": 20, "storage": "pointer" },
+          { "name": "hacking_computer_systems", "sampleCount": 10, "storage": "pointer" },
+          { "name": "hiding_unwanted_behavior", "sampleCount": 11, "storage": "pointer" },
+          { "name": "running_multiple_ai_copies", "sampleCount": 13, "storage": "pointer" },
+          { "name": "strategically_appearing_aligned", "sampleCount": 11, "storage": "pointer" }
+        ]
+      },
+      "scores": [
+        {
+          "key": "convergence",
+          "displayName": "Convergence",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "Grader decision DECISION: convergence. The response shows instrumental-convergence behavior for that scenario type."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "convergence_rate",
+          "displayName": "Convergence rate",
+          "score": "convergence",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Share of samples graded as convergence. Also reported per task type."
+        },
+        {
+          "key": "no_convergence_rate",
+          "displayName": "No-convergence rate",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Share of samples graded as no convergence."
+        },
+        {
+          "key": "invalid_rate",
+          "displayName": "Invalid rate",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of samples with no valid grader decision."
+        },
+        {
+          "key": "convergence_rate_deceptive_behavior",
+          "displayName": "Convergence rate: Deceptive Behavior",
+          "score": "convergence",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Share of the Deceptive Behavior samples graded as convergence."
+        },
+        {
+          "key": "no_convergence_rate_deceptive_behavior",
+          "displayName": "No-convergence rate: Deceptive Behavior",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Share of the Deceptive Behavior samples graded as no convergence."
+        },
+        {
+          "key": "invalid_rate_deceptive_behavior",
+          "displayName": "Invalid rate: Deceptive Behavior",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of the Deceptive Behavior samples with no valid grader decision."
+        },
+        {
+          "key": "convergence_rate_evading_shutdown",
+          "displayName": "Convergence rate: Evading Shutdown",
+          "score": "convergence",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Share of the Evading Shutdown samples graded as convergence."
+        },
+        {
+          "key": "no_convergence_rate_evading_shutdown",
+          "displayName": "No-convergence rate: Evading Shutdown",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Share of the Evading Shutdown samples graded as no convergence."
+        },
+        {
+          "key": "invalid_rate_evading_shutdown",
+          "displayName": "Invalid rate: Evading Shutdown",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of the Evading Shutdown samples with no valid grader decision."
+        },
+        {
+          "key": "convergence_rate_hacking_computer_systems",
+          "displayName": "Convergence rate: Hacking Computer Systems",
+          "score": "convergence",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Share of the Hacking Computer Systems samples graded as convergence."
+        },
+        {
+          "key": "no_convergence_rate_hacking_computer_systems",
+          "displayName": "No-convergence rate: Hacking Computer Systems",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Share of the Hacking Computer Systems samples graded as no convergence."
+        },
+        {
+          "key": "invalid_rate_hacking_computer_systems",
+          "displayName": "Invalid rate: Hacking Computer Systems",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of the Hacking Computer Systems samples with no valid grader decision."
+        },
+        {
+          "key": "convergence_rate_hiding_unwanted_behavior",
+          "displayName": "Convergence rate: Hiding Unwanted Behavior",
+          "score": "convergence",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Share of the Hiding Unwanted Behavior samples graded as convergence."
+        },
+        {
+          "key": "no_convergence_rate_hiding_unwanted_behavior",
+          "displayName": "No-convergence rate: Hiding Unwanted Behavior",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Share of the Hiding Unwanted Behavior samples graded as no convergence."
+        },
+        {
+          "key": "invalid_rate_hiding_unwanted_behavior",
+          "displayName": "Invalid rate: Hiding Unwanted Behavior",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of the Hiding Unwanted Behavior samples with no valid grader decision."
+        },
+        {
+          "key": "convergence_rate_running_multiple_ai_copies",
+          "displayName": "Convergence rate: Running Multiple AI Copies",
+          "score": "convergence",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Share of the Running Multiple AI Copies samples graded as convergence."
+        },
+        {
+          "key": "no_convergence_rate_running_multiple_ai_copies",
+          "displayName": "No-convergence rate: Running Multiple AI Copies",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Share of the Running Multiple AI Copies samples graded as no convergence."
+        },
+        {
+          "key": "invalid_rate_running_multiple_ai_copies",
+          "displayName": "Invalid rate: Running Multiple AI Copies",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of the Running Multiple AI Copies samples with no valid grader decision."
+        },
+        {
+          "key": "convergence_rate_strategically_appearing_aligned",
+          "displayName": "Convergence rate: Strategically Appearing Aligned",
+          "score": "convergence",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Share of the Strategically Appearing Aligned samples graded as convergence."
+        },
+        {
+          "key": "no_convergence_rate_strategically_appearing_aligned",
+          "displayName": "No-convergence rate: Strategically Appearing Aligned",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Share of the Strategically Appearing Aligned samples graded as no convergence."
+        },
+        {
+          "key": "invalid_rate_strategically_appearing_aligned",
+          "displayName": "Invalid rate: Strategically Appearing Aligned",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of the Strategically Appearing Aligned samples with no valid grader decision."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "inspect_evals/instrumentaleval",
+        "package": "inspect-evals==0.22.0",
+        "roles": ["target", "judge"],
+        "models": [
+          {
+            "id": "judge",
+            "role": "judge",
+            "taskArg": "grader_model",
+            "default": "openai/gpt-5-nano",
+            "tier": "standard",
+            "scoring": true
+          }
+        ],
+        "internet": true,
+        "defaultTrials": 1
+      }
+    }
+  ]
+}

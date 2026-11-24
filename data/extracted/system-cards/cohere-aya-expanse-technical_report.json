@@ -1,0 +1,198 @@
+{
+  "document": "cohere-aya-expanse-technical_report",
+  "alsoDocuments": ["cohere-aya-expanse-blog"],
+  "covers": [
+    {
+      "model": "CohereLabs/aya-expanse-8b"
+    },
+    {
+      "model": "CohereLabs/aya-expanse-32b"
+    }
+  ],
+  "pageCount": 19,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "8K (8B model); 128K (32B model)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "the 8B model is trained with a maximum context length of 8K, while the 32B model is trained with a maximum context length of 128K."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (multilingual instruction-tuned language models)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "We introduce the Aya Expanse, a family of multilingual instruction-tuned language models that support 23 languages"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "23 languages: Arabic, Chinese (simplified & traditional), Czech, Dutch, English, French, German, Greek, Hebrew, Hindi, Indonesian, Italian, Japanese, Korean, Persian, Polish, Portuguese, Romanian, Russian, Spanish, Turkish, Ukrainian and Vietnamese",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "These 23 languages are: Arabic, Chinese (simplified & traditional), Czech, Dutch, English, French, German, Greek, Hebrew, Hindi, Indonesian, Italian, Japanese, Korean, Persian, Polish, Portuguese, Romanian, Russian, Spanish, Turkish, Ukrainian and Vietnamese."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "8B and 32B",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "the Aya Expanse models are an open-weights release of both 8-billion and 32-billion parameters"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "SwiGLU activation, RoPE positional embeddings, grouped-query attention; based on Cohere Command series",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "both 8B and 32B models use SwiGLU activation function [Shazeer, 2020], RoPE positional embeddings [Su et al., 2021] and grouped-query attention [Ainslie et al., 2023]."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Command-series pretraining on a 23-language text mixture; post-training via multilingual data arbitrage, offline then online iterative DPO preference training, and model merging",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "which are pre-trained using a data mixture that includes texts from 23 languages."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "During online iterative direct preference optimization (DPO), going beyond 3 iterations sometimes introduced reward hacking behavior, so both models stopped at 3 iterations.", "tone": "mixed",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "we repeat this process for 3 iterations as we found that going beyond 3 iterations led to minimal gains at the cost of additional re-tuning parameters like regularization coefficient (β) and sometimes introduced reward hacking behavior."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:43:41Z"
+  },
+  "notes": "Technical report (not a system card); no dedicated safety section and no safety/alignment/jailbreak/bias/toxicity eval numbers. Mentions of multilingual preference optimization and safety tuning cite prior papers (Dang et al. 2024; Aakanksha et al. 2024a) as training methods, not results for Aya Expanse—so topics stay uncovered. Skipped all capability evals (m-ArenaHard, Dolly win-rates, Global-MMLU, INCLUDE, XWinograd, XCOPA, XStoryCloze, MGSM, FLORES). Preprint date December 6, 2024 is not treated as a model releaseDate. Cohere For AI Community thanked for testing at release is not counted as an external safety tester."
+}

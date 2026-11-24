@@ -1,0 +1,1096 @@
+{
+  "document": "meta-opt-paper-technical_report",
+  "alsoDocuments": ["meta-opt-blog"],
+  "covers": [
+    { "model": "facebook/opt-125m", "section": "Table 1; suite 125M–175B" },
+    { "model": "facebook/opt-350m", "section": "Table 1; suite 125M–175B" },
+    { "model": "facebook/opt-1.3b", "section": "Table 1; suite 125M–175B" },
+    { "model": "facebook/opt-2.7b", "section": "Table 1; suite 125M–175B" },
+    { "model": "facebook/opt-6.7b", "section": "Table 1; suite 125M–175B" },
+    { "model": "facebook/opt-13b", "section": "Table 1; suite 125M–175B" },
+    { "model": "facebook/opt-30b", "section": "Table 1; suite 125M–175B" },
+    { "model": "facebook/opt-66b", "section": "Table 1; suite 125M–175B" },
+    {
+      "model": "meta/opt-175b",
+      "section": "Sections 3–5; Bias & Toxicity (Section 4); Model Card Appendix D"
+    }
+  ],
+  "pageCount": 30,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "May 3, 2022",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "OPT-175B was released on May 3, 2022."
+      }
+    },
+    "knowledgeCutoff": { "status": "not_stated" },
+    "contextWindow": {
+      "status": "stated",
+      "value": "2048 tokens (sequence length)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "ReLU activation and a sequence length of 2048."
+      }
+    },
+    "maxOutput": { "status": "not_stated" },
+    "modalities": {
+      "status": "stated",
+      "value": "text (decoder-only language model)",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "OPT-175B is a large decoder-only transformer language model."
+      }
+    },
+    "reasoningModes": { "status": "not_stated" },
+    "languages": {
+      "status": "stated",
+      "value": "predominantly English (small amount of non-English via CommonCrawl)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "contain predominantly English text, but a small"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "non-commercial use license",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "OPT-175B and the smaller baseline models are made available through a non-commercial"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "125M to 175B (eight models)",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "parameter sizes from 125M to\n       175B."
+      }
+    },
+    "activeParams": { "status": "not_stated" },
+    "architecture": {
+      "status": "stated",
+      "value": "decoder-only transformer (GPT-3-like)",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "OPT-175B is a large decoder-only transformer language model."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "RoBERTa corpora, Pile subset, PushShift.io Reddit; ~180B tokens / 800 GB",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "180B tokens corresponding to 800 GB of data."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "992×80GB A100 GPUs; ~75 tons CO2eq for OPT-175B",
+      "source": {
+        "page": "10",
+        "pdfPage": 9,
+        "quote": "carbon emissions footprint (CO2eq) of 75 tons,10"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "[Safety Bench Unit Tests](/evals/meta-safety-bench-unit-tests): OPT-175B unsafe response rate is worse than dialogue baselines in the Unsafe setting",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "OPT-175B          14.7   .141   .033    .261   .567     .283"
+      }
+    },
+    { "topic": "child_safety", "covered": false },
+    { "topic": "self_harm", "covered": false },
+    { "topic": "jailbreaks", "covered": false },
+    { "topic": "prompt_injection", "covered": false },
+    { "topic": "agentic_misuse", "covered": false },
+    { "topic": "hallucination", "covered": false },
+    { "topic": "honesty", "covered": false },
+    { "topic": "sycophancy", "covered": false },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "OPT-175B shows more stereotypical bias than Davinci on [CrowS-Pairs](/evals/crows-pairs) in most categories; [StereoSet](/evals/stereoset) overall similar to Davinci",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "175B appears to exhibit more stereotypical biases"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "OPT-175B has a higher toxicity rate on [RealToxicityPrompts](/evals/real-toxicity-prompts) than Davinci or PaLM",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "that OPT-175B has a higher toxicity rate than ei-"
+      }
+    },
+    { "topic": "reward_hacking", "covered": false },
+    { "topic": "eval_awareness", "covered": false },
+    { "topic": "situational_awareness", "covered": false },
+    { "topic": "cot_monitorability", "covered": false },
+    { "topic": "sabotage", "covered": false },
+    { "topic": "manipulation", "covered": false },
+    { "topic": "power_seeking", "covered": false },
+    { "topic": "welfare", "covered": false },
+    { "topic": "cyber", "covered": false },
+    { "topic": "bio_chem", "covered": false },
+    { "topic": "auditing", "covered": false }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "OPT-175B has a higher toxicity rate on [RealToxicityPrompts](/evals/real-toxicity-prompts) than Davinci or PaLM (Figure 5; chart numbers not extracted).", "tone": "bad",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "that OPT-175B has a higher toxicity rate than ei-"
+      }
+    },
+    {
+      "text": "The authors chose not to apply known toxicity and bias mitigations in this first release, prioritizing GPT-3 replication.", "tone": "bad",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "apply these mitigations in this first release."
+      }
+    },
+    {
+      "text": "The authors state the technology is premature for commercial deployment.", "tone": "mixed",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "premature for commercial deployment. Despite"
+      }
+    },
+    {
+      "text": "OPT-175B has a high propensity to generate toxic language and reinforce harmful stereotypes, even with relatively innocuous prompts.", "tone": "bad",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "has a high propensity to generate toxic language"
+      }
+    },
+    {
+      "text": "On [CrowS-Pairs](/evals/crows-pairs), worse stereotype scores than Davinci are attributed in part to Pushshift.io Reddit in the pre-training mix.", "tone": "bad",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Nangia et al. (2020) showed that Pushshift.io Red-"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "stereotype score",
+      "value": 62.6,
+      "unit": "percent",
+      "settings": { "other": "Gender" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Gender                     62.6            65.7"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "stereotype score",
+      "value": 65.7,
+      "unit": "percent",
+      "settings": { "other": "Gender" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Gender                     62.6            65.7"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "stereotype score",
+      "value": 73.3,
+      "unit": "percent",
+      "settings": { "other": "Religion" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Religion                   73.3            68.6"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "stereotype score",
+      "value": 68.6,
+      "unit": "percent",
+      "settings": { "other": "Religion" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Religion                   73.3            68.6"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "stereotype score",
+      "value": 64.7,
+      "unit": "percent",
+      "settings": { "other": "Race/Color" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Race/Color                 64.7            68.6"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "stereotype score",
+      "value": 68.6,
+      "unit": "percent",
+      "settings": { "other": "Race/Color" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Race/Color                 64.7            68.6"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "stereotype score",
+      "value": 76.2,
+      "unit": "percent",
+      "settings": { "other": "Sexual orientation" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Sexual orientation         76.2            78.6"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "stereotype score",
+      "value": 78.6,
+      "unit": "percent",
+      "settings": { "other": "Sexual orientation" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Sexual orientation         76.2            78.6"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "stereotype score",
+      "value": 64.4,
+      "unit": "percent",
+      "settings": { "other": "Age" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Age                        64.4            67.8"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "stereotype score",
+      "value": 67.8,
+      "unit": "percent",
+      "settings": { "other": "Age" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Age                        64.4            67.8"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "stereotype score",
+      "value": 61.6,
+      "unit": "percent",
+      "settings": { "other": "Nationality" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Nationality                61.6            62.9"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "stereotype score",
+      "value": 62.9,
+      "unit": "percent",
+      "settings": { "other": "Nationality" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Nationality                61.6            62.9"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "stereotype score",
+      "value": 76.7,
+      "unit": "percent",
+      "settings": { "other": "Disability" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Disability                 76.7            76.7"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "stereotype score",
+      "value": 76.7,
+      "unit": "percent",
+      "settings": { "other": "Disability" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Disability                 76.7            76.7"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "stereotype score",
+      "value": 74.6,
+      "unit": "percent",
+      "settings": { "other": "Physical appearance" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Physical appearance        74.6            76.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "stereotype score",
+      "value": 76.2,
+      "unit": "percent",
+      "settings": { "other": "Physical appearance" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Physical appearance        74.6            76.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "stereotype score",
+      "value": 73.8,
+      "unit": "percent",
+      "settings": { "other": "Socioeconomic status" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Socioeconomic status       73.8            76.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "stereotype score",
+      "value": 76.2,
+      "unit": "percent",
+      "settings": { "other": "Socioeconomic status" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Socioeconomic status       73.8            76.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "stereotype score",
+      "value": 67.2,
+      "unit": "percent",
+      "settings": { "other": "Overall" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Overall                    67.2            69.5"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/opt-175b",
+      "metric": "stereotype score",
+      "value": 69.5,
+      "unit": "percent",
+      "settings": { "other": "Overall" },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 4",
+        "quote": "Overall                    67.2            69.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "Stereotype Score (SS)",
+      "value": 63.4,
+      "unit": "score",
+      "settings": { "other": "profession" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Prof.        SS (↓)        63.4          62.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "Stereotype Score (SS)",
+      "value": 62.6,
+      "unit": "score",
+      "settings": { "other": "profession" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Prof.        SS (↓)        63.4          62.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "Idealized Context Association Test (ICAT)",
+      "value": 57.5,
+      "unit": "score",
+      "settings": { "other": "profession" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ICAT (↑)        57.5          55.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "Idealized Context Association Test (ICAT)",
+      "value": 55.4,
+      "unit": "score",
+      "settings": { "other": "profession" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ICAT (↑)        57.5          55.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "Stereotype Score (SS)",
+      "value": 66.5,
+      "unit": "score",
+      "settings": { "other": "gender" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Gend.        SS (↓)        66.5          63.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "Stereotype Score (SS)",
+      "value": 63.6,
+      "unit": "score",
+      "settings": { "other": "gender" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Gend.        SS (↓)        66.5          63.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "Idealized Context Association Test (ICAT)",
+      "value": 50.6,
+      "unit": "score",
+      "settings": { "other": "gender" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ICAT (↑)        50.6          53.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "Idealized Context Association Test (ICAT)",
+      "value": 53.8,
+      "unit": "score",
+      "settings": { "other": "gender" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ICAT (↑)        50.6          53.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "Stereotype Score (SS)",
+      "value": 59,
+      "unit": "score",
+      "settings": { "other": "religion" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Reli.        SS (↓)        59.0          59.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "Stereotype Score (SS)",
+      "value": 59,
+      "unit": "score",
+      "settings": { "other": "religion" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Reli.        SS (↓)        59.0          59.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "Idealized Context Association Test (ICAT)",
+      "value": 66.3,
+      "unit": "score",
+      "settings": { "other": "religion" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ICAT (↑)        66.3          68.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "Idealized Context Association Test (ICAT)",
+      "value": 68.9,
+      "unit": "score",
+      "settings": { "other": "religion" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ICAT (↑)        66.3          68.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "Stereotype Score (SS)",
+      "value": 57.4,
+      "unit": "score",
+      "settings": { "other": "race" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Race         SS (↓)        57.4          56.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "Stereotype Score (SS)",
+      "value": 56.8,
+      "unit": "score",
+      "settings": { "other": "race" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Race         SS (↓)        57.4          56.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "Idealized Context Association Test (ICAT)",
+      "value": 65.7,
+      "unit": "score",
+      "settings": { "other": "race" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ICAT (↑)        65.7          64.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "Idealized Context Association Test (ICAT)",
+      "value": 64.8,
+      "unit": "score",
+      "settings": { "other": "race" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ICAT (↑)        65.7          64.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "Stereotype Score (SS)",
+      "value": 60.8,
+      "unit": "score",
+      "settings": { "other": "overall" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Overall      SS (↓)        60.8          59.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "Stereotype Score (SS)",
+      "value": 59.9,
+      "unit": "score",
+      "settings": { "other": "overall" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "Overall      SS (↓)        60.8          59.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "openai/gpt-3",
+      "metric": "Idealized Context Association Test (ICAT)",
+      "value": 60.8,
+      "unit": "score",
+      "settings": { "other": "overall" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ICAT (↑)        60.8          60.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "meta/opt-175b",
+      "metric": "Idealized Context Association Test (ICAT)",
+      "value": 60,
+      "unit": "score",
+      "settings": { "other": "overall" },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ICAT (↑)        60.8          60.0"
+      }
+    },
+    {
+      "rawEvalName": "SaferDialogues",
+      "rawModelName": "Reddit 2.7B",
+      "metric": "perplexity",
+      "value": 16.2,
+      "unit": "score",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    Reddit 2.7B       16.2   .140   .300    .261   .450     .439"
+      }
+    },
+    {
+      "rawEvalName": "SaferDialogues",
+      "rawModelName": "Reddit 2.7B",
+      "metric": "Unigram F1",
+      "value": 0.14,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    Reddit 2.7B       16.2   .140   .300    .261   .450     .439"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "rawModelName": "Reddit 2.7B",
+      "metric": "unsafe response rate",
+      "value": 0.3,
+      "unit": "fraction",
+      "settings": { "other": "Safe" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    Reddit 2.7B       16.2   .140   .300    .261   .450     .439"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "rawModelName": "Reddit 2.7B",
+      "metric": "unsafe response rate",
+      "value": 0.261,
+      "unit": "fraction",
+      "settings": { "other": "Realistic" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    Reddit 2.7B       16.2   .140   .300    .261   .450     .439"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "rawModelName": "Reddit 2.7B",
+      "metric": "unsafe response rate",
+      "value": 0.45,
+      "unit": "fraction",
+      "settings": { "other": "Unsafe" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    Reddit 2.7B       16.2   .140   .300    .261   .450     .439"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "rawModelName": "Reddit 2.7B",
+      "metric": "unsafe response rate",
+      "value": 0.439,
+      "unit": "fraction",
+      "settings": { "other": "Adversarial" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    Reddit 2.7B       16.2   .140   .300    .261   .450     .439"
+      }
+    },
+    {
+      "rawEvalName": "SaferDialogues",
+      "rawModelName": "BlenderBot 1",
+      "metric": "perplexity",
+      "value": 12.4,
+      "unit": "score",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    BlenderBot 1      12.4   .161   .028    .150   .250     .194"
+      }
+    },
+    {
+      "rawEvalName": "SaferDialogues",
+      "rawModelName": "BlenderBot 1",
+      "metric": "Unigram F1",
+      "value": 0.161,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    BlenderBot 1      12.4   .161   .028    .150   .250     .194"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "rawModelName": "BlenderBot 1",
+      "metric": "unsafe response rate",
+      "value": 0.028,
+      "unit": "fraction",
+      "settings": { "other": "Safe" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    BlenderBot 1      12.4   .161   .028    .150   .250     .194"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "rawModelName": "BlenderBot 1",
+      "metric": "unsafe response rate",
+      "value": 0.15,
+      "unit": "fraction",
+      "settings": { "other": "Realistic" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    BlenderBot 1      12.4   .161   .028    .150   .250     .194"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "rawModelName": "BlenderBot 1",
+      "metric": "unsafe response rate",
+      "value": 0.25,
+      "unit": "fraction",
+      "settings": { "other": "Unsafe" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    BlenderBot 1      12.4   .161   .028    .150   .250     .194"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "rawModelName": "BlenderBot 1",
+      "metric": "unsafe response rate",
+      "value": 0.194,
+      "unit": "fraction",
+      "settings": { "other": "Adversarial" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    BlenderBot 1      12.4   .161   .028    .150   .250     .194"
+      }
+    },
+    {
+      "rawEvalName": "SaferDialogues",
+      "rawModelName": "R2C2 BlenderBot",
+      "metric": "perplexity",
+      "value": 13.8,
+      "unit": "score",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    R2C2 BlenderBot   13.8   .160   .022    .133   .289     .222"
+      }
+    },
+    {
+      "rawEvalName": "SaferDialogues",
+      "rawModelName": "R2C2 BlenderBot",
+      "metric": "Unigram F1",
+      "value": 0.16,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    R2C2 BlenderBot   13.8   .160   .022    .133   .289     .222"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "rawModelName": "R2C2 BlenderBot",
+      "metric": "unsafe response rate",
+      "value": 0.022,
+      "unit": "fraction",
+      "settings": { "other": "Safe" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    R2C2 BlenderBot   13.8   .160   .022    .133   .289     .222"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "rawModelName": "R2C2 BlenderBot",
+      "metric": "unsafe response rate",
+      "value": 0.133,
+      "unit": "fraction",
+      "settings": { "other": "Realistic" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    R2C2 BlenderBot   13.8   .160   .022    .133   .289     .222"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "rawModelName": "R2C2 BlenderBot",
+      "metric": "unsafe response rate",
+      "value": 0.289,
+      "unit": "fraction",
+      "settings": { "other": "Unsafe" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    R2C2 BlenderBot   13.8   .160   .022    .133   .289     .222"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "rawModelName": "R2C2 BlenderBot",
+      "metric": "unsafe response rate",
+      "value": 0.222,
+      "unit": "fraction",
+      "settings": { "other": "Adversarial" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    R2C2 BlenderBot   13.8   .160   .022    .133   .289     .222"
+      }
+    },
+    {
+      "rawEvalName": "SaferDialogues",
+      "model": "meta/opt-175b",
+      "metric": "perplexity",
+      "value": 14.7,
+      "unit": "score",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    OPT-175B          14.7   .141   .033    .261   .567     .283"
+      }
+    },
+    {
+      "rawEvalName": "SaferDialogues",
+      "model": "meta/opt-175b",
+      "metric": "Unigram F1",
+      "value": 0.141,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    OPT-175B          14.7   .141   .033    .261   .567     .283"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "model": "meta/opt-175b",
+      "metric": "unsafe response rate",
+      "value": 0.033,
+      "unit": "fraction",
+      "settings": { "other": "Safe" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    OPT-175B          14.7   .141   .033    .261   .567     .283"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "model": "meta/opt-175b",
+      "metric": "unsafe response rate",
+      "value": 0.261,
+      "unit": "fraction",
+      "settings": { "other": "Realistic" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    OPT-175B          14.7   .141   .033    .261   .567     .283"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "model": "meta/opt-175b",
+      "metric": "unsafe response rate",
+      "value": 0.567,
+      "unit": "fraction",
+      "settings": { "other": "Unsafe" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    OPT-175B          14.7   .141   .033    .261   .567     .283"
+      }
+    },
+    {
+      "rawEvalName": "Safety Bench Unit Tests",
+      "model": "meta/opt-175b",
+      "metric": "unsafe response rate",
+      "value": 0.283,
+      "unit": "fraction",
+      "settings": { "other": "Adversarial" },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "    OPT-175B          14.7   .141   .033    .261   .567     .283"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:50:14Z"
+  },
+  "notes": "Technical report (not a system card). Safety evals are Section 4 Bias & Toxicity. Skipped ETHOS hate-speech detection (Table 3) as a content-moderation classifier task. Skipped RealToxicityPrompts numeric bars (Figure 5 only; no readable numbers in text layer). Skipped StereoSet LMS rows as language-modeling capability within the suite; kept SS and ICAT. Skipped all general capability NLP/dialogue (Tables 2, Figures 3–4, Appendix A). CrowS-Pairs/StereoSet comparison column labeled Davinci or GPT-3 mapped to openai/gpt-3. No external safety testers. No formal risk-tier framework."
+}

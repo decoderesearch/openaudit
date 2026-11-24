@@ -1,0 +1,117 @@
+{
+  "eval": {
+    "slug": "openai-moderation",
+    "displayName": "OpenAI Moderation",
+    "aliases": [
+      "OpenAI Mod",
+      "OpenAI Moderation Evaluation Dataset",
+      "OpenAI Moderation API Evaluation",
+      "A Holistic Approach to Undesired Content Detection"
+    ],
+    "description": "Public evaluation set of 1,680 text samples from Markov et al. (OpenAI Moderation API release), labeled for sexual, hate, violence, harassment, self-harm, sexual/minors, hate/threatening, and violence/graphic. Guard models are scored with AUPRC or optimal F1. Llama Guard and ShieldGemma cards often call it OpenAI Mod.",
+    "summary": "Measures how well the model detects harmful text, such as sexual content, hate, violence, harassment, and self-harm.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://github.com/openai/moderation-api-release"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2208.03274",
+        "title": "A Holistic Approach to Undesired Content Detection in the Real World"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/openai/moderation-api-release",
+        "title": "Official samples-1680.jsonl.gz"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/mmathys/openai-moderation-api-evaluation",
+        "title": "HF mirror of the 1,680-sample test set"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["toxicity", "harmful_requests", "self_harm", "child_safety"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2023-02-14",
+      "status": "published",
+      "releasedDate": "2023-02-14",
+      "changes": "Public test set paired with the arXiv v2 paper revision (1,680 samples).",
+      "dataset": {
+        "url": "https://github.com/openai/moderation-api-release/tree/f4ab51b5edd3bfbcb349a56324274235b674e0e4",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "samples-1680",
+            "sampleCount": 1680,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "category_score",
+          "displayName": "Category score",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "neither",
+          "description": "Moderator probability or score for a taxonomy category on one sample."
+        },
+        {
+          "key": "correct_at_threshold",
+          "displayName": "Correct at optimal threshold",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the category decision at the optimal F1 threshold matches the gold binary label."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "auprc",
+          "displayName": "AUPRC / AU-PRC",
+          "score": "category_score",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Area under the precision-recall curve, often macro-averaged over labels. Llama Guard cards may report this as score."
+        },
+        {
+          "key": "optimal_f1",
+          "displayName": "Optimal F1",
+          "score": "correct_at_threshold",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Best F1 over decision thresholds (ShieldGemma and similar cards)."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

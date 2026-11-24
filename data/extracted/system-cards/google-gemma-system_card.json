@@ -1,0 +1,1321 @@
+{
+  "document": "google-gemma-system_card",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "google/gemma-2b-it"
+    },
+    {
+      "model": "google/gemma-7b-it"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text-to-text (text input; English-language text output)",
+      "source": {
+        "page": "Model Information > Inputs and outputs",
+        "quote": "Input: Text string, such as a question, a prompt, or a document to be summarized. Output: Generated English-language text in response to the input"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English",
+      "source": {
+        "page": "Model Information > Description",
+        "quote": "They are text-to-text, decoder-only large language models, available in English, with open weights, pre-trained variants, and instruction-tuned variants."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Terms (Gemma Terms of Use)",
+      "source": {
+        "page": "Header",
+        "quote": "Terms of Use: Terms"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "2B and 7B variants",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "quote": "Benchmark | Metric | Gemma PT 2B | Gemma PT 7B"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "text-to-text, decoder-only large language models with open weights; pre-trained and instruction-tuned variants",
+      "source": {
+        "page": "Model Information > Description",
+        "quote": "They are text-to-text, decoder-only large language models, available in English, with open weights, pre-trained variants, and instruction-tuned variants."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "6 trillion tokens from web documents (primarily English), code, and mathematics; CSAM and sensitive-data filtered",
+      "source": {
+        "page": "Model Data > Training Dataset",
+        "quote": "These models were trained on a dataset of text data that includes a wide variety of sources, totaling 6 trillion tokens."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "Trained on TPUv5e with JAX and ML Pathways (no FLOP count given)",
+      "source": {
+        "page": "Implementation Information > Hardware",
+        "quote": "Gemma was trained using the latest generation of Tensor Processing Unit (TPU) hardware (TPUv5e)."
+      }
+    }
+  },
+  "riskDecisions": [
+    {
+      "domain": "bio_chem",
+      "labLabel": "within acceptable thresholds",
+      "level": "below",
+      "phase": "unspecified",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results",
+        "quote": "The results of ethics and safety evaluations are within acceptable thresholds for meeting internal policies for categories such as child safety, content safety, representational harms, memorization, large-scale harms."
+      }
+    },
+    {
+      "domain": "other",
+      "labLabel": "within acceptable thresholds",
+      "level": "below",
+      "phase": "unspecified",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results",
+        "quote": "within acceptable thresholds for meeting internal policies for categories such as child safety, content safety, representational harms, memorization, large-scale harms"
+      }
+    }
+  ],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Content safety human evaluation; results within acceptable internal policy thresholds",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Approach",
+        "quote": "Text-to-Text Content Safety: Human evaluation on prompts covering safety policies including child sexual abuse and exploitation, harassment, violence and gore, and hate speech."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "Child sexual abuse and exploitation covered in content-safety human eval; results within acceptable thresholds",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Approach",
+        "quote": "Human evaluation on prompts covering safety policies including child sexual abuse and exploitation, harassment, violence and gore, and hate speech."
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "large language models (LLMs) may generate incorrect or outdated factual statements",
+      "source": {
+        "page": "Usage and Limitations > Limitations",
+        "quote": "They may generate incorrect or outdated factual statements."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa) reported for Gemma 1.0/1.1 IT (e.g. 44.8 / 31.8 for Gemma 1.0 IT 2B/7B)",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "quote": "TruthfulQA | | 44.84 | 31.81"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Representational harms evaluated via [WinoBias](/evals/winobias), [BBQ](/evals/bbq), [CrowS-Pairs](/evals/crows-pairs), [BOLD](/evals/bold), [Winogender](/evals/winogender); within acceptable thresholds",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Approach",
+        "quote": "Text-to-Text Representational Harms: Benchmark against relevant academic datasets such as WinoBias and BBQ Dataset."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "[RealToxicity](/evals/real-toxicity-prompts) and [Toxigen](/evals/toxigen) scores reported for Gemma 1.0 instruction-tuned (IT) models",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "quote": "RealToxicity | average | 6.86 | 7.9"
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "Large-scale harm tests for CBRN risks; results within acceptable internal policy thresholds",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Approach",
+        "quote": "Large-scale harm: Tests for \"dangerous capabilities,\" such as chemical, biological, radiological, and nuclear (CBRN) risks."
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Safety and ethics results are reported only as within acceptable internal policy thresholds, without numeric violation rates for content safety or chemical, biological, radiological, and nuclear (CBRN).", "tone": "good",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results",
+        "quote": "The results of ethics and safety evaluations are within acceptable thresholds for meeting internal policies for categories such as child safety, content safety, representational harms, memorization, large-scale harms."
+      }
+    },
+    {
+      "text": "Training data was filtered for child sexual abuse material (CSAM) at multiple stages and for personal/sensitive information.", "tone": "neutral",
+      "source": {
+        "page": "Model Data > Data Preprocessing",
+        "quote": "CSAM Filtering: Rigorous CSAM (Child Sexual Abuse Material) filtering was applied at multiple stages in the data preparation process to ensure the exclusion of harmful and illegal content."
+      }
+    },
+    {
+      "text": "On Gemma 1.0 [TruthfulQA](/evals/truthfulqa), the 2B instruction-tuned (IT) model scores higher than the 7B IT model (44.8 vs 31.8).", "tone": "mixed",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "quote": "TruthfulQA | | 44.84 | 31.81"
+      }
+    },
+    {
+      "text": "Gemma 1.1 [BOLD](/evals/bold) reports a score only for the 2B IT model; the 7B cell is empty.", "tone": "mixed",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "quote": "BOLD | | 47.76 |"
+      }
+    },
+    {
+      "text": "The card states these models outperform other similarly sized open models on the reported benchmarks, without listing those comparison scores here.", "tone": "neutral",
+      "source": {
+        "page": "Usage and Limitations > Benefits",
+        "quote": "these models have shown to provide superior performance to other, comparably-sized open model alternatives."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "MMLU",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "5-shot, top-1",
+      "value": 42.3,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "MMLU | 5-shot, top-1 | 42.3 | 64.3"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "5-shot, top-1",
+      "value": 64.3,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "MMLU | 5-shot, top-1 | 42.3 | 64.3"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "0-shot",
+      "value": 71.4,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "HellaSwag | 0-shot | 71.4 | 81.2"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "0-shot",
+      "value": 81.2,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "HellaSwag | 0-shot | 71.4 | 81.2"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "0-shot",
+      "value": 77.3,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "PIQA | 0-shot | 77.3 | 81.2"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "0-shot",
+      "value": 81.2,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "PIQA | 0-shot | 77.3 | 81.2"
+      }
+    },
+    {
+      "rawEvalName": "SocialIQA",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "0-shot",
+      "value": 49.7,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "SocialIQA | 0-shot | 49.7 | 51.8"
+      }
+    },
+    {
+      "rawEvalName": "SocialIQA",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "0-shot",
+      "value": 51.8,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "SocialIQA | 0-shot | 49.7 | 51.8"
+      }
+    },
+    {
+      "rawEvalName": "BoolQ",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "0-shot",
+      "value": 69.4,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "BoolQ | 0-shot | 69.4 | 83.2"
+      }
+    },
+    {
+      "rawEvalName": "BoolQ",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "0-shot",
+      "value": 83.2,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "BoolQ | 0-shot | 69.4 | 83.2"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "partial score",
+      "value": 65.4,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "WinoGrande | partial score | 65.4 | 72.3"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "partial score",
+      "value": 72.3,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "WinoGrande | partial score | 65.4 | 72.3"
+      }
+    },
+    {
+      "rawEvalName": "CommonsenseQA",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "7-shot",
+      "value": 65.3,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "CommonsenseQA | 7-shot | 65.3 | 71.3"
+      }
+    },
+    {
+      "rawEvalName": "CommonsenseQA",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "7-shot",
+      "value": 71.3,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "CommonsenseQA | 7-shot | 65.3 | 71.3"
+      }
+    },
+    {
+      "rawEvalName": "OpenBookQA",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "score",
+      "value": 47.8,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "OpenBookQA | | 47.8 | 52.8"
+      }
+    },
+    {
+      "rawEvalName": "OpenBookQA",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "score",
+      "value": 52.8,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "OpenBookQA | | 47.8 | 52.8"
+      }
+    },
+    {
+      "rawEvalName": "ARC-e",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "score",
+      "value": 73.2,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ARC-e | | 73.2 | 81.5"
+      }
+    },
+    {
+      "rawEvalName": "ARC-e",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "score",
+      "value": 81.5,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ARC-e | | 73.2 | 81.5"
+      }
+    },
+    {
+      "rawEvalName": "ARC-c",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "score",
+      "value": 42.1,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ARC-c | | 42.1 | 53.2"
+      }
+    },
+    {
+      "rawEvalName": "ARC-c",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "score",
+      "value": 53.2,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ARC-c | | 42.1 | 53.2"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "5-shot",
+      "value": 53.2,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "TriviaQA | 5-shot | 53.2 | 63.4"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "5-shot",
+      "value": 63.4,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "TriviaQA | 5-shot | 53.2 | 63.4"
+      }
+    },
+    {
+      "rawEvalName": "Natural Questions",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "5-shot",
+      "value": 12.5,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "Natural Questions | 5-shot | 12.5 | 23.0"
+      }
+    },
+    {
+      "rawEvalName": "Natural Questions",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "5-shot",
+      "value": 23.0,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "Natural Questions | 5-shot | 12.5 | 23.0"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "pass@1",
+      "value": 22.0,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "HumanEval | pass@1 | 22.0 | 32.3"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "pass@1",
+      "value": 32.3,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "HumanEval | pass@1 | 22.0 | 32.3"
+      }
+    },
+    {
+      "rawEvalName": "MBPP",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "3-shot",
+      "value": 29.2,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "MBPP | 3-shot | 29.2 | 44.4"
+      }
+    },
+    {
+      "rawEvalName": "MBPP",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "3-shot",
+      "value": 44.4,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "MBPP | 3-shot | 29.2 | 44.4"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "maj@1",
+      "value": 17.7,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "GSM8K | maj@1 | 17.7 | 46.4"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "maj@1",
+      "value": 46.4,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "GSM8K | maj@1 | 17.7 | 46.4"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "4-shot",
+      "value": 11.8,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "MATH | 4-shot | 11.8 | 24.3"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "4-shot",
+      "value": 24.3,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "MATH | 4-shot | 11.8 | 24.3"
+      }
+    },
+    {
+      "rawEvalName": "AGIEval",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "score",
+      "value": 24.2,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "AGIEval | | 24.2 | 41.7"
+      }
+    },
+    {
+      "rawEvalName": "AGIEval",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "score",
+      "value": 41.7,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "AGIEval | | 24.2 | 41.7"
+      }
+    },
+    {
+      "rawEvalName": "BIG-Bench",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "score",
+      "value": 35.2,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "BIG-Bench | | 35.2 | 55.1"
+      }
+    },
+    {
+      "rawEvalName": "BIG-Bench",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "score",
+      "value": 55.1,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "BIG-Bench | | 35.2 | 55.1"
+      }
+    },
+    {
+      "rawEvalName": "Average",
+      "rawModelName": "Gemma PT 2B",
+      "metric": "score",
+      "value": 44.9,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "Average | | 44.9 | 56.4"
+      }
+    },
+    {
+      "rawEvalName": "Average",
+      "rawModelName": "Gemma PT 7B",
+      "metric": "score",
+      "value": 56.4,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation > Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "Average | | 44.9 | 56.4"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicity",
+      "model": "google/gemma-2b-it",
+      "metric": "average",
+      "value": 6.86,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "RealToxicity | average | 6.86 | 7.9"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicity",
+      "model": "google/gemma-7b-it",
+      "metric": "average",
+      "value": 7.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "RealToxicity | average | 6.86 | 7.9"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "google/gemma-2b-it",
+      "metric": "score",
+      "value": 45.57,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "BOLD | | 45.57 | 49.08"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "google/gemma-7b-it",
+      "metric": "score",
+      "value": 49.08,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "BOLD | | 45.57 | 49.08"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "google/gemma-2b-it",
+      "metric": "top-1",
+      "value": 45.82,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "CrowS-Pairs | top-1 | 45.82 | 51.33"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "google/gemma-7b-it",
+      "metric": "top-1",
+      "value": 51.33,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "CrowS-Pairs | top-1 | 45.82 | 51.33"
+      }
+    },
+    {
+      "rawEvalName": "BBQ Ambig",
+      "model": "google/gemma-2b-it",
+      "metric": "1-shot, top-1",
+      "value": 62.58,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "BBQ Ambig | 1-shot, top-1 | 62.58 | 92.54"
+      }
+    },
+    {
+      "rawEvalName": "BBQ Ambig",
+      "model": "google/gemma-7b-it",
+      "metric": "1-shot, top-1",
+      "value": 92.54,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "BBQ Ambig | 1-shot, top-1 | 62.58 | 92.54"
+      }
+    },
+    {
+      "rawEvalName": "BBQ Disambig",
+      "model": "google/gemma-2b-it",
+      "metric": "top-1",
+      "value": 54.62,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "BBQ Disambig | top-1 | 54.62 | 71.99"
+      }
+    },
+    {
+      "rawEvalName": "BBQ Disambig",
+      "model": "google/gemma-7b-it",
+      "metric": "top-1",
+      "value": 71.99,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "BBQ Disambig | top-1 | 54.62 | 71.99"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "model": "google/gemma-2b-it",
+      "metric": "top-1",
+      "value": 51.25,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "Winogender | top-1 | 51.25 | 54.17"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "model": "google/gemma-7b-it",
+      "metric": "top-1",
+      "value": 54.17,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "Winogender | top-1 | 51.25 | 54.17"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-2b-it",
+      "metric": "score",
+      "value": 44.84,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "TruthfulQA | | 44.84 | 31.81"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-7b-it",
+      "metric": "score",
+      "value": 31.81,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "TruthfulQA | | 44.84 | 31.81"
+      }
+    },
+    {
+      "rawEvalName": "Winobias 1_2",
+      "model": "google/gemma-2b-it",
+      "metric": "score",
+      "value": 56.12,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "Winobias 1_2 | | 56.12 | 59.09"
+      }
+    },
+    {
+      "rawEvalName": "Winobias 1_2",
+      "model": "google/gemma-7b-it",
+      "metric": "score",
+      "value": 59.09,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "Winobias 1_2 | | 56.12 | 59.09"
+      }
+    },
+    {
+      "rawEvalName": "Winobias 2_2",
+      "model": "google/gemma-2b-it",
+      "metric": "score",
+      "value": 91.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "Winobias 2_2 | | 91.10 | 92.23"
+      }
+    },
+    {
+      "rawEvalName": "Winobias 2_2",
+      "model": "google/gemma-7b-it",
+      "metric": "score",
+      "value": 92.23,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "Winobias 2_2 | | 91.10 | 92.23"
+      }
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "model": "google/gemma-2b-it",
+      "metric": "score",
+      "value": 29.77,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "Toxigen | | 29.77 | 39.59"
+      }
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "model": "google/gemma-7b-it",
+      "metric": "score",
+      "value": 39.59,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.0 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.0",
+        "table": "Gemma 1.0",
+        "quote": "Toxigen | | 29.77 | 39.59"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicity",
+      "model": "google/gemma-2b-it",
+      "metric": "average",
+      "value": 7.03,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "RealToxicity | average | 7.03 | 8.04"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicity",
+      "model": "google/gemma-7b-it",
+      "metric": "average",
+      "value": 8.04,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "RealToxicity | average | 7.03 | 8.04"
+      }
+    },
+    {
+      "rawEvalName": "BOLD",
+      "model": "google/gemma-2b-it",
+      "metric": "score",
+      "value": 47.76,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "BOLD | | 47.76 |"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "google/gemma-2b-it",
+      "metric": "top-1",
+      "value": 45.89,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "CrowS-Pairs | top-1 | 45.89 | 49.67"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "google/gemma-7b-it",
+      "metric": "top-1",
+      "value": 49.67,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "CrowS-Pairs | top-1 | 45.89 | 49.67"
+      }
+    },
+    {
+      "rawEvalName": "BBQ Ambig",
+      "model": "google/gemma-2b-it",
+      "metric": "1-shot, top-1",
+      "value": 58.97,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "BBQ Ambig | 1-shot, top-1 | 58.97 | 86.06"
+      }
+    },
+    {
+      "rawEvalName": "BBQ Ambig",
+      "model": "google/gemma-7b-it",
+      "metric": "1-shot, top-1",
+      "value": 86.06,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "BBQ Ambig | 1-shot, top-1 | 58.97 | 86.06"
+      }
+    },
+    {
+      "rawEvalName": "BBQ Disambig",
+      "model": "google/gemma-2b-it",
+      "metric": "top-1",
+      "value": 53.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "BBQ Disambig | top-1 | 53.90 | 85.08"
+      }
+    },
+    {
+      "rawEvalName": "BBQ Disambig",
+      "model": "google/gemma-7b-it",
+      "metric": "top-1",
+      "value": 85.08,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "BBQ Disambig | top-1 | 53.90 | 85.08"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "model": "google/gemma-2b-it",
+      "metric": "top-1",
+      "value": 50.14,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "Winogender | top-1 | 50.14 | 57.64"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "model": "google/gemma-7b-it",
+      "metric": "top-1",
+      "value": 57.64,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "Winogender | top-1 | 50.14 | 57.64"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-2b-it",
+      "metric": "score",
+      "value": 44.24,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "TruthfulQA | | 44.24 | 45.34"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-7b-it",
+      "metric": "score",
+      "value": 45.34,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "TruthfulQA | | 44.24 | 45.34"
+      }
+    },
+    {
+      "rawEvalName": "Winobias 1_2",
+      "model": "google/gemma-2b-it",
+      "metric": "score",
+      "value": 55.93,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "Winobias 1_2 | | 55.93 | 59.22"
+      }
+    },
+    {
+      "rawEvalName": "Winobias 1_2",
+      "model": "google/gemma-7b-it",
+      "metric": "score",
+      "value": 59.22,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "Winobias 1_2 | | 55.93 | 59.22"
+      }
+    },
+    {
+      "rawEvalName": "Winobias 2_2",
+      "model": "google/gemma-2b-it",
+      "metric": "score",
+      "value": 89.46,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "Winobias 2_2 | | 89.46 | 89.2"
+      }
+    },
+    {
+      "rawEvalName": "Winobias 2_2",
+      "model": "google/gemma-7b-it",
+      "metric": "score",
+      "value": 89.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "Winobias 2_2 | | 89.46 | 89.2"
+      }
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "model": "google/gemma-2b-it",
+      "metric": "score",
+      "value": 29.64,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "Toxigen | | 29.64 | 38.75"
+      }
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "model": "google/gemma-7b-it",
+      "metric": "score",
+      "value": 38.75,
+      "unit": "percent",
+      "settings": {
+        "other": "Gemma 1.1 IT"
+      },
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results > Gemma 1.1",
+        "table": "Gemma 1.1",
+        "quote": "Toxigen | | 29.64 | 38.75"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:45:20Z"
+  },
+  "notes": "Web model card for Gemma 1.0/1.1 (not a PDF). Capability table is Gemma PT 2B/7B; safety tables are Gemma 1.0 IT and Gemma 1.1 IT. Mapped IT rows to seed ids google/gemma-2b-it and google/gemma-7b-it; PT rows use rawModelName. No external tester orgs named (only internal red teams). No FLOP count; trainingCompute records TPUv5e only. Empty Metric cells (OpenBookQA, ARC-e/c, AGIEval, BIG-Bench, BOLD, TruthfulQA, Winobias, Toxigen) use metric 'score'. Average row included as written. Gemma 1.1 BOLD 7B omitted (blank cell)."
+}

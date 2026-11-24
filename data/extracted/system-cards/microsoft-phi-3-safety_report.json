@@ -1,0 +1,2865 @@
+{
+  "document": "microsoft-phi-3-safety_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "model": "microsoft/Phi-3-small-8k-instruct"
+    },
+    {
+      "model": "microsoft/Phi-3-medium-4k-instruct"
+    },
+    {
+      "model": "microsoft/Phi-3.5-mini-instruct"
+    },
+    {
+      "model": "microsoft/Phi-3.5-MoE-instruct"
+    }
+  ],
+  "pageCount": 16,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "April 2024 (Phi-3 series); August 2024 (Phi-3.5-mini and Phi-3.5-MoE)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "In April 2024, Microsoft released\nthe Phi-3 series of SLMs, including Phi-3-mini (3.8B), Phi-3-small (7B), and Phi-3-medium (14B)."
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text language models (SLMs)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "In this report, we present our methodology for safety aligning\nthe Phi-3 series of language models."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "Phi-3 red-teamed in English; Phi-3.5 multilingual (Chinese, Spanish, Dutch, English and more)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Because the original Phi-3 models were not trained on curated multilingual datasets, this\nred teaming was conducted in English."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "Phi-3-mini 3.8B, Phi-3-small 7B, Phi-3-medium 14B; Phi-3.5-mini 3.8B; Phi-3.5-MoE 16×3.8B; Mistral-Nemo 12B compared",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "the Phi-3 series of SLMs, including Phi-3-mini (3.8B), Phi-3-small (7B), and Phi-3-medium (14B)."
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "Phi-3.5-MoE described as 16×3.8B",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Phi-3.5-mini-instruct         Phi-3.5-MoE-instruct    Mistral-Nemo\n                                             3.8b                     16× 3.8b              12b"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "small language models (SLMs); safety post-training with SFT and DPO",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "The safety datasets mixed with standard preference datasets were used in\nboth the supervised fine-tuning (SFT) and direct preference optimization (DPO)"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "open-source and in-house safety datasets mixed with standard preference datasets; open-source improved with GPT-4 regenerated responses",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "For safety post-training of the Phi-3 models, we used a combination of open-source and in-house datasets."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [
+    {
+      "domain": "other",
+      "labLabel": "does not have a meaningful impact on marginal risk of the AI ecosystem",
+      "phase": "after_mitigation",
+      "decidedBy": "Microsoft",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "We have also considered the potential risks and believe the release of the Phi-3 models does not have\na meaningful impact on marginal risk of the AI ecosystem due to the availability of larger, advanced"
+      }
+    }
+  ],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Phi-3 models typically refused direct requests for harmful content; inappropriate prompt refusal rate (IPRR) and internal harmful-content metrics reported",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Inappropriate Prompt Refusal Rate (IPRR): Measures the rate that the model refuses to answer inappropriate or harmful prompts (higher is better)."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Jailbreak defect rates reported; AIRT tested encodings, public jailbreaks, and Crescendo; common jailbreaks refused across languages",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Jailbreak (DR-1)         0.123          0.107             0.111       0.150    0.156     0.114     0.130"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Ungroundedness scored; Information Reliability noted as a limitation (nonsensical or fabricated content)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Ungroundedness          0.603          0.299             0.213       1.481    0.935     0.679     0.328"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "[DecodingTrust](/evals/decodingtrust) Stereotype Bias and Fairness; representational harms discussed as limitations",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Stereotype Bias                   0.983            0.983           0.993        0.860   0.990        0.996"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "[ToxiGen](/evals/toxigen) scores reported for Phi-3 models and comparison models",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "ToxiGen         0.764              0.827           0.855                0.589              0.677               0.572"
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": true,
+      "headline": "Fake news elicited via multiturn role-playing; phishing listed among red-team categories",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "AIRT found that Phi-3.5-MoE model was susceptible to a multiturn role-playing strategy, which was\nused to elicit sexual and violent content, fake news, and hate speech in all languages, including English."
+      }
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "AIRT probed phishing and cybersecurity among harm categories",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "AIRT operated independently of the safety post-training team and probed for harmful content across\na range of categories, including content related to current events, phishing and cybersecurity, fairness"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Iterative break-fix safety post-training cut harmful responses on AI Red Team (AIRT) prompts by about 75% on average versus unaligned models.", "tone": "good",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "On average, we observe a 75% reduction in the amount of harmful content generated, which indicates the efficacy of the overall “break-fix” approach."
+      }
+    },
+    {
+      "text": "Phi-3.5-MoE was susceptible to multiturn role-playing that elicited sexual and violent content, fake news, and hate speech in all tested languages.", "tone": "bad",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "AIRT found that Phi-3.5-MoE model was susceptible to a multiturn role-playing strategy, which was\nused to elicit sexual and violent content, fake news, and hate speech in all languages, including English."
+      }
+    },
+    {
+      "text": "Safety behavior of Phi-3.5-MoE was similar across Chinese, Spanish, Dutch, and English; the model often refused in English even when the harmful request was in another language.", "tone": "mixed",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Although slightly higher refusal rates were observed in English\nthan other languages, there was no significant difference in terms of harmful content generated. Note,\nhowever, that the model often provided English refusals even when the request for harmful content was\nin another language."
+      }
+    },
+    {
+      "text": "AIRT did not extensively test medium and low-resource languages, so English safety training may not transfer well there.", "tone": "mixed",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Note that AIRT did not perform extensive testing of medium and low-resource languages, and it\nis possible that safety post-training in English does not transfer as effectively to other languages and\nscenarios."
+      }
+    },
+    {
+      "text": "Microsoft assessed open release as not meaningfully raising ecosystem marginal risk given larger available models, with benefits outweighing risks specific to Phi-3.", "tone": "mixed",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "Based on the evaluations and safety post-training detailed in\nthis white paper, we have assessed the potential benefits of open innovation and research will outweigh\npotential risks specific to this model."
+      }
+    },
+    {
+      "text": "Figure 2 percentages of high-risk responses are inflated because AIRT prompts were crafted to elicit harmful generations.", "tone": "mixed",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "Note that percentages are inflated because prompts used by the AI Red Team were crafted\nto elicit harmful generations."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "MMLU",
+      "metric": "accuracy",
+      "value": 69,
+      "unit": "percent",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Phi-3-mini is small enough to run on a smartphone but achieves 69% on MMLU and 8.38 on"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "MT-Bench",
+      "metric": "score",
+      "value": 8.38,
+      "unit": "score",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Phi-3-mini is small enough to run on a smartphone but achieves 69% on MMLU and 8.38 on"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Ungroundedness",
+      "metric": "ungroundedness score",
+      "value": 0.603,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Ungroundedness          0.603          0.299             0.213       1.481    0.935     0.679     0.328"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Ungroundedness",
+      "metric": "ungroundedness score",
+      "value": 0.299,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Ungroundedness          0.603          0.299             0.213       1.481    0.935     0.679     0.328"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Ungroundedness",
+      "metric": "ungroundedness score",
+      "value": 0.213,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Ungroundedness          0.603          0.299             0.213       1.481    0.935     0.679     0.328"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Ungroundedness",
+      "metric": "ungroundedness score",
+      "value": 1.481,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Ungroundedness          0.603          0.299             0.213       1.481    0.935     0.679     0.328"
+      },
+      "model": "microsoft/phi-2",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Ungroundedness",
+      "metric": "ungroundedness score",
+      "value": 0.935,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Ungroundedness          0.603          0.299             0.213       1.481    0.935     0.679     0.328"
+      },
+      "rawModelName": "Mistral",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Ungroundedness",
+      "metric": "ungroundedness score",
+      "value": 0.679,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Ungroundedness          0.603          0.299             0.213       1.481    0.935     0.679     0.328"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Ungroundedness",
+      "metric": "ungroundedness score",
+      "value": 0.328,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Ungroundedness          0.603          0.299             0.213       1.481    0.935     0.679     0.328"
+      },
+      "rawModelName": "Llama-3-In",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Third Party Harm",
+      "metric": "defect rate DR-1",
+      "value": 0.24,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Third Party Harm (DR-1)      0.240          0.253             0.251       0.240    0.562     0.383     0.373"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Third Party Harm",
+      "metric": "defect rate DR-1",
+      "value": 0.253,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Third Party Harm (DR-1)      0.240          0.253             0.251       0.240    0.562     0.383     0.373"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Third Party Harm",
+      "metric": "defect rate DR-1",
+      "value": 0.251,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Third Party Harm (DR-1)      0.240          0.253             0.251       0.240    0.562     0.383     0.373"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Third Party Harm",
+      "metric": "defect rate DR-1",
+      "value": 0.24,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Third Party Harm (DR-1)      0.240          0.253             0.251       0.240    0.562     0.383     0.373"
+      },
+      "model": "microsoft/phi-2",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Third Party Harm",
+      "metric": "defect rate DR-1",
+      "value": 0.562,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Third Party Harm (DR-1)      0.240          0.253             0.251       0.240    0.562     0.383     0.373"
+      },
+      "rawModelName": "Mistral",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Third Party Harm",
+      "metric": "defect rate DR-1",
+      "value": 0.383,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Third Party Harm (DR-1)      0.240          0.253             0.251       0.240    0.562     0.383     0.373"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Third Party Harm",
+      "metric": "defect rate DR-1",
+      "value": 0.373,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Third Party Harm (DR-1)      0.240          0.253             0.251       0.240    0.562     0.383     0.373"
+      },
+      "rawModelName": "Llama-3-In",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Harmful Content Continuation",
+      "metric": "defect rate DR-3",
+      "value": 0.007,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Harmful Content\n                                 0.007          0.003             0.010       0.029    0.026     0.013     0.013\n      Continuation (DR-3)"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Harmful Content Continuation",
+      "metric": "defect rate DR-3",
+      "value": 0.003,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Harmful Content\n                                 0.007          0.003             0.010       0.029    0.026     0.013     0.013\n      Continuation (DR-3)"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Harmful Content Continuation",
+      "metric": "defect rate DR-3",
+      "value": 0.01,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Harmful Content\n                                 0.007          0.003             0.010       0.029    0.026     0.013     0.013\n      Continuation (DR-3)"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Harmful Content Continuation",
+      "metric": "defect rate DR-3",
+      "value": 0.029,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Harmful Content\n                                 0.007          0.003             0.010       0.029    0.026     0.013     0.013\n      Continuation (DR-3)"
+      },
+      "model": "microsoft/phi-2",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Harmful Content Continuation",
+      "metric": "defect rate DR-3",
+      "value": 0.026,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Harmful Content\n                                 0.007          0.003             0.010       0.029    0.026     0.013     0.013\n      Continuation (DR-3)"
+      },
+      "rawModelName": "Mistral",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Harmful Content Continuation",
+      "metric": "defect rate DR-3",
+      "value": 0.013,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Harmful Content\n                                 0.007          0.003             0.010       0.029    0.026     0.013     0.013\n      Continuation (DR-3)"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Harmful Content Continuation",
+      "metric": "defect rate DR-3",
+      "value": 0.013,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Harmful Content\n                                 0.007          0.003             0.010       0.029    0.026     0.013     0.013\n      Continuation (DR-3)"
+      },
+      "rawModelName": "Llama-3-In",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Harmful Content Summarization",
+      "metric": "defect rate DR-3",
+      "value": 0.1,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Harmful Content\n                                 0.100          0.110             0.112       0.144    0.223     0.103     0.082\n     Summarization (DR-3)"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Harmful Content Summarization",
+      "metric": "defect rate DR-3",
+      "value": 0.11,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Harmful Content\n                                 0.100          0.110             0.112       0.144    0.223     0.103     0.082\n     Summarization (DR-3)"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Harmful Content Summarization",
+      "metric": "defect rate DR-3",
+      "value": 0.112,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Harmful Content\n                                 0.100          0.110             0.112       0.144    0.223     0.103     0.082\n     Summarization (DR-3)"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Harmful Content Summarization",
+      "metric": "defect rate DR-3",
+      "value": 0.144,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Harmful Content\n                                 0.100          0.110             0.112       0.144    0.223     0.103     0.082\n     Summarization (DR-3)"
+      },
+      "model": "microsoft/phi-2",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Harmful Content Summarization",
+      "metric": "defect rate DR-3",
+      "value": 0.223,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Harmful Content\n                                 0.100          0.110             0.112       0.144    0.223     0.103     0.082\n     Summarization (DR-3)"
+      },
+      "rawModelName": "Mistral",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Harmful Content Summarization",
+      "metric": "defect rate DR-3",
+      "value": 0.103,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Harmful Content\n                                 0.100          0.110             0.112       0.144    0.223     0.103     0.082\n     Summarization (DR-3)"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Harmful Content Summarization",
+      "metric": "defect rate DR-3",
+      "value": 0.082,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Harmful Content\n                                 0.100          0.110             0.112       0.144    0.223     0.103     0.082\n     Summarization (DR-3)"
+      },
+      "rawModelName": "Llama-3-In",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Jailbreak",
+      "metric": "defect rate DR-1",
+      "value": 0.123,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Jailbreak (DR-1)         0.123          0.107             0.111       0.150    0.156     0.114     0.130"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Jailbreak",
+      "metric": "defect rate DR-1",
+      "value": 0.107,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Jailbreak (DR-1)         0.123          0.107             0.111       0.150    0.156     0.114     0.130"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Jailbreak",
+      "metric": "defect rate DR-1",
+      "value": 0.111,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Jailbreak (DR-1)         0.123          0.107             0.111       0.150    0.156     0.114     0.130"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Jailbreak",
+      "metric": "defect rate DR-1",
+      "value": 0.15,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Jailbreak (DR-1)         0.123          0.107             0.111       0.150    0.156     0.114     0.130"
+      },
+      "model": "microsoft/phi-2",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Jailbreak",
+      "metric": "defect rate DR-1",
+      "value": 0.156,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Jailbreak (DR-1)         0.123          0.107             0.111       0.150    0.156     0.114     0.130"
+      },
+      "rawModelName": "Mistral",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Jailbreak",
+      "metric": "defect rate DR-1",
+      "value": 0.114,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Jailbreak (DR-1)         0.123          0.107             0.111       0.150    0.156     0.114     0.130"
+      },
+      "model": "google/gemma-7b-it",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn: Jailbreak",
+      "metric": "defect rate DR-1",
+      "value": 0.13,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": "Jailbreak (DR-1)         0.123          0.107             0.111       0.150    0.156     0.114     0.130"
+      },
+      "rawModelName": "Llama-3-In",
+      "settings": {
+        "other": "multi-turn conversation; GPT-4 evaluator"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "IPRR",
+      "value": 0.75,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "IPRR (Higher is better)     0.750         0.965              0.790        0.015   0.040     0.955      0.815"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "IPRR",
+      "value": 0.965,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "IPRR (Higher is better)     0.750         0.965              0.790        0.015   0.040     0.955      0.815"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "IPRR",
+      "value": 0.79,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "IPRR (Higher is better)     0.750         0.965              0.790        0.015   0.040     0.955      0.815"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "IPRR",
+      "value": 0.015,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "IPRR (Higher is better)     0.750         0.965              0.790        0.015   0.040     0.955      0.815"
+      },
+      "model": "microsoft/phi-2"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "IPRR",
+      "value": 0.04,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "IPRR (Higher is better)     0.750         0.965              0.790        0.015   0.040     0.955      0.815"
+      },
+      "rawModelName": "Mistral"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "IPRR",
+      "value": 0.955,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "IPRR (Higher is better)     0.750         0.965              0.790        0.015   0.040     0.955      0.815"
+      },
+      "model": "google/gemma-7b-it"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "IPRR",
+      "value": 0.815,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "IPRR (Higher is better)     0.750         0.965              0.790        0.015   0.040     0.955      0.815"
+      },
+      "rawModelName": "Llama-3-In"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "VPRR",
+      "value": 0.232,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "VPRR (Lower is better)      0.232         0.264              0.124        0.004   0.008     0.216      0.024"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "VPRR",
+      "value": 0.264,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "VPRR (Lower is better)      0.232         0.264              0.124        0.004   0.008     0.216      0.024"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "VPRR",
+      "value": 0.124,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "VPRR (Lower is better)      0.232         0.264              0.124        0.004   0.008     0.216      0.024"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "VPRR",
+      "value": 0.004,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "VPRR (Lower is better)      0.232         0.264              0.124        0.004   0.008     0.216      0.024"
+      },
+      "model": "microsoft/phi-2"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "VPRR",
+      "value": 0.008,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "VPRR (Lower is better)      0.232         0.264              0.124        0.004   0.008     0.216      0.024"
+      },
+      "rawModelName": "Mistral"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "VPRR",
+      "value": 0.216,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "VPRR (Lower is better)      0.232         0.264              0.124        0.004   0.008     0.216      0.024"
+      },
+      "model": "google/gemma-7b-it"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "VPRR",
+      "value": 0.024,
+      "unit": "fraction",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "VPRR (Lower is better)      0.232         0.264              0.124        0.004   0.008     0.216      0.024"
+      },
+      "rawModelName": "Llama-3-In"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Stereotype Bias",
+      "value": 0.983,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Stereotype Bias                   0.983            0.983           0.993        0.860   0.990        0.996"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Stereotype Bias",
+      "value": 0.983,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Stereotype Bias                   0.983            0.983           0.993        0.860   0.990        0.996"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Stereotype Bias",
+      "value": 0.993,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Stereotype Bias                   0.983            0.983           0.993        0.860   0.990        0.996"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Stereotype Bias",
+      "value": 0.86,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Stereotype Bias                   0.983            0.983           0.993        0.860   0.990        0.996"
+      },
+      "model": "microsoft/phi-2"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Stereotype Bias",
+      "value": 0.99,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Stereotype Bias                   0.983            0.983           0.993        0.860   0.990        0.996"
+      },
+      "rawModelName": "Mistral"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Stereotype Bias",
+      "value": 0.996,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Stereotype Bias                   0.983            0.983           0.993        0.860   0.990        0.996"
+      },
+      "model": "google/gemma-7b-it"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Adversarial Robustness",
+      "value": 0.49,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Adversarial Robustness               0.490            0.615           0.516        0.513   0.381        0.497"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Adversarial Robustness",
+      "value": 0.615,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Adversarial Robustness               0.490            0.615           0.516        0.513   0.381        0.497"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Adversarial Robustness",
+      "value": 0.516,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Adversarial Robustness               0.490            0.615           0.516        0.513   0.381        0.497"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Adversarial Robustness",
+      "value": 0.513,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Adversarial Robustness               0.490            0.615           0.516        0.513   0.381        0.497"
+      },
+      "model": "microsoft/phi-2"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Adversarial Robustness",
+      "value": 0.381,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Adversarial Robustness               0.490            0.615           0.516        0.513   0.381        0.497"
+      },
+      "rawModelName": "Mistral"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Adversarial Robustness",
+      "value": 0.497,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Adversarial Robustness               0.490            0.615           0.516        0.513   0.381        0.497"
+      },
+      "model": "google/gemma-7b-it"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Out-of-Distribution Robustness",
+      "value": 0.643,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Out-of-Distribution Robustness            0.643            0.706           0.747        0.655   0.667        0.644"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Out-of-Distribution Robustness",
+      "value": 0.706,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Out-of-Distribution Robustness            0.643            0.706           0.747        0.655   0.667        0.644"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Out-of-Distribution Robustness",
+      "value": 0.747,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Out-of-Distribution Robustness            0.643            0.706           0.747        0.655   0.667        0.644"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Out-of-Distribution Robustness",
+      "value": 0.655,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Out-of-Distribution Robustness            0.643            0.706           0.747        0.655   0.667        0.644"
+      },
+      "model": "microsoft/phi-2"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Out-of-Distribution Robustness",
+      "value": 0.667,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Out-of-Distribution Robustness            0.643            0.706           0.747        0.655   0.667        0.644"
+      },
+      "rawModelName": "Mistral"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Out-of-Distribution Robustness",
+      "value": 0.644,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Out-of-Distribution Robustness            0.643            0.706           0.747        0.655   0.667        0.644"
+      },
+      "model": "google/gemma-7b-it"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Robustness to Adversarial Demonstrations",
+      "value": 0.666,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Robustness to Adversarial Demonstrations       0.666            0.635           0.719        0.467   0.575        0.572"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Robustness to Adversarial Demonstrations",
+      "value": 0.635,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Robustness to Adversarial Demonstrations       0.666            0.635           0.719        0.467   0.575        0.572"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Robustness to Adversarial Demonstrations",
+      "value": 0.719,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Robustness to Adversarial Demonstrations       0.666            0.635           0.719        0.467   0.575        0.572"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Robustness to Adversarial Demonstrations",
+      "value": 0.467,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Robustness to Adversarial Demonstrations       0.666            0.635           0.719        0.467   0.575        0.572"
+      },
+      "model": "microsoft/phi-2"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Robustness to Adversarial Demonstrations",
+      "value": 0.575,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Robustness to Adversarial Demonstrations       0.666            0.635           0.719        0.467   0.575        0.572"
+      },
+      "rawModelName": "Mistral"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Robustness to Adversarial Demonstrations",
+      "value": 0.572,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Robustness to Adversarial Demonstrations       0.666            0.635           0.719        0.467   0.575        0.572"
+      },
+      "model": "google/gemma-7b-it"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Privacy",
+      "value": 0.926,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Privacy                       0.926            0.993           0.824        0.568   0.688        0.905"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Privacy",
+      "value": 0.993,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Privacy                       0.926            0.993           0.824        0.568   0.688        0.905"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Privacy",
+      "value": 0.824,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Privacy                       0.926            0.993           0.824        0.568   0.688        0.905"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Privacy",
+      "value": 0.568,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Privacy                       0.926            0.993           0.824        0.568   0.688        0.905"
+      },
+      "model": "microsoft/phi-2"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Privacy",
+      "value": 0.688,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Privacy                       0.926            0.993           0.824        0.568   0.688        0.905"
+      },
+      "rawModelName": "Mistral"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Privacy",
+      "value": 0.905,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Privacy                       0.926            0.993           0.824        0.568   0.688        0.905"
+      },
+      "model": "google/gemma-7b-it"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Machine Ethics",
+      "value": 0.754,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Machine Ethics                    0.754            0.775           0.737        0.425   0.710        0.766"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Machine Ethics",
+      "value": 0.775,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Machine Ethics                    0.754            0.775           0.737        0.425   0.710        0.766"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Machine Ethics",
+      "value": 0.737,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Machine Ethics                    0.754            0.775           0.737        0.425   0.710        0.766"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Machine Ethics",
+      "value": 0.425,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Machine Ethics                    0.754            0.775           0.737        0.425   0.710        0.766"
+      },
+      "model": "microsoft/phi-2"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Machine Ethics",
+      "value": 0.71,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Machine Ethics                    0.754            0.775           0.737        0.425   0.710        0.766"
+      },
+      "rawModelName": "Mistral"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Machine Ethics",
+      "value": 0.766,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Machine Ethics                    0.754            0.775           0.737        0.425   0.710        0.766"
+      },
+      "model": "google/gemma-7b-it"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Fairness",
+      "value": 0.825,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Fairness                      0.825            0.589           0.663        0.668   0.827        0.950"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Fairness",
+      "value": 0.589,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Fairness                      0.825            0.589           0.663        0.668   0.827        0.950"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Fairness",
+      "value": 0.663,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Fairness                      0.825            0.589           0.663        0.668   0.827        0.950"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Fairness",
+      "value": 0.668,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Fairness                      0.825            0.589           0.663        0.668   0.827        0.950"
+      },
+      "model": "microsoft/phi-2"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Fairness",
+      "value": 0.827,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Fairness                      0.825            0.589           0.663        0.668   0.827        0.950"
+      },
+      "rawModelName": "Mistral"
+    },
+    {
+      "rawEvalName": "DecodingTrust",
+      "metric": "Fairness",
+      "value": 0.95,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": "Fairness                      0.825            0.589           0.663        0.668   0.827        0.950"
+      },
+      "model": "google/gemma-7b-it"
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "metric": "score",
+      "value": 0.764,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ToxiGen         0.764              0.827           0.855                0.589              0.677               0.572"
+      },
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "metric": "score",
+      "value": 0.827,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ToxiGen         0.764              0.827           0.855                0.589              0.677               0.572"
+      },
+      "model": "microsoft/Phi-3-small-8k-instruct"
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "metric": "score",
+      "value": 0.855,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ToxiGen         0.764              0.827           0.855                0.589              0.677               0.572"
+      },
+      "model": "microsoft/Phi-3-medium-4k-instruct"
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "metric": "score",
+      "value": 0.589,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ToxiGen         0.764              0.827           0.855                0.589              0.677               0.572"
+      },
+      "model": "microsoft/phi-2"
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "metric": "score",
+      "value": 0.677,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ToxiGen         0.764              0.827           0.855                0.589              0.677               0.572"
+      },
+      "rawModelName": "Mistral"
+    },
+    {
+      "rawEvalName": "ToxiGen",
+      "metric": "score",
+      "value": 0.572,
+      "unit": "fraction",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "ToxiGen         0.764              0.827           0.855                0.589              0.677               0.572"
+      },
+      "model": "google/gemma-7b-it"
+    },
+    {
+      "rawEvalName": "AI Red Team harmful responses (before vs after break-fix)",
+      "metric": "reduction in harmful content",
+      "value": 75,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "On average, we observe a 75% reduction in the amount of harmful content generated"
+      },
+      "rawModelName": "Phi-3 models",
+      "settings": {
+        "other": "average across models and harm categories; AIRT prompts"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Ungroundedness",
+      "metric": "ungroundedness score",
+      "value": 0.459,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Ungroundedness                 0.459                         0.271               0.244"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Ungroundedness",
+      "metric": "ungroundedness score",
+      "value": 0.271,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Ungroundedness                 0.459                         0.271               0.244"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Ungroundedness",
+      "metric": "ungroundedness score",
+      "value": 0.244,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Ungroundedness                 0.459                         0.271               0.244"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Third Party Harm",
+      "metric": "defect rate DR-1",
+      "value": 0.243,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Third Party Harm (DR-1)               0.243                         0.152               0.599"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Third Party Harm",
+      "metric": "defect rate DR-1",
+      "value": 0.152,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Third Party Harm (DR-1)               0.243                         0.152               0.599"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Third Party Harm",
+      "metric": "defect rate DR-1",
+      "value": 0.599,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Third Party Harm (DR-1)               0.243                         0.152               0.599"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Harmful Content Continuation",
+      "metric": "defect rate DR-3",
+      "value": 0.006,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Harmful Content\n                                          0.006                         0.004               0.025\n      Continuation (DR-3)"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Harmful Content Continuation",
+      "metric": "defect rate DR-3",
+      "value": 0.004,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Harmful Content\n                                          0.006                         0.004               0.025\n      Continuation (DR-3)"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Harmful Content Continuation",
+      "metric": "defect rate DR-3",
+      "value": 0.025,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Harmful Content\n                                          0.006                         0.004               0.025\n      Continuation (DR-3)"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Harmful Content Summarization",
+      "metric": "defect rate DR-3",
+      "value": 0.119,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Harmful Content\n                                          0.119                         0.120               0.110\n     Summarization (DR-3)"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Harmful Content Summarization",
+      "metric": "defect rate DR-3",
+      "value": 0.12,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Harmful Content\n                                          0.119                         0.120               0.110\n     Summarization (DR-3)"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Harmful Content Summarization",
+      "metric": "defect rate DR-3",
+      "value": 0.11,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Harmful Content\n                                          0.119                         0.120               0.110\n     Summarization (DR-3)"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Jailbreak",
+      "metric": "defect rate DR-1",
+      "value": 0.119,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Jailbreak (DR-1)               0.119                         0.110               0.174"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Jailbreak",
+      "metric": "defect rate DR-1",
+      "value": 0.11,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Jailbreak (DR-1)               0.119                         0.110               0.174"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn (English): Jailbreak",
+      "metric": "defect rate DR-1",
+      "value": 0.174,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 6",
+        "quote": "Jailbreak (DR-1)               0.119                         0.110               0.174"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "English-only; multi-turn"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.015,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Chinese Simplified           0.015                           0.007                 0.026"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: Chinese Simplified"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.007,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Chinese Simplified           0.015                           0.007                 0.026"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: Chinese Simplified"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.026,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Chinese Simplified           0.015                           0.007                 0.026"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: Chinese Simplified"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.01,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "French                  0.010                           0.010                 0.034"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: French"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.01,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "French                  0.010                           0.010                 0.034"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: French"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.034,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "French                  0.010                           0.010                 0.034"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: French"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.007,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "German                  0.007                           0.010                 0.027"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: German"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.01,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "German                  0.007                           0.010                 0.027"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: German"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.027,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "German                  0.007                           0.010                 0.027"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: German"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.009,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Italian                 0.009                           0.009                 0.023"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: Italian"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.009,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Italian                 0.009                           0.009                 0.023"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: Italian"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.023,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Italian                 0.009                           0.009                 0.023"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: Italian"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.01,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Japanese                 0.010                           0.008                 0.024"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: Japanese"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.008,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Japanese                 0.010                           0.008                 0.024"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: Japanese"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.024,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Japanese                 0.010                           0.008                 0.024"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: Japanese"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.012,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Portuguese (Brazil)             0.012                           0.017                 0.026"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: Portuguese (Brazil)"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.017,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Portuguese (Brazil)             0.012                           0.017                 0.026"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: Portuguese (Brazil)"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.026,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Portuguese (Brazil)             0.012                           0.017                 0.026"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: Portuguese (Brazil)"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.016,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Spanish                 0.016                           0.008                 0.026"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: Spanish"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.008,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Spanish                 0.016                           0.008                 0.026"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: Spanish"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal: Harmful Content Continuation (multilingual)",
+      "metric": "defect rate DR-3",
+      "value": 0.026,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 7",
+        "quote": "Spanish                 0.016                           0.008                 0.026"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: Spanish"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.691,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "Chinese Simplified             0.691                         0.659                0.706"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: Chinese Simplified"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.659,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "Chinese Simplified             0.691                         0.659                0.706"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: Chinese Simplified"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.706,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "Chinese Simplified             0.691                         0.659                0.706"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: Chinese Simplified"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.874,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "French                    0.874                         0.865                0.870"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: French"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.865,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "French                    0.874                         0.865                0.870"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: French"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.87,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "French                    0.874                         0.865                0.870"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: French"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.881,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "German                    0.881                         0.880                0.865"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: German"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.88,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "German                    0.881                         0.880                0.865"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: German"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.865,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "German                    0.881                         0.880                0.865"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: German"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.6,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "Japanese                   0.600                         0.714                0.673"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: Japanese"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.714,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "Japanese                   0.600                         0.714                0.673"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: Japanese"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.673,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "Japanese                   0.600                         0.714                0.673"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: Japanese"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.864,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "Spanish                   0.864                         0.878                0.853"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: Spanish"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.878,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "Spanish                   0.864                         0.878                0.853"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: Spanish"
+      }
+    },
+    {
+      "rawEvalName": "XSafety",
+      "metric": "Refusal Rate",
+      "value": 0.853,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 8",
+        "quote": "Spanish                   0.864                         0.878                0.853"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: Spanish"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.195,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Chinese Simplified               0.195                       0.287               0.323"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: Chinese Simplified"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.287,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Chinese Simplified               0.195                       0.287               0.323"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: Chinese Simplified"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.323,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Chinese Simplified               0.195                       0.287               0.323"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: Chinese Simplified"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.211,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "French                     0.211                       0.377               0.349"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: French"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.377,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "French                     0.211                       0.377               0.349"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: French"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.349,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "French                     0.211                       0.377               0.349"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: French"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.162,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "German                      0.162                       0.251               0.276"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: German"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.251,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "German                      0.162                       0.251               0.276"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: German"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.276,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "German                      0.162                       0.251               0.276"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: German"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.172,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Italian                    0.172                       0.295               0.323"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: Italian"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.295,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Italian                    0.172                       0.295               0.323"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: Italian"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.323,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Italian                    0.172                       0.295               0.323"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: Italian"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.206,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Japanese                     0.206                       0.285               0.315"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: Japanese"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.285,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Japanese                     0.206                       0.285               0.315"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: Japanese"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.315,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Japanese                     0.206                       0.285               0.315"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: Japanese"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.203,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Portuguese (Brazil)               0.203                       0.323               0.366"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: Portuguese (Brazil)"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.323,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Portuguese (Brazil)               0.203                       0.323               0.366"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: Portuguese (Brazil)"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.366,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Portuguese (Brazil)               0.203                       0.323               0.366"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: Portuguese (Brazil)"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.196,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Spanish                     0.196                       0.278               0.297"
+      },
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "settings": {
+        "other": "language: Spanish"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.278,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Spanish                     0.196                       0.278               0.297"
+      },
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "settings": {
+        "other": "language: Spanish"
+      }
+    },
+    {
+      "rawEvalName": "RTP-LX",
+      "metric": "Kappa/Inter-annotator Agreement",
+      "value": 0.297,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 9",
+        "quote": "Spanish                     0.196                       0.278               0.297"
+      },
+      "model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "settings": {
+        "other": "language: Spanish"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:45:09Z"
+  },
+  "notes": "arXiv PDF 2407.13833v2 (17 PDF pages; printed pages 1–16; pageCount=16). AlsoDocuments empty (only one seed document). Vision variants in the seed were not evaluated in this safety report, so they are omitted from covers. Table columns label comparison models as Mistral and Llama-3-In without a precise checkpoint; left as rawModelName. Figure 2 bar chart has no readable per-bar percentages in the extracted text beyond the stated 75% average reduction—skipped other chart values. Microsoft AI Red Team (AIRT) is internal/independent within Microsoft, so testers is empty (external only). No formal ASL/Preparedness-style per-domain thresholds; one qualitative marginal-risk decision recorded under domain other. MMLU/MT-Bench capability scores appear only in the introduction for Phi-3-mini."
+}

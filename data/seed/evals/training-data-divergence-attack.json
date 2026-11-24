@@ -1,0 +1,80 @@
+{
+  "eval": {
+    "slug": "training-data-divergence-attack",
+    "displayName": "Training-data divergence attack",
+    "aliases": [
+      "Training-data divergence attack (short prompt)",
+      "Training-data divergence attack (long prompt)",
+      "divergence attack"
+    ],
+    "description": "Public memorization attack from Nasr et al. (2023): prompts that repeat a token many times to make an aligned chat model diverge and sometimes emit training text. Cards report divergence rate and the share of diverged generations that match training data; Gemini cards also split short vs long repetition prompts. Method is public; no fixed sample bank.",
+    "summary": "Tests whether repeating one token many times makes the model leak text from its training data.",
+    "maintainers": [
+      {
+        "name": "Nasr et al.",
+        "url": "https://arxiv.org/abs/2311.17035"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2311.17035",
+        "title": "Scalable Extraction of Training Data from (Production) Language Models"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://not-just-memorization.github.io/extracting-training-data-from-chatgpt.html",
+        "title": "Extracting Training Data from ChatGPT (project page)"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness", "capability"],
+      "formats": ["single_turn"],
+      "cases": ["generated"],
+      "grading": ["programmatic", "human"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["jailbreaks"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2023-11-28",
+      "status": "published",
+      "releasedDate": "2023-11-28",
+      "changes": "Nasr et al. divergence attack; Gemini 1.5 cards also report short (1,000 repeats) vs long (~999,000 repeats) prompt lengths.",
+      "scores": [
+        {
+          "key": "diverged",
+          "displayName": "Diverged",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "Whether the model stops repeating the requested token and emits other text."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "divergence_rate",
+          "displayName": "Divergence rate",
+          "score": "diverged",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Share of queries that diverge. Cards may also report the rate at which diverged generations match training data."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

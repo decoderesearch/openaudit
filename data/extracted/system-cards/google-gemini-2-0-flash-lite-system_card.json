@@ -1,0 +1,1022 @@
+{
+  "document": "google-gemini-2-0-flash-lite-system_card",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "google/gemini-2.0-flash-lite-001"
+    }
+  ],
+  "pageCount": 7,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "April 10, 2025",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Model card published April 10, 2025"
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "June 2024",
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "quote": "The knowledge cutoff date for Gemini 2.0 Flash-Lite was June 2024."
+      }
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "1,048,576 token context window",
+      "source": {
+        "page": "1",
+        "pdfPage": 2,
+        "quote": "audio, and video files, with a 1,048,576 token context window."
+      }
+    },
+    "maxOutput": {
+      "status": "stated",
+      "value": "8,192 token output",
+      "source": {
+        "page": "1",
+        "pdfPage": 2,
+        "quote": "Outputs: Text, with an 8,192 token output."
+      }
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text, images, audio, and video inputs; text output",
+      "source": {
+        "page": "1",
+        "pdfPage": 2,
+        "quote": "Inputs: Text strings (e.g., a question, a prompt, a document(s) to be summarized), images,\naudio, and video files, with a 1,048,576 token context window."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "not_stated"
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "sparse Mixture-of-Experts (MoE) Transformer",
+      "source": {
+        "page": "1",
+        "pdfPage": 2,
+        "quote": "Architecture: The Gemini 2.0 series builds upon the sparse Mixture-of-Experts (MoE)\nTransformer architecture"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "pre-training: web-documents, code, images, audio, video; post-training: instruction tuning, human preference, tool-use",
+      "source": {
+        "page": "2",
+        "pdfPage": 3,
+        "quote": "The pre-training dataset was a large-scale, diverse collection of data\nencompassing a wide range of domains and modalities, which included publicly-available\nweb-documents, code"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "[Text to Text Safety](/evals/gdm-text-to-text-safety) -1.4% vs Gemini 1.5 Pro 002 (lower violation rates)",
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "quote": "Text to Text Safety     evaluation measuring safety                 -1.40%"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "may exhibit hallucinations and other foundation-model limitations",
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "quote": "such as hallucinations, and limitations around causal understanding"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[SimpleQA](https://arxiv.org/abs/2411.04368) 21.7%; [FACTS Grounding](/evals/facts-grounding) 83.6% (higher is better)",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "quote": "SimpleQA                                                8.6%         24.9%          21.7%           29.9%"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": true,
+      "headline": "Assurance evaluations by evaluators outside the model development team; Responsibility and Safety Council (RSC) release review",
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "quote": "Assurance Evaluations conducted by evaluators who sit outside of the model\n       development team, used to assess responsibility and safety governance decisions;"
+      }
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Gemini 2.0 Flash-Lite performs better than Gemini 1.5 Flash on the majority of listed benchmarks at the same speed and cost.", "tone": "neutral",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "quote": "Gemini 2.0 Flash-Lite performs better than Gemini 1.5 Flash on the majority of\nbenchmarks, at the same speed and cost."
+      }
+    },
+    {
+      "text": "The Gemini 2.0 family tended to show a small regression vs Gemini 1.5 Pro on image-to-text content policy evaluation, though overall violation rates remained low.", "tone": "mixed",
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "quote": "They tended to demonstrate a small regression on our content policy evaluation for\nimage-to-text, though the overall violation rates remained low."
+      }
+    },
+    {
+      "text": "Refusals can still come across as preachy, though tone has improved compared to Gemini 1.5.", "tone": "mixed",
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "quote": "Refusals can still come across as\n“preachy,” although tone has improved compared to Gemini 1.5."
+      }
+    },
+    {
+      "text": "Gemini 2.0 Flash-Lite does not include all of the same features as Gemini 2.0 Flash, including multimodal API support.", "tone": "neutral",
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "quote": "Gemini 2.0 Flash-Lite does not\ninclude all of the same features as Gemini 2.0 Flash, including multimodal API support and\nothers."
+      }
+    },
+    {
+      "text": "Long-context MRCR (1M) is lower for Flash-Lite (58.0%) than for Gemini 1.5 Flash (71.9%) and Gemini 2.0 Flash (70.5%).", "tone": "neutral",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "quote": "MRCR (1M)                                               71.9%        82.6%         58.0%            70.5%"
+      }
+    },
+    {
+      "text": "Frontier Safety Framework evaluations are listed as part of the evaluation approach, but this card does not report Critical Capability Levels (CCL) or threshold outcomes by domain.", "tone": "mixed",
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "quote": "Frontier Safety Framework evaluations according to Google DeepMind’s Frontier\n       Safety Framework (FSF);"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "MMLU-Pro",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 67.3,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MMLU-Pro                                                67.3%"
+      }
+    },
+    {
+      "rawEvalName": "MMLU-Pro",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 75.8,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MMLU-Pro                                                67.3%        75.8%"
+      }
+    },
+    {
+      "rawEvalName": "MMLU-Pro",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "accuracy",
+      "value": 71.6,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MMLU-Pro                                                67.3%        75.8%          71.6%"
+      }
+    },
+    {
+      "rawEvalName": "MMLU-Pro",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "accuracy",
+      "value": 77.6,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MMLU-Pro                                                67.3%        75.8%          71.6%           77.6%"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v5)",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 30.7,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "LiveCodeBe\n                              covering more recent examples (in        30.7%"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v5)",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 34.2,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "LiveCodeBe\n                              covering more recent examples (in        30.7%        34.2%"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v5)",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "accuracy",
+      "value": 28.9,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "LiveCodeBe\n                              covering more recent examples (in        30.7%        34.2%          28.9%"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench (v5)",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "accuracy",
+      "value": 34.5,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "LiveCodeBe\n                              covering more recent examples (in        30.7%        34.2%          28.9%           34.5%"
+      }
+    },
+    {
+      "rawEvalName": "Bird-SQL (Dev)",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 45.6,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "Bird-SQL\n                              natural language questions into          45.6%"
+      }
+    },
+    {
+      "rawEvalName": "Bird-SQL (Dev)",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 54.4,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "Bird-SQL\n                              natural language questions into          45.6%        54.4%"
+      }
+    },
+    {
+      "rawEvalName": "Bird-SQL (Dev)",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "accuracy",
+      "value": 57.4,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "Bird-SQL\n                              natural language questions into          45.6%        54.4%          57.4%"
+      }
+    },
+    {
+      "rawEvalName": "Bird-SQL (Dev)",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "accuracy",
+      "value": 58.7,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "Bird-SQL\n                              natural language questions into          45.6%        54.4%          57.4%           58.7%"
+      }
+    },
+    {
+      "rawEvalName": "GPQA (diamond)",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 51,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "GPQA\nReasoning                     written by domain experts in             51.0%"
+      }
+    },
+    {
+      "rawEvalName": "GPQA (diamond)",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 59.1,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "GPQA\nReasoning                     written by domain experts in             51.0%        59.1%"
+      }
+    },
+    {
+      "rawEvalName": "GPQA (diamond)",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "accuracy",
+      "value": 51.5,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "GPQA\nReasoning                     written by domain experts in             51.0%        59.1%          51.5%"
+      }
+    },
+    {
+      "rawEvalName": "GPQA (diamond)",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "accuracy",
+      "value": 60.1,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "GPQA\nReasoning                     written by domain experts in             51.0%        59.1%          51.5%           60.1%"
+      }
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 8.6,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "SimpleQA                                                8.6%"
+      }
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 24.9,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "SimpleQA                                                8.6%         24.9%"
+      }
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "accuracy",
+      "value": 21.7,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "SimpleQA                                                8.6%         24.9%          21.7%"
+      }
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "accuracy",
+      "value": 29.9,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "SimpleQA                                                8.6%         24.9%          21.7%           29.9%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 82.9,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "FACTS\n                              responses given documents and            82.9%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 80,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "FACTS\n                              responses given documents and            82.9%        80.0%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "accuracy",
+      "value": 83.6,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "FACTS\n                              responses given documents and            82.9%        80.0%          83.6%"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "accuracy",
+      "value": 84.6,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "FACTS\n                              responses given documents and            82.9%        80.0%          83.6%           84.6%"
+      }
+    },
+    {
+      "rawEvalName": "Global MMLU (Lite)",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 73.7,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "Global\nMultilingual               Lite version includes 200 Culturally        73.7%"
+      }
+    },
+    {
+      "rawEvalName": "Global MMLU (Lite)",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 80.8,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "Global\nMultilingual               Lite version includes 200 Culturally        73.7%        80.8%"
+      }
+    },
+    {
+      "rawEvalName": "Global MMLU (Lite)",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "accuracy",
+      "value": 78.2,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "Global\nMultilingual               Lite version includes 200 Culturally        73.7%        80.8%          78.2%"
+      }
+    },
+    {
+      "rawEvalName": "Global MMLU (Lite)",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "accuracy",
+      "value": 83.4,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "Global\nMultilingual               Lite version includes 200 Culturally        73.7%        80.8%          78.2%           83.4%"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 77.9,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MATH           algebra, geometry, pre-calculus, and     77.9%"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 86.5,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MATH           algebra, geometry, pre-calculus, and     77.9%        86.5%"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "accuracy",
+      "value": 86.8,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MATH           algebra, geometry, pre-calculus, and     77.9%        86.5%         86.8%"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "accuracy",
+      "value": 90.9,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MATH           algebra, geometry, pre-calculus, and     77.9%        86.5%         86.8%            90.9%"
+      }
+    },
+    {
+      "rawEvalName": "HiddenMath",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 47.2,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "HiddenMath                                              47.2%"
+      }
+    },
+    {
+      "rawEvalName": "HiddenMath",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 52,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "HiddenMath                                              47.2%        52.0%"
+      }
+    },
+    {
+      "rawEvalName": "HiddenMath",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "accuracy",
+      "value": 55.3,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "HiddenMath                                              47.2%        52.0%          55.3%"
+      }
+    },
+    {
+      "rawEvalName": "HiddenMath",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "accuracy",
+      "value": 63.5,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "HiddenMath                                              47.2%        52.0%          55.3%           63.5%"
+      }
+    },
+    {
+      "rawEvalName": "MRCR (1M)",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 71.9,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MRCR (1M)                                               71.9%"
+      }
+    },
+    {
+      "rawEvalName": "MRCR (1M)",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 82.6,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MRCR (1M)                                               71.9%        82.6%"
+      }
+    },
+    {
+      "rawEvalName": "MRCR (1M)",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "accuracy",
+      "value": 58,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MRCR (1M)                                               71.9%        82.6%         58.0%"
+      }
+    },
+    {
+      "rawEvalName": "MRCR (1M)",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "accuracy",
+      "value": 70.5,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MRCR (1M)                                               71.9%        82.6%         58.0%            70.5%"
+      }
+    },
+    {
+      "rawEvalName": "MMMU",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 62.3,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MMMU           multimodal understanding and             62.3%"
+      }
+    },
+    {
+      "rawEvalName": "MMMU",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 65.9,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MMMU           multimodal understanding and             62.3%        65.9%"
+      }
+    },
+    {
+      "rawEvalName": "MMMU",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "accuracy",
+      "value": 68,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MMMU           multimodal understanding and             62.3%        65.9%         68.0%"
+      }
+    },
+    {
+      "rawEvalName": "MMMU",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "accuracy",
+      "value": 71.7,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "MMMU           multimodal understanding and             62.3%        65.9%         68.0%            71.7%"
+      }
+    },
+    {
+      "rawEvalName": "CoVoST2 (21 lang)",
+      "model": "google/gemini-flash-1.5",
+      "metric": "BLEU score",
+      "value": 37.4,
+      "unit": "score",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "CoVoST2 (21 Automatic speech translation (BLEU\nAudio                                                                   37.4"
+      }
+    },
+    {
+      "rawEvalName": "CoVoST2 (21 lang)",
+      "model": "google/gemini-pro-1.5",
+      "metric": "BLEU score",
+      "value": 40.1,
+      "unit": "score",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "CoVoST2 (21 Automatic speech translation (BLEU\nAudio                                                                   37.4         40.1"
+      }
+    },
+    {
+      "rawEvalName": "CoVoST2 (21 lang)",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "BLEU score",
+      "value": 38.4,
+      "unit": "score",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "CoVoST2 (21 Automatic speech translation (BLEU\nAudio                                                                   37.4         40.1           38.4"
+      }
+    },
+    {
+      "rawEvalName": "CoVoST2 (21 lang)",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "BLEU score",
+      "value": 39,
+      "unit": "score",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "CoVoST2 (21 Automatic speech translation (BLEU\nAudio                                                                   37.4         40.1           38.4            39.0"
+      }
+    },
+    {
+      "rawEvalName": "EgoSchema (test)",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 66.8,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "EgoSchema      Video analysis across multiple\nVideo                                                                  66.8%"
+      }
+    },
+    {
+      "rawEvalName": "EgoSchema (test)",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 71.2,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "EgoSchema      Video analysis across multiple\nVideo                                                                  66.8%        71.2%"
+      }
+    },
+    {
+      "rawEvalName": "EgoSchema (test)",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "accuracy",
+      "value": 67.2,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "EgoSchema      Video analysis across multiple\nVideo                                                                  66.8%        71.2%          67.2%"
+      }
+    },
+    {
+      "rawEvalName": "EgoSchema (test)",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "accuracy",
+      "value": 71.1,
+      "unit": "percent",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "table": "Capability Benchmark results",
+        "quote": "EgoSchema      Video analysis across multiple\nVideo                                                                  66.8%        71.2%          67.2%            71.1%"
+      }
+    },
+    {
+      "rawEvalName": "Text to Text Safety",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "change vs Gemini 1.5 Pro 002",
+      "value": -1.4,
+      "unit": "percent",
+      "settings": {
+        "other": "absolute percentage increase or decrease vs Gemini 1.5 Pro 002; automated evaluations"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Training and Development Evaluation Results",
+        "quote": "Text to Text Safety     evaluation measuring safety                 -1.40%"
+      }
+    },
+    {
+      "rawEvalName": "Multilingual Safety",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "change vs Gemini 1.5 Pro 002",
+      "value": -2,
+      "unit": "percent",
+      "settings": {
+        "other": "absolute percentage increase or decrease vs Gemini 1.5 Pro 002; automated evaluations"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Training and Development Evaluation Results",
+        "quote": "Multilingual Safety     evaluation across multiple                  -2.0%"
+      }
+    },
+    {
+      "rawEvalName": "Tone",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "change vs Gemini 1.5 Pro 002",
+      "value": 4.4,
+      "unit": "percent",
+      "settings": {
+        "other": "absolute percentage increase or decrease vs Gemini 1.5 Pro 002; automated evaluations"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Training and Development Evaluation Results",
+        "quote": "Tone                    measuring objective tone of                 +4.40%"
+      }
+    },
+    {
+      "rawEvalName": "Instruction Following",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "change vs Gemini 1.5 Pro 002",
+      "value": -1.1,
+      "unit": "percent",
+      "settings": {
+        "other": "absolute percentage increase or decrease vs Gemini 1.5 Pro 002; automated evaluations"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Training and Development Evaluation Results",
+        "quote": "Instruction Following                                               -1.10%"
+      }
+    },
+    {
+      "rawEvalName": "Image to Text Safety",
+      "model": "google/gemini-2.0-flash-lite-001",
+      "metric": "change vs Gemini 1.5 Pro 002",
+      "value": 2.3,
+      "unit": "percent",
+      "settings": {
+        "other": "absolute percentage increase or decrease vs Gemini 1.5 Pro 002; automated evaluations"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Training and Development Evaluation Results",
+        "quote": "Image to Text Safety    evaluation measuring safety                 +2.30%"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:33:09Z"
+  },
+  "notes": "Short 7-page model card. Capability table on printed page 3; safety delta table on printed page 5 (vs Gemini 1.5 Pro 002). Title page has no printed page number (used PDF index 1 for releaseDate/model info that appears before printed page 1). FSF evaluations mentioned but no domain risk labels or CCL statements, so riskDecisions left empty. No named external testers. Safety results are relative deltas only, not absolute violation rates. CoVoST2 reported as BLEU (no %). Comparison models mapped to seed ids google/gemini-flash-1.5, google/gemini-pro-1.5, google/gemini-2.0-flash-001."
+}

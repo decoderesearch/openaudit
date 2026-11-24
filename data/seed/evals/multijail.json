@@ -1,0 +1,127 @@
+{
+  "eval": {
+    "slug": "multijail",
+    "displayName": "MultiJail",
+    "aliases": ["Multi Jail"],
+    "description": "Multilingual jailbreak dataset: 315 English harmful prompts manually translated into nine non-English languages (3,150 parallel texts). Evaluates unintentional (non-English query alone) and intentional (English malicious instruction plus non-English prompt) settings. The headline metric is unsafe rate (share of unsafe replies).",
+    "summary": "Measures how often the model gives unsafe replies to harmful requests written in non-English languages.",
+    "maintainers": [
+      {
+        "name": "DAMO-NLP-SG",
+        "url": "https://github.com/DAMO-NLP-SG/multilingual-safety-for-LLMs"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2310.06474",
+        "title": "Multilingual Jailbreak Challenges in Large Language Models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/DAMO-NLP-SG/multilingual-safety-for-LLMs",
+        "title": "Official MultiJail data repo"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/DAMO-NLP-SG/MultiJail",
+        "title": "DAMO-NLP-SG/MultiJail"
+      }
+    ],
+    "access": "public",
+    "status": "saturated",
+    "saturatedReason": "2023 multilingual set. Current models score under 4% unsafe on it, and judges disagree.",
+    "saturatedDecisionDate": "2026-10-05",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "human"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["jailbreaks", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2023-10-10",
+      "status": "published",
+      "releasedDate": "2023-10-10",
+      "dataset": {
+        "hfRepo": "DAMO-NLP-SG/MultiJail",
+        "revision": "93d65c778925d55973b9ff30c7bccc8545494eb6",
+        "url": "https://huggingface.co/datasets/DAMO-NLP-SG/MultiJail",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "train",
+            "sampleCount": 315,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "unsafe",
+          "displayName": "Unsafe response",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when the evaluator labels the reply as unsafe (harmful content or direct help); separate from safe and invalid."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "unsafe_rate",
+          "displayName": "Unsafe rate",
+          "score": "unsafe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Share of unsafe responses. Cards also report safe response rate, mean/min safe rate, and invalid response rate."
+        },
+        {
+          "key": "non_english_unsafe_rate",
+          "displayName": "Non-English unsafe rate (Avg.)",
+          "score": "unsafe",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Mean of the unsafe rates of the nine non-English languages, with English left out. The paper reports this as \"Avg.\" in Table 1."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "openaudit_runner/multijail",
+        "package": "openaudit-runner==0.1.0",
+        "roles": ["target", "judge"],
+        "models": [
+          {
+            "id": "judge",
+            "role": "judge",
+            "taskArg": "judge_model",
+            "default": "openai/gpt-4o",
+            "tier": "standard",
+            "scoring": true
+          },
+          {
+            "id": "translator",
+            "role": "judge",
+            "label": "Translator",
+            "taskArg": "translator_model",
+            "default": "google/gemini-2.5-flash",
+            "tier": "fast",
+            "scoring": true
+          }
+        ],
+        "internet": true
+      }
+    }
+  ]
+}

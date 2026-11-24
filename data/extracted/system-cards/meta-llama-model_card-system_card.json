@@ -1,0 +1,822 @@
+{
+  "document": "meta-llama-model_card-system_card",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "meta/llama-7b"
+    },
+    {
+      "model": "meta/llama-13b"
+    },
+    {
+      "model": "meta/llama-33b"
+    },
+    {
+      "model": "meta/llama-65b"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (auto-regressive language model)",
+      "source": {
+        "page": "Model details",
+        "quote": "LLaMA is an auto-regressive language model, based on the transformer architecture."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "20 languages in training data (mostly English): bg, ca, cs, da, de, en, es, fr, hr, hu, it, nl, pl, pt, ro, ru, sl, sr, sv, uk",
+      "source": {
+        "page": "Training dataset",
+        "quote": "The Wikipedia and Books domains include data in the following languages: bg, ca, cs, da, de, en, es, fr, hr, hu, it, nl, pl, pt, ro, ru, sl, sr, sv, uk."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Non-commercial bespoke license",
+      "source": {
+        "page": "Model details",
+        "quote": "Non-commercial bespoke license"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7B, 13B, 33B and 65B",
+      "source": {
+        "page": "Model details",
+        "quote": "The model comes in different sizes: 7B, 13B, 33B and 65B parameters."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "auto-regressive language model based on the transformer architecture",
+      "source": {
+        "page": "Model details",
+        "quote": "LLaMA is an auto-regressive language model, based on the transformer architecture."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "CCNet [67%], C4 [15%], GitHub [4.5%], Wikipedia [4.5%], Books [4.5%], ArXiv [2.5%], Stack Exchange [2%]; 7B/13B trained on 1T tokens, 33B/65B on 1.4T tokens",
+      "source": {
+        "page": "Training dataset",
+        "quote": "The model was trained using the following source of data: CCNet [67%], C4 [15%], GitHub [4.5%], Wikipedia [4.5%], Books [4.5%], ArXiv [2.5%], Stack Exchange[2%]."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Prone to generating incorrect information (hallucinations)",
+      "source": {
+        "page": "Ethical considerations",
+        "quote": "These models are often prone to generating incorrect information, sometimes referred to as hallucinations."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Evaluated on responsible AI (RAI) bias datasets; [CrowS-Pairs](/evals/crows-pairs) average 66.6 (lower is better)",
+      "source": {
+        "page": "Factors",
+        "quote": "We thus evaluated on RAI datasets to measure biases exhibited by the model for gender, religion, race, sexual orientation, age, nationality, disability, physical appearance and socio-economic status."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "Toxicity of generations measured with Perspective API on [RealToxicityPrompts](/evals/real-toxicity-prompts)",
+      "source": {
+        "page": "Factors",
+        "quote": "We also measure the toxicity of model generations, depending on the toxicity of the context used to prompt the model."
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The model was not trained with human feedback and can generate toxic, offensive, incorrect, or unhelpful content.", "tone": "bad",
+      "source": {
+        "page": "Intended use",
+        "quote": "our model has not been trained with human feedback, and can thus generate toxic or offensive content, incorrect information or generally unhelpful answers."
+      }
+    },
+    {
+      "text": "Performance is expected to be better for English than for other languages, though 20 languages appear in training data.", "tone": "neutral",
+      "source": {
+        "page": "Factors",
+        "quote": "most of our dataset is made of English text, and we thus expect the model to perform better for English than other languages."
+      }
+    },
+    {
+      "text": "Only one model of each size was trained, so pre-training variability was not evaluated.", "tone": "neutral",
+      "source": {
+        "page": "Metrics",
+        "quote": "we trained only one model of each size, and thus could not evaluate variability of pre-training."
+      }
+    },
+    {
+      "text": "Web training data was filtered by proximity to Wikipedia text using a Kneser-Ney language model (LM) and a fastText classifier.", "tone": "neutral",
+      "source": {
+        "page": "Ethical considerations",
+        "quote": "We filtered the data from the Web based on its proximity to Wikipedia text and references."
+      }
+    },
+    {
+      "text": "As a foundational model, LLaMA should not be used in downstream apps without further risk investigation and mitigation.", "tone": "mixed",
+      "source": {
+        "page": "Ethical considerations",
+        "quote": "LLaMA is a foundational model, and as such, it should not be used for downstream applications without further investigation and mitigations of risks."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "BoolQ",
+      "model": "meta/llama-7b",
+      "metric": "accuracy",
+      "value": 76.5,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>7B</th><th>76.5</th>"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "model": "meta/llama-7b",
+      "metric": "accuracy",
+      "value": 79.8,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>7B</th><th>76.5</th><th>79.8</th>"
+      }
+    },
+    {
+      "rawEvalName": "SIQA",
+      "model": "meta/llama-7b",
+      "metric": "accuracy",
+      "value": 48.9,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>7B</th><th>76.5</th><th>79.8</th><th>48.9</th>"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "model": "meta/llama-7b",
+      "metric": "accuracy",
+      "value": 76.1,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>7B</th><th>76.5</th><th>79.8</th><th>48.9</th><th>76.1</th>"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "model": "meta/llama-7b",
+      "metric": "accuracy",
+      "value": 70.1,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>7B</th><th>76.5</th><th>79.8</th><th>48.9</th><th>76.1</th><th>70.1</th>"
+      }
+    },
+    {
+      "rawEvalName": "ARC-e",
+      "model": "meta/llama-7b",
+      "metric": "accuracy",
+      "value": 76.7,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>7B</th><th>76.5</th><th>79.8</th><th>48.9</th><th>76.1</th><th>70.1</th><th>76.7</th>"
+      }
+    },
+    {
+      "rawEvalName": "ARC-c",
+      "model": "meta/llama-7b",
+      "metric": "accuracy",
+      "value": 47.6,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>7B</th><th>76.5</th><th>79.8</th><th>48.9</th><th>76.1</th><th>70.1</th><th>76.7</th><th>47.6</th>"
+      }
+    },
+    {
+      "rawEvalName": "OBQA",
+      "model": "meta/llama-7b",
+      "metric": "accuracy",
+      "value": 57.2,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>7B</th><th>76.5</th><th>79.8</th><th>48.9</th><th>76.1</th><th>70.1</th><th>76.7</th><th>47.6</th><th>57.2</th>"
+      }
+    },
+    {
+      "rawEvalName": "COPA",
+      "model": "meta/llama-7b",
+      "metric": "accuracy",
+      "value": 93,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>7B</th><th>76.5</th><th>79.8</th><th>48.9</th><th>76.1</th><th>70.1</th><th>76.7</th><th>47.6</th><th>57.2</th><th>93"
+      }
+    },
+    {
+      "rawEvalName": "BoolQ",
+      "model": "meta/llama-13b",
+      "metric": "accuracy",
+      "value": 78.1,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>13B</th><th>78.1</th>"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "model": "meta/llama-13b",
+      "metric": "accuracy",
+      "value": 80.1,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>13B</th><th>78.1</th><th>80.1</th>"
+      }
+    },
+    {
+      "rawEvalName": "SIQA",
+      "model": "meta/llama-13b",
+      "metric": "accuracy",
+      "value": 50.4,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>13B</th><th>78.1</th><th>80.1</th><th>50.4</th>"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "model": "meta/llama-13b",
+      "metric": "accuracy",
+      "value": 79.2,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>13B</th><th>78.1</th><th>80.1</th><th>50.4</th><th>79.2</th>"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "model": "meta/llama-13b",
+      "metric": "accuracy",
+      "value": 73,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>13B</th><th>78.1</th><th>80.1</th><th>50.4</th><th>79.2</th><th>73</th>"
+      }
+    },
+    {
+      "rawEvalName": "ARC-e",
+      "model": "meta/llama-13b",
+      "metric": "accuracy",
+      "value": 78.1,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>13B</th><th>78.1</th><th>80.1</th><th>50.4</th><th>79.2</th><th>73</th><th>78.1</th>"
+      }
+    },
+    {
+      "rawEvalName": "ARC-c",
+      "model": "meta/llama-13b",
+      "metric": "accuracy",
+      "value": 52.7,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>13B</th><th>78.1</th><th>80.1</th><th>50.4</th><th>79.2</th><th>73</th><th>78.1</th><th>52.7</th>"
+      }
+    },
+    {
+      "rawEvalName": "OBQA",
+      "model": "meta/llama-13b",
+      "metric": "accuracy",
+      "value": 56.4,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>13B</th><th>78.1</th><th>80.1</th><th>50.4</th><th>79.2</th><th>73</th><th>78.1</th><th>52.7</th><th>56.4</th>"
+      }
+    },
+    {
+      "rawEvalName": "COPA",
+      "model": "meta/llama-13b",
+      "metric": "accuracy",
+      "value": 94,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>13B</th><th>78.1</th><th>80.1</th><th>50.4</th><th>79.2</th><th>73</th><th>78.1</th><th>52.7</th><th>56.4</th><th>94"
+      }
+    },
+    {
+      "rawEvalName": "BoolQ",
+      "model": "meta/llama-33b",
+      "metric": "accuracy",
+      "value": 83.1,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>33B</th><th>83.1</th>"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "model": "meta/llama-33b",
+      "metric": "accuracy",
+      "value": 82.3,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>33B</th><th>83.1</th><th>82.3</th>"
+      }
+    },
+    {
+      "rawEvalName": "SIQA",
+      "model": "meta/llama-33b",
+      "metric": "accuracy",
+      "value": 50.4,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>33B</th><th>83.1</th><th>82.3</th><th>50.4</th>"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "model": "meta/llama-33b",
+      "metric": "accuracy",
+      "value": 82.8,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>33B</th><th>83.1</th><th>82.3</th><th>50.4</th><th>82.8</th>"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "model": "meta/llama-33b",
+      "metric": "accuracy",
+      "value": 76,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>33B</th><th>83.1</th><th>82.3</th><th>50.4</th><th>82.8</th><th>76</th>"
+      }
+    },
+    {
+      "rawEvalName": "ARC-e",
+      "model": "meta/llama-33b",
+      "metric": "accuracy",
+      "value": 81.4,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>33B</th><th>83.1</th><th>82.3</th><th>50.4</th><th>82.8</th><th>76</th><th>81.4</th>"
+      }
+    },
+    {
+      "rawEvalName": "ARC-c",
+      "model": "meta/llama-33b",
+      "metric": "accuracy",
+      "value": 57.8,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>33B</th><th>83.1</th><th>82.3</th><th>50.4</th><th>82.8</th><th>76</th><th>81.4</th><th>57.8</th>"
+      }
+    },
+    {
+      "rawEvalName": "OBQA",
+      "model": "meta/llama-33b",
+      "metric": "accuracy",
+      "value": 58.6,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>33B</th><th>83.1</th><th>82.3</th><th>50.4</th><th>82.8</th><th>76</th><th>81.4</th><th>57.8</th><th>58.6</th>"
+      }
+    },
+    {
+      "rawEvalName": "COPA",
+      "model": "meta/llama-33b",
+      "metric": "accuracy",
+      "value": 92,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>33B</th><th>83.1</th><th>82.3</th><th>50.4</th><th>82.8</th><th>76</th><th>81.4</th><th>57.8</th><th>58.6</th><th>92"
+      }
+    },
+    {
+      "rawEvalName": "BoolQ",
+      "model": "meta/llama-65b",
+      "metric": "accuracy",
+      "value": 85.3,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>65B</th><th>85.3</th>"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "model": "meta/llama-65b",
+      "metric": "accuracy",
+      "value": 82.8,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>65B</th><th>85.3</th><th>82.8</th>"
+      }
+    },
+    {
+      "rawEvalName": "SIQA",
+      "model": "meta/llama-65b",
+      "metric": "accuracy",
+      "value": 52.3,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>65B</th><th>85.3</th><th>82.8</th><th>52.3</th>"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "model": "meta/llama-65b",
+      "metric": "accuracy",
+      "value": 84.2,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>65B</th><th>85.3</th><th>82.8</th><th>52.3</th><th>84.2</th>"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "model": "meta/llama-65b",
+      "metric": "accuracy",
+      "value": 77,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>65B</th><th>85.3</th><th>82.8</th><th>52.3</th><th>84.2</th><th>77</th>"
+      }
+    },
+    {
+      "rawEvalName": "ARC-e",
+      "model": "meta/llama-65b",
+      "metric": "accuracy",
+      "value": 81.5,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>65B</th><th>85.3</th><th>82.8</th><th>52.3</th><th>84.2</th><th>77</th><th>81.5</th>"
+      }
+    },
+    {
+      "rawEvalName": "ARC-c",
+      "model": "meta/llama-65b",
+      "metric": "accuracy",
+      "value": 56,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>65B</th><th>85.3</th><th>82.8</th><th>52.3</th><th>84.2</th><th>77</th><th>81.5</th><th>56</th>"
+      }
+    },
+    {
+      "rawEvalName": "OBQA",
+      "model": "meta/llama-65b",
+      "metric": "accuracy",
+      "value": 60.2,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>65B</th><th>85.3</th><th>82.8</th><th>52.3</th><th>84.2</th><th>77</th><th>81.5</th><th>56</th><th>60.2</th>"
+      }
+    },
+    {
+      "rawEvalName": "COPA",
+      "model": "meta/llama-65b",
+      "metric": "accuracy",
+      "value": 94,
+      "unit": "percent",
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 2",
+        "quote": "<th>65B</th><th>85.3</th><th>82.8</th><th>52.3</th><th>84.2</th><th>77</th><th>81.5</th><th>56</th><th>60.2</th><th>94</th>"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "LLaMA",
+      "metric": "bias score",
+      "value": 70.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Gender"
+      },
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 3",
+        "quote": "| 1   | Gender               | 70.6     |"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "LLaMA",
+      "metric": "bias score",
+      "value": 79,
+      "unit": "percent",
+      "settings": {
+        "other": "Religion"
+      },
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 3",
+        "quote": "| 2   | Religion             | 79       |"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "LLaMA",
+      "metric": "bias score",
+      "value": 57,
+      "unit": "percent",
+      "settings": {
+        "other": "Race/Color"
+      },
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 3",
+        "quote": "| 3   | Race/Color           | 57       |"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "LLaMA",
+      "metric": "bias score",
+      "value": 81,
+      "unit": "percent",
+      "settings": {
+        "other": "Sexual orientation"
+      },
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 3",
+        "quote": "| 4   | Sexual orientation   | 81       |"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "LLaMA",
+      "metric": "bias score",
+      "value": 70.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Age"
+      },
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 3",
+        "quote": "| 5   | Age                  | 70.1     |"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "LLaMA",
+      "metric": "bias score",
+      "value": 64.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Nationality"
+      },
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 3",
+        "quote": "| 6   | Nationality          | 64.2     |"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "LLaMA",
+      "metric": "bias score",
+      "value": 66.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Disability"
+      },
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 3",
+        "quote": "| 7   | Disability           | 66.7     |"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "LLaMA",
+      "metric": "bias score",
+      "value": 77.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Physical appearance"
+      },
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 3",
+        "quote": "| 8   | Physical appearance  | 77.8     |"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "LLaMA",
+      "metric": "bias score",
+      "value": 71.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Socioeconomic status"
+      },
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 3",
+        "quote": "| 9   | Socioeconomic status | 71.5     |"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "LLaMA",
+      "metric": "bias score",
+      "value": 66.6,
+      "unit": "percent",
+      "settings": {
+        "other": "LLaMA Average"
+      },
+      "source": {
+        "page": "Quantitative analysis",
+        "table": "Table 3",
+        "quote": "|     | LLaMA Average        | 66.6     |"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:49:21Z"
+  },
+  "notes": "Source is the short GitHub MODEL_CARD.md (llama_v1), not the LLaMA paper. Capability numbers for MMLU, BIG-bench hard, GSM8k, QA, RealToxicityPrompts, and WinoGender are listed as evaluation datasets/metrics but have no numeric results in this card—only Table 2 (reasoning) and Table 3 (bias). Table 1 is architecture hyperparameters, not eval scores. Bias Table 3 column is labeled FAIR LLM without naming a size; attributed as rawModelName LLaMA. CrowS-Pairs name inferred from evaluation-datasets list and category rows. Model date is a training window (Dec 2022–Feb 2023), not a release date. Token counts (1T/1.4T) appear in Table 1 and are noted under trainingData, not trainingCompute (no FLOPs/GPU-hours stated)."
+}

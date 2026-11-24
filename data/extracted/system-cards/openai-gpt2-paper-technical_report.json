@@ -1,0 +1,220 @@
+{
+  "document": "openai-gpt2-paper-technical_report",
+  "alsoDocuments": ["openai-gpt2-blog"],
+  "covers": [
+    {
+      "model": "openai-community/gpt2"
+    },
+    {
+      "model": "openai-community/gpt2-medium"
+    },
+    {
+      "model": "openai-community/gpt2-large"
+    },
+    {
+      "model": "openai-community/gpt2-xl"
+    }
+  ],
+  "pageCount": 24,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "WebText does not include links created after Dec 2017",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "does not include links created after Dec"
+      }
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "1024 tokens",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "also increase the context size from 512 to 1024 tokens and"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "WebText is overwhelmingly not French; a detector found only 10MB of French",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "which detected only 10MB of data in the French language"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "117M, 345M, 762M, and 1542M; the largest is also called a 1.5B parameter Transformer (GPT-2)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "1542M           48       1600"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Transformer language models following OpenAI GPT, with 12–48 layers and dmodel 768–1600",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "We use a Transformer (Vaswani et al., 2017) based archi-"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "WebText: text from Reddit outbound links with at least 3 karma; slightly over 8 million documents, 40 GB of text, after de-duplication and heuristic cleaning; Wikipedia removed",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "based cleaning contains slightly over 8 million documents"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "All four WebText language models still underfit the training set; held-out perplexity was still improving with more training time.", "tone": "neutral",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "All models still underfit Web-"
+      }
+    },
+    {
+      "text": "GPT-2 can write news-style articles about an invented event (the discovery of talking unicorns).", "tone": "neutral",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "of talking unicorns. An example is provided in Table 13."
+      }
+    },
+    {
+      "text": "On Natural Questions, GPT-2 is well calibrated: 63.1% accuracy on the 1% of questions it is most confident in.", "tone": "good",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "63.1% on the 1% of questions it is most confident in. The"
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:59:29Z"
+  },
+  "notes": "This is a 2019 capability paper (Language Models are Unsupervised Multitask Learners), not a safety report. There is no safety, alignment, refusal, bias, toxicity, jailbreak, or dangerous-capability section. evalResults is empty under the pilot safety-only rule. Skipped capability numbers: Table 3 language modeling (LAMBADA PPL/ACC, CBT-CN/CBT-NE, WikiText-2, PTB, enwik8, text8, WikiText-103, 1BW) for 117M/345M/762M/1542M and SOTA; Children's Book Test (Figure 2, no extracted chart numbers); Winograd Schema Challenge (Figure 3); CNN/DailyMail summarization ROUGE (GPT-2 TL;DR 29.34/8.27/26.58); CoQA F1 55; Natural Questions (5.3x more correct than a common-answer baseline; 63.1% on most-confident 1% kept only as a finding); WMT-14 Fr-En translation. Figure 1 is a zero-shot capability chart with no readable bar numbers in the text layer. Paper param counts (117M, 345M, 762M, 1542M) differ slightly from later seed names (124M, 355M, 774M, 1.5B); covers still maps all four seed-linked sizes because the report trains and evaluates those four WebText LMs as its own models. Knowledge cutoff is the WebText link date, not a named cutoff. Languages disclosure is only the French-byte detector remark, not a full language list. Training compute is not stated."
+}

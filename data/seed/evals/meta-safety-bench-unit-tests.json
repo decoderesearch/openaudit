@@ -1,0 +1,75 @@
+{
+  "eval": {
+    "slug": "meta-safety-bench-unit-tests",
+    "displayName": "Safety Bench Unit Tests (Meta)",
+    "aliases": [
+      "Safety Bench Unit Tests",
+      "Safety Bench Unit Tests (Safe)",
+      "Safety Bench Unit Tests (Realistic)",
+      "Safety Bench Unit Tests (Unsafe)",
+      "Safety Bench Unit Tests (Adversarial)"
+    ],
+    "description": "Meta OPT dialogue safety unit tests (Dinan et al., 2021) that score how unsafe a model's response is across four topic-sensitivity buckets: Safe, Realistic, Unsafe, and Adversarial. Cards report unsafe response rate per bucket (lower is better). Dataset and runner are lab-internal for this registry entry.",
+    "summary": "Measures how often the model gives unsafe replies to prompts on sensitive topics, from safe to adversarial.",
+    "maintainers": [
+      {
+        "name": "Meta",
+        "url": "https://arxiv.org/abs/2205.01068"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://arxiv.org/abs/2205.01068",
+        "title": "OPT technical report (Safety Bench Unit Tests)"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2205.01068",
+        "title": "OPT: Open Pre-trained Transformer Language Models"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["multi_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["toxicity", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "dinan-2021",
+      "status": "draft",
+      "changes": "As reported in the OPT paper and model card; stratified Safe / Realistic / Unsafe / Adversarial.",
+      "scores": [
+        {
+          "key": "unsafe_response",
+          "displayName": "Unsafe response",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "Whether the dialogue response is scored unsafe for that sensitivity bucket."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "unsafe_response_rate",
+          "displayName": "Unsafe response rate",
+          "score": "unsafe_response",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of responses scored unsafe. Lower is better. Per sensitivity bucket."
+        }
+      ]
+    }
+  ]
+}

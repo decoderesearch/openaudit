@@ -1,0 +1,17 @@
+# The SAEBench environment. setup.sh installs saebench-requirements.txt, then SAEBench with -e.
+# To lock again (after ./setup.sh clones SAEBench to .saebench):
+#   uv pip compile saebench-requirements.in -p 3.11 --index-url https://pypi.org/simple \
+#     --extra-index-url https://download.pytorch.org/whl/cu128 --index-strategy unsafe-best-match \
+#     --no-header | grep -v '^-e ' > saebench-requirements.txt
+-e .saebench
+# RAVEL's published results used 5.5.x. The custom SAE path uses sae-lens only for helpers.
+sae-lens==5.5.2
+transformer-lens==2.11.0
+# cu128 wheels: these also run on RTX 50 series GPUs.
+torch==2.7.1
+torchvision==0.22.1
+# SAEBench needs numpy<2. pyarrow 19 and up need numpy 2.
+numpy==1.26.4
+pyarrow==18.1.0
+# The autointerp code uses the openai 1.x client.
+openai==1.60.0

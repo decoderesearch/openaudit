@@ -1,0 +1,96 @@
+{
+  "eval": {
+    "slug": "re-bench",
+    "displayName": "RE-Bench",
+    "aliases": ["RE-Bench Optimise LLM Foundry", "Research Engineering Benchmark"],
+    "description": "METR Research Engineering Benchmark (v1): seven open-ended ML research-engineering environments where agents and human experts get a computer with GPUs and try to raise a programmatic score within a time budget. Headline comparisons use best-of-k agent scores versus human baselines at matched time budgets. Environments and human-attempt data are open-sourced.",
+    "summary": "Measures how well AI agents do open-ended machine learning research engineering tasks compared with human experts.",
+    "maintainers": [
+      {
+        "name": "METR",
+        "url": "https://github.com/METR/RE-Bench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2411.15114",
+        "title": "RE-Bench: Evaluating frontier AI R&D capabilities of language model agents against human experts"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/METR/RE-Bench",
+        "title": "RE-Bench environments"
+      },
+      {
+        "kind": "blog",
+        "url": "https://metr.org/blog/2024-11-22-evaluating-r-d-capabilities-of-llms/",
+        "title": "METR blog post"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://proceedings.mlr.press/v267/wijk25a.html",
+        "title": "PMLR proceedings page"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "1",
+      "status": "published",
+      "releasedDate": "2024-11-22",
+      "dataset": {
+        "url": "https://github.com/METR/RE-Bench/tree/93b98062e55f6945d4a7e213a3226dd419896170",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "environments",
+            "sampleCount": 7,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "environment_score",
+          "displayName": "Environment score",
+          "type": "continuous",
+          "direction": "higher_is_better",
+          "description": "Task-specific programmatic score for the agent’s submitted solution on that environment attempt."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mean_normalized_score",
+          "displayName": "Mean normalized score",
+          "score": "environment_score",
+          "aggregation": "mean",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Average score across environments after the paper’s normalization, often at a fixed time budget and best-of-k."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "sandbox": "docker",
+        "internet": false,
+        "gpu": true
+      }
+    }
+  ]
+}

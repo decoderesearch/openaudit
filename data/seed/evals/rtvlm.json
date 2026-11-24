@@ -1,0 +1,140 @@
+{
+  "eval": {
+    "slug": "rtvlm",
+    "displayName": "RTVLM",
+    "aliases": ["Red Teaming Visual Language Models", "RedTeamingVLM", "RT-VLM"],
+    "description": "Red-teaming benchmark for vision-language models with about 5,200 image-question pairs across faithfulness, privacy, safety, and fairness (subtasks such as visual misleading, multimodal jailbreak, politics, racial, face fairness, and captcha). GPT-4V or human judges score responses; cards report VLM-as-a-Judge, RAI, or safety scores, often per category (Mislead, Politics, Racial, Jailbreak).",
+    "summary": "Tests whether vision-language models stay accurate, protect privacy, refuse unsafe requests, and treat people fairly when given images.",
+    "maintainers": [
+      {
+        "name": "Mukai Li et al.",
+        "url": "https://huggingface.co/datasets/MMInstruction/RedTeamingVLM"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2401.12915",
+        "title": "Red Teaming Visual Language Models"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/MMInstruction/RedTeamingVLM",
+        "title": "MMInstruction/RedTeamingVLM"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "robustness", "capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "human"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "jailbreaks", "hallucination", "bias"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-01-23",
+      "status": "published",
+      "releasedDate": "2024-01-23",
+      "dataset": {
+        "hfRepo": "MMInstruction/RedTeamingVLM",
+        "revision": "aec4f4d17c2babb11adad995aad47162b8984b30",
+        "url": "https://huggingface.co/datasets/MMInstruction/RedTeamingVLM",
+        "splits": [
+          {
+            "name": "misleading",
+            "sampleCount": 100,
+            "storage": "pointer"
+          },
+          {
+            "name": "captcha",
+            "sampleCount": 200,
+            "storage": "pointer"
+          },
+          {
+            "name": "jailbreak",
+            "sampleCount": 200,
+            "storage": "pointer"
+          },
+          {
+            "name": "face",
+            "sampleCount": 2040,
+            "storage": "pointer"
+          },
+          {
+            "name": "celeb",
+            "sampleCount": 200,
+            "storage": "pointer"
+          },
+          {
+            "name": "politics",
+            "sampleCount": 200,
+            "storage": "pointer"
+          },
+          {
+            "name": "racial",
+            "sampleCount": 200,
+            "storage": "pointer"
+          },
+          {
+            "name": "visual_misleading_wrong",
+            "sampleCount": 405,
+            "storage": "pointer"
+          },
+          {
+            "name": "visual_misleading_correct",
+            "sampleCount": 432,
+            "storage": "pointer"
+          },
+          {
+            "name": "visual_orderA",
+            "sampleCount": 402,
+            "storage": "pointer"
+          },
+          {
+            "name": "visual_orderB",
+            "sampleCount": 402,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "judge_score",
+          "displayName": "Judge score",
+          "type": "continuous",
+          "min": 0,
+          "max": 10,
+          "direction": "higher_is_better",
+          "description": "GPT-4V or human red-team score for the response on the paper's aspect rubrics; cards often map this to a 0–10 VLM-as-a-Judge or RAI scale."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "vlm_judge_score",
+          "displayName": "VLM-as-a-Judge / RAI / safety score",
+          "score": "judge_score",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 10,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Mean judge score. Cards often split Mislead, Politics, Racial, and Jailbreak."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "internet": false,
+        "gpu": true
+      }
+    }
+  ]
+}

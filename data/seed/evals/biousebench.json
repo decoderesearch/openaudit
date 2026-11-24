@@ -1,0 +1,64 @@
+{
+  "eval": {
+    "slug": "biousebench",
+    "displayName": "BioUseBench",
+    "aliases": [],
+    "description": "xAI internal dual-use biology refusal eval spanning high-level categories such as virology, wet-lab methods, chemical synthesis, toxicology, and laboratory safety. It scores whether the model withholds assistance on the most hazardous enablement prompts, not scientific accuracy. Cards report dual-use refusal on the severity-5 subset (higher is safer). Lab-internal.",
+    "summary": "Tests whether the model refuses to help with the most dangerous dual-use biology and chemistry requests.",
+    "maintainers": [
+      {
+        "name": "xAI",
+        "url": "https://media.x.ai/v1/website/4p7card-5eccc980.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://media.x.ai/v1/website/4p7card-5eccc980.pdf",
+        "title": "Grok 4.7 Model Card (BioUseBench)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "internal",
+      "status": "draft",
+      "changes": "xAI BioUseBench as reported on Grok 4.5–4.7 cards; severity-5 dual-use refusal is the headline signal.",
+      "scores": [
+        {
+          "key": "dual_use_refusal",
+          "displayName": "Dual-use refusal",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "Whether the model refuses a severity-5 dual-use biology enablement prompt."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "dual_use_refusal_rate",
+          "displayName": "Dual-use refusal rate",
+          "score": "dual_use_refusal",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of severity-5 dual-use items refused. Treated as a CBRN safeguard signal, not a knowledge score."
+        }
+      ]
+    }
+  ]
+}
