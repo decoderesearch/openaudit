@@ -1,0 +1,65 @@
+{
+  "eval": {
+    "slug": "dna-sequence-design-for-transcription-factor-binding",
+    "displayName": "DNA sequence design for Transcription Factor binding",
+    "aliases": ["DNA sequence design for transcription factor binding"],
+    "description": "OpenAI DNA design eval: the model edits or proposes sequences to raise predicted binding for known transcription factors, starting from random DNA prompts drawn from Nucleobench-style settings. Oracle models score affinity; headline metrics are pass@1 and win rate versus a gradient baseline (Ledidi). Dataset and runner are lab-internal.",
+    "summary": "Measures how well the model designs DNA sequences that bind strongly to specific transcription factors.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://deploymentsafety.openai.com/gpt-rosalind-5-5/dna-sequence-design-for-transcription-factor-binding"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-rosalind-5-5/dna-sequence-design-for-transcription-factor-binding",
+        "title": "GPT-Rosalind-5.5 system card (DNA sequence design for Transcription Factor binding)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn", "agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "nucleobench-tfs",
+      "status": "draft",
+      "changes": "Cards cite 11 transcription factors with 50 prompts each; oracle scoring versus Ledidi win-rate threshold.",
+      "scores": [
+        {
+          "key": "beat_ledidi",
+          "displayName": "Beat Ledidi",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "Oracle affinity for the model design beats the Ledidi gradient baseline on that prompt."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "pass@1",
+          "displayName": "pass@1 / win rate over Ledidi",
+          "score": "beat_ledidi",
+          "aggregation": "pass_at_k",
+          "k": 1,
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of prompts where the model beats Ledidi (reported as pass@1 or win rate)."
+        }
+      ]
+    }
+  ]
+}

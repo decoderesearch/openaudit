@@ -1,0 +1,210 @@
+{
+  "document": "shlab-intern-s2-preview-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "internlm/Intern-S2-Preview"
+    },
+    {
+      "rawModelName": "Intern-MemDec-4B"
+    }
+  ],
+  "pageCount": 35,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "multimodal scientific understanding, reasoning, generation, and long-horizon tasks (text, scientific documents/images, time series)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "a series of scientific agentic foundation models designed to support multimodal"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "397B (Intern-S2-Preview-397B backbone)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "without modifying the frozen 397B backbone"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "397B MoE with MoE router and Gated DeltaNet; upgraded time series encoder and numerical forecasting branch; separate Memory Decoder path",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "For MoE policies, training–inference inconsistency arises from both expert-routing differences and numerical"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "scientific multimodal pre-training over rendered scientific documents, interleaved image-text data, and diverse scientific corpora; SFT then multi-task and agentic RL",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "scientific multimodal pre-training over rendered scientific documents, interleaved image-text data, and diverse"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Supervised fine-tuning data mixture includes safety alignment alongside conversation, code, and scientific tasks, but the report gives no safety evaluation results.", "tone": "mixed",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "instruction following, safety alignment, code generation and reasoning, image–text understanding, visual"
+      }
+    },
+    {
+      "text": "Agentic task synthesis filters infeasible, unsafe, low-quality, or toxic community-skill workflows before training.", "tone": "good",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "including workflows involving unavailable authentication, external\ntransactions, or toxic content, and then perform domain-balanced resampling"
+      }
+    },
+    {
+      "text": "Agentic reinforcement learning (RL) training hardens verifiers against solution leakage, test manipulation, and other reward hacking, without reporting measured rates.", "tone": "good",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "executable environments expose the reward channel to solution leakage, test manipulation, and other forms"
+      }
+    },
+    {
+      "text": "The authors describe Intern-S2-Preview as a preview system and call for future reliability work on longer scientific workflows.", "tone": "neutral",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "Intern-S2-Preview remains a preview system"
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:47:30Z"
+  },
+  "notes": "Technical report (not a system card) on Intern-S2-Preview scientific agentic models. No safety, alignment, honesty, refusal, jailbreak, bias, toxicity, privacy, or dangerous-capability evaluation section or tables; evalResults left empty per pilot safety-only rule. Covered Intern-S2-Preview (main Intern-S2-Preview-397B) and separate Intern-MemDec-4B memory extension. Skipped capability benchmarks: Biology-Instructions, Mol-Instructions, ProteinBinder-9, MicroVQA, SciReasoner and other scientific/multimodal/agentic/general/time-series tables (SciTS, coding/terminal agentic tasks, MMLU Pro cross-domain profile, etc.). Pretraining chunk size ≤256k tokens is not treated as an inference contextWindow. MoE inferred from training/systems text (MoE router, Gated DeltaNet); report does not give active-parameter count or license. Biology/chemistry appear only as scientific capability domains, not bio_chem safety evals."
+}

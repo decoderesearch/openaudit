@@ -1,0 +1,242 @@
+{
+  "document": "tii-refinedweb-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "tiiuae/falcon-rw-1b"
+    },
+    {
+      "model": "tiiuae/falcon-rw-7b"
+    }
+  ],
+  "pageCount": 32,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "CommonCrawl dumps from 2008 to January/February 2023",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "Over what timeframe was the data col-        We use all CommonCrawl dumps from 2008 to January/February 2023."
+      }
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (causal language models)",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "Falcon-RW are autoregressive Transformer models trained with a causal"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English only",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "Falcon-RW models are trained on English data only, and will not gener-\n                                             alize appropriately to other languages."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "Licence                                     Apache  2.0:            https://www.apache.org/licenses/"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "1.3B and 7.5B (Falcon-RW)",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "        Params.        1.3B         6.7B         1.3B         6.7B             1.3B                   8.6B                    1.3B             1.3B      7.5B"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "autoregressive Transformer (GPT-3-based) with ALiBi and FlashAttention; causal LM objective",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "2020), with ALiBi positional encodings (Press et al., 2021) and FlashAt-\n                                             tention (Dao et al., 2022). See Section 4.1 for details."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "RefinedWeb (web-only); Falcon-RW trained on 350GT; public 600GT extract of ~5,000GT full set",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "        Pretraining   300GT        300GT       300GT         300GT           300GT                  780GT                    350GT           350GT      350GT"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "32 PF-days (1.3B) and 182 PF-days (7.5B)",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "        PF-days         27          140           27          140               27                    466                       32              32       182"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Authors report RefinedWeb document toxicity (Perspective API) is about in line with The Pile; that definition excludes social biases and harmfulness.", "tone": "mixed",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "We evaluated the toxicity of the underlying pretraining dataset and found\n                                             it to be in line with common curated pretraining datasets such as The\n                                             Pile (see Figure 4)."
+      }
+    },
+    {
+      "text": "Falcon-RW models are stated to carry stereotypes and biases common on the web; no quantitative bias benchmark is reported.", "tone": "bad",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "they will carry the\n                                             stereotypes and biases commonly encountered online."
+      }
+    },
+    {
+      "text": "The datasheet states no ethical review processes were conducted for the dataset.", "tone": "mixed",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "Were any ethical review processes con-       No."
+      }
+    },
+    {
+      "text": "Out-of-scope uses include production without risk assessment or mitigation, and any irresponsible or harmful use cases.", "tone": "neutral",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "Production use without adequate assessment of risks and mitigation; any\n                                             use cases which may be considered irresponsible or harmful."
+      }
+    },
+    {
+      "text": "Pipeline design uses neutral filtering (no machine learning quality filters beyond language ID) and URL blocklists for adult content; this is data processing, not a model safety eval.", "tone": "neutral",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "(3) Neutral filtering. To avoid introducing further undesirable biases\n                                              into the model (Dodge et al., 2021; Welbl et al., 2021), we avoid using\n                                              ML-based filtering outside of language identification."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:38:22Z"
+  },
+  "notes": "Technical report on RefinedWeb and Falcon-RW 1.3B/7.5B (arXiv 2306.01116), not a system card. No model safety/alignment/honesty/jailbreak/bias benchmark numbers. Figure 4 is a dataset toxicity CDF chart (Perspective API) with no readable numeric table cells in the text layer, so no evalResults. Capability zero-shot aggregates (small-agg, main-agg, core, ext) and Wikitext perplexity skipped under safety-only pilot rules. Seed-linked tiiuae/falcon-rw-1b included; also covered checkpoint tiiuae/falcon-rw-7b named as Falcon-RW 7.5B. Bias topic left uncovered: web-stereotype limitation claim only, no bias test. Training date Dec 2022/Jan 2023 is not a model releaseDate."
+}

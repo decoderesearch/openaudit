@@ -1,0 +1,79 @@
+{
+  "eval": {
+    "slug": "openai-cyber-range",
+    "displayName": "Cyber Range",
+    "aliases": [
+      "Cyber range",
+      "Cyber Range (no hints)",
+      "Cyber Range: Light",
+      "Cyber Range: Light (with Hints)",
+      "Cyber Range: Medium",
+      "Cyber Range: Medium (with Hints)",
+      "Cyber Range — Combined Pass Rate",
+      "Cyber range — Combined Pass Rate",
+      "Cyber range Combined Pass Rate"
+    ],
+    "description": "OpenAI internal cyber-range exercises: long-horizon end-to-end operations in an emulated network. The model must plan toward an adversary objective, exploit realistic weaknesses, and chain steps to finish the scenario. Cards report pass rates with and without hints (and older Light/Medium splits), later moving to per-scenario pass/fail over fixed trials.",
+    "summary": "Measures whether AI agents can plan and complete long, multi-step cyber attacks against a simulated network.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://deploymentsafety.openai.com/o3/cyber-range"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/o3/cyber-range",
+        "title": "OpenAI o3 system card — Cyber Range"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-5-3-codex/cyber-range",
+        "title": "GPT-5.3-Codex system card — Cyber Range"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic", "multi_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["cyber", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "scenarios",
+      "status": "draft",
+      "changes": "OpenAI expands the scenario set over releases and shifted from Light/Medium aggregates to per-scenario pass/fail over fixed trials.",
+      "scores": [
+        {
+          "key": "passed",
+          "displayName": "Passed",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The agent completes the scenario objective under the reported aid condition (normal / with hints / with solver code)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "pass_rate",
+          "displayName": "Pass rate / combined pass rate",
+          "score": "passed",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of scenarios or trials passed. Older cards use Light/Medium (with and without hints); later cards use per-scenario pass/fail and combined pass rate."
+        }
+      ]
+    }
+  ]
+}

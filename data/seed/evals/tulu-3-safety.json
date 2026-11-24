@@ -1,0 +1,81 @@
+{
+  "eval": {
+    "slug": "tulu-3-safety",
+    "displayName": "Tülu 3 Safety",
+    "aliases": ["Tulu 3 Safety", "Tülu 3 Safety (avg)", "Tulu 3 Safety (avg)"],
+    "description": "AllenAI Tülu 3 safety suite score: the macro average of refusal/compliance accuracy across a fixed set of public safety benchmarks (HarmBench, XSTest, WildGuardTest, JailbreakTrigger, Do-Anything-Now, and WildJailbreakTest), usually graded with WildGuard. It is not a new item bank; the parts keep their own registry entries. Higher average is better.",
+    "summary": "Measures how well the model refuses harmful requests and jailbreaks, while it still helps with safe requests.",
+    "maintainers": [
+      {
+        "name": "Allen Institute for AI",
+        "url": "https://github.com/allenai/safety-eval"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2411.15124",
+        "title": "Tülu 3: Pushing Frontiers in Open Language Model Post-Training"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/allenai/safety-eval",
+        "title": "Ai2 Safety Evaluation Suite"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://allenai.org/blog/tulu-3",
+        "title": "Tülu 3 blog"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "programmatic"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "jailbreaks"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "tulu-3",
+      "status": "published",
+      "releasedDate": "2024-11-22",
+      "changes": "Macro average over the safety benchmarks listed in Tülu 3 Sec. 7.2.1 (Tables 25–26).",
+      "scores": [
+        {
+          "key": "safety_correct",
+          "displayName": "Safety-correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "Whether the response is scored as the desired refusal or compliance for that component benchmark item."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "average",
+          "displayName": "Tülu 3 Safety average",
+          "score": "safety_correct",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Macro average of per-benchmark safety scores (often shown as Overall / Tülu 3 Safety)."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "internet": false
+      }
+    }
+  ]
+}

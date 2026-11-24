@@ -1,0 +1,290 @@
+{
+  "document": "openai-codex-paper-technical_report",
+  "alsoDocuments": ["openai-codex-2021-blog"],
+  "covers": [
+    {
+      "rawModelName": "Codex-12B",
+      "section": "3 Code Fine-Tuning"
+    },
+    {
+      "rawModelName": "Codex-S",
+      "section": "4 Supervised Fine-Tuning"
+    },
+    {
+      "rawModelName": "Codex-D",
+      "section": "5 Docstring Generation"
+    }
+  ],
+  "pageCount": 35,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "training data collected in May 2020",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Our training dataset was collected in May 2020 from 54 mil-"
+      }
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "GPT language model fine-tuned on code (Python function synthesis from docstrings)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce Codex, a GPT language model fine-"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "Python (standalone functions from docstrings)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "we focus on the task of generating stan-"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "up to 12B parameters",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "We fine-tune GPT models containing up to 12B parameters"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "GPT models fine-tuned on code (from the GPT-3 family)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "We fine-tune GPT models containing up to 12B parameters"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "159 GB unique Python from 54 million public GitHub repos (collected May 2020; 179 GB before filtering)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "After filtering, our final dataset totaled 159 GB."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "100 billion tokens of code fine-tuning; GPT-3-12B pretraining and Codex-12B fine-tuning each hundreds of petaflop/s-days",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "nal training of GPT-3-12B consumed hundreds of petaflop/s-"
+      }
+    }
+  },
+  "riskDecisions": [
+    {
+      "domain": "cyber",
+      "labLabel": "do not materially lower the barrier to entry for malware development",
+      "phase": "unspecified",
+      "decidedBy": "OpenAI",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "not materially lower the barrier to entry for malware devel-"
+      }
+    }
+  ],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Can generate racist or denigratory comments and code that reflects stereotypes about gender, race, and other groups",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "found that Codex can be prompted in ways that generate"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "Does not differentially enable offensive cybersecurity capabilities; frequently emits insecure crypto configs",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "quote": "not differentially enable offensive cybersecurity capabilities"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "When prompts include subtle bugs, Codex produces worse code than it is capable of, including after an instruction to write correct code; the authors treat this as intent misalignment that grows with model size.", "tone": "bad",
+      "source": {
+        "page": "11",
+        "pdfPage": 27,
+        "quote": "Based on this we conclude that we have identified misalign-"
+      }
+    },
+    {
+      "text": "Codex is not proficient at standalone malware but can still generate code that can be used as components, including recursive file encryption, while struggling with SQL and shell injection payloads.", "tone": "bad",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "quote": "We conducted experiments on Codex’s ability to generate"
+      }
+    },
+    {
+      "text": "On vulnerability discovery, Codex did not beat even rudimentary static application security testing tools.", "tone": "good",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "quote": "to rudimentary Static Application Security Testing (SAST)"
+      }
+    },
+    {
+      "text": "When asked to call RSA or AES libraries, Codex models of varying sizes frequently use clearly insecure configurations (short RSA keys or AES-ECB); Figure 15 is a chart with no printed rates.", "tone": "bad",
+      "source": {
+        "page": "32",
+        "pdfPage": 32,
+        "quote": "models of varying sizes frequently use clearly insecure con-"
+      }
+    },
+    {
+      "text": "Generations that appear identical to training-set snippets were under 0.1% in a cited Copilot study, and were common expressions rather than copied unique code.", "tone": "good",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "Such occurrences were < 0.1% in a study examining"
+      }
+    },
+    {
+      "text": "Probes such as def gender(x): often assumed binary gender, and def race(x): often assumed a small set of exclusive race categories.", "tone": "bad",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "quote": "that, in response to simple prompts like def gender(x):, the"
+      }
+    },
+    {
+      "text": "Codex will complete a typosquatted package name from a misspelled stem and will suggest such a package if asked for it by name.", "tone": "bad",
+      "source": {
+        "page": "31",
+        "pdfPage": 31,
+        "quote": "Codex will suggest a typosquatted package if asked to use"
+      }
+    },
+    {
+      "text": "The authors warn that over-reliance on suggestions that look correct but fail the intended task is a main practical hazard, especially for novice programmers.", "tone": "mixed",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "One of the key risks associated with using code generation"
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:59:09Z"
+  },
+  "notes": "2021 Codex paper (arXiv:2107.03374). Safety content is Section 7 plus Appendices E (alignment), F (bias), G (security). No numeric safety table; Figure 12/14/15 are unlabeled charts so no evalResults. Skipped capability numbers: HumanEval, APPS, Codex-S/D pass@k, BLEU, synthetic chained-docstring pass rate. openai/code-davinci-002 is seed-linked but never named (paper is early Codex-12B/S/D; API/Copilot are descendants). Quotes from two-column pages. Alignment eval dataset: https://github.com/openai/code-align-evals-data. HumanEval is capability."
+}

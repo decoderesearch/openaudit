@@ -1,0 +1,210 @@
+{
+  "document": "deepseek-moe-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "deepseek-ai/deepseek-moe-16b-base"
+    },
+    {
+      "model": "deepseek-ai/deepseek-moe-16b-chat"
+    },
+    {
+      "rawModelName": "DeepSeekMoE 2B"
+    },
+    {
+      "rawModelName": "DeepSeekMoE 145B"
+    }
+  ],
+  "pageCount": 94,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4K maximum sequence length (training)",
+      "source": {
+        "page": "15",
+        "pdfPage": 22,
+        "quote": "with a maximum sequence length of 4K, each\ntraining batch contains 18M tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (Mixture-of-Experts language model)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Mixture-of-Experts Language Models"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English and Chinese primary; other languages in the multilingual corpus",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "primarily focuses on English and Chinese but also encompasses other languages."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "approximately 16.4B total for DeepSeekMoE 16B (also 2B and 145B scales)",
+      "source": {
+        "page": "15",
+        "pdfPage": 22,
+        "quote": "DeepSeekMoE 16B has approximately 16.4B total\nparameters, with the number of activated parameters around 2.8B."
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "around 2.8B activated for DeepSeekMoE 16B",
+      "source": {
+        "page": "15",
+        "pdfPage": 22,
+        "quote": "DeepSeekMoE 16B has approximately 16.4B total\nparameters, with the number of activated parameters around 2.8B."
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "DeepSeekMoE: fine-grained expert segmentation and shared expert isolation; 16B uses 28 layers, hidden 2048, MoE layers with 2 shared + 64 routed experts (each 0.25× FFN), routing each token to 2 shared and 6 routed experts",
+      "source": {
+        "page": "15",
+        "pdfPage": 22,
+        "quote": "Each MoE layer consists of 2 shared experts and 64 routed\nexperts, where each expert is 0.25 times the size of a standard FFN."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "DeepSeek-AI multilingual corpus (web, math, code, literature, other text); DeepSeekMoE 16B trained on 2T tokens; Chat 16B SFT on 1.4M in-house examples",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Our training data is sampled from a large-scale multilingual corpus created by DeepSeek-AI."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "This mixture-of-experts (MoE) architecture technical report has no safety, refusal, jailbreak, bias, honesty, toxicity, or dangerous-capability evaluation section; reported evals are capability benchmarks only.", "tone": "mixed",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "We conduct evaluations on 12 zero-shot or few-shot benchmarks spanning\ndiverse tasks."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:10:01Z"
+  },
+  "notes": "Technical report (arXiv:2401.06066), not a system card. No dedicated safety section and no safety, refusal, jailbreak, toxicity, bias, honesty, hallucination, or dangerous-capability numeric results—evalResults left empty. Open LLM Leaderboard is said to include TruthfulQA, but only an average chart (Figure 1) is shown with no TruthfulQA numbers in the text layer. Section 6 \"Alignment\" is SFT for a chat model (math/code/writing/QA), not safety alignment—does not cover topics. Expert-specialization analysis is architecture research, not safety interpretability. Skipped all capability tables (Tables 1–6 and Figure 1/7): Pile, HellaSwag, PIQA, ARC, RACE, DROP, GSM8K, MATH, HumanEval, MBPP, TriviaQA, NaturalQuestions, MMLU, WinoGrande, CLUEWSC, CEval, CMMLU, CHID, BBH, and Open LLM Leaderboard averages. Seed-linked deepseek-ai/deepseek-moe-16b-chat covered; base uses checkpoint id deepseek-ai/deepseek-moe-16b-base. DeepSeekMoE 2B and 145B covered as rawModelName (no seed ids). Paper announces public release without a license name or calendar release date; arXiv date is publication, not releaseDate. Layout pdftotext splits many figure pages (null/garbled text); pageCount 33 from PDF page count; printed page numbers used for sources."
+}

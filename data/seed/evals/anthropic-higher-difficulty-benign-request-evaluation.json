@@ -1,0 +1,71 @@
+{
+  "eval": {
+    "slug": "anthropic-higher-difficulty-benign-request-evaluation",
+    "displayName": "Higher-difficulty benign request evaluation (Anthropic)",
+    "aliases": [
+      "Higher-difficulty benign request evaluation",
+      "Higher-difficulty benign request",
+      "Higher-difficulty benign request evaluations"
+    ],
+    "description": "Anthropic experimental single-turn over-refusal eval paired with the higher-difficulty violative set. Benign prompts are rewritten with elaborate justifications and academic framing so older models over-refuse more often (English only; same policy-area counts as the violative twin). Cards report the over-refusal rate with and without extended thinking.",
+    "summary": "Measures how often the model refuses safe requests that include detailed justifications and academic framing.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www.anthropic.com/claude-opus-4-6-system-card",
+        "title": "Claude Opus 4.6 System Card (higher-difficulty evals)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "saturated",
+    "saturatedReason": "An experimental Anthropic set. Anthropic says it changes or retires such sets as models saturate them.",
+    "saturatedDecisionDate": "2026-10-05",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": []
+    },
+    "visibility": "public",
+    "family": "Anthropic safeguards evaluations"
+  },
+  "versions": [
+    {
+      "version": "experimental-14-areas",
+      "status": "draft",
+      "changes": "Experimental synthetic set; Anthropic notes the prompt sets may change or be retired as they saturate.",
+      "scores": [
+        {
+          "key": "over_refused",
+          "displayName": "Over-refused",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "The model declined a benign prompt that should have been answered."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "over_refusal_rate",
+          "displayName": "Over-refusal rate",
+          "score": "over_refused",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of higher-difficulty benign prompts the model over-refused."
+        }
+      ]
+    }
+  ]
+}

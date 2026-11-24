@@ -1,0 +1,116 @@
+{
+  "eval": {
+    "slug": "cybersecurity-key-skills-benchmark",
+    "displayName": "Cybersecurity key skills benchmark",
+    "aliases": [
+      "Cyber key skills benchmark",
+      "Cybersecurity key skills benchmark (easy)",
+      "Cybersecurity key skills benchmark (medium)",
+      "Cybersecurity key skills benchmark (hard)",
+      "Cybersecurity key skills benchmark (v1 hard)",
+      "Cybersecurity key skills benchmark (v2 end-to-end)",
+      "Key Skills benchmark (with mitigations)"
+    ],
+    "description": "Google DeepMind lab-internal agentic CTF suite for offensive cyber key skills (reconnaissance, tool development, tool usage, and operational security), grounded in the Rodriguez et al. attack-chain framework. v1 maps bottleneck tasks to easy, medium, and hard difficulty; v2 adds harder end-to-end multi-stage challenges. A challenge counts as solved if any attempt captures the flag; cards report solves by difficulty and version.",
+    "summary": "Measures how well AI agents use offensive cyber skills such as reconnaissance, tool development, and stealth in capture-the-flag tasks.",
+    "family": "GDM cyber",
+    "maintainers": [
+      {
+        "name": "Google DeepMind",
+        "url": "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Pro-Model-Card.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Pro-Model-Card.pdf",
+        "title": "Gemini 2.5 Pro Model Card (key skills results)"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2503.11917",
+        "title": "A Framework for Evaluating Emerging Cyberattack Capabilities of AI"
+      },
+      {
+        "kind": "blog",
+        "url": "https://deepmind.google/blog/evaluating-potential-cybersecurity-threats-of-advanced-ai/",
+        "title": "Evaluating emerging cyber security capabilities of advanced AI"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_fsf_report.pdf",
+        "title": "Gemini 3 Pro Frontier Safety Framework Report (v1 hard / v2)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "human"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["cyber", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "v1",
+      "status": "published",
+      "releasedDate": "2025-03-14",
+      "changes": "Initial key-skills suite reported in Gemini 2.5 cards: bottleneck CTFs at easy, medium, and hard (12 hard challenges). Paper reports 50 challenges including strawman items.",
+      "scores": [
+        {
+          "key": "solved",
+          "displayName": "Solved",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The agent captures the flag on at least one attempt for that challenge."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "solve_rate",
+          "displayName": "Solve rate",
+          "score": "solved",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of challenges solved. Cards often report counts by difficulty (easy / medium / hard)."
+        }
+      ]
+    },
+    {
+      "version": "v2",
+      "status": "draft",
+      "changes": "Harder end-to-end multi-stage challenges covering the seven attack kill chains from Rodriguez et al. Gemini 3 Pro FSF report gives preliminary results (13 challenges).",
+      "scores": [
+        {
+          "key": "solved",
+          "displayName": "Solved",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The agent completes the end-to-end challenge (captures the flag) on at least one attempt."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "solve_rate",
+          "displayName": "End-to-end solve rate",
+          "score": "solved",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of v2 end-to-end challenges solved."
+        }
+      ]
+    }
+  ]
+}

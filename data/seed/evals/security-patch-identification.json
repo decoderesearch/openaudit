@@ -1,0 +1,105 @@
+{
+  "eval": {
+    "slug": "security-patch-identification",
+    "displayName": "Security Patch Identification",
+    "aliases": ["SPI", "SPI Patch Classification"],
+    "description": "Binary classification of whether a software commit is a security-related patch, from Zhou et al. (SPI). Models see commit text and code revisions from open-source C projects. Google DeepMind reports accuracy and AUC on the public FFmpeg and Qemu subset in Gemini cards. Headline metrics are accuracy and AUC.",
+    "summary": "Tests whether the model can tell if a software commit in open-source C code fixes a security problem.",
+    "maintainers": [
+      {
+        "name": "Zhou et al.",
+        "url": "https://sites.google.com/view/du-commits/home"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2105.14565",
+        "title": "SPI: Automated Identification of Security Patches via Commits"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://sites.google.com/view/du-commits/home",
+        "title": "SPI commits dataset site"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2403.13793",
+        "title": "GDM dangerous-capabilities paper (SPI subset scoring)"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["cyber"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "ffmpeg-qemu-public",
+      "status": "published",
+      "releasedDate": "2021-05-30",
+      "changes": "GDM cards use the public FFmpeg+Qemu subset (10,894 vulnerable and 14,977 non-vulnerable commits), keeping patches longer than 250 characters.",
+      "dataset": {
+        "url": "https://sites.google.com/view/du-commits/home",
+        "splits": [
+          {
+            "name": "vulnerable",
+            "sampleCount": 10894,
+            "storage": "pointer"
+          },
+          {
+            "name": "non_vulnerable",
+            "sampleCount": 14977,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 if the model’s security-patch / non-patch label matches the SPI label."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Fraction of commits labeled correctly."
+        },
+        {
+          "key": "auc",
+          "displayName": "AUC",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Area under the ROC curve from model class scores."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"]
+      }
+    }
+  ]
+}

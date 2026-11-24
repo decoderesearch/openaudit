@@ -1,0 +1,270 @@
+{
+  "document": "google-paligemma-technical_report",
+  "alsoDocuments": ["google-paligemma-blog"],
+  "covers": [
+    {
+      "model": "google/paligemma-3b-pt-224"
+    },
+    {
+      "model": "google/paligemma-3b-pt-448"
+    },
+    {
+      "model": "google/paligemma-3b-pt-896"
+    },
+    {
+      "model": "google/paligemma-3b-mix-224"
+    },
+    {
+      "model": "google/paligemma-3b-mix-448"
+    }
+  ],
+  "pageCount": 59,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "Vision-language model: image and text in, text out",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "PaliGemma is an open Vision-Language Model (VLM) that is based on the SigLIP-So400m vision encoder"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "WebLI captioning in over 100 languages; CC3M-35L and related tasks in 35 languages",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "including WebLI in over 100 lan-"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "less than 3 B total parameters",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "3 B total parameters."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "SigLIP-So400m (400M) vision encoder + linear projection + Gemma-2B decoder LM; three resolution checkpoints (224/448/896)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Figure 1 | PaliGemma’s architecture: a SigLIP image encoder feeds into a Gemma decoder LM."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Broad multimodal mixture (captioning on WebLI and CC3M-35L, VQA/VQG, OCR, detection/segmentation, grounded captioning, and related tasks); some pretraining datasets remain private; transfer tasks held out",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "including WebLI in over 100 lan-"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "TPUv5e-256: Stage1 slightly less than 3 days (~350 B tokens); each Stage2 about 15h (~90 B tokens combined for both Stage2)",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "using TPUv5e-256 takes slightly less than 3 days\nfor Stage1 and 15h for each Stage2."
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[POPE](/evals/pope) object-hallucination visual question answering (VQA) (zero-shot from VQAv2 transfer): 86.0 at 224px, 87.0 at 448px",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "⌞POPE                    86.0        87.0          -"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The report has no dedicated safety, toxicity, bias, or red-team evaluation section; \"Ethics and Safety\" appears only as an acknowledgments contributor role.", "tone": "mixed",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "Ethics and Safety"
+      }
+    },
+    {
+      "text": "[POPE](/evals/pope) scores in Table 1 are zero-shot evaluations of the VQAv2-transferred model; the overall score averages equal-sized random, popular, and adversarial splits.", "tone": "neutral",
+      "source": {
+        "page": "39",
+        "pdfPage": 39,
+        "quote": "Train:     Zero-shot evaluation of the model trained for VQAv2."
+      }
+    },
+    {
+      "text": "Some of the pretraining datasets remain private even though training used the open-source big_vision codebase.", "tone": "neutral",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "TPUv5e [38]. However, some of the pretraining"
+      }
+    },
+    {
+      "text": "The authors provide a multitask \"mix\" transfer checkpoint as a step toward instruction tuning, but report no safety metrics for it.", "tone": "mixed",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "we also provide a “mix” transfer checkpoint,"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "PaliGemma 224px (VQAv2 transfer)",
+      "metric": "accuracy",
+      "value": 86,
+      "unit": "percent",
+      "settings": {
+        "other": "224px; zero-shot evaluation of the model trained for VQAv2; overall average of random, popular, and adversarial splits"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 1",
+        "quote": "⌞POPE                    86.0        87.0          -"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "PaliGemma 448px (VQAv2 transfer)",
+      "metric": "accuracy",
+      "value": 87,
+      "unit": "percent",
+      "settings": {
+        "other": "448px; zero-shot evaluation of the model trained for VQAv2; overall average of random, popular, and adversarial splits"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 1",
+        "quote": "⌞POPE                    86.0        87.0          -"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:53:01Z"
+  },
+  "notes": "Technical report (arXiv:2407.07726), not a system card. No formal risk framework or external safety testers. Only safety-relevant numeric eval is POPE (object hallucination); FairFace/toxicity and human safety prompts appear on the separate model card, not this PDF. Table 1 POPE columns map to the pt-224 and pt-448 checkpoints (VQAv2-transfer zero-shot). Mix-224/mix-448 covered because the report describes providing a mix transfer checkpoint; Table 4 multitask results have no POPE row. Skipped capability benchmarks per pilot rules (captioning, VQA, OCR, segmentation, video, Objaverse, etc.). Two-column PDF layout makes some quotes include adjacent-column text."
+}

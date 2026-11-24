@@ -1,0 +1,487 @@
+# Methods: tools that inspect or monitor a model (SAEs, probes, LLM monitors), and how well they do
+# their jobs. A method holds variants (a recipe or architecture). A variant has artifacts: one
+# trained SAE, probe or monitor setup for one subject model. Evals score artifacts.
+$defs:
+  MethodGroup:
+    description: >-
+      What the method reads. `white_box`: activations, weights or token log probs (it needs model
+      access). `black_box`: only text. Topics, not groups, tell the job of a method.
+    type: string
+    enum: [white_box, black_box]
+
+  ExpertStance:
+    description: What a view says about its method, on balance.
+    type: string
+    enum: [positive, negative, mixed]
+
+  ExpertQuote:
+    type: object
+    additionalProperties: false
+    required: [text, sourceUrl]
+    properties:
+      text:
+        type: string
+        minLength: 1
+        description: The words of the source, unchanged.
+      sourceUrl:
+        $ref: "#/$defs/Url"
+
+  MethodAccess:
+    description: >-
+      What a variant needs from the subject model. `white_box`: activations or weights.
+      `logprobs`: token log probabilities only. `black_box`: text in and out only.
+    type: string
+    enum: [white_box, logprobs, black_box]
+
+  MethodParamType:
+    type: string
+    enum: [integer, number, string, boolean]
+
+  MethodParam:
+    description: >-
+      One setting that artifacts of a method can have (`width`, `judgeModel`). A key keeps its
+      meaning for all variants of the method.
+    type: object
+    additionalProperties: false
+    required: [key, label, type]
+    properties:
+      key:
+        type: string
+        pattern: "^[a-z][a-zA-Z0-9]*$"
+      label:
+        type: string
+        minLength: 1
+      type:
+        $ref: "#/$defs/MethodParamType"
+      unit:
+        type: string
+        minLength: 1
+      description:
+        type: string
+        minLength: 1
+
+  MethodMatch:
+    description: >-
+      Compare variants at set values of one metric (SAEs at the same L0). A value between the
+      points of a variant is interpolated.
+    type: object
+    additionalProperties: false
+    required: [eval, metric, targets, default]
+    properties:
+      eval:
+        $ref: "#/$defs/Slug"
+        description: The eval that gives the metric.
+      metric:
+        type: string
+        minLength: 1
+      targets:
+        type: array
+        minItems: 1
+        items:
+          type: number
+      default:
+        type: number
+
+  MethodCompare:
+    description: >-
+      How to compare the variants of a method. Artifacts compete only when they have the same
+      subject and the same value for each `groupBy` key. The `matched` rule of an `EvalSuite`
+      tells how to compare on its evals.
+    type: object
+    additionalProperties: false
+    required: [groupBy]
+    properties:
+      groupBy:
+        type: array
+        description: "`sites`, or `MethodParam` keys (`width`)."
+        items:
+          type: string
+          minLength: 1
+
+  Method:
+    title: Method
+    description: >-
+      A kind of tool that does a set of jobs (sparse autoencoders, probes, LLM monitors). The
+      method page tells which safety use the evals test.
+    type: object
+    additionalProperties: false
+    required:
+      [
+        id,
+        slug,
+        displayName,
+        group,
+        summary,
+        safetyUse,
+        caveats,
+        params,
+        compare,
+        links,
+      ]
+    properties:
+      id:
+        $ref: "#/$defs/Id"
+      slug:
+        $ref: "#/$defs/Slug"
+      displayName:
+        type: string
+        minLength: 1
+        description: Title case (`Sparse Autoencoders`, `LLM Monitors`).
+      group:
+        $ref: "#/$defs/MethodGroup"
+      summary:
+        type: string
+        minLength: 1
+        description: One sentence. What the method does.
+      tagline:
+        type: string
+        minLength: 1
+        maxLength: 60
+        description: >-
+          A few words for lists, next to the name: what the method does (`Read what a model has in
+          mind, as words.`).
+      safetyUse:
+        type: string
+        minLength: 1
+        description: Markdown. The safety jobs the method could do, and which evals test them.
+      caveats:
+        type: array
+        description: Markdown. Limits a reader must know before comparing variants.
+        items:
+          type: string
+          minLength: 1
+      params:
+        type: array
+        description: The settings that its artifacts can have.
+        items:
+          $ref: "#/$defs/MethodParam"
+      compare:
+        $ref: "#/$defs/MethodCompare"
+      expertSummary:
+        type: string
+        minLength: 1
+        description: >-
+          What the expert views say on balance: where they agree and where they disagree. Plain
+          words, 50 words or fewer, with no names and no links.
+      links:
+        type: array
+        items:
+          $ref: "#/$defs/EvalLink"
+
+  MethodVariant:
+    title: MethodVariant
+    description: >-
+      One recipe or architecture of a method (TopK SAE, Apollo probe). A `baseline` is a simple
+      reference that a variant must beat (raw activations, PCA). A changed recipe is a new
+      variant, with `supersedesId` set to the old one.
+    type: object
+    additionalProperties: false
+    required:
+      [
+        id,
+        slug,
+        methodId,
+        displayName,
+        aliases,
+        access,
+        baseline,
+        componentIds,
+        params,
+        links,
+      ]
+    properties:
+      id:
+        $ref: "#/$defs/Id"
+      slug:
+        $ref: "#/$defs/Slug"
+        description: Unique in its method.
+      methodId:
+        $ref: "#/$defs/Id"
+      displayName:
+        type: string
+        minLength: 1
+        description: Title case (`Apollo Probe`, `Chain-of-Thought Judge`).
+      aliases:
+        $ref: "#/$defs/Aliases"
+        description: Names in result files (`MatryoshkaBatchTopK`, `matryoshka_batch_topk`).
+      summary:
+        type: string
+        minLength: 1
+      access:
+        $ref: "#/$defs/MethodAccess"
+      baseline:
+        type: boolean
+      componentIds:
+        type: array
+        description: The variants that this one combines (a probe that reads SAE latents).
+        items:
+          $ref: "#/$defs/Id"
+      supersedesId:
+        $ref: "#/$defs/Id"
+        description: The variant that this one replaces.
+      params:
+        type: array
+        description: Settings of this variant only, added to those of its method.
+        items:
+          $ref: "#/$defs/MethodParam"
+      links:
+        type: array
+        items:
+          $ref: "#/$defs/EvalLink"
+      prompts:
+        type: array
+        description: The prompts of a variant that is an LLM, as the judge prompt of a monitor.
+        items:
+          $ref: "#/$defs/MethodPrompt"
+      visibility:
+        $ref: "#/$defs/Visibility"
+        description: Left out, `public`. Anyone with the link can open an unlisted variant.
+
+  MethodPrompt:
+    title: MethodPrompt
+    description: One prompt of a variant, word for word.
+    type: object
+    additionalProperties: false
+    required: [name, text]
+    properties:
+      name:
+        type: string
+        minLength: 1
+        description: What the prompt is for (`Judge prompt`).
+      text:
+        type: string
+        minLength: 1
+        description: The prompt. A `{name}` part is filled in for each call.
+      note:
+        type: string
+        minLength: 1
+        description: How the filled-in parts are made, for example the format of the transcript.
+      sourceUrl:
+        $ref: "#/$defs/Url"
+        description: Where the prompt comes from.
+
+  MethodExpertView:
+    title: MethodExpertView
+    description: >-
+      What human experts said about a method, from one public source (a post or paper), with its
+      nuance. The summary and points are ours; quotes are the source's words. A source about two
+      methods has one view in each.
+    type: object
+    additionalProperties: false
+    required:
+      [
+        id,
+        slug,
+        methodId,
+        variantIds,
+        title,
+        byline,
+        publishedDate,
+        stance,
+        summary,
+        points,
+        quotes,
+        sources,
+        checkedDate,
+      ]
+    properties:
+      id:
+        $ref: "#/$defs/Id"
+      slug:
+        $ref: "#/$defs/Slug"
+        description: Unique in its method.
+      methodId:
+        $ref: "#/$defs/Id"
+      variantIds:
+        type: array
+        description: The variants of the method that the source names.
+        items:
+          $ref: "#/$defs/Id"
+      title:
+        type: string
+        minLength: 1
+        description: Our plain headline for the view.
+      byline:
+        type: string
+        minLength: 1
+        description: The authors as the source lists them, short (`Lewis Smith, Neel Nanda and 6 others`).
+      organization:
+        type: string
+        minLength: 1
+      publishedDate:
+        $ref: "#/$defs/PartialDate"
+      stance:
+        $ref: "#/$defs/ExpertStance"
+      summary:
+        type: string
+        minLength: 1
+        description: Markdown. What the source found and concluded, in plain words.
+      points:
+        type: array
+        description: Markdown. The nuance and limits that the source gives.
+        items:
+          type: string
+          minLength: 1
+      quotes:
+        type: array
+        items:
+          $ref: "#/$defs/ExpertQuote"
+      sources:
+        type: array
+        minItems: 1
+        description: The original first, then copies and companion posts.
+        items:
+          $ref: "#/$defs/EvalLink"
+      checkedDate:
+        $ref: "#/$defs/PartialDate"
+        description: When we read the source.
+
+  MethodSiteRole:
+    type: string
+    enum: [read, write]
+
+  MethodSite:
+    description: One place in the subject model where an artifact reads or writes.
+    type: object
+    additionalProperties: false
+    required: [role, source]
+    properties:
+      address:
+        type: string
+        description: >-
+          The interp-engine address of the point (`resid_post.12`, `resid_post.5.stream-2`). Left
+          out when the source does not say which point it uses.
+        pattern: "^([a-z][a-z0-9_]*(\\.[0-9]+)?(\\.[a-z][a-z0-9_]*-[0-9]+)*|path\\.[A-Za-z0-9_.]+)$"
+        maxLength: 200
+      role:
+        $ref: "#/$defs/MethodSiteRole"
+      source:
+        type: string
+        minLength: 1
+        description: The name that the source uses (`blocks.12.hook_resid_post`, `layer 58`).
+
+  MethodArtifact:
+    title: MethodArtifact
+    description: >-
+      One trained SAE or probe, or one monitor setup, for one subject model. Evals score
+      artifacts, not variants.
+    type: object
+    additionalProperties: false
+    required: [id, key, variantId, displayName, subject, sites, params]
+    properties:
+      id:
+        $ref: "#/$defs/Id"
+      key:
+        type: string
+        description: A stable key from the source (`gemma-2-2b/l12/w16k/topk/trainer-2`).
+        pattern: "^[a-z0-9]+([._/-][a-z0-9]+)*$"
+        maxLength: 200
+      variantId:
+        $ref: "#/$defs/Id"
+      displayName:
+        type: string
+        minLength: 1
+      subject:
+        type: string
+        minLength: 1
+        description: >-
+          The model that the artifact inspects, as its Hub name (`google/gemma-2-2b`), or the name
+          of a synthetic model.
+      modelId:
+        $ref: "#/$defs/Id"
+        description: The `Model`, when the subject is in the catalog.
+      revision:
+        type: string
+        minLength: 1
+        description: The Hub revision of the subject.
+      sites:
+        type: array
+        description: Empty for a variant that does not use activations.
+        items:
+          $ref: "#/$defs/MethodSite"
+      params:
+        type: object
+        description: Values for the `MethodParam` keys of the method and variant.
+        additionalProperties:
+          anyOf:
+            - type: string
+            - type: number
+            - type: boolean
+      license:
+        type: string
+        minLength: 1
+      sourceUrl:
+        $ref: "#/$defs/Url"
+        description: Where to get the weights or the setup.
+      files:
+        type: array
+        description: The files to download, as the weights of a probe. Each has a `url`, a `mirror`, or both.
+        items:
+          $ref: "#/$defs/MethodArtifactFile"
+
+  MethodArtifactFile:
+    title: MethodArtifactFile
+    description: One file of an artifact.
+    type: object
+    additionalProperties: false
+    required: [name, sha256, bytes]
+    properties:
+      name:
+        type: string
+        description: The file name (`l_48_lm_500000_ar_lr.pt`).
+        pattern: "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+        maxLength: 200
+      url:
+        $ref: "#/$defs/Url"
+        description: The file at its source, at a fixed commit.
+      sha256:
+        $ref: "#/$defs/Sha256"
+      bytes:
+        type: integer
+        minimum: 0
+      mirror:
+        type: string
+        description: >-
+          The key of our copy in R2. `apps/web/scripts/mirror-artifact-files.ts` uploads the file
+          and sets it.
+        pattern: "^artifacts/[0-9a-f]{64}/[A-Za-z0-9][A-Za-z0-9._-]*$"
+
+  MethodResult:
+    title: MethodResult
+    description: One number for one artifact on one eval version, as the source gives it.
+    type: object
+    additionalProperties: false
+    required: [id, artifactId, evalVersionId, metric, value, sourceUrl]
+    properties:
+      id:
+        $ref: "#/$defs/Id"
+      artifactId:
+        $ref: "#/$defs/Id"
+      evalVersionId:
+        $ref: "#/$defs/Id"
+      metric:
+        type: string
+        minLength: 1
+        description: A `MetricDef` key of the eval version.
+      value:
+        type: number
+      stderr:
+        type: number
+        minimum: 0
+      n:
+        type: integer
+        minimum: 1
+        description: The number of samples.
+      sourceUrl:
+        $ref: "#/$defs/Url"
+        description: The result file or paper.
+      sourceTable:
+        type: string
+        minLength: 1
+        description: The table in the paper (`Table 9`).
+      sourceCommit:
+        type: string
+        minLength: 1
+        description: The commit of the eval code that made the number.
+      measuredAt:
+        $ref: "#/$defs/Timestamp"

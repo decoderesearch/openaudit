@@ -1,0 +1,106 @@
+{
+  "eval": {
+    "slug": "biomysterybench",
+    "displayName": "BioMysteryBench",
+    "aliases": [
+      "BioMysteryBench (Human Solvable)",
+      "BioMysteryBench (Human Difficult)",
+      "BioMysteryBench Verified",
+      "BioMysteryBench Hard",
+      "Creative Bioinformatics Analysis (BioMysteryBench)"
+    ],
+    "description": "Anthropic agentic bioinformatics benchmark: anonymized real datasets with objective answers that need analysis tools and code, not dataset lookup. Graded on the final answer against a rubric. Cards split Human Solvable (or Verified) vs Human Difficult (or Hard). The gated full set on Hugging Face has 90 problems after a 2026-07 audit (the research post described 99: 76 human-solvable and 23 human-difficult).",
+    "summary": "Measures how well AI agents solve real bioinformatics problems by analyzing data with code and tools.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "blog",
+        "url": "https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench",
+        "title": "Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/Anthropic/BioMysteryBench-full",
+        "title": "BioMysteryBench-full (gated)"
+      },
+      {
+        "kind": "hf_benchmark",
+        "url": "https://huggingface.co/datasets/Anthropic/BioMysteryBench-full",
+        "title": "BioMysteryBench-full"
+      }
+    ],
+    "access": "gated",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "v11",
+      "status": "published",
+      "releasedDate": "2026-07-07",
+      "changes": "v11 audit on Hugging Face: 9 problems removed and others edited; full set lists 90 problems.",
+      "dataset": {
+        "hfRepo": "Anthropic/BioMysteryBench-full",
+        "revision": "b5a889c4757214ec9a6ade876b734f920a7799db",
+        "url": "https://huggingface.co/datasets/Anthropic/BioMysteryBench-full",
+        "license": "cc-by-4.0",
+        "splits": [
+          {
+            "name": "full",
+            "sampleCount": 90,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "sampleTerms": {
+        "display": "sign_in",
+        "source": "https://huggingface.co/datasets/Anthropic/BioMysteryBench-full",
+        "quote": "BioMysteryBench is provided for **evaluation and benchmarking only**. By requesting access you agree that you will not use this benchmark (problem statements, answer rubrics, task formulation) to train, fine-tune, reinforce, or distill any machine-learning model. You may use it to construct evaluation prompts at inference time and to publish benchmark results with attribution to Anthropic."
+      },
+      "scores": [
+        {
+          "key": "solved",
+          "displayName": "Solved",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The agent's final answer matches the problem rubric."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "solved",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of problems solved. Cards often report Human Solvable and Human Difficult separately."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "sandbox": "docker",
+        "internet": true
+      }
+    }
+  ]
+}

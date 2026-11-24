@@ -1,0 +1,78 @@
+{
+  "eval": {
+    "slug": "shade-ipi-coding",
+    "displayName": "Shade IPI (coding)",
+    "aliases": [
+      "Shade prompt injection (coding)",
+      "Shade IPI coding",
+      "Shade coding prompt injection",
+      "Shade IPI coding (stronger attacker)",
+      "Shade indirect prompt injection (coding)",
+      "Shade coding",
+      "coding Shade"
+    ],
+    "description": "Gray Swan Shade adaptive red-teaming for indirect prompt injection in coding-agent environments. An attacker agent refines attacks over many attempts (often 200 per scenario; Anthropic cards use about 40 scenarios) to divert the target into harmful tool actions. Headline metric is attack success rate (lower is better). Not SHADE-Arena. Dataset and runner are lab-internal.",
+    "summary": "Measures how often hidden attacker instructions in coding tasks trick AI agents into harmful tool actions.",
+    "family": "Shade",
+    "maintainers": [
+      {
+        "name": "Gray Swan",
+        "url": "https://www.grayswan.ai/solutions/platform/shade"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www.grayswan.ai/solutions/platform/shade",
+        "title": "Shade — Gray Swan adversarial red-teaming"
+      },
+      {
+        "kind": "blog",
+        "url": "https://anthropic.com/claude-opus-5-system-card",
+        "title": "Claude Opus 5 system card (Shade coding results)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["agentic"],
+      "cases": ["generated"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["prompt_injection", "jailbreaks", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "adaptive-200",
+      "status": "draft",
+      "changes": "Attacker training and scenario sets change across cards; Anthropic warns results are not always comparable when a new attacker is trained.",
+      "scores": [
+        {
+          "key": "attack_succeeded",
+          "displayName": "Attack succeeded",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "The adaptive Shade attacker diverted the coding agent into the harmful goal on this attempt."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "attack_success_rate",
+          "displayName": "Attack success rate (attempts)",
+          "score": "attack_succeeded",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Fraction of attacker attempts that succeed. Cards often also report scenario-level ASR (any success in N attempts)."
+        }
+      ]
+    }
+  ]
+}

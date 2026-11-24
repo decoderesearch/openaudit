@@ -1,0 +1,334 @@
+{
+  "document": "nous-hermes-3-paper",
+  "alsoDocuments": ["nous-hermes-3-blog"],
+  "covers": [
+    {
+      "model": "NousResearch/Hermes-3-Llama-3.1-405B"
+    },
+    {
+      "model": "NousResearch/Hermes-3-Llama-3.1-70B"
+    },
+    {
+      "model": "NousResearch/Hermes-3-Llama-3.1-8B"
+    }
+  ],
+  "pageCount": 13,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "131,072 (128K) tokens",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "context length of 131, 072 (128K) tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text; instruct and tool use",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present Hermes 3, a neutrally-aligned generalist\n                                                  instruct and tool use model with strong reasoning and creative abilities."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "8B, 70B, and 405B",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "8 billion (8B), 70 billion (70B), and 405 billion\n(405B) parameters respectively and a context length of 131, 072 (128K) tokens."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Fine-tuned Llama 3.1 decoder-only Transformers at 8B, 70B, and 405B",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "For base models we selected the Llama 3.1 Herd of\nModels [28], a set of three decoder-only Transformers [30] with sizes of 8 billion (8B), 70 billion (70B), and 405 billion"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "~390M tokens SFT mix (General Instructions, Domain Expert, Math, Roleplaying, Coding, Tool Use/Agentic/RAG, Content Generation, Steering and Alignment); then DPO (8B only in final)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "The final dataset mixture, as illustrated in Table 1, consists of approximately 390 million tokens."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "SFT GPU hours: 147 (8B), 648 (70B), 2086 (405B)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Training time (GPU hours)              147         648           2086"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Training aims for exact, neutral prompt following; authors contrast Hermes with commercial models that may refuse on moral grounds.",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "commercial models, which may refuse instructions on moral grounds."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa) MC2 scores reported for Hermes 3 and Llama 3.1 Instruct at 8B, 70B, and 405B.",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "TruthfulQA\n                             65.57          64.83        63.29        59.91        58.69       53.99"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Authors argue guardrails belong at the system level rather than in the model, and state there is no such thing as latent thoughtcrime for Hermes.", "tone": "bad",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "For Hermes, there is no such thing as latent thoughtcrime."
+      }
+    },
+    {
+      "text": "Supervised fine-tuning (SFT) filtering removed refusal responses from training data; that is a training choice, not a measured refusal eval.", "tone": "bad",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "removal of refusals and improperly formatted\nresponses, elimination of conversations with missing or empty turns, and prioritization of conversations generated by"
+      }
+    },
+    {
+      "text": "Direct Preference Optimization (DPO) helped the 8B model modestly; for 70B and 405B the authors kept SFT checkpoints because DPO gains were negligible.", "tone": "neutral",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "For\nthe larger model sizes DPO provided only a negligible performance improvements and thus we chose rather to remain\nwith the SFT-phase checkpoints."
+      }
+    },
+    {
+      "text": "Final 405B evaluations (including [TruthfulQA](/evals/truthfulqa)) used FP8 weight quantization.", "tone": "neutral",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "For the 405B models, evaluations were performed under FP8 [19] quantization."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "NousResearch/Hermes-3-Llama-3.1-405B",
+      "metric": "MC2",
+      "value": 65.57,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; FP8 quantization"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "TruthfulQA\n                             65.57"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.1-405B-Instruct",
+      "metric": "MC2",
+      "value": 64.83,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; FP8 quantization; table label Llama 3.1 Instruct 405B"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "TruthfulQA\n                             65.57          64.83"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "NousResearch/Hermes-3-Llama-3.1-70B",
+      "metric": "MC2",
+      "value": 63.29,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "TruthfulQA\n                             65.57          64.83        63.29"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.1-70B-Instruct",
+      "metric": "MC2",
+      "value": 59.91,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "TruthfulQA\n                             65.57          64.83        63.29        59.91"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "NousResearch/Hermes-3-Llama-3.1-8B",
+      "metric": "MC2",
+      "value": 58.69,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; final checkpoint (matches Table 4 SFT+DPO)"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "TruthfulQA\n                             65.57          64.83        63.29        59.91        58.69"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "metric": "MC2",
+      "value": 53.99,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 5",
+        "quote": "TruthfulQA\n                             65.57          64.83        63.29        59.91        58.69       53.99"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:52:02Z"
+  },
+  "notes": "Technical report with almost no dedicated safety section. Only safety-relevant numeric eval is TruthfulQA (Tables 4–5); all other benchmarks (GPT4All suite, AGIEval, Big Bench, IFEval, MT-Bench, ARC, BoolQ, BBH, GPQA, Hellaswag, MATH, MMLU, MMLU-PRO, MuSR, OpenbookQA, PiQA, Winogrande) skipped as general capability per pilot. Skipped duplicate Table 4 SFT+DPO TruthfulQA 58.69 (same as final Hermes 3 8B). Used seed checkpoint id NousResearch/Hermes-3-Llama-3.1-70B for the 70B model. Mapped Llama 3.1 Instruct variants to seed Instruct ids; noted FP8 eval setting for 405B rows. Page numbers are printed footer pages (1–13); blank trailing PDF page omitted from pageCount. No external safety testers or formal risk framework."
+}

@@ -1,0 +1,123 @@
+{
+  "eval": {
+    "slug": "jailbreakbench",
+    "displayName": "JailbreakBench",
+    "aliases": ["JailbreakBench (GCG)", "JailbreakBench (Template)", "JailbreakBench (Template + Mutations)"],
+    "description": "Open jailbreak robustness benchmark with 100 harmful behaviors (and 100 matched benign behaviors) aligned to OpenAI usage policies. Attacks submit jailbreak strings; an LLM judge (Llama-3-70B in the paper) labels success. The headline metric is attack success rate (ASR).",
+    "summary": "Measures how often jailbreak prompts make the model give harmful answers that break its safety rules.",
+    "maintainers": [
+      {
+        "name": "JailbreakBench",
+        "url": "https://github.com/JailbreakBench/jailbreakbench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2404.01318",
+        "title": "JailbreakBench: An Open Robustness Benchmark for Jailbreaking Large Language Models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/JailbreakBench/jailbreakbench",
+        "title": "Official JailbreakBench library"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/JailbreakBench/JBB-Behaviors",
+        "title": "JBB-Behaviors (harmful, benign, judge comparison)"
+      },
+      {
+        "kind": "leaderboard",
+        "url": "https://jailbreakbench.github.io/",
+        "title": "JailbreakBench leaderboard"
+      }
+    ],
+    "access": "public",
+    "status": "saturated",
+    "autoApprove": true,
+    "saturatedReason": "Plain runs score near 0% on current models. It needs adaptive attacks; labs now use multi-turn red teaming.",
+    "saturatedDecisionDate": "2026-10-05",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["jailbreaks", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-03-28",
+      "status": "published",
+      "releasedDate": "2024-03-28",
+      "dataset": {
+        "hfRepo": "JailbreakBench/JBB-Behaviors",
+        "revision": "886acc352a31533ffbcf4ef22c744658688086fc",
+        "url": "https://huggingface.co/datasets/JailbreakBench/JBB-Behaviors",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "harmful",
+            "sampleCount": 100,
+            "storage": "pointer"
+          },
+          {
+            "name": "benign",
+            "sampleCount": 100,
+            "storage": "pointer"
+          },
+          {
+            "name": "judge_comparison",
+            "sampleCount": 300,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "attack_success",
+          "displayName": "Attack success",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when the JailbreakBench judge labels the model response as a successful jailbreak for the harmful goal."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "attack_success_rate",
+          "displayName": "Attack success rate",
+          "score": "attack_success",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Share of harmful behaviors successfully jailbroken. Cards often report ASR gain for a named attack (GCG, Template, Template + Mutations)."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "openaudit_runner/jailbreakbench",
+        "package": "openaudit-runner==0.1.0",
+        "roles": ["target", "judge"],
+        "models": [
+          {
+            "id": "judge",
+            "role": "judge",
+            "taskArg": "judge_model",
+            "default": "meta-llama/llama-3.1-70b-instruct",
+            "tier": "fast",
+            "scoring": true
+          }
+        ],
+        "internet": true
+      }
+    }
+  ]
+}

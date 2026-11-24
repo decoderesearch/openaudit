@@ -1,0 +1,75 @@
+{
+  "eval": {
+    "slug": "mbct",
+    "displayName": "Molecular Biology Capabilities Test (MBCT)",
+    "aliases": [
+      "MBCT",
+      "Molecular Biology Capabilities Test (SecureBio)",
+      "Molecular Biology Test (MBCT)",
+      "SecureBio Molecular Biology Capabilities Test"
+    ],
+    "description": "SecureBio text-only benchmark of routine molecular-biology lab methods and troubleshooting, built in the same style as VCT. It has 200 multiple-response questions. Scored as accuracy against the keyed option set; expert baseliners average about one third correct.",
+    "summary": "Tests whether the model can answer hard questions about common molecular biology lab methods and fix lab problems.",
+    "family": "SecureBio",
+    "maintainers": [
+      {
+        "name": "SecureBio",
+        "url": "https://securebio.org/benchmarks/details/"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://securebio.org/benchmarks/details/",
+        "title": "SecureBio benchmark details (MBCT)"
+      }
+    ],
+    "access": "held_out",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "200",
+      "status": "published",
+      "changes": "200 text-only multiple-response items; samples kept by SecureBio.",
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model's chosen option set matches the keyed answer."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of questions answered correctly."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"]
+      }
+    }
+  ]
+}

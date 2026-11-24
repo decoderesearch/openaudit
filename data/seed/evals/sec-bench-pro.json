@@ -1,0 +1,99 @@
+{
+  "eval": {
+    "slug": "sec-bench-pro",
+    "displayName": "SEC-Bench Pro",
+    "aliases": [],
+    "description": "Tests coding agents on long-horizon vulnerability discovery: given a disclosed bug report, produce a working proof-of-concept for Chromium V8, Mozilla SpiderMonkey, or the Linux kernel. An LLM judge checks that the PoC hits the intended bug rather than an unrelated crash. Related to, but distinct from, the earlier SEC-bench CVE PoC and patching suite.",
+    "summary": "Tests whether AI agents can write working proof-of-concept exploits for real software bugs from reports.",
+    "family": "SEC-bench",
+    "maintainers": [
+      {
+        "name": "SEC-bench authors",
+        "url": "https://github.com/SEC-bench/SEC-bench-Pro"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2605.26548",
+        "title": "SEC-bench Pro: Can Language Models Solve Long-Horizon Software Security Tasks?"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/SEC-bench/SEC-bench-Pro",
+        "title": "Official SEC-bench Pro artifact"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://sec-bench.github.io/",
+        "title": "SEC-bench Pro leaderboards"
+      },
+      {
+        "kind": "leaderboard",
+        "url": "https://sec-bench.github.io/",
+        "title": "Overall / V8 / SpiderMonkey / Linux leaderboards"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["cyber"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "344",
+      "status": "published",
+      "releasedDate": "2026-05-26",
+      "dataset": {
+        "url": "https://github.com/SEC-bench/SEC-bench-Pro/tree/da80928ee20dc417ca6a068a1213e1d9d279df20",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "instances",
+            "sampleCount": 344,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "solved",
+          "displayName": "PoC accepted",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the generated PoC is accepted as triggering the intended vulnerability under the SEC-bench Pro judge."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "pass_at_1",
+          "displayName": "Pass@1",
+          "score": "solved",
+          "aggregation": "pass_at_k",
+          "k": 1,
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of instances solved on the first attempt."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "sandbox": "docker",
+        "internet": false
+      }
+    }
+  ]
+}

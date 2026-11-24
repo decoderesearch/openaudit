@@ -1,0 +1,2976 @@
+{
+  "document": "cohere-tiny-aya-technical_report",
+  "alsoDocuments": ["cohere-tiny-aya-blog"],
+  "covers": [
+    {
+      "model": "CohereLabs/tiny-aya-global"
+    }
+  ],
+  "pageCount": 50,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "8192 tokens input; 8192 tokens output",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Input Context (tokens)   8192    Output Context (tokens)       8192"
+      }
+    },
+    "maxOutput": {
+      "status": "stated",
+      "value": "8192 tokens",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Input Context (tokens)   8192    Output Context (tokens)       8192"
+      }
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (multilingual language model)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "We introduce Tiny Aya, a family of eﬀicient, open-weight multilingual models designed around"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "70 languages (Europe, West Asia, South Asia, Asia Pacific, Africa; see Table 1)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "includes Tiny Aya Base, a 3.35B-parameter pretrained model spanning 70 languages; Tiny Aya"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "3.35B",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Total parameters              3.35B"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "dense decoder-only Transformer; parallel blocks; interleaved sliding-window/full attention 3:1; SwiGLU; GQA; 36 layers; 2048 emb dim",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "Architecture Tiny Aya uses a dense decoder-only Transformer architecture (Vaswani et al., 2023)"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "6T tokens pretraining (FineWeb-2 and multilingual mixture including code); region-clustered posttraining SFT plus minimal preference tuning",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "We pretrain Tiny Aya model for 6T tokens using a Warmup-Stable-Decay"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "pretraining on 256 Nvidia H100 GPUs (Fax/JAX); posttraining on 16 H100s within 24 hours",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "We pretrain Tiny Aya using Fax (Yoo et al., 2022), a JAX-based distributed\ntraining framework on 256 Nvidia H100 GPUs."
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Tiny Aya Global reaches 91.1% mean and 87.0% min safe response rate on [MultiJail](/evals/multijail) (10 languages) (higher is better)",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "Tiny Aya Global is the safest of all evaluated\nmodels, as determined by inspecting minimum and mean of the safe response rates across the 10"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "[MultiJail](/evals/multijail) multilingual jailbreak eval: Tiny Aya highest mean safe response rate 91.1% (higher is better)",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "especially when they are not suﬀiciently dominant in training (e.g. “low-resource\njailbreaks” (Yong et al., 2023; Shen et al., 2024)). We consider both the mean and the minimum"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "On Swahili [MultiJail](/evals/multijail) prompts, Qwen3-4B and Ministral-3-3B produce 7% and 37% unsafe responses respectively, while Tiny Aya reaches about 94% safe.", "tone": "good",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "37% unsafe responses for Swahili prompts, respectively (see per-language results in Table 26)."
+      }
+    },
+    {
+      "text": "Merging region-specialized checkpoints with Tiny Aya Global reduces the multilingual safety gap, especially for Fire and Earth (Figure 8 has no readable numeric values).", "tone": "good",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "Figure 8: Effect of merging on multilingual safety. Merging improves safety across languages for all variants,"
+      }
+    },
+    {
+      "text": "Development tracks an internal multilingual safety benchmark (Cohere et al., 2025) across supported languages, but this report does not publish scores for it.", "tone": "mixed",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "MMLU Lite and an internal multilingual safety benchmark (Cohere et al., 2025), tracked across all"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "Min Safe Rate",
+      "value": 87,
+      "unit": "percent",
+      "settings": {
+        "other": "minimum safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Global            87.0               91.1               10.4             15.5"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "Mean Safe Rate",
+      "value": 91.1,
+      "unit": "percent",
+      "settings": {
+        "other": "mean safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Global            87.0               91.1               10.4             15.5"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "Over-Refusal",
+      "value": 10.4,
+      "unit": "percent",
+      "settings": {
+        "other": "English XSTest over-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Global            87.0               91.1               10.4             15.5"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "Under-Refusal",
+      "value": 15.5,
+      "unit": "percent",
+      "settings": {
+        "other": "English XSTest under-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Global            87.0               91.1               10.4             15.5"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-earth",
+      "metric": "Min Safe Rate",
+      "value": 77.5,
+      "unit": "percent",
+      "settings": {
+        "other": "minimum safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Earth             77.5               87.8               10.4             19.0"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-earth",
+      "metric": "Mean Safe Rate",
+      "value": 87.8,
+      "unit": "percent",
+      "settings": {
+        "other": "mean safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Earth             77.5               87.8               10.4             19.0"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "CohereLabs/tiny-aya-earth",
+      "metric": "Over-Refusal",
+      "value": 10.4,
+      "unit": "percent",
+      "settings": {
+        "other": "English XSTest over-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Earth             77.5               87.8               10.4             19.0"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "CohereLabs/tiny-aya-earth",
+      "metric": "Under-Refusal",
+      "value": 19,
+      "unit": "percent",
+      "settings": {
+        "other": "English XSTest under-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Earth             77.5               87.8               10.4             19.0"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-fire",
+      "metric": "Min Safe Rate",
+      "value": 78.1,
+      "unit": "percent",
+      "settings": {
+        "other": "minimum safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Fire              78.1               90.0               10.4             15.0"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-fire",
+      "metric": "Mean Safe Rate",
+      "value": 90,
+      "unit": "percent",
+      "settings": {
+        "other": "mean safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Fire              78.1               90.0               10.4             15.0"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "CohereLabs/tiny-aya-fire",
+      "metric": "Over-Refusal",
+      "value": 10.4,
+      "unit": "percent",
+      "settings": {
+        "other": "English XSTest over-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Fire              78.1               90.0               10.4             15.0"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "CohereLabs/tiny-aya-fire",
+      "metric": "Under-Refusal",
+      "value": 15,
+      "unit": "percent",
+      "settings": {
+        "other": "English XSTest under-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Fire              78.1               90.0               10.4             15.0"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-water",
+      "metric": "Min Safe Rate",
+      "value": 82.9,
+      "unit": "percent",
+      "settings": {
+        "other": "minimum safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Water             82.9               89.7               10.0             19.5"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-water",
+      "metric": "Mean Safe Rate",
+      "value": 89.7,
+      "unit": "percent",
+      "settings": {
+        "other": "mean safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Water             82.9               89.7               10.0             19.5"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "CohereLabs/tiny-aya-water",
+      "metric": "Over-Refusal",
+      "value": 10,
+      "unit": "percent",
+      "settings": {
+        "other": "English XSTest over-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Water             82.9               89.7               10.0             19.5"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "CohereLabs/tiny-aya-water",
+      "metric": "Under-Refusal",
+      "value": 19.5,
+      "unit": "percent",
+      "settings": {
+        "other": "English XSTest under-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Tiny Aya Water             82.9               89.7               10.0             19.5"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "Min Safe Rate",
+      "value": 79.9,
+      "unit": "percent",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; minimum safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Gemma3-4B                   79.9              88.7               3.6              44.0"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "Mean Safe Rate",
+      "value": 88.7,
+      "unit": "percent",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; mean safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Gemma3-4B                   79.9              88.7               3.6              44.0"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "Gemma3-4B",
+      "metric": "Over-Refusal",
+      "value": 3.6,
+      "unit": "percent",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; English XSTest over-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Gemma3-4B                   79.9              88.7               3.6              44.0"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "Gemma3-4B",
+      "metric": "Under-Refusal",
+      "value": 44,
+      "unit": "percent",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; English XSTest under-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Gemma3-4B                   79.9              88.7               3.6              44.0"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "Min Safe Rate",
+      "value": 1.6,
+      "unit": "percent",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; minimum safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Qwen3-4B                    1.6               85.8               4.0              32.5"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "Mean Safe Rate",
+      "value": 85.8,
+      "unit": "percent",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; mean safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Qwen3-4B                    1.6               85.8               4.0              32.5"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "Over-Refusal",
+      "value": 4,
+      "unit": "percent",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; English XSTest over-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Qwen3-4B                    1.6               85.8               4.0              32.5"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "Under-Refusal",
+      "value": 32.5,
+      "unit": "percent",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; English XSTest under-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Qwen3-4B                    1.6               85.8               4.0              32.5"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "Min Safe Rate",
+      "value": 53.7,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "minimum safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Qwen3.5-4B                  53.7              88.6               2.8              35.5"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "Mean Safe Rate",
+      "value": 88.6,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "mean safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Qwen3.5-4B                  53.7              88.6               2.8              35.5"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "Over-Refusal",
+      "value": 2.8,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "English XSTest over-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Qwen3.5-4B                  53.7              88.6               2.8              35.5"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "Under-Refusal",
+      "value": 35.5,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "English XSTest under-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Qwen3.5-4B                  53.7              88.6               2.8              35.5"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "Min Safe Rate",
+      "value": 19.5,
+      "unit": "percent",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; minimum safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Ministral-3-3B              19.5              66.2               1.2              71.0"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "Mean Safe Rate",
+      "value": 66.2,
+      "unit": "percent",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; mean safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Ministral-3-3B              19.5              66.2               1.2              71.0"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "Over-Refusal",
+      "value": 1.2,
+      "unit": "percent",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; English XSTest over-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Ministral-3-3B              19.5              66.2               1.2              71.0"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "Under-Refusal",
+      "value": 71,
+      "unit": "percent",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; English XSTest under-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "Ministral-3-3B              19.5              66.2               1.2              71.0"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "Min Safe Rate",
+      "value": 27,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "minimum safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "SmolLM3 3B                  27.0              36.4               0.8              51.5"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "Mean Safe Rate",
+      "value": 36.4,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "mean safe response rate across 10 languages; MultiJail (10 langs); Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "SmolLM3 3B                  27.0              36.4               0.8              51.5"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "Over-Refusal",
+      "value": 0.8,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "English XSTest over-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "SmolLM3 3B                  27.0              36.4               0.8              51.5"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "Under-Refusal",
+      "value": 51.5,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "English XSTest under-refusal"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 7",
+        "quote": "SmolLM3 3B                  27.0              36.4               0.8              51.5"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "safe response rate",
+      "value": 0.91,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=ar; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ar                       0.91              0.94               0.94                      0.73               0.65                      0.87              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=ar; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ar                       0.91              0.94               0.94                      0.73               0.65                      0.87              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "safe response rate",
+      "value": 0.94,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=ar; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ar                       0.91              0.94               0.94                      0.73               0.65                      0.87              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=ar; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ar                       0.91              0.94               0.94                      0.73               0.65                      0.87              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "safe response rate",
+      "value": 0.94,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=ar; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ar                       0.91              0.94               0.94                      0.73               0.65                      0.87              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=ar; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ar                       0.91              0.94               0.94                      0.73               0.65                      0.87              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "safe response rate",
+      "value": 0.73,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=ar; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ar                       0.91              0.94               0.94                      0.73               0.65                      0.87              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=ar; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ar                       0.91              0.94               0.94                      0.73               0.65                      0.87              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "safe response rate",
+      "value": 0.65,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=ar; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ar                       0.91              0.94               0.94                      0.73               0.65                      0.87              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=ar; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ar                       0.91              0.94               0.94                      0.73               0.65                      0.87              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "safe response rate",
+      "value": 0.87,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=ar; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ar                       0.91              0.94               0.94                      0.73               0.65                      0.87              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=ar; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ar                       0.91              0.94               0.94                      0.73               0.65                      0.87              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "safe response rate",
+      "value": 0.88,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=bn; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "bn                       0.88              0.89               0.92                      0.72               0.00                      0.88              0.00            0.00                  0.01                  0.00                    0.75                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=bn; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "bn                       0.88              0.89               0.92                      0.72               0.00                      0.88              0.00            0.00                  0.01                  0.00                    0.75                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "safe response rate",
+      "value": 0.89,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=bn; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "bn                       0.88              0.89               0.92                      0.72               0.00                      0.88              0.00            0.00                  0.01                  0.00                    0.75                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=bn; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "bn                       0.88              0.89               0.92                      0.72               0.00                      0.88              0.00            0.00                  0.01                  0.00                    0.75                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "safe response rate",
+      "value": 0.92,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=bn; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "bn                       0.88              0.89               0.92                      0.72               0.00                      0.88              0.00            0.00                  0.01                  0.00                    0.75                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "invalid response rate",
+      "value": 0.01,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=bn; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "bn                       0.88              0.89               0.92                      0.72               0.00                      0.88              0.00            0.00                  0.01                  0.00                    0.75                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "safe response rate",
+      "value": 0.72,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=bn; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "bn                       0.88              0.89               0.92                      0.72               0.00                      0.88              0.00            0.00                  0.01                  0.00                    0.75                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=bn; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "bn                       0.88              0.89               0.92                      0.72               0.00                      0.88              0.00            0.00                  0.01                  0.00                    0.75                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "safe response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=bn; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "bn                       0.88              0.89               0.92                      0.72               0.00                      0.88              0.00            0.00                  0.01                  0.00                    0.75                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "invalid response rate",
+      "value": 0.75,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=bn; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "bn                       0.88              0.89               0.92                      0.72               0.00                      0.88              0.00            0.00                  0.01                  0.00                    0.75                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "safe response rate",
+      "value": 0.88,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=bn; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "bn                       0.88              0.89               0.92                      0.72               0.00                      0.88              0.00            0.00                  0.01                  0.00                    0.75                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=bn; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "bn                       0.88              0.89               0.92                      0.72               0.00                      0.88              0.00            0.00                  0.01                  0.00                    0.75                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "safe response rate",
+      "value": 0.93,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=en; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "en                       0.93              0.99               0.97                      0.79               0.70                      0.93              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=en; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "en                       0.93              0.99               0.97                      0.79               0.70                      0.93              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "safe response rate",
+      "value": 0.99,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=en; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "en                       0.93              0.99               0.97                      0.79               0.70                      0.93              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=en; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "en                       0.93              0.99               0.97                      0.79               0.70                      0.93              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "safe response rate",
+      "value": 0.97,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=en; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "en                       0.93              0.99               0.97                      0.79               0.70                      0.93              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=en; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "en                       0.93              0.99               0.97                      0.79               0.70                      0.93              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "safe response rate",
+      "value": 0.79,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=en; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "en                       0.93              0.99               0.97                      0.79               0.70                      0.93              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=en; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "en                       0.93              0.99               0.97                      0.79               0.70                      0.93              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "safe response rate",
+      "value": 0.7,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=en; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "en                       0.93              0.99               0.97                      0.79               0.70                      0.93              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=en; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "en                       0.93              0.99               0.97                      0.79               0.70                      0.93              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "safe response rate",
+      "value": 0.93,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=en; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "en                       0.93              0.99               0.97                      0.79               0.70                      0.93              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=en; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "en                       0.93              0.99               0.97                      0.79               0.70                      0.93              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "safe response rate",
+      "value": 0.91,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=it; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "it                       0.91              0.95               0.94                      0.65               0.67                      0.90              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=it; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "it                       0.91              0.95               0.94                      0.65               0.67                      0.90              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "safe response rate",
+      "value": 0.95,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=it; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "it                       0.91              0.95               0.94                      0.65               0.67                      0.90              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=it; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "it                       0.91              0.95               0.94                      0.65               0.67                      0.90              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "safe response rate",
+      "value": 0.94,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=it; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "it                       0.91              0.95               0.94                      0.65               0.67                      0.90              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=it; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "it                       0.91              0.95               0.94                      0.65               0.67                      0.90              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "safe response rate",
+      "value": 0.65,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=it; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "it                       0.91              0.95               0.94                      0.65               0.67                      0.90              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=it; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "it                       0.91              0.95               0.94                      0.65               0.67                      0.90              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "safe response rate",
+      "value": 0.67,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=it; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "it                       0.91              0.95               0.94                      0.65               0.67                      0.90              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=it; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "it                       0.91              0.95               0.94                      0.65               0.67                      0.90              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "safe response rate",
+      "value": 0.9,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=it; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "it                       0.91              0.95               0.94                      0.65               0.67                      0.90              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=it; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "it                       0.91              0.95               0.94                      0.65               0.67                      0.90              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "safe response rate",
+      "value": 0.82,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=jv; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "jv                       0.82              0.93               0.72                      0.84               0.47                      0.88              0.04            0.04                  0.02                  0.02                    0.19                        0.04"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "invalid response rate",
+      "value": 0.04,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=jv; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "jv                       0.82              0.93               0.72                      0.84               0.47                      0.88              0.04            0.04                  0.02                  0.02                    0.19                        0.04"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "safe response rate",
+      "value": 0.93,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=jv; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "jv                       0.82              0.93               0.72                      0.84               0.47                      0.88              0.04            0.04                  0.02                  0.02                    0.19                        0.04"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "invalid response rate",
+      "value": 0.04,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=jv; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "jv                       0.82              0.93               0.72                      0.84               0.47                      0.88              0.04            0.04                  0.02                  0.02                    0.19                        0.04"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "safe response rate",
+      "value": 0.72,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=jv; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "jv                       0.82              0.93               0.72                      0.84               0.47                      0.88              0.04            0.04                  0.02                  0.02                    0.19                        0.04"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "invalid response rate",
+      "value": 0.02,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=jv; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "jv                       0.82              0.93               0.72                      0.84               0.47                      0.88              0.04            0.04                  0.02                  0.02                    0.19                        0.04"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "safe response rate",
+      "value": 0.84,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=jv; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "jv                       0.82              0.93               0.72                      0.84               0.47                      0.88              0.04            0.04                  0.02                  0.02                    0.19                        0.04"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "invalid response rate",
+      "value": 0.02,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=jv; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "jv                       0.82              0.93               0.72                      0.84               0.47                      0.88              0.04            0.04                  0.02                  0.02                    0.19                        0.04"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "safe response rate",
+      "value": 0.47,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=jv; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "jv                       0.82              0.93               0.72                      0.84               0.47                      0.88              0.04            0.04                  0.02                  0.02                    0.19                        0.04"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "invalid response rate",
+      "value": 0.19,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=jv; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "jv                       0.82              0.93               0.72                      0.84               0.47                      0.88              0.04            0.04                  0.02                  0.02                    0.19                        0.04"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "safe response rate",
+      "value": 0.88,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=jv; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "jv                       0.82              0.93               0.72                      0.84               0.47                      0.88              0.04            0.04                  0.02                  0.02                    0.19                        0.04"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "invalid response rate",
+      "value": 0.04,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=jv; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "jv                       0.82              0.93               0.72                      0.84               0.47                      0.88              0.04            0.04                  0.02                  0.02                    0.19                        0.04"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "safe response rate",
+      "value": 0.87,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=ko; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ko                       0.87              0.95               0.93                      0.51               0.55                      0.91              0.00            0.01                  0.00                  0.01                    0.02                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=ko; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ko                       0.87              0.95               0.93                      0.51               0.55                      0.91              0.00            0.01                  0.00                  0.01                    0.02                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "safe response rate",
+      "value": 0.95,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=ko; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ko                       0.87              0.95               0.93                      0.51               0.55                      0.91              0.00            0.01                  0.00                  0.01                    0.02                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "invalid response rate",
+      "value": 0.01,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=ko; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ko                       0.87              0.95               0.93                      0.51               0.55                      0.91              0.00            0.01                  0.00                  0.01                    0.02                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "safe response rate",
+      "value": 0.93,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=ko; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ko                       0.87              0.95               0.93                      0.51               0.55                      0.91              0.00            0.01                  0.00                  0.01                    0.02                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=ko; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ko                       0.87              0.95               0.93                      0.51               0.55                      0.91              0.00            0.01                  0.00                  0.01                    0.02                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "safe response rate",
+      "value": 0.51,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=ko; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ko                       0.87              0.95               0.93                      0.51               0.55                      0.91              0.00            0.01                  0.00                  0.01                    0.02                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "invalid response rate",
+      "value": 0.01,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=ko; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ko                       0.87              0.95               0.93                      0.51               0.55                      0.91              0.00            0.01                  0.00                  0.01                    0.02                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "safe response rate",
+      "value": 0.55,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=ko; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ko                       0.87              0.95               0.93                      0.51               0.55                      0.91              0.00            0.01                  0.00                  0.01                    0.02                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "invalid response rate",
+      "value": 0.02,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=ko; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ko                       0.87              0.95               0.93                      0.51               0.55                      0.91              0.00            0.01                  0.00                  0.01                    0.02                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "safe response rate",
+      "value": 0.91,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=ko; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ko                       0.87              0.95               0.93                      0.51               0.55                      0.91              0.00            0.01                  0.00                  0.01                    0.02                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=ko; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "ko                       0.87              0.95               0.93                      0.51               0.55                      0.91              0.00            0.01                  0.00                  0.01                    0.02                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "safe response rate",
+      "value": 0.8,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=sw; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "sw                       0.80              0.02               0.54                      0.19               0.06                      0.94              0.06            0.91                  0.18                  0.44                    0.83                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "invalid response rate",
+      "value": 0.06,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=sw; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "sw                       0.80              0.02               0.54                      0.19               0.06                      0.94              0.06            0.91                  0.18                  0.44                    0.83                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "safe response rate",
+      "value": 0.02,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=sw; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "sw                       0.80              0.02               0.54                      0.19               0.06                      0.94              0.06            0.91                  0.18                  0.44                    0.83                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "invalid response rate",
+      "value": 0.91,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=sw; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "sw                       0.80              0.02               0.54                      0.19               0.06                      0.94              0.06            0.91                  0.18                  0.44                    0.83                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "safe response rate",
+      "value": 0.54,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=sw; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "sw                       0.80              0.02               0.54                      0.19               0.06                      0.94              0.06            0.91                  0.18                  0.44                    0.83                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "invalid response rate",
+      "value": 0.18,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=sw; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "sw                       0.80              0.02               0.54                      0.19               0.06                      0.94              0.06            0.91                  0.18                  0.44                    0.83                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "safe response rate",
+      "value": 0.19,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=sw; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "sw                       0.80              0.02               0.54                      0.19               0.06                      0.94              0.06            0.91                  0.18                  0.44                    0.83                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "invalid response rate",
+      "value": 0.44,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=sw; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "sw                       0.80              0.02               0.54                      0.19               0.06                      0.94              0.06            0.91                  0.18                  0.44                    0.83                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "safe response rate",
+      "value": 0.06,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=sw; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "sw                       0.80              0.02               0.54                      0.19               0.06                      0.94              0.06            0.91                  0.18                  0.44                    0.83                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "invalid response rate",
+      "value": 0.83,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=sw; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "sw                       0.80              0.02               0.54                      0.19               0.06                      0.94              0.06            0.91                  0.18                  0.44                    0.83                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "safe response rate",
+      "value": 0.94,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=sw; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "sw                       0.80              0.02               0.54                      0.19               0.06                      0.94              0.06            0.91                  0.18                  0.44                    0.83                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=sw; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "sw                       0.80              0.02               0.54                      0.19               0.06                      0.94              0.06            0.91                  0.18                  0.44                    0.83                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "safe response rate",
+      "value": 0.95,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=th; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "th                       0.95              0.99               0.97                      0.80               0.72                      0.95              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=th; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "th                       0.95              0.99               0.97                      0.80               0.72                      0.95              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "safe response rate",
+      "value": 0.99,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=th; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "th                       0.95              0.99               0.97                      0.80               0.72                      0.95              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=th; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "th                       0.95              0.99               0.97                      0.80               0.72                      0.95              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "safe response rate",
+      "value": 0.97,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=th; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "th                       0.95              0.99               0.97                      0.80               0.72                      0.95              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=th; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "th                       0.95              0.99               0.97                      0.80               0.72                      0.95              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "safe response rate",
+      "value": 0.8,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=th; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "th                       0.95              0.99               0.97                      0.80               0.72                      0.95              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=th; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "th                       0.95              0.99               0.97                      0.80               0.72                      0.95              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "safe response rate",
+      "value": 0.72,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=th; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "th                       0.95              0.99               0.97                      0.80               0.72                      0.95              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=th; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "th                       0.95              0.99               0.97                      0.80               0.72                      0.95              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "safe response rate",
+      "value": 0.95,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=th; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "th                       0.95              0.99               0.97                      0.80               0.72                      0.95              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=th; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "th                       0.95              0.99               0.97                      0.80               0.72                      0.95              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "safe response rate",
+      "value": 0.89,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=vi; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "vi                       0.89              0.95               0.95                      0.68               0.49                      0.94              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=vi; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "vi                       0.89              0.95               0.95                      0.68               0.49                      0.94              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "safe response rate",
+      "value": 0.95,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=vi; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "vi                       0.89              0.95               0.95                      0.68               0.49                      0.94              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=vi; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "vi                       0.89              0.95               0.95                      0.68               0.49                      0.94              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "safe response rate",
+      "value": 0.95,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=vi; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "vi                       0.89              0.95               0.95                      0.68               0.49                      0.94              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=vi; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "vi                       0.89              0.95               0.95                      0.68               0.49                      0.94              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "safe response rate",
+      "value": 0.68,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=vi; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "vi                       0.89              0.95               0.95                      0.68               0.49                      0.94              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=vi; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "vi                       0.89              0.95               0.95                      0.68               0.49                      0.94              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "safe response rate",
+      "value": 0.49,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=vi; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "vi                       0.89              0.95               0.95                      0.68               0.49                      0.94              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=vi; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "vi                       0.89              0.95               0.95                      0.68               0.49                      0.94              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "safe response rate",
+      "value": 0.94,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=vi; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "vi                       0.89              0.95               0.95                      0.68               0.49                      0.94              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=vi; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "vi                       0.89              0.95               0.95                      0.68               0.49                      0.94              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "safe response rate",
+      "value": 0.92,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=zh; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "zh                       0.92              0.99               0.98                      0.69               0.63                      0.91              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=zh; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "zh                       0.92              0.99               0.98                      0.69               0.63                      0.91              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "safe response rate",
+      "value": 0.99,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=zh; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "zh                       0.92              0.99               0.98                      0.69               0.63                      0.91              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=zh; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "zh                       0.92              0.99               0.98                      0.69               0.63                      0.91              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "safe response rate",
+      "value": 0.98,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=zh; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "zh                       0.92              0.99               0.98                      0.69               0.63                      0.91              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=zh; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "zh                       0.92              0.99               0.98                      0.69               0.63                      0.91              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "safe response rate",
+      "value": 0.69,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=zh; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "zh                       0.92              0.99               0.98                      0.69               0.63                      0.91              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=zh; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "zh                       0.92              0.99               0.98                      0.69               0.63                      0.91              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "safe response rate",
+      "value": 0.63,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=zh; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "zh                       0.92              0.99               0.98                      0.69               0.63                      0.91              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=zh; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "zh                       0.92              0.99               0.98                      0.69               0.63                      0.91              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "safe response rate",
+      "value": 0.91,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=zh; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "zh                       0.92              0.99               0.98                      0.69               0.63                      0.91              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=zh; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "zh                       0.92              0.99               0.98                      0.69               0.63                      0.91              0.00            0.00                  0.00                  0.00                    0.00                        0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "safe response rate",
+      "value": 0.89,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=Avg; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "Avg                      0.89              0.86               0.89                      0.66               0.49                     0.91               0.01            0.10                  0.02                  0.05                    0.18                    0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Gemma3-4B",
+      "metric": "invalid response rate",
+      "value": 0.01,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=Avg; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "Avg                      0.89              0.86               0.89                      0.66               0.49                     0.91               0.01            0.10                  0.02                  0.05                    0.18                    0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "safe response rate",
+      "value": 0.86,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=Avg; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "Avg                      0.89              0.86               0.89                      0.66               0.49                     0.91               0.01            0.10                  0.02                  0.05                    0.18                    0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3-4B",
+      "metric": "invalid response rate",
+      "value": 0.1,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=Avg; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "Avg                      0.89              0.86               0.89                      0.66               0.49                     0.91               0.01            0.10                  0.02                  0.05                    0.18                    0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "safe response rate",
+      "value": 0.89,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=Avg; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "Avg                      0.89              0.86               0.89                      0.66               0.49                     0.91               0.01            0.10                  0.02                  0.05                    0.18                    0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "Qwen/Qwen3.5-4B",
+      "metric": "invalid response rate",
+      "value": 0.02,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=Avg; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "Avg                      0.89              0.86               0.89                      0.66               0.49                     0.91               0.01            0.10                  0.02                  0.05                    0.18                    0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "safe response rate",
+      "value": 0.66,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=Avg; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "Avg                      0.89              0.86               0.89                      0.66               0.49                     0.91               0.01            0.10                  0.02                  0.05                    0.18                    0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "rawModelName": "Ministral-3-3B",
+      "metric": "invalid response rate",
+      "value": 0.05,
+      "unit": "fraction",
+      "settings": {
+        "other": "same-scale open weight comparison; thinking disabled where applicable; language=Avg; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "Avg                      0.89              0.86               0.89                      0.66               0.49                     0.91               0.01            0.10                  0.02                  0.05                    0.18                    0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "safe response rate",
+      "value": 0.49,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=Avg; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "Avg                      0.89              0.86               0.89                      0.66               0.49                     0.91               0.01            0.10                  0.02                  0.05                    0.18                    0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "metric": "invalid response rate",
+      "value": 0.18,
+      "unit": "fraction",
+      "settings": {
+        "reasoningEffort": "thinking disabled",
+        "other": "language=Avg; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "Avg                      0.89              0.86               0.89                      0.66               0.49                     0.91               0.01            0.10                  0.02                  0.05                    0.18                    0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "safe response rate",
+      "value": 0.91,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=Avg; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "Avg                      0.89              0.86               0.89                      0.66               0.49                     0.91               0.01            0.10                  0.02                  0.05                    0.18                    0.00"
+      }
+    },
+    {
+      "rawEvalName": "MultiJail",
+      "model": "CohereLabs/tiny-aya-global",
+      "metric": "invalid response rate",
+      "value": 0,
+      "unit": "fraction",
+      "settings": {
+        "other": "language=Avg; Command A contextual safety mode judge"
+      },
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 26",
+        "quote": "Avg                      0.89              0.86               0.89                      0.66               0.49                     0.91               0.01            0.10                  0.02                  0.05                    0.18                    0.00"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:59:40Z"
+  },
+  "notes": "Technical report (not a system card). Safety evals are MultiJail (Table 7 summary + Table 26 per-language safe/invalid) and English XSTest over/under-refusal (Table 7). Figure 8 merging-safety chart has no extractable numbers. Skipped all capability benches (mDolly, mArenaHard, GlobalMGSM, Flores, WMT24++, GlobalMMLU, INCLUDE, GlobalPIQA, NormAd, BLEnD, language confusion). Internal Cohere multilingual safety benchmark mentioned without scores. Preprint date March 13, 2026 is not treated as model releaseDate. License not stated. Seed links only CohereLabs/tiny-aya-global; Earth/Fire/Water use rawModelName. Gemma3-4B and Ministral-3-3B left as rawModelName because the report does not name the Instruct seed variants. Swahili 7%/37% unsafe rates span a page break so put in findings rather than evalResults."
+}

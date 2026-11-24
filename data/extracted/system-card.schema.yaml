@@ -1,0 +1,176 @@
+# One file per card in data/extracted/system-cards/<document key>.json. The same as the spec's
+# `SystemCard` and reported `EvalResult`s, but documents are seed keys and models are seed ids
+# (data/seed/system_cards.json), so the files can be written before the database has ids.
+# Check a file: node spec/scripts/check-extraction.mjs <file>
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://openaudit.com/data/system-card-extraction.schema.json
+title: SystemCardExtraction
+type: object
+additionalProperties: false
+required: [document, alsoDocuments, covers, disclosures, riskDecisions, topics, testers, findings, evalResults, extraction]
+properties:
+  document:
+    type: string
+    description: The key of the document we read (the fullest form of the card).
+  alsoDocuments:
+    type: array
+    items:
+      type: string
+    uniqueItems: true
+    description: Keys of other documents of the same card (web page, blog post).
+  covers:
+    type: array
+    description: The models the document is about. Empty only for a technical report on an eval.
+    items:
+      $ref: '#/$defs/ModelRef'
+  basedOn:
+    type: string
+    description: The key of the card this one updates, when it is a delta card.
+  fileUrl:
+    type: string
+    format: uri
+    description: The URL of the file we read, when it is not the document's URL (a web page that links to a PDF).
+  pageCount:
+    type: integer
+    minimum: 1
+  disclosures:
+    $ref: 'https://openaudit.com/spec/v1/openaudit.schema.json#/$defs/Disclosures'
+  riskDecisions:
+    type: array
+    items:
+      $ref: '#/$defs/Verdict'
+  topics:
+    type: array
+    items:
+      $ref: 'https://openaudit.com/spec/v1/openaudit.schema.json#/$defs/TopicCoverage'
+  testers:
+    type: array
+    items:
+      $ref: 'https://openaudit.com/spec/v1/openaudit.schema.json#/$defs/ExternalTester'
+  findings:
+    type: array
+    items:
+      $ref: 'https://openaudit.com/spec/v1/openaudit.schema.json#/$defs/Finding'
+  evalResults:
+    type: array
+    items:
+      $ref: '#/$defs/Result'
+  extraction:
+    $ref: 'https://openaudit.com/spec/v1/openaudit.schema.json#/$defs/ExtractionInfo'
+  notes:
+    type: string
+    description: Notes for the reviewer (what was hard to read, what was left out and why).
+$defs:
+  ModelRef:
+    description: >-
+      `model`: a seed model or checkpoint id (`anthropic/claude-opus-4-8`, `Qwen/Qwen3-VL-8B-Thinking`).
+      Give `rawModelName` when the model is not in the seed list.
+    type: object
+    additionalProperties: false
+    properties:
+      model:
+        type: string
+      rawModelName:
+        type: string
+        minLength: 1
+      section:
+        type: string
+        minLength: 1
+    anyOf:
+      - properties:
+          model: true
+        required: [model]
+      - properties:
+          rawModelName: true
+        required: [rawModelName]
+  Verdict:
+    description: >-
+      The spec's `RiskDecision`, with `models` (seed ids from `covers`) in place of `modelIds`.
+      Give `models` only when the verdict is about some of the covered models, not all.
+    type: object
+    additionalProperties: false
+    required: [domain, labLabel, phase, source]
+    properties:
+      domain:
+        $ref: 'https://openaudit.com/spec/v1/openaudit.schema.json#/$defs/RiskDomain'
+      frameworks:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: 'https://openaudit.com/spec/v1/openaudit.schema.json#/$defs/FrameworkId'
+      labLabel:
+        type: string
+        minLength: 1
+      level:
+        $ref: 'https://openaudit.com/spec/v1/openaudit.schema.json#/$defs/RiskLevel'
+      phase:
+        $ref: 'https://openaudit.com/spec/v1/openaudit.schema.json#/$defs/MitigationPhase'
+      decidedBy:
+        type: string
+        minLength: 1
+      models:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          type: string
+      source:
+        $ref: 'https://openaudit.com/spec/v1/openaudit.schema.json#/$defs/CardSource'
+  Result:
+    description: One reported number. `model` or `rawModelName` as in ModelRef.
+    type: object
+    additionalProperties: false
+    required: [rawEvalName, metric, value, source]
+    properties:
+      rawEvalName:
+        type: string
+        minLength: 1
+      model:
+        type: string
+      rawModelName:
+        type: string
+        minLength: 1
+      metric:
+        type: string
+        minLength: 1
+      value:
+        type: number
+      unit:
+        type: string
+        enum: [fraction, percent, score, count, seconds, tokens, other]
+      stderr:
+        type: number
+        minimum: 0
+      ciLow:
+        type: number
+      ciHigh:
+        type: number
+      n:
+        type: integer
+        minimum: 1
+      settings:
+        $ref: 'https://openaudit.com/spec/v1/openaudit.schema.json#/$defs/ResultSettings'
+      source:
+        type: object
+        additionalProperties: false
+        properties:
+          page:
+            type: string
+            minLength: 1
+          pdfPage:
+            type: integer
+            minimum: 1
+          table:
+            type: string
+            minLength: 1
+          quote:
+            type: string
+            minLength: 1
+    anyOf:
+      - properties:
+          model: true
+        required: [model]
+      - properties:
+          rawModelName: true
+        required: [rawModelName]

@@ -1,0 +1,63 @@
+$defs:
+  SampleMessage:
+    description: One chat message of a sample's input. Text only.
+    type: object
+    additionalProperties: false
+    required: [role, content]
+    properties:
+      role:
+        type: string
+        enum: [system, user, assistant, tool]
+      content:
+        type: string
+
+  EvalSample:
+    title: EvalSample
+    description: >-
+      One sample of an eval version, as Inspect's `Sample`. Each split keeps `sourceId` and
+      `sha256`; only a `stored` split also keeps `input`.
+    type: object
+    additionalProperties: false
+    required: [id, evalVersionId, split, sourceId, metadata, sha256]
+    properties:
+      id:
+        $ref: '#/$defs/Id'
+      evalVersionId:
+        $ref: '#/$defs/Id'
+      split:
+        type: string
+        minLength: 1
+        description: An `EvalSplit.name` of the version.
+      sourceId:
+        type: string
+        minLength: 1
+        description: The sample's id in the source. Unique in its split.
+      input:
+        description: A prompt, or chat messages.
+        oneOf:
+          - type: string
+          - type: array
+            minItems: 1
+            items:
+              $ref: '#/$defs/SampleMessage'
+      target:
+        description: The answer or answers the scorer looks for.
+        oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+      choices:
+        type: array
+        items:
+          type: string
+        description: The options of a multiple-choice sample.
+      metadata:
+        type: object
+        description: Other fields of the source sample, as they are in the source.
+      sha256:
+        type: string
+        pattern: '^[0-9a-f]{64}$'
+        description: >-
+          The hash of `{"id": sourceId, "input": input}` as JSON with sorted keys and no spaces. Chat
+          input is `SampleMessage[]`.

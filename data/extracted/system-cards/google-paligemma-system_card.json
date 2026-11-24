@@ -1,0 +1,2288 @@
+{
+  "document": "google-paligemma-system_card",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "google/paligemma-3b-mix-224"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "image and text input; text output",
+      "source": {
+        "page": "Model information > Inputs and outputs",
+        "quote": "takes both image and text as input and generates text as output, supporting multiple languages."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "multiple languages (multilingual pre-training including 35-language CC3M/VQ translations)",
+      "source": {
+        "page": "Model information > Model summary",
+        "quote": "takes both image and text as input and generates text as output, supporting multiple languages."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Terms",
+      "source": {
+        "page": "Header",
+        "quote": "**Terms of Use:** Terms"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "3 billion params",
+      "source": {
+        "page": "Model information > Model architecture",
+        "quote": "having a total of 3 billion params."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Transformer decoder (Gemma-2B) + Vision Transformer image encoder (SigLIP-So400m/14); PaLI-3 recipes",
+      "source": {
+        "page": "Model information > Model architecture",
+        "quote": "PaliGemma is the composition of a Transformer decoder and a Vision Transformer image encoder, having a total of 3 billion params."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "WebLI, CC3M-35L, VQ2A-CC3M-35L/VQG-CC3M-35L, OpenImages, WIT; safety-filtered WebLI",
+      "source": {
+        "page": "Model data > Pre-train datasets",
+        "quote": "PaliGemma is pre-trained on the following mixture of datasets:"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Content safety human evaluation within acceptable internal policy thresholds",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "The human evaluation results of ethics and safety evaluations are within acceptable thresholds for meeting internal policiesfor categories such as child safety, content safety and representational harms."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "Human evaluation covering child safety; results within acceptable internal policy thresholds",
+      "source": {
+        "page": "Ethics and safety > Evaluation approach",
+        "quote": "Human evaluation on prompts covering child safety, content safety and representational harms."
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "May generate incorrect or outdated factual statements",
+      "source": {
+        "page": "Usage and limitations > Limitations",
+        "quote": "They may generate incorrect or outdated factual statements."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Representational harms human evaluation; [FairFace](https://arxiv.org/abs/1908.04913) Perspective API rates by gender, ethnicity, age",
+      "source": {
+        "page": "Ethics and safety > Evaluation approach",
+        "quote": "Human evaluation on prompts covering child safety, content safety and representational harms."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "Perspective API toxicity, insult, profanity, threat and identity-attack rates on [FairFace](https://arxiv.org/abs/1908.04913) captions per demographic subgroup",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Toxicity        | 0.04%            | 0.03%     | 0.08%     | 0.00%   | 0.09%  | 0.00% |"
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "PaliGemma is designed for a single round of image and text input and is not a multi-turn chatbot.", "tone": "neutral",
+      "source": {
+        "page": "Usage and limitations > Limitations",
+        "quote": "PaliGemma is not a multi-turn chatbot. It is designed for a single round of image and text input."
+      }
+    },
+    {
+      "text": "Human ethics and safety results are stated only as within acceptable internal thresholds, without numeric violation rates.", "tone": "good",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "The human evaluation results of ethics and safety evaluations are within acceptable thresholds for meeting internal policiesfor categories such as child safety, content safety and representational harms."
+      }
+    },
+    {
+      "text": "WebLI training pairs were filtered for pornographic images, child sexual abuse imagery (CSAI) and other unsafe text, Perspective toxicity, and personal information via Cloud Data Loss Prevention (DLP).", "tone": "good",
+      "source": {
+        "page": "Model data > Data responsibility filtering",
+        "quote": "Text safety filtering:** We identify and filter out images that are paired with unsafe text."
+      }
+    },
+    {
+      "text": "Transfer-benchmark tasks and datasets were not in the pretraining mixture; their images were removed from web-scale pre-training data.", "tone": "neutral",
+      "source": {
+        "page": "Evaluation information > Benchmark results",
+        "quote": "none of these tasks or datasets are part of the pretraining data mixture, and their images are explicitly removed from the web-scale pre-training data."
+      }
+    },
+    {
+      "text": "[FairFace](https://arxiv.org/abs/1908.04913) caption toxicity used Perspective API at threshold 0.8; the card reports maximum and median rates across demographic subgroups.", "tone": "neutral",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "Perspective API (threshold of 0.8) to measure toxicity, profanity, and other potential issues in the generated captions for images sourced from the FairFace dataset."
+      }
+    },
+    {
+      "text": "Out-of-the-box or zero-shot performance may lag models designed for general-purpose use because PaliGemma is primarily a fine-tuning base.", "tone": "neutral",
+      "source": {
+        "page": "Usage and limitations > Limitations",
+        "quote": "PaliGemma was designed first and foremost to serve as a general pre-trained model for fine-tuning to specialized tasks. Hence, its \"out of the box\" or \"zero-shot\" performance might lag behind models designed specifically for general purpose use."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "COCO captions",
+      "metric": "CIDEr (val)",
+      "value": 141.92,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [COCO captions](https://cocodataset.org/#home) (train+restval)                                                                         | CIDEr (val)                                    | 141.92            | 144.60            |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "COCO captions",
+      "metric": "CIDEr (val)",
+      "value": 144.6,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [COCO captions](https://cocodataset.org/#home) (train+restval)                                                                         | CIDEr (val)                                    | 141.92            | 144.60            |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "NoCaps",
+      "metric": "CIDEr (val)",
+      "value": 121.72,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [NoCaps](https://nocaps.org/) (Eval of COCO captions transfer)                                                                         | CIDEr (val)                                    | 121.72            | 123.58            |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "NoCaps",
+      "metric": "CIDEr (val)",
+      "value": 123.58,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [NoCaps](https://nocaps.org/) (Eval of COCO captions transfer)                                                                         | CIDEr (val)                                    | 121.72            | 123.58            |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "TextCaps",
+      "metric": "CIDEr (val)",
+      "value": 127.48,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [TextCaps](https://textvqa.org/textcaps/) (train)                                                                                      | CIDEr (val)                                    | 127.48            | 153.94            |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "TextCaps",
+      "metric": "CIDEr (val)",
+      "value": 153.94,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [TextCaps](https://textvqa.org/textcaps/) (train)                                                                                      | CIDEr (val)                                    | 127.48            | 153.94            |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "Screen2words",
+      "metric": "CIDEr (test)",
+      "value": 117.57,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [Screen2words](https://arxiv.org/abs/2108.03353) (train+dev)                                                                           | CIDEr (test)                                   | 117.57            | 119.59            |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "Screen2words",
+      "metric": "CIDEr (test)",
+      "value": 119.59,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [Screen2words](https://arxiv.org/abs/2108.03353) (train+dev)                                                                           | CIDEr (test)                                   | 117.57            | 119.59            |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "Widget Captioning",
+      "metric": "CIDEr (test)",
+      "value": 136.07,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [Widget Captioning](https://arxiv.org/abs/2010.04295) (train+dev)                                                                      | CIDEr (test)                                   | 136.07            | 148.36            |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "Widget Captioning",
+      "metric": "CIDEr (test)",
+      "value": 148.36,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [Widget Captioning](https://arxiv.org/abs/2010.04295) (train+dev)                                                                      | CIDEr (test)                                   | 136.07            | 148.36            |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "VQAv2",
+      "metric": "Accuracy (Test server - std)",
+      "value": 83.19,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [VQAv2](https://visualqa.org/index.html) (train+validation)                                                                            | Accuracy (Test server - std)                   | 83.19             | 85.64             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "VQAv2",
+      "metric": "Accuracy (Test server - std)",
+      "value": 85.64,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [VQAv2](https://visualqa.org/index.html) (train+validation)                                                                            | Accuracy (Test server - std)                   | 83.19             | 85.64             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "MMVP",
+      "metric": "Paired Accuracy",
+      "value": 47.33,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [MMVP](https://arxiv.org/abs/2401.06209) (Eval of VQAv2 transfer)                                                                      | Paired Accuracy                                | 47.33             | 45.33             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "MMVP",
+      "metric": "Paired Accuracy",
+      "value": 45.33,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [MMVP](https://arxiv.org/abs/2401.06209) (Eval of VQAv2 transfer)                                                                      | Paired Accuracy                                | 47.33             | 45.33             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "OKVQA",
+      "metric": "Accuracy (val)",
+      "value": 63.54,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [OKVQA](https://okvqa.allenai.org/) (train)                                                                                            | Accuracy (val)                                 | 63.54             | 63.15             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "OKVQA",
+      "metric": "Accuracy (val)",
+      "value": 63.15,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [OKVQA](https://okvqa.allenai.org/) (train)                                                                                            | Accuracy (val)                                 | 63.54             | 63.15             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "A-OKVQA (MC)",
+      "metric": "Accuracy (Test server)",
+      "value": 76.37,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [A-OKVQA](https://allenai.org/project/a-okvqa/home) (MC) (train+val)                                                                   | Accuracy (Test server)                         | 76.37             | 76.90             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "A-OKVQA (MC)",
+      "metric": "Accuracy (Test server)",
+      "value": 76.9,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [A-OKVQA](https://allenai.org/project/a-okvqa/home) (MC) (train+val)                                                                   | Accuracy (Test server)                         | 76.37             | 76.90             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "A-OKVQA (DA)",
+      "metric": "Accuracy (Test server)",
+      "value": 61.85,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [A-OKVQA](https://allenai.org/project/a-okvqa/home) (DA) (train+val)                                                                   | Accuracy (Test server)                         | 61.85             | 63.22             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "A-OKVQA (DA)",
+      "metric": "Accuracy (Test server)",
+      "value": 63.22,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [A-OKVQA](https://allenai.org/project/a-okvqa/home) (DA) (train+val)                                                                   | Accuracy (Test server)                         | 61.85             | 63.22             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "GQA",
+      "metric": "Accuracy (testdev balanced)",
+      "value": 65.61,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [GQA](https://cs.stanford.edu/people/dorarad/gqa/about.html) (train\\_balanced+val\\_balanced)                                           | Accuracy (testdev balanced)                    | 65.61             | 67.03             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "GQA",
+      "metric": "Accuracy (testdev balanced)",
+      "value": 67.03,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [GQA](https://cs.stanford.edu/people/dorarad/gqa/about.html) (train\\_balanced+val\\_balanced)                                           | Accuracy (testdev balanced)                    | 65.61             | 67.03             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "xGQA",
+      "metric": "Mean Accuracy (bn, de, en, id, ko, pt, ru, zh)",
+      "value": 58.37,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [xGQA](https://aclanthology.org/2022.findings-acl.196/) (Eval of GQA transfer)                                                         | Mean Accuracy (bn, de, en, id, ko, pt, ru, zh) | 58.37             | 59.07             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "xGQA",
+      "metric": "Mean Accuracy (bn, de, en, id, ko, pt, ru, zh)",
+      "value": 59.07,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [xGQA](https://aclanthology.org/2022.findings-acl.196/) (Eval of GQA transfer)                                                         | Mean Accuracy (bn, de, en, id, ko, pt, ru, zh) | 58.37             | 59.07             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "NLVR2",
+      "metric": "Accuracy (test)",
+      "value": 90.02,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [NLVR2](https://lil.nlp.cornell.edu/nlvr/) (train+dev)                                                                                 | Accuracy (test)                                | 90.02             | 88.93             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "NLVR2",
+      "metric": "Accuracy (test)",
+      "value": 88.93,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [NLVR2](https://lil.nlp.cornell.edu/nlvr/) (train+dev)                                                                                 | Accuracy (test)                                | 90.02             | 88.93             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "MaRVL",
+      "metric": "Mean Accuracy (test) (id, sw, ta, tr, zh)",
+      "value": 80.57,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [MaRVL](https://marvl-challenge.github.io/) (Eval of NLVR2 transfer)                                                                   | Mean Accuracy (test) (id, sw, ta, tr, zh)      | 80.57             | 76.78             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "MaRVL",
+      "metric": "Mean Accuracy (test) (id, sw, ta, tr, zh)",
+      "value": 76.78,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [MaRVL](https://marvl-challenge.github.io/) (Eval of NLVR2 transfer)                                                                   | Mean Accuracy (test) (id, sw, ta, tr, zh)      | 80.57             | 76.78             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "AI2D",
+      "metric": "Accuracy (test)",
+      "value": 72.12,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [AI2D](https://allenai.org/data/diagrams) (train)                                                                                      | Accuracy (test)                                | 72.12             | 73.28             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "AI2D",
+      "metric": "Accuracy (test)",
+      "value": 73.28,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [AI2D](https://allenai.org/data/diagrams) (train)                                                                                      | Accuracy (test)                                | 72.12             | 73.28             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "ScienceQA",
+      "metric": "Accuracy (test)",
+      "value": 95.39,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [ScienceQA](https://scienceqa.github.io/) (Img subset, no CoT) (train+val)                                                             | Accuracy (test)                                | 95.39             | 95.93             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "ScienceQA",
+      "metric": "Accuracy (test)",
+      "value": 95.93,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [ScienceQA](https://scienceqa.github.io/) (Img subset, no CoT) (train+val)                                                             | Accuracy (test)                                | 95.39             | 95.93             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RSVQA-LR",
+      "metric": "Mean Accuracy (test)",
+      "value": 92.65,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RSVQA-LR](https://zenodo.org/records/6344334) (Non numeric) (train+val)                                                               | Mean Accuracy (test)                           | 92.65             | 93.11             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RSVQA-LR",
+      "metric": "Mean Accuracy (test)",
+      "value": 93.11,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RSVQA-LR](https://zenodo.org/records/6344334) (Non numeric) (train+val)                                                               | Mean Accuracy (test)                           | 92.65             | 93.11             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "ChartQA",
+      "metric": "Mean Relaxed Accuracy (test_human, test_aug)",
+      "value": 57.08,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [ChartQA](https://arxiv.org/abs/2203.10244) (human+aug)x(train+val)                                                                    | Mean Relaxed Accuracy (test\\_human, test\\_aug) | 57.08             | 71.36             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "ChartQA",
+      "metric": "Mean Relaxed Accuracy (test_human, test_aug)",
+      "value": 71.36,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [ChartQA](https://arxiv.org/abs/2203.10244) (human+aug)x(train+val)                                                                    | Mean Relaxed Accuracy (test\\_human, test\\_aug) | 57.08             | 71.36             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "VizWiz VQA",
+      "metric": "Accuracy (Test server - std)",
+      "value": 73.7,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [VizWiz VQA](https://vizwiz.org/tasks-and-datasets/vqa/) (train+val)                                                                   | Accuracy (Test server - std)                   | 73.7              | 75.52             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "VizWiz VQA",
+      "metric": "Accuracy (Test server - std)",
+      "value": 75.52,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [VizWiz VQA](https://vizwiz.org/tasks-and-datasets/vqa/) (train+val)                                                                   | Accuracy (Test server - std)                   | 73.7              | 75.52             |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "COCO-35L",
+      "metric": "CIDEr dev (en)",
+      "value": 139.2,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [COCO-35L](https://arxiv.org/pdf/2205.12522) (train)                                                                                   | CIDEr dev (en/avg-34/avg)                      | 139.2 115.8 116.4 | 141.2 118.0 118.6 |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "COCO-35L",
+      "metric": "CIDEr dev (avg-34)",
+      "value": 115.8,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [COCO-35L](https://arxiv.org/pdf/2205.12522) (train)                                                                                   | CIDEr dev (en/avg-34/avg)                      | 139.2 115.8 116.4 | 141.2 118.0 118.6 |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "COCO-35L",
+      "metric": "CIDEr dev (avg)",
+      "value": 116.4,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [COCO-35L](https://arxiv.org/pdf/2205.12522) (train)                                                                                   | CIDEr dev (en/avg-34/avg)                      | 139.2 115.8 116.4 | 141.2 118.0 118.6 |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "COCO-35L",
+      "metric": "CIDEr dev (en)",
+      "value": 141.2,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [COCO-35L](https://arxiv.org/pdf/2205.12522) (train)                                                                                   | CIDEr dev (en/avg-34/avg)                      | 139.2 115.8 116.4 | 141.2 118.0 118.6 |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "COCO-35L",
+      "metric": "CIDEr dev (avg-34)",
+      "value": 118.0,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [COCO-35L](https://arxiv.org/pdf/2205.12522) (train)                                                                                   | CIDEr dev (en/avg-34/avg)                      | 139.2 115.8 116.4 | 141.2 118.0 118.6 |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "COCO-35L",
+      "metric": "CIDEr dev (avg)",
+      "value": 118.6,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [COCO-35L](https://arxiv.org/pdf/2205.12522) (train)                                                                                   | CIDEr dev (en/avg-34/avg)                      | 139.2 115.8 116.4 | 141.2 118.0 118.6 |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "XM3600",
+      "metric": "CIDEr dev (en)",
+      "value": 78.1,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [XM3600](https://arxiv.org/pdf/2205.12522) (Eval of COCO-35L transfer)                                                                 | CIDEr dev (en/avg-34/avg)                      | 78.1 41.3 42.4    | 80.0 41.9 42.9    |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "XM3600",
+      "metric": "CIDEr dev (avg-34)",
+      "value": 41.3,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [XM3600](https://arxiv.org/pdf/2205.12522) (Eval of COCO-35L transfer)                                                                 | CIDEr dev (en/avg-34/avg)                      | 78.1 41.3 42.4    | 80.0 41.9 42.9    |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "XM3600",
+      "metric": "CIDEr dev (avg)",
+      "value": 42.4,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [XM3600](https://arxiv.org/pdf/2205.12522) (Eval of COCO-35L transfer)                                                                 | CIDEr dev (en/avg-34/avg)                      | 78.1 41.3 42.4    | 80.0 41.9 42.9    |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "XM3600",
+      "metric": "CIDEr dev (en)",
+      "value": 80.0,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [XM3600](https://arxiv.org/pdf/2205.12522) (Eval of COCO-35L transfer)                                                                 | CIDEr dev (en/avg-34/avg)                      | 78.1 41.3 42.4    | 80.0 41.9 42.9    |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "XM3600",
+      "metric": "CIDEr dev (avg-34)",
+      "value": 41.9,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [XM3600](https://arxiv.org/pdf/2205.12522) (Eval of COCO-35L transfer)                                                                 | CIDEr dev (en/avg-34/avg)                      | 78.1 41.3 42.4    | 80.0 41.9 42.9    |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "XM3600",
+      "metric": "CIDEr dev (avg)",
+      "value": 42.9,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [XM3600](https://arxiv.org/pdf/2205.12522) (Eval of COCO-35L transfer)                                                                 | CIDEr dev (en/avg-34/avg)                      | 78.1 41.3 42.4    | 80.0 41.9 42.9    |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "SciCap",
+      "metric": "CIDEr (test)",
+      "value": 162.25,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [SciCap](https://arxiv.org/abs/2110.11624) (first sentence, no subfigure) (train+val)                                                  | CIDEr/BLEU-4 (test)                            | 162.25 0.192      | 181.49 0.211      |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "SciCap",
+      "metric": "BLEU-4 (test)",
+      "value": 0.192,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [SciCap](https://arxiv.org/abs/2110.11624) (first sentence, no subfigure) (train+val)                                                  | CIDEr/BLEU-4 (test)                            | 162.25 0.192      | 181.49 0.211      |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "SciCap",
+      "metric": "CIDEr (test)",
+      "value": 181.49,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [SciCap](https://arxiv.org/abs/2110.11624) (first sentence, no subfigure) (train+val)                                                  | CIDEr/BLEU-4 (test)                            | 162.25 0.192      | 181.49 0.211      |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "SciCap",
+      "metric": "BLEU-4 (test)",
+      "value": 0.211,
+      "unit": "fraction",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [SciCap](https://arxiv.org/abs/2110.11624) (first sentence, no subfigure) (train+val)                                                  | CIDEr/BLEU-4 (test)                            | 162.25 0.192      | 181.49 0.211      |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "Accuracy (random)",
+      "value": 87.8,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [POPE](https://arxiv.org/abs/2305.10355) (Eval of VQAv2 transfer)                                                                      | Accuracy (random/popular/adversarial)          | 87.80 85.87 84.27 | 88.23 86.77 85.90 |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "Accuracy (popular)",
+      "value": 85.87,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [POPE](https://arxiv.org/abs/2305.10355) (Eval of VQAv2 transfer)                                                                      | Accuracy (random/popular/adversarial)          | 87.80 85.87 84.27 | 88.23 86.77 85.90 |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "Accuracy (adversarial)",
+      "value": 84.27,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [POPE](https://arxiv.org/abs/2305.10355) (Eval of VQAv2 transfer)                                                                      | Accuracy (random/popular/adversarial)          | 87.80 85.87 84.27 | 88.23 86.77 85.90 |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "Accuracy (random)",
+      "value": 88.23,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [POPE](https://arxiv.org/abs/2305.10355) (Eval of VQAv2 transfer)                                                                      | Accuracy (random/popular/adversarial)          | 87.80 85.87 84.27 | 88.23 86.77 85.90 |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "Accuracy (popular)",
+      "value": 86.77,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [POPE](https://arxiv.org/abs/2305.10355) (Eval of VQAv2 transfer)                                                                      | Accuracy (random/popular/adversarial)          | 87.80 85.87 84.27 | 88.23 86.77 85.90 |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "Accuracy (adversarial)",
+      "value": 85.9,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [POPE](https://arxiv.org/abs/2305.10355) (Eval of VQAv2 transfer)                                                                      | Accuracy (random/popular/adversarial)          | 87.80 85.87 84.27 | 88.23 86.77 85.90 |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RSVQA-HR",
+      "metric": "Mean Accuracy (test)",
+      "value": 92.61,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RSVQA-HR](https://zenodo.org/records/6344367) (Non numeric) (train+val)                                                               | Mean Accuracy (test/test2)                     | 92.61 90.58       | 92.79 90.54       |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RSVQA-HR",
+      "metric": "Mean Accuracy (test2)",
+      "value": 90.58,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RSVQA-HR](https://zenodo.org/records/6344367) (Non numeric) (train+val)                                                               | Mean Accuracy (test/test2)                     | 92.61 90.58       | 92.79 90.54       |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RSVQA-HR",
+      "metric": "Mean Accuracy (test)",
+      "value": 92.79,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RSVQA-HR](https://zenodo.org/records/6344367) (Non numeric) (train+val)                                                               | Mean Accuracy (test/test2)                     | 92.61 90.58       | 92.79 90.54       |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RSVQA-HR",
+      "metric": "Mean Accuracy (test2)",
+      "value": 90.54,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RSVQA-HR](https://zenodo.org/records/6344367) (Non numeric) (train+val)                                                               | Mean Accuracy (test/test2)                     | 92.61 90.58       | 92.79 90.54       |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "TallyQA",
+      "metric": "Accuracy (test_simple)",
+      "value": 81.72,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [TallyQA](https://arxiv.org/abs/1810.12440) (train)                                                                                    | Accuracy (test\\_simple/test\\_complex)          | 81.72 69.56       | 84.86 72.27       |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "TallyQA",
+      "metric": "Accuracy (test_complex)",
+      "value": 69.56,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [TallyQA](https://arxiv.org/abs/1810.12440) (train)                                                                                    | Accuracy (test\\_simple/test\\_complex)          | 81.72 69.56       | 84.86 72.27       |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "TallyQA",
+      "metric": "Accuracy (test_simple)",
+      "value": 84.86,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [TallyQA](https://arxiv.org/abs/1810.12440) (train)                                                                                    | Accuracy (test\\_simple/test\\_complex)          | 81.72 69.56       | 84.86 72.27       |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "TallyQA",
+      "metric": "Accuracy (test_complex)",
+      "value": 72.27,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [TallyQA](https://arxiv.org/abs/1810.12440) (train)                                                                                    | Accuracy (test\\_simple/test\\_complex)          | 81.72 69.56       | 84.86 72.27       |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "OCR-VQA",
+      "metric": "Accuracy (test)",
+      "value": 72.32,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [OCR-VQA](https://ocr-vqa.github.io/) (train+val)                                                                                      | Accuracy (test)                                | 72.32             | 74.61             | 74.93             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "OCR-VQA",
+      "metric": "Accuracy (test)",
+      "value": 74.61,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [OCR-VQA](https://ocr-vqa.github.io/) (train+val)                                                                                      | Accuracy (test)                                | 72.32             | 74.61             | 74.93             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "OCR-VQA",
+      "metric": "Accuracy (test)",
+      "value": 74.93,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [OCR-VQA](https://ocr-vqa.github.io/) (train+val)                                                                                      | Accuracy (test)                                | 72.32             | 74.61             | 74.93             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-896",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "TextVQA",
+      "metric": "Accuracy (Test server - std)",
+      "value": 55.47,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [TextVQA](https://textvqa.org/) (train+val)                                                                                            | Accuracy (Test server - std)                   | 55.47             | 73.15             | 76.48             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "TextVQA",
+      "metric": "Accuracy (Test server - std)",
+      "value": 73.15,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [TextVQA](https://textvqa.org/) (train+val)                                                                                            | Accuracy (Test server - std)                   | 55.47             | 73.15             | 76.48             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "TextVQA",
+      "metric": "Accuracy (Test server - std)",
+      "value": 76.48,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [TextVQA](https://textvqa.org/) (train+val)                                                                                            | Accuracy (Test server - std)                   | 55.47             | 73.15             | 76.48             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-896",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "DocVQA",
+      "metric": "ANLS (Test server)",
+      "value": 43.74,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [DocVQA](https://www.docvqa.org/) (train+val)                                                                                          | ANLS (Test server)                             | 43.74             | 78.02             | 84.77             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "DocVQA",
+      "metric": "ANLS (Test server)",
+      "value": 78.02,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [DocVQA](https://www.docvqa.org/) (train+val)                                                                                          | ANLS (Test server)                             | 43.74             | 78.02             | 84.77             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "DocVQA",
+      "metric": "ANLS (Test server)",
+      "value": 84.77,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [DocVQA](https://www.docvqa.org/) (train+val)                                                                                          | ANLS (Test server)                             | 43.74             | 78.02             | 84.77             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-896",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "Infographic VQA",
+      "metric": "ANLS (Test server)",
+      "value": 28.46,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [Infographic VQA](https://openaccess.thecvf.com/content/WACV2022/papers/Mathew%5FInfographicVQA%5FWACV%5F2022%5Fpaper.pdf) (train+val) | ANLS (Test server)                             | 28.46             | 40.47             | 47.75             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "Infographic VQA",
+      "metric": "ANLS (Test server)",
+      "value": 40.47,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [Infographic VQA](https://openaccess.thecvf.com/content/WACV2022/papers/Mathew%5FInfographicVQA%5FWACV%5F2022%5Fpaper.pdf) (train+val) | ANLS (Test server)                             | 28.46             | 40.47             | 47.75             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "Infographic VQA",
+      "metric": "ANLS (Test server)",
+      "value": 47.75,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [Infographic VQA](https://openaccess.thecvf.com/content/WACV2022/papers/Mathew%5FInfographicVQA%5FWACV%5F2022%5Fpaper.pdf) (train+val) | ANLS (Test server)                             | 28.46             | 40.47             | 47.75             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-896",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "SceneText VQA",
+      "metric": "ANLS (Test server)",
+      "value": 63.29,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [SceneText VQA](https://arxiv.org/abs/1905.13648) (train+val)                                                                          | ANLS (Test server)                             | 63.29             | 81.82             | 84.40             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "SceneText VQA",
+      "metric": "ANLS (Test server)",
+      "value": 81.82,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [SceneText VQA](https://arxiv.org/abs/1905.13648) (train+val)                                                                          | ANLS (Test server)                             | 63.29             | 81.82             | 84.40             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "SceneText VQA",
+      "metric": "ANLS (Test server)",
+      "value": 84.4,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [SceneText VQA](https://arxiv.org/abs/1905.13648) (train+val)                                                                          | ANLS (Test server)                             | 63.29             | 81.82             | 84.40             |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-896",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RefCOCO",
+      "metric": "MIoU (validation) refcoco",
+      "value": 73.4,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RefCOCO](https://arxiv.org/abs/1608.00272) (combined refcoco, refcoco+, refcocog excluding val and test images)                       | MIoU (validation) refcoco/refcoco+/refcocog    | 73.40 68.32 67.65 | 75.57 69.76 70.17 | 76.94 72.18 72.22 |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RefCOCO",
+      "metric": "MIoU (validation) refcoco+",
+      "value": 68.32,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RefCOCO](https://arxiv.org/abs/1608.00272) (combined refcoco, refcoco+, refcocog excluding val and test images)                       | MIoU (validation) refcoco/refcoco+/refcocog    | 73.40 68.32 67.65 | 75.57 69.76 70.17 | 76.94 72.18 72.22 |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RefCOCO",
+      "metric": "MIoU (validation) refcocog",
+      "value": 67.65,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RefCOCO](https://arxiv.org/abs/1608.00272) (combined refcoco, refcoco+, refcocog excluding val and test images)                       | MIoU (validation) refcoco/refcoco+/refcocog    | 73.40 68.32 67.65 | 75.57 69.76 70.17 | 76.94 72.18 72.22 |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RefCOCO",
+      "metric": "MIoU (validation) refcoco",
+      "value": 75.57,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RefCOCO](https://arxiv.org/abs/1608.00272) (combined refcoco, refcoco+, refcocog excluding val and test images)                       | MIoU (validation) refcoco/refcoco+/refcocog    | 73.40 68.32 67.65 | 75.57 69.76 70.17 | 76.94 72.18 72.22 |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RefCOCO",
+      "metric": "MIoU (validation) refcoco+",
+      "value": 69.76,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RefCOCO](https://arxiv.org/abs/1608.00272) (combined refcoco, refcoco+, refcocog excluding val and test images)                       | MIoU (validation) refcoco/refcoco+/refcocog    | 73.40 68.32 67.65 | 75.57 69.76 70.17 | 76.94 72.18 72.22 |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RefCOCO",
+      "metric": "MIoU (validation) refcocog",
+      "value": 70.17,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RefCOCO](https://arxiv.org/abs/1608.00272) (combined refcoco, refcoco+, refcocog excluding val and test images)                       | MIoU (validation) refcoco/refcoco+/refcocog    | 73.40 68.32 67.65 | 75.57 69.76 70.17 | 76.94 72.18 72.22 |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-448",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RefCOCO",
+      "metric": "MIoU (validation) refcoco",
+      "value": 76.94,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RefCOCO](https://arxiv.org/abs/1608.00272) (combined refcoco, refcoco+, refcocog excluding val and test images)                       | MIoU (validation) refcoco/refcoco+/refcocog    | 73.40 68.32 67.65 | 75.57 69.76 70.17 | 76.94 72.18 72.22 |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-896",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RefCOCO",
+      "metric": "MIoU (validation) refcoco+",
+      "value": 72.18,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RefCOCO](https://arxiv.org/abs/1608.00272) (combined refcoco, refcoco+, refcocog excluding val and test images)                       | MIoU (validation) refcoco/refcoco+/refcocog    | 73.40 68.32 67.65 | 75.57 69.76 70.17 | 76.94 72.18 72.22 |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-896",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "RefCOCO",
+      "metric": "MIoU (validation) refcocog",
+      "value": 72.22,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| [RefCOCO](https://arxiv.org/abs/1608.00272) (combined refcoco, refcoco+, refcocog excluding val and test images)                       | MIoU (validation) refcoco/refcoco+/refcocog    | 73.40 68.32 67.65 | 75.57 69.76 70.17 | 76.94 72.18 72.22 |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-896",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "MSR-VTT (Captioning)",
+      "metric": "CIDEr (test)",
+      "value": 70.54,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| MSR-VTT (Captioning)                                                                                                                   | CIDEr (test)                                   | 70.54             |                   |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "MSR-VTT (QA)",
+      "metric": "Accuracy (test)",
+      "value": 50.09,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| MSR-VTT (QA)                                                                                                                           | Accuracy (test)                                | 50.09             |                   |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "ActivityNet (Captioning)",
+      "metric": "CIDEr (test)",
+      "value": 34.62,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| ActivityNet (Captioning)                                                                                                               | CIDEr (test)                                   | 34.62             |                   |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "ActivityNet (QA)",
+      "metric": "Accuracy (test)",
+      "value": 50.78,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| ActivityNet (QA)                                                                                                                       | Accuracy (test)                                | 50.78             |                   |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "VATEX (Captioning)",
+      "metric": "CIDEr (test)",
+      "value": 79.73,
+      "unit": "score",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| VATEX (Captioning)                                                                                                                     | CIDEr (test)                                   | 79.73             |                   |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "MSVD (QA)",
+      "metric": "Accuracy (test)",
+      "value": 60.22,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Single task (fine-tune on single task)",
+        "quote": "| MSVD (QA)                                                                                                                              | Accuracy (test)                                | 60.22             |                   |                   |",
+        "table": "Single task (fine-tune on single task)"
+      },
+      "rawModelName": "pt-224",
+      "settings": {
+        "other": "fine-tune on single task"
+      }
+    },
+    {
+      "rawEvalName": "MMVP",
+      "metric": "Paired Accuracy",
+      "value": 46.0,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Mix model (fine-tune on mixture of transfer tasks)",
+        "quote": "| [MMVP](https://arxiv.org/abs/2401.06209) | Paired Accuracy                       | 46.00             | 45.33             |",
+        "table": "Mix model (fine-tune on mixture of transfer tasks)"
+      },
+      "model": "google/paligemma-3b-mix-224",
+      "settings": {
+        "other": "fine-tune on mixture of transfer tasks"
+      }
+    },
+    {
+      "rawEvalName": "MMVP",
+      "metric": "Paired Accuracy",
+      "value": 45.33,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Mix model (fine-tune on mixture of transfer tasks)",
+        "quote": "| [MMVP](https://arxiv.org/abs/2401.06209) | Paired Accuracy                       | 46.00             | 45.33             |",
+        "table": "Mix model (fine-tune on mixture of transfer tasks)"
+      },
+      "rawModelName": "mix-448",
+      "settings": {
+        "other": "fine-tune on mixture of transfer tasks"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "Accuracy (random)",
+      "value": 88.0,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Mix model (fine-tune on mixture of transfer tasks)",
+        "quote": "| [POPE](https://arxiv.org/abs/2305.10355) | Accuracy (random/popular/adversarial) | 88.00 86.63 85.67 | 89.37 88.40 87.47 |",
+        "table": "Mix model (fine-tune on mixture of transfer tasks)"
+      },
+      "model": "google/paligemma-3b-mix-224",
+      "settings": {
+        "other": "fine-tune on mixture of transfer tasks"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "Accuracy (popular)",
+      "value": 86.63,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Mix model (fine-tune on mixture of transfer tasks)",
+        "quote": "| [POPE](https://arxiv.org/abs/2305.10355) | Accuracy (random/popular/adversarial) | 88.00 86.63 85.67 | 89.37 88.40 87.47 |",
+        "table": "Mix model (fine-tune on mixture of transfer tasks)"
+      },
+      "model": "google/paligemma-3b-mix-224",
+      "settings": {
+        "other": "fine-tune on mixture of transfer tasks"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "Accuracy (adversarial)",
+      "value": 85.67,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Mix model (fine-tune on mixture of transfer tasks)",
+        "quote": "| [POPE](https://arxiv.org/abs/2305.10355) | Accuracy (random/popular/adversarial) | 88.00 86.63 85.67 | 89.37 88.40 87.47 |",
+        "table": "Mix model (fine-tune on mixture of transfer tasks)"
+      },
+      "model": "google/paligemma-3b-mix-224",
+      "settings": {
+        "other": "fine-tune on mixture of transfer tasks"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "Accuracy (random)",
+      "value": 89.37,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Mix model (fine-tune on mixture of transfer tasks)",
+        "quote": "| [POPE](https://arxiv.org/abs/2305.10355) | Accuracy (random/popular/adversarial) | 88.00 86.63 85.67 | 89.37 88.40 87.47 |",
+        "table": "Mix model (fine-tune on mixture of transfer tasks)"
+      },
+      "rawModelName": "mix-448",
+      "settings": {
+        "other": "fine-tune on mixture of transfer tasks"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "Accuracy (popular)",
+      "value": 88.4,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Mix model (fine-tune on mixture of transfer tasks)",
+        "quote": "| [POPE](https://arxiv.org/abs/2305.10355) | Accuracy (random/popular/adversarial) | 88.00 86.63 85.67 | 89.37 88.40 87.47 |",
+        "table": "Mix model (fine-tune on mixture of transfer tasks)"
+      },
+      "rawModelName": "mix-448",
+      "settings": {
+        "other": "fine-tune on mixture of transfer tasks"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "Accuracy (adversarial)",
+      "value": 87.47,
+      "unit": "percent",
+      "source": {
+        "page": "Evaluation information > Benchmark results > Mix model (fine-tune on mixture of transfer tasks)",
+        "quote": "| [POPE](https://arxiv.org/abs/2305.10355) | Accuracy (random/popular/adversarial) | 88.00 86.63 85.67 | 89.37 88.40 87.47 |",
+        "table": "Mix model (fine-tune on mixture of transfer tasks)"
+      },
+      "rawModelName": "mix-448",
+      "settings": {
+        "other": "fine-tune on mixture of transfer tasks"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Toxicity)",
+      "metric": "Maximum (Perceived gender)",
+      "value": 0.04,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Toxicity        | 0.04%            | 0.03%     | 0.08%     | 0.00%   | 0.09%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Toxicity)",
+      "metric": "Median (Perceived gender)",
+      "value": 0.03,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Toxicity        | 0.04%            | 0.03%     | 0.08%     | 0.00%   | 0.09%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Toxicity)",
+      "metric": "Maximum (Ethnicity)",
+      "value": 0.08,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Toxicity        | 0.04%            | 0.03%     | 0.08%     | 0.00%   | 0.09%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Toxicity)",
+      "metric": "Median (Ethnicity)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Toxicity        | 0.04%            | 0.03%     | 0.08%     | 0.00%   | 0.09%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Toxicity)",
+      "metric": "Maximum (Age group)",
+      "value": 0.09,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Toxicity        | 0.04%            | 0.03%     | 0.08%     | 0.00%   | 0.09%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Toxicity)",
+      "metric": "Median (Age group)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Toxicity        | 0.04%            | 0.03%     | 0.08%     | 0.00%   | 0.09%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Identity Attack)",
+      "metric": "Maximum (Perceived gender)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Identity Attack | 0.00%            | 0.00%     | 0.00%     | 0.00%   | 0.00%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Identity Attack)",
+      "metric": "Median (Perceived gender)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Identity Attack | 0.00%            | 0.00%     | 0.00%     | 0.00%   | 0.00%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Identity Attack)",
+      "metric": "Maximum (Ethnicity)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Identity Attack | 0.00%            | 0.00%     | 0.00%     | 0.00%   | 0.00%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Identity Attack)",
+      "metric": "Median (Ethnicity)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Identity Attack | 0.00%            | 0.00%     | 0.00%     | 0.00%   | 0.00%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Identity Attack)",
+      "metric": "Maximum (Age group)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Identity Attack | 0.00%            | 0.00%     | 0.00%     | 0.00%   | 0.00%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Identity Attack)",
+      "metric": "Median (Age group)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Identity Attack | 0.00%            | 0.00%     | 0.00%     | 0.00%   | 0.00%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Insult)",
+      "metric": "Maximum (Perceived gender)",
+      "value": 0.06,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Insult          | 0.06%            | 0.04%     | 0.09%     | 0.07%   | 0.16%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Insult)",
+      "metric": "Median (Perceived gender)",
+      "value": 0.04,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Insult          | 0.06%            | 0.04%     | 0.09%     | 0.07%   | 0.16%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Insult)",
+      "metric": "Maximum (Ethnicity)",
+      "value": 0.09,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Insult          | 0.06%            | 0.04%     | 0.09%     | 0.07%   | 0.16%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Insult)",
+      "metric": "Median (Ethnicity)",
+      "value": 0.07,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Insult          | 0.06%            | 0.04%     | 0.09%     | 0.07%   | 0.16%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Insult)",
+      "metric": "Maximum (Age group)",
+      "value": 0.16,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Insult          | 0.06%            | 0.04%     | 0.09%     | 0.07%   | 0.16%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Insult)",
+      "metric": "Median (Age group)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Insult          | 0.06%            | 0.04%     | 0.09%     | 0.07%   | 0.16%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Threat)",
+      "metric": "Maximum (Perceived gender)",
+      "value": 0.06,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Threat          | 0.06%            | 0.05%     | 0.14%     | 0.05%   | 0.17%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Threat)",
+      "metric": "Median (Perceived gender)",
+      "value": 0.05,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Threat          | 0.06%            | 0.05%     | 0.14%     | 0.05%   | 0.17%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Threat)",
+      "metric": "Maximum (Ethnicity)",
+      "value": 0.14,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Threat          | 0.06%            | 0.05%     | 0.14%     | 0.05%   | 0.17%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Threat)",
+      "metric": "Median (Ethnicity)",
+      "value": 0.05,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Threat          | 0.06%            | 0.05%     | 0.14%     | 0.05%   | 0.17%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Threat)",
+      "metric": "Maximum (Age group)",
+      "value": 0.17,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Threat          | 0.06%            | 0.05%     | 0.14%     | 0.05%   | 0.17%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Threat)",
+      "metric": "Median (Age group)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Threat          | 0.06%            | 0.05%     | 0.14%     | 0.05%   | 0.17%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Profanity)",
+      "metric": "Maximum (Perceived gender)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Profanity       | 0.00%            | 0.00%     | 0.00%     | 0.00%   | 0.00%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Profanity)",
+      "metric": "Median (Perceived gender)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Profanity       | 0.00%            | 0.00%     | 0.00%     | 0.00%   | 0.00%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Profanity)",
+      "metric": "Maximum (Ethnicity)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Profanity       | 0.00%            | 0.00%     | 0.00%     | 0.00%   | 0.00%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Profanity)",
+      "metric": "Median (Ethnicity)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Profanity       | 0.00%            | 0.00%     | 0.00%     | 0.00%   | 0.00%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Profanity)",
+      "metric": "Maximum (Age group)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Profanity       | 0.00%            | 0.00%     | 0.00%     | 0.00%   | 0.00%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    },
+    {
+      "rawEvalName": "FairFace captions Perspective API (Profanity)",
+      "metric": "Median (Age group)",
+      "value": 0.0,
+      "unit": "percent",
+      "source": {
+        "page": "Ethics and safety > Evaluation results",
+        "quote": "| Profanity       | 0.00%            | 0.00%     | 0.00%     | 0.00%   | 0.00%  | 0.00% |",
+        "table": "FairFace Perspective API rates"
+      },
+      "rawModelName": "PaliGemma",
+      "settings": {
+        "other": "Perspective API threshold 0.8; FairFace dataset captions; max/median across subgroups"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:44:10Z"
+  },
+  "notes": "Web model card (ai.google.dev/gemma/docs/paligemma/model-card), not a PDF; no pageCount. Only one seed model (google/paligemma-3b-mix-224) covers the family via checkpoints; single-task columns use rawModelName pt-224/pt-448/pt-896; mix-224 uses the seed id and mix-448 uses rawModelName. Multi-valued cells (COCO-35L/XM3600, SciCap CIDEr/BLEU-4, POPE, RSVQA-HR, TallyQA, RefCOCO) split into one result per number. ChartQA keeps a single Mean Relaxed Accuracy per resolution. FairFace table header rows are malformed in the page markdown; mapped six numeric columns as gender/ethnicity/age × max/median. Infographic VQA row quote shortened to 300 chars (contiguous substring including the numbers). Human safety evals are qualitative only. No formal risk framework levels. No external testers named."
+}

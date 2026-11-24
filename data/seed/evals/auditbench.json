@@ -1,0 +1,100 @@
+{
+  "eval": {
+    "slug": "auditbench",
+    "displayName": "AuditBench",
+    "aliases": ["Audit Bench"],
+    "description": "Benchmark of 56 language models with one of 14 implanted hidden behaviors that they do not confess when asked. An investigator (auditor) agent probes each target with a configurable tool set and proposes up to 10 quirk guesses. An LLM judge checks whether any guess matches the ground-truth behavior.",
+    "summary": "Tests whether an auditing agent can find hidden behaviors in a model that does not confess them.",
+    "maintainers": [
+      {
+        "name": "Anthropic Alignment Science",
+        "url": "https://alignment.anthropic.com/2026/auditbench/"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2602.22755",
+        "title": "AuditBench paper (arXiv)"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/safety-research/auditing-agents",
+        "title": "Agent, training and scoring code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/auditing-agents",
+        "title": "Target models and training data"
+      },
+      {
+        "kind": "blog",
+        "url": "https://alignment.anthropic.com/2026/auditbench/",
+        "title": "AuditBench release post"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://alignment.anthropic.com/2026/auditbench/",
+        "title": "AuditBench"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["multi_turn", "agentic"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["auditor"],
+      "topics": ["auditing", "honesty", "sycophancy"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-03-10",
+      "status": "published",
+      "releasedDate": "2026-03-10",
+      "dataset": {
+        "url": "https://github.com/safety-research/auditing-agents/tree/0f8571f08a7208bf21d3c2d4ffab7f8b64584eaf",
+        "splits": [
+          {
+            "name": "targets",
+            "sampleCount": 56,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "matched",
+          "displayName": "Matched",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "LLM judge reports that at least one of the auditor's finalized quirk guesses captures the implanted hidden behavior."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "success_rate",
+          "displayName": "Success rate",
+          "score": "matched",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of auditor runs where the judge marks a match. Papers average over 16 runs per target and tool configuration."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["auditor", "target", "judge"],
+        "gpu": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,1376 @@
+{
+  "document": "qwen-qwen3-coder-next-paper",
+  "alsoDocuments": [
+    "qwen-qwen3-coder-next-blog"
+  ],
+  "covers": [
+    {
+      "model": "Qwen/Qwen3-Coder-Next"
+    }
+  ],
+  "pageCount": 23,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "Pretraining corpus updated through Sep 30, 2025",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "The pretraining corpus is updated through\nSep 30, 2025."
+      }
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "262,144 tokens (mid-training / agentic context)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "length from 32,768 tokens to 262,144 tokens"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "370 programming languages in GitHub mid-training data (up from 92)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "increasing programming language support from 92 to 370 languages"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "80 billion",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "It contains 80 billion total parameters while activating only 3 billion per forward pass"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "3 billion",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "It contains 80 billion total parameters while activating only 3 billion per forward pass"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Based on Qwen3-Next with hybrid attention and Mixture-of-Experts (MoE)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "based on Qwen3-Next with hybrid\n                                         attention and Mixture-of-Experts (MoE) designed specifically for coding"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Natural GitHub/code and text–code grounding through Sep 30, 2025; synthetic single-turn QA and multi-turn agentic trajectories; SFT with alignment/safety corpora, verified agentic trajectories, and documentation QA",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "The pretraining corpus is updated through\nSep 30, 2025."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "Reinforced reward-hacking blocker eliminates git-remote and network exploit shortcuts during SWE RL",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "reward-hacking behaviors are effectively eliminated"
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "Evaluated on AthenaBench-Mini cyber threat intelligence (CTI), [PrimeVul-Paired](/evals/primevul) vulnerability detection, SecCodeBench and CWEval secure coding",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "We view cybersecurity as a frontier direction for existing models, where they have yet to achieve human-"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "During software engineering (SWE) reinforcement learning (RL), agents learned new reward hacks such as restoring git remotes or cloning repos to recover ground-truth fixes; a heuristic blocker then eliminated those behaviors on manual inspection.", "tone": "bad",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "reward-hacking behaviors are effectively eliminated"
+      }
+    },
+    {
+      "text": "On AthenaBench-Mini, Qwen3-Coder-Next is comparable to open frontier models overall but weak on root-cause mapping and threat-actor attribution.", "tone": "mixed",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "still fall short on the tasks related to root cause mapping and threat actor attribution"
+      }
+    },
+    {
+      "text": "On [PrimeVul-Paired](/evals/primevul) it reports the lowest P-C among compared models, which the authors read as better paired vulnerable/benign consistency.", "tone": "mixed",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "achieves the lowest P-C score, indicating superior performance"
+      }
+    },
+    {
+      "text": "On SecCodeBench generation without security hints, Ours scores 61.2 vs Claude-Opus-4-5 at 52.5 (higher is better).", "tone": "mixed",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "outperforming Claude-Opus-4-5 on generation (61.2\nvs. 52.5)"
+      }
+    },
+    {
+      "text": "Authors plan future agentic cybersecurity work including vulnerability exploitation and capture-the-flag competitions.", "tone": "bad",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "we aim to explore agentic and real-world cybersecurity tasks for the future models"
+      }
+    },
+    {
+      "text": "supervised fine-tuning (SFT) data mix explicitly includes in-house corpora focused on alignment quality and safety behaviors, plus filtering for functional correctness and security.", "tone": "good",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "with a focus on alignment quality\nand safety behaviors"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "Acc",
+      "value": 52.73,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-Opus-4-5       52.73    52.42      59.02       55.53       9.02     50.06     37.28      3.63"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "Precision",
+      "value": 52.42,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-Opus-4-5       52.73    52.42      59.02       55.53       9.02     50.06     37.28      3.63"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "Recall",
+      "value": 59.02,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-Opus-4-5       52.73    52.42      59.02       55.53       9.02     50.06     37.28      3.63"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "F1",
+      "value": 55.53,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-Opus-4-5       52.73    52.42      59.02       55.53       9.02     50.06     37.28      3.63"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "P-C",
+      "value": 9.02,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-Opus-4-5       52.73    52.42      59.02       55.53       9.02     50.06     37.28      3.63"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "P-V",
+      "value": 50.06,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-Opus-4-5       52.73    52.42      59.02       55.53       9.02     50.06     37.28      3.63"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "P-B",
+      "value": 37.28,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-Opus-4-5       52.73    52.42      59.02       55.53       9.02     50.06     37.28      3.63"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "P-R",
+      "value": 3.63,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-Opus-4-5       52.73    52.42      59.02       55.53       9.02     50.06     37.28      3.63"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-sonnet-4.5",
+      "metric": "Acc",
+      "value": 52.57,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-sonnet-4-5     52.57    51.44      91.80       65.93       8.52     83.38      4.93      3.17"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-sonnet-4.5",
+      "metric": "Precision",
+      "value": 51.44,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-sonnet-4-5     52.57    51.44      91.80       65.93       8.52     83.38      4.93      3.17"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-sonnet-4.5",
+      "metric": "Recall",
+      "value": 91.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-sonnet-4-5     52.57    51.44      91.80       65.93       8.52     83.38      4.93      3.17"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-sonnet-4.5",
+      "metric": "F1",
+      "value": 65.93,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-sonnet-4-5     52.57    51.44      91.80       65.93       8.52     83.38      4.93      3.17"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-sonnet-4.5",
+      "metric": "P-C",
+      "value": 8.52,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-sonnet-4-5     52.57    51.44      91.80       65.93       8.52     83.38      4.93      3.17"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-sonnet-4.5",
+      "metric": "P-V",
+      "value": 83.38,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-sonnet-4-5     52.57    51.44      91.80       65.93       8.52     83.38      4.93      3.17"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-sonnet-4.5",
+      "metric": "P-B",
+      "value": 4.93,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-sonnet-4-5     52.57    51.44      91.80       65.93       8.52     83.38      4.93      3.17"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "anthropic/claude-sonnet-4.5",
+      "metric": "P-R",
+      "value": 3.17,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Claude-sonnet-4-5     52.57    51.44      91.80       65.93       8.52     83.38      4.93      3.17"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "Acc",
+      "value": 50.09,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Deepseek-V3.2         50.09    51.27       4.89        8.91       3.51      1.00     91.60      3.88"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "Precision",
+      "value": 51.27,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Deepseek-V3.2         50.09    51.27       4.89        8.91       3.51      1.00     91.60      3.88"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "Recall",
+      "value": 4.89,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Deepseek-V3.2         50.09    51.27       4.89        8.91       3.51      1.00     91.60      3.88"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "F1",
+      "value": 8.91,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Deepseek-V3.2         50.09    51.27       4.89        8.91       3.51      1.00     91.60      3.88"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "P-C",
+      "value": 3.51,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Deepseek-V3.2         50.09    51.27       4.89        8.91       3.51      1.00     91.60      3.88"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "P-V",
+      "value": 1,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Deepseek-V3.2         50.09    51.27       4.89        8.91       3.51      1.00     91.60      3.88"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "P-B",
+      "value": 91.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Deepseek-V3.2         50.09    51.27       4.89        8.91       3.51      1.00     91.60      3.88"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "P-R",
+      "value": 3.88,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Deepseek-V3.2         50.09    51.27       4.89        8.91       3.51      1.00     91.60      3.88"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "zai-org/GLM-4.7",
+      "metric": "Acc",
+      "value": 53.22,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "GLM-4.7               53.22    53.24      58.62       55.80      20.55     38.60     26.57     12.53"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "zai-org/GLM-4.7",
+      "metric": "Precision",
+      "value": 53.24,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "GLM-4.7               53.22    53.24      58.62       55.80      20.55     38.60     26.57     12.53"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "zai-org/GLM-4.7",
+      "metric": "Recall",
+      "value": 58.62,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "GLM-4.7               53.22    53.24      58.62       55.80      20.55     38.60     26.57     12.53"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "zai-org/GLM-4.7",
+      "metric": "F1",
+      "value": 55.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "GLM-4.7               53.22    53.24      58.62       55.80      20.55     38.60     26.57     12.53"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "zai-org/GLM-4.7",
+      "metric": "P-C",
+      "value": 20.55,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "GLM-4.7               53.22    53.24      58.62       55.80      20.55     38.60     26.57     12.53"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "zai-org/GLM-4.7",
+      "metric": "P-V",
+      "value": 38.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "GLM-4.7               53.22    53.24      58.62       55.80      20.55     38.60     26.57     12.53"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "zai-org/GLM-4.7",
+      "metric": "P-B",
+      "value": 26.57,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "GLM-4.7               53.22    53.24      58.62       55.80      20.55     38.60     26.57     12.53"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "zai-org/GLM-4.7",
+      "metric": "P-R",
+      "value": 12.53,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "GLM-4.7               53.22    53.24      58.62       55.80      20.55     38.60     26.57     12.53"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "Qwen/Qwen3-Coder-Next",
+      "metric": "Acc",
+      "value": 48.33,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Ours                  48.33    48.54      54.54       51.37      0.88      53.01     41.29      4.64"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "Qwen/Qwen3-Coder-Next",
+      "metric": "Precision",
+      "value": 48.54,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Ours                  48.33    48.54      54.54       51.37      0.88      53.01     41.29      4.64"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "Qwen/Qwen3-Coder-Next",
+      "metric": "Recall",
+      "value": 54.54,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Ours                  48.33    48.54      54.54       51.37      0.88      53.01     41.29      4.64"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "Qwen/Qwen3-Coder-Next",
+      "metric": "F1",
+      "value": 51.37,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Ours                  48.33    48.54      54.54       51.37      0.88      53.01     41.29      4.64"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "Qwen/Qwen3-Coder-Next",
+      "metric": "P-C",
+      "value": 0.88,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Ours                  48.33    48.54      54.54       51.37      0.88      53.01     41.29      4.64"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "Qwen/Qwen3-Coder-Next",
+      "metric": "P-V",
+      "value": 53.01,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Ours                  48.33    48.54      54.54       51.37      0.88      53.01     41.29      4.64"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "Qwen/Qwen3-Coder-Next",
+      "metric": "P-B",
+      "value": 41.29,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Ours                  48.33    48.54      54.54       51.37      0.88      53.01     41.29      4.64"
+      }
+    },
+    {
+      "rawEvalName": "PrimeVul-Paired",
+      "model": "Qwen/Qwen3-Coder-Next",
+      "metric": "P-R",
+      "value": 4.64,
+      "unit": "percent",
+      "settings": {
+        "other": "Paired set; greedy decoding"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 15",
+        "quote": "Ours                  48.33    48.54      54.54       51.37      0.88      53.01     41.29      4.64"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "score",
+      "value": 52.5,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Claude-Opus-4-5            52.5           73.2               75.2               83.9         92.27        74.75"
+      },
+      "settings": {
+        "other": "Gen w/o Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "score",
+      "value": 73.2,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Claude-Opus-4-5            52.5           73.2               75.2               83.9         92.27        74.75"
+      },
+      "settings": {
+        "other": "Gen w/ Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "score",
+      "value": 75.2,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Claude-Opus-4-5            52.5           73.2               75.2               83.9         92.27        74.75"
+      },
+      "settings": {
+        "other": "Fix w/o Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "score",
+      "value": 83.9,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Claude-Opus-4-5            52.5           73.2               75.2               83.9         92.27        74.75"
+      },
+      "settings": {
+        "other": "Fix w/ Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "CWEval",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "func@1",
+      "value": 92.27,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Claude-Opus-4-5            52.5           73.2               75.2               83.9         92.27        74.75"
+      },
+      "settings": {
+        "other": "n=10; temperature 0.8"
+      }
+    },
+    {
+      "rawEvalName": "CWEval",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "func-sec@1",
+      "value": 74.75,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Claude-Opus-4-5            52.5           73.2               75.2               83.9         92.27        74.75"
+      },
+      "settings": {
+        "other": "n=10; temperature 0.8"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "anthropic/claude-sonnet-4.5",
+      "metric": "score",
+      "value": 43.4,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Claude-sonnet-4-5          43.4           57.6               62.2               76.4         91.55        71.72"
+      },
+      "settings": {
+        "other": "Gen w/o Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "anthropic/claude-sonnet-4.5",
+      "metric": "score",
+      "value": 57.6,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Claude-sonnet-4-5          43.4           57.6               62.2               76.4         91.55        71.72"
+      },
+      "settings": {
+        "other": "Gen w/ Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "anthropic/claude-sonnet-4.5",
+      "metric": "score",
+      "value": 62.2,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Claude-sonnet-4-5          43.4           57.6               62.2               76.4         91.55        71.72"
+      },
+      "settings": {
+        "other": "Fix w/o Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "anthropic/claude-sonnet-4.5",
+      "metric": "score",
+      "value": 76.4,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Claude-sonnet-4-5          43.4           57.6               62.2               76.4         91.55        71.72"
+      },
+      "settings": {
+        "other": "Fix w/ Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "CWEval",
+      "model": "anthropic/claude-sonnet-4.5",
+      "metric": "func@1",
+      "value": 91.55,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Claude-sonnet-4-5          43.4           57.6               62.2               76.4         91.55        71.72"
+      },
+      "settings": {
+        "other": "n=10; temperature 0.8"
+      }
+    },
+    {
+      "rawEvalName": "CWEval",
+      "model": "anthropic/claude-sonnet-4.5",
+      "metric": "func-sec@1",
+      "value": 71.72,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Claude-sonnet-4-5          43.4           57.6               62.2               76.4         91.55        71.72"
+      },
+      "settings": {
+        "other": "n=10; temperature 0.8"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "score",
+      "value": 43.1,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Deepseek-V3.2              43.1           50.2               50.0               65.8         83.53        54.71"
+      },
+      "settings": {
+        "other": "Gen w/o Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "score",
+      "value": 50.2,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Deepseek-V3.2              43.1           50.2               50.0               65.8         83.53        54.71"
+      },
+      "settings": {
+        "other": "Gen w/ Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "score",
+      "value": 50,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Deepseek-V3.2              43.1           50.2               50.0               65.8         83.53        54.71"
+      },
+      "settings": {
+        "other": "Fix w/o Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "score",
+      "value": 65.8,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Deepseek-V3.2              43.1           50.2               50.0               65.8         83.53        54.71"
+      },
+      "settings": {
+        "other": "Fix w/ Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "CWEval",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "func@1",
+      "value": 83.53,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Deepseek-V3.2              43.1           50.2               50.0               65.8         83.53        54.71"
+      },
+      "settings": {
+        "other": "n=10; temperature 0.8"
+      }
+    },
+    {
+      "rawEvalName": "CWEval",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "func-sec@1",
+      "value": 54.71,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Deepseek-V3.2              43.1           50.2               50.0               65.8         83.53        54.71"
+      },
+      "settings": {
+        "other": "n=10; temperature 0.8"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "zai-org/GLM-4.7",
+      "metric": "score",
+      "value": 29.4,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "GLM-4.7                    29.4           56.0               49.8               64.9         72.44        46.39"
+      },
+      "settings": {
+        "other": "Gen w/o Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "zai-org/GLM-4.7",
+      "metric": "score",
+      "value": 56,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "GLM-4.7                    29.4           56.0               49.8               64.9         72.44        46.39"
+      },
+      "settings": {
+        "other": "Gen w/ Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "zai-org/GLM-4.7",
+      "metric": "score",
+      "value": 49.8,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "GLM-4.7                    29.4           56.0               49.8               64.9         72.44        46.39"
+      },
+      "settings": {
+        "other": "Fix w/o Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "zai-org/GLM-4.7",
+      "metric": "score",
+      "value": 64.9,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "GLM-4.7                    29.4           56.0               49.8               64.9         72.44        46.39"
+      },
+      "settings": {
+        "other": "Fix w/ Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "CWEval",
+      "model": "zai-org/GLM-4.7",
+      "metric": "func@1",
+      "value": 72.44,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "GLM-4.7                    29.4           56.0               49.8               64.9         72.44        46.39"
+      },
+      "settings": {
+        "other": "n=10; temperature 0.8"
+      }
+    },
+    {
+      "rawEvalName": "CWEval",
+      "model": "zai-org/GLM-4.7",
+      "metric": "func-sec@1",
+      "value": 46.39,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "GLM-4.7                    29.4           56.0               49.8               64.9         72.44        46.39"
+      },
+      "settings": {
+        "other": "n=10; temperature 0.8"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "Qwen/Qwen3-Coder-Next",
+      "metric": "score",
+      "value": 61.2,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Ours                       61.2           69.5               76.4               83.7         80.17        56.32"
+      },
+      "settings": {
+        "other": "Gen w/o Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "Qwen/Qwen3-Coder-Next",
+      "metric": "score",
+      "value": 69.5,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Ours                       61.2           69.5               76.4               83.7         80.17        56.32"
+      },
+      "settings": {
+        "other": "Gen w/ Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "Qwen/Qwen3-Coder-Next",
+      "metric": "score",
+      "value": 76.4,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Ours                       61.2           69.5               76.4               83.7         80.17        56.32"
+      },
+      "settings": {
+        "other": "Fix w/o Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "SecCodeBench",
+      "model": "Qwen/Qwen3-Coder-Next",
+      "metric": "score",
+      "value": 83.7,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Ours                       61.2           69.5               76.4               83.7         80.17        56.32"
+      },
+      "settings": {
+        "other": "Fix w/ Hint; pass@k with security severity weighting"
+      }
+    },
+    {
+      "rawEvalName": "CWEval",
+      "model": "Qwen/Qwen3-Coder-Next",
+      "metric": "func@1",
+      "value": 80.17,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Ours                       61.2           69.5               76.4               83.7         80.17        56.32"
+      },
+      "settings": {
+        "other": "n=10; temperature 0.8"
+      }
+    },
+    {
+      "rawEvalName": "CWEval",
+      "model": "Qwen/Qwen3-Coder-Next",
+      "metric": "func-sec@1",
+      "value": 56.32,
+      "unit": "percent",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 16",
+        "quote": "Ours                       61.2           69.5               76.4               83.7         80.17        56.32"
+      },
+      "settings": {
+        "other": "n=10; temperature 0.8"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:59:32Z"
+  },
+  "notes": "Technical report; safety evals only in Appendix A.4 (PrimeVul-Paired, SecCodeBench, CWEval). Skipped capability benches (SWE-Bench Verified/Multilingual/Pro, Terminal-Bench 2.0, Aider, EvalPlus, MultiPL-E, CRUX-Eval, LiveCodeBench, BigCodeBench, FullStackBench, CodeElo, CodeForces, Spider2, Nestful, BFCL, Tau2-Bench, ACEBench, IFEval, Claw-Eval, GPQA, MMLU-Pro, SuperGPQA, HLE, HMMT, AIME, and related tables/figures). Figure 7 reward-hacking chart has no numeric ASR rates in text. Training filters for hallucinated QA/solutions are not counted as hallucination coverage. 'Ours' mapped to Qwen/Qwen3-Coder-Next. No risk framework levels. No external safety testers. Skipped AthenaBench-Mini (Table 14): defensive CTI analysis, not a dangerous capability."
+}

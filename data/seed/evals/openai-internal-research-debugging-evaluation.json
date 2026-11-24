@@ -1,0 +1,64 @@
+{
+  "eval": {
+    "slug": "openai-internal-research-debugging-evaluation",
+    "displayName": "Internal Research Debugging Evaluation",
+    "aliases": ["Internal Research Debugging Eval"],
+    "description": "OpenAI internal suite of real research-experiment bugs (41 debugging tasks plus 6 alignment-auditing rediscovery tasks). Models get code, logs, and artifacts and must unblock a researcher with a root-cause explanation or fix. Pass is binary under a lenient “any assistance that would unblock” threshold; cards report median success rate and rough time-horizon slices. Dataset and runner are lab-internal.",
+    "summary": "Measures whether the model finds the root cause of bugs in real research experiments and helps a researcher continue.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://deploymentsafety.openai.com/gpt-5-5/internal-research-debugging-evaluation"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-5-5/internal-research-debugging-evaluation",
+        "title": "GPT-5.5 system card section"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["human", "programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "47-tasks",
+      "status": "draft",
+      "changes": "41 internal research bugs plus 6 alignment-auditing tasks as described in GPT-5.5 and later OpenAI system cards. Task set may grow.",
+      "scores": [
+        {
+          "key": "passed",
+          "displayName": "Passed",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 if the model’s help would unblock the researcher (including partial root-cause explanations or fixes)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "pass_rate",
+          "displayName": "Pass rate",
+          "score": "passed",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of tasks passed. Cards often report the median across seeds or models."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "eval": {
+    "slug": "anthropic-protocols",
+    "displayName": "Protocols (Anthropic life sciences)",
+    "aliases": ["Protocols", "Protocols Understanding"],
+    "description": "Anthropic internal life-sciences eval of help with molecular-biology bench protocols, with web search. Two modules: Troubleshooting (detect and fix protocol errors) and Understanding (extend an online protocol; Understanding set associated with Benchling). Cards report percent scores per module. Later cards also use this suite in CB-1 automated evals in place of saturated long-form virology tasks.",
+    "summary": "Measures how well the model helps with molecular-biology lab protocols, including finding errors and extending them.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/ceaf5c7ff2783855203fde8208ec311252dced5b/Claude%20Opus%205%20System%20Card.pdf",
+        "title": "Claude Opus 5 System Card (Protocols)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+        "title": "Claude Opus 5.5 System Card (Protocols modules)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic", "single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public",
+    "family": "Anthropic life sciences"
+  },
+  "versions": [
+    {
+      "version": "troubleshooting-and-understanding",
+      "status": "draft",
+      "changes": "Troubleshooting and Understanding modules; Understanding V2 is a held-out Benchling set in later cards.",
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The attempt is graded correct for that Protocols module item."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Module accuracy",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share correct on Troubleshooting or Understanding (cards report modules separately)."
+        }
+      ]
+    }
+  ]
+}

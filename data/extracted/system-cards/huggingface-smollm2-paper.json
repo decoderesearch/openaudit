@@ -1,0 +1,204 @@
+{
+  "document": "huggingface-smollm2-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "section": "4 Pretraining; 5 Post-training"
+    },
+    {
+      "model": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "section": "6 SmolLM2 135M and 360M"
+    },
+    {
+      "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "section": "6 SmolLM2 135M and 360M"
+    }
+  ],
+  "pageCount": 24,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "8k tokens (extended from 2k)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "from 2k to 8k tokens, by taking an intermediate checkpoint"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (language model)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "language model (LM). To attain strong perfor-"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "1.7B (main); also 360M and 135M",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "models: SmolLM2-360M (360M parameters, trained on 4T"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Llama2-style Transformer; 1.7B: 24 layers, dim 2048, FFN 8192, 32 heads, tied embeddings, RoPE, SwiGLU; 135M/360M use GQA",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Our base model contains 1.7B parameters and follows the"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "~11T tokens multi-stage mix of FineWeb-Edu, DCLM, StarCoderData/Stack-Edu, OWM/InfiMM-WebMath/FineMath, Cosmopedia; post-training SmolTalk SFT then UltraFeedback DPO",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "When building SmolLM2, we trained on 11 trillion tokens"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "around 1e23 FLOPs / ~$250,000 USD GPU compute; 256 H100s",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "around 1e23 FLOPs, or $250,000"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The Impact Statement says the work advances machine learning (ML) and that no societal consequences need to be specifically highlighted.", "tone": "mixed",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "none which we feel must be"
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:33:39Z"
+  },
+  "notes": "Capability-focused data-centric technical report (arXiv 2502.02737). No safety, alignment-risk, refusal, jailbreak, bias/fairness, toxicity, privacy, or dangerous-capability section or measured results; evalResults left empty per pilot safety-only rule. Section 5.3 “Alignment” is DPO preference learning for helpfulness, not safety. MagPie-Ultra was filtered with Llama-Guard-3-8B for instruction quality/safety (training-data filter only; does not cover a safety topic). Covered all three seed-linked Instruct sizes; paper also names base SmolLM2-1.7B/360M/135M (seed checkpoints). ArXiv date is not treated as model releaseDate. Skipped capability benches: MMLU/MMLU-Pro, HellaSwag, ARC, OpenBookQA, PIQA, WinoGrande, CommonSenseQA, GSM8K, MATH, HumanEval, MultiPL-E, IFEval, MT-Bench, OpenRewrite-Eval, BBH, HELMET, Needle-in-Haystack, and training-stage ablation tables."
+}

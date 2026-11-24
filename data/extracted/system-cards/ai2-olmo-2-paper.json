@@ -1,0 +1,1164 @@
+{
+  "document": "ai2-olmo-2-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "allenai/OLMo-2-1124-7B-Instruct"
+    },
+    {
+      "model": "allenai/OLMo-2-1124-13B-Instruct"
+    },
+    {
+      "model": "allenai/OLMo-2-0325-32B-Instruct"
+    },
+    {
+      "model": "allenai/OLMo-2-0425-1B-Instruct"
+    },
+    {
+      "model": "allenai/OLMo-2-1124-7B"
+    },
+    {
+      "model": "allenai/OLMo-2-1124-13B"
+    },
+    {
+      "model": "allenai/OLMo-2-0325-32B"
+    },
+    {
+      "model": "allenai/OLMo-2-0425-1B"
+    }
+  ],
+  "pageCount": 58,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4096 sequence length (pretraining)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Sequence Length                      4096              4096                4096"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (dense autoregressive language models)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "a family of dense autoregressive language models at 7B, 13B and 32B scales with fully released"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0 wherever possible; most permissive available license otherwise",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "under the Apache 2.0 license wherever possible, and under the most permissive available"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7B, 13B and 32B (plus experimental 1B in appendix)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "dense autoregressive language models at 7B, 13B and 32B scales with fully released"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "decoder-only transformer (RMSNorm, reordered norm, QK-norm, SwiGLU, RoPE; GQA at 32B)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "We adopt a decoder-only transformer architecture based on Vaswani et al. (2017), and deliver 7B, 13B and"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "olmo-mix-1124 (pretrain), dolmino-mix-1124 (midtrain); Tülu 3-style SFT/DPO/RLVR post-training",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Base Data: olmo-mix-1124 (pretrain) dolmino-mix-1124 (midtrain)"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "7B: 4.05T tokens; 13B: 5.6T tokens; 32B: 6.6T tokens",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "OLMo 2 7B is trained on 4.05 trillion tokens (3.90 trillion for pretraining stage), OLMo"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa) (MC2) measures misconception/truthfulness for instruct models.",
+      "source": {
+        "page": "49",
+        "pdfPage": 49,
+        "quote": "misconception (TruthfulQA; Lin et al., 2021) and instruction-following tasks"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "OLMo 2 Instruct Safety scores are high (e.g. 93.3 for 7B) but fall across post-training stages from supervised fine-tuning (SFT) to reinforcement learning with verifiable rewards (RLVR) Instruct.", "tone": "mixed",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "OLMo 2 7B SFT        51.4   10.2   49.6   59.6   74.6        66.9   25.3    61.1     94.6   23.6   48.6"
+      }
+    },
+    {
+      "text": "SFT data filtering removed date-cutoff mentions after seeing hallucinated date cutoffs and 'As an AI language model' prefaces.", "tone": "mixed",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "with undesirable behavior like hallucinating date cutoffs and prefacing responses with “As an AI language"
+      }
+    },
+    {
+      "text": "[Tülu 3 Safety](/evals/tulu-3-safety) is an average over multiple sub-evaluations; this report points to Lambert et al. (2024) for full details.", "tone": "neutral",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "Average over multiple sub-evaluations—full details of the safety evaluation are in Lambert et al. (2024)."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "openai/gpt-3.5-turbo",
+      "metric": "Average",
+      "value": 69.1,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "GPT-3.5 Turbo 0125 60.5         n/a          38.7 66.6     70.2   74.3   66.9   41.2   70.2   69.1   45.0 62.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "openai/gpt-3.5-turbo",
+      "metric": "MC2",
+      "value": 62.9,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "GPT-3.5 Turbo 0125 60.5         n/a          38.7 66.6     70.2   74.3   66.9   41.2   70.2   69.1   45.0 62.9"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "openai/gpt-4o-mini",
+      "metric": "Average",
+      "value": 84.9,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "GPT 4o Mini 0724      65.7      n/a          49.7 65.9     36.3   83.0   83.5   67.9   82.2   84.9   39.0 64.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "openai/gpt-4o-mini",
+      "metric": "MC2",
+      "value": 64.8,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "GPT 4o Mini 0724      65.7      n/a          49.7 65.9     36.3   83.0   83.5   67.9   82.2   84.9   39.0 64.8"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "google/gemma-3-1b-it",
+      "metric": "Average",
+      "value": 70.2,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Gemma 3 1B            38.3      0.12         20.4 39.4     25.1   35.0   60.6   40.3   38.9   70.2   9.6   43.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-3-1b-it",
+      "metric": "MC2",
+      "value": 43.8,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Gemma 3 1B            38.3      0.12         20.4 39.4     25.1   35.0   60.6   40.3   38.9   70.2   9.6   43.8"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "metric": "Average",
+      "value": 87.2,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Llama 3.2 1B          39.3      0.67         10.1 40.2     32.2   45.4   54.0   21.6   46.7   87.2   13.8 41.5"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "metric": "MC2",
+      "value": 41.5,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Llama 3.2 1B          39.3      0.67         10.1 40.2     32.2   45.4   54.0   21.6   46.7   87.2   13.8 41.5"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "metric": "Average",
+      "value": 77.6,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Qwen 2.5 1.5B         41.7      1.7          7.4    45.8   13.4   66.2   44.2   40.6   59.7   77.6   15.5 46.5"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "metric": "MC2",
+      "value": 46.5,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Qwen 2.5 1.5B         41.7      1.7          7.4    45.8   13.4   66.2   44.2   40.6   59.7   77.6   15.5 46.5"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "metric": "Average",
+      "value": 56.2,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Ministral 8B 2410     53.5      n/a          31.4 70.8     56.2   80.0   56.4   40.0   68.5   56.2   20.2 55.5"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "mistralai/Ministral-8B-Instruct-2410",
+      "metric": "MC2",
+      "value": 55.5,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Ministral 8B 2410     53.5      n/a          31.4 70.8     56.2   80.0   56.4   40.0   68.5   56.2   20.2 55.5"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "metric": "Average",
+      "value": 70.2,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Llama 3.1 8B          59.1      7.2          25.8 71.9     61.7   83.4   80.6   42.5   71.3   70.2   28.4 55.1"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "metric": "MC2",
+      "value": 55.1,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Llama 3.1 8B          59.1      7.2          25.8 71.9     61.7   83.4   80.6   42.5   71.3   70.2   28.4 55.1"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "metric": "Average",
+      "value": 75.4,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Tulu 3 8B             60.7      7.2          34.0 69.0     62.6   87.6   82.4   43.7   68.2   75.4   29.1 55.0"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "allenai/Llama-3.1-Tulu-3-8B",
+      "metric": "MC2",
+      "value": 55,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Tulu 3 8B             60.7      7.2          34.0 69.0     62.6   87.6   82.4   43.7   68.2   75.4   29.1 55.0"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "metric": "Average",
+      "value": 75,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Qwen 2.5 7B           61.6      8.2          29.7 70.2     54.4   83.8   74.7   69.9   76.6   75.0   18.1 63.1"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "metric": "MC2",
+      "value": 63.1,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Qwen 2.5 7B           61.6      8.2          29.7 70.2     54.4   83.8   74.7   69.9   76.6   75.0   18.1 63.1"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "google/gemma-2-9b-it",
+      "metric": "Average",
+      "value": 75.5,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Gemma 2 9B            58.1      4.4          43.7 64.9     58.8   79.7   69.9   29.8   69.1   75.5   28.3 61.4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-2-9b-it",
+      "metric": "MC2",
+      "value": 61.4,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Gemma 2 9B            58.1      4.4          43.7 64.9     58.8   79.7   69.9   29.8   69.1   75.5   28.3 61.4"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "Qwen/Qwen2.5-14B-Instruct",
+      "metric": "Average",
+      "value": 79.3,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Qwen 2.5 14B          65.3      16.0         34.6 78.4     50.5   83.9   82.4   70.6   81.1   79.3   21.1 70.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2.5-14B-Instruct",
+      "metric": "MC2",
+      "value": 70.8,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Qwen 2.5 14B          65.3      16.0         34.6 78.4     50.5   83.9   82.4   70.6   81.1   79.3   21.1 70.8"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "google/gemma-2-27b-it",
+      "metric": "Average",
+      "value": 75.9,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Gemma 2 27B           61.3      21.0         49.0 72.7     67.5   80.7   63.2   35.1   70.7   75.9   33.9 64.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-2-27b-it",
+      "metric": "MC2",
+      "value": 64.6,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Gemma 2 27B           61.3      21.0         49.0 72.7     67.5   80.7   63.2   35.1   70.7   75.9   33.9 64.6"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "Qwen/Qwen2.5-32B-Instruct",
+      "metric": "Average",
+      "value": 82.4,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Qwen 2.5 32B          68.1      35.0         39.1 82.3     48.3   87.5   82.4   77.9   84.7   82.4   26.1 70.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2.5-32B-Instruct",
+      "metric": "MC2",
+      "value": 70.6,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Qwen 2.5 32B          68.1      35.0         39.1 82.3     48.3   87.5   82.4   77.9   84.7   82.4   26.1 70.6"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "rawModelName": "Mistral Small 24B",
+      "metric": "Average",
+      "value": 66.5,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Mistral Small 24B     67.5      n/a          43.2 80.1     78.5   87.2   77.3   65.9   83.7   66.5   24.4 68.1"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Mistral Small 24B",
+      "metric": "MC2",
+      "value": 68.1,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Mistral Small 24B     67.5      n/a          43.2 80.1     78.5   87.2   77.3   65.9   83.7   66.5   24.4 68.1"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "Qwen/QwQ-32B",
+      "metric": "Average",
+      "value": 69.9,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Qwen QwQ 32B            -       35.0         82.4 89.6     54.7   95.5   85.8   98.1   88.4   69.9    -     -"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "google/gemma-3-27b-it",
+      "metric": "Average",
+      "value": 69.1,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Gemma 3 27B           71.3      23.0         63.4 83.7     69.2   91.1   83.4   76.2   81.8   69.1   30.9 63.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-3-27b-it",
+      "metric": "MC2",
+      "value": 63.9,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Gemma 3 27B           71.3      23.0         63.4 83.7     69.2   91.1   83.4   76.2   81.8   69.1   30.9 63.9"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "Qwen/Qwen2.5-72B-Instruct",
+      "metric": "Average",
+      "value": 87,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Qwen 2.5 72B          68.8      79.0         47.7 80.4     34.2   89.5   87.6   75.9   85.5   87.0   30.6 69.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2.5-72B-Instruct",
+      "metric": "MC2",
+      "value": 69.9,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Qwen 2.5 72B          68.8      79.0         47.7 80.4     34.2   89.5   87.6   75.9   85.5   87.0   30.6 69.9"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "meta-llama/Llama-3.1-70B-Instruct",
+      "metric": "Average",
+      "value": 76.4,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Llama 3.1 70B         70.7      64.0         32.9 83.0     77.0   94.5   88.0   56.2   85.2   76.4   46.5 66.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.1-70B-Instruct",
+      "metric": "MC2",
+      "value": 66.8,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Llama 3.1 70B         70.7      64.0         32.9 83.0     77.0   94.5   88.0   56.2   85.2   76.4   46.5 66.8"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "meta-llama/Llama-3.3-70B-Instruct",
+      "metric": "Average",
+      "value": 70.4,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Llama 3.3 70B         72.7      64.0         36.5 85.8     78.0   93.6   90.8   71.8   85.9   70.4   48.2 66.1"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.3-70B-Instruct",
+      "metric": "MC2",
+      "value": 66.1,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "Llama 3.3 70B         72.7      64.0         36.5 85.8     78.0   93.6   90.8   71.8   85.9   70.4   48.2 66.1"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "rawModelName": "OLMo 1B 0724",
+      "metric": "Average",
+      "value": 52,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "OLMo 1B 0724          24.4      0.22         2.4    29.9   27.9   10.8   25.3   2.2    36.6   52.0   12.1 44.3"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "OLMo 1B 0724",
+      "metric": "MC2",
+      "value": 44.3,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "OLMo 1B 0724          24.4      0.22         2.4    29.9   27.9   10.8   25.3   2.2    36.6   52.0   12.1 44.3"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "metric": "Average",
+      "value": 52.4,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "SmolLM2 1.7B          34.2      1.1          5.8    39.8   30.9   45.3   51.6   20.3   34.3   52.4   16.4 45.3"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "metric": "MC2",
+      "value": 45.3,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "SmolLM2 1.7B          34.2      1.1          5.8    39.8   30.9   45.3   51.6   20.3   34.3   52.4   16.4 45.3"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "rawModelName": "OLMo 7B 0424",
+      "metric": "Average",
+      "value": 49.3,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "OLMo 7B 0424          33.1      1.0          8.5    34.4   47.9   23.2   39.2   5.2    48.9   49.3   18.9 55.2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "OLMo 7B 0424",
+      "metric": "MC2",
+      "value": 55.2,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "OLMo 7B 0424          33.1      1.0          8.5    34.4   47.9   23.2   39.2   5.2    48.9   49.3   18.9 55.2"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "allenai/OLMo-2-0425-1B-Instruct",
+      "metric": "Average",
+      "value": 87.6,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "OLMo 2 1B             42.7     0.35          9.1    35.0 34.6     68.3   70.1   20.7   40.0   87.6   12.9 48.7"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "allenai/OLMo-2-0425-1B-Instruct",
+      "metric": "MC2",
+      "value": 48.7,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "OLMo 2 1B             42.7     0.35          9.1    35.0 34.6     68.3   70.1   20.7   40.0   87.6   12.9 48.7"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "allenai/OLMo-2-1124-7B-Instruct",
+      "metric": "Average",
+      "value": 93.3,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "OLMo 2 7B             56.5      1.8          29.1 51.4     60.5   85.1   72.3   32.5   61.3   93.3   23.2 56.5"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "allenai/OLMo-2-1124-7B-Instruct",
+      "metric": "MC2",
+      "value": 56.5,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "OLMo 2 7B             56.5      1.8          29.1 51.4     60.5   85.1   72.3   32.5   61.3   93.3   23.2 56.5"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "allenai/OLMo-2-1124-13B-Instruct",
+      "metric": "Average",
+      "value": 89.7,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "OLMo 2 13B            63.5      4.6          39.5 63.0     71.5   87.4   82.6 39.2     68.5   89.7   28.8 64.3"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "allenai/OLMo-2-1124-13B-Instruct",
+      "metric": "MC2",
+      "value": 64.3,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "OLMo 2 13B            63.5      4.6          39.5 63.0     71.5   87.4   82.6 39.2     68.5   89.7   28.8 64.3"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "allenai/OLMo-2-0325-32B-Instruct",
+      "metric": "Average",
+      "value": 85.9,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "OLMo 2 32B            68.8      13.0        42.8 70.6 78.0        87.6   85.6 49.7     77.3   85.9   37.5 73.2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "allenai/OLMo-2-0325-32B-Instruct",
+      "metric": "MC2",
+      "value": 73.2,
+      "unit": "percent",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 7",
+        "quote": "OLMo 2 32B            68.8      13.0        42.8 70.6 78.0        87.6   85.6 49.7     77.3   85.9   37.5 73.2"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "allenai/OLMo-2-0425-1B-SFT",
+      "metric": "Average",
+      "value": 93.2,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 1B SFT        36.9   2.4    32.8   33.8   52.1        50.5   13.2    36.4     93.2   12.7   42.1"
+      },
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "allenai/OLMo-2-0425-1B-SFT",
+      "metric": "MC2",
+      "value": 42.1,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 1B SFT        36.9   2.4    32.8   33.8   52.1        50.5   13.2    36.4     93.2   12.7   42.1"
+      },
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "allenai/OLMo-2-0425-1B-DPO",
+      "metric": "Average",
+      "value": 89.9,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 1B DPO        40.6   9.5    33.0   34.5   59.0        67.1   14.1    39.9     89.9   12.3   46.4"
+      },
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "allenai/OLMo-2-0425-1B-DPO",
+      "metric": "MC2",
+      "value": 46.4,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 1B DPO        40.6   9.5    33.0   34.5   59.0        67.1   14.1    39.9     89.9   12.3   46.4"
+      },
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "allenai/OLMo-2-1124-7B-SFT",
+      "metric": "Average",
+      "value": 94.6,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 7B SFT        51.4   10.2   49.6   59.6   74.6        66.9   25.3    61.1     94.6   23.6   48.6"
+      },
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "allenai/OLMo-2-1124-7B-SFT",
+      "metric": "MC2",
+      "value": 48.6,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 7B SFT        51.4   10.2   49.6   59.6   74.6        66.9   25.3    61.1     94.6   23.6   48.6"
+      },
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "model": "allenai/OLMo-2-1124-7B-DPO",
+      "metric": "Average",
+      "value": 93.7,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 7B DPO        55.9   27.9   51.1   60.2   82.6        73.0   30.3    60.8     93.7   23.5   56.0"
+      },
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "allenai/OLMo-2-1124-7B-DPO",
+      "metric": "MC2",
+      "value": 56,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 7B DPO        55.9   27.9   51.1   60.2   82.6        73.0   30.3    60.8     93.7   23.5   56.0"
+      },
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "rawModelName": "OLMo 2 13B SFT",
+      "metric": "Average",
+      "value": 94.3,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 13B SFT       56.6   11.5   59.9   71.3   76.3        68.6   29.5    68.0     94.3   29.4   57.1"
+      },
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "OLMo 2 13B SFT",
+      "metric": "MC2",
+      "value": 57.1,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 13B SFT       56.6   11.5   59.9   71.3   76.3        68.6   29.5    68.0     94.3   29.4   57.1"
+      },
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "rawModelName": "OLMo 2 13B DPO",
+      "metric": "Average",
+      "value": 90.3,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 13B DPO       62.0 38.3 61.4       71.5   82.3        80.2   35.2    67.9     90.3   29.0   63.9"
+      },
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "OLMo 2 13B DPO",
+      "metric": "MC2",
+      "value": 63.9,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 13B DPO       62.0 38.3 61.4       71.5   82.3        80.2   35.2    67.9     90.3   29.0   63.9"
+      },
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "rawModelName": "OLMo 2 32B SFT",
+      "metric": "Average",
+      "value": 93.8,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 32B SFT       61.7   16.9   69.7   77.2   78.4        72.4   35.9    76.1     93.8   35.4   61.3"
+      },
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "OLMo 2 32B SFT",
+      "metric": "MC2",
+      "value": 61.3,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 32B SFT       61.7   16.9   69.7   77.2   78.4        72.4   35.9    76.1     93.8   35.4   61.3"
+      },
+      "settings": {
+        "other": "SFT stage"
+      }
+    },
+    {
+      "rawEvalName": "Tülu 3 Safety",
+      "rawModelName": "OLMo 2 32B DPO",
+      "metric": "Average",
+      "value": 91.9,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 32B DPO       68.8 44.1 70.2       77.5   85.7        83.8   46.8    78.0     91.9   36.4   73.5"
+      },
+      "settings": {
+        "other": "DPO stage"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "OLMo 2 32B DPO",
+      "metric": "MC2",
+      "value": 73.5,
+      "unit": "percent",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "table": "Table 16",
+        "quote": "OLMo 2 32B DPO       68.8 44.1 70.2       77.5   85.7        83.8   46.8    78.0     91.9   36.4   73.5"
+      },
+      "settings": {
+        "other": "DPO stage"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:34:48Z"
+  },
+  "notes": "Technical report (arXiv 2501.00656), not a system card. Safety-only pilot: kept Tülu 3 Safety and TruthfulQA from Tables 7 and 16 (intermediate SFT/DPO stages with settings.other). Skipped Table 23 (duplicates Table 7 1B rows). Skipped all capability benches (MMLU, BBH, DROP, GSM8K, MATH, IFEval, AlpacaEval 2, PopQA, HumanEval, OLMES base TriviaQA, etc.). Tülu 3 Safety subtask details are deferred to Lambert et al. (2024), so only honesty is marked covered (via TruthfulQA); no jailbreak/harmful_requests topic claim from the aggregate Safety column alone. No external safety testers or risk framework decisions. Hallucination date-cutoff note is a training filter, not a topic. Mistral Small 24B and older OLMo instruct rows left as rawModelName where seed variant was unclear."
+}

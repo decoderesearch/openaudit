@@ -1,0 +1,645 @@
+{
+  "eval": {
+    "slug": "workspacebench",
+    "displayName": "WorkspaceBench",
+    "aliases": ["Workspace Bench", "wsbench"],
+    "description": "Tests if a workspace lens can read a model's hidden middle steps, across many kinds of task.\n\nEach question is a prompt to Qwen3.6-27B that makes the model hold a concept that it does not write: the middle step of a two-hop fact, the rhyme that it plans, a concept that it was told to think about while it copies a sentence, the correct form of a misspelled word, or what a bug in a program causes. The lens reads the residual stream at layers 20 to 60 (each fourth layer) and at the positions of the family's read plan. Then a judge reads all the readout lines of the question and picks an answer from a list of options, or a regex looks for the target in the readouts. A question passes when the lens shows the target.\n\nThe paper has 27 families and 3,356 questions. OpenAudit runs its own instrument, not the paper's: all readout lines go to one Claude Opus judge call for each question, with no digest step. On the J-Lens, this gives the same verdict as the paper's method on 96% of questions, at about one fifth of the cost. The paper used a Gemini 3.8 Flash judge for most families, so its numbers are not comparable with ours.\n\nKnown limits: a token lens gives a list of words with no order, so families that need an order or a full sentence (role-bound association, buggy code) are hard for it by design. A lens can also pass when its words come from the prompt and not from the hidden step.",
+    "summary": "Tests if a workspace lens reads a model's hidden middle steps across tasks, with a judge for readouts.",
+    "family": "Workspace lens evals",
+    "maintainers": [
+      {
+        "name": "Camila Blank, Agam Bhatia, Euan Ong and Neel Nanda",
+        "url": "https://www.lesswrong.com/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://www.lesswrong.com/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the",
+        "title": "Blank, Bhatia, Ong and Nanda, WorkspaceBench: Evaluating Interpretability Methods for the Global Workspace (September 2026)"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/camilablank/workspace-bench",
+        "title": "WorkspaceBench code, banks and judges (2026)"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["method"],
+      "topics": []
+    },
+    "visibility": "unlisted"
+  },
+  "versions": [
+    {
+      "version": "6be6304-fast-safety",
+      "status": "published",
+      "releasedDate": "2026-11",
+      "changes": "The WorkspaceBench fast subset with its two safety families (fast-safety-v1): 24 families, on Qwen3.6-27B, with the J-Lens, the J++ Lens and the Oracle Lens. The judge method is WorkspaceBench's own, so the judge's notes show on each sample.\n\n- **Families:** the 24 families of fast-safety-v1, on a fixed subset of each family's questions. A family's score is the share of its questions that pass; hinted cutoff and jailbreak recognition subtract their controls.\n- **Judge:** a summarizer writes notes on the readouts of each layer, then each family's judge reads the notes and gives the verdict, through the Anthropic Batch API. The judge is Claude Opus 5.5, but Claude Sonnet 5 for the two safety families (their judge of record). GPT-6 Luna writes the notes. Introspection and the two regex families (model-specific directed modulation, multilingual typo) keep their default summarizer, Claude Opus 5.5.\n- **Readouts:** the fast positions of each family's read plan, at layers 20, 24, ..., 60. The J-Lens readouts of 21 families and the Oracle Lens readouts of 22 families are Camila Blank's (https://huggingface.co/datasets/camila-blank/workspace-bench-fast-v2, revision c71e4a3), with her permission. OpenAudit made the other readouts on H100 GPUs, with the same harness.\n- **Macro:** WorkspaceBench's own macro for the fast subset (results.macro): the mean of the family scores that it counts. WorkspaceBench counts a family only with its default summarizer; our patch counts the Luna notes too.\n- **Harness:** github.com/camilablank/workspace-bench at commit 6be6304, with OpenAudit's patch (evals/workspacebench/patches/6be6304.patch).",
+      "dataset": {
+        "url": "https://github.com/camilablank/workspace-bench/tree/6be63047acbbb7719588cd1aa08d16dfe02fbf1b/evals",
+        "license": "MIT",
+        "splits": [
+          {
+            "name": "basic_readout",
+            "sampleCount": 78,
+            "storage": "pointer"
+          },
+          {
+            "name": "basic_readout_mt",
+            "sampleCount": 72,
+            "storage": "pointer"
+          },
+          {
+            "name": "multihop_mt",
+            "sampleCount": 37,
+            "storage": "pointer"
+          },
+          {
+            "name": "multilingual_multihop",
+            "sampleCount": 87,
+            "storage": "pointer"
+          },
+          {
+            "name": "wrong_intermediate",
+            "sampleCount": 93,
+            "storage": "pointer"
+          },
+          {
+            "name": "relational_multihop",
+            "sampleCount": 100,
+            "storage": "pointer"
+          },
+          {
+            "name": "poetry",
+            "sampleCount": 80,
+            "storage": "pointer"
+          },
+          {
+            "name": "directed_modulation",
+            "sampleCount": 62,
+            "storage": "pointer"
+          },
+          {
+            "name": "multi_concept_directed_modulation",
+            "sampleCount": 102,
+            "storage": "pointer"
+          },
+          {
+            "name": "multilingual_typo",
+            "sampleCount": 86,
+            "storage": "pointer"
+          },
+          {
+            "name": "arithmetic_intermediates",
+            "sampleCount": 91,
+            "storage": "pointer"
+          },
+          {
+            "name": "buggy_code",
+            "sampleCount": 122,
+            "storage": "pointer"
+          },
+          {
+            "name": "conjunctive_association",
+            "sampleCount": 98,
+            "storage": "pointer"
+          },
+          {
+            "name": "role_bound_association",
+            "sampleCount": 90,
+            "storage": "pointer"
+          },
+          {
+            "name": "user_modeling",
+            "sampleCount": 45,
+            "storage": "pointer"
+          },
+          {
+            "name": "model_multihop",
+            "sampleCount": 91,
+            "storage": "pointer"
+          },
+          {
+            "name": "model_specific_directed_modulation",
+            "sampleCount": 94,
+            "storage": "pointer"
+          },
+          {
+            "name": "knowledge_cutoff",
+            "sampleCount": 143,
+            "storage": "pointer"
+          },
+          {
+            "name": "hinted_cutoff",
+            "sampleCount": 210,
+            "storage": "pointer"
+          },
+          {
+            "name": "introspection",
+            "sampleCount": 251,
+            "storage": "pointer"
+          },
+          {
+            "name": "moral_rationale",
+            "sampleCount": 106,
+            "storage": "pointer"
+          },
+          {
+            "name": "nyt_connections",
+            "sampleCount": 22,
+            "storage": "pointer"
+          },
+          {
+            "name": "agentic_misalignment",
+            "sampleCount": 36,
+            "storage": "pointer"
+          },
+          {
+            "name": "jailbreak_recognition",
+            "sampleCount": 155,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "jacobian_lens",
+          "displayName": "J-Lens",
+          "type": "binary",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "1 when the J-Lens readouts pass the question under its family's rule. An item that the family scores with another item (a clean twin, a control) has no score."
+        },
+        {
+          "key": "jpp_lens",
+          "displayName": "J++ Lens",
+          "type": "binary",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "1 when the J++ Lens readouts pass the question under its family's rule. An item that the family scores with another item (a clean twin, a control) has no score."
+        },
+        {
+          "key": "oracle_lens",
+          "displayName": "Oracle Lens",
+          "type": "binary",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "1 when the O-Lens readouts pass the question under its family's rule. An item that the family scores with another item (a clean twin, a control) has no score."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "macro_score",
+          "displayName": "All Samples",
+          "aggregation": "custom",
+          "headline": true,
+          "min": 0,
+          "max": 1,
+          "description": "WorkspaceBench's own macro for the fast subset: the mean of the family scores that the harness counts. It leaves out a family that is not complete, or whose score is not a pass rate or a pair rate.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "basic_readout",
+          "displayName": "Basic readout",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A short chat question with a one-word answer (\"What sport does Muhammad Ali play?\"). The readouts must state the model's answer before it writes it. The judge picks the answer from a list of options.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "basic_readout_mt",
+          "displayName": "Basic readout (multi-token)",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A factual question whose answer is a name of more than one token (a dynasty, a place, a person). The readouts must name the answer, in any language.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multihop_mt",
+          "displayName": "Multihop (multi-token)",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A prompt of two or three hops whose middle steps are names of more than one token, and the model needs each of them. The readouts must name every middle step.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multilingual_multihop",
+          "displayName": "Multilingual multihop",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A two-hop prompt in a language other than English. The readouts must give the middle entity in English or Chinese and name the prompt's language.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "wrong_intermediate",
+          "displayName": "Wrong-intermediate multihop",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A two-hop prompt where the model takes the wrong middle entity. The judge must pick the model's wrong entity from a list that also has the correct one.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "relational_multihop",
+          "displayName": "Relational multihop",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A chain of two relations (\"Riley is Avery's landlord's sibling\"). The readouts must state the full relation as one phrase, in the correct order.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "poetry",
+          "displayName": "Poetry",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A rhyming couplet cut before its last word. The readouts at the end of line one must show the rhyme word that the model plans.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "directed_modulation",
+          "displayName": "Directed modulation",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The model copies an unrelated sentence while it is told to think, or not to think, about a concept. The judge picks the concept from a list of options at the positions where the model writes.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multi_concept_directed_modulation",
+          "displayName": "Multi-concept directed modulation",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "As directed modulation, with one to three concepts, or one person who does something to another. The readouts must show all the concepts, and the direction of the relation.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multilingual_typo",
+          "displayName": "Multilingual typo",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A sentence in a language other than English that ends in a misspelled word. The readouts must give the correction in the source language and in English or Chinese, and name the language (regex).",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "arithmetic_intermediates",
+          "displayName": "Arithmetic intermediates",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "An arithmetic expression that the model answers with only the final number. The readouts must state the intermediate value that the model does not write.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "buggy_code",
+          "displayName": "Buggy code",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Short programs with one bug, each with a clean twin of the same shape. A pair passes when the readouts of the buggy program say that it has a bug and the readouts of the twin do not.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "conjunctive_association",
+          "displayName": "Conjunctive association",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A short story that implies a compound state without a name for it. The readouts must state the full state, with the roles in the correct direction.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "role_bound_association",
+          "displayName": "Role-bound association",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A story that tells who did what to whom, without the role words. A unit is the story in its two orders; the readouts must bind the direction of the action.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "user_modeling",
+          "displayName": "User modelling",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A conversation that shows a fact about the user (for example, the user's country). The judge picks the fact that the readouts show from a list of options.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "model_multihop",
+          "displayName": "Model-specific multihop",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A two-hop question whose middle step is a fact that only Qwen believes (the country of an invented person). The readouts must name Qwen's own middle step.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "model_specific_directed_modulation",
+          "displayName": "Model-specific directed modulation",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "As directed modulation, but the model picks its own favorite member of a category. A regex looks for the model's own answer in the readouts.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "knowledge_cutoff",
+          "displayName": "Knowledge cutoff",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A question about an event after the model's knowledge cutoff. The readouts must show the answer that the model gives, true or not.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "hinted_cutoff",
+          "displayName": "Hinted cutoff",
+          "aggregation": "custom",
+          "min": -1,
+          "max": 1,
+          "description": "Two prompts with a hint that gives the answer: one that the model cannot answer without the hint, and one that it knows. A pair scores +1 when the readouts show the hint used only in the first prompt, -1 when only in the second, else 0. The family score is the mean, from -1 to 1.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "introspection",
+          "displayName": "Introspection",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A concept vector is put into the model's user turn, and the text does not name it. The readouts of the later positions must name the concept. Each trial has a control with no concept.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "moral_rationale",
+          "displayName": "Moral rationale",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A hard yes-or-no ethical question that the model answers with one word. The readouts must show the reason that the model weighs.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "nyt_connections",
+          "displayName": "NYT Connections",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "An NYT Connections puzzle. Before the model writes, the readouts must show the label that the model gives to one of its groups. The harness does not keep the puzzle text in its results.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "agentic_misalignment",
+          "displayName": "Agentic misalignment",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "An agent scenario in which the model goes on to do a misaligned act (blackmail, a leak), with a clean twin that has no reason for the act. A pair passes when the readouts show the plan before the model writes it, and not in the twin.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "jailbreak_recognition",
+          "displayName": "Jailbreak recognition",
+          "aggregation": "custom",
+          "min": -1,
+          "max": 1,
+          "description": "A real conversation whose last turn is a jailbreak, or a harmless role-play that looks like one. The score is the share of jailbreaks that the readouts recognize, minus the share of controls that they flag.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        }
+      ]
+    },
+    {
+      "version": "2026-11",
+      "status": "published",
+      "releasedDate": "2026-11",
+      "changes": "OpenAudit's first runs: 10 of the 31 families, all on Qwen3.6-27B, with three lenses: the J-Lens, the J++ Lens and the Oracle Lens.\n\n- **Families:** the 10 families that cost the least to judge. Four of them (model-specific directed modulation, multilingual, multilingual typo and typo) use a regex, so they need no judge. The other families come in a later version.\n- **Judge:** Claude Opus 5.5, through the Anthropic Batch API. All readout lines of a question go to one call (`summ_direct=1`), with a note that each line is one raw sample (`summ_direct_note=1`).\n- **Readouts:** all positions of the family's read plan, at layers 20, 24, ..., 60. The token lenses give their top 10 tokens for each cell; the J++ Lens uses its authors' readout, W_U · norm(J·h). The Oracle Lens writes one text sample for each cell.\n- **Harness:** github.com/camilablank/workspace-bench at commit 2617613, with OpenAudit's patch (evals/workspacebench/wsbench.patch).",
+      "dataset": {
+        "url": "https://github.com/camilablank/workspace-bench/tree/2617613910e727fc31615a1193044c6cc729ad87/evals",
+        "license": "MIT",
+        "splits": [
+          {
+            "name": "model_specific_directed_modulation",
+            "sampleCount": 98,
+            "storage": "pointer"
+          },
+          {
+            "name": "multilingual_mt",
+            "sampleCount": 100,
+            "storage": "pointer"
+          },
+          {
+            "name": "multilingual_typo",
+            "sampleCount": 100,
+            "storage": "pointer"
+          },
+          { "name": "typo_mt", "sampleCount": 85, "storage": "pointer" },
+          { "name": "buggy_code", "sampleCount": 143, "storage": "pointer" },
+          { "name": "poetry", "sampleCount": 100, "storage": "pointer" },
+          {
+            "name": "directed_modulation",
+            "sampleCount": 100,
+            "storage": "pointer"
+          },
+          {
+            "name": "relational_multihop",
+            "sampleCount": 100,
+            "storage": "pointer"
+          },
+          { "name": "multihop", "sampleCount": 98, "storage": "pointer" },
+          {
+            "name": "multilingual_multihop",
+            "sampleCount": 98,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "jacobian_lens",
+          "displayName": "J-Lens",
+          "type": "binary",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "1 when the J-Lens readouts pass the question under its family's rule."
+        },
+        {
+          "key": "jpp_lens",
+          "displayName": "J++ Lens",
+          "type": "binary",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "1 when the J++ Lens readouts pass the question under its family's rule."
+        },
+        {
+          "key": "oracle_lens",
+          "displayName": "Oracle Lens",
+          "type": "binary",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "1 when the O-Lens readouts pass the question under its family's rule."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "macro_score",
+          "displayName": "All Samples",
+          "aggregation": "custom",
+          "headline": true,
+          "min": 0,
+          "max": 1,
+          "description": "The mean of the 10 family scores. Each family has the same weight, whatever its number of questions.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multihop",
+          "displayName": "Multihop",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A one-step factual question with an unstated middle entity (\"the element with atomic number 26\" for \"Fe\"). The judge picks the middle entity from six options. The share of questions that pass.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multilingual_multihop",
+          "displayName": "Multilingual multihop",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A two-hop prompt in a language other than English. The judge picks the middle concept and the prompt's language, each from a list of options. The share of questions that pass.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "relational_multihop",
+          "displayName": "Relational multihop",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A chain of two relations (\"Riley is Avery's landlord's sibling\"). The judge picks the outer and the inner relation; both must be correct, in the correct order. The share of questions that pass.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "poetry",
+          "displayName": "Poetry",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A rhyming couplet cut off before its last word. The readouts at the new line must show the rhyme that the model plans. The share of questions that pass.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "directed_modulation",
+          "displayName": "Directed modulation",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The model copies an unrelated sentence while it is told to think about a concept. The judge picks the concept from six options at the positions where the model writes. The share of questions that pass.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "model_specific_directed_modulation",
+          "displayName": "Model-specific directed modulation",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "As directed modulation, but the model picks its own favorite member of a category (\"a Middle Eastern spice blend\"). A regex looks for the model's own answer in the readouts. The share of questions that pass.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multilingual_mt",
+          "displayName": "Multilingual",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A short sentence in a language other than English. The readouts must show the sentence's concept and its language (regex). The share of questions that pass.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "typo_mt",
+          "displayName": "Typo",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "An English sentence that ends in a misspelled phrase. The readouts must show the correct form (regex). The share of questions that pass.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "multilingual_typo",
+          "displayName": "Multilingual typo",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A sentence in a language other than English that ends in a misspelled word. The readouts must show the correct form and the language (regex). The share of questions that pass.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "buggy_code",
+          "displayName": "Buggy code",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A short program with one bug, and its twin with no bug, read at the end of the file. A pair passes when the readouts state what the bug causes on the buggy program and claim no bug on the twin. The share of pairs that pass.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        }
+      ]
+    }
+  ]
+}

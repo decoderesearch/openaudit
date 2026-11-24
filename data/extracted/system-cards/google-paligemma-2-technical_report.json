@@ -1,0 +1,1820 @@
+{
+  "document": "google-paligemma-2-technical_report",
+  "alsoDocuments": ["google-paligemma-2-blog"],
+  "covers": [
+    {
+      "model": "google/paligemma2-3b-pt-224"
+    },
+    {
+      "model": "google/paligemma2-10b-pt-224"
+    },
+    {
+      "model": "google/paligemma2-28b-pt-896"
+    }
+  ],
+  "pageCount": 31,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "vision-language model (image and text)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "PaliGemma 2 is an upgrade of the PaliGemma open Vision-Language Model (VLM) based on the Gemma 2"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "3.0B, 9.7B, and 27.7B (PaliGemma 2 3B/10B/28B)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "   PaliGemma 2 3B                             Gemma 2 2B               3.0B            1.0      4.6      23.5\n   PaliGemma 2 10B       SigLIP-So400m        Gemma 2 9B               9.7B            3.7     18.3      67.7\n   PaliGemma 2 28B                            Gemma 2 27B             27.7B           18.9     63.5    ∼155.6"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "SigLIP-So400m vision encoder with Gemma 2 LMs (2B to 27B)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We combine the SigLIP-So400m vision encoder that was also used by\n                                        PaliGemma with the whole range of Gemma 2 models, from the 2B one all the way up to the 27B model."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Stage 1 multimodal task mixture of 1 billion examples for transferability via fine-tuning",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "mixture of 1 billion examples designed to"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "PaliGemma 2 3B Stage 1 roughly 3 days on 256 chips (same as PaliGemma); relative costs in Table 1",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "cost as PaliGemma (3 days for Stage 1 using 256"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "Evaluations include prompts covering child safety (Gemma 2-style, captioning and VQA)",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "These evaluations include prompts covering child safety,\ncontent safety and representational harms, following the approach used in Gemma 2 [22], but with\nimage captioning and visual question answering (VQA) setups."
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[DOCCI](https://arxiv.org/abs/2404.19753) non-entailment sentences (Table 6): PaliGemma 2 10B 20.3%, 3B 28.4%, vs 28.6-52.3% for baselines.",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "PaliGemma 2 448px2 10B           521    7.5 20.3"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Low [FairFace](https://arxiv.org/abs/1908.04913) Perspective API toxicity/profanity across gender, ethnicity, and age; models comparable",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "Overall, we observe a low level of toxicity and\nprofanity among others, across all slices and models. In addition, all PaliGemma 2 models perform\ncomparably."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "Low Perspective API toxicity and profanity on [FairFace](https://arxiv.org/abs/1908.04913) captions for all PaliGemma 2 sizes",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "profanity among others, across all slices and models. In addition, all PaliGemma 2 models perform\ncomparably."
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The report claims Gemma-2-style ethics prompts for child safety, content safety, and representational harms in captioning/visual question answering (VQA) setups, but reports no numeric scores for those prompts.", "tone": "mixed",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "Besides quality-related metrics, we also evaluate the new PaliGemma 2 VLMs with respect to a number\nof categories relevant to ethics and safety."
+      }
+    },
+    {
+      "text": "[FairFace](https://arxiv.org/abs/1908.04913) caption safety rates use Perspective API with threshold ≥ 0.8; table values are percent of instances (e.g. 0.09 means 0.09%).", "tone": "neutral",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "Numbers indicate the fraction of instances with thresholds ≥ 0.8 in [%], i.e. a\nvalue of e.g. 0.09 means 0.09%."
+      }
+    },
+    {
+      "text": "On [FairFace](https://arxiv.org/abs/1908.04913) captions, all PaliGemma 2 sizes show low toxicity and profanity and perform comparably across demographic slices.", "tone": "good",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "profanity among others, across all slices and models. In addition, all PaliGemma 2 models perform\ncomparably."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.14,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.14    0.15      0.19     0.29     0.39      0.39       0.26   0.18   0.32"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.29,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.14    0.15      0.19     0.29     0.39      0.39       0.26   0.18   0.32"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.26,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.14    0.15      0.19     0.29     0.39      0.39       0.26   0.18   0.32"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.15,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.14    0.15      0.19     0.29     0.39      0.39       0.26   0.18   0.32"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.39,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.14    0.15      0.19     0.29     0.39      0.39       0.26   0.18   0.32"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.18,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.14    0.15      0.19     0.29     0.39      0.39       0.26   0.18   0.32"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.19,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.14    0.15      0.19     0.29     0.39      0.39       0.26   0.18   0.32"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.39,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.14    0.15      0.19     0.29     0.39      0.39       0.26   0.18   0.32"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.32,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.14    0.15      0.19     0.29     0.39      0.39       0.26   0.18   0.32"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0.04,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.04    0.02      0.02     0.13     0.06      0.06       0.06   0.03   0.06"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0.13,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.04    0.02      0.02     0.13     0.06      0.06       0.06   0.03   0.06"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0.06,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.04    0.02      0.02     0.13     0.06      0.06       0.06   0.03   0.06"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0.02,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.04    0.02      0.02     0.13     0.06      0.06       0.06   0.03   0.06"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0.06,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.04    0.02      0.02     0.13     0.06      0.06       0.06   0.03   0.06"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0.03,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.04    0.02      0.02     0.13     0.06      0.06       0.06   0.03   0.06"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0.02,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.04    0.02      0.02     0.13     0.06      0.06       0.06   0.03   0.06"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0.06,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.04    0.02      0.02     0.13     0.06      0.06       0.06   0.03   0.06"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0.06,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.04    0.02      0.02     0.13     0.06      0.06       0.06   0.03   0.06"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.17,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.17    0.25      0.17     0.37     0.52      0.52       0.27   0.39   0.24"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.37,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.17    0.25      0.17     0.37     0.52      0.52       0.27   0.39   0.24"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.27,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.17    0.25      0.17     0.37     0.52      0.52       0.27   0.39   0.24"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.25,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.17    0.25      0.17     0.37     0.52      0.52       0.27   0.39   0.24"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.52,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.17    0.25      0.17     0.37     0.52      0.52       0.27   0.39   0.24"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.39,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.17    0.25      0.17     0.37     0.52      0.52       0.27   0.39   0.24"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.17,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.17    0.25      0.17     0.37     0.52      0.52       0.27   0.39   0.24"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.52,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.17    0.25      0.17     0.37     0.52      0.52       0.27   0.39   0.24"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.24,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.17    0.25      0.17     0.37     0.52      0.52       0.27   0.39   0.24"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.55,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.55    0.43      0.57     0.83     0.48      0.48       0.64   0.43   0.64"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.83,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.55    0.43      0.57     0.83     0.48      0.48       0.64   0.43   0.64"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.64,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.55    0.43      0.57     0.83     0.48      0.48       0.64   0.43   0.64"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.43,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.55    0.43      0.57     0.83     0.48      0.48       0.64   0.43   0.64"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.48,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.55    0.43      0.57     0.83     0.48      0.48       0.64   0.43   0.64"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.43,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.55    0.43      0.57     0.83     0.48      0.48       0.64   0.43   0.64"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.57,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.55    0.43      0.57     0.83     0.48      0.48       0.64   0.43   0.64"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.48,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.55    0.43      0.57     0.83     0.48      0.48       0.64   0.43   0.64"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.64,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.55    0.43      0.57     0.83     0.48      0.48       0.64   0.43   0.64"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Maximum across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.13,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.13    0.10      0.18     0.07     0.07      0.14       0.12   0.08   0.12"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.07,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.13    0.10      0.18     0.07     0.07      0.14       0.12   0.08   0.12"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.12,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.13    0.10      0.18     0.07     0.07      0.14       0.12   0.08   0.12"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.13    0.10      0.18     0.07     0.07      0.14       0.12   0.08   0.12"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.07,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.13    0.10      0.18     0.07     0.07      0.14       0.12   0.08   0.12"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.08,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.13    0.10      0.18     0.07     0.07      0.14       0.12   0.08   0.12"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.18,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.13    0.10      0.18     0.07     0.07      0.14       0.12   0.08   0.12"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.14,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.13    0.10      0.18     0.07     0.07      0.14       0.12   0.08   0.12"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Toxicity",
+      "value": 0.12,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Toxicity          0.13    0.10      0.18     0.07     0.07      0.14       0.12   0.08   0.12"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0.02,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.02    0.01      0.02     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.02    0.01      0.02     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.02    0.01      0.02     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0.01,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.02    0.01      0.02     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.02    0.01      0.02     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.02    0.01      0.02     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0.02,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.02    0.01      0.02     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.02    0.01      0.02     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Identity Attack",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Identity Attack   0.02    0.01      0.02     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.15,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.15    0.23      0.14     0.14     0.17      0.13       0.09   0.18   0.16"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.14,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.15    0.23      0.14     0.14     0.17      0.13       0.09   0.18   0.16"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.09,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.15    0.23      0.14     0.14     0.17      0.13       0.09   0.18   0.16"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.23,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.15    0.23      0.14     0.14     0.17      0.13       0.09   0.18   0.16"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.17,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.15    0.23      0.14     0.14     0.17      0.13       0.09   0.18   0.16"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.18,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.15    0.23      0.14     0.14     0.17      0.13       0.09   0.18   0.16"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.14,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.15    0.23      0.14     0.14     0.17      0.13       0.09   0.18   0.16"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.13,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.15    0.23      0.14     0.14     0.17      0.13       0.09   0.18   0.16"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Insult",
+      "value": 0.16,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Insult            0.15    0.23      0.14     0.14     0.17      0.13       0.09   0.18   0.16"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.35,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.35    0.27      0.41     0.28     0.19      0.42       0.27   0.31   0.40"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.28,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.35    0.27      0.41     0.28     0.19      0.42       0.27   0.31   0.40"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.27,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.35    0.27      0.41     0.28     0.19      0.42       0.27   0.31   0.40"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.27,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.35    0.27      0.41     0.28     0.19      0.42       0.27   0.31   0.40"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.19,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.35    0.27      0.41     0.28     0.19      0.42       0.27   0.31   0.40"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.31,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.35    0.27      0.41     0.28     0.19      0.42       0.27   0.31   0.40"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.41,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.35    0.27      0.41     0.28     0.19      0.42       0.27   0.31   0.40"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.42,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.35    0.27      0.41     0.28     0.19      0.42       0.27   0.31   0.40"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Threat",
+      "value": 0.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Threat            0.35    0.27      0.41     0.28     0.19      0.42       0.27   0.31   0.40"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 3B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 10B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Perceived Gender"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Ethnicity"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "FairFace",
+      "metric": "Profanity",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Perspective API threshold > 0.8; captions; Median across subgroups; Age Group"
+      },
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "table": "Table 12",
+        "quote": "           Profanity         0.00    0.00      0.00     0.00     0.00      0.00       0.00   0.00   0.00"
+      },
+      "rawModelName": "PaliGemma 2 28B"
+    },
+    {
+      "rawEvalName": "DOCCI",
+      "rawModelName": "MiniGPT-4",
+      "metric": "NES (non-entailment sentences)",
+      "value": 52.3,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "MolScribe [76]                   93.8                  MiniGPT-4                  7B    484    5.6   52.3"
+      },
+      "settings": {
+        "other": "lower is better; instruction-tuned baseline"
+      }
+    },
+    {
+      "rawEvalName": "DOCCI",
+      "rawModelName": "mPLUG-Owl2",
+      "metric": "NES (non-entailment sentences)",
+      "value": 48.4,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "PaliGemma 2 10B 448px2           94.8                  mPLUG-Owl2                 8B    459    4.4   48.4"
+      },
+      "settings": {
+        "other": "lower is better; instruction-tuned baseline"
+      }
+    },
+    {
+      "rawEvalName": "DOCCI",
+      "rawModelName": "InstructBLIP",
+      "metric": "NES (non-entailment sentences)",
+      "value": 42.6,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "InstructBLIP               7B    510    4.0   42.6"
+      },
+      "settings": {
+        "other": "lower is better; instruction-tuned baseline"
+      }
+    },
+    {
+      "rawEvalName": "DOCCI",
+      "rawModelName": "LLaVA-1.5",
+      "metric": "NES (non-entailment sentences)",
+      "value": 40.6,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "LLaVA-1.5                  7B    395    4.2   40.6"
+      },
+      "settings": {
+        "other": "lower is better; instruction-tuned baseline"
+      }
+    },
+    {
+      "rawEvalName": "DOCCI",
+      "rawModelName": "VILA",
+      "metric": "NES (non-entailment sentences)",
+      "value": 28.6,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "VILA                       7B    871    8.6   28.6"
+      },
+      "settings": {
+        "other": "lower is better; instruction-tuned baseline"
+      }
+    },
+    {
+      "rawEvalName": "DOCCI",
+      "rawModelName": "PaliGemma",
+      "metric": "NES (non-entailment sentences)",
+      "value": 34.3,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "PaliGemma                  3B  535      8.9 34.3"
+      },
+      "settings": {
+        "other": "lower is better; fine-tuned on DOCCI at 448px"
+      }
+    },
+    {
+      "rawEvalName": "DOCCI",
+      "rawModelName": "PaLI-5B",
+      "metric": "NES (non-entailment sentences)",
+      "value": 32.9,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "PaLI-5B                    5B 1065     11.3 32.9"
+      },
+      "settings": {
+        "other": "lower is better; instruction-tuned baseline"
+      }
+    },
+    {
+      "rawEvalName": "DOCCI",
+      "rawModelName": "PaliGemma 2 448px2 3B",
+      "metric": "NES (non-entailment sentences)",
+      "value": 28.4,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "PaliGemma 2 448px2 3B            529    7.7 28.4"
+      },
+      "settings": {
+        "other": "lower is better; fine-tuned on DOCCI at 448px"
+      }
+    },
+    {
+      "rawEvalName": "DOCCI",
+      "rawModelName": "PaliGemma 2 448px2 10B",
+      "metric": "NES (non-entailment sentences)",
+      "value": 20.3,
+      "unit": "percent",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 6",
+        "quote": "PaliGemma 2 448px2 10B           521    7.5 20.3"
+      },
+      "settings": {
+        "other": "lower is better; fine-tuned on DOCCI at 448px"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:44:50Z"
+  },
+  "notes": "Technical report (arXiv 2412.03555), not a system card. Safety content is Appendix D + Table 12 only (FairFace captions via Perspective API). Child/content safety and representational-harm prompt evals are claimed with no numeric results. Skipped capability tables (AI2D, DocVQA, ChartQA, TextVQA, VQAv2, COCO, DOCCI caption metrics including NES, VSR, FinTabNet, molecule/music OCR, RadGraph, on-device latency, etc.) under pilot safety-only rule. DOCCI factual-alignment claim used for hallucination topic; NES numbers skipped as captioning capability. FairFace table does not name resolution or pt vs mix; mapped 3B/10B/28B to pt checkpoints. Mix checkpoints and extra resolutions not separately covered. alsoDocuments google-paligemma-2-blog not fetched. No risk framework levels or external testers. Table 12 names only sizes, so rows keep raw names. DOCCI NES rows (Table 6) kept as a hallucination measure."
+}

@@ -1,0 +1,71 @@
+{
+  "eval": {
+    "slug": "anthropic-higher-difficulty-violative-request-evaluation",
+    "displayName": "Higher-difficulty violative request evaluation (Anthropic)",
+    "aliases": [
+      "Higher-difficulty violative request evaluation",
+      "Higher-difficulty violative request",
+      "Higher-difficulty violative request evaluations"
+    ],
+    "description": "Anthropic experimental single-turn harmlessness eval built when the standard violative set saturated. Synthetic prompts across Usage Policy areas are transformed to be less explicit (English only; cards often use 1,000 prompts × 14 areas, or larger earlier sets). Each prompt should get a harmless refusal or safe redirect. Cards report the harmless response rate with and without extended thinking.",
+    "summary": "Measures how often the model refuses or safely redirects harmful requests that are written in a less obvious way.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www.anthropic.com/claude-opus-4-6-system-card",
+        "title": "Claude Opus 4.6 System Card (higher-difficulty evals)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "saturated",
+    "saturatedReason": "An experimental Anthropic set. Anthropic says it changes or retires such sets as models saturate them.",
+    "saturatedDecisionDate": "2026-10-05",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests"]
+    },
+    "visibility": "public",
+    "family": "Anthropic safeguards evaluations"
+  },
+  "versions": [
+    {
+      "version": "experimental-14-areas",
+      "status": "draft",
+      "changes": "Experimental synthetic set; Anthropic notes the prompt sets may change or be retired as they saturate.",
+      "scores": [
+        {
+          "key": "harmless",
+          "displayName": "Harmless response",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The reply does not facilitate the requested harm under Anthropic’s grading."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "harmless_response_rate",
+          "displayName": "Harmless response rate",
+          "score": "harmless",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of higher-difficulty violative prompts with a harmless response."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,347 @@
+{
+  "gemma-2-2b": {
+    "core": {
+      "batch_size_prompts": 16,
+      "compute_ce_loss": true,
+      "compute_featurewise_density_statistics": true,
+      "compute_featurewise_weight_based_metrics": true,
+      "compute_kl": true,
+      "compute_l2_norms": true,
+      "compute_sparsity_metrics": true,
+      "compute_variance_metrics": true,
+      "context_size": 128,
+      "dataset": "Skylion007/openwebtext",
+      "exclude_special_tokens_from_reconstruction": true,
+      "llm_dtype": "bfloat16",
+      "model_name": "gemma-2-2b",
+      "n_eval_reconstruction_batches": 200,
+      "n_eval_sparsity_variance_batches": 2000
+    },
+    "sparse_probing": {
+      "context_length": 128,
+      "dataset_names": [
+        "LabHC/bias_in_bios_class_set1",
+        "LabHC/bias_in_bios_class_set2",
+        "LabHC/bias_in_bios_class_set3",
+        "canrager/amazon_reviews_mcauley_1and5",
+        "canrager/amazon_reviews_mcauley_1and5_sentiment",
+        "codeparrot/github-code",
+        "fancyzhx/ag_news",
+        "Helsinki-NLP/europarl"
+      ],
+      "k_values": [1, 2, 5],
+      "llm_batch_size": 32,
+      "llm_dtype": "bfloat16",
+      "lower_vram_usage": false,
+      "model_name": "gemma-2-2b",
+      "probe_test_set_size": 1000,
+      "probe_train_set_size": 4000,
+      "random_seed": 42,
+      "sae_batch_size": 16
+    },
+    "absorption": {
+      "f1_jump_threshold": 0.03,
+      "k_sparse_probe_batch_size": 4096,
+      "k_sparse_probe_l1_decay": 0.01,
+      "k_sparse_probe_num_epochs": 50,
+      "llm_batch_size": 32,
+      "llm_dtype": "bfloat16",
+      "max_k_value": 10,
+      "model_name": "gemma-2-2b",
+      "prompt_template": "{word} has the first letter:",
+      "prompt_token_pos": -6,
+      "random_seed": 42
+    },
+    "scr": {
+      "column1_vals_lookup": {
+        "LabHC/bias_in_bios_class_set1": [
+          ["professor", "nurse"],
+          ["architect", "journalist"],
+          ["surgeon", "psychologist"],
+          ["attorney", "teacher"]
+        ],
+        "canrager/amazon_reviews_mcauley_1and5": [
+          ["Books", "CDs_and_Vinyl"],
+          ["Software", "Electronics"],
+          ["Pet_Supplies", "Office_Products"],
+          ["Industrial_and_Scientific", "Toys_and_Games"]
+        ]
+      },
+      "context_length": 128,
+      "dataset_names": [
+        "LabHC/bias_in_bios_class_set1",
+        "canrager/amazon_reviews_mcauley_1and5"
+      ],
+      "early_stopping_patience": 20,
+      "llm_batch_size": 32,
+      "llm_dtype": "bfloat16",
+      "lower_vram_usage": false,
+      "model_name": "gemma-2-2b",
+      "n_values": [2, 5, 10, 20, 50, 100, 500],
+      "perform_scr": true,
+      "probe_epochs": 20,
+      "probe_l1_penalty": 0.001,
+      "probe_lr": 0.001,
+      "probe_test_batch_size": 500,
+      "probe_train_batch_size": 16,
+      "random_seed": 42,
+      "sae_batch_size": 125,
+      "test_set_size": 1000,
+      "train_set_size": 4000
+    },
+    "tpp": {
+      "column1_vals_lookup": {
+        "LabHC/bias_in_bios_class_set1": [
+          ["professor", "nurse"],
+          ["architect", "journalist"],
+          ["surgeon", "psychologist"],
+          ["attorney", "teacher"]
+        ],
+        "canrager/amazon_reviews_mcauley_1and5": [
+          ["Books", "CDs_and_Vinyl"],
+          ["Software", "Electronics"],
+          ["Pet_Supplies", "Office_Products"],
+          ["Industrial_and_Scientific", "Toys_and_Games"]
+        ]
+      },
+      "context_length": 128,
+      "dataset_names": [
+        "LabHC/bias_in_bios_class_set1",
+        "canrager/amazon_reviews_mcauley_1and5"
+      ],
+      "early_stopping_patience": 20,
+      "llm_batch_size": 32,
+      "llm_dtype": "bfloat16",
+      "lower_vram_usage": false,
+      "model_name": "gemma-2-2b",
+      "n_values": [2, 5, 10, 20, 50, 100, 500],
+      "perform_scr": false,
+      "probe_epochs": 20,
+      "probe_l1_penalty": 0.001,
+      "probe_lr": 0.001,
+      "probe_test_batch_size": 500,
+      "probe_train_batch_size": 16,
+      "random_seed": 42,
+      "sae_batch_size": 125,
+      "test_set_size": 1000,
+      "train_set_size": 4000
+    },
+    "ravel": {
+      "artifact_dir": "artifacts/ravel",
+      "entity_attribute_selection": {
+        "city": ["Country", "Continent", "Language"],
+        "nobel_prize_winner": ["Country of Birth", "Field", "Gender"]
+      },
+      "force_dataset_recompute": false,
+      "full_dataset_downsample": null,
+      "learning_rate": 0.001,
+      "llm_batch_size": 32,
+      "llm_dtype": "bfloat16",
+      "model_name": "google/gemma-2-2b",
+      "n_generated_tokens": 6,
+      "num_epochs": 2,
+      "num_pairs_per_attribute": 5000,
+      "random_seed": 42,
+      "top_n_entities": 500,
+      "top_n_templates": 90,
+      "train_mdas": false,
+      "train_test_split": 0.7
+    },
+    "unlearning": {
+      "dataset_names": [
+        "wmdp-bio",
+        "high_school_us_history",
+        "college_computer_science",
+        "high_school_geography",
+        "human_aging"
+      ],
+      "dataset_size": 1024,
+      "intervention_method": "clamp_feature_activation",
+      "llm_batch_size": 4,
+      "llm_dtype": "bfloat16",
+      "model_name": "gemma-2-2b-it",
+      "multipliers": [25, 50, 100, 200],
+      "n_batch_loss_added": 50,
+      "n_features_list": [10, 20],
+      "random_seed": 42,
+      "retain_thresholds": [0.001, 0.01],
+      "save_metrics": true,
+      "seq_len": 1024,
+      "target_metric": "correct"
+    },
+    "autointerp": {
+      "act_threshold_frac": 0.01,
+      "buffer": 10,
+      "dataset_name": "monology/pile-uncopyrighted",
+      "dead_latent_threshold": 15,
+      "llm_batch_size": 32,
+      "llm_context_size": 128,
+      "llm_dtype": "bfloat16",
+      "max_tokens_in_explanation": 30,
+      "model_name": "gemma-2-2b",
+      "n_iw_sampled_ex_for_generation": 5,
+      "n_iw_sampled_ex_for_scoring": 2,
+      "n_latents": 1000,
+      "n_random_ex_for_scoring": 10,
+      "n_top_ex_for_generation": 10,
+      "n_top_ex_for_scoring": 2,
+      "no_overlap": true,
+      "override_latents": null,
+      "random_seed": 42,
+      "scoring": true,
+      "total_tokens": 2000000,
+      "use_demos_in_explanation": true
+    }
+  },
+  "pythia-160m-deduped": {
+    "core": {
+      "batch_size_prompts": 16,
+      "compute_ce_loss": true,
+      "compute_featurewise_density_statistics": true,
+      "compute_featurewise_weight_based_metrics": true,
+      "compute_kl": true,
+      "compute_l2_norms": true,
+      "compute_sparsity_metrics": true,
+      "compute_variance_metrics": true,
+      "context_size": 128,
+      "dataset": "Skylion007/openwebtext",
+      "exclude_special_tokens_from_reconstruction": true,
+      "llm_dtype": "float32",
+      "model_name": "pythia-160m-deduped",
+      "n_eval_reconstruction_batches": 200,
+      "n_eval_sparsity_variance_batches": 2000
+    },
+    "sparse_probing": {
+      "context_length": 128,
+      "dataset_names": [
+        "LabHC/bias_in_bios_class_set1",
+        "LabHC/bias_in_bios_class_set2",
+        "LabHC/bias_in_bios_class_set3",
+        "canrager/amazon_reviews_mcauley_1and5",
+        "canrager/amazon_reviews_mcauley_1and5_sentiment",
+        "codeparrot/github-code",
+        "fancyzhx/ag_news",
+        "Helsinki-NLP/europarl"
+      ],
+      "k_values": [1, 2, 5],
+      "llm_batch_size": 256,
+      "llm_dtype": "float32",
+      "lower_vram_usage": false,
+      "model_name": "pythia-160m-deduped",
+      "probe_test_set_size": 1000,
+      "probe_train_set_size": 4000,
+      "random_seed": 42,
+      "sae_batch_size": 16
+    },
+    "absorption": {
+      "f1_jump_threshold": 0.03,
+      "k_sparse_probe_batch_size": 4096,
+      "k_sparse_probe_l1_decay": 0.01,
+      "k_sparse_probe_num_epochs": 50,
+      "llm_batch_size": 256,
+      "llm_dtype": "float32",
+      "max_k_value": 10,
+      "model_name": "pythia-160m-deduped",
+      "prompt_template": "{word} has the first letter:",
+      "prompt_token_pos": -6,
+      "random_seed": 42
+    },
+    "scr": {
+      "column1_vals_lookup": {
+        "LabHC/bias_in_bios_class_set1": [
+          ["professor", "nurse"],
+          ["architect", "journalist"],
+          ["surgeon", "psychologist"],
+          ["attorney", "teacher"]
+        ],
+        "canrager/amazon_reviews_mcauley_1and5": [
+          ["Books", "CDs_and_Vinyl"],
+          ["Software", "Electronics"],
+          ["Pet_Supplies", "Office_Products"],
+          ["Industrial_and_Scientific", "Toys_and_Games"]
+        ]
+      },
+      "context_length": 128,
+      "dataset_names": [
+        "LabHC/bias_in_bios_class_set1",
+        "canrager/amazon_reviews_mcauley_1and5"
+      ],
+      "early_stopping_patience": 20,
+      "llm_batch_size": 256,
+      "llm_dtype": "float32",
+      "lower_vram_usage": false,
+      "model_name": "pythia-160m-deduped",
+      "n_values": [2, 5, 10, 20, 50, 100, 500],
+      "perform_scr": true,
+      "probe_epochs": 20,
+      "probe_l1_penalty": 0.001,
+      "probe_lr": 0.001,
+      "probe_test_batch_size": 500,
+      "probe_train_batch_size": 16,
+      "random_seed": 42,
+      "sae_batch_size": 125,
+      "test_set_size": 1000,
+      "train_set_size": 4000
+    },
+    "tpp": {
+      "column1_vals_lookup": {
+        "LabHC/bias_in_bios_class_set1": [
+          ["professor", "nurse"],
+          ["architect", "journalist"],
+          ["surgeon", "psychologist"],
+          ["attorney", "teacher"]
+        ],
+        "canrager/amazon_reviews_mcauley_1and5": [
+          ["Books", "CDs_and_Vinyl"],
+          ["Software", "Electronics"],
+          ["Pet_Supplies", "Office_Products"],
+          ["Industrial_and_Scientific", "Toys_and_Games"]
+        ]
+      },
+      "context_length": 128,
+      "dataset_names": [
+        "LabHC/bias_in_bios_class_set1",
+        "canrager/amazon_reviews_mcauley_1and5"
+      ],
+      "early_stopping_patience": 20,
+      "llm_batch_size": 256,
+      "llm_dtype": "float32",
+      "lower_vram_usage": false,
+      "model_name": "pythia-160m-deduped",
+      "n_values": [2, 5, 10, 20, 50, 100, 500],
+      "perform_scr": false,
+      "probe_epochs": 20,
+      "probe_l1_penalty": 0.001,
+      "probe_lr": 0.001,
+      "probe_test_batch_size": 500,
+      "probe_train_batch_size": 16,
+      "random_seed": 42,
+      "sae_batch_size": 125,
+      "test_set_size": 1000,
+      "train_set_size": 4000
+    },
+    "autointerp": {
+      "act_threshold_frac": 0.01,
+      "buffer": 10,
+      "dataset_name": "monology/pile-uncopyrighted",
+      "dead_latent_threshold": 15,
+      "llm_batch_size": 256,
+      "llm_context_size": 128,
+      "llm_dtype": "float32",
+      "max_tokens_in_explanation": 30,
+      "model_name": "pythia-160m-deduped",
+      "n_iw_sampled_ex_for_generation": 5,
+      "n_iw_sampled_ex_for_scoring": 2,
+      "n_latents": 1000,
+      "n_random_ex_for_scoring": 10,
+      "n_top_ex_for_generation": 10,
+      "n_top_ex_for_scoring": 2,
+      "no_overlap": true,
+      "override_latents": null,
+      "random_seed": 42,
+      "scoring": true,
+      "total_tokens": 2000000,
+      "use_demos_in_explanation": true
+    }
+  }
+}

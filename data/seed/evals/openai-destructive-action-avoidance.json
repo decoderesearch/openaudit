@@ -1,0 +1,88 @@
+{
+  "eval": {
+    "slug": "openai-destructive-action-avoidance",
+    "displayName": "Destructive action avoidance",
+    "aliases": [
+      "Destructive action avoidance",
+      "Destructive actions — Avoidance only",
+      "Destructive actions — Avoidance + Correctness",
+      "Destructive actions (Avoidance only)",
+      "Destructive actions (Avoidance + Correctness)"
+    ],
+    "description": "OpenAI internal agentic coding / computer-use eval that checks whether a model preserves user-produced changes and avoids accidental data-destructive actions (for example overwrite, delete, or hard reset) when edits are injected into the workspace. Cards report avoidance-only and avoidance-plus-correctness rates. Dataset and runner are lab-internal.",
+    "summary": "Tests whether AI agents keep user changes and avoid actions that destroy data, such as deleting files.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://cdn.openai.com/pdf/2a7d98b1-57e5-4147-8d0e-683894d782ae/5p1_codex_max_card_03.pdf",
+        "title": "GPT-5.1-Codex-Max System Card (destructive action avoidance)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed", "generated"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["agentic_misuse", "sabotage"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-11-19",
+      "status": "draft",
+      "releasedDate": "2025-11-19",
+      "changes": "OpenAI first reports the destructive action avoidance eval in the GPT-5.1-Codex-Max card. Later cards add Avoidance only and Avoidance + Correctness metrics. Policies and datasets may evolve.",
+      "scores": [
+        {
+          "key": "avoidance",
+          "displayName": "Avoidance",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model avoids overwriting or destroying undesired user data / changes in the task environment."
+        },
+        {
+          "key": "avoidance_and_correctness",
+          "displayName": "Avoidance + Correctness",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model completes the challenging task correctly without overwriting undesired data."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "avoidance_rate",
+          "displayName": "Avoidance-only rate",
+          "score": "avoidance",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of cases where the model avoids destructive overwrites (also reported as Destructive action avoidance)."
+        },
+        {
+          "key": "avoidance_and_correctness_rate",
+          "displayName": "Avoidance + Correctness rate",
+          "score": "avoidance_and_correctness",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Share of cases where the model both avoids overwrites and completes the task correctly."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "eval": {
+    "slug": "apple-afm-safety-evaluation",
+    "displayName": "AFM safety evaluation (Apple)",
+    "aliases": ["Human Evaluation of Output Harmfulness", "Human Preference Evaluation on Safety Prompts"],
+    "description": "Apple internal set of over a thousand adversarial prompts on harmful content, sensitive topics and factuality, under Apple's safety policy. Human graders score each response. The 2024 AFM report gives the violation rate and a side-by-side safety preference against other models. The prompts are not public.",
+    "summary": "Measures how often the model gives unsafe or false answers to hard prompts about harmful content and sensitive topics.",
+    "maintainers": [
+      {
+        "name": "Apple",
+        "url": "https://machinelearning.apple.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2407.21075",
+        "title": "Apple Intelligence Foundation Language Models (2024)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["human"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "hallucination"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-07-29",
+      "status": "published",
+      "releasedDate": "2024-07-29",
+      "scores": [
+        {
+          "key": "violating",
+          "displayName": "Violating response",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "A human grader finds that the response breaks Apple's safety policy."
+        },
+        {
+          "key": "preference",
+          "displayName": "Side-by-side preference",
+          "type": "ordinal",
+          "min": -1,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "A human grader compares the AFM response with another model's response: 1 AFM is safer and more helpful, 0 tie, -1 the other model is."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "violation_rate",
+          "displayName": "Violation rate",
+          "score": "violating",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of prompts with a violating response."
+        },
+        {
+          "key": "win_rate",
+          "displayName": "AFM wins",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Share of prompts where graders prefer the AFM response (preference 1)."
+        },
+        {
+          "key": "tie_rate",
+          "displayName": "Tie",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "neither",
+          "description": "Share of prompts with no preference (preference 0)."
+        },
+        {
+          "key": "loss_rate",
+          "displayName": "AFM loses",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "description": "Share of prompts where graders prefer the other model (preference -1)."
+        }
+      ]
+    }
+  ]
+}

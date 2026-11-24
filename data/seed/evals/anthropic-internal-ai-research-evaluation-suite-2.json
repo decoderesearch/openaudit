@@ -1,0 +1,72 @@
+{
+  "eval": {
+    "slug": "anthropic-internal-ai-research-evaluation-suite-2",
+    "displayName": "Internal AI Research Evaluation Suite 2",
+    "aliases": ["Internal AI research evaluation suite 2", "AI R&D rule-out: Internal suite 2"],
+    "description": "Anthropic internal automated tasks where a model must autonomously do self-contained ML and alignment research. Tasks are scaled-down versions of Anthropic research work and training materials. Scored with a weighted average of objective, outcome-based task scores; cards use a conservative rule-out threshold of 0.6 for AI R&D-4. Dataset and runner are lab-internal.",
+    "summary": "Measures how well AI agents do self-contained machine learning and alignment research tasks without human help.",
+    "family": "Anthropic Internal AI Research",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www-cdn.anthropic.com/07b2a3f9902ee19fe39a36ca638e5ae987bc64dd.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/07b2a3f9902ee19fe39a36ca638e5ae987bc64dd.pdf",
+        "title": "Claude Opus 4 & Sonnet 4 System Card (Suite 2)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/c788cbc0a3da9135112f97cdf6dcd06f2c16cee2.pdf",
+        "title": "Claude Opus 4.6 System Card (Suite 2)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "suite-2",
+      "status": "published",
+      "changes": "Weighted-average suite as reported from Claude Sonnet 3.7 onward, with a 0.6 AI R&D-4 rule-out threshold.",
+      "scores": [
+        {
+          "key": "task_score",
+          "displayName": "Task score",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Outcome-based score on one Suite 2 research task (partial credit allowed)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "weighted_average_score",
+          "displayName": "Weighted average score",
+          "score": "task_score",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Weighted average over Suite 2 task scores. Weights reflect task quality and coverage of Anthropic research skills. Cards treat scores below 0.6 as ruling out AI R&D-4."
+        }
+      ]
+    }
+  ]
+}

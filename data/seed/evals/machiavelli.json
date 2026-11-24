@@ -1,0 +1,140 @@
+{
+  "eval": {
+    "slug": "machiavelli",
+    "displayName": "MACHIAVELLI",
+    "aliases": ["Machiavelli", "MACHIAVELLI Benchmark"],
+    "description": "Measures how often agents take unethical actions while pursuing goals in Choose-Your-Own-Adventure text games. Agents play for achievements; dense scene labels score power-seeking, disutility to others, and ethical violations. The standard test set is 30 games from a suite of 134.",
+    "summary": "Measures how often AI agents choose unethical or power-seeking actions while they pursue goals in text games.",
+    "maintainers": [
+      {
+        "name": "Pan et al.",
+        "url": "https://github.com/aypan17/machiavelli"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2304.03279",
+        "title": "Do the Rewards Justify the Means? (ICML 2023)"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/aypan17/machiavelli",
+        "title": "Original MACHIAVELLI environment"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://aypan17.github.io/machiavelli/",
+        "title": "MACHIAVELLI project page"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/kobyjl/machiavelli_game_data",
+        "title": "Game data mirror used by the Inspect port"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/Plyb/inspect-machiavelli",
+        "title": "Inspect AI port (listed in inspect_evals register)"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["power_seeking"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2023-04-06",
+      "status": "published",
+      "releasedDate": "2023-04-06",
+      "dataset": {
+        "hfRepo": "kobyjl/machiavelli_game_data",
+        "revision": "708b3c3f1dc4943d77bef784bf98219f719613b5",
+        "url": "https://huggingface.co/datasets/kobyjl/machiavelli_game_data",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "test",
+            "sampleCount": 30,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "game_score",
+          "displayName": "Game score",
+          "type": "continuous",
+          "direction": "higher_is_better",
+          "description": "Normalized achievement points as a percentage of the random-agent mean for that game."
+        },
+        {
+          "key": "power_sum",
+          "displayName": "Power (Σ)",
+          "type": "continuous",
+          "direction": "lower_is_better",
+          "description": "Normalized count of power-seeking steps (money, physical, social, utility) vs the random-agent mean."
+        },
+        {
+          "key": "utility_sum",
+          "displayName": "Utility harm (Σ)",
+          "type": "continuous",
+          "direction": "lower_is_better",
+          "description": "Normalized count of steps that impose severe disutility on other characters."
+        },
+        {
+          "key": "violations_sum",
+          "displayName": "Ethical violations (Σ)",
+          "type": "continuous",
+          "direction": "lower_is_better",
+          "description": "Normalized count of ethical-violation labels (killing, stealing, deception, and related harms)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mean_violations",
+          "displayName": "Mean ethical violations",
+          "score": "violations_sum",
+          "aggregation": "mean",
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Mean normalized violations.Σ across the 30 test games."
+        },
+        {
+          "key": "mean_power",
+          "displayName": "Mean power-seeking",
+          "score": "power_sum",
+          "aggregation": "mean",
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Mean normalized power.Σ across the 30 test games."
+        },
+        {
+          "key": "mean_game_score",
+          "displayName": "Mean game score",
+          "score": "game_score",
+          "aggregation": "mean",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Mean normalized achievement score across the 30 test games."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": true
+      }
+    }
+  ]
+}

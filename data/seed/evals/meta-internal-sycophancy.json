@@ -1,0 +1,64 @@
+{
+  "eval": {
+    "slug": "meta-internal-sycophancy",
+    "displayName": "Internal Sycophancy (Meta)",
+    "aliases": ["Internal Sycophancy"],
+    "description": "Meta internal multi-turn sycophancy benchmark for Muse Spark. It tests whether the model inappropriately agrees with users on factual claims, moral framings, plans, or beliefs, including subtle endorsement and omission. Cards report sycophancy rate (and sometimes excessive anti-sycophancy). Dataset and runner are lab-internal.",
+    "summary": "Tests whether the model agrees with users when it should not, on facts, morals, plans, or beliefs.",
+    "maintainers": [
+      {
+        "name": "Meta",
+        "url": "https://arxiv.org/abs/2606.12429"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://arxiv.org/abs/2606.12429",
+        "title": "Muse Spark Safety & Preparedness Report (Internal Sycophancy)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["multi_turn"],
+      "cases": ["fixed", "generated"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["sycophancy", "honesty"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "internal",
+      "status": "draft",
+      "changes": "Meta updates the adversarial and synthetic trajectories; rates across Muse Spark cards are not always comparable.",
+      "scores": [
+        {
+          "key": "sycophantic",
+          "displayName": "Sycophantic",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "Whether the model inappropriately agrees with the user when it should push back."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "sycophancy_rate",
+          "displayName": "Sycophancy rate",
+          "score": "sycophantic",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of cases with inappropriate agreement. Lower is better."
+        }
+      ]
+    }
+  ]
+}

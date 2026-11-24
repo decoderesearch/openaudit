@@ -1,0 +1,494 @@
+{
+  "document": "deepseek-v4.1-flash-paper",
+  "alsoDocuments": ["deepseek-v4.1-flash-blog"],
+  "covers": [
+    {
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash"
+    }
+  ],
+  "pageCount": 51,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "up to one million tokens",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "model with 552B backbone parameters and support for contexts of up to one million tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "images and text input; text output",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "DeepSeek-V4.1-Flash is a multimodal mixture-of-experts (MoE) Transformer that takes images\nand text as input and generates text autoregressively."
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "API presets low/high/max map to effort 50/75/100 (scalar effort 1–100)",
+      "source": {
+        "page": "34",
+        "pdfPage": 34,
+        "quote": "low, high, and max correspond to effort values of 50, 75, and 100, respectively."
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "552B backbone parameters and 196B Engram parameters",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Overall, DeepSeek-V4.1-Flash\nhas 552B backbone parameters and 196B Engram parameters, activating 8B parameters per\ntoken during prefill and 16B during decode."
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "8B during prefill; 16B during decode",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Overall, DeepSeek-V4.1-Flash\nhas 552B backbone parameters and 196B Engram parameters, activating 8B parameters per\ntoken during prefill and 16B during decode."
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "multimodal MoE Transformer with Causal Encoder-Decoder (CED), CSA2, Engram, FP4 main KV cache",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "With its Causal Encoder-Decoder (CED) architecture, the model activates 16B parameters\nper token during decode but only 8B parameters during prefill"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "multimodal corpus comprising 45T tokens",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We pretrain DeepSeek-V4.1-\nFlash on a multimodal corpus comprising 45T tokens and conduct comprehensive post-training"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "Agents attempt reward hacking during RL; AppArmor/eBPF mitigations; exploit-seeking still seen in [CyberGym](/evals/cybergym) evals",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "quote": "During RL training, we frequently observe agents\nattempting to perform reward hacking or unintentionally crashing the environment."
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "state of the art (SOTA) among open-source on cyber-security tasks ([CyberGym](/evals/cybergym) 88.1%, [SEC-Bench Pro](/evals/sec-bench-pro) 62.8%, [ExploitGym](/evals/exploitgym) 15.3% Pass@1 at Max)",
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "quote": "On cyber-security tasks, DeepSeek-V4.1-Flash establishes a new state of the art among open-\nsource models."
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Authors flag dual-use cyber capabilities and ask the community to use them for defensive security research and vulnerability remediation.", "tone": "mixed",
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "quote": "Given the dual-use nature of these capabilities, we encourage the community to"
+      }
+    },
+    {
+      "text": "Despite internet and git-history restrictions in coding-agent evals, the model still showed exploit-seeking such as decompiling Ubuntu packages on [CyberGym](/evals/cybergym).", "tone": "bad",
+      "source": {
+        "page": "32",
+        "pdfPage": 32,
+        "quote": "we still observe instances of exploit-seeking behavior during testing—such\nas decompiling core Ubuntu Linux packages to uncover vulnerabilities in CyberGym."
+      }
+    },
+    {
+      "text": "During reinforcement learning (RL), agents exploited disclosed vulnerabilities and damaged sandboxes; DeepSeek used AppArmor profiles and extended Berkeley Packet Filter (eBPF) network policies to block such attempts.", "tone": "bad",
+      "source": {
+        "page": "29",
+        "pdfPage": 29,
+        "quote": "We use per-sandbox AppArmor profiles and\nfine-grained eBPF-based network policies to prevent such attempts."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "CyberGym",
+      "model": "openai/gpt-5.6-sol",
+      "metric": "Pass@1",
+      "value": 84.5,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "CyberGym (Pass@1)                    -       84.5    80.0   84.5    83.3       76.7         88.1"
+      }
+    },
+    {
+      "rawEvalName": "CyberGym",
+      "model": "moonshotai/Kimi-K3",
+      "metric": "Pass@1",
+      "value": 80,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "CyberGym (Pass@1)                    -       84.5    80.0   84.5    83.3       76.7         88.1"
+      }
+    },
+    {
+      "rawEvalName": "CyberGym",
+      "model": "zai-org/GLM-5.3",
+      "metric": "Pass@1",
+      "value": 84.5,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "CyberGym (Pass@1)                    -       84.5    80.0   84.5    83.3       76.7         88.1"
+      }
+    },
+    {
+      "rawEvalName": "CyberGym",
+      "model": "deepseek-ai/DeepSeek-V4-Pro",
+      "metric": "Pass@1",
+      "value": 83.3,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "CyberGym (Pass@1)                    -       84.5    80.0   84.5    83.3       76.7         88.1"
+      }
+    },
+    {
+      "rawEvalName": "CyberGym",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "metric": "Pass@1",
+      "value": 76.7,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "CyberGym (Pass@1)                    -       84.5    80.0   84.5    83.3       76.7         88.1"
+      }
+    },
+    {
+      "rawEvalName": "CyberGym",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "metric": "Pass@1",
+      "value": 88.1,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "CyberGym (Pass@1)                    -       84.5    80.0   84.5    83.3       76.7         88.1"
+      }
+    },
+    {
+      "rawEvalName": "SEC-Bench Pro",
+      "model": "openai/gpt-5.6-sol",
+      "metric": "Pass@1",
+      "value": 74.3,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max",
+        "harness": "Claude Code",
+        "other": "version 260505"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "SEC-Bench Pro (Pass@1)               -       74.3     -      -      56.4       30.9         62.8"
+      }
+    },
+    {
+      "rawEvalName": "SEC-Bench Pro",
+      "model": "deepseek-ai/DeepSeek-V4-Pro",
+      "metric": "Pass@1",
+      "value": 56.4,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max",
+        "harness": "Claude Code",
+        "other": "version 260505"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "SEC-Bench Pro (Pass@1)               -       74.3     -      -      56.4       30.9         62.8"
+      }
+    },
+    {
+      "rawEvalName": "SEC-Bench Pro",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "metric": "Pass@1",
+      "value": 30.9,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max",
+        "harness": "Claude Code",
+        "other": "version 260505"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "SEC-Bench Pro (Pass@1)               -       74.3     -      -      56.4       30.9         62.8"
+      }
+    },
+    {
+      "rawEvalName": "SEC-Bench Pro",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "metric": "Pass@1",
+      "value": 62.8,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max",
+        "harness": "Claude Code",
+        "other": "version 260505"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "SEC-Bench Pro (Pass@1)               -       74.3     -      -      56.4       30.9         62.8"
+      }
+    },
+    {
+      "rawEvalName": "ExploitGym",
+      "model": "anthropic/claude-opus-5",
+      "metric": "Pass@1",
+      "value": 22.1,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "ExploitGym (Pass@1)                 22.1     33.7     -     15.0     5.4        1.8         15.3"
+      }
+    },
+    {
+      "rawEvalName": "ExploitGym",
+      "model": "openai/gpt-5.6-sol",
+      "metric": "Pass@1",
+      "value": 33.7,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "ExploitGym (Pass@1)                 22.1     33.7     -     15.0     5.4        1.8         15.3"
+      }
+    },
+    {
+      "rawEvalName": "ExploitGym",
+      "model": "zai-org/GLM-5.3",
+      "metric": "Pass@1",
+      "value": 15,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "ExploitGym (Pass@1)                 22.1     33.7     -     15.0     5.4        1.8         15.3"
+      }
+    },
+    {
+      "rawEvalName": "ExploitGym",
+      "model": "deepseek-ai/DeepSeek-V4-Pro",
+      "metric": "Pass@1",
+      "value": 5.4,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "ExploitGym (Pass@1)                 22.1     33.7     -     15.0     5.4        1.8         15.3"
+      }
+    },
+    {
+      "rawEvalName": "ExploitGym",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "metric": "Pass@1",
+      "value": 1.8,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "ExploitGym (Pass@1)                 22.1     33.7     -     15.0     5.4        1.8         15.3"
+      }
+    },
+    {
+      "rawEvalName": "ExploitGym",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "metric": "Pass@1",
+      "value": 15.3,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Max"
+      },
+      "source": {
+        "page": "33",
+        "pdfPage": 33,
+        "table": "Table 3",
+        "quote": "ExploitGym (Pass@1)                 22.1     33.7     -     15.0     5.4        1.8         15.3"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:46:45Z"
+  },
+  "notes": "Technical report on KV-cache compression and agentic capability; almost no safety/alignment section. Safety-only pilot: kept CyberGym, SEC-Bench Pro, and ExploitGym from Table 3 (Max); skipped all pretrain Table 1 and other post-train capability rows (GPQA, HLE, Terminal-Bench, DeepSWE, Automation-Bench, visual agents, etc.). Table header abbreviates K3 (body text: Kimi-K3) and Opus-5. No formal risk framework or external safety testers. Claude Code harness stated for SEC-Bench Pro only. Dual-use cyber note has no numeric risk level."
+}

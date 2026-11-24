@@ -1,0 +1,69 @@
+{
+  "eval": {
+    "slug": "virology-protocol-uplift-trial",
+    "displayName": "Virology protocol uplift trial",
+    "aliases": ["ASL-4 virology protocol uplift trial", "ASL-4 Virology Uplift Trial"],
+    "description": "Anthropic human uplift trial: PhD-level biologists (without bioweapons expertise) write an end-to-end protocol to recover a challenging virus from synthetic DNA, with or without model help. Graders use a multi-point rubric with critical-failure gates. Cards report mean critical failures (lower is stronger uplift) and sometimes fractional plan scores; some runs add agentic model-only arms.",
+    "summary": "Measures how much the model helps biologists plan the recovery of a dangerous virus.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/7624816413e9b4d2e3ba620c5a5e091b98b190a5/Claude%20Mythos%20Preview%20System%20Card.pdf",
+        "title": "Claude Mythos Preview System Card (Virology protocol uplift trial)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/6a5fa276ac68b9aeb0c8b6af5fa36326e0e166dd/Claude%20Opus%204.6%20System%20Card.pdf",
+        "title": "Claude Opus 4.6 System Card (ASL-4 virology protocol uplift trial)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["multi_turn", "agentic"],
+      "cases": ["live_human"],
+      "grading": ["human"],
+      "adversarial": false,
+      "humanParticipants": true,
+      "subjects": ["model"],
+      "topics": ["bio_chem", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "anthropic-asl4",
+      "status": "draft",
+      "changes": "Time budgets and critical-failure thresholds were updated across cards (for example toward under 1.8 mean critical failures).",
+      "scores": [
+        {
+          "key": "critical_failures",
+          "displayName": "Critical failures",
+          "type": "continuous",
+          "min": 0,
+          "direction": "lower_is_better",
+          "description": "Count of critical-failure rubric gates hit by a participant protocol."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mean_critical_failures",
+          "displayName": "Mean critical failures",
+          "score": "critical_failures",
+          "aggregation": "mean",
+          "min": 0,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Mean critical failures in the model-assisted (or agentic) group."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "document": "moonshot-kimi-vl-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "moonshotai/Kimi-VL-A3B-Instruct"
+    },
+    {
+      "model": "moonshotai/Kimi-VL-A3B-Thinking"
+    },
+    {
+      "model": "moonshotai/Kimi-VL-A3B-Thinking-2506"
+    }
+  ],
+  "pageCount": 24,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "128K (extended from 8K; RoPE inverse frequency reset from 50,000 to 800,000)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "we extend the context length of the model from\n8192 (8K) to 131072 (128K), with the inverse frequency of its RoPE (J. Su et al. 2023) embeddings reset from 50,000"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text, images, and videos",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "understand information from multiple modalities, including text, images, and videos."
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "Instruct (non-thinking) and Thinking variants via long-CoT SFT and RL",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "long-CoT SFT and RL stages to activate and enhance long thinking abilities."
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English and Chinese (caption datasets and text pretrain domains)",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "We have integrated various open-source Chinese and English caption datasets like (Schuhmann et al. 2022;"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "16B total parameters (MoE language model)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "an MoE language model with 2.8B activated parameters, 16B total parameters, and an architecture similar"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "2.8B activated parameters in the language decoder (plus 0.4B vision tower in tables)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "an MoE language model with 2.8B activated parameters, 16B total parameters, and an architecture similar"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "MoonViT native-resolution vision encoder + MLP projector + Moonlight MoE LLM (similar to DeepSeek-V3)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "The architecture of Kimi-VL consists of three parts: a native-resolution vision encoder (MoonViT), an MLP projector,"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "4.4T multimodal pre-training tokens after text-only pre-training of the language model; plus SFT and long-CoT/RL post-training",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "The pre-training stages of Kimi-VL consume a total of 4.4T tokens after text-only pre-training of its language"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:24:49Z"
+  },
+  "notes": "Capability-focused VLM technical report (arXiv:2504.07491v3) with no safety, alignment, refusal, jailbreak, bias, or dangerous-capability evaluation section. Hallucination is only mentioned as a training-data filter (limiting synthetic caption/video description share); that does not cover the hallucination topic per pilot rules. OSWorld-G \"refusal samples\" names a benchmark subset, not a safety refusal eval. Skipped all capability tables (MMMU, VideoMMMU, MMVU, MMBench, MMStar, MMVet, RealWorldQA, AI2D, BLINK, MathVista, MathVision, InfoVQA, OCRBench, ScreenSpot-V2/Pro, OSWorld, LongVideoBench, MMLongBench-Doc, MLVU, EgoSchema, NIAH, V*, VideoMME, etc.). All three seed-linked variants are named in the report and covered. No external safety testers."
+}

@@ -1,0 +1,21 @@
+[project]
+name = "openaudit-workspace"
+version = "0"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+dev = ["openaudit-spec", "openaudit-runner[classifiers]", "pytest>=8"]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["spec/generated/python", "apps/runner"]
+
+[tool.uv.sources]
+openaudit-spec = { workspace = true }
+openaudit-runner = { workspace = true }
+
+[tool.pytest.ini_options]
+testpaths = ["spec/tests", "apps/runner/tests", "evals/workspace-lenses/tests", "evals/varied-deception/tests", "evals/sparse-autoencoders/tests", "evals/workspacebench/tests", "submissions/examples", "submissions/harnesses/_template"]

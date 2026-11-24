@@ -1,0 +1,916 @@
+{
+  "document": "microsoft-phi-4-paper-technical_report",
+  "alsoDocuments": ["microsoft-phi-4-blog"],
+  "covers": [
+    {
+      "model": "microsoft/phi-4"
+    }
+  ],
+  "pageCount": 36,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4096 default; extended to 16K in midtraining",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "a default context length of 4096. This is later extended to a 16K context length during midtraining."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text language model",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present phi-4, a 14-billion parameter language model developed with a training recipe that"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "multilingual SFT data for 40 languages",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "We also added multilingual data for 40 languages."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "14 billion",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present phi-4, a 14-billion parameter language model developed with a training recipe that"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "decoder-only transformer, 14B parameters",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "The phi-4 model is based on a decoder-only transformer architecture [VSP+ 17] with 14B parameters and"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "bulk synthetic data plus curated/filtered organic web, books, code; post-training includes safety and RAI data",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Synthetic data constitutes the bulk of the training data for phi-4 and is generated using a diverse"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "In-house RAI Harmful Content and 3P Content Harms defect rates reported for phi-4 and baselines",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "3P Content Harms        Books, News, Recipes, Songs\n(DR1)                    0.26      0.253       0.251            0.562       0.399      0.373     0.383   0.121"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "Jailbreak (DR1) includes simulated conversations around child grooming",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "conversations around child grooming, illegal persuasion, leaking of 100 words of guidelines, popular\nconspiracy, prejudice against real people, step-by-step illegal advice, and violence against real people."
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Harmful Content RAI category includes Self-Harm with Continuation and Summarization defect rates",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Harmful Content        Hate/Fairness, Self-Harm, Sexual, Violence"
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Jailbreak (DR1) defect rate 0.073 for phi-4; AIRT reported strong defenses against jailbreaks",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Jailbreak(DR1)\n                         0.117       0.107       0.111          0.156       0.153      0.13      0.114   0.073"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Post-training supervised fine-tuning (SFT)/direct preference optimization (DPO) to prefer refusal over hallucination; Grounding RAI score and factual hallucination weakness noted",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "If the model does not know the answer,\nwe would rather it refuse to answer than to make up a hallucination."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "RAI Grounding score measures whether response information is based on a given prompt",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Grounding is scored between 0 (not grounded) and 5\n(fully grounded), and measures if the information in a response is based on a given prompt."
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Hate/Fairness in Harmful Content RAI; residual bias amplification acknowledged as unresolved",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "we acknowledge challenges around reproduction or amplification of\nbiases, inappropriate content generation, and safety issues."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": true,
+      "headline": "Jailbreak (DR1) scenarios include illegal persuasion",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "conversations around child grooming, illegal persuasion, leaking of 100 words of guidelines, popular\nconspiracy, prejudice against real people, step-by-step illegal advice, and violence against real people."
+      }
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Microsoft AI Red Team (AIRT) found phi-4's behavior similar to the phi-3 family and flagged risky behaviors that further safety post-training then addressed.", "tone": "good",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Overall, AIRT found that the behavior\nof phi-4 was similar to that of the phi-3 family, but identified several risky behaviors that were addressed"
+      }
+    },
+    {
+      "text": "Greedy Coordinate Gradient (GCG) adversarial suffixes generated on phi-3-medium did not transfer to phi-4.", "tone": "good",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "generated adversarial suffixes using the GCG algorithm [ZWC+ 23] on phi-3-medium, but found that\nthese suffixes did not transfer to phi-4."
+      }
+    },
+    {
+      "text": "Authors state further red teaming is still needed across a broader range of scenarios and harm categories.", "tone": "mixed",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Further red teaming is required to identify possible risks across\na broader range of scenarios and harm categories."
+      }
+    },
+    {
+      "text": "phi-4 can still invent biographies for plausible names, so factual hallucinations are not eliminated.", "tone": "bad",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "specifically in hallucinations around factual\nknowledge. For example, if X is a plausible human name, the model sometimes responds to prompts of the"
+      }
+    },
+    {
+      "text": "Responsible AI (RAI) mitigation reduced but did not fully resolve bias amplification, inappropriate content, and safety issues.", "tone": "mixed",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "have resulted in mitigating\nthese issues across all dimensions, but have not resolved the issues completely."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Grounding",
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "metric": "grounding score",
+      "value": 4.469,
+      "unit": "score",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Grounding           4.469     4.701       4.787           4.065       4.692      4.672     4.32    4.619"
+      }
+    },
+    {
+      "rawEvalName": "Grounding",
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "metric": "grounding score",
+      "value": 4.701,
+      "unit": "score",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Grounding           4.469     4.701       4.787           4.065       4.692      4.672     4.32    4.619"
+      }
+    },
+    {
+      "rawEvalName": "Grounding",
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "metric": "grounding score",
+      "value": 4.787,
+      "unit": "score",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Grounding           4.469     4.701       4.787           4.065       4.692      4.672     4.32    4.619"
+      }
+    },
+    {
+      "rawEvalName": "Grounding",
+      "model": "mistralai/Mistral-7B-Instruct-v0.1",
+      "metric": "grounding score",
+      "value": 4.065,
+      "unit": "score",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Grounding           4.469     4.701       4.787           4.065       4.692      4.672     4.32    4.619"
+      }
+    },
+    {
+      "rawEvalName": "Grounding",
+      "model": "mistralai/Mistral-7B-Instruct-v0.2",
+      "metric": "grounding score",
+      "value": 4.692,
+      "unit": "score",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Grounding           4.469     4.701       4.787           4.065       4.692      4.672     4.32    4.619"
+      }
+    },
+    {
+      "rawEvalName": "Grounding",
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "metric": "grounding score",
+      "value": 4.672,
+      "unit": "score",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Grounding           4.469     4.701       4.787           4.065       4.692      4.672     4.32    4.619"
+      }
+    },
+    {
+      "rawEvalName": "Grounding",
+      "model": "google/gemma-7b-it",
+      "metric": "grounding score",
+      "value": 4.32,
+      "unit": "score",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Grounding           4.469     4.701       4.787           4.065       4.692      4.672     4.32    4.619"
+      }
+    },
+    {
+      "rawEvalName": "Grounding",
+      "model": "microsoft/phi-4",
+      "metric": "grounding score",
+      "value": 4.619,
+      "unit": "score",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Grounding           4.469     4.701       4.787           4.065       4.692      4.672     4.32    4.619"
+      }
+    },
+    {
+      "rawEvalName": "3P Content Harms (DR1)",
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "metric": "defect rate DR1",
+      "value": 0.26,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "3P Content Harms        Books, News, Recipes, Songs\n(DR1)                    0.26      0.253       0.251            0.562       0.399      0.373     0.383   0.121"
+      }
+    },
+    {
+      "rawEvalName": "3P Content Harms (DR1)",
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "metric": "defect rate DR1",
+      "value": 0.253,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "3P Content Harms        Books, News, Recipes, Songs\n(DR1)                    0.26      0.253       0.251            0.562       0.399      0.373     0.383   0.121"
+      }
+    },
+    {
+      "rawEvalName": "3P Content Harms (DR1)",
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "metric": "defect rate DR1",
+      "value": 0.251,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "3P Content Harms        Books, News, Recipes, Songs\n(DR1)                    0.26      0.253       0.251            0.562       0.399      0.373     0.383   0.121"
+      }
+    },
+    {
+      "rawEvalName": "3P Content Harms (DR1)",
+      "model": "mistralai/Mistral-7B-Instruct-v0.1",
+      "metric": "defect rate DR1",
+      "value": 0.562,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "3P Content Harms        Books, News, Recipes, Songs\n(DR1)                    0.26      0.253       0.251            0.562       0.399      0.373     0.383   0.121"
+      }
+    },
+    {
+      "rawEvalName": "3P Content Harms (DR1)",
+      "model": "mistralai/Mistral-7B-Instruct-v0.2",
+      "metric": "defect rate DR1",
+      "value": 0.399,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "3P Content Harms        Books, News, Recipes, Songs\n(DR1)                    0.26      0.253       0.251            0.562       0.399      0.373     0.383   0.121"
+      }
+    },
+    {
+      "rawEvalName": "3P Content Harms (DR1)",
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "metric": "defect rate DR1",
+      "value": 0.373,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "3P Content Harms        Books, News, Recipes, Songs\n(DR1)                    0.26      0.253       0.251            0.562       0.399      0.373     0.383   0.121"
+      }
+    },
+    {
+      "rawEvalName": "3P Content Harms (DR1)",
+      "model": "google/gemma-7b-it",
+      "metric": "defect rate DR1",
+      "value": 0.383,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "3P Content Harms        Books, News, Recipes, Songs\n(DR1)                    0.26      0.253       0.251            0.562       0.399      0.373     0.383   0.121"
+      }
+    },
+    {
+      "rawEvalName": "3P Content Harms (DR1)",
+      "model": "microsoft/phi-4",
+      "metric": "defect rate DR1",
+      "value": 0.121,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "3P Content Harms        Books, News, Recipes, Songs\n(DR1)                    0.26      0.253       0.251            0.562       0.399      0.373     0.383   0.121"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Continuation (DR3)",
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "metric": "defect rate DR3",
+      "value": 0.007,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Continuation (DR3)      0.007     0.003       0.01        0.026            0.018      0.013     0.013   0.036"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Continuation (DR3)",
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "metric": "defect rate DR3",
+      "value": 0.003,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Continuation (DR3)      0.007     0.003       0.01        0.026            0.018      0.013     0.013   0.036"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Continuation (DR3)",
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "metric": "defect rate DR3",
+      "value": 0.01,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Continuation (DR3)      0.007     0.003       0.01        0.026            0.018      0.013     0.013   0.036"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Continuation (DR3)",
+      "model": "mistralai/Mistral-7B-Instruct-v0.1",
+      "metric": "defect rate DR3",
+      "value": 0.026,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Continuation (DR3)      0.007     0.003       0.01        0.026            0.018      0.013     0.013   0.036"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Continuation (DR3)",
+      "model": "mistralai/Mistral-7B-Instruct-v0.2",
+      "metric": "defect rate DR3",
+      "value": 0.018,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Continuation (DR3)      0.007     0.003       0.01        0.026            0.018      0.013     0.013   0.036"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Continuation (DR3)",
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "metric": "defect rate DR3",
+      "value": 0.013,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Continuation (DR3)      0.007     0.003       0.01        0.026            0.018      0.013     0.013   0.036"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Continuation (DR3)",
+      "model": "google/gemma-7b-it",
+      "metric": "defect rate DR3",
+      "value": 0.013,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Continuation (DR3)      0.007     0.003       0.01        0.026            0.018      0.013     0.013   0.036"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Continuation (DR3)",
+      "model": "microsoft/phi-4",
+      "metric": "defect rate DR3",
+      "value": 0.036,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Continuation (DR3)      0.007     0.003       0.01        0.026            0.018      0.013     0.013   0.036"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Summarization (DR3)",
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "metric": "defect rate DR3",
+      "value": 0.105,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Summarization (DR3)      0.105      0.11       0.112       0.223            0.16       0.082     0.103   0.102"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Summarization (DR3)",
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "metric": "defect rate DR3",
+      "value": 0.11,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Summarization (DR3)      0.105      0.11       0.112       0.223            0.16       0.082     0.103   0.102"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Summarization (DR3)",
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "metric": "defect rate DR3",
+      "value": 0.112,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Summarization (DR3)      0.105      0.11       0.112       0.223            0.16       0.082     0.103   0.102"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Summarization (DR3)",
+      "model": "mistralai/Mistral-7B-Instruct-v0.1",
+      "metric": "defect rate DR3",
+      "value": 0.223,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Summarization (DR3)      0.105      0.11       0.112       0.223            0.16       0.082     0.103   0.102"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Summarization (DR3)",
+      "model": "mistralai/Mistral-7B-Instruct-v0.2",
+      "metric": "defect rate DR3",
+      "value": 0.16,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Summarization (DR3)      0.105      0.11       0.112       0.223            0.16       0.082     0.103   0.102"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Summarization (DR3)",
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "metric": "defect rate DR3",
+      "value": 0.082,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Summarization (DR3)      0.105      0.11       0.112       0.223            0.16       0.082     0.103   0.102"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Summarization (DR3)",
+      "model": "google/gemma-7b-it",
+      "metric": "defect rate DR3",
+      "value": 0.103,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Summarization (DR3)      0.105      0.11       0.112       0.223            0.16       0.082     0.103   0.102"
+      }
+    },
+    {
+      "rawEvalName": "Harmful Content Summarization (DR3)",
+      "model": "microsoft/phi-4",
+      "metric": "defect rate DR3",
+      "value": 0.102,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Summarization (DR3)      0.105      0.11       0.112       0.223            0.16       0.082     0.103   0.102"
+      }
+    },
+    {
+      "rawEvalName": "Jailbreak (DR1)",
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "metric": "defect rate DR1",
+      "value": 0.117,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Jailbreak(DR1)\n                         0.117       0.107       0.111          0.156       0.153      0.13      0.114   0.073"
+      }
+    },
+    {
+      "rawEvalName": "Jailbreak (DR1)",
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "metric": "defect rate DR1",
+      "value": 0.107,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Jailbreak(DR1)\n                         0.117       0.107       0.111          0.156       0.153      0.13      0.114   0.073"
+      }
+    },
+    {
+      "rawEvalName": "Jailbreak (DR1)",
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "metric": "defect rate DR1",
+      "value": 0.111,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Jailbreak(DR1)\n                         0.117       0.107       0.111          0.156       0.153      0.13      0.114   0.073"
+      }
+    },
+    {
+      "rawEvalName": "Jailbreak (DR1)",
+      "model": "mistralai/Mistral-7B-Instruct-v0.1",
+      "metric": "defect rate DR1",
+      "value": 0.156,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Jailbreak(DR1)\n                         0.117       0.107       0.111          0.156       0.153      0.13      0.114   0.073"
+      }
+    },
+    {
+      "rawEvalName": "Jailbreak (DR1)",
+      "model": "mistralai/Mistral-7B-Instruct-v0.2",
+      "metric": "defect rate DR1",
+      "value": 0.153,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Jailbreak(DR1)\n                         0.117       0.107       0.111          0.156       0.153      0.13      0.114   0.073"
+      }
+    },
+    {
+      "rawEvalName": "Jailbreak (DR1)",
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "metric": "defect rate DR1",
+      "value": 0.13,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Jailbreak(DR1)\n                         0.117       0.107       0.111          0.156       0.153      0.13      0.114   0.073"
+      }
+    },
+    {
+      "rawEvalName": "Jailbreak (DR1)",
+      "model": "google/gemma-7b-it",
+      "metric": "defect rate DR1",
+      "value": 0.114,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Jailbreak(DR1)\n                         0.117       0.107       0.111          0.156       0.153      0.13      0.114   0.073"
+      }
+    },
+    {
+      "rawEvalName": "Jailbreak (DR1)",
+      "model": "microsoft/phi-4",
+      "metric": "defect rate DR1",
+      "value": 0.073,
+      "unit": "fraction",
+      "settings": {
+        "other": "GPT-4o simulated multi-turn conversations; in-house RAI benchmarks"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 10",
+        "quote": "Jailbreak(DR1)\n                         0.117       0.107       0.111          0.156       0.153      0.13      0.114   0.073"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:24:03Z"
+  },
+  "notes": "Technical report (arXiv 2412.08905), not a system card. Safety evalResults limited to Table 10 in-house RAI benchmarks (Grounding, 3P Content Harms, Harmful Content Continuation/Summarization, Jailbreak). Skipped all general capability tables (Table 1, 2, 3, 4, 6, 9, Figure 1 AMC, HELMET, PhiBench) and SimpleQA F1 plus Figure 6 SimpleQA correct/not-attempted/incorrect breakdown per pilot safety-only rule. Microsoft AIRT is internal, so testers left empty. No formal ASL/Preparedness-style risk thresholds. Seed-linked microsoft/phi-4 is the only model this report is about; later Phi-4 variants are not named here. Reviewer: prompt_injection not covered: prompt encodings are a jailbreak method."
+}

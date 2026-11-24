@@ -1,0 +1,213 @@
+$defs:
+  ModelSource:
+    description: >-
+      `hf`: weights on the Hugging Face Hub (or `local/<name>`). `api`: a model behind a provider
+      API. The name alone can collide (`openai/gpt-oss-20b` is open), so the source is part of
+      the identity.
+    type: string
+    enum: [hf, api]
+
+  ParentRelation:
+    description: How a model comes from its parent, as the Hub's `base_model:<relation>:` tags.
+    type: string
+    enum: [quantized, adapter, finetune]
+
+  Model:
+    title: Model
+    description: One model. Its facts are here, each with a source; a document is one source.
+    type: object
+    additionalProperties: false
+    required: [id, source, name, displayName, organizationId, aliases, facts, documentIds]
+    dependentRequired:
+      parentId: [parentRelation]
+      parentRelation: [parentId]
+    properties:
+      id:
+        $ref: '#/$defs/Id'
+      source:
+        $ref: '#/$defs/ModelSource'
+      name:
+        type: string
+        pattern: '^[^/\s]+/[^/\s]+$'
+        description: >-
+          The HF repo id or `local/<name>` for `hf`; `provider/model` for `api`. Unique with
+          `source`. Also the URL path.
+      displayName:
+        type: string
+        minLength: 1
+      organizationId:
+        $ref: '#/$defs/Id'
+        description: The `Organization` that made the model.
+      family:
+        type: string
+        minLength: 1
+        description: The model family, for grouping (`Llama 3`).
+      revision:
+        type: string
+        minLength: 1
+        description: The HF commit or the API snapshot id that the facts refer to.
+      aliases:
+        $ref: '#/$defs/Aliases'
+        description: Other names, such as API ids (`davinci`) and old names.
+      parentId:
+        $ref: '#/$defs/Id'
+        description: The model this one comes from. One parent; a chain for combinations.
+      parentRelation:
+        $ref: '#/$defs/ParentRelation'
+      removedFromHub:
+        type: boolean
+        description: The Hub repo was removed or made private. We keep the record.
+      pretrained:
+        type: boolean
+        description: >-
+          A base model: pretrained only, with no instruct or chat tuning. Lists do not show it.
+      facts:
+        $ref: '#/$defs/ModelFacts'
+      documentIds:
+        description: The `Document`s about this model. The order has no meaning.
+        type: array
+        items:
+          $ref: '#/$defs/Id'
+        uniqueItems: true
+
+  ModelFacts:
+    description: Facts about a model. A fact is left out when nobody has found it yet.
+    type: object
+    additionalProperties: false
+    properties:
+      releaseDate:
+        $ref: '#/$defs/DateFact'
+      knowledgeCutoff:
+        $ref: '#/$defs/DateFact'
+      contextWindow:
+        $ref: '#/$defs/CountFact'
+        description: Tokens.
+      maxOutput:
+        $ref: '#/$defs/CountFact'
+        description: Tokens.
+      modalities:
+        $ref: '#/$defs/ModalitiesFact'
+      reasoningModes:
+        $ref: '#/$defs/TagsFact'
+        description: The reasoning settings the model has (`none`, `low`, `high`).
+      languages:
+        $ref: '#/$defs/TagsFact'
+        description: BCP 47 language tags (`en`, `zh`).
+      license:
+        $ref: '#/$defs/TextFact'
+        description: An SPDX id when there is one (`apache-2.0`), else the license name.
+      totalParams:
+        $ref: '#/$defs/CountFact'
+      activeParams:
+        $ref: '#/$defs/CountFact'
+        description: Parameters used per token. Less than `totalParams` for a mixture of experts.
+      architecture:
+        $ref: '#/$defs/TextFact'
+        description: A short description (`MoE transformer, 256 experts`).
+
+  FactSource:
+    description: Where a fact comes from.
+    type: object
+    additionalProperties: false
+    required: [kind]
+    properties:
+      kind:
+        $ref: '#/$defs/FactSourceKind'
+        description: >-
+          `document`: a `Document` (give `documentId`, and `page` and `quote` when you can).
+          `hf_config`: the model's Hub config. `provider_docs` and `url`: a web page (give `url`).
+          `manual`: entered by a person without a source to cite.
+      documentId:
+        $ref: '#/$defs/Id'
+      url:
+        $ref: '#/$defs/Url'
+      page:
+        type: string
+        minLength: 1
+        description: The page or section (`12`, `A.3`).
+      quote:
+        type: string
+        minLength: 1
+
+  DateFact:
+    type: object
+    additionalProperties: false
+    required: [value, source]
+    properties:
+      value:
+        $ref: '#/$defs/PartialDate'
+      source:
+        $ref: '#/$defs/FactSource'
+
+  CountFact:
+    type: object
+    additionalProperties: false
+    required: [value, source]
+    properties:
+      value:
+        type: integer
+        minimum: 0
+      source:
+        $ref: '#/$defs/FactSource'
+
+  TextFact:
+    type: object
+    additionalProperties: false
+    required: [value, source]
+    properties:
+      value:
+        type: string
+        minLength: 1
+      source:
+        $ref: '#/$defs/FactSource'
+
+  TagsFact:
+    type: object
+    additionalProperties: false
+    required: [value, source]
+    properties:
+      value:
+        type: array
+        items:
+          $ref: '#/$defs/Tag'
+        uniqueItems: true
+      source:
+        $ref: '#/$defs/FactSource'
+
+  Modality:
+    type: string
+    enum: [text, image, audio, video]
+
+  Modalities:
+    type: object
+    additionalProperties: false
+    required: [input, output]
+    properties:
+      input:
+        type: array
+        items:
+          $ref: '#/$defs/Modality'
+        uniqueItems: true
+      output:
+        type: array
+        items:
+          $ref: '#/$defs/Modality'
+        uniqueItems: true
+
+  Tag:
+    type: string
+    minLength: 1
+
+  FactSourceKind:
+    type: string
+    enum: [document, hf_config, provider_docs, url, manual]
+
+  ModalitiesFact:
+    type: object
+    additionalProperties: false
+    required: [value, source]
+    properties:
+      value:
+        $ref: '#/$defs/Modalities'
+      source:
+        $ref: '#/$defs/FactSource'

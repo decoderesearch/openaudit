@@ -1,0 +1,111 @@
+{
+  "labs": {
+    "meta-llama": "meta",
+    "meta-models": "meta",
+    "facebook": "meta",
+    "xai": "x-ai",
+    "mistral": "mistralai",
+    "deepseek-ai": "deepseek",
+    "moonshot": "moonshotai",
+    "zai-org": "z-ai",
+    "thudm": "z-ai"
+  },
+  "tiers": {
+    "premium": {
+      "description": "The best model of each lab. About $2 to $4 in, $6 to $20 out.",
+      "models": [
+        "anthropic/claude-opus-5.5",
+        "openai/gpt-6.1-sol-pro",
+        "google/gemini-4-argon",
+        "x-ai/grok-4.7"
+      ]
+    },
+    "standard": {
+      "description": "Strong models at a medium price. About $2 in, $6 to $10 out. Google has no newer model at this price, so its Flash model is here too.",
+      "models": [
+        "anthropic/claude-sonnet-5.5",
+        "openai/gpt-6.1-sol",
+        "google/gemini-3.8-flash",
+        "x-ai/grok-4.7"
+      ]
+    },
+    "fast": {
+      "description": "Cheap, fast models for many calls. About $0.10 to $1.25 in, $0.50 to $3.75 out.",
+      "models": [
+        "google/gemini-3.8-flash",
+        "openai/gpt-6-luna",
+        "x-ai/grok-4.3"
+      ]
+    }
+  },
+  "roles": {
+    "aggregator": {
+      "description": "Writes a model's OpenAudit card from its eval results. Uses the first model.",
+      "tier": "standard"
+    },
+    "flagger": {
+      "description": "Finds the chat snippets that show a failure. The first model checks each attempt. When it fails or blocks one, the next model tries it. Unlike other roles, it keeps the models of the target's lab. Gemini 3.8 Flash is last: on FORTRESS it flagged 65% of the most harmful replies, and Grok 4.3 and Claude Haiku 5.5 flagged all.",
+      "models": [
+        "openai/gpt-6-luna",
+        "x-ai/grok-4.3",
+        "anthropic/claude-haiku-5.5",
+        "google/gemini-3.8-flash"
+      ]
+    },
+    "auditor": {
+      "description": "Replaces an eval's default auditor when that auditor is the target, or when both are Claude models. The first model that the rule allows.",
+      "models": [
+        "openai/gpt-6-luna",
+        "google/gemini-3.8-flash",
+        "anthropic/claude-sonnet-5.5"
+      ]
+    },
+    "deploy_judge": {
+      "description": "The Deploymeter panel: each model reviews an anonymous evidence packet. Unlike other roles, the panel keeps the models of the target's lab, but their reviews do not count in the score. The best model of each lab, half with open weights (`openWeights`).",
+      "models": [
+        "anthropic/claude-opus-5.5",
+        "openai/gpt-6.1-sol-pro",
+        "google/gemini-4-argon",
+        "x-ai/grok-4.7",
+        "mistralai/mistral-large-4-0",
+        "deepseek/deepseek-v4-pro-0813",
+        "moonshotai/kimi-k3",
+        "z-ai/glm-5.3",
+        "minimax/minimax-m3",
+        "qwen/qwen3.8-2.4t-a95b"
+      ]
+    },
+    "deploy_scrubber": {
+      "description": "Finds the words that still name the model or its developer in a Deploymeter evidence packet, after the name lists replaced the known names.",
+      "tier": "fast"
+    },
+    "incident_writer": {
+      "description": "Writes incident pages: short descriptions, and log excerpts from the sources, with text read from screenshots. The first model that is not of the incident's lab.",
+      "models": [
+        "anthropic/claude-opus-5.5",
+        "openai/gpt-6.1-sol"
+      ]
+    },
+    "reply_summarizer": {
+      "description": "Writes a short, vague summary of a reply that the site withholds. The first model, then the next when it fails or blocks one. GPT-6 Luna first: as a flagger it blocked about 3% of harmful transcripts, Gemini 3.8 Flash about 90%. DeepSeek V4 Pro last: it is the only one that summarizes biological and chemical weapon replies.",
+      "models": [
+        "openai/gpt-6-luna",
+        "x-ai/grok-4.3",
+        "deepseek/deepseek-v4-pro-0813"
+      ]
+    },
+    "site_assistant": {
+      "description": "Answers questions in the site's chat panel (Ask OpenAudit), through the Anthropic API: an Anthropic model only. The first model. Each answer reads the site guide.",
+      "models": [
+        "anthropic/claude-sonnet-5.5"
+      ]
+    }
+  },
+  "openWeights": [
+    "deepseek/deepseek-v4-pro-0813",
+    "moonshotai/kimi-k3",
+    "z-ai/glm-5.3",
+    "minimax/minimax-m3",
+    "qwen/qwen3.8-2.4t-a95b"
+  ]
+}

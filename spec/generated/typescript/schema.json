@@ -1,0 +1,5642 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openaudit.com/spec/v1/openaudit.schema.json",
+  "title": "SpecRecord",
+  "description": "Any OpenAudit spec record. Optional fields are left out, never null. Ids are UUIDv7.",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/Organization"
+    },
+    {
+      "$ref": "#/$defs/Model"
+    },
+    {
+      "$ref": "#/$defs/Document"
+    },
+    {
+      "$ref": "#/$defs/Eval"
+    },
+    {
+      "$ref": "#/$defs/EvalSuite"
+    },
+    {
+      "$ref": "#/$defs/EvalVersion"
+    },
+    {
+      "$ref": "#/$defs/EvalSample"
+    },
+    {
+      "$ref": "#/$defs/SystemCard"
+    },
+    {
+      "$ref": "#/$defs/EvalResult"
+    },
+    {
+      "$ref": "#/$defs/EvalRun"
+    },
+    {
+      "$ref": "#/$defs/EvalAttempt"
+    },
+    {
+      "$ref": "#/$defs/Transcript"
+    },
+    {
+      "$ref": "#/$defs/OpenAuditCardVersion"
+    },
+    {
+      "$ref": "#/$defs/OpenAuditSnippet"
+    },
+    {
+      "$ref": "#/$defs/OrgIncident"
+    },
+    {
+      "$ref": "#/$defs/OrgIncidentEvent"
+    },
+    {
+      "$ref": "#/$defs/OrgDeparture"
+    },
+    {
+      "$ref": "#/$defs/Commitment"
+    },
+    {
+      "$ref": "#/$defs/OrgCommitment"
+    },
+    {
+      "$ref": "#/$defs/OrgCommitmentEvent"
+    },
+    {
+      "$ref": "#/$defs/Method"
+    },
+    {
+      "$ref": "#/$defs/MethodVariant"
+    },
+    {
+      "$ref": "#/$defs/MethodExpertView"
+    },
+    {
+      "$ref": "#/$defs/MethodArtifact"
+    },
+    {
+      "$ref": "#/$defs/MethodResult"
+    }
+  ],
+  "$defs": {
+    "CommitmentCategory": {
+      "title": "CommitmentCategory",
+      "description": "`oversight`: outside people test or check the organization. `transparency`: the organization tells the public or governments what it finds. `limits`: the organization limits or stops its own development. `security`: it protects its models, or gives resources to safety.",
+      "type": "string",
+      "enum": [
+        "oversight",
+        "transparency",
+        "limits",
+        "security"
+      ]
+    },
+    "CommitmentCriterion": {
+      "title": "CommitmentCriterion",
+      "description": "One part of the ideal form of a commitment.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "label",
+        "description"
+      ],
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/Slug",
+          "description": "Unique in the commitment (`deep-access`)."
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A few words in Title Case (`Deep Access`)."
+        },
+        "description": {
+          "$ref": "#/$defs/Markdown",
+          "description": "One sentence that tells what meets the criterion."
+        }
+      }
+    },
+    "Commitment": {
+      "title": "Commitment",
+      "description": "One kind of safety commitment, with the criteria of its ideal form. Its page is `/organizations/commitments/<slug>`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "slug",
+        "name",
+        "category",
+        "order",
+        "summary",
+        "description",
+        "criteria"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "slug": {
+          "$ref": "#/$defs/Slug"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Title Case (`Embedded Evaluators`)."
+        },
+        "category": {
+          "$ref": "#/$defs/CommitmentCategory"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The place of the column in the table."
+        },
+        "summary": {
+          "$ref": "#/$defs/Markdown",
+          "description": "One sentence that tells the ideal form."
+        },
+        "description": {
+          "$ref": "#/$defs/Markdown",
+          "description": "Why it matters for safety, in 2 or 3 short sentences."
+        },
+        "criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/CommitmentCriterion"
+          }
+        }
+      }
+    },
+    "CommitmentLevel": {
+      "title": "CommitmentLevel",
+      "description": "How far the organization has committed. `full`: it meets all criteria, each independently verified. `partial`: it meets some criteria, has large exceptions, or is not all verified. `intent`: it says it will, with no terms or date. `none_found`: we checked and found no public commitment. `declined`: it publicly refused. `dropped`: it had the commitment, then withdrew it or let it end. `broken`: credible sources report that it did not keep the commitment.",
+      "type": "string",
+      "enum": [
+        "full",
+        "partial",
+        "intent",
+        "none_found",
+        "declined",
+        "dropped",
+        "broken"
+      ]
+    },
+    "CommitmentStrength": {
+      "title": "CommitmentStrength",
+      "description": "How enforceable the commitment is. `statement`: a post or a talk; it can change at any time. `policy`: in a published policy or framework with a change process. `agreement`: signed with other parties (an accord, a contract, a government agreement). `law`: a law or regulation requires it.",
+      "type": "string",
+      "enum": [
+        "statement",
+        "policy",
+        "agreement",
+        "law"
+      ]
+    },
+    "CommitmentDuration": {
+      "title": "CommitmentDuration",
+      "description": "`ongoing`: no end date. `time_limited`: a pilot, or a term with an end date.",
+      "type": "string",
+      "enum": [
+        "ongoing",
+        "time_limited"
+      ]
+    },
+    "CriterionStatus": {
+      "title": "CriterionStatus",
+      "type": "string",
+      "enum": [
+        "met",
+        "partly",
+        "not_met"
+      ]
+    },
+    "CommitmentState": {
+      "title": "CommitmentState",
+      "description": "An organization's commitment at one time.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "criteria",
+        "limits"
+      ],
+      "properties": {
+        "level": {
+          "$ref": "#/$defs/CommitmentLevel"
+        },
+        "strength": {
+          "$ref": "#/$defs/CommitmentStrength"
+        },
+        "duration": {
+          "$ref": "#/$defs/CommitmentDuration"
+        },
+        "endDate": {
+          "$ref": "#/$defs/PartialDate",
+          "description": "When a time-limited commitment ends."
+        },
+        "condition": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The condition that the commitment depends on, in a few words (`If all frontier labs agree`). Empty when it has no condition."
+        },
+        "criteria": {
+          "type": "object",
+          "description": "Each criterion of the commitment by its key. A criterion that is not here is not known.",
+          "propertyNames": {
+            "$ref": "#/$defs/Slug"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/CriterionStatus"
+          }
+        },
+        "verified": {
+          "type": "array",
+          "description": "The keys of the met or partly met criteria that an independent party can check, with a public result. Missing is none.",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/Slug"
+          }
+        },
+        "notes": {
+          "type": "object",
+          "description": "Where the organization is now on each criterion, by its key.",
+          "propertyNames": {
+            "$ref": "#/$defs/Slug"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/CriterionNote"
+          }
+        },
+        "limits": {
+          "type": "array",
+          "description": "The exceptions and limits, each in a few words (`Lab can redact`).",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "CriterionNote": {
+      "title": "CriterionNote",
+      "description": "One criterion's state in short words. Each part is a phrase or one short sentence.",
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "commitment": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What the organization commits to or does for the criterion."
+        },
+        "missing": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What is missing for the criterion to be met and independently verified."
+        }
+      }
+    },
+    "CommitmentQuote": {
+      "title": "CommitmentQuote",
+      "description": "The organization's own words, copied exactly from the source.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "url"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "$ref": "#/$defs/Url"
+        }
+      }
+    },
+    "OrgCommitment": {
+      "title": "OrgCommitment",
+      "description": "One organization's current state for one commitment: the state after its newest event, or `none_found` with no events. Its page is `/<organization slug>/commitments/<commitment slug>`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "organizationId",
+        "commitmentId",
+        "checkedAt",
+        "state"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "organizationId": {
+          "$ref": "#/$defs/Id"
+        },
+        "commitmentId": {
+          "$ref": "#/$defs/Id"
+        },
+        "checkedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The day of the newest research (YYYY-MM-DD)."
+        },
+        "checkedBy": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The model that did the newest research, with its effort, as \"Claude Opus 5.5 (High)\"."
+        },
+        "summary": {
+          "$ref": "#/$defs/Markdown",
+          "description": "The current state in one sentence, for the table and the lists."
+        },
+        "state": {
+          "$ref": "#/$defs/CommitmentState"
+        }
+      }
+    },
+    "CommitmentEventKind": {
+      "title": "CommitmentEventKind",
+      "description": "`announced`: the first commitment. `expanded` or `narrowed`: the terms changed. `renewed`: a time-limited commitment continued. `expired`: it ended at its end date. `withdrawn`: the organization dropped it. `broken`: sources report that it was not kept. `kept`: evidence that the organization did what it said (a published report). `declined`: the organization refused.",
+      "type": "string",
+      "enum": [
+        "announced",
+        "expanded",
+        "narrowed",
+        "renewed",
+        "expired",
+        "withdrawn",
+        "broken",
+        "kept",
+        "declined"
+      ]
+    },
+    "OrgCommitmentEvent": {
+      "title": "OrgCommitmentEvent",
+      "description": "One event in an organization's commitment timeline, with the state after it.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "orgCommitmentId",
+        "order",
+        "date",
+        "datePrecision",
+        "kind",
+        "title",
+        "sources",
+        "state"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "orgCommitmentId": {
+          "$ref": "#/$defs/Id"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The place in the timeline, from 0, oldest first."
+        },
+        "date": {
+          "$ref": "#/$defs/PartialDate"
+        },
+        "datePrecision": {
+          "$ref": "#/$defs/DatePrecision"
+        },
+        "kind": {
+          "$ref": "#/$defs/CommitmentEventKind"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A short headline (`Signs agreements with four embedded assessors`)."
+        },
+        "summary": {
+          "$ref": "#/$defs/Markdown",
+          "description": "1 or 2 short sentences."
+        },
+        "quote": {
+          "$ref": "#/$defs/CommitmentQuote"
+        },
+        "agreement": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The shared agreement that the event is part of (`Frontier AI Safety Commitments`)."
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/OrgSource"
+          }
+        },
+        "state": {
+          "$ref": "#/$defs/CommitmentState"
+        }
+      }
+    },
+    "Id": {
+      "title": "Id",
+      "description": "A UUIDv7, made by the client that creates the record. Lowercase, with dashes.",
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "Slug": {
+      "title": "Slug",
+      "description": "A lowercase name for URLs and lookups (`google`, `01-ai`).",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 64
+    },
+    "DocumentKey": {
+      "title": "DocumentKey",
+      "description": "A lowercase key for a document (`openai-gpt2-blog`).",
+      "type": "string",
+      "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+      "maxLength": 100
+    },
+    "PartialDate": {
+      "title": "PartialDate",
+      "description": "A date only as exact as its source says (YYYY, YYYY-MM or YYYY-MM-DD).",
+      "type": "string",
+      "pattern": "^\\d{4}(-(0[1-9]|1[0-2])(-(0[1-9]|[12]\\d|3[01]))?)?$"
+    },
+    "Timestamp": {
+      "title": "Timestamp",
+      "description": "An RFC 3339 time with a time zone.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "Url": {
+      "title": "Url",
+      "description": "An http or https URL.",
+      "type": "string",
+      "pattern": "^https?://"
+    },
+    "Sha256": {
+      "title": "Sha256",
+      "description": "A SHA-256 digest, lowercase hex.",
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "Aliases": {
+      "title": "Aliases",
+      "description": "Other names for the record, for search and for matching names in documents.",
+      "type": "array",
+      "items": {
+        "title": "Alias",
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "DeployVerdict": {
+      "title": "DeployVerdict",
+      "description": "What a Deploymeter score says about wide public deployment. `approve`: 70 to 100, wide use with normal safeguards or as it is. `limits`: 50 to 69, only with more safeguards or monitoring. `reject`: 0 to 49, limited use only, or not for wide use.",
+      "type": "string",
+      "enum": [
+        "approve",
+        "limits",
+        "reject"
+      ]
+    },
+    "DeployReviewSample": {
+      "title": "DeployReviewSample",
+      "description": "One answer of a judge to the evidence packet. A review has more than one.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "score",
+        "headline",
+        "summary",
+        "reasonsFor",
+        "reasonsAgainst"
+      ],
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Trust for wide public deployment, from a safety view. A multiple of 5. When the judge abstains, the score it would give; it does not count."
+        },
+        "abstain": {
+          "type": "boolean",
+          "description": "True when the judge cannot give a fair score from the packet."
+        },
+        "enoughEvidence": {
+          "type": "boolean",
+          "description": "False when the judge found the packet too thin to judge. Only in older panels."
+        },
+        "headline": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The main point for a general reader, in one sentence."
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reasonsFor": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reasonsAgainst": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reply": {
+          "type": "string",
+          "description": "The judge's full reply (JSON text)."
+        },
+        "reasoning": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The reasoning that the provider shows: full text, or a summary for some providers. Null when it shows none."
+        },
+        "reasoningTokens": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "DeployGuess": {
+      "title": "DeployGuess",
+      "description": "After its review, a judge guesses who made the model and which model it is. It shows how well the packet hides them. `rightDeveloper`: the guess names the developer.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "developer",
+        "model",
+        "confidence",
+        "rightDeveloper"
+      ],
+      "properties": {
+        "developer": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "rightDeveloper": {
+          "type": "boolean"
+        },
+        "reasoning": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The reasoning that the provider shows for the guess, as in `DeployReviewSample`."
+        }
+      }
+    },
+    "DeployPanelSummary": {
+      "title": "DeployPanelSummary",
+      "description": "What the panel's reviews say together, written by one model from the reviews that count.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "agreements",
+        "disagreements"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "agreements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "disagreements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "DocumentKind": {
+      "title": "DocumentKind",
+      "description": "What the document is. A system card and a safety report state the lab's tests. A model page is a short page about a model (specs and use), with no safety tests.",
+      "type": "string",
+      "enum": [
+        "system_card",
+        "technical_report",
+        "safety_report",
+        "model_page",
+        "blog"
+      ]
+    },
+    "Document": {
+      "title": "Document",
+      "description": "A document an organization published about models: a link, our saved copy of the file and facts we took from it. `url` stays the publisher's link.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "key",
+        "kind",
+        "title",
+        "url",
+        "publisherId",
+        "verified"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "key": {
+          "$ref": "#/$defs/DocumentKey",
+          "description": "A readable unique key (`openai-gpt2-blog`)."
+        },
+        "kind": {
+          "$ref": "#/$defs/DocumentKind"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "$ref": "#/$defs/Url"
+        },
+        "publisherId": {
+          "$ref": "#/$defs/Id",
+          "description": "The `Organization` that published it."
+        },
+        "publishedDate": {
+          "$ref": "#/$defs/PartialDate"
+        },
+        "fileUrl": {
+          "$ref": "#/$defs/Url",
+          "description": "Where we got the saved copy, when it is not `url` (the PDF that a web page links to)."
+        },
+        "fileKey": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The saved copy in our storage (`documents/<key>.pdf`)."
+        },
+        "fileType": {
+          "type": "string",
+          "enum": [
+            "pdf",
+            "html"
+          ]
+        },
+        "sha256": {
+          "$ref": "#/$defs/Sha256",
+          "description": "The hash of the saved copy."
+        },
+        "fetchedAt": {
+          "$ref": "#/$defs/Timestamp",
+          "description": "When we fetched the saved copy."
+        },
+        "verified": {
+          "type": "boolean",
+          "description": "A person checked that the link works and that the publisher is correct."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes for reviewers. Not shown on public pages."
+        }
+      }
+    },
+    "Visibility": {
+      "title": "Visibility",
+      "description": "`private`: the owner only. `unlisted`: anyone with the link; never listed or indexed. `public`: listed and indexed. A record is never more visible than its parent.",
+      "type": "string",
+      "enum": [
+        "private",
+        "unlisted",
+        "public"
+      ]
+    },
+    "EvalAccess": {
+      "title": "EvalAccess",
+      "description": "Who can get the samples. `public`: anyone. `gated`: after agreeing to the source's terms. `held_out`: kept back by the maintainer. `lab_internal`: only the lab has it; we store the record so reported results can link to it, and never run it.",
+      "type": "string",
+      "enum": [
+        "public",
+        "gated",
+        "held_out",
+        "lab_internal"
+      ]
+    },
+    "EvalStatus": {
+      "title": "EvalStatus",
+      "description": "`active`: current, and we recommend it. `saturated`: valid, but current models score at the ceiling or the floor. `legacy`: dated, replaced, or with known validity problems; you can still run it for history, but we do not recommend it by default. `retired`: withdrawn; do not run it.",
+      "type": "string",
+      "enum": [
+        "active",
+        "saturated",
+        "legacy",
+        "retired"
+      ]
+    },
+    "Measures": {
+      "title": "Measures",
+      "description": "`capability`: can the subject do it. `propensity`: does it tend to. `robustness`: can its safeguards be broken.",
+      "type": "string",
+      "enum": [
+        "capability",
+        "propensity",
+        "robustness"
+      ]
+    },
+    "EvalFormat": {
+      "title": "EvalFormat",
+      "type": "string",
+      "enum": [
+        "single_turn",
+        "multi_turn",
+        "agentic"
+      ]
+    },
+    "EvalCases": {
+      "title": "EvalCases",
+      "description": "`fixed`: a dataset. `generated`: an auditor model writes the conversation from a seed. `live_human`: people talk to the subject.",
+      "type": "string",
+      "enum": [
+        "fixed",
+        "generated",
+        "live_human"
+      ]
+    },
+    "Grading": {
+      "title": "Grading",
+      "type": "string",
+      "enum": [
+        "programmatic",
+        "model_judge",
+        "human"
+      ]
+    },
+    "SubjectKind": {
+      "title": "SubjectKind",
+      "description": "What a run tests. `model`: a model. `auditor`: an agent (model, tools, scaffold) that audits target models. `method`: an interp method on a model, with its artifact (SAE, vector, probe).",
+      "type": "string",
+      "enum": [
+        "model",
+        "auditor",
+        "method"
+      ]
+    },
+    "Topic": {
+      "title": "Topic",
+      "description": "What an eval is about. The same list tags system-card coverage.",
+      "type": "string",
+      "enum": [
+        "harmful_requests",
+        "child_safety",
+        "self_harm",
+        "jailbreaks",
+        "prompt_injection",
+        "agentic_misuse",
+        "hallucination",
+        "honesty",
+        "sycophancy",
+        "bias",
+        "toxicity",
+        "reward_hacking",
+        "eval_awareness",
+        "situational_awareness",
+        "cot_monitorability",
+        "sabotage",
+        "manipulation",
+        "power_seeking",
+        "welfare",
+        "cyber",
+        "bio_chem",
+        "auditing"
+      ]
+    },
+    "EvalFacets": {
+      "title": "EvalFacets",
+      "description": "Independent answers to one question each. Labels such as \"benchmark\" or \"red team\" are combinations of these.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "measures",
+        "formats",
+        "cases",
+        "grading",
+        "adversarial",
+        "humanParticipants",
+        "subjects",
+        "topics"
+      ],
+      "properties": {
+        "measures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Measures"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "formats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvalFormat"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "cases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvalCases"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "grading": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Grading"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "adversarial": {
+          "type": "boolean",
+          "description": "The eval tries to make the subject fail (red teaming, jailbreaks)."
+        },
+        "humanParticipants": {
+          "type": "boolean",
+          "description": "People take part, as in uplift trials."
+        },
+        "subjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SubjectKind"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Topic"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "EvalMaintainer": {
+      "title": "EvalMaintainer",
+      "description": "Who maintains the eval. Give `organizationId` when the maintainer is an `Organization`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "organizationId": {
+          "$ref": "#/$defs/Id"
+        },
+        "url": {
+          "$ref": "#/$defs/Url"
+        }
+      }
+    },
+    "RecommendedModel": {
+      "title": "RecommendedModel",
+      "description": "A model we recommend for one role in an eval, in place of its default. We tested it on some samples and its results agreed with the default model's results.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "model",
+        "recommendedAt",
+        "evidence"
+      ],
+      "properties": {
+        "role": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The role, as the eval's task names it (`judge`, `auditor`, `grader`)."
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The model, as OpenRouter names it (`google/gemini-2.5-flash-lite`)."
+        },
+        "recommendedAt": {
+          "$ref": "#/$defs/PartialDate",
+          "description": "The day we made the recommendation (YYYY-MM-DD)."
+        },
+        "replaces": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The default model for the role (`openai/gpt-4-turbo`)."
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The eval version that we tested."
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Markdown. What we tested (samples, agreement, cost) and the run ids."
+        }
+      }
+    },
+    "EvalLinkKind": {
+      "title": "EvalLinkKind",
+      "description": "`hf_benchmark`: a Hugging Face benchmark dataset repo, for Community Evals. `error_report`: our report of dataset errors to the maintainers; the Known Errors page links it.",
+      "type": "string",
+      "enum": [
+        "paper",
+        "repo",
+        "dataset",
+        "hf_benchmark",
+        "leaderboard",
+        "homepage",
+        "blog",
+        "error_report"
+      ]
+    },
+    "EvalLink": {
+      "title": "EvalLink",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "url"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/EvalLinkKind"
+        },
+        "url": {
+          "$ref": "#/$defs/Url"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "EvalSuite": {
+      "title": "EvalSuite",
+      "description": "A set of evals that one source publishes together (SAEBench). Its page compares method variants across its evals. An eval names its suite with `suiteId`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "slug",
+        "displayName",
+        "summary",
+        "maintainers",
+        "links"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "slug": {
+          "$ref": "#/$defs/Slug",
+          "description": "The name in URLs (`saebench`)."
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "description": "One plain sentence about what the suite tests."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A short Markdown description."
+        },
+        "maintainers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvalMaintainer"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvalLink"
+          }
+        },
+        "evalOrder": {
+          "type": "array",
+          "description": "Slugs of its evals in display order, safety tasks first. Its other evals follow, safety tasks first, then by name.",
+          "items": {
+            "$ref": "#/$defs/Slug"
+          }
+        },
+        "matched": {
+          "$ref": "#/$defs/MethodMatch",
+          "description": "Compare method variants at set values of one metric of a suite eval. Without it, each variant uses its one artifact in a group."
+        }
+      }
+    },
+    "Eval": {
+      "title": "Eval",
+      "description": "A test of models, auditors or interp methods: a benchmark, a red team, an automated audit. Results point to one of its `EvalVersion`s.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "slug",
+        "displayName",
+        "aliases",
+        "maintainers",
+        "links",
+        "access",
+        "status",
+        "facets",
+        "visibility"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "slug": {
+          "$ref": "#/$defs/Slug",
+          "description": "The name in URLs (`petri`, `mask`). Unique on the site."
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliases": {
+          "$ref": "#/$defs/Aliases",
+          "description": "Other spellings in documents (`Model Alignment between Statements and Knowledge`)."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A short Markdown description."
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "description": "One plain sentence about what the eval tests, for lists and tables (\"Tests whether the model lies under pressure about what it believes is true.\")."
+        },
+        "family": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Groups related evals (`Petri` for Petri and Petri Bloom suites)."
+        },
+        "suiteId": {
+          "$ref": "#/$defs/Id",
+          "description": "The `EvalSuite` that the eval is part of."
+        },
+        "maintainers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvalMaintainer"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvalLink"
+          }
+        },
+        "access": {
+          "$ref": "#/$defs/EvalAccess"
+        },
+        "status": {
+          "$ref": "#/$defs/EvalStatus"
+        },
+        "saturatedReason": {
+          "type": "string",
+          "minLength": 1,
+          "description": "One line on why we marked it `saturated` (`Current models refuse almost every prompt.`). Markdown."
+        },
+        "saturatedDecisionDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The day we marked it `saturated` (YYYY-MM-DD)."
+        },
+        "legacyReason": {
+          "type": "string",
+          "minLength": 1,
+          "description": "One line on why we marked it `legacy` (`Built for base-model continuation; chat models score near zero.`). Markdown."
+        },
+        "legacyDecisionDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The day we marked it `legacy` (YYYY-MM-DD)."
+        },
+        "supersededBy": {
+          "$ref": "#/$defs/Slug",
+          "description": "The slug of the newer eval to use in place of this one."
+        },
+        "autoApprove": {
+          "type": "boolean",
+          "description": "A full run costs little, so a user's request of it starts without an admin's approval (when its estimated cost is under the limit)."
+        },
+        "facets": {
+          "$ref": "#/$defs/EvalFacets"
+        },
+        "recommendedModels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RecommendedModel"
+          },
+          "description": "Cheaper judge or helper models that we tested against the defaults."
+        },
+        "canary": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The eval's canary string. We show it on each page, so training filters can drop them."
+        },
+        "ownerUserId": {
+          "$ref": "#/$defs/Id",
+          "description": "The user who made it. Left out for evals in the site registry (seed data)."
+        },
+        "visibility": {
+          "$ref": "#/$defs/Visibility",
+          "description": "A private eval needs an owner. Anyone with the link can open an unlisted eval."
+        }
+      },
+      "if": {
+        "properties": {
+          "visibility": {
+            "const": "private"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "ownerUserId": true
+        },
+        "required": [
+          "ownerUserId"
+        ]
+      }
+    },
+    "EvalVersionStatus": {
+      "title": "EvalVersionStatus",
+      "description": "`draft`: can change. `published`: fixed, but its `runner` can change and it can add metrics; results point only to published versions.",
+      "type": "string",
+      "enum": [
+        "draft",
+        "published"
+      ]
+    },
+    "SampleStorage": {
+      "title": "SampleStorage",
+      "description": "`stored`: we keep the samples (the license allows it). `pointer`: a link to the source revision, and each sample's id and hash. `hash_only`: only a hash of each sample (held out).",
+      "type": "string",
+      "enum": [
+        "stored",
+        "pointer",
+        "hash_only"
+      ]
+    },
+    "EvalSplit": {
+      "title": "EvalSplit",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "sampleCount",
+        "storage"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The split name in the source (`test`, `public`, `private`)."
+        },
+        "sampleCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "storage": {
+          "$ref": "#/$defs/SampleStorage"
+        }
+      }
+    },
+    "EvalDataset": {
+      "title": "EvalDataset",
+      "description": "Where the samples come from. Give `hfRepo` and `revision`, or `url`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "splits"
+      ],
+      "properties": {
+        "hfRepo": {
+          "type": "string",
+          "pattern": "^[^/\\s]+/[^/\\s]+$",
+          "description": "A Hugging Face dataset repo (`cais/MASK`)."
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The commit or tag the samples come from."
+        },
+        "url": {
+          "$ref": "#/$defs/Url"
+        },
+        "sha256": {
+          "$ref": "#/$defs/Sha256",
+          "description": "The hash of all samples in order, as the spec serializes them."
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1,
+          "description": "An SPDX id when there is one (`cc-by-4.0`), else the license name."
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DatasetSource"
+          },
+          "description": "More data the task loads, for suites that join datasets (AbstentionBench)."
+        },
+        "splits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvalSplit"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "DatasetSource": {
+      "title": "DatasetSource",
+      "description": "One more place a task loads data from. Give `hfRepo` and `revision`, or `url`.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hfRepo": {
+          "type": "string",
+          "pattern": "^[^/\\s]+/[^/\\s]+$"
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The commit the task pins."
+        },
+        "url": {
+          "$ref": "#/$defs/Url",
+          "description": "A file at a pinned commit (a GitHub raw URL)."
+        }
+      }
+    },
+    "DisplayRule": {
+      "title": "DisplayRule",
+      "description": "Who can read sample text: inputs, targets, transcripts and logs. `open`: anyone. `sign_in`: signed-in users who accepted the dataset's terms on our site. `scores_only`: nobody; pages show only scores and pass or fail.",
+      "type": "string",
+      "enum": [
+        "open",
+        "sign_in",
+        "scores_only"
+      ]
+    },
+    "SubsetTerms": {
+      "title": "SubsetTerms",
+      "description": "A rule for the samples whose metadata `key` equals `value` (a dataset inside a suite).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "value",
+        "display",
+        "source"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The sample metadata key, as the Inspect task sets it (`dataset_name`)."
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "display": {
+          "$ref": "#/$defs/DisplayRule"
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The terms, as the source states them."
+        },
+        "source": {
+          "$ref": "#/$defs/Url"
+        }
+      }
+    },
+    "SampleTerms": {
+      "title": "SampleTerms",
+      "description": "The source's terms on showing its samples, and our rule for them. Left out: `open`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "display",
+        "source"
+      ],
+      "properties": {
+        "display": {
+          "$ref": "#/$defs/DisplayRule"
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The terms, as the source states them. Left out when the source states none."
+        },
+        "source": {
+          "$ref": "#/$defs/Url",
+          "description": "Where the terms are (the gate page or the README)."
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Why this rule, when the quote alone does not say."
+        },
+        "subsets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SubsetTerms"
+          },
+          "description": "Rules for some samples. A matching rule replaces `display` for those samples."
+        }
+      }
+    },
+    "ScoreType": {
+      "title": "ScoreType",
+      "description": "`binary`: 0 or 1 (pass). `ordinal`: whole steps from `min` to `max` (a 1-10 judge scale). `continuous`: any number, in `[min, max]` when given.",
+      "type": "string",
+      "enum": [
+        "binary",
+        "ordinal",
+        "continuous"
+      ]
+    },
+    "Direction": {
+      "title": "Direction",
+      "description": "`nearer_zero_is_better`: a signed number where 0 is best and both signs are worse.",
+      "type": "string",
+      "enum": [
+        "higher_is_better",
+        "lower_is_better",
+        "nearer_zero_is_better",
+        "neither"
+      ]
+    },
+    "ScoreDef": {
+      "title": "ScoreDef",
+      "description": "One score a scorer gives each attempt (Petri's judge gives about 36).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "displayName",
+        "type",
+        "direction"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "description": "The name in data (`unprompted_deception`)."
+        },
+        "attemptName": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The name of this score on an attempt when it is not `key` or ends with `/<key>`, such as the scorer's name (`fortress_scorer_adversarial`)."
+        },
+        "attemptScale": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "The factor that puts an attempt's value on this score's scale (100 for a 0 to 1 value of a percent)."
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "$ref": "#/$defs/ScoreType"
+        },
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "direction": {
+          "$ref": "#/$defs/Direction"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What the score means; for a judge, a summary of its rubric."
+        },
+        "pass": {
+          "$ref": "#/$defs/PassRule"
+        }
+      },
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ordinal"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "min": true,
+          "max": true
+        },
+        "required": [
+          "min",
+          "max"
+        ]
+      }
+    },
+    "PassRule": {
+      "title": "PassRule",
+      "description": "When one attempt's value of this score is a pass or a fail, if the direction cannot tell. The runner marks each attempt by the rule of its headline score, and the attempt page marks each score. With no rule, the direction decides: see `ADD_AN_EVAL.md`. A value that the rule does not name has no mark.",
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "description": "Each value as text and its mark: true for a pass (MASK: `honest` true, `lie` false). Case and spaces at the ends do not count. A number is its shortest text (`1`, `0.5`)."
+        },
+        "byTarget": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "boolean"
+            }
+          },
+          "description": "For each sample target, the values and their marks, as in `values` (AbstentionBench: with the target `True`, `yes` is a pass)."
+        },
+        "failAtOrAbove": {
+          "type": "number",
+          "description": "A number at this value or above is a fail, and a lower number is a pass (Petri's 1 to 10 scale, 7)."
+        },
+        "groups": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "The group metric keys that the rule is for. An attempt in none of them has no mark (APE: only the harmful topics)."
+        },
+        "none": {
+          "const": true,
+          "description": "No mark on any value, for a score that is not good or bad for safety by itself."
+        }
+      }
+    },
+    "MetricAggregation": {
+      "title": "MetricAggregation",
+      "description": "How attempts become one number. `mean`: the mean of a score. `rate`: the share of attempts whose binary score is 1. `pass_at_k`: pass@k over trials. `custom`: the eval's own formula (see `description`).",
+      "type": "string",
+      "enum": [
+        "mean",
+        "rate",
+        "pass_at_k",
+        "custom"
+      ]
+    },
+    "MetricDef": {
+      "title": "MetricDef",
+      "description": "One aggregate number an `EvalResult` can hold.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "displayName",
+        "aggregation",
+        "direction"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_@]*$"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "score": {
+          "type": "string",
+          "description": "The `ScoreDef.key` it comes from. Left out for `custom`."
+        },
+        "aggregation": {
+          "$ref": "#/$defs/MetricAggregation"
+        },
+        "k": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "For `pass_at_k`."
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Left out for a plain number or a fraction (`percent`, `tokens`)."
+        },
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "direction": {
+          "$ref": "#/$defs/Direction",
+          "description": "Which way is better for the eval's own goal. For a skill eval, more skill."
+        },
+        "safetyDirection": {
+          "$ref": "#/$defs/Direction",
+          "description": "Which way is better for safety, as in `EvalResult.safetyDirection`; measured results get it. `neither` for skill metrics (dangerous skills too) and for refusals of safe requests."
+        },
+        "headline": {
+          "type": "boolean",
+          "description": "The number to show first. At most one per version."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "if": {
+        "properties": {
+          "aggregation": {
+            "const": "pass_at_k"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "k": true
+        },
+        "required": [
+          "k"
+        ]
+      }
+    },
+    "ModelRole": {
+      "title": "ModelRole",
+      "description": "A model's part in a run, as Inspect's `model_roles`. `target`: the model under test. `auditor`: writes the other side of the conversation. `judge`: scores. `monitor`: watches the target for bad actions. `generator`: writes samples.",
+      "type": "string",
+      "enum": [
+        "target",
+        "auditor",
+        "judge",
+        "monitor",
+        "generator"
+      ]
+    },
+    "ModelSlot": {
+      "title": "ModelSlot",
+      "description": "One model a task needs besides the target. The runner gives it as `taskArg` or as `inspectRole`; give one. A run can change it; a re-score can change it only when `scoring`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "role",
+        "default"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "description": "Unique in the version (`judge`, `refusal_judge`, `mark`)."
+        },
+        "role": {
+          "$ref": "#/$defs/ModelRole"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The name to show (`Refusal judge`). Default from `id`."
+        },
+        "taskArg": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Give the model as this task argument (`scorer_model`)."
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The place in a list task argument (`grader_models`)."
+        },
+        "inspectRole": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Give the model as this Inspect model role (`grader`)."
+        },
+        "default": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The model the task uses when not told, as a route model id (`openai/gpt-4o`). With a `tier`, our runs use the tier and this is only a record of the task's default."
+        },
+        "tier": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The lowest tier in spec/model-ladders.yaml that is good enough for this slot. A run gets the first model of the tier that the rules allow, and the next ones as fallbacks. A model of a higher tier is also good enough."
+        },
+        "labs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/LabPrefix"
+          },
+          "description": "Use these labs' models of the tier first, in this order, when the rules allow it."
+        },
+        "sameLab": {
+          "type": "boolean",
+          "description": "The slot can use a model of the target's lab (one judge in a panel of judges from several labs). It never uses the target model itself."
+        },
+        "scoring": {
+          "type": "boolean",
+          "description": "Only the scorer uses it, so a re-score can change it."
+        }
+      }
+    },
+    "RunnerKind": {
+      "title": "RunnerKind",
+      "description": "`inspect`: an Inspect task. `openaudit`: our runner. `external`: the maintainer's own code.",
+      "type": "string",
+      "enum": [
+        "inspect",
+        "openaudit",
+        "external"
+      ]
+    },
+    "EvalRunner": {
+      "title": "EvalRunner",
+      "description": "How to run a version. Optional; a run can come from anywhere.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/RunnerKind"
+        },
+        "task": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The task to run (`inspect_evals/mask`, `inspect_petri/audit`)."
+        },
+        "package": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The package and version that has the task (`inspect-evals==0.9.2`)."
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "description": "Other packages the task uses, each with its version (`inspect-petri==3.1.0`)."
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ModelRole"
+          },
+          "uniqueItems": true,
+          "description": "The model roles a run must fill."
+        },
+        "models": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ModelSlot"
+          },
+          "description": "The models besides the target, and how the task gets each one."
+        },
+        "targetRole": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Also give the target as this Inspect model role (`target`), for tasks that read it by role."
+        },
+        "sandbox": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The sandbox the task needs (`docker`), if any."
+        },
+        "internet": {
+          "type": "boolean"
+        },
+        "gpu": {
+          "type": "boolean",
+          "description": "The runner needs a GPU (white-box methods)."
+        },
+        "rawReasoning": {
+          "type": "boolean",
+          "description": "The scores need the model's raw chain of thought. Most provider APIs do not return it, so we do not offer the eval for API models."
+        },
+        "defaultTrials": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "defaultLimit": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The samples a run does when its settings give no limit. A run with this limit or more counts as a full run."
+        }
+      }
+    },
+    "EvalVersion": {
+      "title": "EvalVersion",
+      "description": "One fixed form of an eval: its samples and how they are scored. Results from different versions are not comparable. A new version when the samples, scores, rubric or task defaults change. Judge and auditor models are run settings. A package release that changes none of these only changes the `runner` pins; each run keeps its package versions.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "evalId",
+        "version",
+        "status",
+        "scores",
+        "metrics"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "evalId": {
+          "$ref": "#/$defs/Id"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+          "maxLength": 40,
+          "description": "The maintainer's name for it (`2.0`, `2026-02`). Unique per eval."
+        },
+        "status": {
+          "$ref": "#/$defs/EvalVersionStatus"
+        },
+        "releasedDate": {
+          "$ref": "#/$defs/PartialDate"
+        },
+        "changes": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What changed from the version before, in Markdown."
+        },
+        "dataset": {
+          "$ref": "#/$defs/EvalDataset",
+          "description": "Left out for `lab_internal` evals."
+        },
+        "sampleTerms": {
+          "$ref": "#/$defs/SampleTerms"
+        },
+        "scores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ScoreDef"
+          }
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MetricDef"
+          }
+        },
+        "runner": {
+          "$ref": "#/$defs/EvalRunner"
+        },
+        "methodSetup": {
+          "$ref": "#/$defs/MethodEvalSetup",
+          "description": "Only for evals whose subjects are methods."
+        }
+      }
+    },
+    "SubjectValue": {
+      "title": "SubjectValue",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "value"
+      ],
+      "properties": {
+        "subject": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The Hub name of the subject model, as artifacts give it."
+        },
+        "value": {
+          "type": "number"
+        }
+      }
+    },
+    "SubjectOrder": {
+      "title": "SubjectOrder",
+      "description": "A number for each subject model that sorts the leaderboard rows (a capability index).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "sourceUrl",
+        "values"
+      ],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceUrl": {
+          "$ref": "#/$defs/Url"
+        },
+        "sourceTable": {
+          "type": "string",
+          "minLength": 1
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SubjectValue"
+          }
+        }
+      }
+    },
+    "MethodEvalSetup": {
+      "title": "MethodEvalSetup",
+      "description": "How an eval of tools defines its positive cases and sets thresholds.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "definition": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Markdown. What counts as a positive case (a lie)."
+        },
+        "calibration": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Markdown. How each tool sets its threshold before it is scored."
+        },
+        "subjectOrder": {
+          "$ref": "#/$defs/SubjectOrder"
+        },
+        "coreSubjects": {
+          "description": "The subject models that rank the variants. A variant needs a result on each to have a rank.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "ResultOrigin": {
+      "title": "ResultOrigin",
+      "description": "`reported`: from a document (give `source`). `measured`: from an `EvalRun`.",
+      "type": "string",
+      "enum": [
+        "reported",
+        "measured"
+      ]
+    },
+    "ResultSettings": {
+      "title": "ResultSettings",
+      "description": "How the number was made. Compare results only when these match. Left out: not stated.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reasoningEffort": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The lab's words (`high`, `max`, `no thinking`)."
+        },
+        "tools": {
+          "type": "boolean"
+        },
+        "passAtK": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "trials": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "harness": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The scaffold or agent (`Claude Code`, `Terminus 2`)."
+        },
+        "safeguards": {
+          "type": "boolean",
+          "description": "Production safeguards (classifiers) were on."
+        },
+        "helpfulOnly": {
+          "type": "boolean",
+          "description": "A helpful-only model, without safety training."
+        },
+        "surface": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Where it ran (`API`, `ChatGPT`)."
+        },
+        "otherModels": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The judge and other models besides the target, as `slot: model` pairs (`judge: openai/gpt-4o`). Scores with different judges are not comparable."
+        },
+        "other": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Anything else the source says about the setup."
+        }
+      }
+    },
+    "ResultSource": {
+      "title": "ResultSource",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "documentId"
+      ],
+      "properties": {
+        "documentId": {
+          "$ref": "#/$defs/Id"
+        },
+        "page": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The page or section, as printed in the document."
+        },
+        "pdfPage": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The page in the document's saved PDF, from 1. Links go here."
+        },
+        "table": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The table or figure (`Table 4`, `Figure 2.3.A`)."
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "EvalResult": {
+      "title": "EvalResult",
+      "description": "One number: one metric of one eval for one model. A reported result that matches no `Eval` or `Model` yet keeps the raw name, and the id is added later.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "origin",
+        "metric",
+        "value",
+        "settings",
+        "reviewed"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "origin": {
+          "$ref": "#/$defs/ResultOrigin"
+        },
+        "evalId": {
+          "$ref": "#/$defs/Id"
+        },
+        "evalVersionId": {
+          "$ref": "#/$defs/Id"
+        },
+        "rawEvalName": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The eval's name as the source writes it (`SWE-bench Verified (n=500)`)."
+        },
+        "modelId": {
+          "$ref": "#/$defs/Id"
+        },
+        "rawModelName": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The model's name as the source writes it."
+        },
+        "metric": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A `MetricDef.key` when the version is known; else the source's words."
+        },
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "fraction",
+            "percent",
+            "score",
+            "count",
+            "seconds",
+            "tokens",
+            "other"
+          ],
+          "description": "`percent` is 0-100 and `fraction` is 0-1. `score` is any other scale."
+        },
+        "stderr": {
+          "type": "number",
+          "minimum": 0
+        },
+        "ciLow": {
+          "type": "number"
+        },
+        "ciHigh": {
+          "type": "number"
+        },
+        "n": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The number of samples, when stated."
+        },
+        "safetyDirection": {
+          "$ref": "#/$defs/Direction",
+          "description": "Which way is better for safety. `neither` for skill results (dangerous skills too) and for refusals of safe requests. Left out: not known."
+        },
+        "capabilityDirection": {
+          "$ref": "#/$defs/Direction",
+          "description": "Which way shows more skill. `neither` for behavior results. Left out: not known."
+        },
+        "settings": {
+          "$ref": "#/$defs/ResultSettings"
+        },
+        "source": {
+          "$ref": "#/$defs/ResultSource"
+        },
+        "evalRunId": {
+          "$ref": "#/$defs/Id",
+          "description": "The run a `measured` result comes from."
+        },
+        "reviewed": {
+          "type": "boolean"
+        },
+        "extraction": {
+          "$ref": "#/$defs/ExtractionInfo"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "origin": {
+                "const": "reported"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "rawEvalName": true,
+              "source": true
+            },
+            "required": [
+              "rawEvalName",
+              "source"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "origin": {
+                "const": "measured"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evalRunId": true
+            },
+            "required": [
+              "evalRunId"
+            ]
+          }
+        },
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "modelId": true
+              },
+              "required": [
+                "modelId"
+              ]
+            },
+            {
+              "properties": {
+                "rawModelName": true
+              },
+              "required": [
+                "rawModelName"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "RunStatus": {
+      "title": "RunStatus",
+      "description": "`requested`: a user asked for it; it waits for an admin to approve it. `queued`: waits for a runner. `running`: a runner has it. `importing`: the log is being saved. `succeeded`, `failed`, `cancelled`: done.",
+      "type": "string",
+      "enum": [
+        "requested",
+        "queued",
+        "running",
+        "importing",
+        "succeeded",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "RunOrigin": {
+      "title": "RunOrigin",
+      "description": "`run`: our runner ran it. `import`: a log made elsewhere, imported. `rescore`: our runner scored the outputs of `sourceRunId` again, with other scoring models.",
+      "type": "string",
+      "enum": [
+        "run",
+        "import",
+        "rescore"
+      ]
+    },
+    "RouteKind": {
+      "title": "RouteKind",
+      "description": "How the target model was served. `direct`: the lab's own API. `openrouter`, `bedrock`, `vertex`, `azure`: that router or cloud. `engine`: our interp-engine server.",
+      "type": "string",
+      "enum": [
+        "direct",
+        "openrouter",
+        "bedrock",
+        "vertex",
+        "azure",
+        "engine"
+      ]
+    },
+    "ServingRoute": {
+      "title": "ServingRoute",
+      "description": "How a run reached the model. Provenance and a filter; not a change to the model.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "model"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/RouteKind"
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The model id on the route (`qwen/qwen3.6-27b`)."
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "The providers the router may use, in order (OpenRouter `provider.order`)."
+        },
+        "allowFallbacks": {
+          "type": "boolean"
+        },
+        "fallbacks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "For a slot: other models to try, in order, when this model fails a call or refuses it (an error, a content filter or an empty reply)."
+        },
+        "quantization": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The weights' precision as the route states it (`bf16`, `fp8`, `unknown`)."
+        }
+      }
+    },
+    "RunSettings": {
+      "title": "RunSettings",
+      "description": "What the runner was asked to do. Left out: the task's default.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reasoning": {
+          "type": "string",
+          "enum": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max",
+            "on"
+          ],
+          "description": "Thinking effort, in OpenRouter's words. `none`: no thinking. `on`: thinking at the model's default, for models with no effort levels."
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Run only the first samples of the dataset."
+        },
+        "epochs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maxConnections": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Parallel model calls in each shard."
+        },
+        "shardSize": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Samples in each shard. Left out, the runner's default."
+        },
+        "capKey": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The `runner_cap` key for the run's shards, for one cap per model server. Left out: from the route."
+        },
+        "temperature": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maxTokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "taskArgs": {
+          "type": "object",
+          "description": "Arguments for the task (`{\"target\": \"mc1\"}`)."
+        },
+        "models": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/ServingRoute"
+          },
+          "description": "The model for each slot in the version's `runner.models`, by slot id."
+        }
+      }
+    },
+    "TokenUsage": {
+      "title": "TokenUsage",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "output": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reasoning": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Part of `output`."
+        },
+        "cacheRead": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Input tokens read from the provider's prompt cache. Part of `input`."
+        },
+        "cacheWrite": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Input tokens written to the provider's prompt cache. Part of `input`."
+        }
+      }
+    },
+    "FileRef": {
+      "title": "FileRef",
+      "description": "A file in our private storage.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "bytes"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The object key (`runs/<run id>/log.eval`)."
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "$ref": "#/$defs/Sha256"
+        }
+      }
+    },
+    "RunProvenance": {
+      "title": "RunProvenance",
+      "description": "Where and how the run happened.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tool": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The program that ran the eval (`inspect_ai`)."
+        },
+        "toolVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "packages": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Package versions, as the log states them (`{\"inspect_evals\": \"0.22.0\"}`)."
+        },
+        "task": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The task as the log names it (`inspect_evals/truthfulqa`)."
+        },
+        "taskArgs": {
+          "type": "object"
+        },
+        "logModel": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The model as the log names it (`openrouter/qwen/qwen3.6-27b`)."
+        },
+        "servedBy": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "The providers that served the model calls, as the route reported them."
+        },
+        "host": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The machine the runner ran on."
+        },
+        "runnerVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "startedAt": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "finishedAt": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "tokens": {
+          "$ref": "#/$defs/TokenUsage"
+        },
+        "costUsd": {
+          "type": "number",
+          "minimum": 0,
+          "description": "What this run paid, when the routes say. A re-score pays only its judges."
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What a reader must know about an imported run, from the log (`eval.metadata.note`). The run and attempt pages show it."
+        },
+        "byModel": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/ModelUsage"
+          },
+          "description": "Tokens and cost for each model, by the name in the log."
+        },
+        "byRole": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/ModelUsage"
+          },
+          "description": "Tokens and cost for each model role (`target`, `auditor`, `judge`, `judge_2`). A re-score has only its judges."
+        },
+        "erroredSamples": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Samples with an error and no score. The results leave them out."
+        },
+        "fallbacks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FallbackUse"
+          },
+          "description": "The calls that a slot's fallback models made in place of its model."
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProviderBlock"
+          },
+          "description": "Model calls that a provider refused for its policy, by provider. A run that failed or was cancelled because of a block also has them."
+        }
+      }
+    },
+    "ProviderBlock": {
+      "title": "ProviderBlock",
+      "description": "Samples whose model calls a provider refused for its policy (not the model's own refusal). These samples have no score.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "kind",
+        "samples"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The provider that refused (`Meta`, `OpenAI`), or `unknown`."
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "account",
+            "content"
+          ],
+          "description": "`account`: the provider blocked our account, so it refuses all calls. `content`: it refused these prompts only."
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The provider's error code (`user_blocked`, `data_inspection_failed`)."
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The model of the refused calls, when the error names it."
+        },
+        "samples": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The samples with this block. Zero when the run stopped before its samples."
+        }
+      }
+    },
+    "FallbackUse": {
+      "title": "FallbackUse",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slot",
+        "model",
+        "calls"
+      ],
+      "properties": {
+        "slot": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "calls": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "ModelUsage": {
+      "title": "ModelUsage",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tokens": {
+          "$ref": "#/$defs/TokenUsage"
+        },
+        "costUsd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "costEstimated": {
+          "type": "boolean",
+          "description": "The route did not state the cost; `costUsd` is list price times tokens."
+        },
+        "servedBy": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "EvalRun": {
+      "title": "EvalRun",
+      "description": "One run of an eval version on one model, with its settings and provenance. `measured` results and attempts point to it.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "evalId",
+        "evalVersionId",
+        "modelId",
+        "origin",
+        "status",
+        "route",
+        "settings",
+        "visibility",
+        "createdAt"
+      ],
+      "if": {
+        "properties": {
+          "origin": {
+            "const": "rescore"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "sourceRunId": true
+        },
+        "required": [
+          "sourceRunId"
+        ]
+      },
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "evalId": {
+          "$ref": "#/$defs/Id"
+        },
+        "evalVersionId": {
+          "$ref": "#/$defs/Id"
+        },
+        "modelId": {
+          "$ref": "#/$defs/Id"
+        },
+        "origin": {
+          "$ref": "#/$defs/RunOrigin"
+        },
+        "sourceRunId": {
+          "$ref": "#/$defs/Id",
+          "description": "For a re-score, the run whose outputs it scores."
+        },
+        "status": {
+          "$ref": "#/$defs/RunStatus"
+        },
+        "route": {
+          "$ref": "#/$defs/ServingRoute"
+        },
+        "settings": {
+          "$ref": "#/$defs/RunSettings"
+        },
+        "provenance": {
+          "$ref": "#/$defs/RunProvenance"
+        },
+        "log": {
+          "$ref": "#/$defs/FileRef",
+          "description": "The original log (an Inspect `.eval`)."
+        },
+        "sampleCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The samples the run plans to do."
+        },
+        "attemptCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The attempts done so far."
+        },
+        "error": {
+          "type": "string",
+          "minLength": 1
+        },
+        "visibility": {
+          "$ref": "#/$defs/Visibility"
+        },
+        "createdAt": {
+          "$ref": "#/$defs/Timestamp"
+        }
+      }
+    },
+    "AttemptStatus": {
+      "title": "AttemptStatus",
+      "type": "string",
+      "enum": [
+        "success",
+        "error"
+      ]
+    },
+    "AttemptScore": {
+      "title": "AttemptScore",
+      "description": "One scorer's grade of an attempt, as Inspect's `Score`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "description": "A number, a letter (`C` correct, `I` incorrect), or a yes/no.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "answer": {
+          "type": "string",
+          "description": "The answer the scorer read from the output."
+        },
+        "explanation": {
+          "type": "string"
+        }
+      }
+    },
+    "Hazard": {
+      "title": "Hazard",
+      "description": "Who can read a reply that can give dangerous help. `gated`: anyone, but no public share (J-Lens). `restricted`: staff. `withheld`: nobody on the site. The prompt, target and scores stay open.",
+      "type": "string",
+      "enum": [
+        "gated",
+        "restricted",
+        "withheld"
+      ]
+    },
+    "EvalAttempt": {
+      "title": "EvalAttempt",
+      "description": "One sample in one epoch of a run: a short copy of the input and output for lists, the scores, and the full transcript in `body`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "runId",
+        "ordinal",
+        "sampleId",
+        "epoch",
+        "status",
+        "scores"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "runId": {
+          "$ref": "#/$defs/Id"
+        },
+        "ordinal": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The attempt's place in the log, from 1. URLs use it."
+        },
+        "sampleId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The sample's id in the log."
+        },
+        "evalSampleId": {
+          "$ref": "#/$defs/Id",
+          "description": "The stored `EvalSample`, when we keep the samples."
+        },
+        "epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "$ref": "#/$defs/AttemptStatus"
+        },
+        "passed": {
+          "type": "boolean",
+          "description": "The headline score is correct. Left out when the score is not pass or fail."
+        },
+        "input": {
+          "type": "string",
+          "description": "The first user message, shortened."
+        },
+        "target": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "output": {
+          "type": "string",
+          "description": "The final answer, shortened."
+        },
+        "scores": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/AttemptScore"
+          },
+          "description": "By scorer name."
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The keys of the metrics over a part of the samples (a category or group) that count this attempt, such as `harm_score_copyright`."
+        },
+        "error": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notScored": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Why the attempt has no scores, from the sample's `notScored` metadata."
+        },
+        "tokens": {
+          "$ref": "#/$defs/TokenUsage"
+        },
+        "seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "display": {
+          "$ref": "#/$defs/DisplayRule",
+          "description": "A subset rule that matched this sample. Left out, the version's rule applies."
+        },
+        "hazard": {
+          "$ref": "#/$defs/Hazard",
+          "description": "Set from the dataset's labels when the eval graded the reply unsafe. Left out, open."
+        },
+        "body": {
+          "$ref": "#/$defs/FileRef",
+          "description": "The attempt's `Transcript` as JSON."
+        }
+      }
+    },
+    "SampleMessage": {
+      "title": "SampleMessage",
+      "description": "One chat message of a sample's input. Text only.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "content"
+      ],
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": [
+            "system",
+            "user",
+            "assistant",
+            "tool"
+          ]
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "EvalSample": {
+      "title": "EvalSample",
+      "description": "One sample of an eval version, as Inspect's `Sample`. Each split keeps `sourceId` and `sha256`; only a `stored` split also keeps `input`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "evalVersionId",
+        "split",
+        "sourceId",
+        "metadata",
+        "sha256"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "evalVersionId": {
+          "$ref": "#/$defs/Id"
+        },
+        "split": {
+          "type": "string",
+          "minLength": 1,
+          "description": "An `EvalSplit.name` of the version."
+        },
+        "sourceId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The sample's id in the source. Unique in its split."
+        },
+        "input": {
+          "description": "A prompt, or chat messages.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/SampleMessage"
+              }
+            }
+          ]
+        },
+        "target": {
+          "description": "The answer or answers the scorer looks for.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The options of a multiple-choice sample."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Other fields of the source sample, as they are in the source."
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "The hash of `{\"id\": sourceId, \"input\": input}` as JSON with sorted keys and no spaces. Chat input is `SampleMessage[]`."
+        }
+      }
+    },
+    "MethodGroup": {
+      "title": "MethodGroup",
+      "description": "What the method reads. `white_box`: activations, weights or token log probs (it needs model access). `black_box`: only text. Topics, not groups, tell the job of a method.",
+      "type": "string",
+      "enum": [
+        "white_box",
+        "black_box"
+      ]
+    },
+    "ExpertStance": {
+      "title": "ExpertStance",
+      "description": "What a view says about its method, on balance.",
+      "type": "string",
+      "enum": [
+        "positive",
+        "negative",
+        "mixed"
+      ]
+    },
+    "ExpertQuote": {
+      "title": "ExpertQuote",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "sourceUrl"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The words of the source, unchanged."
+        },
+        "sourceUrl": {
+          "$ref": "#/$defs/Url"
+        }
+      }
+    },
+    "MethodAccess": {
+      "title": "MethodAccess",
+      "description": "What a variant needs from the subject model. `white_box`: activations or weights. `logprobs`: token log probabilities only. `black_box`: text in and out only.",
+      "type": "string",
+      "enum": [
+        "white_box",
+        "logprobs",
+        "black_box"
+      ]
+    },
+    "MethodParamType": {
+      "title": "MethodParamType",
+      "type": "string",
+      "enum": [
+        "integer",
+        "number",
+        "string",
+        "boolean"
+      ]
+    },
+    "MethodParam": {
+      "title": "MethodParam",
+      "description": "One setting that artifacts of a method can have (`width`, `judgeModel`). A key keeps its meaning for all variants of the method.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "label",
+        "type"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-zA-Z0-9]*$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "$ref": "#/$defs/MethodParamType"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "MethodMatch": {
+      "title": "MethodMatch",
+      "description": "Compare variants at set values of one metric (SAEs at the same L0). A value between the points of a variant is interpolated.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eval",
+        "metric",
+        "targets",
+        "default"
+      ],
+      "properties": {
+        "eval": {
+          "$ref": "#/$defs/Slug",
+          "description": "The eval that gives the metric."
+        },
+        "metric": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number"
+          }
+        },
+        "default": {
+          "type": "number"
+        }
+      }
+    },
+    "MethodCompare": {
+      "title": "MethodCompare",
+      "description": "How to compare the variants of a method. Artifacts compete only when they have the same subject and the same value for each `groupBy` key. The `matched` rule of an `EvalSuite` tells how to compare on its evals.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "groupBy"
+      ],
+      "properties": {
+        "groupBy": {
+          "type": "array",
+          "description": "`sites`, or `MethodParam` keys (`width`).",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "Method": {
+      "title": "Method",
+      "description": "A kind of tool that does a set of jobs (sparse autoencoders, probes, LLM monitors). The method page tells which safety use the evals test.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "slug",
+        "displayName",
+        "group",
+        "summary",
+        "safetyUse",
+        "caveats",
+        "params",
+        "compare",
+        "links"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "slug": {
+          "$ref": "#/$defs/Slug"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Title case (`Sparse Autoencoders`, `LLM Monitors`)."
+        },
+        "group": {
+          "$ref": "#/$defs/MethodGroup"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "description": "One sentence. What the method does."
+        },
+        "tagline": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60,
+          "description": "A few words for lists, next to the name: what the method does (`Read what a model has in mind, as words.`)."
+        },
+        "safetyUse": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Markdown. The safety jobs the method could do, and which evals test them."
+        },
+        "caveats": {
+          "type": "array",
+          "description": "Markdown. Limits a reader must know before comparing variants.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "params": {
+          "type": "array",
+          "description": "The settings that its artifacts can have.",
+          "items": {
+            "$ref": "#/$defs/MethodParam"
+          }
+        },
+        "compare": {
+          "$ref": "#/$defs/MethodCompare"
+        },
+        "expertSummary": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What the expert views say on balance: where they agree and where they disagree. Plain words, 50 words or fewer, with no names and no links."
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvalLink"
+          }
+        }
+      }
+    },
+    "MethodVariant": {
+      "title": "MethodVariant",
+      "description": "One recipe or architecture of a method (TopK SAE, Apollo probe). A `baseline` is a simple reference that a variant must beat (raw activations, PCA). A changed recipe is a new variant, with `supersedesId` set to the old one.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "slug",
+        "methodId",
+        "displayName",
+        "aliases",
+        "access",
+        "baseline",
+        "componentIds",
+        "params",
+        "links"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "slug": {
+          "$ref": "#/$defs/Slug",
+          "description": "Unique in its method."
+        },
+        "methodId": {
+          "$ref": "#/$defs/Id"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Title case (`Apollo Probe`, `Chain-of-Thought Judge`)."
+        },
+        "aliases": {
+          "$ref": "#/$defs/Aliases",
+          "description": "Names in result files (`MatryoshkaBatchTopK`, `matryoshka_batch_topk`)."
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "access": {
+          "$ref": "#/$defs/MethodAccess"
+        },
+        "baseline": {
+          "type": "boolean"
+        },
+        "componentIds": {
+          "type": "array",
+          "description": "The variants that this one combines (a probe that reads SAE latents).",
+          "items": {
+            "$ref": "#/$defs/Id"
+          }
+        },
+        "supersedesId": {
+          "$ref": "#/$defs/Id",
+          "description": "The variant that this one replaces."
+        },
+        "params": {
+          "type": "array",
+          "description": "Settings of this variant only, added to those of its method.",
+          "items": {
+            "$ref": "#/$defs/MethodParam"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvalLink"
+          }
+        },
+        "prompts": {
+          "type": "array",
+          "description": "The prompts of a variant that is an LLM, as the judge prompt of a monitor.",
+          "items": {
+            "$ref": "#/$defs/MethodPrompt"
+          }
+        },
+        "visibility": {
+          "$ref": "#/$defs/Visibility",
+          "description": "Left out, `public`. Anyone with the link can open an unlisted variant."
+        }
+      }
+    },
+    "MethodPrompt": {
+      "title": "MethodPrompt",
+      "description": "One prompt of a variant, word for word.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "text"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What the prompt is for (`Judge prompt`)."
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The prompt. A `{name}` part is filled in for each call."
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1,
+          "description": "How the filled-in parts are made, for example the format of the transcript."
+        },
+        "sourceUrl": {
+          "$ref": "#/$defs/Url",
+          "description": "Where the prompt comes from."
+        }
+      }
+    },
+    "MethodExpertView": {
+      "title": "MethodExpertView",
+      "description": "What human experts said about a method, from one public source (a post or paper), with its nuance. The summary and points are ours; quotes are the source's words. A source about two methods has one view in each.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "slug",
+        "methodId",
+        "variantIds",
+        "title",
+        "byline",
+        "publishedDate",
+        "stance",
+        "summary",
+        "points",
+        "quotes",
+        "sources",
+        "checkedDate"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "slug": {
+          "$ref": "#/$defs/Slug",
+          "description": "Unique in its method."
+        },
+        "methodId": {
+          "$ref": "#/$defs/Id"
+        },
+        "variantIds": {
+          "type": "array",
+          "description": "The variants of the method that the source names.",
+          "items": {
+            "$ref": "#/$defs/Id"
+          }
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Our plain headline for the view."
+        },
+        "byline": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The authors as the source lists them, short (`Lewis Smith, Neel Nanda and 6 others`)."
+        },
+        "organization": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publishedDate": {
+          "$ref": "#/$defs/PartialDate"
+        },
+        "stance": {
+          "$ref": "#/$defs/ExpertStance"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Markdown. What the source found and concluded, in plain words."
+        },
+        "points": {
+          "type": "array",
+          "description": "Markdown. The nuance and limits that the source gives.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "quotes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ExpertQuote"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "description": "The original first, then copies and companion posts.",
+          "items": {
+            "$ref": "#/$defs/EvalLink"
+          }
+        },
+        "checkedDate": {
+          "$ref": "#/$defs/PartialDate",
+          "description": "When we read the source."
+        }
+      }
+    },
+    "MethodSiteRole": {
+      "title": "MethodSiteRole",
+      "type": "string",
+      "enum": [
+        "read",
+        "write"
+      ]
+    },
+    "MethodSite": {
+      "title": "MethodSite",
+      "description": "One place in the subject model where an artifact reads or writes.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "source"
+      ],
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "The interp-engine address of the point (`resid_post.12`, `resid_post.5.stream-2`). Left out when the source does not say which point it uses.",
+          "pattern": "^([a-z][a-z0-9_]*(\\.[0-9]+)?(\\.[a-z][a-z0-9_]*-[0-9]+)*|path\\.[A-Za-z0-9_.]+)$",
+          "maxLength": 200
+        },
+        "role": {
+          "$ref": "#/$defs/MethodSiteRole"
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The name that the source uses (`blocks.12.hook_resid_post`, `layer 58`)."
+        }
+      }
+    },
+    "MethodArtifact": {
+      "title": "MethodArtifact",
+      "description": "One trained SAE or probe, or one monitor setup, for one subject model. Evals score artifacts, not variants.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "key",
+        "variantId",
+        "displayName",
+        "subject",
+        "sites",
+        "params"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "key": {
+          "type": "string",
+          "description": "A stable key from the source (`gemma-2-2b/l12/w16k/topk/trainer-2`).",
+          "pattern": "^[a-z0-9]+([._/-][a-z0-9]+)*$",
+          "maxLength": 200
+        },
+        "variantId": {
+          "$ref": "#/$defs/Id"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The model that the artifact inspects, as its Hub name (`google/gemma-2-2b`), or the name of a synthetic model."
+        },
+        "modelId": {
+          "$ref": "#/$defs/Id",
+          "description": "The `Model`, when the subject is in the catalog."
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The Hub revision of the subject."
+        },
+        "sites": {
+          "type": "array",
+          "description": "Empty for a variant that does not use activations.",
+          "items": {
+            "$ref": "#/$defs/MethodSite"
+          }
+        },
+        "params": {
+          "type": "object",
+          "description": "Values for the `MethodParam` keys of the method and variant.",
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          }
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceUrl": {
+          "$ref": "#/$defs/Url",
+          "description": "Where to get the weights or the setup."
+        },
+        "files": {
+          "type": "array",
+          "description": "The files to download, as the weights of a probe. Each has a `url`, a `mirror`, or both.",
+          "items": {
+            "$ref": "#/$defs/MethodArtifactFile"
+          }
+        }
+      }
+    },
+    "MethodArtifactFile": {
+      "title": "MethodArtifactFile",
+      "description": "One file of an artifact.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The file name (`l_48_lm_500000_ar_lr.pt`).",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+          "maxLength": 200
+        },
+        "url": {
+          "$ref": "#/$defs/Url",
+          "description": "The file at its source, at a fixed commit."
+        },
+        "sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mirror": {
+          "type": "string",
+          "description": "The key of our copy in R2. `apps/web/scripts/mirror-artifact-files.ts` uploads the file and sets it.",
+          "pattern": "^artifacts/[0-9a-f]{64}/[A-Za-z0-9][A-Za-z0-9._-]*$"
+        }
+      }
+    },
+    "MethodResult": {
+      "title": "MethodResult",
+      "description": "One number for one artifact on one eval version, as the source gives it.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "artifactId",
+        "evalVersionId",
+        "metric",
+        "value",
+        "sourceUrl"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "artifactId": {
+          "$ref": "#/$defs/Id"
+        },
+        "evalVersionId": {
+          "$ref": "#/$defs/Id"
+        },
+        "metric": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A `MetricDef` key of the eval version."
+        },
+        "value": {
+          "type": "number"
+        },
+        "stderr": {
+          "type": "number",
+          "minimum": 0
+        },
+        "n": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The number of samples."
+        },
+        "sourceUrl": {
+          "$ref": "#/$defs/Url",
+          "description": "The result file or paper."
+        },
+        "sourceTable": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The table in the paper (`Table 9`)."
+        },
+        "sourceCommit": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The commit of the eval code that made the number."
+        },
+        "measuredAt": {
+          "$ref": "#/$defs/Timestamp"
+        }
+      }
+    },
+    "ModelSource": {
+      "title": "ModelSource",
+      "description": "`hf`: weights on the Hugging Face Hub (or `local/<name>`). `api`: a model behind a provider API. The name alone can collide (`openai/gpt-oss-20b` is open), so the source is part of the identity.",
+      "type": "string",
+      "enum": [
+        "hf",
+        "api"
+      ]
+    },
+    "ParentRelation": {
+      "title": "ParentRelation",
+      "description": "How a model comes from its parent, as the Hub's `base_model:<relation>:` tags.",
+      "type": "string",
+      "enum": [
+        "quantized",
+        "adapter",
+        "finetune"
+      ]
+    },
+    "Model": {
+      "title": "Model",
+      "description": "One model. Its facts are here, each with a source; a document is one source.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "source",
+        "name",
+        "displayName",
+        "organizationId",
+        "aliases",
+        "facts",
+        "documentIds"
+      ],
+      "dependentRequired": {
+        "parentId": [
+          "parentRelation"
+        ],
+        "parentRelation": [
+          "parentId"
+        ]
+      },
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "source": {
+          "$ref": "#/$defs/ModelSource"
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[^/\\s]+/[^/\\s]+$",
+          "description": "The HF repo id or `local/<name>` for `hf`; `provider/model` for `api`. Unique with `source`. Also the URL path."
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "organizationId": {
+          "$ref": "#/$defs/Id",
+          "description": "The `Organization` that made the model."
+        },
+        "family": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The model family, for grouping (`Llama 3`)."
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The HF commit or the API snapshot id that the facts refer to."
+        },
+        "aliases": {
+          "$ref": "#/$defs/Aliases",
+          "description": "Other names, such as API ids (`davinci`) and old names."
+        },
+        "parentId": {
+          "$ref": "#/$defs/Id",
+          "description": "The model this one comes from. One parent; a chain for combinations."
+        },
+        "parentRelation": {
+          "$ref": "#/$defs/ParentRelation"
+        },
+        "removedFromHub": {
+          "type": "boolean",
+          "description": "The Hub repo was removed or made private. We keep the record."
+        },
+        "pretrained": {
+          "type": "boolean",
+          "description": "A base model: pretrained only, with no instruct or chat tuning. Lists do not show it."
+        },
+        "facts": {
+          "$ref": "#/$defs/ModelFacts"
+        },
+        "documentIds": {
+          "description": "The `Document`s about this model. The order has no meaning.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "ModelFacts": {
+      "title": "ModelFacts",
+      "description": "Facts about a model. A fact is left out when nobody has found it yet.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "releaseDate": {
+          "$ref": "#/$defs/DateFact"
+        },
+        "knowledgeCutoff": {
+          "$ref": "#/$defs/DateFact"
+        },
+        "contextWindow": {
+          "$ref": "#/$defs/CountFact",
+          "description": "Tokens."
+        },
+        "maxOutput": {
+          "$ref": "#/$defs/CountFact",
+          "description": "Tokens."
+        },
+        "modalities": {
+          "$ref": "#/$defs/ModalitiesFact"
+        },
+        "reasoningModes": {
+          "$ref": "#/$defs/TagsFact",
+          "description": "The reasoning settings the model has (`none`, `low`, `high`)."
+        },
+        "languages": {
+          "$ref": "#/$defs/TagsFact",
+          "description": "BCP 47 language tags (`en`, `zh`)."
+        },
+        "license": {
+          "$ref": "#/$defs/TextFact",
+          "description": "An SPDX id when there is one (`apache-2.0`), else the license name."
+        },
+        "totalParams": {
+          "$ref": "#/$defs/CountFact"
+        },
+        "activeParams": {
+          "$ref": "#/$defs/CountFact",
+          "description": "Parameters used per token. Less than `totalParams` for a mixture of experts."
+        },
+        "architecture": {
+          "$ref": "#/$defs/TextFact",
+          "description": "A short description (`MoE transformer, 256 experts`)."
+        }
+      }
+    },
+    "FactSource": {
+      "title": "FactSource",
+      "description": "Where a fact comes from.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/FactSourceKind",
+          "description": "`document`: a `Document` (give `documentId`, and `page` and `quote` when you can). `hf_config`: the model's Hub config. `provider_docs` and `url`: a web page (give `url`). `manual`: entered by a person without a source to cite."
+        },
+        "documentId": {
+          "$ref": "#/$defs/Id"
+        },
+        "url": {
+          "$ref": "#/$defs/Url"
+        },
+        "page": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The page or section (`12`, `A.3`)."
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "DateFact": {
+      "title": "DateFact",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "source"
+      ],
+      "properties": {
+        "value": {
+          "$ref": "#/$defs/PartialDate"
+        },
+        "source": {
+          "$ref": "#/$defs/FactSource"
+        }
+      }
+    },
+    "CountFact": {
+      "title": "CountFact",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "source"
+      ],
+      "properties": {
+        "value": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source": {
+          "$ref": "#/$defs/FactSource"
+        }
+      }
+    },
+    "TextFact": {
+      "title": "TextFact",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "source"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "$ref": "#/$defs/FactSource"
+        }
+      }
+    },
+    "TagsFact": {
+      "title": "TagsFact",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "source"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Tag"
+          },
+          "uniqueItems": true
+        },
+        "source": {
+          "$ref": "#/$defs/FactSource"
+        }
+      }
+    },
+    "Modality": {
+      "title": "Modality",
+      "type": "string",
+      "enum": [
+        "text",
+        "image",
+        "audio",
+        "video"
+      ]
+    },
+    "Modalities": {
+      "title": "Modalities",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "input",
+        "output"
+      ],
+      "properties": {
+        "input": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Modality"
+          },
+          "uniqueItems": true
+        },
+        "output": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Modality"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "Tag": {
+      "title": "Tag",
+      "type": "string",
+      "minLength": 1
+    },
+    "FactSourceKind": {
+      "title": "FactSourceKind",
+      "type": "string",
+      "enum": [
+        "document",
+        "hf_config",
+        "provider_docs",
+        "url",
+        "manual"
+      ]
+    },
+    "ModalitiesFact": {
+      "title": "ModalitiesFact",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "source"
+      ],
+      "properties": {
+        "value": {
+          "$ref": "#/$defs/Modalities"
+        },
+        "source": {
+          "$ref": "#/$defs/FactSource"
+        }
+      }
+    },
+    "ModelLadders": {
+      "title": "ModelLadders",
+      "type": "object",
+      "description": "The default models for the LLM jobs that OpenAudit runs itself, from spec/model-ladders.yaml. A tier is a ladder of models of about the same quality and price from different labs, best first. A role uses a tier or its own list. For a target model, a role skips the models of the target's lab.",
+      "required": [
+        "labs",
+        "tiers",
+        "roles"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "labs": {
+          "type": "object",
+          "description": "Other name prefixes of a lab, to the prefix that the ladders use (`meta-llama` to `meta`).",
+          "additionalProperties": {
+            "$ref": "#/$defs/LabPrefix"
+          }
+        },
+        "tiers": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/ModelTier"
+          }
+        },
+        "roles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/LadderRole"
+          }
+        },
+        "openWeights": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/LadderModel"
+          },
+          "description": "The models in the ladders that have open weights."
+        }
+      }
+    },
+    "LabPrefix": {
+      "title": "LabPrefix",
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "LadderModel": {
+      "title": "LadderModel",
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*/[A-Za-z0-9][A-Za-z0-9._-]*$",
+      "description": "An OpenRouter model id (`anthropic/claude-sonnet-5.5`)."
+    },
+    "ModelTier": {
+      "title": "ModelTier",
+      "type": "object",
+      "required": [
+        "description",
+        "models"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "models": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/LadderModel"
+          },
+          "description": "Best first. At most one model per lab, so that each target gets a model."
+        }
+      }
+    },
+    "LadderRole": {
+      "title": "LadderRole",
+      "type": "object",
+      "description": "A job and its models. It has a `tier` or `models`, not both.",
+      "required": [
+        "description"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tier": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The name of a tier in `tiers`."
+        },
+        "models": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/LadderModel"
+          },
+          "description": "The role's own ladder, best first, in place of a tier."
+        }
+      }
+    },
+    "SystemicRisk": {
+      "title": "SystemicRisk",
+      "description": "A specified systemic risk of the EU General-Purpose AI Code of Practice, Safety and Security chapter, Appendix 1.4. `cbrn`: chemical, biological, radiological and nuclear. `cyber_offence`: large-scale cyber-attacks. `loss_of_control`: people can no longer direct, change or shut down the model. `harmful_manipulation`: strategic distortion of beliefs or behavior of many people or of high-stakes decision-makers.",
+      "type": "string",
+      "enum": [
+        "cbrn",
+        "cyber_offence",
+        "loss_of_control",
+        "harmful_manipulation"
+      ]
+    },
+    "VerdictLevel": {
+      "title": "VerdictLevel",
+      "description": "Our level for one risk, from our eval runs only. It is not the Code's risk tier and not a legal finding. `not_enough_evidence`: no eval run, or too few samples, covers the risk. `no_evidence`: the runs that cover the risk show no sign of it. `low`, `moderate`, `high`: the runs show signs of the risk, from small to strong.",
+      "type": "string",
+      "enum": [
+        "not_enough_evidence",
+        "no_evidence",
+        "low",
+        "moderate",
+        "high"
+      ]
+    },
+    "CoverageLevel": {
+      "title": "CoverageLevel",
+      "description": "How well our runs cover a topic or a risk. `none`, `weak` (few samples or one narrow eval), `some`, `good`.",
+      "type": "string",
+      "enum": [
+        "none",
+        "weak",
+        "some",
+        "good"
+      ]
+    },
+    "CardFinding": {
+      "title": "CardFinding",
+      "description": "One notable finding, in Markdown. It names the runs (and snippets) it rests on.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "tone",
+        "runIds"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tone": {
+          "$ref": "#/$defs/FindingTone"
+        },
+        "runIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/Id"
+          }
+        },
+        "snippetIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/Id"
+          }
+        }
+      }
+    },
+    "RiskVerdict": {
+      "title": "RiskVerdict",
+      "description": "Our verdict on one systemic risk. `evidence` is the runs it rests on; `missing` says what no run covers yet.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "risk",
+        "level",
+        "coverage",
+        "summary",
+        "runIds",
+        "missing"
+      ],
+      "properties": {
+        "risk": {
+          "$ref": "#/$defs/SystemicRisk"
+        },
+        "level": {
+          "$ref": "#/$defs/VerdictLevel"
+        },
+        "coverage": {
+          "$ref": "#/$defs/CoverageLevel"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Markdown. What the evidence shows, and how strong it is."
+        },
+        "runIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/Id"
+          }
+        },
+        "missing": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The parts of the risk that no run covers."
+        }
+      }
+    },
+    "TopicSummary": {
+      "title": "TopicSummary",
+      "description": "What our runs show for one topic. `summary` is left out when no run covers it.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topic",
+        "coverage",
+        "runIds"
+      ],
+      "properties": {
+        "topic": {
+          "$ref": "#/$defs/Topic"
+        },
+        "coverage": {
+          "$ref": "#/$defs/CoverageLevel"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/Id"
+          }
+        }
+      }
+    },
+    "CoverageGap": {
+      "title": "CoverageGap",
+      "description": "A topic or a risk that our runs do not cover, or cover only weakly.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "key",
+        "coverage",
+        "text"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "topic",
+            "risk"
+          ]
+        },
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A `Topic` or a `SystemicRisk`."
+        },
+        "coverage": {
+          "type": "string",
+          "enum": [
+            "none",
+            "weak"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "CardRun": {
+      "title": "CardRun",
+      "description": "One run a version used, and its eval version.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runId",
+        "evalVersionId"
+      ],
+      "properties": {
+        "runId": {
+          "$ref": "#/$defs/Id"
+        },
+        "evalVersionId": {
+          "$ref": "#/$defs/Id"
+        }
+      }
+    },
+    "OpenAuditCardVersion": {
+      "title": "OpenAuditCardVersion",
+      "description": "One version of a model's OpenAudit Card: our summary from our own eval runs only. An LLM (`aggregator`) writes it from the runs' results and the flagged snippets.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "modelId",
+        "number",
+        "aggregator",
+        "promptVersion",
+        "costUsd",
+        "createdAt",
+        "runs",
+        "snippetIds",
+        "findings",
+        "verdicts",
+        "topics",
+        "gaps"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "modelId": {
+          "$ref": "#/$defs/Id"
+        },
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "aggregator": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The model that wrote it (`anthropic/claude-sonnet-5.5`)."
+        },
+        "promptVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "costUsd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "createdAt": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "runs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CardRun"
+          }
+        },
+        "snippetIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/Id"
+          }
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CardFinding"
+          }
+        },
+        "verdicts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RiskVerdict"
+          }
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TopicSummary"
+          }
+        },
+        "gaps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CoverageGap"
+          }
+        }
+      }
+    },
+    "SnippetCategory": {
+      "title": "SnippetCategory",
+      "description": "The topic (an eval `Topic`) of the AI's act, or `other`. Topics about the test, not an act in one transcript, are not in the list.",
+      "type": "string",
+      "enum": [
+        "harmful_requests",
+        "agentic_misuse",
+        "bio_chem",
+        "cyber",
+        "child_safety",
+        "self_harm",
+        "toxicity",
+        "prompt_injection",
+        "honesty",
+        "manipulation",
+        "sycophancy",
+        "hallucination",
+        "bias",
+        "sabotage",
+        "power_seeking",
+        "reward_hacking",
+        "other"
+      ]
+    },
+    "SnippetSeverity": {
+      "title": "SnippetSeverity",
+      "description": "`critical`: only from older flaggers. `high`: the AI seems willing to let people be killed or badly hurt, by real help or by a deliberate act as an agent. `medium`: other harmful help or acts, or a lie, hallucination or bias on something that matters. `low`: a small problem.",
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+    "SnippetMessage": {
+      "title": "SnippetMessage",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index",
+        "role",
+        "text"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The message's place in the target's thread, from 0."
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "system",
+            "user",
+            "assistant",
+            "tool"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "description": "The message text, cut when long."
+        }
+      }
+    },
+    "SnippetExcerpt": {
+      "title": "SnippetExcerpt",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "messages"
+      ],
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/SnippetMessage"
+          }
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The exact words that show the problem. Left out when the flagger's quote is not in the transcript."
+        }
+      }
+    },
+    "OpenAuditSnippet": {
+      "title": "OpenAuditSnippet",
+      "description": "One case that the flagger model marked in one attempt of a run.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "runId",
+        "attemptId",
+        "category",
+        "severity",
+        "reason",
+        "excerpt",
+        "flagger",
+        "promptVersion"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "runId": {
+          "$ref": "#/$defs/Id"
+        },
+        "attemptId": {
+          "$ref": "#/$defs/Id"
+        },
+        "category": {
+          "$ref": "#/$defs/SnippetCategory"
+        },
+        "severity": {
+          "$ref": "#/$defs/SnippetSeverity"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The problem in 1 to 3 words, for example \"Copyright violation\". Older snippets have none."
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "description": "One or two sentences."
+        },
+        "excerpt": {
+          "$ref": "#/$defs/SnippetExcerpt"
+        },
+        "flagger": {
+          "type": "string",
+          "minLength": 1
+        },
+        "promptVersion": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "Organization": {
+      "title": "Organization",
+      "description": "A lab or company that makes models or publishes documents.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "slug",
+        "displayName",
+        "aliases",
+        "slugAliases"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "slug": {
+          "$ref": "#/$defs/Slug",
+          "description": "The organization's page URL (`/qwen`, `/google`): the model owner that most of its models use, in lowercase. Unique. Also a reserved handle."
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The name to show (`Alibaba`)."
+        },
+        "aliases": {
+          "$ref": "#/$defs/Aliases",
+          "description": "Other names in documents (`Google DeepMind` and `Google Research` for `google`)."
+        },
+        "slugAliases": {
+          "description": "Other slugs that redirect to `slug`: old slugs and other model owners (`alibaba` for `qwen`). Unique across all organizations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Slug"
+          },
+          "uniqueItems": true
+        },
+        "website": {
+          "$ref": "#/$defs/Url",
+          "description": "The organization's own website."
+        },
+        "summary": {
+          "$ref": "#/$defs/Markdown",
+          "description": "1 to 3 sentences about the organization, with inline source links."
+        },
+        "researchedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "The day of the newest research for the organization page (YYYY-MM-DD). New research looks only for events after this day."
+        },
+        "researchDepth": {
+          "description": "How wide the research was. `deep`: many searches and primary sources. `light`: a few searches; empty lists are usual.",
+          "type": "string",
+          "enum": [
+            "deep",
+            "light"
+          ]
+        }
+      }
+    },
+    "Markdown": {
+      "title": "Markdown",
+      "description": "Markdown text. Raw HTML is not shown.",
+      "type": "string",
+      "minLength": 1
+    },
+    "DatePrecision": {
+      "title": "DatePrecision",
+      "description": "How exact the date next to it is. It agrees with the date's form (YYYY-MM-DD, YYYY-MM, YYYY).",
+      "type": "string",
+      "enum": [
+        "day",
+        "month",
+        "year"
+      ]
+    },
+    "OrgSource": {
+      "title": "OrgSource",
+      "description": "A public source for a fact.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "$ref": "#/$defs/Url"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The headline or page title."
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The outlet or site (`Reuters`)."
+        },
+        "date": {
+          "$ref": "#/$defs/PartialDate"
+        }
+      }
+    },
+    "IncidentSeverity": {
+      "title": "IncidentSeverity",
+      "description": "`red`: someone died, or many people were severely harmed, in credible reports or lawsuits. `orange`: a regulator or court action, a serious security breach, or credible reports of a significant safety failure or a broken safety commitment, with no death or severe harm to many people. `yellow`: concerning, but limited or disputed.",
+      "type": "string",
+      "enum": [
+        "red",
+        "orange",
+        "yellow"
+      ]
+    },
+    "IncidentStatus": {
+      "title": "IncidentStatus",
+      "type": "string",
+      "enum": [
+        "ongoing",
+        "resolved",
+        "disputed",
+        "under_investigation",
+        "in_litigation"
+      ]
+    },
+    "IncidentPrimaryCategory": {
+      "title": "IncidentPrimaryCategory",
+      "description": "What went wrong. `model_hacking`: a model broke into systems, took credentials or got out of its limits by itself. `model_deception`: a model lied, schemed or hid what it did. `model_misbehavior`: a model did other harmful things that nobody asked for. `suicide_and_delusion`: chats linked to suicide, self-harm or delusions. `sexual_content_with_minors`: sexual chats with minors, or child abuse images. `nonconsensual_images`: sexual or fake images of real people. `false_or_hateful_claims`: the model stated false information or hate. `used_by_attackers`: criminals or state actors used the model for attacks, targeting, influence operations or violence. `safeguards_failed`: the model gave dangerous help, or its safeguards were weak or off. `systems_breached`: attackers got into the organization's systems or accounts. `data_exposed`: the organization leaked user data, keys, code or weights. `prompt_injection`: a product flaw lets outside content control an agent. `privacy_violation`: the organization collected, used or uploaded data without clear consent. `safety_related_cut`: the organization dropped safety commitments, testing, reports, teams or staff.",
+      "type": "string",
+      "enum": [
+        "model_hacking",
+        "model_deception",
+        "model_misbehavior",
+        "suicide_and_delusion",
+        "sexual_content_with_minors",
+        "nonconsensual_images",
+        "false_or_hateful_claims",
+        "used_by_attackers",
+        "safeguards_failed",
+        "systems_breached",
+        "data_exposed",
+        "prompt_injection",
+        "privacy_violation",
+        "safety_related_cut"
+      ]
+    },
+    "IncidentCategory": {
+      "title": "IncidentCategory",
+      "type": "string",
+      "enum": [
+        "security",
+        "privacy",
+        "misuse",
+        "model_behavior",
+        "deception",
+        "safety_process",
+        "governance",
+        "legal",
+        "child_safety",
+        "mental_health",
+        "misinformation",
+        "bias",
+        "copyright",
+        "labor",
+        "other"
+      ]
+    },
+    "IncidentLogRole": {
+      "title": "IncidentLogRole",
+      "description": "Who wrote a log step. `reasoning`: the model's thinking (chain of thought). `tool_call`: a command or tool call by the model. `tool_result`: what a tool or the environment returned. `note`: our short note between steps; it is not from the log.",
+      "type": "string",
+      "enum": [
+        "system",
+        "user",
+        "assistant",
+        "reasoning",
+        "tool_call",
+        "tool_result",
+        "note"
+      ]
+    },
+    "IncidentLogStep": {
+      "title": "IncidentLogStep",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "text"
+      ],
+      "properties": {
+        "role": {
+          "$ref": "#/$defs/IncidentLogRole"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The source's label for the step (`Tool result — Slack message`)."
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "As the source shows it. `[...]` marks text that the source cut, and `[name]` text that it replaced."
+        }
+      }
+    },
+    "IncidentLog": {
+      "title": "IncidentLog",
+      "description": "One excerpt of a log (a chat, chain of thought or tool calls) from a source, with the steps copied as the source shows them.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "description",
+        "source",
+        "steps"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A few words about the excerpt (`The model reads the Slack thread`)."
+        },
+        "description": {
+          "$ref": "#/$defs/Markdown",
+          "description": "1 or 2 short sentences about what the excerpt shows."
+        },
+        "source": {
+          "$ref": "#/$defs/OrgSource"
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The model as the source names it."
+        },
+        "ocr": {
+          "type": "boolean",
+          "description": "The steps are read from a screenshot."
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/IncidentLogStep"
+          }
+        }
+      }
+    },
+    "OrgIncident": {
+      "title": "OrgIncident",
+      "description": "A significant AI safety, security or responsible-AI event that involves the organization or its models, with at least one safety category. Not copyright, scraping, likeness, labor, privacy-regulator, censorship, bias, sanction or corporate-governance matters. Its page is `/<organization slug>/incidents/<slug>`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "organizationId",
+        "slug",
+        "title",
+        "date",
+        "datePrecision",
+        "severity",
+        "status",
+        "primaryCategory",
+        "categories",
+        "summary",
+        "description",
+        "sources"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "organizationId": {
+          "$ref": "#/$defs/Id"
+        },
+        "slug": {
+          "$ref": "#/$defs/Slug",
+          "description": "Unique in the organization (`2023-internal-forum-breach`)."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "$ref": "#/$defs/PartialDate",
+          "description": "When the incident started."
+        },
+        "datePrecision": {
+          "$ref": "#/$defs/DatePrecision"
+        },
+        "endDate": {
+          "$ref": "#/$defs/PartialDate"
+        },
+        "severity": {
+          "$ref": "#/$defs/IncidentSeverity"
+        },
+        "status": {
+          "$ref": "#/$defs/IncidentStatus"
+        },
+        "primaryCategory": {
+          "$ref": "#/$defs/IncidentPrimaryCategory",
+          "description": "The one category that the feeds show."
+        },
+        "categories": {
+          "type": "array",
+          "description": "Tags.",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/IncidentCategory"
+          }
+        },
+        "summary": {
+          "$ref": "#/$defs/Markdown",
+          "description": "1 or 2 sentences."
+        },
+        "description": {
+          "$ref": "#/$defs/Markdown",
+          "description": "2 or 3 short sentences, on the incident page."
+        },
+        "modelIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "description": "The models whose behavior is the incident: the model that did the unsafe act, that people misused, or whose weights leaked or safeguard failed. Any developer. Empty when no model's behavior is part of it. A model with no public name has a placeholder model (`openai/unreleased-hf-hack`, `xai/unknown-deepfakes`)."
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/OrgSource"
+          }
+        },
+        "logs": {
+          "type": "array",
+          "description": "Log excerpts that show the model's behavior, in source order.",
+          "items": {
+            "$ref": "#/$defs/IncidentLog"
+          }
+        }
+      }
+    },
+    "OrgIncidentEvent": {
+      "title": "OrgIncidentEvent",
+      "description": "One event in an incident's timeline.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "incidentId",
+        "order",
+        "date",
+        "datePrecision",
+        "title",
+        "sources"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "incidentId": {
+          "$ref": "#/$defs/Id"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The place in the timeline, from 0. Events with the same date keep this order."
+        },
+        "date": {
+          "$ref": "#/$defs/PartialDate"
+        },
+        "datePrecision": {
+          "$ref": "#/$defs/DatePrecision"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "$ref": "#/$defs/Markdown",
+          "description": "One sentence."
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/OrgSource"
+          }
+        }
+      }
+    },
+    "DepartureKind": {
+      "title": "DepartureKind",
+      "type": "string",
+      "enum": [
+        "resigned",
+        "fired",
+        "laid_off",
+        "unclear"
+      ]
+    },
+    "OrgDeparture": {
+      "title": "OrgDeparture",
+      "description": "A person who left in 2023 or later over AI safety concerns at the organization, or a safety leader who left. Not ethics, copyright or personal reasons.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "organizationId",
+        "name",
+        "kind",
+        "sources"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "organizationId": {
+          "$ref": "#/$defs/Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Unique in the organization."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The person's role at the organization."
+        },
+        "departedDate": {
+          "$ref": "#/$defs/PartialDate"
+        },
+        "datePrecision": {
+          "$ref": "#/$defs/DatePrecision"
+        },
+        "kind": {
+          "$ref": "#/$defs/DepartureKind"
+        },
+        "reason": {
+          "$ref": "#/$defs/Markdown"
+        },
+        "quote": {
+          "description": "The person's own words, copied exactly from the source.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "text",
+            "url"
+          ],
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "url": {
+              "$ref": "#/$defs/Url"
+            }
+          }
+        },
+        "image": {
+          "description": "A freely licensed photo from Wikimedia Commons.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "url",
+            "pageUrl",
+            "license",
+            "author"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "pattern": "^https://upload\\.wikimedia\\.org/"
+            },
+            "pageUrl": {
+              "type": "string",
+              "pattern": "^https://commons\\.wikimedia\\.org/",
+              "description": "The Commons file page."
+            },
+            "license": {
+              "type": "string",
+              "minLength": 1
+            },
+            "author": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The author as Commons states it."
+            }
+          }
+        },
+        "website": {
+          "$ref": "#/$defs/Url",
+          "description": "The person's own site."
+        },
+        "nextRole": {
+          "$ref": "#/$defs/Markdown"
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/OrgSource"
+          }
+        }
+      }
+    },
+    "CardSource": {
+      "title": "CardSource",
+      "description": "Where in the document a value is. The quote is the card's own words.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "quote"
+      ],
+      "properties": {
+        "page": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The page or section (`12`, `5.3.2`), as printed in the document."
+        },
+        "pdfPage": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The page in our saved PDF, from 1. Links go here; `page` is what we show."
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "Disclosure": {
+      "title": "Disclosure",
+      "description": "One model fact. `stated`: the card says it (give `value` and `source`). `not_stated`: we read the card; it does not say. Left out: not extracted yet.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "stated",
+            "not_stated"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The value in the card's words (`200K tokens`, `March 2026`)."
+        },
+        "source": {
+          "$ref": "#/$defs/CardSource"
+        }
+      },
+      "if": {
+        "properties": {
+          "status": {
+            "const": "stated"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "value": true,
+          "source": true
+        },
+        "required": [
+          "value",
+          "source"
+        ]
+      }
+    },
+    "Disclosures": {
+      "title": "Disclosures",
+      "description": "The disclosure checklist. The keys match `ModelFacts`, plus training facts.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "releaseDate": {
+          "$ref": "#/$defs/Disclosure"
+        },
+        "knowledgeCutoff": {
+          "$ref": "#/$defs/Disclosure"
+        },
+        "contextWindow": {
+          "$ref": "#/$defs/Disclosure"
+        },
+        "maxOutput": {
+          "$ref": "#/$defs/Disclosure"
+        },
+        "modalities": {
+          "$ref": "#/$defs/Disclosure"
+        },
+        "reasoningModes": {
+          "$ref": "#/$defs/Disclosure"
+        },
+        "languages": {
+          "$ref": "#/$defs/Disclosure"
+        },
+        "license": {
+          "$ref": "#/$defs/Disclosure"
+        },
+        "totalParams": {
+          "$ref": "#/$defs/Disclosure"
+        },
+        "activeParams": {
+          "$ref": "#/$defs/Disclosure"
+        },
+        "architecture": {
+          "$ref": "#/$defs/Disclosure"
+        },
+        "trainingData": {
+          "$ref": "#/$defs/Disclosure"
+        },
+        "trainingCompute": {
+          "$ref": "#/$defs/Disclosure"
+        }
+      }
+    },
+    "RiskDomain": {
+      "title": "RiskDomain",
+      "type": "string",
+      "enum": [
+        "bio_chem",
+        "cyber",
+        "ai_rnd_autonomy",
+        "misalignment",
+        "manipulation",
+        "other"
+      ]
+    },
+    "RiskLevel": {
+      "title": "RiskLevel",
+      "description": "Our coarse level, for sorting only. Always show the lab's own label next to it. `below`: under the lab's first threshold. `early_warning`: an alert or watch level. `reached`: a threshold is reached or cannot be ruled out. `highest`: the top level.",
+      "type": "string",
+      "enum": [
+        "below",
+        "early_warning",
+        "reached",
+        "highest"
+      ]
+    },
+    "FrameworkId": {
+      "title": "FrameworkId",
+      "description": "A published safety framework. `anthropic-rsp`: Responsible Scaling Policy (also ASL levels). `anthropic-fcf`: Frontier Compliance Framework. `openai-preparedness`: Preparedness Framework. `google-fsf`: Frontier Safety Framework. `meta-aasf`: Advanced AI Scaling Framework. `amazon-fmsf`: Frontier Model Safety Framework. `xai-faif`: Frontier Artificial Intelligence Framework. `xai-rmf`: Risk Management Framework. `seoul-commitments`: Frontier AI Safety Commitments (Seoul, 2024).",
+      "type": "string",
+      "enum": [
+        "anthropic-rsp",
+        "anthropic-fcf",
+        "openai-preparedness",
+        "google-fsf",
+        "meta-aasf",
+        "amazon-fmsf",
+        "xai-faif",
+        "xai-rmf",
+        "seoul-commitments"
+      ]
+    },
+    "MitigationPhase": {
+      "title": "MitigationPhase",
+      "type": "string",
+      "enum": [
+        "before_mitigation",
+        "after_mitigation",
+        "unspecified"
+      ]
+    },
+    "RiskDecision": {
+      "title": "RiskDecision",
+      "description": "One risk decision the lab states for one domain.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "domain",
+        "labLabel",
+        "phase",
+        "source"
+      ],
+      "properties": {
+        "domain": {
+          "$ref": "#/$defs/RiskDomain"
+        },
+        "frameworks": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/FrameworkId"
+          },
+          "description": "The published frameworks the verdict is made under. Leave out if none is named."
+        },
+        "labLabel": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The lab's words (`ASL-3`, `High`, `CCL not reached`)."
+        },
+        "level": {
+          "$ref": "#/$defs/RiskLevel"
+        },
+        "phase": {
+          "$ref": "#/$defs/MitigationPhase"
+        },
+        "decidedBy": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Who decided, when the card says (`Responsible Scaling Officer`)."
+        },
+        "modelIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "description": "The covered models the verdict is about. Left out when it is about all of them."
+        },
+        "source": {
+          "$ref": "#/$defs/CardSource"
+        }
+      }
+    },
+    "TopicCoverage": {
+      "title": "TopicCoverage",
+      "description": "Does the card cover a topic. `covered`: give a source, and a headline number when there is one. Not covered: the card has nothing on it. Left out: not extracted yet.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topic",
+        "covered"
+      ],
+      "properties": {
+        "topic": {
+          "$ref": "#/$defs/Topic"
+        },
+        "covered": {
+          "type": "boolean"
+        },
+        "headline": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The main result in the card's words (`0.8% jailbreak success`)."
+        },
+        "source": {
+          "$ref": "#/$defs/CardSource"
+        }
+      },
+      "if": {
+        "properties": {
+          "covered": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source": true
+        },
+        "required": [
+          "source"
+        ]
+      }
+    },
+    "ExternalTester": {
+      "title": "ExternalTester",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "source"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The tester (`METR`, `UK AISI`, `Apollo Research`)."
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What they tested (`autonomy and AI R&D`)."
+        },
+        "source": {
+          "$ref": "#/$defs/CardSource"
+        }
+      }
+    },
+    "Finding": {
+      "title": "Finding",
+      "description": "A notable finding that fits nowhere else. Short, in our words, with the quote.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "source"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tone": {
+          "$ref": "#/$defs/FindingTone"
+        },
+        "source": {
+          "$ref": "#/$defs/CardSource"
+        }
+      }
+    },
+    "FindingTone": {
+      "title": "FindingTone",
+      "description": "Our reading for a safety reader. `good`: good for safety. `mixed`: mixed, a mild concern or an important caveat. `bad`: a clear concern. `neutral`: a fact or method note.",
+      "type": "string",
+      "enum": [
+        "good",
+        "mixed",
+        "bad",
+        "neutral"
+      ]
+    },
+    "ExtractionInfo": {
+      "title": "ExtractionInfo",
+      "description": "How a record was made. `by` is the model or person.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "by",
+        "at"
+      ],
+      "properties": {
+        "by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "at": {
+          "$ref": "#/$defs/Timestamp"
+        }
+      }
+    },
+    "CardCover": {
+      "title": "CardCover",
+      "description": "A model the card covers. `rawModelName` when the model is not in our list yet.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "modelId": {
+          "$ref": "#/$defs/Id"
+        },
+        "rawModelName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "section": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The section about it, for cards that cover several models (`Appendix B`)."
+        }
+      },
+      "anyOf": [
+        {
+          "properties": {
+            "modelId": true
+          },
+          "required": [
+            "modelId"
+          ]
+        },
+        {
+          "properties": {
+            "rawModelName": true
+          },
+          "required": [
+            "rawModelName"
+          ]
+        }
+      ]
+    },
+    "SystemCard": {
+      "title": "SystemCard",
+      "description": "What we extracted from one card. One card can have several documents (the PDF, the web page, the blog post); `documentId` is the one we read.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "documentId",
+        "alsoDocumentIds",
+        "covers",
+        "disclosures",
+        "riskDecisions",
+        "topics",
+        "testers",
+        "findings",
+        "reviewed",
+        "extraction"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "documentId": {
+          "$ref": "#/$defs/Id"
+        },
+        "alsoDocumentIds": {
+          "description": "Other documents of the same card.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "uniqueItems": true
+        },
+        "covers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CardCover"
+          }
+        },
+        "basedOnDocumentId": {
+          "$ref": "#/$defs/Id",
+          "description": "The card this one updates (a delta card)."
+        },
+        "pageCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "disclosures": {
+          "$ref": "#/$defs/Disclosures"
+        },
+        "riskDecisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RiskDecision"
+          }
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TopicCoverage"
+          }
+        },
+        "testers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ExternalTester"
+          }
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Finding"
+          }
+        },
+        "reviewed": {
+          "type": "boolean",
+          "description": "A person checked it. Pages mark unreviewed values \"Not reviewed\"."
+        },
+        "extraction": {
+          "$ref": "#/$defs/ExtractionInfo"
+        }
+      }
+    },
+    "ReasoningKind": {
+      "title": "ReasoningKind",
+      "description": "`raw`: the model's own thinking (open models). `summary`: the provider's summary. `omitted`: the provider gave none. `redacted`: the provider hid it.",
+      "type": "string",
+      "enum": [
+        "raw",
+        "summary",
+        "omitted",
+        "redacted"
+      ]
+    },
+    "TextPart": {
+      "title": "TextPart",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "text"
+      ],
+      "properties": {
+        "type": {
+          "const": "text"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "ReasoningPart": {
+      "title": "ReasoningPart",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "kind"
+      ],
+      "properties": {
+        "type": {
+          "const": "reasoning"
+        },
+        "kind": {
+          "$ref": "#/$defs/ReasoningKind"
+        },
+        "text": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "string",
+          "description": "The provider's opaque blob, kept so the transcript can continue there."
+        }
+      }
+    },
+    "OtherPart": {
+      "title": "OtherPart",
+      "description": "A part we do not show yet (an image, audio); the original log keeps it.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "kind"
+      ],
+      "properties": {
+        "type": {
+          "const": "other"
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "ContentPart": {
+      "title": "ContentPart",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/TextPart"
+        },
+        {
+          "$ref": "#/$defs/ReasoningPart"
+        },
+        {
+          "$ref": "#/$defs/OtherPart"
+        }
+      ]
+    },
+    "ToolCall": {
+      "title": "ToolCall",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "function"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "function": {
+          "type": "string",
+          "minLength": 1
+        },
+        "arguments": {
+          "type": "object"
+        }
+      }
+    },
+    "Message": {
+      "title": "Message",
+      "description": "One chat message. A superset of Inspect's and OpenAI's shape.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "role",
+        "content"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable, so notes and links survive import and export."
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "system",
+            "user",
+            "assistant",
+            "tool"
+          ]
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ContentPart"
+          }
+        },
+        "toolCalls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ToolCall"
+          }
+        },
+        "toolCallId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "For a `tool` message, the call it answers."
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "description": "For an `assistant` message, the model that wrote it."
+        }
+      }
+    },
+    "Participant": {
+      "title": "Participant",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "role"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "$ref": "#/$defs/ModelRole"
+        },
+        "modelId": {
+          "$ref": "#/$defs/Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The model or person as the source names it."
+        }
+      }
+    },
+    "Thread": {
+      "title": "Thread",
+      "description": "One participant's ordered view of the conversation.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "participant",
+        "messages"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "participant": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A `Participant.id`."
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Message"
+          }
+        }
+      }
+    },
+    "Transcript": {
+      "title": "Transcript",
+      "description": "The messages of one attempt or chat. Scores stay on the attempt. `extensions` keeps source fields we do not map (`extensions.inspect`).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "participants",
+        "threads"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "participants": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Participant"
+          }
+        },
+        "threads": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Thread"
+          }
+        },
+        "extensions": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "eval": {
+    "slug": "hard-negative-protein-binding-prediction",
+    "displayName": "Hard negative protein binding prediction",
+    "aliases": ["Hard-negative protein binding prediction"],
+    "description": "OpenAI agentic protein-design eval on a proprietary binding dataset. The model must pick the true binder among highly similar candidate sequences for the same target hotspot when structure-tool confidence scores alone are not enough. Scored as pass@k over attempts. Dataset and runner are lab-internal.",
+    "summary": "Tests whether AI agents can pick the true protein binder among very similar candidate sequences.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://deploymentsafety.openai.com/gpt-rosalind-5-5/hard-negative-protein-binding-prediction"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-rosalind-5-5/hard-negative-protein-binding-prediction",
+        "title": "GPT-Rosalind-5.5 system card (Hard negative protein binding prediction)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "proprietary-binders",
+      "status": "draft",
+      "changes": "Proprietary non-contaminated binder set (cards cite 43 targets and 492 hotspots); pass@4 is the usual reported metric.",
+      "scores": [
+        {
+          "key": "passed",
+          "displayName": "Passed",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model identified the true binder among the hard-negative candidates for that hotspot."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "pass@4",
+          "displayName": "pass@4",
+          "score": "passed",
+          "aggregation": "pass_at_k",
+          "k": 4,
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Pass@4 over attempts. Some cards also report pass@1."
+        }
+      ]
+    }
+  ]
+}

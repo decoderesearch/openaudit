@@ -1,0 +1,447 @@
+{
+  "document": "01ai-yi-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "01-ai/Yi-34B-Chat"
+    },
+    {
+      "model": "01-ai/Yi-6B-Chat"
+    },
+    {
+      "model": "01-ai/Yi-34B"
+    },
+    {
+      "model": "01-ai/Yi-6B"
+    },
+    {
+      "model": "01-ai/Yi-34B-200K"
+    },
+    {
+      "model": "01-ai/Yi-6B-200K"
+    },
+    {
+      "rawModelName": "Yi-VL-34B"
+    },
+    {
+      "rawModelName": "Yi-9B"
+    }
+  ],
+  "pageCount": 26,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4K base; extended up to 200K",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "to support long context windows up to 200K where the base model itself is\ntrained on 4K context length."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "language and multimodal (vision-language)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce the Yi model family, a series of language and multimodal models that"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English and Chinese",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "For pretraining, we construct 3.1 trillion tokens\n                                         of English and Chinese corpora using a cascaded data deduplication and quality"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "6B and 34B",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Table 1: Model configs of Yi-6B and Yi-34B. LR stands for learning rate."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "modified decoder-only Transformer (LLaMA-based) with GQA, SwiGLU, and RoPE ABF",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Yi uses a modified version of the classical decoder-only Transformer architecture [78] where the code\nis based on LLaMA’s [77] implementation."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "3.1 trillion tokens of English and Chinese corpora via cascaded deduplication and quality filtering; finetuning on less than 10K polished instruction pairs",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "For pretraining, we construct 3.1 trillion tokens\n                                         of English and Chinese corpora using a cascaded data deduplication and quality"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa) 0-shot scores for Yi-Chat 6B/34B and quantized variants in Table 4",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "Yi-Chat             34B                     67.6 / 73.5     79.1 / 81.3     77.0 / 78.5        62.4"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "01.AI describes a full-stack Responsible AI Safety Engine (RAISE) for safe pretraining, alignment, and deployment.", "tone": "neutral",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "To enhance the model’s trustworthiness and safety, we develop a full-stack Responsible AI Safety\nEngine (RAISE)."
+      }
+    },
+    {
+      "text": "Pretraining uses heuristic, keyword, and classifier filters to remove Personal Identifiable Information (PII) and reduce sexual, violent, and extremist content.", "tone": "neutral",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "we build\na set of filters based on heuristic rules, keyword matching, and learned classifiers to remove text\ncontaining personal identifiers and private data, and reduce sexual, violent, and extremist content."
+      }
+    },
+    {
+      "text": "A learned Safety Scorer removes toxic web documents such as violence, pornography, and political propaganda from pretraining data.", "tone": "neutral",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "the Safety Scorer identifies and removes web documents containing\ntoxic content, such as violence, pornography, and political propaganda."
+      }
+    },
+    {
+      "text": "Alignment mixes a multi-category safety taxonomy dataset and attack-scenario prompts into dialog supervised fine-tuning (SFT) data.", "tone": "neutral",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "We curated datasets reflecting these\ncategories for a robust alignment, and mix them with our dialog SFT data."
+      }
+    },
+    {
+      "text": "The authors built an internal helpful-and-harmless chat eval but report only external preference leaderboards, not those helpful and harmless (HH) scores.", "tone": "mixed",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "we have established our own helpful and harmless evaluation dataset by gathering\nand constructing data of varying difficulty levels"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "metric": "score",
+      "value": 36.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; LLaMA2-Chat 13B"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": "LLaMA2-Chat                        13B      50.9 / 47.3     27.5 / 35.1     27.9 / 35.9        36.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "metric": "score",
+      "value": 54,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; LLaMA2-Chat 70B"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": "                                   70B      59.4 / 59.9     36.1 / 41.0     35.0 / 41.3        54.0"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "baichuan-inc/Baichuan2-13B-Chat",
+      "metric": "score",
+      "value": 49,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Baichuan2-Chat 13B"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": "Baichuan2-Chat                     13B      55.1 / 50.1     58.6 / 59.5     56.0 / 54.8        49.0"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen-14B-Chat",
+      "metric": "score",
+      "value": 52.5,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Qwen-Chat 14B"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": "Qwen-Chat                          14B      64.0 / 65.0     67.7 / 70.6     66.1 / 70.1        52.5"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InternLM-Chat",
+      "metric": "score",
+      "value": 51.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 20B"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": "InternLM-Chat                      20B      55.6 / 57.4     53.6 / 53.8     51.2 / 53.6        51.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "AquilaChat2",
+      "metric": "score",
+      "value": 64.3,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 34B"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": "AquilaChat2                        34B      65.2 / 66.7     67.5 / 70.0     83.0 / 89.4        64.3"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "01-ai/Yi-6B-Chat",
+      "metric": "score",
+      "value": 50.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Yi-Chat 6B"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": "Yi-Chat             6B                      58.2 / 61.0     69.4 / 74.7     68.8 / 74.2        50.6"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Yi-Chat-8bits(GPTQ)",
+      "metric": "score",
+      "value": 49.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 6B GPTQ 8-bit"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": "Yi-Chat-8bits(GPTQ) 6B                      58.3 / 61.0     69.2 / 74.7     69.2 / 73.9        49.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Yi-Chat-4bits(AWQ)",
+      "metric": "score",
+      "value": 50.3,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 6B AWQ 4-bit"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": "Yi-Chat-4bits(AWQ) 6B                       56.8 / 59.9     67.7 / 73.3     67.5 / 72.3        50.3"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "01-ai/Yi-34B-Chat",
+      "metric": "score",
+      "value": 62.4,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; Yi-Chat 34B"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": "Yi-Chat             34B                     67.6 / 73.5     79.1 / 81.3     77.0 / 78.5        62.4"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Yi-Chat-8bits(GPTQ)",
+      "metric": "score",
+      "value": 61.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 34B GPTQ 8-bit"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": "Yi-Chat-8bits(GPTQ) 34B                     66.2 / 73.7     79.1 / 81.2     76.8 / 79.0        61.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Yi-Chat-4bits(AWQ)",
+      "metric": "score",
+      "value": 61.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; 34B AWQ 4-bit"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": "Yi-Chat-4bits(AWQ) 34B                      65.8 / 72.4     78.2 / 80.5     75.7 / 77.3        61.8"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:10:06Z"
+  },
+  "notes": "Technical report (not a system card). Safety section describes RAISE, pretraining filters, a safety taxonomy mixed into SFT, and attack-scenario prompts, but gives no numeric safety/refusal/jailbreak rates. Only safety-relevant scored eval kept is TruthfulQA from Table 4 (pilot: honesty/truthfulness). Skipped capability tables (MMLU, CMMLU, C-Eval, BBH, GSM8K, MATH, HumanEval, MBPP, AlpacaEval, Chatbot Arena, SuperClue, Needle-in-a-Haystack, MMMU, Hungarian exam chart). Hallucination reduction and safety taxonomy categories (self-harm, cyber, bias, etc.) are training-data methods, so those topics stay uncovered. Yi-1.5 seed models are not named in this March 2024 report."
+}

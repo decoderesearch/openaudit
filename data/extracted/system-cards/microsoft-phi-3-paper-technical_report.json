@@ -1,0 +1,1548 @@
+{
+  "document": "microsoft-phi-3-paper-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    {
+      "model": "microsoft/Phi-3-small-8k-instruct"
+    },
+    {
+      "model": "microsoft/Phi-3-medium-4k-instruct"
+    },
+    {
+      "model": "microsoft/Phi-3.5-mini-instruct"
+    },
+    {
+      "model": "microsoft/Phi-3.5-MoE-instruct"
+    },
+    {
+      "model": "microsoft/Phi-3.5-vision-instruct"
+    }
+  ],
+  "pageCount": 24,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "phi-3-mini default 4K (long-context 128K); phi-3-small default 8192; phi-3.5 series context expanded to 128K",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "The phi-3-mini model is a transformer decoder architecture [VSP+ 17], with default context length 4K."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text language models; Phi-3.5-Vision is multimodal (image/multi-image and text in, text out)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "Architecture The Phi-3.5-Vision (4.2B parameters) is a multimodal model designed to process an"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "primarily English; phi-3-small adds ~10% multilingual data; phi-3.5 improves multilingual (e.g. Arabic, Chinese, Russian, Ukrainian, Vietnamese)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "language to English. Exploring multilingual capabilities for Small Language Models is an important"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "phi-3-mini 3.8B; phi-3-small 7B; phi-3-medium 14B; phi-3.5-MoE 16×3.8B (42B total); Phi-3.5-Vision 4.2B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce phi-3-mini, a 3.8 billion parameter language model trained on 3.3 trillion tokens,"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "phi-3.5-MoE 6.6B activated parameters",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "3.5-Vision. The phi-3.5-MoE, a 16 x 3.8B MoE model with 6.6 billion active parameters, achieves"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "transformer decoder (Llama-2-like for mini); phi-3-small with blocksparse attention; phi-3.5-MoE top-2 of 16 experts; Phi-3.5-Vision CLIP ViT-L/14 + phi-3.5-mini decoder",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "The phi-3-mini model is a transformer decoder architecture [VSP+ 17], with default context length 4K."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "heavily filtered publicly available web data and synthetic data (scaled from phi-2); SFT/DPO including safety and RAI; vision: interleaved image-text, FLD-5B, OCR/PDF, charts/tables",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "data and synthetic data. The model is also further aligned for robustness, safety, and chat format."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "In-house RAI defect rates for harmful content continuation/summarization and third-party harm; red-team harmful response rates decreased after safety alignment",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "      Harmful Content Continuation (DR-3)      0.007        0.003            0.010         0.005      0.029   0.026     0.013     0.013"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Jailbreak (DR-1) defect rates on Microsoft internal multi-turn RAI (e.g. phi-3-mini 0.12)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "                Jailbreak (DR-1)               0.123        0.107            0.111         0.106      0.150   0.156     0.114     0.130"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Ungroundedness scores on internal RAI; [POPE](/evals/pope) scores for Phi-3.5-Vision; remaining hallucination challenges noted",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "                Ungroundedness                 0.603        0.299            0.213         0.228      1.481   0.935     0.679     0.328"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa) (10-shot MC2): phi-3-mini 65.0, phi-3-small 70.2, phi-3-medium 75.1; phi-3.5-MoE 77.5 (higher is better)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "           TruthfulQA\n                                          65.0         70.2           75.1        –       53.0      52.1      63.2       60.1        85.8"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Microsoft reports a large drop in adversarial multi-turn harmful response rates for phi-3-mini after safety alignment (Figure 5 chart; numeric bars not in the text layer).", "tone": "good",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "Figure 5: Comparison of harmful response percentages by Microsoft AI Red Team between phi-3-mini before"
+      }
+    },
+    {
+      "text": "An independent Microsoft red team iteratively examined phi-3-mini and drove additional post-training data; the same process was used for phi-3-small, phi-3-medium, and phi-3.5-MoE.", "tone": "good",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "An independent red team at Microsoft\niteratively examined phi-3-mini to further identify areas of improvement during the post-training pro-"
+      }
+    },
+    {
+      "text": "Safety post-training raised Phi-3.5-Vision scores on Internal, [RTVLM](/evals/rtvlm), and [VLGuard](/evals/vlguard) versus the variant without safety training.", "tone": "good",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "post-training notably enhances the RAI performance of Phi-3.5-Vision across all RAI benchmarks. In"
+      }
+    },
+    {
+      "text": "Phi-3.5-Vision can still answer some harmful or sensitive visual queries (e.g. certain captchas and scam images), framed as a helpfulness–harmlessness trade-off.", "tone": "bad",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "3.5-Vision occasionally fails to refrain from answering harmful or sensitive inquiries. Examples of such"
+      }
+    },
+    {
+      "text": "Despite responsible AI (RAI) work, the authors still flag factual inaccuracies/hallucinations, bias amplification, inappropriate content, and safety issues as open challenges for downstream use-case evaluation.", "tone": "mixed",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "Despite our diligent RAI efforts, as with most LLMs, there remains challenges around factual inaccu-"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "metric": "ungroundedness",
+      "value": 0.603,
+      "unit": "score",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Ungroundedness                 0.603        0.299            0.213         0.228      1.481   0.935     0.679     0.328"
+      },
+      "settings": {
+        "other": "Ungroundedness; GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "metric": "ungroundedness",
+      "value": 0.299,
+      "unit": "score",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Ungroundedness                 0.603        0.299            0.213         0.228      1.481   0.935     0.679     0.328"
+      },
+      "settings": {
+        "other": "Ungroundedness; GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "metric": "ungroundedness",
+      "value": 0.213,
+      "unit": "score",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Ungroundedness                 0.603        0.299            0.213         0.228      1.481   0.935     0.679     0.328"
+      },
+      "settings": {
+        "other": "Ungroundedness; GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "metric": "ungroundedness",
+      "value": 0.228,
+      "unit": "score",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Ungroundedness                 0.603        0.299            0.213         0.228      1.481   0.935     0.679     0.328"
+      },
+      "settings": {
+        "other": "Ungroundedness; GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/phi-2",
+      "metric": "ungroundedness",
+      "value": 1.481,
+      "unit": "score",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Ungroundedness                 0.603        0.299            0.213         0.228      1.481   0.935     0.679     0.328"
+      },
+      "settings": {
+        "other": "Ungroundedness; GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "mistralai/Mistral-7B-v0.1",
+      "metric": "ungroundedness",
+      "value": 0.935,
+      "unit": "score",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Ungroundedness                 0.603        0.299            0.213         0.228      1.481   0.935     0.679     0.328"
+      },
+      "settings": {
+        "other": "Ungroundedness; GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "google/gemma-7b",
+      "metric": "ungroundedness",
+      "value": 0.679,
+      "unit": "score",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Ungroundedness                 0.603        0.299            0.213         0.228      1.481   0.935     0.679     0.328"
+      },
+      "settings": {
+        "other": "Ungroundedness; GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "metric": "ungroundedness",
+      "value": 0.328,
+      "unit": "score",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Ungroundedness                 0.603        0.299            0.213         0.228      1.481   0.935     0.679     0.328"
+      },
+      "settings": {
+        "other": "Ungroundedness; GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "metric": "defect rate",
+      "value": 0.24,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "            Third Party Harm (DR-1)            0.240        0.253            0.251         0.105      0.240   0.562     0.383     0.373"
+      },
+      "settings": {
+        "other": "Third Party Harm (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "metric": "defect rate",
+      "value": 0.253,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "            Third Party Harm (DR-1)            0.240        0.253            0.251         0.105      0.240   0.562     0.383     0.373"
+      },
+      "settings": {
+        "other": "Third Party Harm (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "metric": "defect rate",
+      "value": 0.251,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "            Third Party Harm (DR-1)            0.240        0.253            0.251         0.105      0.240   0.562     0.383     0.373"
+      },
+      "settings": {
+        "other": "Third Party Harm (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "metric": "defect rate",
+      "value": 0.105,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "            Third Party Harm (DR-1)            0.240        0.253            0.251         0.105      0.240   0.562     0.383     0.373"
+      },
+      "settings": {
+        "other": "Third Party Harm (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/phi-2",
+      "metric": "defect rate",
+      "value": 0.24,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "            Third Party Harm (DR-1)            0.240        0.253            0.251         0.105      0.240   0.562     0.383     0.373"
+      },
+      "settings": {
+        "other": "Third Party Harm (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "mistralai/Mistral-7B-v0.1",
+      "metric": "defect rate",
+      "value": 0.562,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "            Third Party Harm (DR-1)            0.240        0.253            0.251         0.105      0.240   0.562     0.383     0.373"
+      },
+      "settings": {
+        "other": "Third Party Harm (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "google/gemma-7b",
+      "metric": "defect rate",
+      "value": 0.383,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "            Third Party Harm (DR-1)            0.240        0.253            0.251         0.105      0.240   0.562     0.383     0.373"
+      },
+      "settings": {
+        "other": "Third Party Harm (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "metric": "defect rate",
+      "value": 0.373,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "            Third Party Harm (DR-1)            0.240        0.253            0.251         0.105      0.240   0.562     0.383     0.373"
+      },
+      "settings": {
+        "other": "Third Party Harm (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "metric": "defect rate",
+      "value": 0.007,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Continuation (DR-3)      0.007        0.003            0.010         0.005      0.029   0.026     0.013     0.013"
+      },
+      "settings": {
+        "other": "Harmful Content Continuation (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "metric": "defect rate",
+      "value": 0.003,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Continuation (DR-3)      0.007        0.003            0.010         0.005      0.029   0.026     0.013     0.013"
+      },
+      "settings": {
+        "other": "Harmful Content Continuation (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "metric": "defect rate",
+      "value": 0.01,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Continuation (DR-3)      0.007        0.003            0.010         0.005      0.029   0.026     0.013     0.013"
+      },
+      "settings": {
+        "other": "Harmful Content Continuation (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "metric": "defect rate",
+      "value": 0.005,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Continuation (DR-3)      0.007        0.003            0.010         0.005      0.029   0.026     0.013     0.013"
+      },
+      "settings": {
+        "other": "Harmful Content Continuation (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/phi-2",
+      "metric": "defect rate",
+      "value": 0.029,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Continuation (DR-3)      0.007        0.003            0.010         0.005      0.029   0.026     0.013     0.013"
+      },
+      "settings": {
+        "other": "Harmful Content Continuation (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "mistralai/Mistral-7B-v0.1",
+      "metric": "defect rate",
+      "value": 0.026,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Continuation (DR-3)      0.007        0.003            0.010         0.005      0.029   0.026     0.013     0.013"
+      },
+      "settings": {
+        "other": "Harmful Content Continuation (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "google/gemma-7b",
+      "metric": "defect rate",
+      "value": 0.013,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Continuation (DR-3)      0.007        0.003            0.010         0.005      0.029   0.026     0.013     0.013"
+      },
+      "settings": {
+        "other": "Harmful Content Continuation (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "metric": "defect rate",
+      "value": 0.013,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Continuation (DR-3)      0.007        0.003            0.010         0.005      0.029   0.026     0.013     0.013"
+      },
+      "settings": {
+        "other": "Harmful Content Continuation (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "metric": "defect rate",
+      "value": 0.1,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Summarization (DR-3)     0.100        0.110            0.112         0.12       0.144   0.223     0.103     0.082"
+      },
+      "settings": {
+        "other": "Harmful Content Summarization (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "metric": "defect rate",
+      "value": 0.11,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Summarization (DR-3)     0.100        0.110            0.112         0.12       0.144   0.223     0.103     0.082"
+      },
+      "settings": {
+        "other": "Harmful Content Summarization (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "metric": "defect rate",
+      "value": 0.112,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Summarization (DR-3)     0.100        0.110            0.112         0.12       0.144   0.223     0.103     0.082"
+      },
+      "settings": {
+        "other": "Harmful Content Summarization (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "metric": "defect rate",
+      "value": 0.12,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Summarization (DR-3)     0.100        0.110            0.112         0.12       0.144   0.223     0.103     0.082"
+      },
+      "settings": {
+        "other": "Harmful Content Summarization (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/phi-2",
+      "metric": "defect rate",
+      "value": 0.144,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Summarization (DR-3)     0.100        0.110            0.112         0.12       0.144   0.223     0.103     0.082"
+      },
+      "settings": {
+        "other": "Harmful Content Summarization (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "mistralai/Mistral-7B-v0.1",
+      "metric": "defect rate",
+      "value": 0.223,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Summarization (DR-3)     0.100        0.110            0.112         0.12       0.144   0.223     0.103     0.082"
+      },
+      "settings": {
+        "other": "Harmful Content Summarization (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "google/gemma-7b",
+      "metric": "defect rate",
+      "value": 0.103,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Summarization (DR-3)     0.100        0.110            0.112         0.12       0.144   0.223     0.103     0.082"
+      },
+      "settings": {
+        "other": "Harmful Content Summarization (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "metric": "defect rate",
+      "value": 0.082,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "      Harmful Content Summarization (DR-3)     0.100        0.110            0.112         0.12       0.144   0.223     0.103     0.082"
+      },
+      "settings": {
+        "other": "Harmful Content Summarization (DR-3); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "metric": "defect rate",
+      "value": 0.123,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Jailbreak (DR-1)               0.123        0.107            0.111         0.106      0.150   0.156     0.114     0.130"
+      },
+      "settings": {
+        "other": "Jailbreak (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "metric": "defect rate",
+      "value": 0.107,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Jailbreak (DR-1)               0.123        0.107            0.111         0.106      0.150   0.156     0.114     0.130"
+      },
+      "settings": {
+        "other": "Jailbreak (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "metric": "defect rate",
+      "value": 0.111,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Jailbreak (DR-1)               0.123        0.107            0.111         0.106      0.150   0.156     0.114     0.130"
+      },
+      "settings": {
+        "other": "Jailbreak (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "metric": "defect rate",
+      "value": 0.106,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Jailbreak (DR-1)               0.123        0.107            0.111         0.106      0.150   0.156     0.114     0.130"
+      },
+      "settings": {
+        "other": "Jailbreak (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "microsoft/phi-2",
+      "metric": "defect rate",
+      "value": 0.15,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Jailbreak (DR-1)               0.123        0.107            0.111         0.106      0.150   0.156     0.114     0.130"
+      },
+      "settings": {
+        "other": "Jailbreak (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "mistralai/Mistral-7B-v0.1",
+      "metric": "defect rate",
+      "value": 0.156,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Jailbreak (DR-1)               0.123        0.107            0.111         0.106      0.150   0.156     0.114     0.130"
+      },
+      "settings": {
+        "other": "Jailbreak (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "google/gemma-7b",
+      "metric": "defect rate",
+      "value": 0.114,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Jailbreak (DR-1)               0.123        0.107            0.111         0.106      0.150   0.156     0.114     0.130"
+      },
+      "settings": {
+        "other": "Jailbreak (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "Microsoft internal multi-turn conversation RAI",
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "metric": "defect rate",
+      "value": 0.13,
+      "unit": "fraction",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 4",
+        "quote": "                Jailbreak (DR-1)               0.123        0.107            0.111         0.106      0.150   0.156     0.114     0.130"
+      },
+      "settings": {
+        "other": "Jailbreak (DR-1); GPT-4 simulated multi-turn; lower is better"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "microsoft/Phi-3-mini-4k-instruct",
+      "metric": "MC2",
+      "value": 65,
+      "unit": "percent",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "           TruthfulQA\n                                          65.0         70.2           75.1        –       53.0      52.1      63.2       60.1        85.8"
+      },
+      "settings": {
+        "other": "10-Shot; MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "microsoft/Phi-3-small-8k-instruct",
+      "metric": "MC2",
+      "value": 70.2,
+      "unit": "percent",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "           TruthfulQA\n                                          65.0         70.2           75.1        –       53.0      52.1      63.2       60.1        85.8"
+      },
+      "settings": {
+        "other": "10-Shot; MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "microsoft/Phi-3-medium-4k-instruct",
+      "metric": "MC2",
+      "value": 75.1,
+      "unit": "percent",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "           TruthfulQA\n                                          65.0         70.2           75.1        –       53.0      52.1      63.2       60.1        85.8"
+      },
+      "settings": {
+        "other": "10-Shot; MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "mistralai/Mistral-7B-v0.1",
+      "metric": "MC2",
+      "value": 53,
+      "unit": "percent",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "           TruthfulQA\n                                          65.0         70.2           75.1        –       53.0      52.1      63.2       60.1        85.8"
+      },
+      "settings": {
+        "other": "10-Shot; MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-7b",
+      "metric": "MC2",
+      "value": 52.1,
+      "unit": "percent",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "           TruthfulQA\n                                          65.0         70.2           75.1        –       53.0      52.1      63.2       60.1        85.8"
+      },
+      "settings": {
+        "other": "10-Shot; MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "metric": "MC2",
+      "value": 63.2,
+      "unit": "percent",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "           TruthfulQA\n                                          65.0         70.2           75.1        –       53.0      52.1      63.2       60.1        85.8"
+      },
+      "settings": {
+        "other": "10-Shot; MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Mixtral",
+      "metric": "MC2",
+      "value": 60.1,
+      "unit": "percent",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "           TruthfulQA\n                                          65.0         70.2           75.1        –       53.0      52.1      63.2       60.1        85.8"
+      },
+      "settings": {
+        "other": "10-Shot; MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "GPT-3.5 version 1106",
+      "metric": "MC2",
+      "value": 85.8,
+      "unit": "percent",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "           TruthfulQA\n                                          65.0         70.2           75.1        –       53.0      52.1      63.2       60.1        85.8"
+      },
+      "settings": {
+        "other": "10-Shot; MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "metric": "MC2",
+      "value": 64,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 3",
+        "quote": "                    TruthfulQA\n                                         64            77.5        64.7           68.1           69.2         76.6       76.6         78.2"
+      },
+      "settings": {
+        "other": "10-shot, MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "microsoft/Phi-3.5-MoE-instruct",
+      "metric": "MC2",
+      "value": 77.5,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 3",
+        "quote": "                    TruthfulQA\n                                         64            77.5        64.7           68.1           69.2         76.6       76.6         78.2"
+      },
+      "settings": {
+        "other": "10-shot, MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Mistral",
+      "metric": "MC2",
+      "value": 64.7,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 3",
+        "quote": "                    TruthfulQA\n                                         64            77.5        64.7           68.1           69.2         76.6       76.6         78.2"
+      },
+      "settings": {
+        "other": "10-shot, MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Mistral-Nemo",
+      "metric": "MC2",
+      "value": 68.1,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 3",
+        "quote": "                    TruthfulQA\n                                         64            77.5        64.7           68.1           69.2         76.6       76.6         78.2"
+      },
+      "settings": {
+        "other": "10-shot, MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "metric": "MC2",
+      "value": 69.2,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 3",
+        "quote": "                    TruthfulQA\n                                         64            77.5        64.7           68.1           69.2         76.6       76.6         78.2"
+      },
+      "settings": {
+        "other": "10-shot, MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-2-9b-it",
+      "metric": "MC2",
+      "value": 76.6,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 3",
+        "quote": "                    TruthfulQA\n                                         64            77.5        64.7           68.1           69.2         76.6       76.6         78.2"
+      },
+      "settings": {
+        "other": "10-shot, MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemini-flash-1.5",
+      "metric": "MC2",
+      "value": 76.6,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 3",
+        "quote": "                    TruthfulQA\n                                         64            77.5        64.7           68.1           69.2         76.6       76.6         78.2"
+      },
+      "settings": {
+        "other": "10-shot, MC2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "openai/gpt-4o-mini",
+      "metric": "MC2",
+      "value": 78.2,
+      "unit": "percent",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 3",
+        "quote": "                    TruthfulQA\n                                         64            77.5        64.7           68.1           69.2         76.6       76.6         78.2"
+      },
+      "settings": {
+        "other": "10-shot, MC2"
+      }
+    },
+    {
+      "rawEvalName": "Internal",
+      "model": "microsoft/Phi-3.5-vision-instruct",
+      "metric": "RAI score",
+      "value": 8.16,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": "  Internal (private)                        8.16                                     7.06                                 5.44                             7.27                  8.55"
+      },
+      "settings": {
+        "other": "private multi-modal RAI; score [0,10], higher better"
+      }
+    },
+    {
+      "rawEvalName": "Internal",
+      "rawModelName": "Phi-3.5-Vision w/o safety",
+      "metric": "RAI score",
+      "value": 7.06,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": "  Internal (private)                        8.16                                     7.06                                 5.44                             7.27                  8.55"
+      },
+      "settings": {
+        "other": "private multi-modal RAI; score [0,10], higher better; without safety post-training",
+        "helpfulOnly": true
+      }
+    },
+    {
+      "rawEvalName": "Internal",
+      "rawModelName": "Llava-1.6 Vicuna",
+      "metric": "RAI score",
+      "value": 5.44,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": "  Internal (private)                        8.16                                     7.06                                 5.44                             7.27                  8.55"
+      },
+      "settings": {
+        "other": "private multi-modal RAI; score [0,10], higher better"
+      }
+    },
+    {
+      "rawEvalName": "Internal",
+      "model": "Qwen/Qwen-VL-Chat",
+      "metric": "RAI score",
+      "value": 7.27,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": "  Internal (private)                        8.16                                     7.06                                 5.44                             7.27                  8.55"
+      },
+      "settings": {
+        "other": "private multi-modal RAI; score [0,10], higher better"
+      }
+    },
+    {
+      "rawEvalName": "Internal",
+      "model": "openai/gpt-4-vision-preview",
+      "metric": "RAI score",
+      "value": 8.55,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": "  Internal (private)                        8.16                                     7.06                                 5.44                             7.27                  8.55"
+      },
+      "settings": {
+        "other": "private multi-modal RAI; score [0,10], higher better"
+      }
+    },
+    {
+      "rawEvalName": "RTVLM",
+      "model": "microsoft/Phi-3.5-vision-instruct",
+      "metric": "RAI score",
+      "value": 5.44,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": "  RTVLM (public)                            5.44                                     3.56                                 3.86                             4.78                  6.81"
+      },
+      "settings": {
+        "other": "public; score [0,10], higher better"
+      }
+    },
+    {
+      "rawEvalName": "RTVLM",
+      "rawModelName": "Phi-3.5-Vision w/o safety",
+      "metric": "RAI score",
+      "value": 3.56,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": "  RTVLM (public)                            5.44                                     3.56                                 3.86                             4.78                  6.81"
+      },
+      "settings": {
+        "other": "public; score [0,10], higher better; without safety post-training",
+        "helpfulOnly": true
+      }
+    },
+    {
+      "rawEvalName": "RTVLM",
+      "rawModelName": "Llava-1.6 Vicuna",
+      "metric": "RAI score",
+      "value": 3.86,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": "  RTVLM (public)                            5.44                                     3.56                                 3.86                             4.78                  6.81"
+      },
+      "settings": {
+        "other": "public; score [0,10], higher better"
+      }
+    },
+    {
+      "rawEvalName": "RTVLM",
+      "model": "Qwen/Qwen-VL-Chat",
+      "metric": "RAI score",
+      "value": 4.78,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": "  RTVLM (public)                            5.44                                     3.56                                 3.86                             4.78                  6.81"
+      },
+      "settings": {
+        "other": "public; score [0,10], higher better"
+      }
+    },
+    {
+      "rawEvalName": "RTVLM",
+      "model": "openai/gpt-4-vision-preview",
+      "metric": "RAI score",
+      "value": 6.81,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": "  RTVLM (public)                            5.44                                     3.56                                 3.86                             4.78                  6.81"
+      },
+      "settings": {
+        "other": "public; score [0,10], higher better"
+      }
+    },
+    {
+      "rawEvalName": "VLGuard",
+      "model": "microsoft/Phi-3.5-vision-instruct",
+      "metric": "RAI score",
+      "value": 9.1,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": " VLGuard (public)                           9.10                                     4.66                                 5.62                             8.33                  8.90"
+      },
+      "settings": {
+        "other": "public; score [0,10], higher better"
+      }
+    },
+    {
+      "rawEvalName": "VLGuard",
+      "rawModelName": "Phi-3.5-Vision w/o safety",
+      "metric": "RAI score",
+      "value": 4.66,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": " VLGuard (public)                           9.10                                     4.66                                 5.62                             8.33                  8.90"
+      },
+      "settings": {
+        "other": "public; score [0,10], higher better; without safety post-training",
+        "helpfulOnly": true
+      }
+    },
+    {
+      "rawEvalName": "VLGuard",
+      "rawModelName": "Llava-1.6 Vicuna",
+      "metric": "RAI score",
+      "value": 5.62,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": " VLGuard (public)                           9.10                                     4.66                                 5.62                             8.33                  8.90"
+      },
+      "settings": {
+        "other": "public; score [0,10], higher better"
+      }
+    },
+    {
+      "rawEvalName": "VLGuard",
+      "model": "Qwen/Qwen-VL-Chat",
+      "metric": "RAI score",
+      "value": 8.33,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": " VLGuard (public)                           9.10                                     4.66                                 5.62                             8.33                  8.90"
+      },
+      "settings": {
+        "other": "public; score [0,10], higher better"
+      }
+    },
+    {
+      "rawEvalName": "VLGuard",
+      "model": "openai/gpt-4-vision-preview",
+      "metric": "RAI score",
+      "value": 8.9,
+      "unit": "score",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 7",
+        "quote": " VLGuard (public)                           9.10                                     4.66                                 5.62                             8.33                  8.90"
+      },
+      "settings": {
+        "other": "public; score [0,10], higher better"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "model": "microsoft/Phi-3.5-vision-instruct",
+      "metric": "score",
+      "value": 86.1,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "       POPE\n                        86.1             87.4             86.6             87.2                 87.0                  82.6             74.4             84.2               87.0"
+      },
+      "settings": {
+        "other": "test split; object hallucination"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "MM1-3B-Chat",
+      "metric": "score",
+      "value": 87.4,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "       POPE\n                        86.1             87.4             86.6             87.2                 87.0                  82.6             74.4             84.2               87.0"
+      },
+      "settings": {
+        "other": "test split; object hallucination"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "MM1-7B-Chat",
+      "metric": "score",
+      "value": 86.6,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "       POPE\n                        86.1             87.4             86.6             87.2                 87.0                  82.6             74.4             84.2               87.0"
+      },
+      "settings": {
+        "other": "test split; object hallucination"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "Llava-1.6 Vicuna",
+      "metric": "score",
+      "value": 87.2,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "       POPE\n                        86.1             87.4             86.6             87.2                 87.0                  82.6             74.4             84.2               87.0"
+      },
+      "settings": {
+        "other": "test split; object hallucination"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "LLaVA-Next Llama3-8b",
+      "metric": "score",
+      "value": 87,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "       POPE\n                        86.1             87.4             86.6             87.2                 87.0                  82.6             74.4             84.2               87.0"
+      },
+      "settings": {
+        "other": "test split; object hallucination"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "model": "Qwen/Qwen-VL-Chat",
+      "metric": "score",
+      "value": 82.6,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "       POPE\n                        86.1             87.4             86.6             87.2                 87.0                  82.6             74.4             84.2               87.0"
+      },
+      "settings": {
+        "other": "test split; object hallucination"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "model": "anthropic/claude-3-haiku",
+      "metric": "score",
+      "value": 74.4,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "       POPE\n                        86.1             87.4             86.6             87.2                 87.0                  82.6             74.4             84.2               87.0"
+      },
+      "settings": {
+        "other": "test split; object hallucination"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "Gemini 1.0 Pro V",
+      "metric": "score",
+      "value": 84.2,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "       POPE\n                        86.1             87.4             86.6             87.2                 87.0                  82.6             74.4             84.2               87.0"
+      },
+      "settings": {
+        "other": "test split; object hallucination"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "model": "openai/gpt-4o",
+      "metric": "score",
+      "value": 87,
+      "unit": "percent",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "       POPE\n                        86.1             87.4             86.6             87.2                 87.0                  82.6             74.4             84.2               87.0"
+      },
+      "settings": {
+        "other": "test split; object hallucination"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:04:33Z"
+  },
+  "notes": "Technical report (not a system card). Safety-only evals kept per pilot override: Table 4 internal RAI (all rows), TruthfulQA from academic table and Table 3, Table 7 MM RAI (Internal/RTVLM/VLGuard), POPE as hallucination. Skipped capability tables (MMLU, coding, math, Arena Hard, RepoQA, RULER, MT-Bench, MMMU, ScienceQA, etc.). Figure 5 and Figure 8 are charts without readable numeric values in the text layer, so no bar values extracted. Microsoft AI Red Team is in-house, so testers left empty. Seed-linked microsoft/Phi-3-vision-128k-instruct omitted: report describes Phi-3.5-Vision (Figure 8 axis labels say Phi-3-Vision but caption is Phi-3.5-Vision)."
+}

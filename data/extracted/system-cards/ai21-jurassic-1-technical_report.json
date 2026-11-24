@@ -1,0 +1,2333 @@
+{
+  "document": "ai21-jurassic-1-technical_report",
+  "alsoDocuments": ["ai21-jurassic-1-blog"],
+  "covers": [
+    {
+      "model": "ai21/j1-jumbo"
+    },
+    {
+      "rawModelName": "J1-Large"
+    }
+  ],
+  "pageCount": 9,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "2048 tokens",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "if we use the same\nmaximal sequence length of 2048 tokens, we can represent 39% more text"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (auto-regressive language models)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Jurassic-1 is a pair of auto-regressive language models recently released by AI21 Labs, consisting"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English (training corpora)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "auto-regressive models trained on a mix of English\ncorpora that scales up to 178B parameters"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "J1-Jumbo 178B; J1-Large 7.5B",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "J1-Large           7.5B         32          4096       32       128       256K\n                        GPT-3 175B         175B         96          12288      96       128       50K\n                        J1-Jumbo           178B         76          13824      96       144       256K"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Transformer decoder (Radford et al. 2019 modifications); J1-Jumbo 76 layers",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "We based our models on the decoder module of the Transformer architecture (Vaswani et al., 2017) with the modifications\nproposed by Radford et al. (2019)."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "300B tokens from publicly available resources (structure similar to GPT-3 training data)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Our model was trained with the conventional self-supervised auto-regressive training objective on 300B tokens drawn\nfrom publicly available resources, attempting, in part, to replicate the structure of the training data as reported in Brown"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Jurassic-1 models are marginally less biased than GPT3 on [StereoSet](/evals/stereoset) (Overall ICAT J1-Jumbo 68.3)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "While it appears the Jurassic-1 models are\nmarginally less biased than GPT3, this is merely one benchmark and we do not wish to overstate our claims."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The authors state Jurassic-1 absorbs training-data bias and toxicity and can replicate them, like other language models.", "tone": "bad",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "language models absorb biases and toxicity expressed in\nthe texts they were trained on, and are prone to replicating them. Our model is no different"
+      }
+    },
+    {
+      "text": "They recommend prompt engineering and filtering of suspected results to mitigate bias harms, while noting the problem is unsolved.", "tone": "mixed",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Many methods could be\nused to mitigate these issues, e.g., by carefully engineering prompts, or filtering suspected results – which we strongly\nrecommend users of our models to adopt"
+      }
+    },
+    {
+      "text": "AI21 invites ethics and safety collaboration via safety@ai21.com.", "tone": "neutral",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "We invite anyone\ninterested in conducting research on or otherwise promoting AI ethics and safety to contact us at safety@ai21.com and\nexplore opportunities for collaboration."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "LM Score",
+      "value": 92.7,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 92.7                92.6               93.9                92.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "LM Score",
+      "value": 92.6,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 92.7                92.6               93.9                92.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "LM Score",
+      "value": 93.9,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 92.7                92.6               93.9                92.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "LM Score",
+      "value": 92.9,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 92.7                92.6               93.9                92.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "SS Score",
+      "value": 72.2,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 72.2                72.1               73.3                75.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "SS Score",
+      "value": 72.1,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 72.2                72.1               73.3                75.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "SS Score",
+      "value": 73.3,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 72.2                72.1               73.3                75.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "SS Score",
+      "value": 75.4,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 72.2                72.1               73.3                75.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "ICAT Score",
+      "value": 51.6,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 72.2                72.1               73.3                75.4\n                          ICAT               51.6                51.6               50.1                45.7"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "ICAT Score",
+      "value": 51.6,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 72.2                72.1               73.3                75.4\n                          ICAT               51.6                51.6               50.1                45.7"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "ICAT Score",
+      "value": 50.1,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 72.2                72.1               73.3                75.4\n                          ICAT               51.6                51.6               50.1                45.7"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "ICAT Score",
+      "value": 45.7,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 72.2                72.1               73.3                75.4\n                          ICAT               51.6                51.6               50.1                45.7"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "LM Score",
+      "value": 91.1,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 91.1                91.7               91.9                92.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "LM Score",
+      "value": 91.7,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 91.1                91.7               91.9                92.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "LM Score",
+      "value": 91.9,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 91.1                91.7               91.9                92.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "LM Score",
+      "value": 92.3,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 91.1                91.7               91.9                92.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "SS Score",
+      "value": 65.3,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 65.3                64.2               66.6                67.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "SS Score",
+      "value": 64.2,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 65.3                64.2               66.6                67.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "SS Score",
+      "value": 66.6,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 65.3                64.2               66.6                67.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "SS Score",
+      "value": 67,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 65.3                64.2               66.6                67.0"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "ICAT Score",
+      "value": 63.2,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 65.3                64.2               66.6                67.0\n                          ICAT               63.2                65.7               61.4                60.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "ICAT Score",
+      "value": 65.7,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 65.3                64.2               66.6                67.0\n                          ICAT               63.2                65.7               61.4                60.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "ICAT Score",
+      "value": 61.4,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 65.3                64.2               66.6                67.0\n                          ICAT               63.2                65.7               61.4                60.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "ICAT Score",
+      "value": 60.9,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 65.3                64.2               66.6                67.0\n                          ICAT               63.2                65.7               61.4                60.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "LM Score",
+      "value": 94,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 94.0                93.6               94.0                93.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "LM Score",
+      "value": 93.6,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 94.0                93.6               94.0                93.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "LM Score",
+      "value": 94,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 94.0                93.6               94.0                93.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "LM Score",
+      "value": 93.6,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 94.0                93.6               94.0                93.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "SS Score",
+      "value": 64.6,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 64.6                62.8               68.6                65.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "SS Score",
+      "value": 62.8,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 64.6                62.8               68.6                65.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "SS Score",
+      "value": 68.6,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 64.6                62.8               68.6                65.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "SS Score",
+      "value": 65.6,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 64.6                62.8               68.6                65.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "ICAT Score",
+      "value": 66.5,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 64.6                62.8               68.6                65.6\n                          ICAT               66.5                69.7               59.0                64.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "ICAT Score",
+      "value": 69.7,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 64.6                62.8               68.6                65.6\n                          ICAT               66.5                69.7               59.0                64.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "ICAT Score",
+      "value": 59,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 64.6                62.8               68.6                65.6\n                          ICAT               66.5                69.7               59.0                64.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "ICAT Score",
+      "value": 64.3,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 64.6                62.8               68.6                65.6\n                          ICAT               66.5                69.7               59.0                64.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "LM Score",
+      "value": 92,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 92.0                92.1               92.8                91.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "LM Score",
+      "value": 92.1,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 92.0                92.1               92.8                91.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "LM Score",
+      "value": 92.8,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 92.0                92.1               92.8                91.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "LM Score",
+      "value": 91.4,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 92.0                92.1               92.8                91.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "SS Score",
+      "value": 69.5,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 69.5                65.2               65.8                66.2"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "SS Score",
+      "value": 65.2,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 69.5                65.2               65.8                66.2"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "SS Score",
+      "value": 65.8,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 69.5                65.2               65.8                66.2"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "SS Score",
+      "value": 66.2,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 69.5                65.2               65.8                66.2"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "ICAT Score",
+      "value": 56.2,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 69.5                65.2               65.8                66.2\n                          ICAT               56.2                64.0               63.4                61.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "ICAT Score",
+      "value": 64,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 69.5                65.2               65.8                66.2\n                          ICAT               56.2                64.0               63.4                61.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "ICAT Score",
+      "value": 63.4,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 69.5                65.2               65.8                66.2\n                          ICAT               56.2                64.0               63.4                61.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "ICAT Score",
+      "value": 61.8,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 69.5                65.2               65.8                66.2\n                          ICAT               56.2                64.0               63.4                61.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "LM Score",
+      "value": 92.7,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 92.7                92.7               93.1                92.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "LM Score",
+      "value": 92.7,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 92.7                92.7               93.1                92.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "LM Score",
+      "value": 93.1,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 92.7                92.7               93.1                92.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "LM Score",
+      "value": 92.9,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 92.7                92.7               93.1                92.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "SS Score",
+      "value": 66.1,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Intra-Sentence\n                          SS                 66.1                64.6               68.3                67.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "SS Score",
+      "value": 64.6,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Intra-Sentence\n                          SS                 66.1                64.6               68.3                67.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "SS Score",
+      "value": 68.3,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Intra-Sentence\n                          SS                 66.1                64.6               68.3                67.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "SS Score",
+      "value": 67.4,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Intra-Sentence\n                          SS                 66.1                64.6               68.3                67.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "ICAT Score",
+      "value": 62.9,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Overall\n                          ICAT               62.9                65.7               59.0                60.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "ICAT Score",
+      "value": 65.7,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Overall\n                          ICAT               62.9                65.7               59.0                60.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "ICAT Score",
+      "value": 59,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Overall\n                          ICAT               62.9                65.7               59.0                60.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "ICAT Score",
+      "value": 60.6,
+      "unit": "score",
+      "settings": {
+        "other": "Intra-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Overall\n                          ICAT               62.9                65.7               59.0                60.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "LM Score",
+      "value": 83.7,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 83.7                83.2               82.6                80.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "LM Score",
+      "value": 83.2,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 83.7                83.2               82.6                80.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "LM Score",
+      "value": 82.6,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 83.7                83.2               82.6                80.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "LM Score",
+      "value": 80.9,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 83.7                83.2               82.6                80.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "SS Score",
+      "value": 59.5,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 59.5                58.9               63.2                59.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "SS Score",
+      "value": 58.9,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 59.5                58.9               63.2                59.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "SS Score",
+      "value": 63.2,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 59.5                58.9               63.2                59.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "SS Score",
+      "value": 59.5,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 59.5                58.9               63.2                59.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "ICAT Score",
+      "value": 67.9,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 59.5                58.9               63.2                59.5\n                          ICAT               67.9                68.4               60.7                65.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "ICAT Score",
+      "value": 68.4,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 59.5                58.9               63.2                59.5\n                          ICAT               67.9                68.4               60.7                65.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "ICAT Score",
+      "value": 60.7,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 59.5                58.9               63.2                59.5\n                          ICAT               67.9                68.4               60.7                65.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "ICAT Score",
+      "value": 65.4,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Gender"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Gender            SS                 59.5                58.9               63.2                59.5\n                          ICAT               67.9                68.4               60.7                65.4"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "LM Score",
+      "value": 81.7,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 81.7                80.8               78.3                78.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "LM Score",
+      "value": 80.8,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 81.7                80.8               78.3                78.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "LM Score",
+      "value": 78.3,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 81.7                80.8               78.3                78.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "LM Score",
+      "value": 78.5,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 81.7                80.8               78.3                78.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "SS Score",
+      "value": 56.9,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 56.9                53.1               58.1                56.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "SS Score",
+      "value": 53.1,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 56.9                53.1               58.1                56.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "SS Score",
+      "value": 58.1,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 56.9                53.1               58.1                56.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "SS Score",
+      "value": 56.5,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 56.9                53.1               58.1                56.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "ICAT Score",
+      "value": 70.4,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 56.9                53.1               58.1                56.5\n                          ICAT               70.4                75.7               65.7                68.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "ICAT Score",
+      "value": 75.7,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 56.9                53.1               58.1                56.5\n                          ICAT               70.4                75.7               65.7                68.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "ICAT Score",
+      "value": 65.7,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 56.9                53.1               58.1                56.5\n                          ICAT               70.4                75.7               65.7                68.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "ICAT Score",
+      "value": 68.3,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Profession"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Profession        SS                 56.9                53.1               58.1                56.5\n                          ICAT               70.4                75.7               65.7                68.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "LM Score",
+      "value": 84.7,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 84.7                82.8               83.1                82.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "LM Score",
+      "value": 82.8,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 84.7                82.8               83.1                82.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "LM Score",
+      "value": 83.1,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 84.7                82.8               83.1                82.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "LM Score",
+      "value": 82.5,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 84.7                82.8               83.1                82.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "SS Score",
+      "value": 51.6,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 51.6                47.6               52.2                50.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "SS Score",
+      "value": 47.6,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 51.6                47.6               52.2                50.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "SS Score",
+      "value": 52.2,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 51.6                47.6               52.2                50.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "SS Score",
+      "value": 50.6,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 51.6                47.6               52.2                50.6"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "ICAT Score",
+      "value": 82,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 51.6                47.6               52.2                50.6\n                          ICAT               82.0                78.8               79.4                81.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "ICAT Score",
+      "value": 78.8,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 51.6                47.6               52.2                50.6\n                          ICAT               82.0                78.8               79.4                81.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "ICAT Score",
+      "value": 79.4,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 51.6                47.6               52.2                50.6\n                          ICAT               82.0                78.8               79.4                81.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "ICAT Score",
+      "value": 81.5,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Race"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Race              SS                 51.6                47.6               52.2                50.6\n                          ICAT               82.0                78.8               79.4                81.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "LM Score",
+      "value": 87.1,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 87.1                84.9               89.0                85.2"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "LM Score",
+      "value": 84.9,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 87.1                84.9               89.0                85.2"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "LM Score",
+      "value": 89,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 87.1                84.9               89.0                85.2"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "LM Score",
+      "value": 85.2,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 87.1                84.9               89.0                85.2"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "SS Score",
+      "value": 54.2,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 54.2                53.2               52.9                54.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "SS Score",
+      "value": 53.2,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 54.2                53.2               52.9                54.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "SS Score",
+      "value": 52.9,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 54.2                53.2               52.9                54.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "SS Score",
+      "value": 54.5,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 54.2                53.2               52.9                54.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "ICAT Score",
+      "value": 79.8,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 54.2                53.2               52.9                54.5\n                          ICAT               79.8                79.4               83.9                77.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "ICAT Score",
+      "value": 79.4,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 54.2                53.2               52.9                54.5\n                          ICAT               79.8                79.4               83.9                77.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "ICAT Score",
+      "value": 83.9,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 54.2                53.2               52.9                54.5\n                          ICAT               79.8                79.4               83.9                77.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "ICAT Score",
+      "value": 77.5,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Religion"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Religion          SS                 54.2                53.2               52.9                54.5\n                          ICAT               79.8                79.4               83.9                77.5"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "LM Score",
+      "value": 83.5,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 83.5                82.2               81.5                80.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "LM Score",
+      "value": 82.2,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 83.5                82.2               81.5                80.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "LM Score",
+      "value": 81.5,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 83.5                82.2               81.5                80.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "LM Score",
+      "value": 80.8,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 83.5                82.2               81.5                80.8"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "SS Score",
+      "value": 54.7,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Inter-Sentence\n                          SS                 54.7                51.3               55.9                54.1"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "SS Score",
+      "value": 51.3,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Inter-Sentence\n                          SS                 54.7                51.3               55.9                54.1"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "SS Score",
+      "value": 55.9,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Inter-Sentence\n                          SS                 54.7                51.3               55.9                54.1"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "SS Score",
+      "value": 54.1,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Inter-Sentence\n                          SS                 54.7                51.3               55.9                54.1"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "ICAT Score",
+      "value": 75.7,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Overall\n                          ICAT               75.7                80.0               71.9                74.2"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "ICAT Score",
+      "value": 80,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Overall\n                          ICAT               75.7                80.0               71.9                74.2"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "ICAT Score",
+      "value": 71.9,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Overall\n                          ICAT               75.7                80.0               71.9                74.2"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "ICAT Score",
+      "value": 74.2,
+      "unit": "score",
+      "settings": {
+        "other": "Inter-Sentence; Overall"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Overall\n                          ICAT               75.7                80.0               71.9                74.2"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "LM Score",
+      "value": 88.1,
+      "unit": "score",
+      "settings": {
+        "other": "Overall Score"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 88.1                87.4               87.3                86.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "LM Score",
+      "value": 87.4,
+      "unit": "score",
+      "settings": {
+        "other": "Overall Score"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 88.1                87.4               87.3                86.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "LM Score",
+      "value": 87.3,
+      "unit": "score",
+      "settings": {
+        "other": "Overall Score"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 88.1                87.4               87.3                86.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "LM Score",
+      "value": 86.9,
+      "unit": "score",
+      "settings": {
+        "other": "Overall Score"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          LM                 88.1                87.4               87.3                86.9"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "SS Score",
+      "value": 60.4,
+      "unit": "score",
+      "settings": {
+        "other": "Overall Score"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Overall Score     SS                 60.4                58.0               62.0                60.7"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "SS Score",
+      "value": 58,
+      "unit": "score",
+      "settings": {
+        "other": "Overall Score"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Overall Score     SS                 60.4                58.0               62.0                60.7"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "SS Score",
+      "value": 62,
+      "unit": "score",
+      "settings": {
+        "other": "Overall Score"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Overall Score     SS                 60.4                58.0               62.0                60.7"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "SS Score",
+      "value": 60.7,
+      "unit": "score",
+      "settings": {
+        "other": "Overall Score"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "        Overall Score     SS                 60.4                58.0               62.0                60.7"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Curie (≈GPT-3 6.7B)",
+      "metric": "ICAT Score",
+      "value": 69.8,
+      "unit": "score",
+      "settings": {
+        "other": "Overall Score"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          ICAT               69.8                73.5               66.3                68.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "J1-Large",
+      "metric": "ICAT Score",
+      "value": 73.5,
+      "unit": "score",
+      "settings": {
+        "other": "Overall Score"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          ICAT               69.8                73.5               66.3                68.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "rawModelName": "Davinci (≈GPT-3 175B)",
+      "metric": "ICAT Score",
+      "value": 66.3,
+      "unit": "score",
+      "settings": {
+        "other": "Overall Score"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          ICAT               69.8                73.5               66.3                68.3"
+      }
+    },
+    {
+      "rawEvalName": "StereoSet",
+      "model": "ai21/j1-jumbo",
+      "metric": "ICAT Score",
+      "value": 68.3,
+      "unit": "score",
+      "settings": {
+        "other": "Overall Score"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 7",
+        "quote": "                          ICAT               69.8                73.5               66.3                68.3"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:49:26Z"
+  },
+  "notes": "Technical report / white paper (not a system card). Only safety eval is StereoSet bias (Table 7); toxicity is discussed qualitatively with no toxicity benchmark scores. Skipped capability: Table 4 log-prob per byte, Table 5 format sensitivity, Table 6 zero-shot (ARC, BoolQ, HellaSwag, PIQA, RACE, RTE, StoryCloze, Winogrande), Figure 2 few-shot DBPedia-14 and TREC-6. Seed links only ai21/j1-jumbo; J1-Large (7.5B) has no separate seed id (seed api alias j1-large maps to Jumbo), so covers uses rawModelName. Curie/Davinci left as rawModelName. Abstract says J1-Large 7B; Table 1 says 7.5B. No risk framework or external safety testers. Footnote mentions 800 GPUs over months but no FLOPs, so trainingCompute not_stated."
+}

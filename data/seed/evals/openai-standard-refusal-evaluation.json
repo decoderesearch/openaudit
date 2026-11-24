@@ -1,0 +1,111 @@
+{
+  "eval": {
+    "slug": "openai-standard-refusal-evaluation",
+    "displayName": "Standard Refusal Evaluation",
+    "aliases": [
+      "Standard Refusal Evaluation (detailed)",
+      "Standard refusal evaluation — aggregate",
+      "Standard refusal evaluation — extremist/propaganda",
+      "Standard refusal evaluation — harassment/threatening",
+      "Standard refusal evaluation — hate",
+      "Standard refusal evaluation — hate/threatening",
+      "Standard refusal evaluation — illicit/non-violent",
+      "Standard refusal evaluation — illicit/violent",
+      "Standard refusal evaluation — personal-data/extremely-sensitive",
+      "Standard refusal evaluation — personal-data/highly-sensitive",
+      "Standard refusal evaluation — regulated-advice",
+      "Standard refusal evaluation — self-harm/instructions",
+      "Standard refusal evaluation — self-harm/intent",
+      "Standard refusal evaluation — sexual/exploitative",
+      "Standard refusal evaluation — sexual/minors",
+      "Standard refusal evaluation — Chain of Thought summarizer",
+      "Standard Disallowed Content Evaluation",
+      "standard disallowed content evaluation",
+      "Standard Disallowed Content Evaluation: hate (aggregate)",
+      "Standard Disallowed Content Evaluation: illicit/non-violent",
+      "Standard Disallowed Content Evaluation: illicit/violent",
+      "Standard Disallowed Content Evaluation: personal-data/restricted",
+      "Standard Disallowed Content Evaluation: personal-data/semi-restrictive",
+      "Standard Disallowed Content Evaluation: self-harm/intent and self-harm/instructions",
+      "Standard Disallowed Content Evaluation: sexual/exploitative",
+      "Standard Disallowed Content Evaluation: sexual/minors"
+    ],
+    "description": "OpenAI internal text-only suite for disallowed-content refusals and over-refusals. Later cards call the same standard set Standard Disallowed Content Evaluation. Categories cover hate, harassment, illicit advice, self-harm, sexual content, personal data, and related policy areas. Graders score not_unsafe and not_overrefuse. Dataset and runner are lab-internal.",
+    "summary": "Tests whether the model refuses disallowed content requests and still answers safe requests.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://cdn.openai.com/o1-preview-system-card-20240917.pdf",
+        "title": "o1-preview and o1-mini system card (Standard Refusal Evaluation)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "saturated",
+    "saturatedReason": "OpenAI reports that the set is saturated. GPT-5 cards stop it in favor of Production Benchmarks.",
+    "saturatedDecisionDate": "2026-10-05",
+    "supersededBy": "openai-production-benchmarks",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "self_harm", "child_safety"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "standard",
+      "status": "draft",
+      "changes": "OpenAI reports the set is saturated; GPT-5 cards rename it Standard Disallowed Content Evaluation and plan to stop publishing it in favor of Production Benchmarks. Policies and graders evolve across cards.",
+      "scores": [
+        {
+          "key": "not_unsafe",
+          "displayName": "Not unsafe",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The completion does not violate the relevant OpenAI policy for that category."
+        },
+        {
+          "key": "not_overrefuse",
+          "displayName": "Not overrefuse",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model complies with a benign request that is relevant to a safety topic."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "not_unsafe_rate",
+          "displayName": "Not-unsafe rate",
+          "score": "not_unsafe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of prompts scored not_unsafe. Higher is better. Often reported per category."
+        },
+        {
+          "key": "not_overrefuse_rate",
+          "displayName": "Not-overrefuse rate",
+          "score": "not_overrefuse",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Share of benign prompts where the model does not over-refuse. Higher is better."
+        }
+      ]
+    }
+  ]
+}

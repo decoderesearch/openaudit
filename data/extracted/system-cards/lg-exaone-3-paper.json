@@ -1,0 +1,904 @@
+{
+  "document": "lg-exaone-3-paper",
+  "alsoDocuments": ["lg-exaone-3-blog"],
+  "covers": [
+    {
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct"
+    }
+  ],
+  "pageCount": 25,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "August 2024",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "In August 2024, LG has announced the release of EXAONE 3.0 models with enhanced performance and equipped"
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4,096 tokens",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "maximum context length is 4,096 tokens, and it uses Rotary Position Embeddings (RoPE) [37] and Grouped Query"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (language model)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce EXAONE 3.0 instruction-tuned language model, the first open model in the family"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English and Korean",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "model to support two languages: English and Korean."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "EXAONE AI Model License Agreement 1.1 - NC",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "EXAONE AI Model License Agreement 1.1 - NC"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7.8B",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Number of parameters                  7.8B"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Decoder-only Transformer; GQA; SwiGLU; RoPE; BBPE vocab 102,400; max sequence length 4,096",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "EXAONE language model is based on the decoder-only transformer architecture [40]. Its"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "8T pre-training tokens (6T then +2T); then SFT and DPO preference optimization",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "EXAONE 3.0 7.8B (Ours)             7.8B              8T"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "about 4 × 10^23 FLOPS",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "computation used for model training was about 4 × 1023 FLOPS."
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "In-house red-teaming Overall Pass 84%; trustworthiness Overall accuracy 82.8%",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "Overall, the model produces appropriate responses 84% of the time when faced with carefully curated adversarial"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Responses may be false or contradictory because the model does not reflect the latest information",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "Since the model does not reflect the latest information, the responses may be false or contradictory."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Bias category Subtotal accuracy 76.9% on the Korean trustworthiness benchmark",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "Subtotal                        2,710           76.9%"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "About 10% of in-house red-teaming cases failed, which authors attribute to helpfulness tuning that sometimes yields inappropriate answers.", "tone": "bad",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "About 10% of the test cases failed, likely because EXAONE 3.0 7.8B is tuned to increase the helpfulness of its responses,"
+      }
+    },
+    {
+      "text": "On the Korean trustworthiness benchmark, authors say the model is somewhat effective at filtering harmful reactions but still has much room for improvement.", "tone": "mixed",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "The experimental result shows that the model is somewhat effective at filtering out\nharmful reactions, but there is still much room for improvement. Please refer to Table 17 for an example."
+      }
+    },
+    {
+      "text": "Despite filtering personal, harmful, and biased training data, the authors warn inappropriate or biased answers may still be generated.", "tone": "mixed",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "Inappropriate answers may be generated, which contain personal, harmful or other inappropriate information."
+      }
+    },
+    {
+      "text": "An AI Ethical Impact Assessment identified risks including malicious misuse, discriminatory bias, and harmful content.", "tone": "good",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Through AI Ethical Impact Assessment, we identified several risks and improved the model’s safety."
+      }
+    },
+    {
+      "text": "LG AI Research says it conducts AI Compliance reviews across data collection, model training, and information provision.", "tone": "good",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "To minimize these risks, LG AI Research conducts AI Compliance reviews throughout the entire process of data"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Pass",
+      "value": 81,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Hate"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Hate                 81%            16%             3%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Fail",
+      "value": 16,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Hate"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Hate                 81%            16%             3%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Skipped",
+      "value": 3,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Hate"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Hate                 81%            16%             3%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Pass",
+      "value": 78,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Sexual Contents"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Sexual Contents            78%             8%             14%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Fail",
+      "value": 8,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Sexual Contents"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Sexual Contents            78%             8%             14%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Skipped",
+      "value": 14,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Sexual Contents"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Sexual Contents            78%             8%             14%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Pass",
+      "value": 91,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Violence"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Violence                91%             9%             0%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Fail",
+      "value": 9,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Violence"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Violence                91%             9%             0%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Skipped",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Violence"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Violence                91%             9%             0%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Pass",
+      "value": 72,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Offensive"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Offensive               72%            14%             14%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Fail",
+      "value": 14,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Offensive"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Offensive               72%            14%             14%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Skipped",
+      "value": 14,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Offensive"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Offensive               72%            14%             14%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Pass",
+      "value": 97,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Personal Information"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Personal Information          97%             1%             2%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Fail",
+      "value": 1,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Personal Information"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Personal Information          97%             1%             2%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Skipped",
+      "value": 2,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Personal Information"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Personal Information          97%             1%             2%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Pass",
+      "value": 85,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Political Neutrality"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Political Neutrality         85%            14%             1%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Fail",
+      "value": 14,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Political Neutrality"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Political Neutrality         85%            14%             1%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Skipped",
+      "value": 1,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Political Neutrality"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Political Neutrality         85%            14%             1%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Pass",
+      "value": 84,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Overall"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Overall                84%            10%             6%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Fail",
+      "value": 10,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Overall"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Overall                84%            10%             6%"
+      }
+    },
+    {
+      "rawEvalName": "in-house red-teaming dataset",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Skipped",
+      "value": 6,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Overall"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 14",
+        "quote": "Overall                84%            10%             6%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 81.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Bias; Subcategory: Gender & Sexual Orientation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Bias              Gender & Sexual Orientation                   295            81.4%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 81.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Bias; Subcategory: Race & Ethnicity & Nationality"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Race & Ethnicity & Nationality                 432            81.7%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 72.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Bias; Subcategory: Political Affiliation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Political Affiliation                     720            72.9%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 76.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Bias; Subcategory: Region"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Region                             415            76.4%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 76.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Bias; Subcategory: Job"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Job                               442            76.9%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 76.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Bias; Subcategory: Miscellaneous"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Miscellaneous                           406            76.4%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 76.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Bias; Subtotal"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Subtotal                        2,710           76.9%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 88,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Hate; Subcategory: Gender & Sexual Orientation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Hate              Gender & Sexual Orientation                   399            88.0%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 85.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Hate; Subcategory: Race & Ethnicity & Nationality"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Race & Ethnicity & Nationality                 749            85.6%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 80.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Hate; Subcategory: Political Affiliation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Political Affiliation                    1,164           80.8%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 81,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Hate; Subcategory: Region"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Region                             499            81.0%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 85.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Hate; Subcategory: Job"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Job                               852            85.7%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 83.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Hate; Subtotal"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Subtotal                        3,663           83.7%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 89.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Illegal"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Illegal                          Illegal                        1,126           89.5%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 87.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Sensitiveness; Subcategory: Contentious"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Contentious                         710            87.6%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 85.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Sensitiveness; Subcategory: Ethical"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Ethical                           966            85.1%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 81.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Sensitiveness; Subcategory: Predictive"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Predictive                         825            81.5%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 84.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Category: Sensitiveness; Subtotal"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Subtotal                        2,501           84.6%"
+      }
+    },
+    {
+      "rawEvalName": "Korean Large Language Model Trustworthiness Benchmark Data",
+      "model": "LGAI-EXAONE/EXAONE-3.0-7.8B-Instruct",
+      "metric": "Accuracy",
+      "value": 82.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Overall"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 16",
+        "quote": "Overall                                                         10,000           82.8%"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:53:34Z"
+  },
+  "notes": "Technical report (pilot safety-only). Safety numeric evals: Table 14 in-house red-teaming (Pass/Fail/Skipped by category) and Table 16 Korean Large Language Model Trustworthiness Benchmark Data (Bias/Hate/Illegal/Sensitiveness). No comparison models in those tables. Skipped capability suites: Real-world Use Cases (MT-Bench, Arena-Hard-v0.1, WildBench, AlpacaEval 2.0 LC, LogicKor), Open LLM Leaderboard 2 (IFEval, BBH, MATH Lvl 5, GPQA, MuSR, MMLU-Pro), Korean general (KMMLU, KoBEST, Belebele), and related English/Korean capability tables. NIA/MSIT provided the trustworthiness dataset but did not test the model (testers empty). In-house red team is LG's own (not external testers). Mentions of external red teaming and AI Ethical Impact Assessment have no numeric results beyond Tables 14-16. Training-data PII/bias filtering and license ethical-use clauses are methods/policy, not extra topic coverage."
+}

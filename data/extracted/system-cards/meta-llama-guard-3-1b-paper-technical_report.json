@@ -1,0 +1,1383 @@
+{
+  "document": "meta-llama-guard-3-1b-paper-technical_report",
+  "alsoDocuments": ["meta-llama-3.2-blog"],
+  "covers": [
+    {
+      "model": "meta-llama/Llama-Guard-3-1B-INT4"
+    },
+    {
+      "model": "meta-llama/Llama-Guard-3-1B"
+    }
+  ],
+  "pageCount": 9,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (prompt classification and prompt+response classification)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "only user input (prompt classification) or both user input and generative model output (prompt + response"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English plus French, German, Italian, Spanish, Portuguese, Hindi, Vietnamese, Indonesian (Table 1)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "or higher F1 score than Llama Guard 3-1B on 5 out of 8 non-English languages. Compared to GPT4, Llama"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "1.1B (Table 1 # param); pruned stage has 1123 million parameters",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Fine-tuned from Llama 3.2 1B; pruned to 12 layers / 6400 MLP dim; INT4 weight and INT8 activation QAT; unembedding pruned to 20 tokens; distilled from Llama Guard 3-8B",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Both Llama Guard 3-1B\nand Llama Guard 3-1B-INT4 start from the Llama 3.2 1B pre-trained model (lla, 2024), but Llama Guard"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "English Llama Guard labels on Llama 2/3 generations from hh-rlhf; plus multilingual human and synthetic conversation data",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "We finetune Llama Guard 3-1B-INT4 using the English data used by Llama Guard (Inan et al., 2023), which"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Moderates prompts and responses as safe or unsafe on an internal MLCommons hazard taxonomy test set",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "We evaluate the performance of Llama Guard 3-1B-INT4 on our internal test dataset based on MLCommons"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Llama Guard 3-1B-INT4 matches or beats Llama Guard 3-1B on safety moderation while being about 7× smaller (440MB).", "tone": "good",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "safety moderation scores to its larger counterpart, Llama Guard 3-1B, despite being approximately 7"
+      }
+    },
+    {
+      "text": "Distillation from Llama Guard 3-8B improved absolute F1 by 1.3% on the internal test set versus standard finetuning.", "tone": "good",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "We observed a 1.3 percent (absolute) improvement in F1-score on internal"
+      }
+    },
+    {
+      "text": "On a Moto-Razor Android phone the INT4 model reached at least 30 tokens/s and at most 2.5s time-to-first-token.", "tone": "neutral",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "to a Moto-Razor phone and observed >= 30 token/s and <=2.5s time-to-first-token."
+      }
+    },
+    {
+      "text": "Authors warn some hazard categories (Defamation, Intellectual Property, Elections) need up-to-date factual knowledge beyond this baseline.", "tone": "mixed",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Some hazard categories may require factual, up-to-date knowledge to be evaluated (for example, S5:"
+      }
+    },
+    {
+      "text": "Unembedding pruning keeps 20 output tokens, cutting the output layer from 262.6M to 41.0k parameters.", "tone": "neutral",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "we reduced the output layer size from 262.6M parameters (2048 × 128k) to 40.96k parameters"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "F1",
+      "value": 0.939,
+      "unit": "fraction",
+      "settings": {
+        "other": "English"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "FPR",
+      "value": 0.04,
+      "unit": "fraction",
+      "settings": {
+        "other": "English"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "F1",
+      "value": 0.943,
+      "unit": "fraction",
+      "settings": {
+        "other": "French"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "FPR",
+      "value": 0.036,
+      "unit": "fraction",
+      "settings": {
+        "other": "French"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "F1",
+      "value": 0.877,
+      "unit": "fraction",
+      "settings": {
+        "other": "German"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "FPR",
+      "value": 0.032,
+      "unit": "fraction",
+      "settings": {
+        "other": "German"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "F1",
+      "value": 0.873,
+      "unit": "fraction",
+      "settings": {
+        "other": "Italian"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "FPR",
+      "value": 0.038,
+      "unit": "fraction",
+      "settings": {
+        "other": "Italian"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "F1",
+      "value": 0.875,
+      "unit": "fraction",
+      "settings": {
+        "other": "Spanish"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "FPR",
+      "value": 0.023,
+      "unit": "fraction",
+      "settings": {
+        "other": "Spanish"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "F1",
+      "value": 0.86,
+      "unit": "fraction",
+      "settings": {
+        "other": "Portugese"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "FPR",
+      "value": 0.06,
+      "unit": "fraction",
+      "settings": {
+        "other": "Portugese"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "F1",
+      "value": 0.871,
+      "unit": "fraction",
+      "settings": {
+        "other": "Hindi"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "FPR",
+      "value": 0.05,
+      "unit": "fraction",
+      "settings": {
+        "other": "Hindi"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "F1",
+      "value": 0.89,
+      "unit": "fraction",
+      "settings": {
+        "other": "Vietnamese"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "FPR",
+      "value": 0.034,
+      "unit": "fraction",
+      "settings": {
+        "other": "Vietnamese"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "F1",
+      "value": 0.915,
+      "unit": "fraction",
+      "settings": {
+        "other": "Indonesian"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "metric": "FPR",
+      "value": 0.048,
+      "unit": "fraction",
+      "settings": {
+        "other": "Indonesian"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-8B         0.939/0.040   0.943/0.036   0.877/0.032   0.873/0.038   0.875/0.023   0.860/0.060 0.871/0.050   0.890/0.034   0.915/0.048        8             14.9"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "F1",
+      "value": 0.899,
+      "unit": "fraction",
+      "settings": {
+        "other": "English"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "FPR",
+      "value": 0.09,
+      "unit": "fraction",
+      "settings": {
+        "other": "English"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "F1",
+      "value": 0.939,
+      "unit": "fraction",
+      "settings": {
+        "other": "French"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "FPR",
+      "value": 0.012,
+      "unit": "fraction",
+      "settings": {
+        "other": "French"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "F1",
+      "value": 0.851,
+      "unit": "fraction",
+      "settings": {
+        "other": "German"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "FPR",
+      "value": 0.06,
+      "unit": "fraction",
+      "settings": {
+        "other": "German"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "F1",
+      "value": 0.897,
+      "unit": "fraction",
+      "settings": {
+        "other": "Italian"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "FPR",
+      "value": 0.111,
+      "unit": "fraction",
+      "settings": {
+        "other": "Italian"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "F1",
+      "value": 0.84,
+      "unit": "fraction",
+      "settings": {
+        "other": "Spanish"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "FPR",
+      "value": 0.084,
+      "unit": "fraction",
+      "settings": {
+        "other": "Spanish"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "F1",
+      "value": 0.798,
+      "unit": "fraction",
+      "settings": {
+        "other": "Portugese"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "FPR",
+      "value": 0.108,
+      "unit": "fraction",
+      "settings": {
+        "other": "Portugese"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "F1",
+      "value": 0.815,
+      "unit": "fraction",
+      "settings": {
+        "other": "Hindi"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "FPR",
+      "value": 0.088,
+      "unit": "fraction",
+      "settings": {
+        "other": "Hindi"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "F1",
+      "value": 0.819,
+      "unit": "fraction",
+      "settings": {
+        "other": "Vietnamese"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "FPR",
+      "value": 0.099,
+      "unit": "fraction",
+      "settings": {
+        "other": "Vietnamese"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "F1",
+      "value": 0.875,
+      "unit": "fraction",
+      "settings": {
+        "other": "Indonesian"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B",
+      "metric": "FPR",
+      "value": 0.083,
+      "unit": "fraction",
+      "settings": {
+        "other": "Indonesian"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B         0.899/0.090   0.939/0.012   0.851/0.06    0.897/0.111   0.84/0.084    0.798/0.108 0.815/0.088   0.819/0.099   0.875/0.083       1.5             2.8"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "F1",
+      "value": 0.904,
+      "unit": "fraction",
+      "settings": {
+        "other": "English"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "FPR",
+      "value": 0.084,
+      "unit": "fraction",
+      "settings": {
+        "other": "English"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "F1",
+      "value": 0.873,
+      "unit": "fraction",
+      "settings": {
+        "other": "French"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "FPR",
+      "value": 0.072,
+      "unit": "fraction",
+      "settings": {
+        "other": "French"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "F1",
+      "value": 0.847,
+      "unit": "fraction",
+      "settings": {
+        "other": "German"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "FPR",
+      "value": 0.135,
+      "unit": "fraction",
+      "settings": {
+        "other": "German"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "F1",
+      "value": 0.897,
+      "unit": "fraction",
+      "settings": {
+        "other": "Italian"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "FPR",
+      "value": 0.111,
+      "unit": "fraction",
+      "settings": {
+        "other": "Italian"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "F1",
+      "value": 0.855,
+      "unit": "fraction",
+      "settings": {
+        "other": "Spanish"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "FPR",
+      "value": 0.084,
+      "unit": "fraction",
+      "settings": {
+        "other": "Spanish"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "F1",
+      "value": 0.844,
+      "unit": "fraction",
+      "settings": {
+        "other": "Portugese"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "FPR",
+      "value": 0.112,
+      "unit": "fraction",
+      "settings": {
+        "other": "Portugese"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "F1",
+      "value": 0.782,
+      "unit": "fraction",
+      "settings": {
+        "other": "Hindi"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "FPR",
+      "value": 0.104,
+      "unit": "fraction",
+      "settings": {
+        "other": "Hindi"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "F1",
+      "value": 0.825,
+      "unit": "fraction",
+      "settings": {
+        "other": "Vietnamese"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "FPR",
+      "value": 0.13,
+      "unit": "fraction",
+      "settings": {
+        "other": "Vietnamese"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "F1",
+      "value": 0.833,
+      "unit": "fraction",
+      "settings": {
+        "other": "Indonesian"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "model": "meta-llama/Llama-Guard-3-1B-INT4",
+      "metric": "FPR",
+      "value": 0.121,
+      "unit": "fraction",
+      "settings": {
+        "other": "Indonesian"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "Llama Guard 3-1B -INT4   0.904/0.084   0.873/0.072   0.847/0.135   0.897/0.111   0.855/0.084   0.844/0.112 0.782/0.104   0.825/0.130   0.833/0.121       1.1             0.4"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "F1",
+      "value": 0.805,
+      "unit": "fraction",
+      "settings": {
+        "other": "English; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "FPR",
+      "value": 0.152,
+      "unit": "fraction",
+      "settings": {
+        "other": "English; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "F1",
+      "value": 0.795,
+      "unit": "fraction",
+      "settings": {
+        "other": "French; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "FPR",
+      "value": 0.157,
+      "unit": "fraction",
+      "settings": {
+        "other": "French; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "F1",
+      "value": 0.691,
+      "unit": "fraction",
+      "settings": {
+        "other": "German; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "FPR",
+      "value": 0.123,
+      "unit": "fraction",
+      "settings": {
+        "other": "German; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "F1",
+      "value": 0.753,
+      "unit": "fraction",
+      "settings": {
+        "other": "Italian; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "FPR",
+      "value": 0.2,
+      "unit": "fraction",
+      "settings": {
+        "other": "Italian; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "F1",
+      "value": 0.711,
+      "unit": "fraction",
+      "settings": {
+        "other": "Spanish; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "FPR",
+      "value": 0.169,
+      "unit": "fraction",
+      "settings": {
+        "other": "Spanish; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "F1",
+      "value": 0.738,
+      "unit": "fraction",
+      "settings": {
+        "other": "Portugese; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "FPR",
+      "value": 0.207,
+      "unit": "fraction",
+      "settings": {
+        "other": "Portugese; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "F1",
+      "value": 0.709,
+      "unit": "fraction",
+      "settings": {
+        "other": "Hindi; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "FPR",
+      "value": 0.206,
+      "unit": "fraction",
+      "settings": {
+        "other": "Hindi; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "F1",
+      "value": 0.741,
+      "unit": "fraction",
+      "settings": {
+        "other": "Vietnamese; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "FPR",
+      "value": 0.148,
+      "unit": "fraction",
+      "settings": {
+        "other": "Vietnamese; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "F1",
+      "value": 0.787,
+      "unit": "fraction",
+      "settings": {
+        "other": "Indonesian; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    },
+    {
+      "rawEvalName": "internal test dataset based on MLCommons hazard taxonomy",
+      "rawModelName": "GPT4",
+      "metric": "FPR",
+      "value": 0.169,
+      "unit": "fraction",
+      "settings": {
+        "other": "Indonesian; zero-shot prompting"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "GPT4                     0.805/0.152   0.795/0.157   0.691/0.123    0.753/0.20   0.711/0.169   0.738/0.207 0.709/0.206   0.741/0.148   0.787/0.169        ?               ?"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:46:34Z"
+  },
+  "notes": "Technical report on compressing Llama Guard 3-1B-INT4 (pruning, QAT, unembedding pruning, distillation). Only safety eval is Table 1 F1/FPR on an internal MLCommons-hazard test set across 9 languages for INT4, 1B, 8B, and GPT4; included under the guard-model exception to the content-moderation skip rule. Skipped on-device throughput/TTFT as latency/capability, not safety scores. Paper Date Nov 28 2024 is not phrased as a release date (open-sourced at Meta Connect 2024 without a calendar date). Intro cites Llama Guard 2-8B as teacher then Sec 3.4 says Llama Guard 3-8B; distillation finding follows Sec 3.4. Table header spells Portuguese as Portugese; kept that spelling in settings.other. No external testers or risk-framework decisions. Hazard categories beyond S5/S8/S13 are not listed here, so child_safety/self_harm left uncovered."
+}

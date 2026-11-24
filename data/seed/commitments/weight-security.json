@@ -1,0 +1,1222 @@
+{
+  "slug": "weight-security",
+  "name": "Model Weight Security",
+  "category": "security",
+  "order": 12,
+  "summary": "The lab protects the weights that it has not released against theft by well-funded attackers, including states, and keeps dangerous weights closed.",
+  "description": "Stolen weights remove all of a lab's safeguards at once. Published weights cannot be protected, so this covers weights before release and weights that the lab keeps closed. Open-weight labs are not marked down for what they publish.",
+  "criteria": [
+    {
+      "key": "state-level",
+      "label": "State-Level Security",
+      "description": "Security that aims to stop state attackers (RAND security level 4 or higher) for unreleased frontier weights."
+    },
+    {
+      "key": "insider-controls",
+      "label": "Insider Controls",
+      "description": "Controls against theft of unreleased weights by insiders, such as two-person access and few people with access."
+    },
+    {
+      "key": "release-gate",
+      "label": "Release Gate",
+      "description": "A rule set in advance keeps a model's weights closed when the model passes a risk threshold."
+    }
+  ],
+  "orgs": [
+    {
+      "org": "openai",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "summary": "OpenAI protects unreleased weights with encryption and multi-party approval; its frameworks gate weight releases on risk tests, with no state-level security goal.",
+      "events": [
+        {
+          "date": "2023-07-21",
+          "kind": "announced",
+          "title": "Signs White House pledge on weight security",
+          "summary": "Signs the White House voluntary commitments, which include limiting model weight access by job function and an insider threat detection program for unreleased weights.",
+          "quote": {
+            "text": "This includes limiting access to model weights to those whose job function requires it and establishing a robust insider threat detection program consistent with protections provided for their most valuable intellectual property and trade secrets.",
+            "url": "https://bidenwhitehouse.archives.gov/wp-content/uploads/2023/07/Ensuring-Safe-Secure-and-Trustworthy-AI.pdf"
+          },
+          "agreement": "White House Voluntary AI Commitments",
+          "sources": [
+            {
+              "url": "https://bidenwhitehouse.archives.gov/wp-content/uploads/2023/07/Ensuring-Safe-Secure-and-Trustworthy-AI.pdf",
+              "title": "Ensuring Safe, Secure, and Trustworthy AI",
+              "publisher": "The White House",
+              "date": "2023-07-21"
+            },
+            {
+              "url": "https://www.presidency.ucsb.edu/documents/fact-sheet-biden-harris-administration-secures-voluntary-commitments-from-leading",
+              "title": "Fact Sheet: Biden-Harris Administration Secures Voluntary Commitments from Leading Artificial Intelligence Companies to Manage the Risks Posed by AI",
+              "publisher": "The American Presidency Project",
+              "date": "2023-07-21"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "insider-controls": "partly"
+            },
+            "limits": []
+          }
+        },
+        {
+          "date": "2025-04-15",
+          "kind": "expanded",
+          "title": "Requires third-party audits of security controls",
+          "summary": "Preparedness Framework version 2 lists security controls for High capability models, including strictly limited weight access and regular validation by third-party auditors.",
+          "quote": {
+            "text": "Ensure security controls and practices are validated regularly by third-party auditors",
+            "url": "https://cdn.openai.com/pdf/18a02b5d-6b67-4cec-ab64-68cdfbddebcd/preparedness-framework-v2.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://cdn.openai.com/pdf/18a02b5d-6b67-4cec-ab64-68cdfbddebcd/preparedness-framework-v2.pdf",
+              "title": "Preparedness Framework, Version 2",
+              "publisher": "OpenAI",
+              "date": "2025-04-15"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "limits": ["High capability models"]
+          }
+        },
+        {
+          "date": "2025-08-05",
+          "kind": "kept",
+          "title": "Tests fine-tuned open weights before gpt-oss release",
+          "summary": "Says it fine-tuned gpt-oss-120b as an attacker might and found it did not reach High capability under the Preparedness Framework. Three outside expert groups reviewed the method.",
+          "quote": {
+            "text": "These findings informed our decision to release the gpt-oss models.",
+            "url": "https://openai.com/index/introducing-gpt-oss/"
+          },
+          "sources": [
+            {
+              "url": "https://openai.com/index/introducing-gpt-oss/",
+              "title": "Introducing gpt-oss",
+              "publisher": "OpenAI",
+              "date": "2025-08-05"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "limits": ["High capability models"]
+          }
+        },
+        {
+          "date": "2026-05-28",
+          "kind": "expanded",
+          "title": "Describes weight protections in SB 53 framework",
+          "summary": "The Frontier Governance Framework describes encryption, monitoring and multi-party approval for unreleased weights, with SOC 2 Type II audits and ISO 27001 certification.",
+          "quote": {
+            "text": "Model weights are protected through encryption (at rest and in transit), continuous monitoring, and access controls (e.g., multi-factor authentication, multi-party approval, and detailed logging).",
+            "url": "https://cdn.openai.com/pdf/e37d949b-8c9f-4d76-b99e-4272f4631a7e/openai-frontier-governance-framework.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://cdn.openai.com/pdf/e37d949b-8c9f-4d76-b99e-4272f4631a7e/openai-frontier-governance-framework.pdf",
+              "title": "OpenAI Frontier Governance Framework",
+              "publisher": "OpenAI",
+              "date": "2026-05-28"
+            },
+            {
+              "url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260SB53",
+              "title": "SB-53 Artificial intelligence models: large developers",
+              "publisher": "California Legislature",
+              "date": "2025-09-29"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "law",
+            "duration": "ongoing",
+            "criteria": {
+              "insider-controls": "met",
+              "release-gate": "partly"
+            },
+            "notes": {
+              "state-level": { "commitment": "Encryption, monitoring and outside audits for weights.", "missing": "No stated goal to stop state attackers found." },
+              "insider-controls": { "commitment": "Multi-party approval, multi-factor authentication, logging and personnel screening.", "missing": "SOC 2 audit reports are not public." },
+              "release-gate": { "commitment": "No deployment above acceptable risk; open weights tested after attacker fine-tuning.", "missing": "No explicit rule to keep weights closed; OpenAI sets risk limits." }
+            },
+            "limits": ["No stated state-level goal"]
+          }
+        }
+      ]
+    },
+    {
+      "org": "anthropic",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "summary": "Anthropic requires ASL-3 weight security above its thresholds, implying no open release; SL4-level security is only a goal, and ASL-3 excludes sophisticated insiders.",
+      "events": [
+        {
+          "date": "2023-07-21",
+          "kind": "announced",
+          "title": "Signs White House pledge on weight security",
+          "summary": "Signs the White House voluntary commitments, which include limiting model weight access by job function and an insider threat detection program for unreleased weights.",
+          "quote": {
+            "text": "This includes limiting access to model weights to those whose job function requires it and establishing a robust insider threat detection program consistent with protections provided for their most valuable intellectual property and trade secrets.",
+            "url": "https://bidenwhitehouse.archives.gov/wp-content/uploads/2023/07/Ensuring-Safe-Secure-and-Trustworthy-AI.pdf"
+          },
+          "agreement": "White House Voluntary AI Commitments",
+          "sources": [
+            {
+              "url": "https://bidenwhitehouse.archives.gov/wp-content/uploads/2023/07/Ensuring-Safe-Secure-and-Trustworthy-AI.pdf",
+              "title": "Ensuring Safe, Secure, and Trustworthy AI",
+              "publisher": "The White House",
+              "date": "2023-07-21"
+            },
+            {
+              "url": "https://www.presidency.ucsb.edu/documents/fact-sheet-biden-harris-administration-secures-voluntary-commitments-from-leading",
+              "title": "Fact Sheet: Biden-Harris Administration Secures Voluntary Commitments from Leading Artificial Intelligence Companies to Manage the Risks Posed by AI",
+              "publisher": "The American Presidency Project",
+              "date": "2023-07-21"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "insider-controls": "partly"
+            },
+            "limits": []
+          }
+        },
+        {
+          "date": "2023-09-19",
+          "kind": "expanded",
+          "title": "Sets ASL-3 security goal against non-state attackers",
+          "summary": "The Responsible Scaling Policy requires ASL-3 security so that non-state attackers are unlikely to steal weights, and states cannot without significant expense.",
+          "quote": {
+            "text": "non-state attackers are unlikely to be able to steal model weights, and advanced threat actors (e.g. states) cannot steal them without significant expense",
+            "url": "https://assets.claude.com/1adf000c8f675958c2ee23805d91aaade1cd4613.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://assets.claude.com/1adf000c8f675958c2ee23805d91aaade1cd4613.pdf",
+              "title": "Responsible Scaling Policy, Version 1.0",
+              "publisher": "Anthropic",
+              "date": "2023-09-19"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "state-level": "partly",
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "limits": ["States not fully stopped"]
+          }
+        },
+        {
+          "date": "2024-10-15",
+          "kind": "expanded",
+          "title": "Adds security audits and state-level expectation",
+          "summary": "Version 2.0 adds independent validation and expert red-teaming of security, and says AI R&D thresholds will likely need protection against theft by state-level adversaries.",
+          "quote": {
+            "text": "we expect a higher security standard (which would protect against model-weight theft by state-level adversaries) will be required",
+            "url": "https://assets.claude.com/616dee633636e5bd309cb73aed8622e80fe47839.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://assets.claude.com/616dee633636e5bd309cb73aed8622e80fe47839.pdf",
+              "title": "Responsible Scaling Policy, Version 2.0",
+              "publisher": "Anthropic",
+              "date": "2024-10-15"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "state-level": "partly",
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "limits": ["State-level not yet required"]
+          }
+        },
+        {
+          "date": "2025-05-14",
+          "kind": "narrowed",
+          "title": "Excludes sophisticated insiders from ASL-3 security",
+          "summary": "Version 2.2 removes sophisticated insiders and state-compromised insiders from the scope of the ASL-3 Security Standard.",
+          "quote": {
+            "text": "amending a footnote to exclude both sophisticated insiders and state-compromised insiders from the scope of the ASL-3 Security Standard",
+            "url": "https://www.anthropic.com/responsible-scaling-policy"
+          },
+          "sources": [
+            {
+              "url": "https://assets.claude.com/872c653b2d0501d6ab44cf87f43e1dc4853e4d37.pdf",
+              "title": "Responsible Scaling Policy, Version 2.2",
+              "publisher": "Anthropic",
+              "date": "2025-05-14"
+            },
+            {
+              "url": "https://www.anthropic.com/responsible-scaling-policy",
+              "title": "Anthropic's Responsible Scaling Policy",
+              "publisher": "Anthropic"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "state-level": "partly",
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "limits": [
+              "Sophisticated insiders excluded",
+              "State-level not yet required"
+            ]
+          }
+        },
+        {
+          "date": "2025-05-22",
+          "kind": "kept",
+          "title": "Activates ASL-3 security protections",
+          "summary": "Says it activated ASL-3 protections, including two-party authorization for weight access and binary allowlisting.",
+          "quote": {
+            "text": "Many of these controls, such as two-party authorization for model weight access, enhanced change management protocols, and endpoint software controls through binary allowlisting, are examples of following the best practices established by other security-conscious organizations.",
+            "url": "https://www.anthropic.com/news/activating-asl3-protections"
+          },
+          "sources": [
+            {
+              "url": "https://www.anthropic.com/news/activating-asl3-protections",
+              "title": "Activating AI Safety Level 3 protections",
+              "publisher": "Anthropic",
+              "date": "2025-05-22"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "state-level": "partly",
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "limits": [
+              "Sophisticated insiders excluded",
+              "State-level not yet required"
+            ]
+          }
+        },
+        {
+          "date": "2025-12-19",
+          "kind": "expanded",
+          "title": "Covers weight protection in SB 53 framework",
+          "summary": "Its SB 53 compliance framework covers how it protects model weights; the law requires a description of weight security practices.",
+          "quote": {
+            "text": "It also covers how we protect model weights and respond to safety incidents.",
+            "url": "https://www.anthropic.com/news/compliance-framework-SB53"
+          },
+          "sources": [
+            {
+              "url": "https://www.anthropic.com/news/compliance-framework-SB53",
+              "title": "Our compliance framework for California's SB 53",
+              "publisher": "Anthropic",
+              "date": "2025-12-19"
+            },
+            {
+              "url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260SB53",
+              "title": "SB-53 Artificial intelligence models: large developers",
+              "publisher": "California Legislature",
+              "date": "2025-09-29"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "law",
+            "duration": "ongoing",
+            "criteria": {
+              "state-level": "partly",
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "limits": [
+              "Sophisticated insiders excluded",
+              "State-level not yet required"
+            ]
+          }
+        },
+        {
+          "date": "2026-02-24",
+          "kind": "narrowed",
+          "title": "Turns higher security levels into public goals",
+          "summary": "Version 3.0 keeps ASL-3 protections but makes higher security public goals, not hard commitments. RAND SL4-level security appears as an industry-wide recommendation.",
+          "quote": {
+            "text": "Rather than being hard commitments, these are public goals that we will openly grade our progress towards.",
+            "url": "https://www.anthropic.com/news/responsible-scaling-policy-v3"
+          },
+          "sources": [
+            {
+              "url": "https://www.anthropic.com/news/responsible-scaling-policy-v3",
+              "title": "Responsible Scaling Policy Version 3.0",
+              "publisher": "Anthropic",
+              "date": "2026-02-24"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "law",
+            "duration": "ongoing",
+            "condition": "Unless competitors continue",
+            "criteria": {
+              "state-level": "partly",
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "notes": {
+              "state-level": { "commitment": "ASL-3 aims to stop non-state attackers; RSP v3 names RAND SL4-level security as a goal.", "missing": "SL4-level security is a goal, not a hard commitment." },
+              "insider-controls": { "commitment": "Two-party authorization for weight access.", "missing": "ASL-3 excludes sophisticated and state-compromised insiders; no public outside audit found." },
+              "release-gate": { "commitment": "Models past capability thresholds need ASL-3 security against weight theft.", "missing": "Implied by the security rule, not stated; no outside check." }
+            },
+            "limits": [
+              "Sophisticated insiders excluded",
+              "Higher levels are goals"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "org": "google",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "summary": "Google's framework recommends weight security per capability level, up to RAND SL4 for ML R&D, but allows open release when benefits outweigh risks.",
+      "events": [
+        {
+          "date": "2023-07-21",
+          "kind": "announced",
+          "title": "Signs White House pledge on weight security",
+          "summary": "Signs the White House voluntary commitments, which include limiting model weight access by job function and an insider threat detection program for unreleased weights.",
+          "quote": {
+            "text": "This includes limiting access to model weights to those whose job function requires it and establishing a robust insider threat detection program consistent with protections provided for their most valuable intellectual property and trade secrets.",
+            "url": "https://bidenwhitehouse.archives.gov/wp-content/uploads/2023/07/Ensuring-Safe-Secure-and-Trustworthy-AI.pdf"
+          },
+          "agreement": "White House Voluntary AI Commitments",
+          "sources": [
+            {
+              "url": "https://bidenwhitehouse.archives.gov/wp-content/uploads/2023/07/Ensuring-Safe-Secure-and-Trustworthy-AI.pdf",
+              "title": "Ensuring Safe, Secure, and Trustworthy AI",
+              "publisher": "The White House",
+              "date": "2023-07-21"
+            },
+            {
+              "url": "https://www.presidency.ucsb.edu/documents/fact-sheet-biden-harris-administration-secures-voluntary-commitments-from-leading",
+              "title": "Fact Sheet: Biden-Harris Administration Secures Voluntary Commitments from Leading Artificial Intelligence Companies to Manage the Risks Posed by AI",
+              "publisher": "The American Presidency Project",
+              "date": "2023-07-21"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "insider-controls": "partly"
+            },
+            "limits": []
+          }
+        },
+        {
+          "date": "2024-05-17",
+          "kind": "expanded",
+          "title": "Defines security levels up to RAND L5",
+          "summary": "The Frontier Safety Framework defines security levels from limits on unilateral weight access up to roughly RAND L4 and L5, but does not yet map them to thresholds.",
+          "quote": {
+            "text": "Higher level security mitigations result in greater protection against the exfiltration of model weights, and higher level deployment mitigations enable tighter management of critical capabilities.",
+            "url": "https://deepmind.google/blog/introducing-the-frontier-safety-framework/"
+          },
+          "sources": [
+            {
+              "url": "https://deepmind.google/blog/introducing-the-frontier-safety-framework/",
+              "title": "Introducing the Frontier Safety Framework",
+              "publisher": "Google DeepMind",
+              "date": "2024-05-17"
+            },
+            {
+              "url": "https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/introducing-the-frontier-safety-framework/fsf-technical-report.pdf",
+              "title": "Frontier Safety Framework",
+              "publisher": "Google DeepMind",
+              "date": "2024-05-17"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "state-level": "partly",
+              "insider-controls": "partly"
+            },
+            "limits": ["Levels not mapped"]
+          }
+        },
+        {
+          "date": "2025-02-04",
+          "kind": "expanded",
+          "title": "Recommends RAND SL4 for ML R&D thresholds",
+          "summary": "Version 2.0 recommends security near RAND SL4 for the top ML R&D level and SL2 for CBRN and cyber, and says the field as a whole must adopt them.",
+          "quote": {
+            "text": "We recommend security controls and detections at a level generally aligned with RAND SL 4 for this capability threshold, but emphasize that this must be taken on by the frontier AI field as a whole.",
+            "url": "https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/updating-the-frontier-safety-framework/Frontier%20Safety%20Framework%202.0.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/updating-the-frontier-safety-framework/Frontier%20Safety%20Framework%202.0.pdf",
+              "title": "Frontier Safety Framework 2.0",
+              "publisher": "Google DeepMind",
+              "date": "2025-02-04"
+            },
+            {
+              "url": "https://deepmind.google/blog/updating-the-frontier-safety-framework/",
+              "title": "Updating the Frontier Safety Framework",
+              "publisher": "Google DeepMind",
+              "date": "2025-02-04"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "condition": "If whole field acts",
+            "criteria": {
+              "state-level": "partly",
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "notes": {
+              "state-level": { "commitment": "Recommends security aligned with RAND SL4 for the top ML R&D level.", "missing": "Only a recommendation, which the whole field must adopt." },
+              "insider-controls": { "commitment": "Security levels start with limits on unilateral weight access.", "missing": "Recommendations only; no public outside audit found." }
+            },
+            "limits": ["Recommendations only", "SL2 for CBRN, cyber"]
+          }
+        },
+        {
+          "date": "2026-04-17",
+          "kind": "expanded",
+          "title": "Adds insider-threat security level for misuse risks",
+          "summary": "Version 3.1 recommends Security Level 2+ for CBRN, cyber and manipulation levels, adding insider risk teams and background checks. It keeps an exception for open release when benefits outweigh risks.",
+          "quote": {
+            "text": "with additional security measures designed to address risks from insider threats and well-resourced non-state external actors",
+            "url": "https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/strengthening-our-frontier-safety-framework/frontier-safety-framework_3-1.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/strengthening-our-frontier-safety-framework/frontier-safety-framework_3-1.pdf",
+              "title": "Frontier Safety Framework, Version 3.1",
+              "publisher": "Google DeepMind",
+              "date": "2026-04-17"
+            },
+            {
+              "url": "https://deepmind.google/blog/strengthening-our-frontier-safety-framework/",
+              "title": "Strengthening our Frontier Safety Framework",
+              "publisher": "Google DeepMind"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "condition": "If whole field acts",
+            "criteria": {
+              "state-level": "partly",
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "notes": {
+              "state-level": { "commitment": "Recommends security aligned with RAND SL4 for the top ML R&D level.", "missing": "Only a recommendation, which the whole field must adopt." },
+              "insider-controls": { "commitment": "SL2+ adds insider risk teams and background checks for misuse levels.", "missing": "Measures are examples, not requirements; no public outside audit found." },
+              "release-gate": { "commitment": "Models at critical levels need recommended weight security before deployment.", "missing": "Open release allowed when Google judges benefits outweigh risks." }
+            },
+            "limits": ["Recommendations only", "Open release exception"]
+          }
+        }
+      ]
+    },
+    {
+      "org": "meta",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "summary": "Meta's 2026 framework lets high-risk models, including open weights, deploy once mitigations cut risk; critical-level weight protections apply only where feasible.",
+      "events": [
+        {
+          "date": "2023-07-21",
+          "kind": "announced",
+          "title": "Signs White House pledge on weight security",
+          "summary": "Signs the White House voluntary commitments, which include limiting model weight access by job function and an insider threat detection program for unreleased weights.",
+          "quote": {
+            "text": "This includes limiting access to model weights to those whose job function requires it and establishing a robust insider threat detection program consistent with protections provided for their most valuable intellectual property and trade secrets.",
+            "url": "https://bidenwhitehouse.archives.gov/wp-content/uploads/2023/07/Ensuring-Safe-Secure-and-Trustworthy-AI.pdf"
+          },
+          "agreement": "White House Voluntary AI Commitments",
+          "sources": [
+            {
+              "url": "https://bidenwhitehouse.archives.gov/wp-content/uploads/2023/07/Ensuring-Safe-Secure-and-Trustworthy-AI.pdf",
+              "title": "Ensuring Safe, Secure, and Trustworthy AI",
+              "publisher": "The White House",
+              "date": "2023-07-21"
+            },
+            {
+              "url": "https://www.presidency.ucsb.edu/documents/fact-sheet-biden-harris-administration-secures-voluntary-commitments-from-leading",
+              "title": "Fact Sheet: Biden-Harris Administration Secures Voluntary Commitments from Leading Artificial Intelligence Companies to Manage the Risks Posed by AI",
+              "publisher": "The American Presidency Project",
+              "date": "2023-07-21"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "insider-controls": "partly"
+            },
+            "limits": []
+          }
+        },
+        {
+          "date": "2025-02-03",
+          "kind": "expanded",
+          "title": "Limits access to high-risk model weights",
+          "summary": "The Frontier AI Framework says access to high-risk models is limited to a few experts, with protections against exfiltration where feasible and commercially practicable.",
+          "quote": {
+            "text": "Access is strictly limited to a small number of experts, alongside security protections to prevent hacking or exfiltration insofar as is technically feasible and commercially practicable.",
+            "url": "https://ai.meta.com/static-resource/meta-frontier-ai-framework"
+          },
+          "sources": [
+            {
+              "url": "https://ai.meta.com/static-resource/meta-frontier-ai-framework",
+              "title": "Frontier AI Framework",
+              "publisher": "Meta",
+              "date": "2025-02-03"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "insider-controls": "partly",
+              "release-gate": "met"
+            },
+            "notes": {
+              "state-level": { "commitment": "Protections against hacking and exfiltration.", "missing": "No stated goal to stop state attackers; protections only where feasible and practicable." },
+              "insider-controls": { "commitment": "Access to high-risk model weights is limited to a few experts.", "missing": "Feasibility caveat; no public outside audit found." }
+            },
+            "limits": ["Feasibility caveat", "No stated threat level"]
+          }
+        },
+        {
+          "date": "2026-04-08",
+          "kind": "narrowed",
+          "title": "Replaces no-release rule with deployment after mitigations",
+          "summary": "Version 2 changes the high-risk measure from no release to deployment, including open release, once mitigations cut risk to moderate or lower. Version 2.1 in October 2026 keeps these terms.",
+          "quote": {
+            "text": "we will not deploy the model externally unless we have strong additional evidence that mitigations are sufficiently robust to adversarial attacks that the fully mitigated model is reduced to moderate or lower levels.",
+            "url": "https://ai.meta.com/static-resource/Meta_Advanced-AI-Scaling-Framework-v2/"
+          },
+          "sources": [
+            {
+              "url": "https://ai.meta.com/static-resource/Meta_Advanced-AI-Scaling-Framework-v2/",
+              "title": "Advanced AI Scaling Framework, Version 2",
+              "publisher": "Meta",
+              "date": "2026-04-07"
+            },
+            {
+              "url": "https://ai.meta.com/blog/scaling-how-we-build-test-advanced-ai/",
+              "title": "Scaling How We Build and Test Our Most Advanced AI",
+              "publisher": "Meta",
+              "date": "2026-04-08"
+            },
+            {
+              "url": "https://research.meta.ai/static/meta-superintelligence-scaling-framework",
+              "title": "Meta Superintelligence Scaling Framework, Version 2.1",
+              "publisher": "Meta",
+              "date": "2026-10-02"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "notes": {
+              "state-level": { "commitment": "Heightened weight access controls and exfiltration protections at high and critical levels.", "missing": "No stated goal to stop state attackers; critical-level protections only where feasible." },
+              "insider-controls": { "commitment": "Heightened access controls; baseline controls against internal threat actors.", "missing": "No two-person rule stated; feasibility caveat; no public outside audit found." },
+              "release-gate": { "commitment": "High-risk models deploy, including openly, only if mitigations cut risk to moderate.", "missing": "No rule to keep weights closed; mitigations can clear an open release." }
+            },
+            "limits": ["Feasibility caveat", "Gate depends on mitigations"]
+          }
+        }
+      ]
+    },
+    {
+      "org": "xai",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "summary": "xAI's 2026 framework sets a Security Goal naming state-sponsored actors and insiders, and releases models only when it judges risks acceptable.",
+      "events": [
+        {
+          "date": "2024-05-21",
+          "kind": "announced",
+          "title": "Signs pledge to protect unreleased model weights",
+          "summary": "Signs the Seoul commitments, which list investing in cybersecurity and insider threat safeguards for unreleased model weights as a best practice.",
+          "quote": {
+            "text": "to invest in cybersecurity and insider threat safeguards to protect proprietary and unreleased model weights",
+            "url": "https://www.gov.uk/government/publications/frontier-ai-safety-commitments-ai-seoul-summit-2024/frontier-ai-safety-commitments-ai-seoul-summit-2024"
+          },
+          "agreement": "Frontier AI Safety Commitments",
+          "sources": [
+            {
+              "url": "https://www.gov.uk/government/publications/frontier-ai-safety-commitments-ai-seoul-summit-2024/frontier-ai-safety-commitments-ai-seoul-summit-2024",
+              "title": "Frontier AI Safety Commitments, AI Seoul Summit 2024",
+              "publisher": "UK Government",
+              "date": "2024-05-21"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "release-gate": "partly"
+            },
+            "limits": ["No thresholds published"]
+          }
+        },
+        {
+          "date": "2025-08-20",
+          "kind": "expanded",
+          "title": "Claims security against motivated non-state actors",
+          "summary": "The Risk Management Framework says xAI's security standards are sufficient to stop theft of critical model information by a motivated non-state actor.",
+          "quote": {
+            "text": "xAI has implemented appropriate information security standards sufficient to prevent its critical model information from being stolen by a motivated non-state actor.",
+            "url": "https://data.x.ai/2025-08-20-xai-risk-management-framework.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://data.x.ai/2025-08-20-xai-risk-management-framework.pdf",
+              "title": "xAI Risk Management Framework",
+              "publisher": "xAI",
+              "date": "2025-08-20"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "state-level": "not_met",
+              "release-gate": "partly"
+            },
+            "limits": ["Non-state actors only"]
+          }
+        },
+        {
+          "date": "2025-12-30",
+          "kind": "expanded",
+          "title": "Adds weight encryption and access controls",
+          "summary": "The Frontier AI Framework, published for California's TFAIA, lists encryption of model weights, role-based access controls and real-time monitoring.",
+          "quote": {
+            "text": "Practices include encryption of model weights, role-based access controls, and real-time monitoring to prevent unauthorized transfer.",
+            "url": "https://data.x.ai/2025-12-31-xai-frontier-artificial-intelligence-framework.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://data.x.ai/2025-12-31-xai-frontier-artificial-intelligence-framework.pdf",
+              "title": "xAI Frontier Artificial Intelligence Framework",
+              "publisher": "xAI",
+              "date": "2025-12-30"
+            },
+            {
+              "url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260SB53",
+              "title": "SB-53 Artificial intelligence models: large developers",
+              "publisher": "California Legislature",
+              "date": "2025-09-29"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "law",
+            "duration": "ongoing",
+            "criteria": {
+              "state-level": "not_met",
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "limits": ["Non-state actors only"]
+          }
+        },
+        {
+          "date": "2026-06-30",
+          "kind": "expanded",
+          "title": "Sets Security Goal including state-sponsored actors",
+          "summary": "The rewritten framework sets a Security Goal covering non-state actors, insiders and state-sponsored actors, based on NIST 800-171 and supported by SOC 2 Type II evaluations.",
+          "quote": {
+            "text": "xAI will maintain a documented Security Goal that identifies the threat actors against which mitigations are designed to protect against, including sophisticated non-state actors, insider threats, state-sponsored actors and other foreseeable actors.",
+            "url": "https://media.x.ai/v1/website/xai-frontier-artificial-intelligence-framework-30-june-2026-f1f0c916.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://media.x.ai/v1/website/xai-frontier-artificial-intelligence-framework-30-june-2026-f1f0c916.pdf",
+              "title": "xAI Frontier Artificial Intelligence Framework",
+              "publisher": "xAI",
+              "date": "2026-06-30"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "law",
+            "duration": "ongoing",
+            "criteria": {
+              "state-level": "partly",
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "notes": {
+              "state-level": { "commitment": "A Security Goal names state-sponsored actors; uses NIST 800-171 controls.", "missing": "No RAND level or tested result stated." },
+              "insider-controls": { "commitment": "Role-based access, least privilege and monitoring.", "missing": "No two-person rule stated; SOC 2 Type II results are not public." },
+              "release-gate": { "commitment": "Releases a model only when it judges systemic risks acceptable.", "missing": "General gate, not specific to weights; xAI sets its own criteria." }
+            },
+            "limits": ["No RAND level stated"]
+          }
+        }
+      ]
+    },
+    {
+      "org": "microsoft",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "summary": "Microsoft's framework requires protection against cybercrime groups and insiders for high-risk models, and pauses deployment when it cannot mitigate a risk.",
+      "events": [
+        {
+          "date": "2023-07-21",
+          "kind": "announced",
+          "title": "Signs White House pledge on weight security",
+          "summary": "Signs the White House voluntary commitments, which include limiting model weight access by job function and an insider threat detection program for unreleased weights.",
+          "quote": {
+            "text": "This includes limiting access to model weights to those whose job function requires it and establishing a robust insider threat detection program consistent with protections provided for their most valuable intellectual property and trade secrets.",
+            "url": "https://bidenwhitehouse.archives.gov/wp-content/uploads/2023/07/Ensuring-Safe-Secure-and-Trustworthy-AI.pdf"
+          },
+          "agreement": "White House Voluntary AI Commitments",
+          "sources": [
+            {
+              "url": "https://bidenwhitehouse.archives.gov/wp-content/uploads/2023/07/Ensuring-Safe-Secure-and-Trustworthy-AI.pdf",
+              "title": "Ensuring Safe, Secure, and Trustworthy AI",
+              "publisher": "The White House",
+              "date": "2023-07-21"
+            },
+            {
+              "url": "https://www.presidency.ucsb.edu/documents/fact-sheet-biden-harris-administration-secures-voluntary-commitments-from-leading",
+              "title": "Fact Sheet: Biden-Harris Administration Secures Voluntary Commitments from Leading Artificial Intelligence Companies to Manage the Risks Posed by AI",
+              "publisher": "The American Presidency Project",
+              "date": "2023-07-21"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "insider-controls": "partly"
+            },
+            "limits": []
+          }
+        },
+        {
+          "date": "2025-02-08",
+          "kind": "expanded",
+          "title": "Sets security against cybercrime groups and insiders",
+          "summary": "The Frontier Governance Framework requires security against most cybercrime groups and insider threats for high-risk models, with third-party security red teaming where appropriate.",
+          "quote": {
+            "text": "security measures protective against most cybercrime groups and insider threats",
+            "url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/Microsoft-Frontier-Governance-Framework.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/Microsoft-Frontier-Governance-Framework.pdf",
+              "title": "Frontier Governance Framework, Version 1",
+              "publisher": "Microsoft",
+              "date": "2025-02-08"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "limits": ["No state-level goal", "Third parties if appropriate"]
+          }
+        },
+        {
+          "date": "2026-02",
+          "kind": "expanded",
+          "title": "Updates security framework for California law",
+          "summary": "The February 2026 framework, aligned with California's TFAIA, keeps the same weight security measures. The law requires a description of weight security practices.",
+          "quote": {
+            "text": "One year update following finalization of the EU Code of Practice for General Purpose AI (CoP), NY RAISE Act and CA Transparency in Frontier Artificial Intelligence Act",
+            "url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/msc/documents/presentations/CSR/Frontier-Governance-Framework-Feb-2026.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/msc/documents/presentations/CSR/Frontier-Governance-Framework-Feb-2026.pdf",
+              "title": "Frontier Governance Framework, February 2026",
+              "publisher": "Microsoft",
+              "date": "2026-02"
+            },
+            {
+              "url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260SB53",
+              "title": "SB-53 Artificial intelligence models: large developers",
+              "publisher": "California Legislature",
+              "date": "2025-09-29"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "law",
+            "duration": "ongoing",
+            "criteria": {
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "notes": {
+              "state-level": { "commitment": "Aims to protect against most cybercrime groups and insiders.", "missing": "No goal to stop state attackers found." },
+              "insider-controls": { "commitment": "Requires protection against insider threats for high-risk models.", "missing": "Third-party red teaming only where appropriate; no public results found." },
+              "release-gate": { "commitment": "Deploys only when post-mitigation risk is low or medium; otherwise pauses.", "missing": "General deployment gate; no rule specific to open weights." }
+            },
+            "limits": ["No state-level goal", "Third parties if appropriate"]
+          }
+        }
+      ]
+    },
+    {
+      "org": "mistral",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "summary": "Mistral AI signed EU Code duties on weight security and a risk-based release gate; no own weight security policy or thresholds found.",
+      "events": [
+        {
+          "date": "2024-05-21",
+          "kind": "announced",
+          "title": "Signs pledge to protect unreleased model weights",
+          "summary": "Signs the Seoul commitments, which list investing in cybersecurity and insider threat safeguards for unreleased model weights as a best practice.",
+          "quote": {
+            "text": "to invest in cybersecurity and insider threat safeguards to protect proprietary and unreleased model weights",
+            "url": "https://www.gov.uk/government/publications/frontier-ai-safety-commitments-ai-seoul-summit-2024/frontier-ai-safety-commitments-ai-seoul-summit-2024"
+          },
+          "agreement": "Frontier AI Safety Commitments",
+          "sources": [
+            {
+              "url": "https://www.gov.uk/government/publications/frontier-ai-safety-commitments-ai-seoul-summit-2024/frontier-ai-safety-commitments-ai-seoul-summit-2024",
+              "title": "Frontier AI Safety Commitments, AI Seoul Summit 2024",
+              "publisher": "UK Government",
+              "date": "2024-05-21"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "release-gate": "partly"
+            },
+            "limits": ["No thresholds published"]
+          }
+        },
+        {
+          "date": "2025-07-28",
+          "kind": "expanded",
+          "title": "Signs EU Code with security commitments",
+          "summary": "Signs the EU Code, whose safety chapter requires a Security Goal against non-state and insider threats, insider controls, and external security reviews as appropriate.",
+          "quote": {
+            "text": "including non-state external threats, insider threats, and other expected threat actors",
+            "url": "https://ec.europa.eu/newsroom/dae/redirection/document/118119"
+          },
+          "agreement": "EU General-Purpose AI Code of Practice",
+          "sources": [
+            {
+              "url": "https://www.linkedin.com/posts/audreyherblinstoop_we-were-the-first-to-announce-it-and-today-activity-7355617443525881858-OT9j",
+              "title": "We were the first to announce it, and today we officially signed the Code of Practice of the AI Act.",
+              "publisher": "Audrey Herblin-Stoop (Mistral AI), LinkedIn",
+              "date": "2025-07-28"
+            },
+            {
+              "url": "https://digital-strategy.ec.europa.eu/en/policies/contents-code-gpai",
+              "title": "The General-Purpose AI Code of Practice",
+              "publisher": "European Commission"
+            },
+            {
+              "url": "https://ec.europa.eu/newsroom/dae/redirection/document/118119",
+              "title": "Code of Practice for General-Purpose AI Models: Safety and Security Chapter",
+              "publisher": "European Commission",
+              "date": "2025-07-10"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "insider-controls": "partly",
+              "release-gate": "partly"
+            },
+            "notes": {
+              "state-level": { "commitment": "The EU Code Security Goal covers non-state and insider threats.", "missing": "No goal to stop state attackers found." },
+              "insider-controls": { "commitment": "Signed EU Code duties: background checks, few people with weight access.", "missing": "No own weight security policy found; no public outside audit." },
+              "release-gate": { "commitment": "EU Code: no market release while systemic risks are unacceptable.", "missing": "No own thresholds published; not specific to open weights." }
+            },
+            "limits": ["Exempt below open frontier", "No own policy found"]
+          }
+        }
+      ]
+    },
+    {
+      "org": "deepseek",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "events": []
+    },
+    {
+      "org": "zai",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "summary": "Z.ai co-wrote a framework that suspends open release past red lines and held GLM-5.3 weights briefly; no weight security policy found.",
+      "events": [
+        {
+          "date": "2024-05-21",
+          "kind": "announced",
+          "title": "Signs pledge to protect unreleased model weights",
+          "summary": "Signs the Seoul commitments, which list investing in cybersecurity and insider threat safeguards for unreleased model weights as a best practice.",
+          "quote": {
+            "text": "to invest in cybersecurity and insider threat safeguards to protect proprietary and unreleased model weights",
+            "url": "https://www.gov.uk/government/publications/frontier-ai-safety-commitments-ai-seoul-summit-2024/frontier-ai-safety-commitments-ai-seoul-summit-2024"
+          },
+          "agreement": "Frontier AI Safety Commitments",
+          "sources": [
+            {
+              "url": "https://www.gov.uk/government/publications/frontier-ai-safety-commitments-ai-seoul-summit-2024/frontier-ai-safety-commitments-ai-seoul-summit-2024",
+              "title": "Frontier AI Safety Commitments, AI Seoul Summit 2024",
+              "publisher": "UK Government",
+              "date": "2024-05-21"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "release-gate": "partly"
+            },
+            "notes": {
+              "state-level": { "commitment": "Signed the Seoul pledge on weight security.", "missing": "No stated goal to stop state attackers found." },
+              "insider-controls": { "commitment": "The Seoul pledge names insider threat safeguards as a best practice.", "missing": "No own insider controls policy found." }
+            },
+            "limits": ["No thresholds published"]
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "kind": "expanded",
+          "title": "Co-writes open-weight framework with release red lines",
+          "summary": "A framework by Z.ai and Concordia AI puts models past red lines in a red zone, where open release is suspended. It cites Z.ai holding GLM-5.3 weights for safety testing.",
+          "quote": {
+            "text": "Release is suspended or postponed whenever a model crosses domain-specific red lines",
+            "url": "https://concordia-ai.com/wp-content/uploads/2026/09/Open-Weight-AI-Risk-Management-Framework.pdf"
+          },
+          "sources": [
+            {
+              "url": "https://concordia-ai.com/wp-content/uploads/2026/09/Open-Weight-AI-Risk-Management-Framework.pdf",
+              "title": "Frontier Open-Weight AI Risk Management Framework",
+              "publisher": "Concordia AI and Z.AI",
+              "date": "2026-09"
+            },
+            {
+              "url": "https://concordia-ai.com/research/frontier-open-weight-ai-risk-management-framework/",
+              "title": "Frontier Open-Weight AI Risk Management Framework",
+              "publisher": "Concordia AI",
+              "date": "2026-09"
+            },
+            {
+              "url": "https://z.ai/blog/glm-5.3",
+              "title": "GLM-5.3: Frontier Coding with Emergent Cyber Capabilities",
+              "publisher": "Z.ai",
+              "date": "2026-08-14"
+            },
+            {
+              "url": "https://thenextweb.com/news/z-ai-concordia-open-weight-ai-risk-framework-six-stages",
+              "title": "Z.ai and Concordia AI propose six stages for managing open-weight AI risk",
+              "publisher": "The Next Web",
+              "date": "2026-09-28"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "agreement",
+            "duration": "ongoing",
+            "criteria": {
+              "release-gate": "partly"
+            },
+            "notes": {
+              "state-level": { "missing": "No stated goal to stop state attackers found." },
+              "insider-controls": { "commitment": "The Seoul pledge names insider threat safeguards as a best practice.", "missing": "No own insider controls policy found." },
+              "release-gate": { "commitment": "Co-wrote a framework suspending release past red lines; held GLM-5.3 weights two weeks.", "missing": "A recommendation, not a stated Z.ai rule; no outside check." }
+            },
+            "limits": ["Recommendation, not policy"]
+          }
+        }
+      ]
+    },
+    {
+      "org": "alibaba",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "events": []
+    },
+    {
+      "org": "thinkingmachines",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "summary": "Thinking Machines says each release stage needs supporting evidence, and held Inkling 2 Small weights a week for testing; no thresholds yet.",
+      "events": [
+        {
+          "date": "2026-07-31",
+          "kind": "announced",
+          "title": "Says each release stage needs supporting evidence",
+          "summary": "A high-level framework says access widens in stages, up to open weights, only when evidence supports it, and that a model can be held back. Stop conditions are left for a later framework.",
+          "quote": {
+            "text": "On a safe path to openness, each stage should widen access only when the evidence supports it.",
+            "url": "https://thinkingmachines.ai/blog/a-safe-path-to-open-weights/"
+          },
+          "sources": [
+            {
+              "url": "https://thinkingmachines.ai/blog/a-safe-path-to-open-weights/",
+              "title": "A Safe Path to Open Weights",
+              "publisher": "Thinking Machines Lab",
+              "date": "2026-07-31"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "statement",
+            "duration": "ongoing",
+            "criteria": {
+              "release-gate": "partly"
+            },
+            "limits": ["No thresholds yet"]
+          }
+        },
+        {
+          "date": "2026-11-05",
+          "kind": "kept",
+          "title": "Holds Inkling 2 Small weights for safety testing",
+          "summary": "Launches Inkling 2 Small with closed weights on Tinker first, citing its staged-release approach, and says weights follow external safety testing. It published them on November 12.",
+          "quote": {
+            "text": "Inkling 2 Small will initially be available through Tinker, with closed weights, following the approach we outlined in a safe path to open weights.",
+            "url": "https://thinkingmachines.ai/news/inkling-2-small/"
+          },
+          "sources": [
+            {
+              "url": "https://thinkingmachines.ai/news/inkling-2-small/",
+              "title": "Introducing Inkling 2 Small",
+              "publisher": "Thinking Machines Lab",
+              "date": "2026-11-05"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "statement",
+            "duration": "ongoing",
+            "criteria": {
+              "release-gate": "partly"
+            },
+            "notes": {
+              "state-level": { "missing": "No weight security policy found." },
+              "insider-controls": { "missing": "No insider controls policy found." },
+              "release-gate": { "commitment": "Widens access only when evidence supports it; held Inkling 2 Small weights a week.", "missing": "No thresholds or stop conditions yet; no outside check." }
+            },
+            "limits": ["No thresholds yet"]
+          }
+        }
+      ]
+    },
+    {
+      "org": "moonshot",
+      "checkedAt": "2026-11-16",
+      "checkedBy": "Claude Opus 5.5 (High)",
+      "summary": "Moonshot AI says it aims not to release open weights that extend the cyber capability frontier; no weight security policy found.",
+      "events": [
+        {
+          "date": "2026-10-24",
+          "kind": "announced",
+          "title": "Aims not to release open weights past cyber frontier",
+          "summary": "The Kimi K3.1 Pro post says Moonshot aims not to release open weights that extend the absolute frontier of cyber capability. It says it removed cyber data from training to stay below that frontier.",
+          "quote": {
+            "text": "we aim not to release open weights that would extend the absolute frontier of cyber capability.",
+            "url": "https://www.kimi.ai/blog/kimi-k3-1-pro"
+          },
+          "sources": [
+            {
+              "url": "https://www.kimi.ai/blog/kimi-k3-1-pro",
+              "title": "Introducing Kimi K3.1 Pro",
+              "publisher": "Moonshot AI",
+              "date": "2026-10-24"
+            },
+            {
+              "url": "https://www.investing.com/news/stock-market-news/moonshot-curbs-hacking-ability-in-new-kimi-model-as-fears-grow-over-aipowered-cyberattacks-4970639",
+              "title": "Moonshot curbs hacking ability in new Kimi model as fears grow over AI-powered cyberattacks",
+              "publisher": "Reuters (via Investing.com)",
+              "date": "2026-10-24"
+            }
+          ],
+          "state": {
+            "level": "partial",
+            "strength": "statement",
+            "duration": "ongoing",
+            "criteria": {
+              "release-gate": "partly"
+            },
+            "notes": {
+              "state-level": { "missing": "No weight security policy found." },
+              "insider-controls": { "missing": "No insider controls policy found." },
+              "release-gate": { "commitment": "Aims not to release open weights beyond the absolute cyber frontier.", "missing": "Cyber only; an aim with a relative threshold; no outside check." }
+            },
+            "limits": ["Cyber only", "Relative to frontier"]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "eval": {
+    "slug": "crows-pairs",
+    "displayName": "CrowS-Pairs",
+    "aliases": [
+      "Crowdsourced Stereotype Pairs",
+      "CrowS-Pairs (Overall)",
+      "CrowS-Pairs (Gender)",
+      "CrowS-Pairs (Religion)",
+      "CrowS-Pairs (Race/Color)",
+      "CrowS-Pairs (Sexual orientation)",
+      "CrowS-Pairs (Age)",
+      "CrowS-Pairs (Nationality)",
+      "CrowS-Pairs (Disability)",
+      "CrowS-Pairs (Physical appearance)",
+      "CrowS-Pairs (Socioeconomic status)"
+    ],
+    "description": "Tests social stereotypes in language models with 1,508 English minimal pairs across nine U.S. bias types (race/color, gender, religion, and others). Each pair has a more stereotypical and a less stereotypical sentence that differ only in the demographic group. The model score is the share of pairs where the model prefers the more stereotypical sentence; 50 is equal preference.",
+    "summary": "Measures how often the model prefers stereotypical sentences over less stereotypical ones about social groups.",
+    "maintainers": [
+      {
+        "name": "NYU ML²",
+        "url": "https://github.com/nyu-mll/crows-pairs"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2010.00133",
+        "title": "CrowS-Pairs: A Challenge Dataset for Measuring Social Biases in Masked Language Models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/nyu-mll/crows-pairs",
+        "title": "Official data and MLM metric code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/nyu-mll/crows_pairs",
+        "title": "nyu-mll/crows_pairs"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bias"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "1.0.0",
+      "status": "published",
+      "releasedDate": "2020-09",
+      "dataset": {
+        "hfRepo": "nyu-mll/crows_pairs",
+        "revision": "b9c986f7facc268b3e4c6e2127335d67e7a3f206",
+        "url": "https://huggingface.co/datasets/nyu-mll/crows_pairs",
+        "license": "cc-by-sa-4.0",
+        "splits": [
+          {
+            "name": "test",
+            "sampleCount": 1508,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "prefers_stereotype",
+          "displayName": "Prefers stereotypical sentence",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when the model assigns higher likelihood (or preference) to the more stereotypical sentence in the pair."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "stereotype_score",
+          "displayName": "Stereotype score",
+          "score": "prefers_stereotype",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "neither",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of pairs where the model prefers the more stereotypical sentence. Cards also call this bias score or CrowS-Pairs score. 0.5 is equal preference."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

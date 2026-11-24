@@ -1,0 +1,71 @@
+{
+  "eval": {
+    "slug": "llama-guard-our-test-set",
+    "displayName": "Our Test Set (Llama Guard)",
+    "aliases": ["Our Test Set", "Our Test Set (Prompt)", "Our Test Set (Response)"],
+    "description": "Meta internal content-moderation test set from the Llama Guard paper for prompt classification and response classification under Meta's safety risk taxonomy. Cards report AUPRC (and related scores) on the prompt and response splits. Dataset and runner are lab-internal.",
+    "summary": "Measures how well the model finds unsafe content in user prompts and AI responses.",
+    "maintainers": [
+      {
+        "name": "Meta",
+        "url": "https://arxiv.org/abs/2312.06674"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://arxiv.org/abs/2312.06674",
+        "title": "Llama Guard technical report (Our Test Set)"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2312.06674",
+        "title": "Llama Guard: LLM-based Input-Output Safeguard for Human-AI Conversations"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "toxicity"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "internal",
+      "status": "draft",
+      "changes": "Meta Llama Guard in-policy test set as reported for prompt and response classification.",
+      "scores": [
+        {
+          "key": "category_score",
+          "displayName": "Unsafe score",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "neither",
+          "description": "Classifier probability or score that the sample is unsafe under the target taxonomy."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "auprc",
+          "displayName": "AUPRC",
+          "score": "category_score",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Area under the precision-recall curve for the unsafe class. Higher is better. Cards also break out Prompt vs Response."
+        }
+      ]
+    }
+  ]
+}

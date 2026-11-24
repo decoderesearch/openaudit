@@ -1,0 +1,86 @@
+{
+  "eval": {
+    "slug": "winogender",
+    "displayName": "Winogender",
+    "aliases": ["WinoGender", "Winogender Schemas"],
+    "description": "Tests gender bias in coreference resolution with Winograd-style English minimal pairs that differ only by pronoun gender (he, she, they). Each template links an occupation, a participant, and a pronoun. The score is whether the system resolves the pronoun to the correct mention; systematic gaps by pronoun gender indicate bias.",
+    "summary": "Tests whether the model links pronouns to the correct person equally well for every gender.",
+    "maintainers": [
+      {
+        "name": "Rudinger et al.",
+        "url": "https://github.com/rudinger/winogender-schemas"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/1804.09301",
+        "title": "Gender Bias in Coreference Resolution"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/rudinger/winogender-schemas",
+        "title": "Winogender schemas data"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bias"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2018-04",
+      "status": "published",
+      "releasedDate": "2018-04",
+      "dataset": {
+        "url": "https://github.com/rudinger/winogender-schemas/tree/1c7f8b481ad8a234b41e9f76a424d6e856e13f7f",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "all_sentences",
+            "sampleCount": 720,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct coreference",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the system links the pronoun to the labeled occupation or participant."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Coreference accuracy",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of sentences with correct pronoun resolution. Cards also report top-1 or co-reference resolution accuracy."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,2790 @@
+{
+  "document": "meta-llama-3-herd-paper-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "section": "Table 1 Llama 3 8B Instruct"
+    },
+    {
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "section": "Table 1 Llama 3 70B Instruct"
+    },
+    {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "section": "Table 1 Llama 3.1 8B Instruct"
+    },
+    {
+      "model": "meta-llama/Llama-3.1-70B-Instruct",
+      "section": "Table 1 Llama 3.1 70B Instruct"
+    },
+    {
+      "model": "meta-llama/Llama-3.1-405B-Instruct",
+      "section": "Table 1 Llama 3.1 405B Instruct; flagship"
+    },
+    {
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "section": "5.4.7 Llama Guard 3"
+    }
+  ],
+  "pageCount": 92,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "July 2024 (Llama 3.1); April 2024 (Llama 3 8B/70B)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Llama 3.1 405B Instruct             ✓              ✓                ✓              ✓        July 2024"
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "up to 128K tokens",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "405B parameters and a context window of up to 128K tokens. This paper presents an extensive"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "Text language models; image/video/speech integrations not broadly released",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "resulting models are not yet being broadly released as they are still under development."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English, German, French, Italian, Portuguese, Hindi, Spanish, and Thai",
+      "source": {
+        "page": "37",
+        "pdfPage": 37,
+        "quote": "Llama 3 supports 8 languages — English, German, French, Italian, Portuguese, Hindi, Spanish, and Thai,"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Llama 3 Community License (updated)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "We are publicly releasing all three Llama 3 models under an updated version of the Llama 3 Community License;"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "8B, 70B, and 405B",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "The result of our work is Llama 3: a herd of three multilingual1 language models with 8B, 70B, and 405B"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Dense Transformer; 405B: 126 layers, dim 16384, 128 heads, 8 KV heads, SwiGLU, RoPE, vocab 128K",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Llama 3 405B uses an architecture with 126 layers, a token representation dimension of 16,384, and 128"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "15.6T text tokens (flagship)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "we pre-trained a flagship model with 405B trainable parameters on 15.6T text tokens. As expected per"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "3.8 × 10^25 FLOPs (flagship)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "pre-trained using 3.8 × 1025 FLOPs, almost 50× more than the largest"
+      }
+    }
+  },
+  "riskDecisions": [
+    {
+      "domain": "bio_chem",
+      "labLabel": "low risk",
+      "phase": "after_mitigation",
+      "decidedBy": "Meta (Llama Team) with CBRNE SMEs",
+      "source": {
+        "page": "48",
+        "pdfPage": 48,
+        "quote": "After validating these results with CBRNE SMEs, we assess that there is a low risk that"
+      }
+    },
+    {
+      "domain": "cyber",
+      "labLabel": "insignificant uplift",
+      "phase": "after_mitigation",
+      "decidedBy": "Meta (Llama Team)",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "quote": "novices and experts using the 405B model demonstrated insignificant uplift over having open access to the"
+      }
+    }
+  ],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Internal adversarial violation-rate benchmarks across English, multilingual, long-context, and tool-use",
+      "source": {
+        "page": "41",
+        "pdfPage": 41,
+        "quote": "adversarial prompts are the basis for how we measure violation rate."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "Expert child-safety red teaming informed mitigations and expanded evaluation coverage",
+      "source": {
+        "page": "49",
+        "pdfPage": 49,
+        "quote": "Child Safety risk assessments were conducted using a team of experts, to assess the"
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Llama Guard 3 reduces Suicide & Self-Harm violations relative to Llama 3 405B (Table 26)",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "quote": "    - Suicide & Self-Harm                                          -62%                       -31%                -62%"
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Long-context many-shot jailbreak mitigations and red-team multi-turn jailbreak testing",
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "quote": "Long-context models are vulnerable to many-shot jailbreaking attacks without targeted"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "[CyberSecEval](https://arxiv.org/abs/2312.04724) text prompt-injection; Llama 3 405B successful 21.7% of the time",
+      "source": {
+        "page": "46",
+        "pdfPage": 46,
+        "quote": "injection attacks against Llama 3 405B were successful 21.7% of the time. Figure 22 provides text-based"
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": true,
+      "headline": "Autonomous ransomware-phase agent tests; exploit execution entirely unsuccessful",
+      "source": {
+        "page": "46",
+        "pdfPage": 46,
+        "quote": "Attempts to execute exploits were entirely unsuccessful"
+      }
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "MuTox added toxicity (AT) in speech translation, per language, for Llama 3 models",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "quote": "English        0.84       15.09      0.68       15.46       1.44      13.42"
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": true,
+      "headline": "Spear-phishing persuasiveness and success-rate evaluations with a judge large language model (LLM)",
+      "source": {
+        "page": "46",
+        "pdfPage": 46,
+        "quote": "Spear phishing benchmark: We evaluate model persuasiveness and success rate in carrying out personalized"
+      }
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "[CyberSecEval](https://arxiv.org/abs/2312.04724) suite plus spear phishing, attack automation, and cyber uplift testing",
+      "source": {
+        "page": "46",
+        "pdfPage": 46,
+        "quote": "To evaluate cybersecurity risk, we leverage the CyberSecEval benchmark"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "CBRNE uplift study found no significant uplift; assessed low risk for bio/chem weapons",
+      "source": {
+        "page": "48",
+        "pdfPage": 48,
+        "quote": "After validating these results with CBRNE SMEs, we assess that there is a low risk that"
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Internal violation rate (VR)/false refusal rate (FRR) safety numbers are not reproducible externally; competitors in those figures are anonymized.", "tone": "mixed",
+      "source": {
+        "page": "44",
+        "pdfPage": 44,
+        "quote": "Because these safety benchmarks are internal to Meta, we acknowledge that the numbers in this section are not reproducible"
+      }
+    },
+    {
+      "text": "Larger Llama 3 models generate more insecure code on [CyberSecEval](https://arxiv.org/abs/2312.04724) while also scoring higher BLEU.", "tone": "bad",
+      "source": {
+        "page": "46",
+        "pdfPage": 46,
+        "quote": "we continue to observe that larger models both generate more insecure code and also"
+      }
+    },
+    {
+      "text": "Cyber uplift study with 62 volunteers found insignificant uplift from Llama 3 405B versus internet-only.", "tone": "good",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "quote": "novices and experts using the 405B model demonstrated insignificant uplift over having open access to the"
+      }
+    },
+    {
+      "text": "chemical, biological, radiological, nuclear, and explosive (CBRNE) planning uplift study showed no significant uplift from Llama 3 versus web-only controls.", "tone": "good",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "quote": "Quantitative analysis of these results of this study show no significant uplift in performance related to usage"
+      }
+    },
+    {
+      "text": "All quantitative results in the paper are for the Llama 3.1 models even when tables say Llama 3.", "tone": "neutral",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "All results in this paper are for the Llama 3.1 models."
+      }
+    },
+    {
+      "text": "Safety knowledge in English does not readily transfer to other languages without language-specific safety data.", "tone": "mixed",
+      "source": {
+        "page": "45",
+        "pdfPage": 45,
+        "quote": "Multilingual safety. Our experiments demonstrate that safety knowledge in English does not readily transfer to"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "verbatim memorization",
+      "metric": "inclusion rate",
+      "value": 0.26,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "table": "Table 24",
+        "quote": "Llama 3 8B                 0.26%               0.24%               1.11%"
+      },
+      "rawModelName": "Llama 3 8B",
+      "settings": {
+        "other": "English, 50-gram; pre-trained"
+      },
+      "model": "meta-llama/Llama-3.1-8B"
+    },
+    {
+      "rawEvalName": "verbatim memorization",
+      "metric": "inclusion rate",
+      "value": 0.24,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "table": "Table 24",
+        "quote": "Llama 3 8B                 0.26%               0.24%               1.11%"
+      },
+      "rawModelName": "Llama 3 8B",
+      "settings": {
+        "other": "All languages, 50-gram; pre-trained"
+      },
+      "model": "meta-llama/Llama-3.1-8B"
+    },
+    {
+      "rawEvalName": "verbatim memorization",
+      "metric": "inclusion rate",
+      "value": 1.11,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "table": "Table 24",
+        "quote": "Llama 3 8B                 0.26%               0.24%               1.11%"
+      },
+      "rawModelName": "Llama 3 8B",
+      "settings": {
+        "other": "All languages, 1000-gram; pre-trained"
+      },
+      "model": "meta-llama/Llama-3.1-8B"
+    },
+    {
+      "rawEvalName": "verbatim memorization",
+      "metric": "inclusion rate",
+      "value": 0.6,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "table": "Table 24",
+        "quote": "Llama 3 70B                0.60%               0.55%               3.56%"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "English, 50-gram; pre-trained"
+      },
+      "model": "meta-llama/Llama-3.1-70B"
+    },
+    {
+      "rawEvalName": "verbatim memorization",
+      "metric": "inclusion rate",
+      "value": 0.55,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "table": "Table 24",
+        "quote": "Llama 3 70B                0.60%               0.55%               3.56%"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "All languages, 50-gram; pre-trained"
+      },
+      "model": "meta-llama/Llama-3.1-70B"
+    },
+    {
+      "rawEvalName": "verbatim memorization",
+      "metric": "inclusion rate",
+      "value": 3.56,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "table": "Table 24",
+        "quote": "Llama 3 70B                0.60%               0.55%               3.56%"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "All languages, 1000-gram; pre-trained"
+      },
+      "model": "meta-llama/Llama-3.1-70B"
+    },
+    {
+      "rawEvalName": "verbatim memorization",
+      "metric": "inclusion rate",
+      "value": 1.13,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "table": "Table 24",
+        "quote": "Llama 3 405B               1.13%               1.03%               3.91%"
+      },
+      "rawModelName": "Llama 3 405B",
+      "settings": {
+        "other": "English, 50-gram; pre-trained"
+      },
+      "model": "meta-llama/Llama-3.1-405B"
+    },
+    {
+      "rawEvalName": "verbatim memorization",
+      "metric": "inclusion rate",
+      "value": 1.03,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "table": "Table 24",
+        "quote": "Llama 3 405B               1.13%               1.03%               3.91%"
+      },
+      "rawModelName": "Llama 3 405B",
+      "settings": {
+        "other": "All languages, 50-gram; pre-trained"
+      },
+      "model": "meta-llama/Llama-3.1-405B"
+    },
+    {
+      "rawEvalName": "verbatim memorization",
+      "metric": "inclusion rate",
+      "value": 3.91,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "table": "Table 24",
+        "quote": "Llama 3 405B               1.13%               1.03%               3.91%"
+      },
+      "rawModelName": "Llama 3 405B",
+      "settings": {
+        "other": "All languages, 1000-gram; pre-trained"
+      },
+      "model": "meta-llama/Llama-3.1-405B"
+    },
+    {
+      "rawEvalName": "verbatim memorization",
+      "metric": "inclusion rate",
+      "value": 0.2,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "table": "Table 24",
+        "quote": "Llama 2 7B                 0.20%                  –                   –"
+      },
+      "rawModelName": "Llama 2 7B",
+      "settings": {
+        "other": "English, 50-gram; pre-trained"
+      },
+      "model": "meta-llama/Llama-2-7b-hf"
+    },
+    {
+      "rawEvalName": "verbatim memorization",
+      "metric": "inclusion rate",
+      "value": 0.47,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "table": "Table 24",
+        "quote": "Llama 2 70B                0.47%                  –                   –"
+      },
+      "rawModelName": "Llama 2 70B",
+      "settings": {
+        "other": "English, 50-gram; pre-trained"
+      },
+      "model": "meta-llama/Llama-2-70b-hf"
+    },
+    {
+      "rawEvalName": "CyberSecEval",
+      "metric": "compliance rate with malicious prompts",
+      "value": 10.4,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 46,
+        "quote": "with malicious prompts 10.4% of the time. Llama 3 70B complied at a rate of 3.8%."
+      },
+      "rawModelName": "Llama 3 405B",
+      "settings": {
+        "other": "Code interpreter abuse prompt corpus"
+      }
+    },
+    {
+      "rawEvalName": "CyberSecEval",
+      "metric": "compliance rate with malicious prompts",
+      "value": 3.8,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 46,
+        "quote": "with malicious prompts 10.4% of the time. Llama 3 70B complied at a rate of 3.8%."
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "Code interpreter abuse prompt corpus"
+      }
+    },
+    {
+      "rawEvalName": "CyberSecEval",
+      "metric": "prompt injection success rate",
+      "value": 21.7,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 46,
+        "quote": "injection attacks against Llama 3 405B were successful 21.7% of the time. Figure 22 provides text-based"
+      },
+      "rawModelName": "Llama 3 405B",
+      "settings": {
+        "other": "Text-based prompt injection benchmark; average across strategies"
+      }
+    },
+    {
+      "rawEvalName": "CyberSecEval",
+      "metric": "prompt injection success rate",
+      "value": 0.35,
+      "unit": "fraction",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 22",
+        "quote": "Mixtral 8x22B 0.56 0.56 0.56 0.25 0.56 0.31 0.38 0.31 0.25 0.31 0.25 0.38 0.25 0.19 0.12                                          0.35"
+      },
+      "rawModelName": "Mixtral 8x22B",
+      "settings": {
+        "other": "Text-based prompt injection; average across strategies"
+      }
+    },
+    {
+      "rawEvalName": "CyberSecEval",
+      "metric": "prompt injection success rate",
+      "value": 0.26,
+      "unit": "fraction",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 22",
+        "quote": "Llama 3 70B 0.25 0.50 0.31 0.38 0.25 0.56 0.25 0.38 0.44 0.19 0.25 0.06 0.00 0.06 0.00                                    0.26"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "Text-based prompt injection; average across strategies"
+      }
+    },
+    {
+      "rawEvalName": "CyberSecEval",
+      "metric": "prompt injection success rate",
+      "value": 0.19,
+      "unit": "fraction",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 22",
+        "quote": "Llama 3 8B 0.12 0.38 0.31 0.38 0.19 0.19 0.25 0.12 0.12 0.19 0.19 0.19 0.06 0.06 0.06                            0.19"
+      },
+      "rawModelName": "Llama 3 8B",
+      "settings": {
+        "other": "Text-based prompt injection; average across strategies"
+      }
+    },
+    {
+      "rawEvalName": "CyberSecEval",
+      "metric": "prompt injection success rate",
+      "value": 0.18,
+      "unit": "fraction",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 22",
+        "quote": "Gemini Pro 0.44 0.31 0.19 0.19 0.25 0.12 0.25 0.06 0.25 0.19 0.06 0.12 0.19 0.00 0.12                            0.18"
+      },
+      "model": "google/gemini-pro",
+      "settings": {
+        "other": "Text-based prompt injection; average across strategies"
+      }
+    },
+    {
+      "rawEvalName": "CyberSecEval",
+      "metric": "prompt injection success rate",
+      "value": 0.17,
+      "unit": "fraction",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 22",
+        "quote": "GPT-4 Turbo 0.62 0.31 0.25 0.50 0.12 0.00 0.12 0.12 0.06 0.12 0.00 0.00 0.12 0.12 0.00                           0.17"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "Text-based prompt injection; average across strategies"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "success rate",
+      "value": 24,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 46,
+        "quote": "been successful in 24% of spear phishing attempts while Llama 3 405B was judged to be successful in"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "judge LLM Llama 3 70B; victim model Llama 3 70B"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "success rate",
+      "value": 14,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 46,
+        "quote": "14% of attempts. Figure 23 presents judge LLM-evaluated persuasiveness scores across models and"
+      },
+      "rawModelName": "Llama 3 405B",
+      "settings": {
+        "other": "judge LLM Llama 3 70B; victim model Llama 3 70B"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "average persuasiveness score",
+      "value": 3.98,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "GPT-4 Turbo           4.02                      4.09             3.84              3.97                  3.98"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "overall average across phishing goals; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 4.02,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "GPT-4 Turbo           4.02                      4.09             3.84              3.97                  3.98"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "phishing goal: Malware download; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 4.09,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "GPT-4 Turbo           4.02                      4.09             3.84              3.97                  3.98"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "phishing goal: Security info gathering; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 3.84,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "GPT-4 Turbo           4.02                      4.09             3.84              3.97                  3.98"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "phishing goal: Data theft; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 3.97,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "GPT-4 Turbo           4.02                      4.09             3.84              3.97                  3.98"
+      },
+      "model": "openai/gpt-4-turbo",
+      "settings": {
+        "other": "phishing goal: Credential theft; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "average persuasiveness score",
+      "value": 2.95,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Llama 3 70B           2.79                      3.57             2.68              2.75           2.95"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "overall average across phishing goals; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 2.79,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Llama 3 70B           2.79                      3.57             2.68              2.75           2.95"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "phishing goal: Malware download; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 3.57,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Llama 3 70B           2.79                      3.57             2.68              2.75           2.95"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "phishing goal: Security info gathering; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 2.68,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Llama 3 70B           2.79                      3.57             2.68              2.75           2.95"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "phishing goal: Data theft; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 2.75,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Llama 3 70B           2.79                      3.57             2.68              2.75           2.95"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "phishing goal: Credential theft; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "average persuasiveness score",
+      "value": 2.6,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Llama 3 405B           2.71                      3.37             2.03              2.31          2.60"
+      },
+      "rawModelName": "Llama 3 405B",
+      "settings": {
+        "other": "overall average across phishing goals; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 2.71,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Llama 3 405B           2.71                      3.37             2.03              2.31          2.60"
+      },
+      "rawModelName": "Llama 3 405B",
+      "settings": {
+        "other": "phishing goal: Malware download; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 3.37,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Llama 3 405B           2.71                      3.37             2.03              2.31          2.60"
+      },
+      "rawModelName": "Llama 3 405B",
+      "settings": {
+        "other": "phishing goal: Security info gathering; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 2.03,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Llama 3 405B           2.71                      3.37             2.03              2.31          2.60"
+      },
+      "rawModelName": "Llama 3 405B",
+      "settings": {
+        "other": "phishing goal: Data theft; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 2.31,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Llama 3 405B           2.71                      3.37             2.03              2.31          2.60"
+      },
+      "rawModelName": "Llama 3 405B",
+      "settings": {
+        "other": "phishing goal: Credential theft; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "average persuasiveness score",
+      "value": 1.68,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Mixtral 8x22B          1.68                      2.01             1.47              1.58   1.68"
+      },
+      "rawModelName": "Mixtral 8x22B",
+      "settings": {
+        "other": "overall average across phishing goals; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 1.68,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Mixtral 8x22B          1.68                      2.01             1.47              1.58   1.68"
+      },
+      "rawModelName": "Mixtral 8x22B",
+      "settings": {
+        "other": "phishing goal: Malware download; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 2.01,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Mixtral 8x22B          1.68                      2.01             1.47              1.58   1.68"
+      },
+      "rawModelName": "Mixtral 8x22B",
+      "settings": {
+        "other": "phishing goal: Security info gathering; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 1.47,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Mixtral 8x22B          1.68                      2.01             1.47              1.58   1.68"
+      },
+      "rawModelName": "Mixtral 8x22B",
+      "settings": {
+        "other": "phishing goal: Data theft; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "spear phishing benchmark",
+      "metric": "persuasiveness score",
+      "value": 1.58,
+      "unit": "score",
+      "source": {
+        "page": "47",
+        "pdfPage": 47,
+        "table": "Figure 23",
+        "quote": "Mixtral 8x22B          1.68                      2.01             1.47              1.58   1.68"
+      },
+      "rawModelName": "Mixtral 8x22B",
+      "settings": {
+        "other": "phishing goal: Credential theft; Llama 3 70B judge LLM"
+      }
+    },
+    {
+      "rawEvalName": "Attack automation framework",
+      "metric": "exploit execution success",
+      "value": 0,
+      "unit": "fraction",
+      "source": {
+        "page": "46",
+        "pdfPage": 46,
+        "quote": "Attempts to execute exploits were entirely unsuccessful"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "ransomware phases on Kali Linux; 20 test runs",
+        "trials": 20
+      }
+    },
+    {
+      "rawEvalName": "Attack automation framework",
+      "metric": "exploit execution success",
+      "value": 0,
+      "unit": "fraction",
+      "source": {
+        "page": "46",
+        "pdfPage": 46,
+        "quote": "Attempts to execute exploits were entirely unsuccessful"
+      },
+      "rawModelName": "Llama 3 405B",
+      "settings": {
+        "other": "ransomware phases on Kali Linux; 23 test runs",
+        "trials": 23
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -76,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   English         -76%       +95%        -75%        +25%         -86%      +102%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=English; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 95,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   English         -76%       +95%        -75%        +25%         -86%      +102%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=English; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -75,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   English         -76%       +95%        -75%        +25%         -86%      +102%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=English; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 25,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   English         -76%       +95%        -75%        +25%         -86%      +102%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=English; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -86,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   English         -76%       +95%        -75%        +25%         -86%      +102%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=English; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 102,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   English         -76%       +95%        -75%        +25%         -86%      +102%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=English; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -38,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   French          -38%       +27%        -45%        +4%          -59%      +29%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=French; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 27,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   French          -38%       +27%        -45%        +4%          -59%      +29%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=French; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -45,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   French          -38%       +27%        -45%        +4%          -59%      +29%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=French; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 4,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   French          -38%       +27%        -45%        +4%          -59%      +29%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=French; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -59,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   French          -38%       +27%        -45%        +4%          -59%      +29%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=French; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 29,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   French          -38%       +27%        -45%        +4%          -59%      +29%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=French; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -57,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   German          -57%       +32%        -60%        +14%         -77%      +37%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=German; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 32,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   German          -57%       +32%        -60%        +14%         -77%      +37%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=German; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -60,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   German          -57%       +32%        -60%        +14%         -77%      +37%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=German; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 14,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   German          -57%       +32%        -60%        +14%         -77%      +37%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=German; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -77,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   German          -57%       +32%        -60%        +14%         -77%      +37%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=German; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 37,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   German          -57%       +32%        -60%        +14%         -77%      +37%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=German; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -54,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Hindi           -54%       +60%        -54%        +14%         -71%      +62%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=Hindi; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 60,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Hindi           -54%       +60%        -54%        +14%         -71%      +62%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=Hindi; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -54,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Hindi           -54%       +60%        -54%        +14%         -71%      +62%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=Hindi; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 14,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Hindi           -54%       +60%        -54%        +14%         -71%      +62%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=Hindi; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -71,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Hindi           -54%       +60%        -54%        +14%         -71%      +62%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=Hindi; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 62,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Hindi           -54%       +60%        -54%        +14%         -71%      +62%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=Hindi; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -34,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Italian         -34%       +27%        -34%        +5%          -48%      +29%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=Italian; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 27,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Italian         -34%       +27%        -34%        +5%          -48%      +29%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=Italian; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -34,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Italian         -34%       +27%        -34%        +5%          -48%      +29%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=Italian; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 5,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Italian         -34%       +27%        -34%        +5%          -48%      +29%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=Italian; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -48,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Italian         -34%       +27%        -34%        +5%          -48%      +29%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=Italian; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 29,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Italian         -34%       +27%        -34%        +5%          -48%      +29%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=Italian; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -51,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Portuguese      -51%       +35%        -57%        +13%         -65%      +39%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=Portuguese; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 35,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Portuguese      -51%       +35%        -57%        +13%         -65%      +39%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=Portuguese; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -57,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Portuguese      -51%       +35%        -57%        +13%         -65%      +39%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=Portuguese; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 13,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Portuguese      -51%       +35%        -57%        +13%         -65%      +39%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=Portuguese; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -65,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Portuguese      -51%       +35%        -57%        +13%         -65%      +39%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=Portuguese; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 39,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Portuguese      -51%       +35%        -57%        +13%         -65%      +39%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=Portuguese; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -41,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Spanish         -41%       +26%        -50%        +10%         -60%      +27%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=Spanish; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 26,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Spanish         -41%       +26%        -50%        +10%         -60%      +27%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=Spanish; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -50,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Spanish         -41%       +26%        -50%        +10%         -60%      +27%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=Spanish; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 10,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Spanish         -41%       +26%        -50%        +10%         -60%      +27%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=Spanish; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -60,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Spanish         -41%       +26%        -50%        +10%         -60%      +27%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=Spanish; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 27,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Spanish         -41%       +26%        -50%        +10%         -60%      +27%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=Spanish; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -43,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Thai            -43%       +37%        -39%        +8%          -51%      +39%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=Thai; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 37,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Thai            -43%       +37%        -39%        +8%          -51%      +39%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; language=Thai; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -39,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Thai            -43%       +37%        -39%        +8%          -51%      +39%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=Thai; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 8,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Thai            -43%       +37%        -39%        +8%          -51%      +39%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; language=Thai; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -51,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Thai            -43%       +37%        -39%        +8%          -51%      +39%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=Thai; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 39,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "table": "Table 25",
+        "quote": "                   Thai            -43%       +37%        -39%        +8%          -51%      +39%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; language=Thai; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -65,
+      "unit": "percent",
+      "source": {
+        "page": "50",
+        "pdfPage": 50,
+        "quote": "Llama Guard 3 is able to significantly reduce violations across capabilities (-65% violations on average"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "average across benchmarks"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 95,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    False Refusal Rate Relative to Llama 3:                       +95%                       +25%               +102%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; English; overall FRR; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 25,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    False Refusal Rate Relative to Llama 3:                       +95%                       +25%               +102%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; English; overall FRR; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "False Refusal Rate relative to Llama 3",
+      "value": 102,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    False Refusal Rate Relative to Llama 3:                       +95%                       +25%               +102%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; English; overall FRR; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -53,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Child Sexual Exploitation                                    -53%                       -47%                -59%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; English; category=Child Sexual Exploitation; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -47,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Child Sexual Exploitation                                    -53%                       -47%                -59%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; English; category=Child Sexual Exploitation; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -59,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Child Sexual Exploitation                                    -53%                       -47%                -59%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; English; category=Child Sexual Exploitation; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -86,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Defamation                                                   -86%                      -100%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; English; category=Defamation; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -100,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Defamation                                                   -86%                      -100%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; English; category=Defamation; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -100,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Defamation                                                   -86%                      -100%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; English; category=Defamation; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -100,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Elections                                                   -100%                      -100%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; English; category=Elections; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -100,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Elections                                                   -100%                      -100%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; English; category=Elections; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -100,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Elections                                                   -100%                      -100%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; English; category=Elections; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -36,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Hate                                                         -36%                       -82%                -91%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; English; category=Hate; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -82,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Hate                                                         -36%                       -82%                -91%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; English; category=Hate; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -91,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Hate                                                         -36%                       -82%                -91%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; English; category=Hate; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Indiscriminate Weapons14                                       0%                         0%                  0%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; English; category=Indiscriminate Weapons; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Indiscriminate Weapons14                                       0%                         0%                  0%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; English; category=Indiscriminate Weapons; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Indiscriminate Weapons14                                       0%                         0%                  0%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; English; category=Indiscriminate Weapons; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -88,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Intellectual Property                                        -88%                      -100%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; English; category=Intellectual Property; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -100,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Intellectual Property                                        -88%                      -100%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; English; category=Intellectual Property; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -100,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Intellectual Property                                        -88%                      -100%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; English; category=Intellectual Property; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -80,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Non-Violent Crimes                                           -80%                       -80%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; English; category=Non-Violent Crimes; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -80,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Non-Violent Crimes                                           -80%                       -80%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; English; category=Non-Violent Crimes; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -100,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Non-Violent Crimes                                           -80%                       -80%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; English; category=Non-Violent Crimes; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -40,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Privacy                                                      -40%                       -60%                -60%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; English; category=Privacy; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -60,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Privacy                                                      -40%                       -60%                -60%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; English; category=Privacy; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -60,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Privacy                                                      -40%                       -60%                -60%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; English; category=Privacy; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -75,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Sex-Related Crimes                                           -75%                       -75%                -88%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; English; category=Sex-Related Crimes; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -75,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Sex-Related Crimes                                           -75%                       -75%                -88%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; English; category=Sex-Related Crimes; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -88,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Sex-Related Crimes                                           -75%                       -75%                -88%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; English; category=Sex-Related Crimes; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -100,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Sexual Content                                              -100%                      -100%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; English; category=Sexual Content; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -100,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Sexual Content                                              -100%                      -100%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; English; category=Sexual Content; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -100,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Sexual Content                                              -100%                      -100%               -100%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; English; category=Sexual Content; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -70,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Specialized Advice                                           -70%                       -70%                -70%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; English; category=Specialized Advice; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -70,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Specialized Advice                                           -70%                       -70%                -70%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; English; category=Specialized Advice; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -70,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Specialized Advice                                           -70%                       -70%                -70%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; English; category=Specialized Advice; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -62,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Suicide & Self-Harm                                          -62%                       -31%                -62%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; English; category=Suicide & Self-Harm; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -31,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Suicide & Self-Harm                                          -62%                       -31%                -62%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; English; category=Suicide & Self-Harm; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -62,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Suicide & Self-Harm                                          -62%                       -31%                -62%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; English; category=Suicide & Self-Harm; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -67,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Violent Crimes                                               -67%                       -53%                -80%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Input Llama Guard; English; category=Violent Crimes; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -53,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Violent Crimes                                               -67%                       -53%                -80%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Output Llama Guard; English; category=Violent Crimes; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "Llama Guard 3 system safety",
+      "metric": "Violation Rate relative to Llama 3",
+      "value": -80,
+      "unit": "percent",
+      "source": {
+        "page": "51",
+        "pdfPage": 51,
+        "table": "Table 26",
+        "quote": "    - Violent Crimes                                               -67%                       -53%                -80%"
+      },
+      "model": "meta-llama/Llama-Guard-3-8B",
+      "settings": {
+        "safeguards": true,
+        "other": "Full Llama Guard; English; category=Violent Crimes; generations from Llama 3 405B"
+      }
+    },
+    {
+      "rawEvalName": "MuTox",
+      "metric": "added toxicity (AT)",
+      "value": 0.84,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 33",
+        "quote": "English        0.84       15.09      0.68       15.46       1.44      13.42"
+      },
+      "rawModelName": "Llama 3 8B",
+      "settings": {
+        "other": "speech interface; language=English"
+      }
+    },
+    {
+      "rawEvalName": "MuTox",
+      "metric": "lost toxicity (LT)",
+      "value": 15.09,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 33",
+        "quote": "English        0.84       15.09      0.68       15.46       1.44      13.42"
+      },
+      "rawModelName": "Llama 3 8B",
+      "settings": {
+        "other": "speech interface; language=English"
+      }
+    },
+    {
+      "rawEvalName": "MuTox",
+      "metric": "added toxicity (AT)",
+      "value": 0.68,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 33",
+        "quote": "English        0.84       15.09      0.68       15.46       1.44      13.42"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "speech interface; language=English"
+      }
+    },
+    {
+      "rawEvalName": "MuTox",
+      "metric": "lost toxicity (LT)",
+      "value": 15.46,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 33",
+        "quote": "English        0.84       15.09      0.68       15.46       1.44      13.42"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "speech interface; language=English"
+      }
+    },
+    {
+      "rawEvalName": "MuTox",
+      "metric": "added toxicity (AT)",
+      "value": 1.44,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 33",
+        "quote": "English        0.84       15.09      0.68       15.46       1.44      13.42"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "speech interface; language=English"
+      }
+    },
+    {
+      "rawEvalName": "MuTox",
+      "metric": "lost toxicity (LT)",
+      "value": 13.42,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 33",
+        "quote": "English        0.84       15.09      0.68       15.46       1.44      13.42"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "speech interface; language=English"
+      }
+    },
+    {
+      "rawEvalName": "MuTox",
+      "metric": "added toxicity (AT)",
+      "value": 2.31,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 33",
+        "quote": "Overall        2.31        9.89      2.00       10.29       2.06      10.94"
+      },
+      "rawModelName": "Llama 3 8B",
+      "settings": {
+        "other": "speech interface; language=Overall"
+      }
+    },
+    {
+      "rawEvalName": "MuTox",
+      "metric": "lost toxicity (LT)",
+      "value": 9.89,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 33",
+        "quote": "Overall        2.31        9.89      2.00       10.29       2.06      10.94"
+      },
+      "rawModelName": "Llama 3 8B",
+      "settings": {
+        "other": "speech interface; language=Overall"
+      }
+    },
+    {
+      "rawEvalName": "MuTox",
+      "metric": "added toxicity (AT)",
+      "value": 2,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 33",
+        "quote": "Overall        2.31        9.89      2.00       10.29       2.06      10.94"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "speech interface; language=Overall"
+      }
+    },
+    {
+      "rawEvalName": "MuTox",
+      "metric": "lost toxicity (LT)",
+      "value": 10.29,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 33",
+        "quote": "Overall        2.31        9.89      2.00       10.29       2.06      10.94"
+      },
+      "rawModelName": "Llama 3 70B",
+      "settings": {
+        "other": "speech interface; language=Overall"
+      }
+    },
+    {
+      "rawEvalName": "MuTox",
+      "metric": "added toxicity (AT)",
+      "value": 2.06,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 33",
+        "quote": "Overall        2.31        9.89      2.00       10.29       2.06      10.94"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "speech interface; language=Overall"
+      }
+    },
+    {
+      "rawEvalName": "MuTox",
+      "metric": "lost toxicity (LT)",
+      "value": 10.94,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 33",
+        "quote": "Overall        2.31        9.89      2.00       10.29       2.06      10.94"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "speech interface; language=Overall"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:59:13Z"
+  },
+  "notes": "Technical report (not a system card). Safety-only evalResults per pilot override. Skipped general capability (MMLU, HumanEval, MATH, coding, Arena-style human prefs, IFEval, tool-use accuracy, etc.). Internal VR/FRR Figures 18–21 are charts without labeled numeric points—skipped. Figure 22 per-strategy rates exist in text but strategy headers are garbled; kept averages only (plus 21.7% text claim for 405B). Skipped Table 27 Llama Guard classifier P/R/F1 and Table 28 Prompt Guard TPR/FPR as classifier skill. Table labels usually omit Instruct; used rawModelName (base+instruct exist). Hallucination section is a training recipe only—no measured hallucination benchmark. Spear-phishing goal names inferred from partially garbled Figure 23 axis labels."
+}

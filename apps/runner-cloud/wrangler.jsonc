@@ -1,0 +1,72 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // The top level is STAGING (`wrangler deploy`). Production is `wrangler deploy --env production`.
+  "name": "openaudit-runner-staging",
+  // Our Cloudflare account. A fork sets its own.
+  "account_id": "15b91c8dab7a96ffcad42dd6c80e2f51",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  "workers_dev": true,
+  "containers": [
+    {
+      "class_name": "RunnerContainer",
+      "image": "../runner/Dockerfile",
+      "image_build_context": "../..",
+      // 1 vCPU, 6 GiB memory, 12 GB disk.
+      "instance_type": "standard-2",
+      "max_instances": 20,
+      // A deploy waits this many seconds before it stops a running container.
+      "rollout_active_grace_period": 900
+    }
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "RUNNER", "class_name": "RunnerContainer" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["RunnerContainer"] }],
+  // RUNS: a run container that stops sends a cards message to this queue.
+  "queues": {
+    "producers": [{ "queue": "openaudit-runs-staging", "binding": "RUNS" }],
+    "consumers": [{ "queue": "openaudit-runs-staging", "max_batch_size": 10, "max_batch_timeout": 1, "max_retries": 100 }]
+  },
+  // The hourly cards sweep, and the daily update email (src/digest.ts).
+  "triggers": { "crons": ["17 * * * *", "0 15 * * *"] },
+  "vars": {
+    "SIGN_URL": "https://openaudit-runner-staging.hijohnnylin.workers.dev/r2/sign",
+    "R2_BUCKET": "openaudit"
+  },
+  // Secrets: RUNNER_TOKEN, RUNNER_DATABASE_URL, OPENROUTER_API_KEY, HF_TOKEN, R2_S3_ENDPOINT,
+  // R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY. Optional: OPENAUDIT_URL, RUNNER_NOTIFY_TOKEN.
+  // Each environment has its own secrets.
+  "env": {
+    "production": {
+      "name": "openaudit-runner",
+      "workers_dev": true,
+      "containers": [
+        {
+          "class_name": "RunnerContainer",
+          "image": "../runner/Dockerfile",
+          "image_build_context": "../..",
+          "instance_type": "standard-2",
+          "max_instances": 20,
+          "rollout_active_grace_period": 900
+        }
+      ],
+      "durable_objects": {
+        "bindings": [{ "name": "RUNNER", "class_name": "RunnerContainer" }]
+      },
+      "queues": {
+        "producers": [{ "queue": "openaudit-runs", "binding": "RUNS" }],
+        "consumers": [{ "queue": "openaudit-runs", "max_batch_size": 10, "max_batch_timeout": 1, "max_retries": 100 }]
+      },
+      // No crons: we build cards on dev (/admin/sync copies them), and update emails are off.
+      "triggers": { "crons": [] },
+      "vars": {
+        "SIGN_URL": "https://openaudit-runner.hijohnnylin.workers.dev/r2/sign",
+        "R2_BUCKET": "openaudit",
+        "CARDS": "off"
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "eval": {
+    "slug": "wildjailbreak",
+    "displayName": "WildJailbreak",
+    "aliases": ["WildJailbreak-Test", "WildJailbreakTest", "WildJailbreak Test"],
+    "description": "Held-out adversarial eval set from AI2 WildJailbreak (WildTeaming). It has about 2,000 adversarial harmful prompts and 250 adversarial benign prompts that look harmful but are not. Cards report refusal accuracy or safe rate on the harmful and benign subsets. The training split (262K pairs) is for safety fine-tuning, not this eval.",
+    "summary": "Tests whether the model refuses harmful jailbreak prompts but still answers safe prompts that look harmful.",
+    "family": "AI2 Safety Toolkit",
+    "maintainers": [
+      {
+        "name": "Allen Institute for AI",
+        "url": "https://github.com/allenai/wildteaming"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2406.18510",
+        "title": "WildTeaming at Scale: From In-the-Wild Jailbreaks to (Adversarially) Safer Language Models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/allenai/wildteaming",
+        "title": "WildTeaming code and models"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/allenai/wildjailbreak",
+        "title": "allenai/wildjailbreak (train + eval)"
+      },
+      {
+        "kind": "blog",
+        "url": "https://allenai.org/blog/the-ai2-safety-toolkit-datasets-and-models-for-safe-and-responsible-llms-development-10abc05f6c80",
+        "title": "The Ai2 Safety Toolkit"
+      }
+    ],
+    "access": "gated",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness", "propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "programmatic"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["jailbreaks", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-06-26",
+      "status": "published",
+      "releasedDate": "2024-06-26",
+      "dataset": {
+        "hfRepo": "allenai/wildjailbreak",
+        "revision": "5ddc12a7894f842b0619b8e1c7ee496b198af009",
+        "url": "https://huggingface.co/datasets/allenai/wildjailbreak",
+        "license": "odc-by",
+        "splits": [
+          {
+            "name": "eval",
+            "sampleCount": 2250,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "sampleTerms": {
+        "display": "sign_in",
+        "source": "https://huggingface.co/datasets/allenai/wildjailbreak",
+        "quote": "Access to this dataset is automatically granted upon accepting the [AI2 Responsible Use Guidelines](https://allenai.org/responsible-use.pdf), and completing all fields below"
+      },
+      "scores": [
+        {
+          "key": "refused",
+          "displayName": "Refused",
+          "type": "binary",
+          "direction": "neither",
+          "description": "1 when the model refuses. On adversarial harmful prompts refusal is the safe behavior; on adversarial benign prompts compliance is preferred."
+        },
+        {
+          "key": "safe",
+          "displayName": "Safe",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when a safety grader labels the completion safe (cards: Safe Rate)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "refusal_accuracy",
+          "displayName": "Refusal accuracy",
+          "score": "refused",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Correct refusal behavior: refuse adversarial harmful prompts and answer adversarial benign prompts. Cards often split Harmful vs Benign."
+        },
+        {
+          "key": "safe_rate",
+          "displayName": "Safe rate",
+          "score": "safe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Share of completions labeled safe (cards: Safe Rate)."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "internet": false
+      }
+    }
+  ]
+}

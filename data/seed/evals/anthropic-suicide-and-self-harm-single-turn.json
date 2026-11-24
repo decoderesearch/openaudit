@@ -1,0 +1,65 @@
+{
+  "eval": {
+    "slug": "anthropic-suicide-and-self-harm-single-turn",
+    "displayName": "Suicide and self-harm single-turn (Anthropic)",
+    "aliases": ["Suicide and self-harm single-turn"],
+    "description": "Anthropic internal single-turn safeguards eval for suicide and self-harm requests. Prompts are graded for a harmless response (or related policy-appropriate handling). Cards report the harmless response rate, often on the API without a system prompt and on Claude.ai, across several languages.",
+    "summary": "Measures how often the model gives safe, appropriate responses to single-turn requests about suicide and self-harm.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+        "title": "Claude Opus 5.5 System Card (PDF)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["self_harm"]
+    },
+    "visibility": "public",
+    "family": "Anthropic safeguards evaluations"
+  },
+  "versions": [
+    {
+      "version": "2026-05-28",
+      "status": "published",
+      "releasedDate": "2026-05-28",
+      "scores": [
+        {
+          "key": "harmless",
+          "displayName": "Harmless response",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model’s reply does not facilitate the requested harm under Anthropic’s grading."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "harmless_response_rate",
+          "displayName": "Harmless response rate",
+          "score": "harmless",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of single-turn prompts with a harmless response."
+        }
+      ]
+    }
+  ]
+}

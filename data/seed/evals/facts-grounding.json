@@ -1,0 +1,166 @@
+{
+  "eval": {
+    "slug": "facts-grounding",
+    "displayName": "FACTS Grounding",
+    "aliases": ["FACTS Grounding Benchmark", "FACTS Grounding v1"],
+    "description": "Tests whether long-form answers stay grounded in a given document. Each example has a system instruction, a user request and a context document of up to about 32k tokens. An ensemble of model judges first marks answers that do not address the request as ineligible, then checks each eligible answer against the document. The score is the share of answers that are both eligible and grounded. The maintainers keep a private set for the Kaggle leaderboard.",
+    "summary": "Tests whether the model writes long answers that use only facts from a given document.",
+    "maintainers": [
+      {
+        "name": "Google DeepMind, Kaggle",
+        "url": "https://www.kaggle.com/facts-leaderboard"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2501.03200",
+        "title": "The FACTS Grounding Leaderboard: Benchmarking LLMs' Ability to Ground Responses to Long-Form Input"
+      },
+      {
+        "kind": "blog",
+        "url": "https://deepmind.google/discover/blog/facts-grounding-a-new-benchmark-for-evaluating-the-factuality-of-large-language-models/",
+        "title": "FACTS Grounding: A new benchmark for evaluating the factuality of large language models"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/google/FACTS-grounding-public",
+        "title": "google/FACTS-grounding-public (860 public examples)"
+      },
+      {
+        "kind": "leaderboard",
+        "url": "https://www.kaggle.com/facts-leaderboard",
+        "title": "FACTS Grounding leaderboard on Kaggle"
+      },
+      {
+        "kind": "error_report",
+        "url": "https://huggingface.co/datasets/google/FACTS-grounding-public/discussions/3",
+        "title": "FACTS Grounding rows"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["hallucination"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-12",
+      "status": "published",
+      "releasedDate": "2024-12-17",
+      "dataset": {
+        "hfRepo": "google/FACTS-grounding-public",
+        "revision": "11b6961370aa0ac73c91d58e35317e724b2ac765",
+        "url": "https://huggingface.co/datasets/google/FACTS-grounding-public",
+        "license": "cc-by-4.0",
+        "splits": [
+          {
+            "name": "public",
+            "sampleCount": 860,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "grounded",
+          "displayName": "Eligible and grounded",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Share of the three judges that find the answer fully grounded in the document (0, 1/3, 2/3 or 1). It is 0 when the answer is ineligible: all three judges find that it does not address the request."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "factuality_score",
+          "displayName": "Factuality score",
+          "score": "grounded",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Share of answers that are eligible and grounded, averaged over the judge models. Some reports call it the adjusted score."
+        },
+        {
+          "key": "unadjusted_score",
+          "displayName": "Unadjusted score",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Factuality score with no eligibility check (paper Table 5)."
+        },
+        {
+          "key": "ineligible_rate",
+          "displayName": "Ineligible rate",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Share of answers that all three judges find do not address the request."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "openaudit_runner/facts_grounding",
+        "package": "openaudit-runner==0.1.0",
+        "defaultLimit": 300,
+        "roles": ["target", "judge"],
+        "models": [
+          {
+            "id": "judge_1",
+            "role": "judge",
+            "label": "Judge 1 (json, Gemini place)",
+            "taskArg": "judge_models",
+            "index": 0,
+            "default": "google/gemini-3.8-flash",
+            "tier": "standard",
+            "labs": ["google"],
+            "sameLab": true,
+            "scoring": true
+          },
+          {
+            "id": "judge_2",
+            "role": "judge",
+            "label": "Judge 2 (json, GPT-4o place)",
+            "taskArg": "judge_models",
+            "index": 1,
+            "default": "openai/gpt-6.1-sol",
+            "tier": "standard",
+            "labs": ["openai"],
+            "sameLab": true,
+            "scoring": true
+          },
+          {
+            "id": "judge_3",
+            "role": "judge",
+            "label": "Judge 3 (implicit span, Claude place)",
+            "taskArg": "judge_models",
+            "index": 2,
+            "default": "anthropic/claude-sonnet-5.5",
+            "tier": "standard",
+            "labs": ["anthropic"],
+            "sameLab": true,
+            "scoring": true
+          }
+        ],
+        "internet": true
+      }
+    }
+  ]
+}

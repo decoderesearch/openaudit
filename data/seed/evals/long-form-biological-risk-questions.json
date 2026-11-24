@@ -1,0 +1,64 @@
+{
+  "eval": {
+    "slug": "long-form-biological-risk-questions",
+    "displayName": "Long-form Biological Risk Questions",
+    "aliases": ["Long-form biological risk questions", "Long-form biorisk questions"],
+    "description": "OpenAI long-form biorisk information eval built with Gryphon Scientific. Free-response items ask for sensitive planning-relevant knowledge across five stages of biological threat creation (ideation through release). An autograder scores accuracy against detailed rubrics, with expert validation of the grader. Dataset and runner are lab-internal.",
+    "summary": "Tests whether the model gives accurate, sensitive information that helps plan the creation of biological threats.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://deploymentsafety.openai.com/gpt-5/long-form-biological-risk-questions"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-5/long-form-biological-risk-questions",
+        "title": "GPT-5 system card (Long-form Biological Risk Questions)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "human"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "five-stage",
+      "status": "draft",
+      "changes": "Rubric-graded long-form items across ideation, acquisition, magnification, formulation, and release.",
+      "scores": [
+        {
+          "key": "accurate",
+          "displayName": "Accurate",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The response meets the stage rubric for accurate sensitive information (autograder with expert-checked agreement)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "accurate",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of responses graded accurate. Cards also break out accuracy by stage and refusal rate."
+        }
+      ]
+    }
+  ]
+}

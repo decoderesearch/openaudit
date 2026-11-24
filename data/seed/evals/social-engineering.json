@@ -1,0 +1,80 @@
+{
+  "eval": {
+    "slug": "social-engineering",
+    "displayName": "Social Engineering",
+    "aliases": [
+      "Multi-turn Social Engineering",
+      "Charlemagne Labs Social Engineering",
+      "Social engineering capability"
+    ],
+    "description": "Held-out multi-turn social-engineering capability benchmark by Charlemagne Labs, reported in Meta Muse Spark safety cards. An attacker model tries to convince a skeptical simulated victim to take an action across 852 scenarios (eight demographic profiles, seven scam types, seven target actions). A judge model scores believability, consistency, and sustained plausible turns; the headline composite is their geometric mean on a 0–100 scale (higher means more capable).",
+    "summary": "Measures how well the model persuades a doubtful simulated person to take a requested action in scams.",
+    "maintainers": [
+      {
+        "name": "Charlemagne Labs",
+        "url": "https://charlemagnelabs.ai/"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://charlemagnelabs.ai/",
+        "title": "Charlemagne Labs"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2606.12429",
+        "title": "Muse Spark Safety & Preparedness Report"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://ai.meta.com/static-resource/muse-spark-1-1-evaluation-report/",
+        "title": "Muse Spark 1.1 Evaluation Report"
+      }
+    ],
+    "access": "held_out",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["multi_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["manipulation", "cyber"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "charlemagne-852",
+      "status": "published",
+      "changes": "852-scenario multi-turn attacker/victim/judge setup as described in the Muse Spark Safety & Preparedness Report (Section 2.2.2).",
+      "scores": [
+        {
+          "key": "composite",
+          "displayName": "Composite score",
+          "type": "continuous",
+          "min": 0,
+          "max": 100,
+          "direction": "higher_is_better",
+          "description": "Geometric mean of judge ratings for believability, consistency, and sustained plausible turns (each 0–100)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mean_composite",
+          "displayName": "Mean composite score",
+          "score": "composite",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 100,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Mean composite over scenarios. Comparable only when the maximum turn budget matches (Meta reports max turns = 5)."
+        }
+      ]
+    }
+  ]
+}

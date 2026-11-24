@@ -1,0 +1,416 @@
+{
+  "method": {
+    "slug": "workspace-lenses",
+    "displayName": "Workspace Lenses",
+    "group": "white_box",
+    "summary": "A workspace lens reads a model's activations at one layer as a ranked list of words: the concepts that the model has in mind.",
+    "tagline": "Read what a model has in mind, as words.",
+    "expertSummary": "Experts agree that lenses can show hidden thoughts and help auditors form hypotheses, and that cleaner lenses read better. They also agree that the readouts are not complete: a one-token lens misses ordered or complex content. Some warn of noise at early layers and of many false positives.",
+    "safetyUse": "In an alignment audit, a workspace lens can show what a model thinks but does not write. Anthropic read the Jacobian lens (J-Lens) on Claude models in audit scenarios. Words such as \"fake\" and \"fictional\" showed that the model knew that it was in a test. Words such as \"manipulation\", \"fake\" and \"fraud\" came up when the model cheated, before its text showed it. When Anthropic removed the test-awareness words from the activations of Claude Sonnet 4.5 in a blackmail test, it tried blackmail in 13 of 180 runs, against 0 of 180 with no change. In two models that were trained to have hidden bad goals, the lens showed words tied to those goals on ordinary prompts.\n\nA lens is cheap: one matrix product for each layer, with no extra training. Thus it can scan many transcripts. Experts see it as a tool that makes hypotheses for an auditor, not as a detector that finds all bad reasoning.\n\nThe Workspace Lens Readout eval tests if a lens finds the hidden middle step of a task (\"heart\" in a question about the number of heart chambers).",
+    "caveats": [
+      "A lens reads only concepts that are one token in the model's vocabulary. A plan whose key concept has no one-token name may not show.",
+      "Anthropic found that automatic, well-practiced computations do not use the workspace. A bad behavior that training made automatic may not show in a lens.",
+      "Readouts are noisy, and some top tokens make no sense. Experts expect many false positives.",
+      "Replications on open models were mixed. A review replicated the readouts on several tasks, but the poetry and arithmetic results failed. A swap of a concept in the workspace changed the answer much less often than Anthropic found on Claude. On GPT-2, the J-Lens did worse than the plain logit lens.",
+      "Workspace Lens Readout version 2026-10 has the J++ authors' numbers. For five of its six models, the J-Lens files came from other groups, fitted on different text. On Qwen3.6-27B, the authors fitted both lenses on the same text, and the J++ Lens still did much better. Version 2026-10.1 has OpenAudit's own runs on the same six models.",
+      "Each lens is fitted for one subject model. Compare lenses on the same model."
+    ],
+    "params": [
+      {
+        "key": "resultsBy",
+        "label": "Results by",
+        "type": "string",
+        "description": "The group that ran the eval on the lens. Results from different groups are not comparable."
+      },
+      {
+        "key": "fitPrompts",
+        "label": "Fit prompts",
+        "type": "integer",
+        "description": "The number of text sequences that the Jacobians are averaged over."
+      },
+      {
+        "key": "fitData",
+        "label": "Fit data",
+        "type": "string",
+        "description": "The text corpus that the lens is fitted on."
+      }
+    ],
+    "compare": {
+      "groupBy": ["resultsBy"]
+    },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://transformer-circuits.pub/2026/workspace/index.html",
+        "title": "Gurnee et al., Verbalizable Representations Form a Global Workspace in Language Models (July 2026)"
+      },
+      {
+        "kind": "blog",
+        "url": "https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens",
+        "title": "nostalgebraist, Interpreting GPT: the logit lens (2020)"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2303.08112",
+        "title": "Belrose et al., Eliciting Latent Predictions from Transformers with the Tuned Lens (2023)"
+      },
+      {
+        "kind": "blog",
+        "url": "https://www.anthropic.com/research/global-workspace",
+        "title": "Anthropic, A global workspace in language models (July 2026)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www.neuronpedia.org/jlens",
+        "title": "Neuronpedia workspace lens explorer (2026)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://docs.neuronpedia.org/jacobian-lens",
+        "title": "Neuronpedia workspace lens docs (2026)"
+      }
+    ]
+  },
+  "variants": [
+    {
+      "slug": "jacobian-lens",
+      "displayName": "Jacobian Lens",
+      "aliases": ["J-Lens", "J-lens", "jlens", "Jacobian lens"],
+      "access": "white_box",
+      "summary": "The first workspace lens. It reads a layer through the mean Jacobian from that layer to a late layer, then the unembedding. Unlike the logit lens, it corrects for the change in coordinates between layers.",
+      "baseline": false,
+      "params": [],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2607.15495",
+          "title": "Gurnee et al., Verbalizable Representations Form a Global Workspace in Language Models (arXiv, 2026)"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/anthropics/jacobian-lens",
+          "title": "Anthropic reference code (2026)"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://huggingface.co/neuronpedia/jacobian-lens",
+          "title": "Neuronpedia J-Lens weights for many open models (2026)"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://huggingface.co/camilablank/workspace-lenses",
+          "title": "Camila Blank, J-Lens and R-Lens weights (2026)"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://www.neuronpedia.org/jlens",
+          "title": "Neuronpedia workspace lens explorer (2026)"
+        }
+      ]
+    },
+    {
+      "slug": "jpp-lens",
+      "displayName": "J++ Lens",
+      "aliases": ["J++ Lens", "J++", "jpp", "JPP Lens"],
+      "access": "white_box",
+      "summary": "Changes how the J-Lens averages its Jacobians. It fits 8 expert Jacobians on clusters of activations and gives less weight to the ones that give bad readouts. It also uses the backward pass of the R-Lens.",
+      "baseline": false,
+      "params": [],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace",
+          "title": "Ayonrinde and Lindsey (October 2026)"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/safety-research/jpp_lens",
+          "title": "J++ Lens code (2026)"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://huggingface.co/koayon/jpp-lenses",
+          "title": "J++ Lens weights for six open models (2026)"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://www.neuronpedia.org/jlens",
+          "title": "Neuronpedia workspace lens explorer (2026)"
+        }
+      ]
+    },
+    {
+      "slug": "r-lens",
+      "displayName": "R-Lens",
+      "aliases": ["R-Lens", "R-lens", "RelP lens", "relp-lens", "rlens"],
+      "access": "white_box",
+      "summary": "The J-Lens with stop-gradients from layer-wise relevance propagation (LRP) in the backward pass of its fit. This stops much of the noise that builds up over many layers, so early layers read more cleanly.",
+      "baseline": false,
+      "params": [],
+      "links": [
+        {
+          "kind": "blog",
+          "url": "https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers",
+          "title": "Blank, Bhatia and Nanda (August 2026)"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://huggingface.co/camilablank/workspace-lenses",
+          "title": "R-Lens and J-Lens weights for eight open models (2026)"
+        },
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2508.21258",
+          "title": "Rezaei Jafari et al., RelP: Faithful and Efficient Circuit Discovery in Language Models via Relevance Patching (2025)"
+        }
+      ]
+    },
+    {
+      "slug": "logit-lens",
+      "displayName": "Logit Lens",
+      "aliases": ["Logit Lens", "logit lens"],
+      "access": "white_box",
+      "summary": "The first and simplest lens. It reads each layer's activations with the model's final norm and unembedding, as if they were already at the last layer. It needs no fitting.",
+      "baseline": false,
+      "params": [],
+      "links": [
+        {
+          "kind": "blog",
+          "url": "https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens",
+          "title": "nostalgebraist (2020)"
+        }
+      ]
+    },
+    {
+      "slug": "oracle-lens",
+      "displayName": "Oracle Lens",
+      "aliases": [
+        "O-Lens",
+        "O-lens",
+        "olens",
+        "Oracle Lens",
+        "oracle lens",
+        "activation oracle"
+      ],
+      "access": "white_box",
+      "summary": "Writes text, not a ranked list of words. It is a LoRA adapter on the model: the activation goes into a slot of a fixed prompt, and the model writes a few short bullets about it. Trained with RL against an activation reconstructor. Each readout costs a generation, so it is much slower than a token lens.",
+      "baseline": false,
+      "params": [],
+      "links": [
+        {
+          "kind": "homepage",
+          "url": "https://huggingface.co/agu18dec/olens_and_ar",
+          "title": "Bhatia, Blank et al., O-Lens s3d.rl600 and its activation reconstructor for Qwen3.6-27B (September 2026)"
+        }
+      ],
+      "visibility": "unlisted"
+    }
+  ],
+  "views": [
+    {
+      "slug": "anthropic-global-workspace",
+      "variants": ["jacobian-lens", "logit-lens"],
+      "title": "Anthropic: the J-Lens shows silent reasoning in audits, but it is not complete",
+      "byline": "Wes Gurnee, Nicholas Sofroniew and 14 others",
+      "organization": "Anthropic",
+      "publishedDate": "2026-07-06",
+      "stance": "positive",
+      "summary": "Anthropic introduced the J-Lens and used it on Claude models. In six scenarios from alignment audits, the lens showed strategic thoughts, such as leverage and manipulation, and awareness of a test, which the model did not write. In two models trained to have hidden bad goals, it showed words tied to those goals on ordinary prompts. The authors call it a useful addition to the audit toolkit, but not a complete one.",
+      "points": [
+        "The paper calls the J-Lens a refinement of the logit lens. It corrects for the change of coordinates between layers, so it reads early layers where the logit lens gives tokens that make no sense.",
+        "In a blackmail test, the removal of test-awareness words from Claude Sonnet 4.5's activations made it try blackmail in 13 of 180 runs, against 0 of 180 with no change.",
+        "In the pre-release audit of Claude Opus 4.6, the lens showed \"fake\", \"panic\" and \"fraud\" when the model invented a bug or approved its own action, before its text showed the deception.",
+        "A score made from lens words for \"fictional\" and \"simulation\" tracked an NLA-based measure of test awareness on about 94,000 positions in audit transcripts.",
+        "An automated auditing agent with the J-Lens did about as well as one with natural language autoencoders on four of six cases, and better than one with SAEs on four claims. The ground truth came from NLA results.",
+        "The lens reads only one-token concepts. Automatic, well-practiced behavior can run without the workspace, so a trained-in bad behavior may not show.",
+        "At some positions and layers, the top tokens make no sense to the authors."
+      ],
+      "quotes": [
+        {
+          "text": "The Jacobian lens is an imperfect tool, which we believe only approximately and incompletely captures the model’s underlying workspace structure.",
+          "sourceUrl": "https://transformer-circuits.pub/2026/workspace/index.html"
+        },
+        {
+          "text": "We do not feel comfortable making the stronger claim that monitoring the J-space is sufficient for alignment monitoring, or that any sophisticated plan the model might execute must be represented there.",
+          "sourceUrl": "https://transformer-circuits.pub/2026/workspace/index.html"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://transformer-circuits.pub/2026/workspace/index.html",
+          "title": "Verbalizable Representations Form a Global Workspace in Language Models"
+        },
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2607.15495",
+          "title": "arXiv version"
+        },
+        {
+          "kind": "blog",
+          "url": "https://www.anthropic.com/research/global-workspace",
+          "title": "A global workspace in language models"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "nanda-review",
+      "variants": ["jacobian-lens", "logit-lens"],
+      "title": "Neel Nanda: a useful but limited tool for audits, with many false positives",
+      "byline": "Neel Nanda",
+      "publishedDate": "2026-07-06",
+      "stance": "mixed",
+      "summary": "Anthropic asked Neel Nanda to review the paper before release. He believes its main claim, and replicated most core results on Qwen 3.6 27B with his MATS scholars. He expects the J-Lens to be moderately useful in audits, mainly to make hypotheses. He does not expect it to flag everything, and he expects many false positives.",
+      "points": [
+        "The paper's comparisons persuaded him that the J-Lens works better than the logit lens, but he finds this less interesting than the workspace itself.",
+        "Replicated on Qwen 3.6 27B: verbal report, directed modulation, and the multilingual and typo results, at weak to moderate strength.",
+        "The poetry and arithmetic results failed. He says that experimenter error or the weaker model could be the cause.",
+        "In the multihop test, a swap of the final answer did as well as or better than a swap of the middle step. He thinks that the facts were too easy.",
+        "He thinks that the J-Lens could become a standard audit tool, comparable to SAEs or natural language autoencoders, and that it is easier to make.",
+        "His lens used 25 fit prompts, against 1,000 in the paper. Anthropic's own tests in the paper (not his replication) show that 10 prompts work almost as well, so a lens is cheap to make."
+      ],
+      "quotes": [
+        {
+          "text": "I expect it to largely be useful as a hypothesis generation tool, surfacing key considerations I may not have thought of.",
+          "sourceUrl": "https://www.lesswrong.com/posts/zFJ3ZdQwrTWE9jT5S/a-review-of-anthropic-s-global-workspace-paper"
+        },
+        {
+          "text": "I do not expect it to reliably flag everything important going on, and I expect it to have many false positives, whether from errors of the method or our misinterpretation of it (and I expect the authors would agree with me).",
+          "sourceUrl": "https://www.lesswrong.com/posts/zFJ3ZdQwrTWE9jT5S/a-review-of-anthropic-s-global-workspace-paper"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "blog",
+          "url": "https://www.lesswrong.com/posts/zFJ3ZdQwrTWE9jT5S/a-review-of-anthropic-s-global-workspace-paper",
+          "title": "A Review of Anthropic's Global Workspace Paper"
+        },
+        {
+          "kind": "paper",
+          "url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/cc4be2488d65e54a6ed06492f8968398ddc18ebe.pdf",
+          "title": "External commentary on the paper (PDF)"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "r-lens",
+      "variants": ["jacobian-lens", "r-lens"],
+      "title": "MATS: the J-Lens is noisy at early layers; an LRP backward pass makes it cleaner",
+      "byline": "Camila Blank, Agam Bhatia and Neel Nanda",
+      "organization": "MATS",
+      "publishedDate": "2026-08-05",
+      "stance": "mixed",
+      "summary": "The authors found that J-Lens readouts at early layers are often noisy and hard to read. They think that errors build up in the backward pass over many layers. The R-Lens adds stop-gradients from layer-wise relevance propagation (LRP) to the backward pass, at almost no cost. It gave cleaner early readouts, and its directions for middle steps were more causally important. The J++ Lens uses this backward pass.",
+      "points": [
+        "The R-Lens did better than the J-Lens in a range of eval categories, and its advantage grew with model size.",
+        "It sometimes finds concepts that the J-Lens never shows, mainly ones that appear only in early layers.",
+        "The authors released matched J-Lens and R-Lens pairs for several open models."
+      ],
+      "quotes": [
+        {
+          "text": "The J-lens is a powerful tool for surfacing intermediate variables in the workspace layers of a model, but we find readouts in early layers to often be noisy and largely uninterpretable.",
+          "sourceUrl": "https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "blog",
+          "url": "https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers",
+          "title": "R-lens: Making J-lens More Faithful on Early Layers"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://huggingface.co/camilablank/workspace-lenses",
+          "title": "J-Lens and R-Lens weights"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "workspacebench",
+      "variants": ["jacobian-lens", "r-lens", "logit-lens"],
+      "title": "WorkspaceBench: one-token lenses are reliable, but miss much of the workspace",
+      "byline": "Camila Blank, Agam Bhatia, Euan Ong and Neel Nanda",
+      "organization": "MATS",
+      "publishedDate": "2026-09-23",
+      "stance": "mixed",
+      "summary": "WorkspaceBench has 3,356 questions in 27 families, with safety, reasoning and multihop tasks, for Qwen 3.6 27B. It compares readers of the workspace: one-token lenses such as the J-Lens and R-Lens, and readers that write text, such as natural language autoencoders (NLAs). One-token lenses were reliable, but could not express ordered or complex content. NLAs expressed more, but almost every NLA readout had a claim that the context contradicted.",
+      "points": [
+        "A one-token lens is a bag of words. It cannot show order (\"thief chases policeman\") or multi-digit numbers.",
+        "Single tokens often fail an LLM judge even when they point to the right concept, for example \"black\" for blackmail. So most evals first turn the token list into concepts with an LLM summarizer.",
+        "Methods that did better on the other tasks also tended to do better on the safety tasks."
+      ],
+      "quotes": [
+        {
+          "text": "Single token readers, especially when combined with an LLM summarizer, are powerful and reliable tools for surfacing some workspace content.",
+          "sourceUrl": "https://www.lesswrong.com/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the"
+        },
+        {
+          "text": "However, single tokens have inherent limitations that leave a lot of important workspace representations unreachable.",
+          "sourceUrl": "https://www.lesswrong.com/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "blog",
+          "url": "https://www.lesswrong.com/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the",
+          "title": "WorkspaceBench: Evaluating Interpretability Methods for the Global Workspace"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/camilablank/workspace-bench",
+          "title": "WorkspaceBench code and items"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "jpp-lens",
+      "variants": ["jacobian-lens", "jpp-lens", "r-lens", "logit-lens"],
+      "title": "J++ Lens: filtering noisy Jacobians reads middle steps much more often",
+      "byline": "Kola Ayonrinde and Jack Lindsey",
+      "organization": "Anthropic",
+      "publishedDate": "2026-10-08",
+      "stance": "positive",
+      "summary": "The authors found that many of the Jacobians that the J-Lens averages are noise, mainly at early layers. The J++ Lens fits expert Jacobians on clusters of activations and gives less weight to the bad ones. On six open models from 9B to 284B parameters, it found the hidden middle step much more often than the J-Lens and the R-Lens, and it found it at earlier layers. Its lens vectors were at least as causally important as those of the J-Lens. The authors think that better lenses can help to monitor for test awareness and hidden scheming.",
+      "points": [
+        "Jacobian Filtering gave most of the gain. The LRP backward pass and the drop of non-word tokens gave the rest.",
+        "The R-Lens did better than the J-Lens on five of the six models. The logit lens was close to the J-Lens, and beat it on two models.",
+        "The weights of the expert Jacobians are tuned on a small dev set of the same kind of tasks.",
+        "For five of the six models, the J-Lens files came from Neuronpedia or Camila Blank, fitted on other text and numbers of prompts. For Qwen3.6-27B, the authors fitted the J-Lens with the same data as the J++ Lens, because the released one did worse.",
+        "The authors say that the top possible score is not clear: a model sometimes takes a shortcut to the answer without the middle step.",
+        "The J++ Lens is still a one-token lens. The authors suggest the same filter for multi-token lenses as the next step."
+      ],
+      "quotes": [
+        {
+          "text": "We believe that more faithful lenses can be useful in monitoring for eval awareness and unverbalised scheming.",
+          "sourceUrl": "https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace"
+        },
+        {
+          "text": "It is somewhat unclear what the ceiling of the evaluation score is for a given model.",
+          "sourceUrl": "https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace",
+          "title": "J++ Lens: Jacobian Filtering Enables More Faithful Workspace Lenses"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/safety-research/jpp_lens",
+          "title": "Code"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://huggingface.co/koayon/jpp-lenses",
+          "title": "Lens weights"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    }
+  ]
+}

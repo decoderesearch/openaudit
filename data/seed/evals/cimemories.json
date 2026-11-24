@@ -1,0 +1,111 @@
+{
+  "eval": {
+    "slug": "cimemories",
+    "displayName": "CIMemories",
+    "aliases": ["CIMemories", "CI Memories"],
+    "description": "Meta FAIR compositional contextual-integrity benchmark for persistent memory in LLMs. Synthetic user profiles (100+ attributes each) are paired with task contexts; each attribute is labeled necessary or inappropriate to share for that task. An LLM judge measures violation (leaking inappropriate attributes) and completeness or coverage (sharing necessary ones). Cards often report violation rate, coverage rate, or violations@5.",
+    "summary": "Measures whether the model shares user details from memory only when a task needs them.",
+    "maintainers": [
+      {
+        "name": "Meta FAIR",
+        "url": "https://github.com/facebookresearch/CIMemories"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2511.14937",
+        "title": "CIMemories: A Compositional Benchmark for Contextual Integrity of Persistent Memory in LLMs"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/facebookresearch/CIMemories",
+        "title": "Official CIMemories code and profiles"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/facebook/CIMemories",
+        "title": "facebook/CIMemories"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["honesty"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-11",
+      "status": "published",
+      "releasedDate": "2025-11-18",
+      "dataset": {
+        "hfRepo": "facebook/CIMemories",
+        "revision": "7a2bde79f747d011b23095e6bb035c6f64127d9f",
+        "url": "https://huggingface.co/datasets/facebook/CIMemories",
+        "license": "cc-by-nc-4.0",
+        "splits": [
+          {
+            "name": "test",
+            "sampleCount": 71883,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "violation",
+          "displayName": "Violation",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when an inappropriate-to-share attribute is revealed in the model response for that task context."
+        },
+        {
+          "key": "completeness",
+          "displayName": "Completeness",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when a necessary-to-share attribute is revealed in the model response for that task context."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "violation_rate",
+          "displayName": "Violation rate",
+          "score": "violation",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Share of inappropriate attributes revealed. Cards also report violations@5 (attribute-level worst case over up to 5 generations)."
+        },
+        {
+          "key": "coverage_rate",
+          "displayName": "Coverage / completeness rate",
+          "score": "completeness",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Share of necessary attributes shared (paper completeness; cards often say coverage rate)."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "internet": false
+      }
+    }
+  ]
+}

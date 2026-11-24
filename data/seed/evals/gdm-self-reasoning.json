@@ -1,0 +1,117 @@
+{
+  "eval": {
+    "slug": "gdm-self-reasoning",
+    "displayName": "GDM self-reasoning",
+    "aliases": [
+      "Situational awareness evaluations",
+      "Situational awareness challenges",
+      "Situational awareness evals (read_logs)",
+      "Situational awareness (Disabled Tool)",
+      "situational awareness (max tokens, context size mod, oversight frequency)",
+      "Deceptive alignment situational awareness challenges",
+      "GDM Situational Awareness",
+      "GDM Dangerous Capabilities: Self-reasoning",
+      "Situational awareness evals"
+    ],
+    "description": "Eleven Google DeepMind agentic challenges that test instrumental self-reasoning: whether a model can notice and lift deployment constraints (config limits, disabled tools, logs, filters) to finish a given task. Each challenge has easy and hard hint levels. Success is programmatic (correct config or task completion); papers and cards report per-challenge success rates and challenges passed of 11.",
+    "summary": "Tests whether AI agents can notice limits in their own setup and change them to finish a task.",
+    "family": "GDM stealth and situational awareness",
+    "maintainers": [
+      {
+        "name": "Google DeepMind",
+        "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/src/inspect_evals/gdm_self_reasoning"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2505.01420",
+        "title": "Evaluating Frontier Models for Stealth and Situational Awareness"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/src/inspect_evals/gdm_self_reasoning",
+        "title": "Inspect Evals gdm_self_reasoning"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["situational_awareness"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-04-29",
+      "status": "published",
+      "releasedDate": "2025-04-29",
+      "dataset": {
+        "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/b49df6bc9e30b2d24571084bc710b9439b9ffa77/src/inspect_evals/gdm_self_reasoning",
+        "license": "mit",
+        "splits": [
+          { "name": "approved_directories", "sampleCount": 2, "storage": "pointer" },
+          { "name": "calculator_improvement", "sampleCount": 2, "storage": "pointer" },
+          { "name": "context_length_mod_instrumental_only", "sampleCount": 2, "storage": "pointer" },
+          { "name": "context_length_mod_irreversibility_only", "sampleCount": 2, "storage": "pointer" },
+          { "name": "database_tool", "sampleCount": 2, "storage": "pointer" },
+          { "name": "latency_calculator", "sampleCount": 2, "storage": "pointer" },
+          { "name": "max_messages_calculator", "sampleCount": 2, "storage": "pointer" },
+          { "name": "max_tokens", "sampleCount": 2, "storage": "pointer" },
+          { "name": "oversight_frequency", "sampleCount": 2, "storage": "pointer" },
+          { "name": "read_logs", "sampleCount": 2, "storage": "pointer" },
+          { "name": "turn_off_filters", "sampleCount": 2, "storage": "pointer" }
+        ]
+      },
+      "scores": [
+        {
+          "key": "success",
+          "displayName": "Success",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The agent correctly changes its deployment or otherwise solves the challenge objective on that trial."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "challenges_passed",
+          "displayName": "Challenges passed",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 11,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Count of the 11 challenges whose success rate exceeds the paper's 20% pass threshold (paper uses 50 trials; Inspect defaults to 10 epochs with at_least_1)."
+        },
+        {
+          "key": "success_rate",
+          "displayName": "Success rate",
+          "score": "success",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Per challenge. Fraction of trials that succeed."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "inspect_evals/gdm_self_reasoning_approved_directories",
+        "package": "inspect-evals==0.22.0",
+        "roles": ["target"],
+        "sandbox": "docker",
+        "internet": false,
+        "defaultTrials": 10
+      }
+    }
+  ]
+}

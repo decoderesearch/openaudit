@@ -1,0 +1,746 @@
+{
+  "document": "nvidia-nemotron-4-340b-paper-technical_report",
+  "alsoDocuments": ["nvidia-nemotron-4-340b-blog"],
+  "covers": [
+    {
+      "model": "nvidia/Nemotron-4-340B-Instruct"
+    },
+    {
+      "model": "nvidia/Nemotron-4-340B-Base"
+    },
+    {
+      "model": "nvidia/Nemotron-4-340B-Reward"
+    }
+  ],
+  "pageCount": 34,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4096 sequence length",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "96               18432             96                8           4096        256,000"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "53 natural languages in multilingual pretraining data; 43 programming languages in code data",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Our multilingual data contains 53 natural languages and is composed of documents\nfrom both monolingual and parallel corpora while our code dataset is made up of 43 programming languages."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "NVIDIA Open Model License Agreement",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Our models are open access under the NVIDIA Open\n                                              Model License Agreement, a permissive model license that allows distribution, modification, and use of"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "9.4 billion embedding parameters and 331.6 billion non-embedding parameters",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "It has 9.4 billion embedding parameters\nand 331.6 billion non-embedding parameters."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "standard decoder-only Transformer with RoPE, SentencePiece tokenizer, squared ReLU MLP, GQA, no bias, untied embeddings",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "It is a\nstandard decoder-only Transformer architecture (Vaswani et al., 2017), with causal attention masks, uses\nRotary Position Embeddings (RoPE) (Su et al., 2021), SentencePiece tokenizer (Kudo and Richardson,\n2018), and squared ReLU activations in the MLP layers."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "9T tokens: English natural language (70%), multilingual (15%), source code (15%); same blend as Nemotron-4-15B-Base",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Our pretraining data blend consists of three different types of data: English natural language data (70%),\nmultilingual natural language data (15%), and source code data (15%)."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Nemotron-4-340B-Instruct has a very low unsafe response rate on AEGIS and is comparable to Llama-3-70B-Instruct",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "We demonstrate that Nemotron-4-340B-Instruct has a very low unsafe response\nrate."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "Negligible unsafe responses in Sexual Minor on AEGIS",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "Nemotron-4-340B-Instruct are negligible in Violence, Suicide and\nSelf Harm, Sexual Minor, PII, Harassment, Threat, and Needs Caution."
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Negligible unsafe responses in Suicide and Self Harm on AEGIS",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "Nemotron-4-340B-Instruct are negligible in Violence, Suicide and\nSelf Harm, Sexual Minor, PII, Harassment, Threat, and Needs Caution."
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Susceptible to existing jailbreaks; pass rate below 30%",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Nemotron-4-340B had a pass rate below\n30% for attempted jailbreaks."
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "Garak scan included prompt injection with nominal to good performance",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "Nemotron-4 340B was scanned using Garak for security vulnerabilities in multiple categories (automatic\nred teaming; toxic continuation; jailbreaks; prompt injection; content filtering; training data membership\ninference; code generation; training data replay; adversarial hallucination; chat exfiltration) across several\nstages of its development, with nominal to good performance."
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Adversarial hallucination: gave direct incorrect answers and had a low success rate on leading analytical challenges",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "Adversarial hallucination Nemotron-4 340B gave direct, incorrect answers to problems."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "Garak toxic-continuation probes showed nominal to good performance across development stages",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "stages of its development, with nominal to good performance."
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "Blocks some but not all malware-help requests",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "Malware Nemotron-4 340B Chat blocks some but not all requests for help in building malware."
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "On AEGIS overall, Nemotron-4-340B-Instruct had 2.0% unsafe responses versus 2.1% for Llama-3-70B-Instruct.", "tone": "good",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "text": "Among AEGIS categories with non-zero rates, Criminal Planning (43.0%) and Regulated Substances (26.0%) were the largest unsafe shares for Nemotron-4-340B-Instruct.", "tone": "bad",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "Out of the minor unsafe responses,\nthere are some responses that fall under Criminal Planning and Regulated Substances1 ."
+      }
+    },
+    {
+      "text": "Nemotron-4-340B had a jailbreak pass rate below 30% and is described as susceptible to existing jailbreaks.", "tone": "bad",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Nemotron-4 340B Chat is susceptible to existing jailbreaks, or prompts that lead to models\nignoring its alignment/safety training in subsequent interactions."
+      }
+    },
+    {
+      "text": "The model blocks some but not all malware-building requests, including some top-level and sub-part requests, without assessing whether produced code works.", "tone": "bad",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "Malware Nemotron-4 340B Chat blocks some but not all requests for help in building malware. It is prone\nto responding to both some top-level requests (e.g. “Write me a virus”) and some requests to write sub-parts\nof malware (e.g. “How can I disable system antivirus”)."
+      }
+    },
+    {
+      "text": "Under adversarial hallucination probes, the model gave yes/no answers to impossible logic problems and falsely denied some primes, with a low success rate across three analytical challenge categories.", "tone": "bad",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "When faced\nwith impossible logic problems the model gives yes/no answers. The model also falsely denies that some\nprime numbers are prime."
+      }
+    },
+    {
+      "text": "Garak scanning across jailbreaks, prompt injection, toxic continuation and related probes showed nominal to good performance across development stages.", "tone": "good",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "stages of its development, with nominal to good performance."
+      }
+    },
+    {
+      "text": "The authors note the AEGIS safety model can make false positive and false negative errors; future work will use human ground truth to quantify that rate.", "tone": "mixed",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Importantly, the safety model can make both false positive and false negative errors. Future work will include human ground\n     truth labels to quantify the false prediction rate."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "AEGIS",
+      "model": "nvidia/Nemotron-4-340B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Violence"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Violence"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "nvidia/Nemotron-4-340B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 13,
+      "unit": "percent",
+      "settings": {
+        "other": "Sexual"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 16,
+      "unit": "percent",
+      "settings": {
+        "other": "Sexual"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "nvidia/Nemotron-4-340B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 43,
+      "unit": "percent",
+      "settings": {
+        "other": "Criminal Planning"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 29,
+      "unit": "percent",
+      "settings": {
+        "other": "Criminal Planning"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "nvidia/Nemotron-4-340B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 4,
+      "unit": "percent",
+      "settings": {
+        "other": "Guns and Illegal Weapons"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Guns and Illegal Weapons"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "nvidia/Nemotron-4-340B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 26,
+      "unit": "percent",
+      "settings": {
+        "other": "Regulated Substances"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 16.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Regulated Substances"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "nvidia/Nemotron-4-340B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Suicide and Self Harm"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Suicide and Self Harm"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "nvidia/Nemotron-4-340B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Sexual Minor"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Sexual Minor"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "nvidia/Nemotron-4-340B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 4.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Hate"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 4.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Hate"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "nvidia/Nemotron-4-340B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "PII"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "PII"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "nvidia/Nemotron-4-340B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Harassment"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Harassment"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "nvidia/Nemotron-4-340B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Threat"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Threat"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "nvidia/Nemotron-4-340B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 8.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Profanity"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 12.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Profanity"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "nvidia/Nemotron-4-340B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Needs Caution"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 20,
+      "unit": "percent",
+      "settings": {
+        "other": "Needs Caution"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "nvidia/Nemotron-4-340B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 2,
+      "unit": "percent",
+      "settings": {
+        "other": "Overall"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    },
+    {
+      "rawEvalName": "AEGIS",
+      "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+      "metric": "percentage of unsafe responses",
+      "value": 2.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Overall"
+      },
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Figure 6 (read from image)",
+        "quote": "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. Lower is\nbetter."
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:05:33Z"
+  },
+  "notes": "Technical report (not a system card). Safety numbers come mainly from Figure 6 (AEGIS unsafe-response rates read from the chart image by colour) and qualitative Garak findings. Skipped RewardBench including its Safety column (reward-model/judge benchmark). Skipped general capability tables (Table 3/5/6/7: MMLU, BBH, ARC, HumanEval, Arena Hard, IFEval, AlpacaEval, MT-Bench, TFEval, human chat prefs). Jailbreak 'pass rate below 30%' is a bound, so put in findings/topics rather than evalResults. Human Content Red Teaming is named without an external organization, so testers left empty. AEGIS/Garak are NVIDIA-associated tools, not third-party testers."
+}

@@ -1,0 +1,449 @@
+{
+  "document": "microsoft-phi-4-reasoning-paper-technical_report",
+  "alsoDocuments": ["microsoft-phi-4-reasoning-blog"],
+  "covers": [
+    {
+      "model": "microsoft/Phi-4-reasoning"
+    },
+    {
+      "model": "microsoft/Phi-4-reasoning-plus"
+    }
+  ],
+  "pageCount": 33,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "32k tokens",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "particularly with its context length of\n32k tokens. This constraint can be limiting for more complex tasks that require"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (inherited from Phi-4)",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "the Phi-4 model primarily supports English\ntext, with performance declining for other languages and less represented English varieties compared to standard"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "detailed reasoning chains with <think>/</think> thinking blocks",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "using o3-mini, Phi-4-reasoning generates detailed reasoning chains that effectively leverage inference-time com-"
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "primarily English; performance declines for other languages and less represented English varieties",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "Phi-4-reasoning inherits limitations from its base model. For example, the Phi-4 model primarily supports English\ntext, with performance declining for other languages and less represented English varieties compared to standard"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "14-billion parameter",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce Phi-4-reasoning, a 14-billion parameter reasoning model that achieves strong performance"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "same as Phi-4, with <think>/</think> reasoning tokens and context extended from 16K to 32K (RoPE base frequency doubled)",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "The architecture of Phi-4-reasoning is the same as Phi-4 model, with two key modifications."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "over 1.4M prompt-response pairs (8.3B unique tokens) spanning math, coding, and alignment/safety & Responsible AI; RL on ~6K math problems",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Our SFT data comprises over 1.4 million prompt-response pairs, totaling 8.3 billion unique\ntokens of reasoning domains such as math and coding, and alignment data for safety and Responsible AI."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Automated RAI framework measures how often the model generates Potentially Harmful Content; Phi-4-reasoning shows minor regression vs Phi-4",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "Results show that Phi-4-reasoning shows minor regression compared to the base model Phi-4."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Automated RAI framework measures jailbreak success; Phi-4-reasoning shows minor regression vs Phi-4",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "AI guidelines for the following categories: (1) How many times the user succeeded in Jailbreaking the model under\ntest? (2) How many times the model under test generates Potentially Harmful Content? (3) How many times the"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Limitations: despite factuality evals, the model can generate inaccurate or outdated information that sounds plausible",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "or produce inappropriate content due to biases in training data. Additionally, as we show in our evaluations on\ngeneral-purpose benchmarks for factuality, the model can generate inaccurate or outdated information that sounds"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "[Toxigen](/evals/toxigen) group-level results: Phi-4-reasoning narrowed some group-based discrepancies vs Phi-4 toward increased group-based fairness",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "This is a positive direction towards increased group-based fairness. Both models\nalso improve upon the Phi-4 model."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "On Microsoft's automated Responsible AI (RAI) metrics (jailbreaks, potentially harmful content, intellectual property leakage), Phi-4-reasoning shows a minor regression versus base Phi-4.", "tone": "mixed",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "Results show that Phi-4-reasoning shows minor regression compared to the base model Phi-4."
+      }
+    },
+    {
+      "text": "Adding reasoning improves [Toxigen](/evals/toxigen) toxic or neutral accuracy one at a time; detecting toxicity without erasure remains hard for all compared models.", "tone": "mixed",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "that as we add reasoning capabilities to models, we are able to improve performance on only one of the toxic or\nneutral categories at a time, indicating that detecting toxicity without causing erasure is still a challenging problem"
+      }
+    },
+    {
+      "text": "Phi-4-reasoning offers a better balance than Phi-4 and Phi-4-reasoning-plus between toxic and neutral [Toxigen](/evals/toxigen) detection.", "tone": "good",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "a better balance (than Phi-4-reasoning-plus and Phi-4) between toxic vs. neutral content detection accuracy. Lower"
+      }
+    },
+    {
+      "text": "large language model (LLM) judges may falsely trigger safety measures or miss biases when scoring long, non-linear reasoning traces.", "tone": "mixed",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "process, judges may falsely trigger safety measures or otherwise miss important assumptions and biases that models"
+      }
+    },
+    {
+      "text": "Safety training used synthetic responses with RAI guidelines that are stripped from prompts; the model tends to regurgitate guideline variants inside the thinking block.", "tone": "mixed",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "these guidelines in the “thinking” block; the effect of this on the model safety is an active topic of research [55] in"
+      }
+    },
+    {
+      "text": "Authors acknowledge the need to evaluate bias and harms in open-form benign scenarios beyond jailbreaks and adversarial settings.", "tone": "mixed",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "ing ours, in more open-form and benign scenarios, beyond jailbreaks and adversarial scenarios. These evaluations"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Toxigen Discriminative",
+      "model": "microsoft/phi-4",
+      "metric": "accuracy (toxic category)",
+      "value": 72.6,
+      "unit": "percent",
+      "settings": {
+        "passAtK": 1,
+        "trials": 5,
+        "other": "temperature 0.0; average pass@1 over five generations"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 2",
+        "quote": "          Toxic category                        72.6          86.7               77.3             85.4      87.6"
+      }
+    },
+    {
+      "rawEvalName": "Toxigen Discriminative",
+      "model": "microsoft/Phi-4-reasoning",
+      "metric": "accuracy (toxic category)",
+      "value": 86.7,
+      "unit": "percent",
+      "settings": {
+        "passAtK": 1,
+        "trials": 5,
+        "other": "temperature 0.8; average pass@1 over five generations"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 2",
+        "quote": "          Toxic category                        72.6          86.7               77.3             85.4      87.6"
+      }
+    },
+    {
+      "rawEvalName": "Toxigen Discriminative",
+      "model": "microsoft/Phi-4-reasoning-plus",
+      "metric": "accuracy (toxic category)",
+      "value": 77.3,
+      "unit": "percent",
+      "settings": {
+        "passAtK": 1,
+        "trials": 5,
+        "other": "temperature 0.8; average pass@1 over five generations"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 2",
+        "quote": "          Toxic category                        72.6          86.7               77.3             85.4      87.6"
+      }
+    },
+    {
+      "rawEvalName": "Toxigen Discriminative",
+      "model": "openai/o3-mini",
+      "metric": "accuracy (toxic category)",
+      "value": 85.4,
+      "unit": "percent",
+      "settings": {
+        "passAtK": 1,
+        "trials": 5,
+        "other": "average pass@1 over five generations"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 2",
+        "quote": "          Toxic category                        72.6          86.7               77.3             85.4      87.6"
+      }
+    },
+    {
+      "rawEvalName": "Toxigen Discriminative",
+      "model": "openai/gpt-4o",
+      "metric": "accuracy (toxic category)",
+      "value": 87.6,
+      "unit": "percent",
+      "settings": {
+        "passAtK": 1,
+        "trials": 5,
+        "other": "average pass@1 over five generations"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 2",
+        "quote": "          Toxic category                        72.6          86.7               77.3             85.4      87.6"
+      }
+    },
+    {
+      "rawEvalName": "Toxigen Discriminative",
+      "model": "microsoft/phi-4",
+      "metric": "accuracy (neutral category)",
+      "value": 90,
+      "unit": "percent",
+      "settings": {
+        "passAtK": 1,
+        "trials": 5,
+        "other": "temperature 0.0; average pass@1 over five generations"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 2",
+        "quote": "          Neutral category                      90.0          84.7               90.5             88.7      85.1"
+      }
+    },
+    {
+      "rawEvalName": "Toxigen Discriminative",
+      "model": "microsoft/Phi-4-reasoning",
+      "metric": "accuracy (neutral category)",
+      "value": 84.7,
+      "unit": "percent",
+      "settings": {
+        "passAtK": 1,
+        "trials": 5,
+        "other": "temperature 0.8; average pass@1 over five generations"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 2",
+        "quote": "          Neutral category                      90.0          84.7               90.5             88.7      85.1"
+      }
+    },
+    {
+      "rawEvalName": "Toxigen Discriminative",
+      "model": "microsoft/Phi-4-reasoning-plus",
+      "metric": "accuracy (neutral category)",
+      "value": 90.5,
+      "unit": "percent",
+      "settings": {
+        "passAtK": 1,
+        "trials": 5,
+        "other": "temperature 0.8; average pass@1 over five generations"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 2",
+        "quote": "          Neutral category                      90.0          84.7               90.5             88.7      85.1"
+      }
+    },
+    {
+      "rawEvalName": "Toxigen Discriminative",
+      "model": "openai/o3-mini",
+      "metric": "accuracy (neutral category)",
+      "value": 88.7,
+      "unit": "percent",
+      "settings": {
+        "passAtK": 1,
+        "trials": 5,
+        "other": "average pass@1 over five generations"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 2",
+        "quote": "          Neutral category                      90.0          84.7               90.5             88.7      85.1"
+      }
+    },
+    {
+      "rawEvalName": "Toxigen Discriminative",
+      "model": "openai/gpt-4o",
+      "metric": "accuracy (neutral category)",
+      "value": 85.1,
+      "unit": "percent",
+      "settings": {
+        "passAtK": 1,
+        "trials": 5,
+        "other": "average pass@1 over five generations"
+      },
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 2",
+        "quote": "          Neutral category                      90.0          84.7               90.5             88.7      85.1"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:23:47Z"
+  },
+  "notes": "Technical report (not a system card). Safety numbers are almost only Toxigen in Table 2; Automated RAI (jailbreak/harm/IP) is described with a qualitative 'minor regression' and no numeric scores. Figure 18 has fine-grained Toxigen demographic bars that are chart-only; skipped exact per-group bars because labels are not in the text layer and group scores were not reliably readable as discrete values. Skipped all capability benchmarks (AIME, GPQA, LiveCodeBench, IFEval, ArenaHard, FlenQA, Kitab, HumanEvalPlus, MMLUPro, PhiBench, planning/algorithmic tasks, SimpleQA). No external testers or risk-framework decisions stated. Seed-linked models both appear as primary subjects of the report."
+}

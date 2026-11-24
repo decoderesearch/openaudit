@@ -1,0 +1,120 @@
+{
+  "eval": {
+    "slug": "toxicchat",
+    "displayName": "ToxicChat",
+    "aliases": ["Toxic Chat"],
+    "description": "Toxicity detection benchmark of about 10K real user prompts from the Vicuna online demo, with human toxicity and jailbreak labels. Guard models are scored with AUPRC or optimal F1 on the toxic label. The toxicchat0124 release is the current split (train 5,082 / test 5,083).",
+    "summary": "Tests whether a safety model can find toxic and jailbreak prompts in real user chats.",
+    "maintainers": [
+      {
+        "name": "LMSYS / UC San Diego",
+        "url": "https://huggingface.co/datasets/lmsys/toxic-chat"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2310.17389",
+        "title": "ToxicChat: Unveiling Hidden Challenges of Toxicity Detection in Real-World User-AI Conversation"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/lmsys/toxic-chat",
+        "title": "lmsys/toxic-chat"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["toxicity", "jailbreaks", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "0124",
+      "status": "published",
+      "releasedDate": "2024-01-31",
+      "changes": "toxicchat0124 update of the Vicuna-demo annotations (replaces toxicchat1123).",
+      "dataset": {
+        "hfRepo": "lmsys/toxic-chat",
+        "revision": "29df8e4dba60e1f4af4b4075c0705c5b313548a8",
+        "url": "https://huggingface.co/datasets/lmsys/toxic-chat",
+        "license": "cc-by-nc-4.0",
+        "splits": [
+          {
+            "name": "toxicchat0124/train",
+            "sampleCount": 5082,
+            "storage": "pointer"
+          },
+          {
+            "name": "toxicchat0124/test",
+            "sampleCount": 5083,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "sampleTerms": {
+        "display": "open",
+        "source": "https://huggingface.co/datasets/lmsys/toxic-chat",
+        "quote": "If you come across anything in the data that you think should not be made public, please let us know right away.",
+        "note": "The quote asks for reports of bad data. It does not limit showing samples."
+      },
+      "scores": [
+        {
+          "key": "toxic_pred",
+          "displayName": "Predicted toxic",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "neither",
+          "description": "Moderator score or probability that the user prompt is toxic."
+        },
+        {
+          "key": "correct_at_threshold",
+          "displayName": "Correct at optimal threshold",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the toxic/benign decision at the optimal F1 threshold matches the human toxicity label."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "auprc",
+          "displayName": "AUPRC / AU-PRC",
+          "score": "toxic_pred",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Area under the precision-recall curve for the toxic class. Llama Guard cards often report this as score."
+        },
+        {
+          "key": "optimal_f1",
+          "displayName": "Optimal F1",
+          "score": "correct_at_threshold",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Best F1 over decision thresholds on the toxic label (ShieldGemma and similar cards)."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

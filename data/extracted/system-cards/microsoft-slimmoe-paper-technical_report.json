@@ -1,0 +1,183 @@
+{
+  "document": "microsoft-slimmoe-paper-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "microsoft/Phi-mini-MoE-instruct"
+    },
+    {
+      "model": "microsoft/Phi-tiny-MoE-instruct"
+    }
+  ],
+  "pageCount": 27,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4096 (training maximum sequence length)",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "a batch size of 4096 and a maximum sequence length of 4096. For SFT distillation, we maintain"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "Phi-mini-MoE 7.6B total; Phi-tiny-MoE 3.8B total",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Phi-mini-MoE (7.6B total / 2.4B activated) and Phi-tiny-MoE (3.8B total / 1.1B activated), using"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "Phi-mini-MoE 2.4B activated; Phi-tiny-MoE 1.1B activated",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Phi-mini-MoE (7.6B total / 2.4B activated) and Phi-tiny-MoE (3.8B total / 1.1B activated), using"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Mixture of Experts (MoE) compressed from Phi-3.5-MoE via SlimMoE expert slimming; 16 experts, top-2; Phi-mini-MoE dexpert=960; Phi-tiny-MoE dexpert=448 with 50% GQA groups pruned",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Phi-mini-MoE         4096        32/8           960             32      16       2       7.6B     2.4B"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "400B-token subset of the Phi-3.5-MoE pre-training corpus for multi-stage distillation; SFT and DPO on the GRIN-MoE post-training corpus",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "multi-stage distillation using a 400B-\ntoken subset of the Phi-3.5-MoE (Abdin et al., 2024; Liu et al., 2024b) pre-training corpus, lever-"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:19:09Z"
+  },
+  "notes": "Technical report (arXiv 2506.18349) on SlimMoE compression of Phi-3.5-MoE into Phi-mini-MoE and Phi-tiny-MoE. No safety, alignment-safety, refusal, jailbreak, bias, toxicity, privacy, honesty, hallucination, or dangerous-capability section or numbers. Mentions SFT+DPO for instruction following / preference alignment and steering away from unwanted behavior (training method only; not topic coverage). All reported benchmarks are capability (MMLU, MMLU-pro, BBH, ARC-Challenge, HellaSwag, OpenBookQA, PIQA, BoolQ, WinoGrande, HumanEval, MBPP, GSM8K, GPQA, MT-Bench, and ablations); skipped per pilot safety-only evalResults rule. contextWindow taken from training max sequence length 4096 in Appendix A.5, not an explicit inference context claim. trainingCompute left not_stated (64 A100 GPUs mentioned, no FLOPs)."
+}

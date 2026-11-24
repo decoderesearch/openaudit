@@ -1,0 +1,130 @@
+{
+  "eval": {
+    "slug": "decodingtrust",
+    "displayName": "DecodingTrust",
+    "aliases": ["DecodingTrust"],
+    "description": "Trustworthiness suite for LLMs across eight perspectives: toxicity, stereotype bias, adversarial robustness, out-of-distribution robustness, robustness to adversarial demonstrations, privacy, machine ethics, and fairness. Each perspective uses fixed prompts and task sets; cards report a 0–1 score per perspective (for example Stereotype Bias or Privacy). Dataset is on Hugging Face under access control; code and data also live in the AI-secure GitHub repo.",
+    "summary": "Measures how trustworthy the model is in eight areas, such as toxicity, bias, privacy, and fairness.",
+    "maintainers": [
+      {
+        "name": "AI-Secure",
+        "url": "https://github.com/AI-secure/DecodingTrust"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2306.11698",
+        "title": "DecodingTrust: A Comprehensive Assessment of Trustworthiness in GPT Models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/AI-secure/DecodingTrust",
+        "title": "Official DecodingTrust code and data"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/AI-Secure/DecodingTrust",
+        "title": "AI-Secure/DecodingTrust (gated)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://decodingtrust.github.io/",
+        "title": "DecodingTrust benchmark site"
+      }
+    ],
+    "access": "gated",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "robustness", "capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["toxicity", "bias", "jailbreaks", "honesty"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2023-06-20",
+      "status": "published",
+      "releasedDate": "2023-06-20",
+      "dataset": {
+        "hfRepo": "AI-Secure/DecodingTrust",
+        "revision": "b53ffb6d1c997a1e8324eb44815d3311db3d0065",
+        "url": "https://huggingface.co/datasets/AI-Secure/DecodingTrust",
+        "license": "cc-by-sa-4.0",
+        "splits": [
+          {
+            "name": "toxicity_toxic",
+            "sampleCount": 1196,
+            "storage": "pointer"
+          },
+          {
+            "name": "toxicity_nontoxic",
+            "sampleCount": 1200,
+            "storage": "pointer"
+          },
+          {
+            "name": "stereotype",
+            "sampleCount": 3456,
+            "storage": "pointer"
+          },
+          {
+            "name": "privacy_enron",
+            "sampleCount": 3333,
+            "storage": "pointer"
+          },
+          {
+            "name": "fairness_adult_test",
+            "sampleCount": 199,
+            "storage": "pointer"
+          },
+          {
+            "name": "fairness_crime_test",
+            "sampleCount": 299,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "sampleTerms": {
+        "display": "sign_in",
+        "source": "https://huggingface.co/datasets/AI-Secure/DecodingTrust",
+        "note": "The source gates access on Hugging Face. We keep the gate: sign in and accept to read samples."
+      },
+      "scores": [
+        {
+          "key": "perspective_score",
+          "displayName": "Perspective score",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Per-perspective trustworthiness score as reported by DecodingTrust (toxicity, stereotype bias, adversarial robustness, OOD robustness, adversarial demonstrations, privacy, machine ethics, or fairness)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "perspective_score",
+          "displayName": "Perspective score",
+          "score": "perspective_score",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Mean perspective score on one DecodingTrust perspective. Cards name the perspective in the metric field (for example Stereotype Bias)."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

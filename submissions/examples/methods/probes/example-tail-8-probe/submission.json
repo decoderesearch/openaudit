@@ -1,0 +1,55 @@
+{
+  "schema": "openaudit.submission/1",
+  "method": "probes",
+  "variant": "example-tail-8-probe",
+  "displayName": "Example: Tail-8 Probe",
+  "summary": "An Apollo-style probe that reads only the last 8 tokens of the reply, not the mean over all reply tokens. The threshold and the choice of probe use the same readout.",
+  "authors": [
+    {
+      "name": "OpenAudit",
+      "url": "https://openaudit.com"
+    }
+  ],
+  "contact": "support@openaudit.com",
+  "license": "MIT",
+  "links": [
+    {
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2502.03407",
+      "title": "Goldowsky-Dill et al., Detecting Strategic Deception Using Linear Probes (2025)"
+    }
+  ],
+  "artifacts": [],
+  "recipe": {
+    "summary": "The fit of the harness's Apollo recipe: instructed pairs, a difference in means and logistic regressions on 8 layers. The change is the readout: the probe scores the mean of the activations of the last 8 reply tokens. The Alpaca threshold and the choice of probe on the validation split use the same readout.",
+    "file": {
+      "path": "code/recipe.py",
+      "sha256": "44e76c0c36a6fffd0cfd96821f9e0710c2b86359460afdb118eba240068b7f7f"
+    },
+    "trainData": {
+      "kind": "generated",
+      "generator": "https://huggingface.co/datasets/ai-safety-institute/lie-detection-rollouts/blob/177a81666ab378ce9d055507bc30f480ab63e74b/README.md",
+      "sources": {
+        "facts": {
+          "dataset": "L1Fthrasir/Facts-true-false",
+          "revision": "f736863e0640de7dcbbb677cd7fbdb540558de50",
+          "file": "data/train-00000-of-00001.parquet"
+        },
+        "alpaca": {
+          "dataset": "ai-safety-institute/lie-detection-rollouts",
+          "revision": "177a81666ab378ce9d055507bc30f480ab63e74b",
+          "file": "{subset}/alpaca.parquet"
+        },
+        "validation": {
+          "dataset": "ai-safety-institute/lie-detection-rollouts",
+          "revision": "177a81666ab378ce9d055507bc30f480ab63e74b",
+          "file": "{subset}/varied_deception_validation.parquet"
+        }
+      }
+    },
+    "fitData": "The true facts of L1Fthrasir/Facts-true-false as instructed pairs, and the subject model's Alpaca replies for the threshold.",
+    "selection": "TAIL = 8 is fixed before any run (the author's hypothesis). The threshold is at a 1% positive rate on the Alpaca replies. The layer and the probe type are chosen on the Varied Deception validation split.",
+    "evalItemsUsed": "none. Only the validation split, which the harness permits.",
+    "compute": "On one RTX PRO 6000, for Qwen/Qwen3.5-4B: 9 minutes for the fit and 10 minutes for the full run (results.json). On an RTX 5090 with the slow reference kernels for linear attention, 13 and 15 minutes."
+  }
+}

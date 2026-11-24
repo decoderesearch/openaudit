@@ -1,0 +1,192 @@
+{
+  "document": "nvidia-helpsteer2-preference-paper-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "nvidia/Llama-3.1-Nemotron-70B-Instruct"
+    },
+    {
+      "rawModelName": "Llama-3.1-Nemotron-70B-Reward"
+    }
+  ],
+  "pageCount": 28,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "stated",
+      "value": "Dataset HelpSteer2 / preference annotations CC-BY-4.0; model license not stated",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Dataset (CC-BY-4.0-License): huggingface.co/datasets/nvidia/HelpSteer2"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "70B (Llama-3.1-70B-Instruct base)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "we use Llama-3.1-70B-Instruct (Dubey et al., 2024) as the\nbase model"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Llama-3.1-70B-Instruct base with reward head or RLHF alignment",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "we use Llama-3.1-70B-Instruct (Dubey et al., 2024) as the\nbase model"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "HelpSteer2 Likert ratings plus newly released HelpSteer2-Preference preference annotations and justifications",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "we release preference annotations (designed for Bradley-Terry\n                                                    training) to complement existing ratings (designed for Regression style training) in\n                                                    the HelpSteer2 dataset"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "Reward models 8–32 H100-eqv. node-hours; DPO 16, PPO 50, REINFORCE 64 H100-eqv. node-hours on 8×A100/H100-80GB nodes",
+      "source": {
+        "page": "24",
+        "pdfPage": 24,
+        "quote": "Table 9: Compute required for training models, measured in H100-eqv. node-hours. Experiments are\nrun on nodes of 8 A100/H100-80GB SXM GPUs on internal clusters."
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Authors state the HelpSteer2-Preference prompts and responses contain no unsafe content (harm, illegal activity, profanity, bias/stereotyping) and no personally identifiable information (PII), as excluded in the HelpSteer2 collection.", "tone": "good",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "The prompts and responses in the HelpSteer2-Preference dataset do not contain any unsafe content\n(e.g. harmful content, illegal activities, profanity, bias and stereotyping)"
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:43:48Z"
+  },
+  "notes": "Technical report on HelpSteer2-Preference data and reward/RLHF training, not a safety system card. Per pilot rules, skipped RewardBench entirely (reward-model/judge benchmark), including its Safety column. Skipped capability/chat-preference evals: MT-Bench, AlpacaEval 2.0 LC, Arena Hard, and Table 13 MMLU/GSM8K/HumanEval. Appendix D sycophantic/style factors describe annotator preference justifications, not model sycophancy tests. Ethics statement covers training-data filtering only, so topics stay uncovered. Released HF ids named: nvidia/Llama-3.1-Nemotron-70B-Instruct (seed checkpoint) and Llama-3.1-Nemotron-70B-Reward (seed has Reward-HF, not exact match). Scale AI is an annotation vendor, not an external safety tester."
+}

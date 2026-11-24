@@ -1,0 +1,73 @@
+{
+  "eval": {
+    "slug": "gdm-assurance-content-safety",
+    "displayName": "Assurance content safety violations",
+    "aliases": [
+      "Assurance content safety violations (Text to Text)",
+      "Assurance content safety violations (Image to Text)"
+    ],
+    "description": "Google DeepMind arms-length assurance eval of content-safety policy violations for Gemini release review. Prompt sets are held out from the model team. Cards report reduction in violations versus a prior Gemini for Text to Text and Image to Text. Separate from development Text to Text / Image to Text Safety. Lab-internal.",
+    "summary": "Measures how often the model produces content that breaks safety policy when given harmful requests.",
+    "family": "Google DeepMind safety evaluations",
+    "maintainers": [
+      {
+        "name": "Google DeepMind",
+        "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf",
+        "title": "Gemini 1.5 technical report (Assurance evaluations)"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2403.05530",
+        "title": "Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "human"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "internal",
+      "status": "draft",
+      "changes": "Assurance content-safety violation rates as reported for Gemini 1.5; held-out prompt sets.",
+      "scores": [
+        {
+          "key": "policy_violation",
+          "displayName": "Policy violation",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "Whether the response violates a content-safety policy under the assurance grader."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "violation_rate",
+          "displayName": "Content safety violation rate",
+          "score": "policy_violation",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of assurance prompts graded as policy violations. Cards often report relative reduction versus a prior Gemini."
+        }
+      ]
+    }
+  ]
+}

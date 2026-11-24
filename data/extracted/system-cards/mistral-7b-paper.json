@@ -1,0 +1,230 @@
+{
+  "document": "mistral-7b-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "mistralai/Mistral-7B-v0.1"
+    },
+    {
+      "model": "mistralai/Mistral-7B-Instruct-v0.1"
+    }
+  ],
+  "pageCount": 9,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "8192",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "context_len        8192"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Our models are released under the Apache 2.0 license."
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7–billion-parameter",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce Mistral 7B, a 7–billion-parameter language model engineered for"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "transformer with grouped-query attention (GQA) and sliding window attention (SWA); dim 4096, 32 layers, 32 heads, 8 kv heads, window 4096",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Mistral 7B is based on a transformer architecture"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Instruct: fine-tuned on public Hugging Face instruction datasets; no proprietary data or training tricks",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "No proprietary data or training tricks were utilized:"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "With the recommended system prompt, declines to answer 100% of 175 harmful/unsafe prompts",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "declines to answer 100% of the harmful questions."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Section 5 presents optional system-prompt guardrails; with the Mistral prompt the Instruct model declines all 175 internal unsafe prompts while keeping usable MT-Bench scores.", "tone": "good",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Using this prompt allows the user to move on the"
+      }
+    },
+    {
+      "text": "Authors claim Instruct can self-reflect as a content moderator (illegal activity, hate/harassment/violence including self-harm, unqualified advice) with 99.4% precision and 95.6% recall on an internal balanced set; that classifier task is not recorded as an eval result.", "tone": "good",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "got a precision of 99.4% for a recall of 95.6% (considering acceptable"
+      }
+    },
+    {
+      "text": "Pretraining data composition, filtering, and compute are not described; only public Hugging Face instruction data is named for Instruct fine-tuning.", "tone": "mixed",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "we fine-tuned it on instruction datasets"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "unsafe prompts",
+      "model": "mistralai/Mistral-7B-Instruct-v0.1",
+      "metric": "decline rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "Mistral system prompt; 175 unsafe prompts"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "declines to answer 100% of the harmful questions."
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:37:15Z"
+  },
+  "notes": "Technical report (arXiv:2310.06825). Safety is only Section 5 (system-prompt guardrails + self-reflection content moderation). Skipped all capability tables (Table 2/3/4 MT-Bench, MMLU, code, math, Arena, human preference). Skipped content-moderation precision/recall from evalResults as classifier skill; noted in findings. Child abuse and self-harm appear only as moderation category labels, not as topic tests. Seed-linked Instruct v0.2 and v0.3 are not named and post-date the paper."
+}

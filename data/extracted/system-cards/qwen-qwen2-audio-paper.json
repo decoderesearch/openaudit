@@ -1,0 +1,207 @@
+{
+  "document": "qwen-qwen2-audio-paper",
+  "alsoDocuments": ["qwen-qwen2-audio-blog"],
+  "covers": [
+    {
+      "model": "Qwen/Qwen2-Audio-7B-Instruct"
+    }
+  ],
+  "pageCount": 16,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "audio and text inputs; textual outputs",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "designed to process both audio and\n                                           text inputs to generate textual outputs"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "8.2B parameters",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "The total parameters of Qwen2-Audio is 8.2B parameters."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Audio encoder initialized from Whisper-large-v3 plus Qwen-7B LLM; three-stage training (pre-training, SFT, DPO)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "initialization of the audio encoder of Qwen2-Audio is based on the Whisper-\nlarge-v3 model (Radford et al., 2023)."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Natural language prompts for different data and tasks; further expanded data volume; SFT and DPO preference triplets",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "utilized natural language prompts for different data and tasks and have further expanded the data volume."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The report has no dedicated safety, red-teaming, jailbreak, bias, toxicity, privacy, or dangerous-capability section or numeric safety evals.", "tone": "mixed",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "we still perform a comprehensive evaluation that encompasses various tasks, namely Automatic Speech\nRecognition (ASR), Speech-to-Text Translation (S2TT), Speech Emotion Recognition (SER), Vocal Sound\nClassification (VSC)."
+      }
+    },
+    {
+      "text": "The abstract claims direct preference optimization (DPO) improved factuality and adherence to desired behavior, without reporting a factuality or honesty metric.", "tone": "mixed",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "DPO has optimized the model’s performance in terms of factuality and adherence"
+      }
+    },
+    {
+      "text": "During AIR-Bench chat testing, Gemini-1.5 could not return some samples for SAFETY reasons, so its sample count was cut by about one fifth.", "tone": "mixed",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "correctly return some test samples due to its SAFETY reasons during testing"
+      }
+    },
+    {
+      "text": "Qwen2-Audio is described as open-sourced; no license string is given in the paper.", "tone": "neutral",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Qwen2-Audio is open-sourced with the aim of fostering\n                                                           the advancement of the multi-modal language community."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:53:14Z"
+  },
+  "notes": "Technical report (arXiv 2407.10759), not a system card. No safety/alignment eval tables. Skipped all capability numbers (ASR WER, S2TT BLEU, SER/VSC ACC, AIR-Bench GPT-4 chat scores in Table 2 and Figure 1). Figure 3 pre-training hours chart has no readable numbers in the text layer. Report names only 'Qwen2-Audio' (8.2B, Qwen-7B backbone); mapped to seed Qwen/Qwen2-Audio-7B-Instruct as the post-SFT/DPO chat model described. Checkpoint Qwen/Qwen2-Audio-7B is not named. Abstract DPO factuality claim left as a finding only (no honesty/hallucination topic coverage)."
+}

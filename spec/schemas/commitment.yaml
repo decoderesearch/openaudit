@@ -1,0 +1,251 @@
+# Safety commitments: what an organization has committed to, how far, and how it is enforced.
+# A `Commitment` is one kind of commitment with the criteria of its ideal form. An
+# `OrgCommitment` is one organization's current state for it, and its `OrgCommitmentEvent`s are
+# the timeline. Text fields are Markdown. Claims are written as claims ("says it will").
+$defs:
+  CommitmentCategory:
+    description: >-
+      `oversight`: outside people test or check the organization. `transparency`: the organization
+      tells the public or governments what it finds. `limits`: the organization limits or stops its
+      own development. `security`: it protects its models, or gives resources to safety.
+    type: string
+    enum: [oversight, transparency, limits, security]
+
+  CommitmentCriterion:
+    description: One part of the ideal form of a commitment.
+    type: object
+    additionalProperties: false
+    required: [key, label, description]
+    properties:
+      key:
+        $ref: '#/$defs/Slug'
+        description: Unique in the commitment (`deep-access`).
+      label:
+        type: string
+        minLength: 1
+        description: A few words in Title Case (`Deep Access`).
+      description:
+        $ref: '#/$defs/Markdown'
+        description: One sentence that tells what meets the criterion.
+
+  Commitment:
+    title: Commitment
+    description: >-
+      One kind of safety commitment, with the criteria of its ideal form. Its page is
+      `/organizations/commitments/<slug>`.
+    type: object
+    additionalProperties: false
+    required: [id, slug, name, category, order, summary, description, criteria]
+    properties:
+      id:
+        $ref: '#/$defs/Id'
+      slug:
+        $ref: '#/$defs/Slug'
+      name:
+        type: string
+        minLength: 1
+        description: Title Case (`Embedded Evaluators`).
+      category:
+        $ref: '#/$defs/CommitmentCategory'
+      order:
+        type: integer
+        minimum: 0
+        description: The place of the column in the table.
+      summary:
+        $ref: '#/$defs/Markdown'
+        description: One sentence that tells the ideal form.
+      description:
+        $ref: '#/$defs/Markdown'
+        description: Why it matters for safety, in 2 or 3 short sentences.
+      criteria:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/CommitmentCriterion'
+
+  CommitmentLevel:
+    description: >-
+      How far the organization has committed. `full`: it meets all criteria, each independently
+      verified. `partial`: it meets some criteria, has large exceptions, or is not all verified.
+      `intent`: it says it will, with no terms or date.
+      `none_found`: we checked and found no public commitment. `declined`: it publicly refused.
+      `dropped`: it had the commitment, then withdrew it or let it end. `broken`: credible sources
+      report that it did not keep the commitment.
+    type: string
+    enum: [full, partial, intent, none_found, declined, dropped, broken]
+
+  CommitmentStrength:
+    description: >-
+      How enforceable the commitment is. `statement`: a post or a talk; it can change at any time.
+      `policy`: in a published policy or framework with a change process. `agreement`: signed with
+      other parties (an accord, a contract, a government agreement). `law`: a law or regulation
+      requires it.
+    type: string
+    enum: [statement, policy, agreement, law]
+
+  CommitmentDuration:
+    description: >-
+      `ongoing`: no end date. `time_limited`: a pilot, or a term with an end date.
+    type: string
+    enum: [ongoing, time_limited]
+
+  CriterionStatus:
+    type: string
+    enum: [met, partly, not_met]
+
+  CommitmentState:
+    description: An organization's commitment at one time.
+    type: object
+    additionalProperties: false
+    required: [level, criteria, limits]
+    properties:
+      level:
+        $ref: '#/$defs/CommitmentLevel'
+      strength:
+        $ref: '#/$defs/CommitmentStrength'
+      duration:
+        $ref: '#/$defs/CommitmentDuration'
+      endDate:
+        $ref: '#/$defs/PartialDate'
+        description: When a time-limited commitment ends.
+      condition:
+        type: string
+        minLength: 1
+        description: >-
+          The condition that the commitment depends on, in a few words (`If all frontier labs
+          agree`). Empty when it has no condition.
+      criteria:
+        type: object
+        description: Each criterion of the commitment by its key. A criterion that is not here is not known.
+        propertyNames:
+          $ref: '#/$defs/Slug'
+        additionalProperties:
+          $ref: '#/$defs/CriterionStatus'
+      verified:
+        type: array
+        description: >-
+          The keys of the met or partly met criteria that an independent party can check, with a
+          public result. Missing is none.
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/Slug'
+      notes:
+        type: object
+        description: Where the organization is now on each criterion, by its key.
+        propertyNames:
+          $ref: '#/$defs/Slug'
+        additionalProperties:
+          $ref: '#/$defs/CriterionNote'
+      limits:
+        type: array
+        description: The exceptions and limits, each in a few words (`Lab can redact`).
+        items:
+          type: string
+          minLength: 1
+
+  CriterionNote:
+    description: One criterion's state in short words. Each part is a phrase or one short sentence.
+    type: object
+    additionalProperties: false
+    minProperties: 1
+    properties:
+      commitment:
+        type: string
+        minLength: 1
+        description: What the organization commits to or does for the criterion.
+      missing:
+        type: string
+        minLength: 1
+        description: What is missing for the criterion to be met and independently verified.
+
+  CommitmentQuote:
+    description: The organization's own words, copied exactly from the source.
+    type: object
+    additionalProperties: false
+    required: [text, url]
+    properties:
+      text:
+        type: string
+        minLength: 1
+      url:
+        $ref: '#/$defs/Url'
+
+  OrgCommitment:
+    title: OrgCommitment
+    description: >-
+      One organization's current state for one commitment: the state after its newest event, or
+      `none_found` with no events. Its page is `/<organization slug>/commitments/<commitment slug>`.
+    type: object
+    additionalProperties: false
+    required: [id, organizationId, commitmentId, checkedAt, state]
+    properties:
+      id:
+        $ref: '#/$defs/Id'
+      organizationId:
+        $ref: '#/$defs/Id'
+      commitmentId:
+        $ref: '#/$defs/Id'
+      checkedAt:
+        type: string
+        format: date
+        description: The day of the newest research (YYYY-MM-DD).
+      checkedBy:
+        type: string
+        minLength: 1
+        description: The model that did the newest research, with its effort, as "Claude Opus 5.5 (High)".
+      summary:
+        $ref: '#/$defs/Markdown'
+        description: The current state in one sentence, for the table and the lists.
+      state:
+        $ref: '#/$defs/CommitmentState'
+
+  CommitmentEventKind:
+    description: >-
+      `announced`: the first commitment. `expanded` or `narrowed`: the terms changed. `renewed`: a
+      time-limited commitment continued. `expired`: it ended at its end date. `withdrawn`: the
+      organization dropped it. `broken`: sources report that it was not kept. `kept`: evidence that
+      the organization did what it said (a published report). `declined`: the organization refused.
+    type: string
+    enum: [announced, expanded, narrowed, renewed, expired, withdrawn, broken, kept, declined]
+
+  OrgCommitmentEvent:
+    title: OrgCommitmentEvent
+    description: One event in an organization's commitment timeline, with the state after it.
+    type: object
+    additionalProperties: false
+    required: [id, orgCommitmentId, order, date, datePrecision, kind, title, sources, state]
+    properties:
+      id:
+        $ref: '#/$defs/Id'
+      orgCommitmentId:
+        $ref: '#/$defs/Id'
+      order:
+        type: integer
+        minimum: 0
+        description: The place in the timeline, from 0, oldest first.
+      date:
+        $ref: '#/$defs/PartialDate'
+      datePrecision:
+        $ref: '#/$defs/DatePrecision'
+      kind:
+        $ref: '#/$defs/CommitmentEventKind'
+      title:
+        type: string
+        minLength: 1
+        description: A short headline (`Signs agreements with four embedded assessors`).
+      summary:
+        $ref: '#/$defs/Markdown'
+        description: 1 or 2 short sentences.
+      quote:
+        $ref: '#/$defs/CommitmentQuote'
+      agreement:
+        type: string
+        minLength: 1
+        description: The shared agreement that the event is part of (`Frontier AI Safety Commitments`).
+      sources:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/OrgSource'
+      state:
+        $ref: '#/$defs/CommitmentState'

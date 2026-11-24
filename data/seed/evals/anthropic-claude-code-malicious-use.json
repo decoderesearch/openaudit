@@ -1,0 +1,90 @@
+{
+  "eval": {
+    "slug": "anthropic-claude-code-malicious-use",
+    "displayName": "Claude Code malicious use (Anthropic)",
+    "aliases": [
+      "Agentic coding malicious use",
+      "Claude Code malicious coding",
+      "Claude Code dual-use & benign",
+      "Claude Code malicious use",
+      "Malicious use of Claude Code",
+      "Claude Code malicious use without mitigations",
+      "Claude Code malicious use with mitigations"
+    ],
+    "description": "Anthropic internal Claude Code agent eval. Sixty-one malicious cyber prompts should be refused; sixty-one dual-use and benign prompts should succeed. Each prompt is run repeatedly with the standard Claude Code toolset and system prompt. Cards report malicious refusal rate and dual-use/benign success rate.",
+    "summary": "Tests whether AI agents refuse malicious cyber tasks but still help with safe and dual-use ones.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+        "title": "Claude Opus 5.5 System Card (PDF)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness", "propensity"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["agentic_misuse", "cyber"]
+    },
+    "visibility": "public",
+    "family": "Anthropic safeguards evaluations"
+  },
+  "versions": [
+    {
+      "version": "2026-06-30",
+      "status": "published",
+      "releasedDate": "2026-06-30",
+      "scores": [
+        {
+          "key": "malicious_refused",
+          "displayName": "Malicious refused",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model refused a malicious cyber Claude Code prompt."
+        },
+        {
+          "key": "dual_use_success",
+          "displayName": "Dual-use or benign success",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model helpfully completed a dual-use or benign Claude Code prompt."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "malicious_refusal_rate",
+          "displayName": "Malicious refusal rate",
+          "score": "malicious_refused",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of malicious Claude Code prompts refused."
+        },
+        {
+          "key": "dual_use_benign_success_rate",
+          "displayName": "Dual-use and benign success rate",
+          "score": "dual_use_success",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Share of dual-use and benign Claude Code prompts completed successfully."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "eval": {
+    "slug": "promptfoo",
+    "displayName": "Promptfoo Red Team",
+    "aliases": ["Promptfoo red teaming", "promptfoo redteam"],
+    "description": "Open-source red-teaming tool. It generates attack prompts from plugins (harm categories, such as harmful content, crime, misinformation and privacy) and applies strategies (attack methods, such as Base64, prompt injection, iterative jailbreak and Crescendo). A model grader marks each response as pass or fail. The prompts are generated for each run, so compare results only with the same plugins, strategies, test count and grader.",
+    "summary": "Tests whether the model resists attack prompts that try to cause harmful output or break its rules.",
+    "maintainers": [
+      {
+        "name": "Promptfoo",
+        "url": "https://github.com/promptfoo/promptfoo"
+      }
+    ],
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/promptfoo/promptfoo",
+        "title": "promptfoo/promptfoo"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www.promptfoo.dev/docs/red-team/",
+        "title": "Promptfoo red teaming docs"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["single_turn", "multi_turn"],
+      "cases": ["generated"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "jailbreaks", "prompt_injection"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "0.123.1",
+      "status": "published",
+      "releasedDate": "2026-09-18",
+      "scores": [
+        {
+          "key": "pass",
+          "displayName": "Pass",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the grader finds the response safe for the plugin's harm category."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "pass_rate",
+          "displayName": "Passing rate",
+          "score": "pass",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Share of attack prompts with a safe response, for one plugin and strategy set."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "package": "promptfoo@0.123.1",
+        "roles": ["generator", "target", "judge"],
+        "internet": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "openaudit.submission/1",
+  "method": "probes",
+  "variant": "example-apollo-recipe",
+  "displayName": "Example: Apollo Probe Recipe",
+  "summary": "An example submission: the Apollo-style probe recipe of the Varied Deception harness, with our real runs. It is not a new variant.",
+  "authors": [
+    {
+      "name": "OpenAudit",
+      "url": "https://openaudit.com"
+    }
+  ],
+  "contact": "support@openaudit.com",
+  "license": "Apache-2.0",
+  "links": [
+    {
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2502.03407",
+      "title": "Goldowsky-Dill et al., Detecting Strategic Deception Using Linear Probes (2025)"
+    }
+  ],
+  "artifacts": [],
+  "recipe": {
+    "summary": "A probe on instructed pairs: each true fact after an honest instruction and after a dishonest one. The recipe fits a difference in means and logistic regressions on 8 layers, and keeps the probe with the best balanced accuracy on the validation split.",
+    "file": {
+      "path": "code/recipe.py",
+      "sha256": "39e018b35bbbaba20601a7d25acc02b3b7a48c45d98100431c91ceac4e5389ab"
+    },
+    "trainData": {
+      "kind": "generated",
+      "generator": "https://huggingface.co/datasets/ai-safety-institute/lie-detection-rollouts/blob/177a81666ab378ce9d055507bc30f480ab63e74b/README.md",
+      "sources": {
+        "facts": {
+          "dataset": "L1Fthrasir/Facts-true-false",
+          "revision": "f736863e0640de7dcbbb677cd7fbdb540558de50",
+          "file": "data/train-00000-of-00001.parquet"
+        },
+        "alpaca": {
+          "dataset": "ai-safety-institute/lie-detection-rollouts",
+          "revision": "177a81666ab378ce9d055507bc30f480ab63e74b",
+          "file": "{subset}/alpaca.parquet"
+        },
+        "validation": {
+          "dataset": "ai-safety-institute/lie-detection-rollouts",
+          "revision": "177a81666ab378ce9d055507bc30f480ab63e74b",
+          "file": "{subset}/varied_deception_validation.parquet"
+        }
+      }
+    },
+    "fitData": "The true facts of L1Fthrasir/Facts-true-false, and the subject model replies to Alpaca prompts for the threshold.",
+    "selection": "The threshold is at a 1% positive rate on the Alpaca replies. The layer and the probe type are chosen on the Varied Deception validation split, which has other scenarios than the eval chats.",
+    "evalItemsUsed": "none. Only the validation split, which the harness permits.",
+    "compute": "About 2 minutes for each fit on one RTX 5090 for a 4B model."
+  }
+}

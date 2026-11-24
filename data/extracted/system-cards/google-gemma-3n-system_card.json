@@ -1,0 +1,1134 @@
+{
+  "document": "google-gemma-3n-system_card",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "google/gemma-3n-E2B-it"
+    },
+    {
+      "model": "google/gemma-3n-E4B-it"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "June 2024",
+      "source": {
+        "page": "Model Data > Training Dataset",
+        "quote": "The knowledge cutoff date for the training data was June 2024."
+      }
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "32K tokens",
+      "source": {
+        "page": "Model Information > Inputs and outputs",
+        "quote": "Total input context of 32K tokens"
+      }
+    },
+    "maxOutput": {
+      "status": "stated",
+      "value": "up to 32K tokens, subtracting the request input tokens",
+      "source": {
+        "page": "Model Information > Inputs and outputs",
+        "quote": "Total output length up to 32K tokens, subtracting the request input tokens"
+      }
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text, image, video, and audio input; text output",
+      "source": {
+        "page": "Model Information > Description",
+        "quote": "They are capable of multimodal input, handling text, image, video, and audio input, and generating text outputs"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "over 140 spoken languages",
+      "source": {
+        "page": "Model Information > Description",
+        "quote": "These models were trained with data in over 140 spoken languages."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Terms",
+      "source": {
+        "page": "Header",
+        "quote": "Terms of Use: Terms Authors: Google DeepMind"
+      }
+    },
+    "totalParams": {
+      "status": "not_stated"
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "effective size of 2B and 4B parameters",
+      "source": {
+        "page": "Model Information > Description",
+        "quote": "This technique allows the models to operate at an effective size of 2B and 4B parameters, which is lower than the total number of parameters they contain."
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "selective parameter activation technology",
+      "source": {
+        "page": "Model Information > Description",
+        "quote": "Gemma 3n models use selective parameter activation technology to reduce resource requirements."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "approximately 11 trillion tokens; web documents, code, mathematics, images, audio; over 140 languages; CSAM and sensitive-data filtering",
+      "source": {
+        "page": "Model Data > Training Dataset",
+        "quote": "These models were trained on a dataset that includes a wide variety of sources totalling approximately 11 trillion tokens."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "minimal policy violations across text-to-text, image-to-text, and audio-to-text",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results",
+        "quote": "the model produced minimal policy violations, and showed significant improvements over previous Gemma models' performance with respect to high severity violations"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "evaluated child safety including child sexual abuse and exploitation; safe levels vs prior Gemma",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Approach",
+        "quote": "Child Safety: Evaluation of text-to-text and image to text prompts covering child safety policies, including child sexual abuse and exploitation."
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Models may generate incorrect or outdated factual statements",
+      "source": {
+        "page": "Usage and Limitations > Limitations > Factual Accuracy",
+        "quote": "They may generate incorrect or outdated factual statements."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Representational harms evals for bias and stereotyping; bias considered in training data",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Approach",
+        "quote": "Representational Harms: Evaluation of text-to-text and image to text prompts covering safety policies including bias, stereotyping, and harmful associations or inaccuracies."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Safety testing was run without safety filters and reports only qualitative 'minimal policy violations' with no numeric safety scores.", "tone": "mixed",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results",
+        "quote": "All testing was conducted without safety filters to evaluate the model capabilities and behaviors."
+      }
+    },
+    {
+      "text": "The card says safety evaluations used primarily English language prompts, limiting language coverage of the safety claims.", "tone": "mixed",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Results",
+        "quote": "A limitation of our evaluations was they included primarily English language prompts."
+      }
+    },
+    {
+      "text": "Arms-length 'assurance evaluations' inform release decisions and notable results go to the Responsibility & Safety Council.", "tone": "neutral",
+      "source": {
+        "page": "Ethics and Safety > Evaluation Approach",
+        "quote": "Notable assurance evaluation results are reported to our Responsibility & Safety Council as part of release review."
+      }
+    },
+    {
+      "text": "Selective parameter activation lets the models run at an effective size of 2B and 4B parameters, below their total parameter count.", "tone": "neutral",
+      "source": {
+        "page": "Model Information > Description",
+        "quote": "This technique allows the models to operate at an effective size of 2B and 4B parameters, which is lower than the total number of parameters they contain."
+      }
+    },
+    {
+      "text": "The card claims superior performance versus other comparably sized open model alternatives on the reported benchmarks.", "tone": "neutral",
+      "source": {
+        "page": "Usage and Limitations > Benefits",
+        "quote": "these models have shown to provide superior performance to other, comparably-sized open model alternatives."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "HellaSwag",
+      "rawModelName": "E2B PT",
+      "metric": "Accuracy",
+      "value": 72.2,
+      "unit": "percent",
+      "settings": {
+        "other": "10-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "HellaSwag | Accuracy | 10-shot | 72.2 | 78.6",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "rawModelName": "E4B PT",
+      "metric": "Accuracy",
+      "value": 78.6,
+      "unit": "percent",
+      "settings": {
+        "other": "10-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "HellaSwag | Accuracy | 10-shot | 72.2 | 78.6",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "BoolQ",
+      "rawModelName": "E2B PT",
+      "metric": "Accuracy",
+      "value": 76.4,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "BoolQ | Accuracy | 0-shot | 76.4 | 81.6",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "BoolQ",
+      "rawModelName": "E4B PT",
+      "metric": "Accuracy",
+      "value": 81.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "BoolQ | Accuracy | 0-shot | 76.4 | 81.6",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "rawModelName": "E2B PT",
+      "metric": "Accuracy",
+      "value": 78.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "PIQA | Accuracy | 0-shot | 78.9 | 81.0",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "rawModelName": "E4B PT",
+      "metric": "Accuracy",
+      "value": 81.0,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "PIQA | Accuracy | 0-shot | 78.9 | 81.0",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "SocialIQA",
+      "rawModelName": "E2B PT",
+      "metric": "Accuracy",
+      "value": 48.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "SocialIQA | Accuracy | 0-shot | 48.8 | 50.0",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "SocialIQA",
+      "rawModelName": "E4B PT",
+      "metric": "Accuracy",
+      "value": 50.0,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "SocialIQA | Accuracy | 0-shot | 48.8 | 50.0",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA",
+      "rawModelName": "E2B PT",
+      "metric": "Accuracy",
+      "value": 60.8,
+      "unit": "percent",
+      "settings": {
+        "other": "5-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "TriviaQA | Accuracy | 5-shot | 60.8 | 70.2",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA",
+      "rawModelName": "E4B PT",
+      "metric": "Accuracy",
+      "value": 70.2,
+      "unit": "percent",
+      "settings": {
+        "other": "5-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "TriviaQA | Accuracy | 5-shot | 60.8 | 70.2",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "Natural Questions",
+      "rawModelName": "E2B PT",
+      "metric": "Accuracy",
+      "value": 15.5,
+      "unit": "percent",
+      "settings": {
+        "other": "5-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "Natural Questions | Accuracy | 5-shot | 15.5 | 20.9",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "Natural Questions",
+      "rawModelName": "E4B PT",
+      "metric": "Accuracy",
+      "value": 20.9,
+      "unit": "percent",
+      "settings": {
+        "other": "5-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "Natural Questions | Accuracy | 5-shot | 15.5 | 20.9",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "ARC-c",
+      "rawModelName": "E2B PT",
+      "metric": "Accuracy",
+      "value": 51.7,
+      "unit": "percent",
+      "settings": {
+        "other": "25-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "ARC-c | Accuracy | 25-shot | 51.7 | 61.6",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "ARC-c",
+      "rawModelName": "E4B PT",
+      "metric": "Accuracy",
+      "value": 61.6,
+      "unit": "percent",
+      "settings": {
+        "other": "25-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "ARC-c | Accuracy | 25-shot | 51.7 | 61.6",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "ARC-e",
+      "rawModelName": "E2B PT",
+      "metric": "Accuracy",
+      "value": 75.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "ARC-e | Accuracy | 0-shot | 75.8 | 81.6",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "ARC-e",
+      "rawModelName": "E4B PT",
+      "metric": "Accuracy",
+      "value": 81.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "ARC-e | Accuracy | 0-shot | 75.8 | 81.6",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "rawModelName": "E2B PT",
+      "metric": "Accuracy",
+      "value": 66.8,
+      "unit": "percent",
+      "settings": {
+        "other": "5-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "WinoGrande | Accuracy | 5-shot | 66.8 | 71.7",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "rawModelName": "E4B PT",
+      "metric": "Accuracy",
+      "value": 71.7,
+      "unit": "percent",
+      "settings": {
+        "other": "5-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "WinoGrande | Accuracy | 5-shot | 66.8 | 71.7",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "BIG-Bench Hard",
+      "rawModelName": "E2B PT",
+      "metric": "Accuracy",
+      "value": 44.3,
+      "unit": "percent",
+      "settings": {
+        "other": "few-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "BIG-Bench Hard | Accuracy | few-shot | 44.3 | 52.9",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "BIG-Bench Hard",
+      "rawModelName": "E4B PT",
+      "metric": "Accuracy",
+      "value": 52.9,
+      "unit": "percent",
+      "settings": {
+        "other": "few-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "BIG-Bench Hard | Accuracy | few-shot | 44.3 | 52.9",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "DROP",
+      "rawModelName": "E2B PT",
+      "metric": "Token F1 score",
+      "value": 53.9,
+      "unit": "score",
+      "settings": {
+        "other": "1-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "DROP | Token F1 score | 1-shot | 53.9 | 60.8",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "DROP",
+      "rawModelName": "E4B PT",
+      "metric": "Token F1 score",
+      "value": 60.8,
+      "unit": "score",
+      "settings": {
+        "other": "1-shot; PT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Reasoning and factuality",
+        "quote": "DROP | Token F1 score | 1-shot | 53.9 | 60.8",
+        "table": "Reasoning and factuality"
+      }
+    },
+    {
+      "rawEvalName": "MGSM",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "Accuracy",
+      "value": 53.1,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Multilingual",
+        "quote": "MGSM | Accuracy | 0-shot | 53.1 | 60.7",
+        "table": "Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "MGSM",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "Accuracy",
+      "value": 60.7,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Multilingual",
+        "quote": "MGSM | Accuracy | 0-shot | 53.1 | 60.7",
+        "table": "Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "WMT24++ (ChrF)",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "Character-level F-score",
+      "value": 42.7,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Multilingual",
+        "quote": "WMT24++ (ChrF) | Character-level F-score | 0-shot | 42.7 | 50.1",
+        "table": "Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "WMT24++ (ChrF)",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "Character-level F-score",
+      "value": 50.1,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Multilingual",
+        "quote": "WMT24++ (ChrF) | Character-level F-score | 0-shot | 42.7 | 50.1",
+        "table": "Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "Include",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "Accuracy",
+      "value": 38.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Multilingual",
+        "quote": "Include | Accuracy | 0-shot | 38.6 | 57.2",
+        "table": "Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "Include",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "Accuracy",
+      "value": 57.2,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Multilingual",
+        "quote": "Include | Accuracy | 0-shot | 38.6 | 57.2",
+        "table": "Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (ProX)",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "Accuracy",
+      "value": 8.1,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Multilingual",
+        "quote": "MMLU (ProX) | Accuracy | 0-shot | 8.1 | 19.9",
+        "table": "Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (ProX)",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "Accuracy",
+      "value": 19.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Multilingual",
+        "quote": "MMLU (ProX) | Accuracy | 0-shot | 8.1 | 19.9",
+        "table": "Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI MMLU",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "Accuracy",
+      "value": 22.3,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Multilingual",
+        "quote": "OpenAI MMLU | Accuracy | 0-shot | 22.3 | 35.6",
+        "table": "Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI MMLU",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "Accuracy",
+      "value": 35.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Multilingual",
+        "quote": "OpenAI MMLU | Accuracy | 0-shot | 22.3 | 35.6",
+        "table": "Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "Global-MMLU",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "Accuracy",
+      "value": 55.1,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Multilingual",
+        "quote": "Global-MMLU | Accuracy | 0-shot | 55.1 | 60.3",
+        "table": "Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "Global-MMLU",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "Accuracy",
+      "value": 60.3,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Multilingual",
+        "quote": "Global-MMLU | Accuracy | 0-shot | 55.1 | 60.3",
+        "table": "Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "ECLeKTic",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "ECLeKTic score",
+      "value": 2.5,
+      "unit": "score",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Multilingual",
+        "quote": "ECLeKTic | ECLeKTic score | 0-shot | 2.5 | 1.9",
+        "table": "Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "ECLeKTic",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "ECLeKTic score",
+      "value": 1.9,
+      "unit": "score",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Multilingual",
+        "quote": "ECLeKTic | ECLeKTic score | 0-shot | 2.5 | 1.9",
+        "table": "Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "GPQA Diamond",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "RelaxedAccuracy/accuracy",
+      "value": 24.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > STEM and code",
+        "quote": "GPQA Diamond | RelaxedAccuracy/accuracy | 0-shot | 24.8 | 23.7",
+        "table": "STEM and code"
+      }
+    },
+    {
+      "rawEvalName": "GPQA Diamond",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "RelaxedAccuracy/accuracy",
+      "value": 23.7,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > STEM and code",
+        "quote": "GPQA Diamond | RelaxedAccuracy/accuracy | 0-shot | 24.8 | 23.7",
+        "table": "STEM and code"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench v5",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "pass@1",
+      "value": 18.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)",
+        "passAtK": 1
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > STEM and code",
+        "quote": "LiveCodeBench v5 | pass@1 | 0-shot | 18.6 | 25.7",
+        "table": "STEM and code"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench v5",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "pass@1",
+      "value": 25.7,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)",
+        "passAtK": 1
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > STEM and code",
+        "quote": "LiveCodeBench v5 | pass@1 | 0-shot | 18.6 | 25.7",
+        "table": "STEM and code"
+      }
+    },
+    {
+      "rawEvalName": "Codegolf v2.2",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "pass@1",
+      "value": 11.0,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)",
+        "passAtK": 1
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > STEM and code",
+        "quote": "Codegolf v2.2 | pass@1 | 0-shot | 11.0 | 16.8",
+        "table": "STEM and code"
+      }
+    },
+    {
+      "rawEvalName": "Codegolf v2.2",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "pass@1",
+      "value": 16.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)",
+        "passAtK": 1
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > STEM and code",
+        "quote": "Codegolf v2.2 | pass@1 | 0-shot | 11.0 | 16.8",
+        "table": "STEM and code"
+      }
+    },
+    {
+      "rawEvalName": "AIME 2025",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "Accuracy",
+      "value": 6.7,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > STEM and code",
+        "quote": "AIME 2025 | Accuracy | 0-shot | 6.7 | 11.6",
+        "table": "STEM and code"
+      }
+    },
+    {
+      "rawEvalName": "AIME 2025",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "Accuracy",
+      "value": 11.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > STEM and code",
+        "quote": "AIME 2025 | Accuracy | 0-shot | 6.7 | 11.6",
+        "table": "STEM and code"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "Accuracy",
+      "value": 60.1,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Additional benchmarks",
+        "quote": "MMLU | Accuracy | 0-shot | 60.1 | 64.9",
+        "table": "Additional benchmarks"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "Accuracy",
+      "value": 64.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Additional benchmarks",
+        "quote": "MMLU | Accuracy | 0-shot | 60.1 | 64.9",
+        "table": "Additional benchmarks"
+      }
+    },
+    {
+      "rawEvalName": "MBPP",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "pass@1",
+      "value": 56.6,
+      "unit": "percent",
+      "settings": {
+        "other": "3-shot; IT; full precision (float32)",
+        "passAtK": 1
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Additional benchmarks",
+        "quote": "MBPP | pass@1 | 3-shot | 56.6 | 63.6",
+        "table": "Additional benchmarks"
+      }
+    },
+    {
+      "rawEvalName": "MBPP",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "pass@1",
+      "value": 63.6,
+      "unit": "percent",
+      "settings": {
+        "other": "3-shot; IT; full precision (float32)",
+        "passAtK": 1
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Additional benchmarks",
+        "quote": "MBPP | pass@1 | 3-shot | 56.6 | 63.6",
+        "table": "Additional benchmarks"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "pass@1",
+      "value": 66.5,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)",
+        "passAtK": 1
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Additional benchmarks",
+        "quote": "HumanEval | pass@1 | 0-shot | 66.5 | 75.0",
+        "table": "Additional benchmarks"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "pass@1",
+      "value": 75.0,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)",
+        "passAtK": 1
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Additional benchmarks",
+        "quote": "HumanEval | pass@1 | 0-shot | 66.5 | 75.0",
+        "table": "Additional benchmarks"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "pass@1",
+      "value": 13.2,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)",
+        "passAtK": 1
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Additional benchmarks",
+        "quote": "LiveCodeBench | pass@1 | 0-shot | 13.2 | 13.2",
+        "table": "Additional benchmarks"
+      }
+    },
+    {
+      "rawEvalName": "LiveCodeBench",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "pass@1",
+      "value": 13.2,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)",
+        "passAtK": 1
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Additional benchmarks",
+        "quote": "LiveCodeBench | pass@1 | 0-shot | 13.2 | 13.2",
+        "table": "Additional benchmarks"
+      }
+    },
+    {
+      "rawEvalName": "HiddenMath",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "Accuracy",
+      "value": 27.7,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Additional benchmarks",
+        "quote": "HiddenMath | Accuracy | 0-shot | 27.7 | 37.7",
+        "table": "Additional benchmarks"
+      }
+    },
+    {
+      "rawEvalName": "HiddenMath",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "Accuracy",
+      "value": 37.7,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Additional benchmarks",
+        "quote": "HiddenMath | Accuracy | 0-shot | 27.7 | 37.7",
+        "table": "Additional benchmarks"
+      }
+    },
+    {
+      "rawEvalName": "Global-MMLU-Lite",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "Accuracy",
+      "value": 59.0,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Additional benchmarks",
+        "quote": "Global-MMLU-Lite | Accuracy | 0-shot | 59.0 | 64.5",
+        "table": "Additional benchmarks"
+      }
+    },
+    {
+      "rawEvalName": "Global-MMLU-Lite",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "Accuracy",
+      "value": 64.5,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Additional benchmarks",
+        "quote": "Global-MMLU-Lite | Accuracy | 0-shot | 59.0 | 64.5",
+        "table": "Additional benchmarks"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (Pro)",
+      "model": "google/gemma-3n-E2B-it",
+      "metric": "Accuracy",
+      "value": 40.5,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Additional benchmarks",
+        "quote": "MMLU (Pro) | Accuracy | 0-shot | 40.5 | 50.6",
+        "table": "Additional benchmarks"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (Pro)",
+      "model": "google/gemma-3n-E4B-it",
+      "metric": "Accuracy",
+      "value": 50.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; IT; full precision (float32)"
+      },
+      "source": {
+        "page": "Evaluation > Benchmark Results > Additional benchmarks",
+        "quote": "MMLU (Pro) | Accuracy | 0-shot | 40.5 | 50.6",
+        "table": "Additional benchmarks"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:34:06Z"
+  },
+  "notes": "Web model card (ai.google.dev/gemma/docs/gemma-3n/model_card), not a PDF; no pageCount. Seed links only E2B-it and E4B-it; PT table columns use rawModelName 'E2B PT'/'E4B PT'. Safety is qualitative only (no numeric violation rates). License shown only as 'Terms of Use: Terms' (no Apache/Gemma license string on the page). Total parameter counts not stated (only effective 2B/4B). No external testers named. Last updated 2025-06-17 UTC on page; release date not stated."
+}

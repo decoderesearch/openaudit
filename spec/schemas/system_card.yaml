@@ -1,0 +1,292 @@
+$defs:
+  CardSource:
+    description: Where in the document a value is. The quote is the card's own words.
+    type: object
+    additionalProperties: false
+    required: [quote]
+    properties:
+      page:
+        type: string
+        minLength: 1
+        description: The page or section (`12`, `5.3.2`), as printed in the document.
+      pdfPage:
+        type: integer
+        minimum: 1
+        description: The page in our saved PDF, from 1. Links go here; `page` is what we show.
+      quote:
+        type: string
+        minLength: 1
+
+  Disclosure:
+    description: >-
+      One model fact. `stated`: the card says it (give `value` and `source`). `not_stated`: we
+      read the card; it does not say. Left out: not extracted yet.
+    type: object
+    additionalProperties: false
+    required: [status]
+    properties:
+      status:
+        type: string
+        enum: [stated, not_stated]
+      value:
+        type: string
+        minLength: 1
+        description: The value in the card's words (`200K tokens`, `March 2026`).
+      source:
+        $ref: '#/$defs/CardSource'
+    if:
+      properties:
+        status:
+          const: stated
+    then:
+      properties:
+        value: true
+        source: true
+      required: [value, source]
+
+  Disclosures:
+    description: The disclosure checklist. The keys match `ModelFacts`, plus training facts.
+    type: object
+    additionalProperties: false
+    properties:
+      releaseDate:
+        $ref: '#/$defs/Disclosure'
+      knowledgeCutoff:
+        $ref: '#/$defs/Disclosure'
+      contextWindow:
+        $ref: '#/$defs/Disclosure'
+      maxOutput:
+        $ref: '#/$defs/Disclosure'
+      modalities:
+        $ref: '#/$defs/Disclosure'
+      reasoningModes:
+        $ref: '#/$defs/Disclosure'
+      languages:
+        $ref: '#/$defs/Disclosure'
+      license:
+        $ref: '#/$defs/Disclosure'
+      totalParams:
+        $ref: '#/$defs/Disclosure'
+      activeParams:
+        $ref: '#/$defs/Disclosure'
+      architecture:
+        $ref: '#/$defs/Disclosure'
+      trainingData:
+        $ref: '#/$defs/Disclosure'
+      trainingCompute:
+        $ref: '#/$defs/Disclosure'
+
+  RiskDomain:
+    type: string
+    enum: [bio_chem, cyber, ai_rnd_autonomy, misalignment, manipulation, other]
+
+  RiskLevel:
+    description: >-
+      Our coarse level, for sorting only. Always show the lab's own label next to it.
+      `below`: under the lab's first threshold. `early_warning`: an alert or watch level.
+      `reached`: a threshold is reached or cannot be ruled out. `highest`: the top level.
+    type: string
+    enum: [below, early_warning, reached, highest]
+
+  FrameworkId:
+    description: >-
+      A published safety framework. `anthropic-rsp`: Responsible Scaling Policy (also ASL levels).
+      `anthropic-fcf`: Frontier Compliance Framework. `openai-preparedness`: Preparedness Framework.
+      `google-fsf`: Frontier Safety Framework. `meta-aasf`: Advanced AI Scaling Framework.
+      `amazon-fmsf`: Frontier Model Safety Framework. `xai-faif`: Frontier Artificial Intelligence
+      Framework. `xai-rmf`: Risk Management Framework. `seoul-commitments`: Frontier AI Safety
+      Commitments (Seoul, 2024).
+    type: string
+    enum: [anthropic-rsp, anthropic-fcf, openai-preparedness, google-fsf, meta-aasf, amazon-fmsf, xai-faif, xai-rmf, seoul-commitments]
+
+  MitigationPhase:
+    type: string
+    enum: [before_mitigation, after_mitigation, unspecified]
+
+  RiskDecision:
+    description: One risk decision the lab states for one domain.
+    type: object
+    additionalProperties: false
+    required: [domain, labLabel, phase, source]
+    properties:
+      domain:
+        $ref: '#/$defs/RiskDomain'
+      frameworks:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/FrameworkId'
+        description: The published frameworks the verdict is made under. Leave out if none is named.
+      labLabel:
+        type: string
+        minLength: 1
+        description: The lab's words (`ASL-3`, `High`, `CCL not reached`).
+      level:
+        $ref: '#/$defs/RiskLevel'
+      phase:
+        $ref: '#/$defs/MitigationPhase'
+      decidedBy:
+        type: string
+        minLength: 1
+        description: Who decided, when the card says (`Responsible Scaling Officer`).
+      modelIds:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/Id'
+        description: The covered models the verdict is about. Left out when it is about all of them.
+      source:
+        $ref: '#/$defs/CardSource'
+
+  TopicCoverage:
+    description: >-
+      Does the card cover a topic. `covered`: give a source, and a headline number when there is
+      one. Not covered: the card has nothing on it. Left out: not extracted yet.
+    type: object
+    additionalProperties: false
+    required: [topic, covered]
+    properties:
+      topic:
+        $ref: '#/$defs/Topic'
+      covered:
+        type: boolean
+      headline:
+        type: string
+        minLength: 1
+        description: The main result in the card's words (`0.8% jailbreak success`).
+      source:
+        $ref: '#/$defs/CardSource'
+    if:
+      properties:
+        covered:
+          const: true
+    then:
+      properties:
+        source: true
+      required: [source]
+
+  ExternalTester:
+    type: object
+    additionalProperties: false
+    required: [name, source]
+    properties:
+      name:
+        type: string
+        minLength: 1
+        description: The tester (`METR`, `UK AISI`, `Apollo Research`).
+      scope:
+        type: string
+        minLength: 1
+        description: What they tested (`autonomy and AI R&D`).
+      source:
+        $ref: '#/$defs/CardSource'
+
+  Finding:
+    description: A notable finding that fits nowhere else. Short, in our words, with the quote.
+    type: object
+    additionalProperties: false
+    required: [text, source]
+    properties:
+      text:
+        type: string
+        minLength: 1
+      tone:
+        $ref: '#/$defs/FindingTone'
+      source:
+        $ref: '#/$defs/CardSource'
+
+  FindingTone:
+    description: >-
+      Our reading for a safety reader. `good`: good for safety. `mixed`: mixed, a mild concern
+      or an important caveat. `bad`: a clear concern. `neutral`: a fact or method note.
+    type: string
+    enum: [good, mixed, bad, neutral]
+
+  ExtractionInfo:
+    description: How a record was made. `by` is the model or person.
+    type: object
+    additionalProperties: false
+    required: [by, at]
+    properties:
+      by:
+        type: string
+        minLength: 1
+      at:
+        $ref: '#/$defs/Timestamp'
+
+  CardCover:
+    description: A model the card covers. `rawModelName` when the model is not in our list yet.
+    type: object
+    additionalProperties: false
+    properties:
+      modelId:
+        $ref: '#/$defs/Id'
+      rawModelName:
+        type: string
+        minLength: 1
+      section:
+        type: string
+        minLength: 1
+        description: The section about it, for cards that cover several models (`Appendix B`).
+    anyOf:
+      - properties:
+          modelId: true
+        required: [modelId]
+      - properties:
+          rawModelName: true
+        required: [rawModelName]
+
+  SystemCard:
+    title: SystemCard
+    description: >-
+      What we extracted from one card. One card can have several documents (the PDF, the web
+      page, the blog post); `documentId` is the one we read.
+    type: object
+    additionalProperties: false
+    required: [id, documentId, alsoDocumentIds, covers, disclosures, riskDecisions, topics, testers, findings, reviewed, extraction]
+    properties:
+      id:
+        $ref: '#/$defs/Id'
+      documentId:
+        $ref: '#/$defs/Id'
+      alsoDocumentIds:
+        description: Other documents of the same card.
+        type: array
+        items:
+          $ref: '#/$defs/Id'
+        uniqueItems: true
+      covers:
+        type: array
+        items:
+          $ref: '#/$defs/CardCover'
+      basedOnDocumentId:
+        $ref: '#/$defs/Id'
+        description: The card this one updates (a delta card).
+      pageCount:
+        type: integer
+        minimum: 1
+      disclosures:
+        $ref: '#/$defs/Disclosures'
+      riskDecisions:
+        type: array
+        items:
+          $ref: '#/$defs/RiskDecision'
+      topics:
+        type: array
+        items:
+          $ref: '#/$defs/TopicCoverage'
+      testers:
+        type: array
+        items:
+          $ref: '#/$defs/ExternalTester'
+      findings:
+        type: array
+        items:
+          $ref: '#/$defs/Finding'
+      reviewed:
+        type: boolean
+        description: A person checked it. Pages mark unreviewed values "Not reviewed".
+      extraction:
+        $ref: '#/$defs/ExtractionInfo'

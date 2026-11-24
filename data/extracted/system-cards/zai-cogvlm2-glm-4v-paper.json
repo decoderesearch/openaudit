@@ -1,0 +1,189 @@
+{
+  "document": "zai-cogvlm2-glm-4v-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "zai-org/glm-4v-9b"
+    },
+    {
+      "rawModelName": "CogVLM2"
+    },
+    {
+      "rawModelName": "CogVLM2-Video"
+    },
+    {
+      "rawModelName": "GLM-4V-Plus"
+    }
+  ],
+  "pageCount": 27,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "image and video understanding (vision-language)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "a new generation of visual language models for image and video understanding"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English and Chinese (stated for GLM-4V)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "GLM-4V, a 13-billion-parameter bilingual visual language model to explore the image understanding\ncapabilities in both English and Chinese."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "CogVLM2 19B; GLM-4V-9B 13B; CogVLM2-Video 12B (Table 1)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "    CogVLM2            19B        EVA-CLIP-E          LLaMA3-8B       Conv + SwiGLU\n   GLM-4V-9B           13B        EVA-CLIP-E            GLM4-9B       Conv + SwiGLU\n CogVLM2-Video         12B        EVA-CLIP-E          LLaMA3-8B       Conv + SwiGLU"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "ViT (EVA-CLIP-E) encoder, Conv+SwiGLU adapter, LLM backbone (LLaMA3-8B or GLM4-9B); CogVLM2 uses visual expert in attention and FFN; GLM-4V uses image-language co-training; CogVLM2 up to 1344×1344, GLM-4V 1120×1120",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "The CogVLM family of models comprises four key components: a Vision Transformer (ViT [3])\nencoder, an adapter, a language model, and an optional visual expert module."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Progressive pre-training data construction (LAION-2B and further image-text, OCR, grounding, caption, VQA, alignment and preference corpora); video TQA with automated temporal grounding",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Utilizing these two techniques, the construction of pre-training data for CogVLM family is progressive\nand incremental."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:51:16Z"
+  },
+  "notes": "Technical report on CogVLM2 family capability, not a system card. No safety, alignment, refusal, jailbreak, bias, toxicity, privacy, or dangerous-capability section or numeric safety evals. One appendix prompt to GPT-4o for video data filtering mentions that image captions may contain hallucinations; that is training-data filtering, not a model hallucination eval, so hallucination is uncovered and no evalResults. Skipped all image/video capability tables (Table 4, Table 5, Figure 4, Appendix C): MMBench, MMStar, MMVet, MMMU, MME, ChartQA, AI2D, TextVQA, DocVQA, VCR, OCRbench, MVBench, VideoChatGPT-Bench (VCG-*), LVBench. Figure 1 month labels (e.g. CogVLM2 2024.5) are not treated as releaseDate. Open-sourced GitHub links given but no license name. Preference alignment corpora are style SFT/RLHF, not safety coverage."
+}

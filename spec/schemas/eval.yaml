@@ -1,0 +1,900 @@
+$defs:
+  Visibility:
+    description: >-
+      `private`: the owner only. `unlisted`: anyone with the link; never listed or indexed.
+      `public`: listed and indexed. A record is never more visible than its parent.
+    type: string
+    enum: [private, unlisted, public]
+
+  EvalAccess:
+    description: >-
+      Who can get the samples. `public`: anyone. `gated`: after agreeing to the source's terms.
+      `held_out`: kept back by the maintainer. `lab_internal`: only the lab has it; we store the
+      record so reported results can link to it, and never run it.
+    type: string
+    enum: [public, gated, held_out, lab_internal]
+
+  EvalStatus:
+    description: >-
+      `active`: current, and we recommend it. `saturated`: valid, but current models score at the
+      ceiling or the floor. `legacy`: dated, replaced, or with known validity problems; you can
+      still run it for history, but we do not recommend it by default. `retired`: withdrawn; do
+      not run it.
+    type: string
+    enum: [active, saturated, legacy, retired]
+
+  Measures:
+    description: >-
+      `capability`: can the subject do it. `propensity`: does it tend to. `robustness`: can its
+      safeguards be broken.
+    type: string
+    enum: [capability, propensity, robustness]
+
+  EvalFormat:
+    type: string
+    enum: [single_turn, multi_turn, agentic]
+
+  EvalCases:
+    description: >-
+      `fixed`: a dataset. `generated`: an auditor model writes the conversation from a seed.
+      `live_human`: people talk to the subject.
+    type: string
+    enum: [fixed, generated, live_human]
+
+  Grading:
+    type: string
+    enum: [programmatic, model_judge, human]
+
+  SubjectKind:
+    description: >-
+      What a run tests. `model`: a model. `auditor`: an agent (model, tools, scaffold) that
+      audits target models. `method`: an interp method on a model, with its artifact (SAE,
+      vector, probe).
+    type: string
+    enum: [model, auditor, method]
+
+  Topic:
+    description: What an eval is about. The same list tags system-card coverage.
+    type: string
+    enum:
+      - harmful_requests
+      - child_safety
+      - self_harm
+      - jailbreaks
+      - prompt_injection
+      - agentic_misuse
+      - hallucination
+      - honesty
+      - sycophancy
+      - bias
+      - toxicity
+      - reward_hacking
+      - eval_awareness
+      - situational_awareness
+      - cot_monitorability
+      - sabotage
+      - manipulation
+      - power_seeking
+      - welfare
+      - cyber
+      - bio_chem
+      - auditing
+
+  EvalFacets:
+    description: >-
+      Independent answers to one question each. Labels such as "benchmark" or "red team" are
+      combinations of these.
+    type: object
+    additionalProperties: false
+    required:
+      [
+        measures,
+        formats,
+        cases,
+        grading,
+        adversarial,
+        humanParticipants,
+        subjects,
+        topics,
+      ]
+    properties:
+      measures:
+        type: array
+        items:
+          $ref: "#/$defs/Measures"
+        minItems: 1
+        uniqueItems: true
+      formats:
+        type: array
+        items:
+          $ref: "#/$defs/EvalFormat"
+        minItems: 1
+        uniqueItems: true
+      cases:
+        type: array
+        items:
+          $ref: "#/$defs/EvalCases"
+        minItems: 1
+        uniqueItems: true
+      grading:
+        type: array
+        items:
+          $ref: "#/$defs/Grading"
+        minItems: 1
+        uniqueItems: true
+      adversarial:
+        type: boolean
+        description: The eval tries to make the subject fail (red teaming, jailbreaks).
+      humanParticipants:
+        type: boolean
+        description: People take part, as in uplift trials.
+      subjects:
+        type: array
+        items:
+          $ref: "#/$defs/SubjectKind"
+        minItems: 1
+        uniqueItems: true
+      topics:
+        type: array
+        items:
+          $ref: "#/$defs/Topic"
+        uniqueItems: true
+
+  EvalMaintainer:
+    description: Who maintains the eval. Give `organizationId` when the maintainer is an `Organization`.
+    type: object
+    additionalProperties: false
+    required: [name]
+    properties:
+      name:
+        type: string
+        minLength: 1
+      organizationId:
+        $ref: "#/$defs/Id"
+      url:
+        $ref: "#/$defs/Url"
+
+  RecommendedModel:
+    description: >-
+      A model we recommend for one role in an eval, in place of its default. We tested it on
+      some samples and its results agreed with the default model's results.
+    type: object
+    additionalProperties: false
+    required: [role, model, recommendedAt, evidence]
+    properties:
+      role:
+        type: string
+        minLength: 1
+        description: The role, as the eval's task names it (`judge`, `auditor`, `grader`).
+      model:
+        type: string
+        minLength: 1
+        description: The model, as OpenRouter names it (`google/gemini-2.5-flash-lite`).
+      recommendedAt:
+        $ref: "#/$defs/PartialDate"
+        description: The day we made the recommendation (YYYY-MM-DD).
+      replaces:
+        type: string
+        minLength: 1
+        description: The default model for the role (`openai/gpt-4-turbo`).
+      version:
+        type: string
+        minLength: 1
+        description: The eval version that we tested.
+      evidence:
+        type: string
+        minLength: 1
+        description: Markdown. What we tested (samples, agreement, cost) and the run ids.
+
+  EvalLinkKind:
+    description: >-
+      `hf_benchmark`: a Hugging Face benchmark dataset repo, for Community Evals. `error_report`:
+      our report of dataset errors to the maintainers; the Known Errors page links it.
+    type: string
+    enum: [paper, repo, dataset, hf_benchmark, leaderboard, homepage, blog, error_report]
+
+  EvalLink:
+    type: object
+    additionalProperties: false
+    required: [kind, url]
+    properties:
+      kind:
+        $ref: "#/$defs/EvalLinkKind"
+      url:
+        $ref: "#/$defs/Url"
+      title:
+        type: string
+        minLength: 1
+
+  EvalSuite:
+    title: EvalSuite
+    description: >-
+      A set of evals that one source publishes together (SAEBench). Its page compares method
+      variants across its evals. An eval names its suite with `suiteId`.
+    type: object
+    additionalProperties: false
+    required: [id, slug, displayName, summary, maintainers, links]
+    properties:
+      id:
+        $ref: "#/$defs/Id"
+      slug:
+        $ref: "#/$defs/Slug"
+        description: The name in URLs (`saebench`).
+      displayName:
+        type: string
+        minLength: 1
+      summary:
+        type: string
+        minLength: 1
+        maxLength: 200
+        description: One plain sentence about what the suite tests.
+      description:
+        type: string
+        minLength: 1
+        description: A short Markdown description.
+      maintainers:
+        type: array
+        items:
+          $ref: "#/$defs/EvalMaintainer"
+      links:
+        type: array
+        items:
+          $ref: "#/$defs/EvalLink"
+      evalOrder:
+        type: array
+        description: >-
+          Slugs of its evals in display order, safety tasks first. Its other evals follow, safety
+          tasks first, then by name.
+        items:
+          $ref: "#/$defs/Slug"
+      matched:
+        $ref: "#/$defs/MethodMatch"
+        description: >-
+          Compare method variants at set values of one metric of a suite eval. Without it, each
+          variant uses its one artifact in a group.
+
+  Eval:
+    title: Eval
+    description: >-
+      A test of models, auditors or interp methods: a benchmark, a red team, an automated audit.
+      Results point to one of its `EvalVersion`s.
+    type: object
+    additionalProperties: false
+    required:
+      [
+        id,
+        slug,
+        displayName,
+        aliases,
+        maintainers,
+        links,
+        access,
+        status,
+        facets,
+        visibility,
+      ]
+    properties:
+      id:
+        $ref: "#/$defs/Id"
+      slug:
+        $ref: "#/$defs/Slug"
+        description: The name in URLs (`petri`, `mask`). Unique on the site.
+      displayName:
+        type: string
+        minLength: 1
+      aliases:
+        $ref: "#/$defs/Aliases"
+        description: Other spellings in documents (`Model Alignment between Statements and Knowledge`).
+      description:
+        type: string
+        minLength: 1
+        description: A short Markdown description.
+      summary:
+        type: string
+        minLength: 1
+        maxLength: 200
+        description: >-
+          One plain sentence about what the eval tests, for lists and tables ("Tests whether the
+          model lies under pressure about what it believes is true.").
+      family:
+        type: string
+        minLength: 1
+        description: Groups related evals (`Petri` for Petri and Petri Bloom suites).
+      suiteId:
+        $ref: "#/$defs/Id"
+        description: The `EvalSuite` that the eval is part of.
+      maintainers:
+        type: array
+        items:
+          $ref: "#/$defs/EvalMaintainer"
+      links:
+        type: array
+        items:
+          $ref: "#/$defs/EvalLink"
+      access:
+        $ref: "#/$defs/EvalAccess"
+      status:
+        $ref: "#/$defs/EvalStatus"
+      saturatedReason:
+        type: string
+        minLength: 1
+        description: >-
+          One line on why we marked it `saturated` (`Current models refuse almost every prompt.`).
+          Markdown.
+      saturatedDecisionDate:
+        type: string
+        format: date
+        description: The day we marked it `saturated` (YYYY-MM-DD).
+      legacyReason:
+        type: string
+        minLength: 1
+        description: >-
+          One line on why we marked it `legacy` (`Built for base-model continuation; chat models
+          score near zero.`). Markdown.
+      legacyDecisionDate:
+        type: string
+        format: date
+        description: The day we marked it `legacy` (YYYY-MM-DD).
+      supersededBy:
+        $ref: "#/$defs/Slug"
+        description: The slug of the newer eval to use in place of this one.
+      autoApprove:
+        type: boolean
+        description: >-
+          A full run costs little, so a user's request of it starts without an admin's approval
+          (when its estimated cost is under the limit).
+      facets:
+        $ref: "#/$defs/EvalFacets"
+      recommendedModels:
+        type: array
+        items:
+          $ref: "#/$defs/RecommendedModel"
+        description: Cheaper judge or helper models that we tested against the defaults.
+      canary:
+        type: string
+        minLength: 1
+        description: The eval's canary string. We show it on each page, so training filters can drop them.
+      ownerUserId:
+        $ref: "#/$defs/Id"
+        description: The user who made it. Left out for evals in the site registry (seed data).
+      visibility:
+        $ref: "#/$defs/Visibility"
+        description: A private eval needs an owner. Anyone with the link can open an unlisted eval.
+    if:
+      properties:
+        visibility:
+          const: private
+    then:
+      properties:
+        ownerUserId: true
+      required: [ownerUserId]
+
+  EvalVersionStatus:
+    description: >-
+      `draft`: can change. `published`: fixed, but its `runner` can change and it can add metrics;
+      results point only to published versions.
+    type: string
+    enum: [draft, published]
+
+  SampleStorage:
+    description: >-
+      `stored`: we keep the samples (the license allows it). `pointer`: a link to the source
+      revision, and each sample's id and hash. `hash_only`: only a hash of each sample (held out).
+    type: string
+    enum: [stored, pointer, hash_only]
+
+  EvalSplit:
+    type: object
+    additionalProperties: false
+    required: [name, sampleCount, storage]
+    properties:
+      name:
+        type: string
+        minLength: 1
+        description: The split name in the source (`test`, `public`, `private`).
+      sampleCount:
+        type: integer
+        minimum: 0
+      storage:
+        $ref: "#/$defs/SampleStorage"
+
+  EvalDataset:
+    description: Where the samples come from. Give `hfRepo` and `revision`, or `url`.
+    type: object
+    additionalProperties: false
+    required: [splits]
+    properties:
+      hfRepo:
+        type: string
+        pattern: '^[^/\s]+/[^/\s]+$'
+        description: A Hugging Face dataset repo (`cais/MASK`).
+      revision:
+        type: string
+        minLength: 1
+        description: The commit or tag the samples come from.
+      url:
+        $ref: "#/$defs/Url"
+      sha256:
+        $ref: "#/$defs/Sha256"
+        description: The hash of all samples in order, as the spec serializes them.
+      license:
+        type: string
+        minLength: 1
+        description: An SPDX id when there is one (`cc-by-4.0`), else the license name.
+      sources:
+        type: array
+        items:
+          $ref: "#/$defs/DatasetSource"
+        description: More data the task loads, for suites that join datasets (AbstentionBench).
+      splits:
+        type: array
+        items:
+          $ref: "#/$defs/EvalSplit"
+        minItems: 1
+
+  DatasetSource:
+    description: One more place a task loads data from. Give `hfRepo` and `revision`, or `url`.
+    type: object
+    additionalProperties: false
+    properties:
+      hfRepo:
+        type: string
+        pattern: '^[^/\s]+/[^/\s]+$'
+      revision:
+        type: string
+        minLength: 1
+        description: The commit the task pins.
+      url:
+        $ref: "#/$defs/Url"
+        description: A file at a pinned commit (a GitHub raw URL).
+
+  DisplayRule:
+    description: >-
+      Who can read sample text: inputs, targets, transcripts and logs. `open`: anyone.
+      `sign_in`: signed-in users who accepted the dataset's terms on our site. `scores_only`:
+      nobody; pages show only scores and pass or fail.
+    type: string
+    enum: [open, sign_in, scores_only]
+
+  SubsetTerms:
+    description: A rule for the samples whose metadata `key` equals `value` (a dataset inside a suite).
+    type: object
+    additionalProperties: false
+    required: [key, value, display, source]
+    properties:
+      key:
+        type: string
+        minLength: 1
+        description: The sample metadata key, as the Inspect task sets it (`dataset_name`).
+      value:
+        type: string
+        minLength: 1
+      display:
+        $ref: "#/$defs/DisplayRule"
+      quote:
+        type: string
+        minLength: 1
+        description: The terms, as the source states them.
+      source:
+        $ref: "#/$defs/Url"
+
+  SampleTerms:
+    description: >-
+      The source's terms on showing its samples, and our rule for them. Left out: `open`.
+    type: object
+    additionalProperties: false
+    required: [display, source]
+    properties:
+      display:
+        $ref: "#/$defs/DisplayRule"
+      quote:
+        type: string
+        minLength: 1
+        description: The terms, as the source states them. Left out when the source states none.
+      source:
+        $ref: "#/$defs/Url"
+        description: Where the terms are (the gate page or the README).
+      note:
+        type: string
+        minLength: 1
+        description: Why this rule, when the quote alone does not say.
+      subsets:
+        type: array
+        items:
+          $ref: "#/$defs/SubsetTerms"
+        description: Rules for some samples. A matching rule replaces `display` for those samples.
+
+  ScoreType:
+    description: >-
+      `binary`: 0 or 1 (pass). `ordinal`: whole steps from `min` to `max` (a 1-10 judge scale).
+      `continuous`: any number, in `[min, max]` when given.
+    type: string
+    enum: [binary, ordinal, continuous]
+
+  Direction:
+    description: "`nearer_zero_is_better`: a signed number where 0 is best and both signs are worse."
+    type: string
+    enum: [higher_is_better, lower_is_better, nearer_zero_is_better, neither]
+
+  ScoreDef:
+    description: One score a scorer gives each attempt (Petri's judge gives about 36).
+    type: object
+    additionalProperties: false
+    required: [key, displayName, type, direction]
+    properties:
+      key:
+        type: string
+        pattern: "^[a-z][a-z0-9_]*$"
+        description: The name in data (`unprompted_deception`).
+      attemptName:
+        type: string
+        minLength: 1
+        description: >-
+          The name of this score on an attempt when it is not `key` or ends with `/<key>`, such as
+          the scorer's name (`fortress_scorer_adversarial`).
+      attemptScale:
+        type: number
+        exclusiveMinimum: 0
+        description: The factor that puts an attempt's value on this score's scale (100 for a 0 to 1 value of a percent).
+      displayName:
+        type: string
+        minLength: 1
+      type:
+        $ref: "#/$defs/ScoreType"
+      min:
+        type: number
+      max:
+        type: number
+      direction:
+        $ref: "#/$defs/Direction"
+      description:
+        type: string
+        minLength: 1
+        description: What the score means; for a judge, a summary of its rubric.
+      pass:
+        $ref: "#/$defs/PassRule"
+    if:
+      properties:
+        type:
+          const: ordinal
+    then:
+      properties:
+        min: true
+        max: true
+      required: [min, max]
+
+  PassRule:
+    description: >-
+      When one attempt's value of this score is a pass or a fail, if the direction cannot tell. The
+      runner marks each attempt by the rule of its headline score, and the attempt page marks each
+      score. With no rule, the direction decides: see `ADD_AN_EVAL.md`. A value that the rule does
+      not name has no mark.
+    type: object
+    additionalProperties: false
+    minProperties: 1
+    properties:
+      values:
+        type: object
+        additionalProperties:
+          type: boolean
+        description: >-
+          Each value as text and its mark: true for a pass (MASK: `honest` true, `lie` false). Case
+          and spaces at the ends do not count. A number is its shortest text (`1`, `0.5`).
+      byTarget:
+        type: object
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: boolean
+        description: >-
+          For each sample target, the values and their marks, as in `values` (AbstentionBench: with
+          the target `True`, `yes` is a pass).
+      failAtOrAbove:
+        type: number
+        description: A number at this value or above is a fail, and a lower number is a pass (Petri's 1 to 10 scale, 7).
+      groups:
+        type: array
+        minItems: 1
+        items:
+          type: string
+          minLength: 1
+        description: >-
+          The group metric keys that the rule is for. An attempt in none of them has no mark (APE:
+          only the harmful topics).
+      none:
+        const: true
+        description: No mark on any value, for a score that is not good or bad for safety by itself.
+
+  MetricAggregation:
+    description: >-
+      How attempts become one number. `mean`: the mean of a score. `rate`: the share of attempts
+      whose binary score is 1. `pass_at_k`: pass@k over trials. `custom`: the eval's own formula
+      (see `description`).
+    type: string
+    enum: [mean, rate, pass_at_k, custom]
+
+  MetricDef:
+    description: One aggregate number an `EvalResult` can hold.
+    type: object
+    additionalProperties: false
+    required: [key, displayName, aggregation, direction]
+    properties:
+      key:
+        type: string
+        pattern: "^[a-z][a-z0-9_@]*$"
+      displayName:
+        type: string
+        minLength: 1
+      score:
+        type: string
+        description: The `ScoreDef.key` it comes from. Left out for `custom`.
+      aggregation:
+        $ref: "#/$defs/MetricAggregation"
+      k:
+        type: integer
+        minimum: 1
+        description: For `pass_at_k`.
+      unit:
+        type: string
+        minLength: 1
+        description: Left out for a plain number or a fraction (`percent`, `tokens`).
+      min:
+        type: number
+      max:
+        type: number
+      direction:
+        $ref: "#/$defs/Direction"
+        description: Which way is better for the eval's own goal. For a skill eval, more skill.
+      safetyDirection:
+        $ref: "#/$defs/Direction"
+        description: >-
+          Which way is better for safety, as in `EvalResult.safetyDirection`; measured results get
+          it. `neither` for skill metrics (dangerous skills too) and for refusals of safe requests.
+      headline:
+        type: boolean
+        description: The number to show first. At most one per version.
+      description:
+        type: string
+        minLength: 1
+    if:
+      properties:
+        aggregation:
+          const: pass_at_k
+    then:
+      properties:
+        k: true
+      required: [k]
+
+  ModelRole:
+    description: >-
+      A model's part in a run, as Inspect's `model_roles`. `target`: the model under test.
+      `auditor`: writes the other side of the conversation. `judge`: scores. `monitor`: watches
+      the target for bad actions. `generator`: writes samples.
+    type: string
+    enum: [target, auditor, judge, monitor, generator]
+
+  ModelSlot:
+    description: >-
+      One model a task needs besides the target. The runner gives it as `taskArg` or as
+      `inspectRole`; give one. A run can change it; a re-score can change it only when `scoring`.
+    type: object
+    additionalProperties: false
+    required: [id, role, default]
+    properties:
+      id:
+        type: string
+        pattern: "^[a-z][a-z0-9_]*$"
+        description: Unique in the version (`judge`, `refusal_judge`, `mark`).
+      role:
+        $ref: "#/$defs/ModelRole"
+      label:
+        type: string
+        minLength: 1
+        description: The name to show (`Refusal judge`). Default from `id`.
+      taskArg:
+        type: string
+        minLength: 1
+        description: Give the model as this task argument (`scorer_model`).
+      index:
+        type: integer
+        minimum: 0
+        description: The place in a list task argument (`grader_models`).
+      inspectRole:
+        type: string
+        minLength: 1
+        description: Give the model as this Inspect model role (`grader`).
+      default:
+        type: string
+        minLength: 1
+        description: >-
+          The model the task uses when not told, as a route model id (`openai/gpt-4o`). With a
+          `tier`, our runs use the tier and this is only a record of the task's default.
+      tier:
+        type: string
+        minLength: 1
+        description: >-
+          The lowest tier in spec/model-ladders.yaml that is good enough for this slot. A run
+          gets the first model of the tier that the rules allow, and the next ones as
+          fallbacks. A model of a higher tier is also good enough.
+      labs:
+        type: array
+        minItems: 1
+        items:
+          $ref: "#/$defs/LabPrefix"
+        description: Use these labs' models of the tier first, in this order, when the rules allow it.
+      sameLab:
+        type: boolean
+        description: >-
+          The slot can use a model of the target's lab (one judge in a panel of judges from
+          several labs). It never uses the target model itself.
+      scoring:
+        type: boolean
+        description: Only the scorer uses it, so a re-score can change it.
+
+  RunnerKind:
+    description: "`inspect`: an Inspect task. `openaudit`: our runner. `external`: the maintainer's own code."
+    type: string
+    enum: [inspect, openaudit, external]
+
+  EvalRunner:
+    description: How to run a version. Optional; a run can come from anywhere.
+    type: object
+    additionalProperties: false
+    required: [kind]
+    properties:
+      kind:
+        $ref: "#/$defs/RunnerKind"
+      task:
+        type: string
+        minLength: 1
+        description: The task to run (`inspect_evals/mask`, `inspect_petri/audit`).
+      package:
+        type: string
+        minLength: 1
+        description: The package and version that has the task (`inspect-evals==0.9.2`).
+      dependencies:
+        type: array
+        items:
+          type: string
+          minLength: 1
+        uniqueItems: true
+        description: Other packages the task uses, each with its version (`inspect-petri==3.1.0`).
+      roles:
+        type: array
+        items:
+          $ref: "#/$defs/ModelRole"
+        uniqueItems: true
+        description: The model roles a run must fill.
+      models:
+        type: array
+        items:
+          $ref: "#/$defs/ModelSlot"
+        description: The models besides the target, and how the task gets each one.
+      targetRole:
+        type: string
+        minLength: 1
+        description: Also give the target as this Inspect model role (`target`), for tasks that read it by role.
+      sandbox:
+        type: string
+        minLength: 1
+        description: The sandbox the task needs (`docker`), if any.
+      internet:
+        type: boolean
+      gpu:
+        type: boolean
+        description: The runner needs a GPU (white-box methods).
+      rawReasoning:
+        type: boolean
+        description: >-
+          The scores need the model's raw chain of thought. Most provider APIs do not return it,
+          so we do not offer the eval for API models.
+      defaultTrials:
+        type: integer
+        minimum: 1
+      defaultLimit:
+        type: integer
+        minimum: 1
+        description: >-
+          The samples a run does when its settings give no limit. A run with this limit or more
+          counts as a full run.
+
+  EvalVersion:
+    title: EvalVersion
+    description: >-
+      One fixed form of an eval: its samples and how they are scored. Results from different
+      versions are not comparable. A new version when the samples, scores, rubric or task
+      defaults change. Judge and auditor models are run settings. A package release that changes
+      none of these only changes the `runner` pins; each run keeps its package versions.
+    type: object
+    additionalProperties: false
+    required: [id, evalId, version, status, scores, metrics]
+    properties:
+      id:
+        $ref: "#/$defs/Id"
+      evalId:
+        $ref: "#/$defs/Id"
+      version:
+        type: string
+        pattern: "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+        maxLength: 40
+        description: The maintainer's name for it (`2.0`, `2026-02`). Unique per eval.
+      status:
+        $ref: "#/$defs/EvalVersionStatus"
+      releasedDate:
+        $ref: "#/$defs/PartialDate"
+      changes:
+        type: string
+        minLength: 1
+        description: What changed from the version before, in Markdown.
+      dataset:
+        $ref: "#/$defs/EvalDataset"
+        description: Left out for `lab_internal` evals.
+      sampleTerms:
+        $ref: "#/$defs/SampleTerms"
+      scores:
+        type: array
+        items:
+          $ref: "#/$defs/ScoreDef"
+      metrics:
+        type: array
+        items:
+          $ref: "#/$defs/MetricDef"
+      runner:
+        $ref: "#/$defs/EvalRunner"
+      methodSetup:
+        $ref: "#/$defs/MethodEvalSetup"
+        description: Only for evals whose subjects are methods.
+
+  SubjectValue:
+    type: object
+    additionalProperties: false
+    required: [subject, value]
+    properties:
+      subject:
+        type: string
+        minLength: 1
+        description: The Hub name of the subject model, as artifacts give it.
+      value:
+        type: number
+
+  SubjectOrder:
+    description: A number for each subject model that sorts the leaderboard rows (a capability index).
+    type: object
+    additionalProperties: false
+    required: [label, sourceUrl, values]
+    properties:
+      label:
+        type: string
+        minLength: 1
+      sourceUrl:
+        $ref: "#/$defs/Url"
+      sourceTable:
+        type: string
+        minLength: 1
+      values:
+        type: array
+        items:
+          $ref: "#/$defs/SubjectValue"
+
+  MethodEvalSetup:
+    description: How an eval of tools defines its positive cases and sets thresholds.
+    type: object
+    additionalProperties: false
+    properties:
+      definition:
+        type: string
+        minLength: 1
+        description: Markdown. What counts as a positive case (a lie).
+      calibration:
+        type: string
+        minLength: 1
+        description: Markdown. How each tool sets its threshold before it is scored.
+      subjectOrder:
+        $ref: "#/$defs/SubjectOrder"
+      coreSubjects:
+        description: The subject models that rank the variants. A variant needs a result on each to have a rank.
+        type: array
+        uniqueItems: true
+        items:
+          type: string
+          minLength: 1

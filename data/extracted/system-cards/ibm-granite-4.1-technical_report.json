@@ -1,0 +1,358 @@
+{
+  "document": "ibm-granite-4.1-technical_report",
+  "alsoDocuments": ["ibm-granite-4.1-blog"],
+  "covers": [
+    {
+      "model": "ibm-granite/granite-4.1-3b"
+    },
+    {
+      "model": "ibm-granite/granite-4.1-8b"
+    },
+    {
+      "model": "ibm-granite/granite-4.1-30b"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "512K tokens",
+      "source": {
+        "page": "Pre-Training",
+        "quote": "extending the context window to 512K tokens"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text LLMs",
+      "source": {
+        "page": "TL;DR",
+        "quote": "Granite 4.1 is a family of dense, decoder‑only LLMs (3B, 8B, and 30B) trained on ~15T tokens"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "without long chains of thought / extended reasoning traces",
+      "source": {
+        "page": "Granite 4.1 Comparison with Leading Open‑Source Models",
+        "quote": "Granite 4.1 delivers competitive instruction‑following and tool‑calling capabilities without relying on long chains of thought."
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English, German, Spanish, French, Japanese, Portuguese, Arabic, Czech, Italian, Korean, Dutch, and Chinese",
+      "source": {
+        "page": "Instruct Model Benchmarks",
+        "quote": "Supported languages: English, German, Spanish, French, Japanese, Portuguese, Arabic, Czech, Italian, Korean, Dutch, and Chinese."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0",
+      "source": {
+        "page": "TL;DR",
+        "quote": "All Granite 4.1 models are released under the Apache 2.0 license."
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "3B, 8B, and 30B",
+      "source": {
+        "page": "TL;DR",
+        "quote": "Granite 4.1 is a family of dense, decoder‑only LLMs (3B, 8B, and 30B) trained on ~15T tokens"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "decoder-only dense transformer with GQA, RoPE, SwiGLU, RMSNorm, shared input/output embeddings",
+      "source": {
+        "page": "Model Architecture",
+        "quote": "Granite 4.1 models use a decoder-only dense transformer architecture. The core design choices include Grouped Query Attention (GQA), Rotary Position Embeddings (RoPE), SwiGLU activations, RMSNorm, and shared input/output embeddings."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "~15T tokens across five pre-training phases; ~4.1M SFT samples",
+      "source": {
+        "page": "Pre-Training",
+        "quote": "Granite 4.1 is trained from scratch on approximately 15 trillion tokens using a five‑phase training strategy."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Instruct Safety suite: [SALAD-Bench](/evals/salad-bench), [AttaQ](https://arxiv.org/abs/2311.04124), and Tulu3 Safety Eval Avg scored for 3B/8B/30B",
+      "source": {
+        "page": "Instruct Model Benchmarks",
+        "quote": "| Safety | | | | |\n| SALAD-Bench | | 93.95 | 95.80 | 96.41 |\n| AttaQ | | 81.88 | 81.19 | 85.76 |\n| Tulu3 Safety Eval Avg | | 66.84 | 75.57 | 78.19 |"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Safety numbers appear only as three unnamed-metric rows under Instruct Model Benchmarks; the report gives no threat model, attack method, or metric definition for [SALAD-Bench](/evals/salad-bench), [AttaQ](https://arxiv.org/abs/2311.04124), or Tulu3 Safety Eval.", "tone": "mixed",
+      "source": {
+        "page": "Instruct Model Benchmarks",
+        "quote": "| Safety | | | | |\n| SALAD-Bench | | 93.95 | 95.80 | 96.41 |"
+      }
+    },
+    {
+      "text": "Supervised fine-tuning (SFT) data quality uses hard-reject rules for hallucination, false premises, and incorrect computations, plus rule-based leakage detection, but no model-level hallucination or privacy eval scores are reported.", "tone": "mixed",
+      "source": {
+        "page": "SFT: Data Preparation & Quality Control",
+        "quote": "Hard-reject defects (hallucination, false premise, incorrect computation) trigger automatic rejection regardless of score."
+      }
+    },
+    {
+      "text": "An Identity and Knowledge-Calibration reinforcement learning (RL) stage (~40 steps, 1728 prompts) is said to improve self-identification, with no safety metric attached.", "tone": "neutral",
+      "source": {
+        "page": "Identity & Knowledge-Calibration RL",
+        "quote": "In this stage, we train the model for a few steps (~40 training steps) on identity and knowledge calibration prompts. We observed that this small training stage significantly improves the model's self-identification capabilities."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "SALAD-Bench",
+      "model": "ibm-granite/granite-4.1-3b",
+      "metric": "score",
+      "value": 93.95,
+      "unit": "percent",
+      "settings": {
+        "other": "Instruct Model Benchmarks; metric column blank in report"
+      },
+      "source": {
+        "page": "Instruct Model Benchmarks",
+        "table": "Instruct Model Benchmarks",
+        "quote": "| SALAD-Bench | | 93.95 | 95.80 | 96.41 |"
+      }
+    },
+    {
+      "rawEvalName": "SALAD-Bench",
+      "model": "ibm-granite/granite-4.1-8b",
+      "metric": "score",
+      "value": 95.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Instruct Model Benchmarks; metric column blank in report"
+      },
+      "source": {
+        "page": "Instruct Model Benchmarks",
+        "table": "Instruct Model Benchmarks",
+        "quote": "| SALAD-Bench | | 93.95 | 95.80 | 96.41 |"
+      }
+    },
+    {
+      "rawEvalName": "SALAD-Bench",
+      "model": "ibm-granite/granite-4.1-30b",
+      "metric": "score",
+      "value": 96.41,
+      "unit": "percent",
+      "settings": {
+        "other": "Instruct Model Benchmarks; metric column blank in report"
+      },
+      "source": {
+        "page": "Instruct Model Benchmarks",
+        "table": "Instruct Model Benchmarks",
+        "quote": "| SALAD-Bench | | 93.95 | 95.80 | 96.41 |"
+      }
+    },
+    {
+      "rawEvalName": "AttaQ",
+      "model": "ibm-granite/granite-4.1-3b",
+      "metric": "score",
+      "value": 81.88,
+      "unit": "percent",
+      "settings": {
+        "other": "Instruct Model Benchmarks; metric column blank in report"
+      },
+      "source": {
+        "page": "Instruct Model Benchmarks",
+        "table": "Instruct Model Benchmarks",
+        "quote": "| AttaQ | | 81.88 | 81.19 | 85.76 |"
+      }
+    },
+    {
+      "rawEvalName": "AttaQ",
+      "model": "ibm-granite/granite-4.1-8b",
+      "metric": "score",
+      "value": 81.19,
+      "unit": "percent",
+      "settings": {
+        "other": "Instruct Model Benchmarks; metric column blank in report"
+      },
+      "source": {
+        "page": "Instruct Model Benchmarks",
+        "table": "Instruct Model Benchmarks",
+        "quote": "| AttaQ | | 81.88 | 81.19 | 85.76 |"
+      }
+    },
+    {
+      "rawEvalName": "AttaQ",
+      "model": "ibm-granite/granite-4.1-30b",
+      "metric": "score",
+      "value": 85.76,
+      "unit": "percent",
+      "settings": {
+        "other": "Instruct Model Benchmarks; metric column blank in report"
+      },
+      "source": {
+        "page": "Instruct Model Benchmarks",
+        "table": "Instruct Model Benchmarks",
+        "quote": "| AttaQ | | 81.88 | 81.19 | 85.76 |"
+      }
+    },
+    {
+      "rawEvalName": "Tulu3 Safety Eval Avg",
+      "model": "ibm-granite/granite-4.1-3b",
+      "metric": "score",
+      "value": 66.84,
+      "unit": "percent",
+      "settings": {
+        "other": "Instruct Model Benchmarks; average as named; metric column blank in report"
+      },
+      "source": {
+        "page": "Instruct Model Benchmarks",
+        "table": "Instruct Model Benchmarks",
+        "quote": "| Tulu3 Safety Eval Avg | | 66.84 | 75.57 | 78.19 |"
+      }
+    },
+    {
+      "rawEvalName": "Tulu3 Safety Eval Avg",
+      "model": "ibm-granite/granite-4.1-8b",
+      "metric": "score",
+      "value": 75.57,
+      "unit": "percent",
+      "settings": {
+        "other": "Instruct Model Benchmarks; average as named; metric column blank in report"
+      },
+      "source": {
+        "page": "Instruct Model Benchmarks",
+        "table": "Instruct Model Benchmarks",
+        "quote": "| Tulu3 Safety Eval Avg | | 66.84 | 75.57 | 78.19 |"
+      }
+    },
+    {
+      "rawEvalName": "Tulu3 Safety Eval Avg",
+      "model": "ibm-granite/granite-4.1-30b",
+      "metric": "score",
+      "value": 78.19,
+      "unit": "percent",
+      "settings": {
+        "other": "Instruct Model Benchmarks; average as named; metric column blank in report"
+      },
+      "source": {
+        "page": "Instruct Model Benchmarks",
+        "table": "Instruct Model Benchmarks",
+        "quote": "| Tulu3 Safety Eval Avg | | 66.84 | 75.57 | 78.19 |"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:47:05Z"
+  },
+  "notes": "Hugging Face blog technical report (not a PDF system card); text from WebFetch markdown. Pilot safety-only: kept SALAD-Bench, AttaQ, and Tulu3 Safety Eval Avg from Instruct Model Benchmarks; skipped all capability/alignment-chat benches (MMLU/MMLU-Pro/BBH/AGI EVAL/DROP/GPQA/SimpleQA, GSM8K/GSM Symbolic/Minerva/DeepMind Math, HumanEval(+)/MBPP(+)/CRUXEval-O/BigCodeBench/MULTIPLE/Eval+ Avg, BFCL v3, MMMLU/INCLUDE/MGSM, RULER, AlpacaEval 2.0/IFEval/ArenaHard/MTBench). No risk tiers or external safety testers. Blog Published April 29, 2026 treated as publication date not model releaseDate. Metric column blank for Safety rows so metric recorded as score with unit percent. Architecture quote uses ASCII hyphen in decoder-only line of Model Architecture section. Figures 13–14 are charts without readable numeric tables in text."
+}

@@ -1,0 +1,981 @@
+{
+  "document": "zai-glm-4.5-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "zai-org/GLM-4.5"
+    },
+    {
+      "model": "zai-org/GLM-4.5-Air"
+    }
+  ],
+  "pageCount": 26,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "128K tokens (maximum context length; mid-training extends sequence length to 131,072)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "with a maximum context length of 128K tokens. By distilling from the output of distinct experts,"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (large language model)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present GLM-4.5, an open-source Mixture-of-Experts (MoE) large language"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "hybrid reasoning: thinking mode and non-thinking (direct response) mode",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "thinking mode for complex reasoning and agentic\ntasks, and non-thinking mode for instant responses."
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English and Chinese majority pre-training; additional multilingual documents (Fineweb-2 and crawled webpages)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "The majority of our pre-training documents are English and Chinese webpages crawled\nfrom the Internet."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "GLM-4.5 355B; GLM-4.5-Air 106B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We release both GLM-4.5\n                                                    (355B parameters) and a compact version, GLM-4.5-Air (106B parameters), to"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "GLM-4.5 32B activated; GLM-4.5-Air 12B activated",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "      # Activated Parameters                            32B                  12B               37B                     32B"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Mixture-of-Experts (MoE) with loss-free balance routing and sigmoid gates; deeper/narrower than DeepSeek-V3/Kimi K2; MTP layer for speculative decoding",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "In the GLM-4.5 series, we adopt the MoE architecture, which improves the computational efficiency"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "webpages, social media, books, papers, and code repositories; multi-stage on 23T tokens; mid-training adds repo-level code, synthetic reasoning, long-context and agent data",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Through multi-stage training on 23T tokens and comprehensive post-training"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "[SafetyBench](/evals/safetybench) Illegal Activities 91.0 and Offensiveness; strong safety score overall 89.9 (higher is better)",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "While it performs well in preventing responses related to Illegal\nActivities (90.97) and protecting Privacy and Property (92.00), there is still room for improvement in"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "[SafetyBench](/evals/safetybench) Unfairness and Bias is weakest category; ongoing focus for improvement",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "addressing Unfairness and Bias, an area of ongoing focus for our development efforts. The detailed"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "No clear reward hacking in Instruction Following RL up to ~1000 steps; mitigated reward hacking observed",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "Up to roughly 1,000 training steps, we have not observed clear evidence of reward\nhacking."
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Safety evaluation is limited to [SafetyBench](/evals/safetybench) multiple-choice questions; no jailbreak, red-team, or dangerous-capability scores are reported.", "tone": "mixed",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "To systematically assess the safety alignment of our model, we utilized SafetyBench [51], a compre-\nhensive benchmark designed to evaluate the safety of large language models."
+      }
+    },
+    {
+      "text": "GLM-4.5 overall [SafetyBench](/evals/safetybench) score 89.9 is close to Kimi-K2 (90.5) and GPT-4.1 (89.7) (higher is better).", "tone": "good",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "overall score of 89.87 is comparable to that of Kimi-K2 (90.48) and GPT-4.1 (89.71). Notably,"
+      }
+    },
+    {
+      "text": "Authors note room to improve on Unfairness and Bias despite otherwise strong [SafetyBench](/evals/safetybench) categories.", "tone": "mixed",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "addressing Unfairness and Bias, an area of ongoing focus for our development efforts. The detailed"
+      }
+    },
+    {
+      "text": "Holistic reinforcement learning (RL) preference labels include safety among evaluation dimensions, but no separate safety metric is given for that stage.", "tone": "mixed",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "such as instruction following, safety, and factual correctness. For model feedback, we design separate"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5",
+      "metric": "Average",
+      "value": 89.9,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5             89.9       94.3     91.0       94.7        83.0          96.7          92.0           77.4"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5",
+      "metric": "Ethics & Morality",
+      "value": 94.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5             89.9       94.3     91.0       94.7        83.0          96.7          92.0           77.4"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5",
+      "metric": "Illegal Activities",
+      "value": 91,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5             89.9       94.3     91.0       94.7        83.0          96.7          92.0           77.4"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5",
+      "metric": "Mental Health",
+      "value": 94.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5             89.9       94.3     91.0       94.7        83.0          96.7          92.0           77.4"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5",
+      "metric": "Offensiveness",
+      "value": 83,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5             89.9       94.3     91.0       94.7        83.0          96.7          92.0           77.4"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5",
+      "metric": "Physical Health",
+      "value": 96.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5             89.9       94.3     91.0       94.7        83.0          96.7          92.0           77.4"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5",
+      "metric": "Privacy & Property",
+      "value": 92,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5             89.9       94.3     91.0       94.7        83.0          96.7          92.0           77.4"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5",
+      "metric": "Unfairness & Bias",
+      "value": 77.4,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5             89.9       94.3     91.0       94.7        83.0          96.7          92.0           77.4"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5-Air",
+      "metric": "Average",
+      "value": 87.8,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5-Air         87.8       91.0     90.3       92.7        83.3          92.3          90.3           74.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5-Air",
+      "metric": "Ethics & Morality",
+      "value": 91,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5-Air         87.8       91.0     90.3       92.7        83.3          92.3          90.3           74.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5-Air",
+      "metric": "Illegal Activities",
+      "value": 90.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5-Air         87.8       91.0     90.3       92.7        83.3          92.3          90.3           74.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5-Air",
+      "metric": "Mental Health",
+      "value": 92.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5-Air         87.8       91.0     90.3       92.7        83.3          92.3          90.3           74.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5-Air",
+      "metric": "Offensiveness",
+      "value": 83.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5-Air         87.8       91.0     90.3       92.7        83.3          92.3          90.3           74.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5-Air",
+      "metric": "Physical Health",
+      "value": 92.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5-Air         87.8       91.0     90.3       92.7        83.3          92.3          90.3           74.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5-Air",
+      "metric": "Privacy & Property",
+      "value": 90.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5-Air         87.8       91.0     90.3       92.7        83.3          92.3          90.3           74.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "zai-org/GLM-4.5-Air",
+      "metric": "Unfairness & Bias",
+      "value": 74.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GLM-4.5-Air         87.8       91.0     90.3       92.7        83.3          92.3          90.3           74.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "google/gemini-2.5-pro",
+      "metric": "Average",
+      "value": 90.5,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Gemini 2.5 Pro      90.5       94.7     91.7       95.3        84.3          97.0          92.3           78.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "google/gemini-2.5-pro",
+      "metric": "Ethics & Morality",
+      "value": 94.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Gemini 2.5 Pro      90.5       94.7     91.7       95.3        84.3          97.0          92.3           78.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "google/gemini-2.5-pro",
+      "metric": "Illegal Activities",
+      "value": 91.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Gemini 2.5 Pro      90.5       94.7     91.7       95.3        84.3          97.0          92.3           78.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "google/gemini-2.5-pro",
+      "metric": "Mental Health",
+      "value": 95.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Gemini 2.5 Pro      90.5       94.7     91.7       95.3        84.3          97.0          92.3           78.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "google/gemini-2.5-pro",
+      "metric": "Offensiveness",
+      "value": 84.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Gemini 2.5 Pro      90.5       94.7     91.7       95.3        84.3          97.0          92.3           78.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "google/gemini-2.5-pro",
+      "metric": "Physical Health",
+      "value": 97,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Gemini 2.5 Pro      90.5       94.7     91.7       95.3        84.3          97.0          92.3           78.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "google/gemini-2.5-pro",
+      "metric": "Privacy & Property",
+      "value": 92.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Gemini 2.5 Pro      90.5       94.7     91.7       95.3        84.3          97.0          92.3           78.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "google/gemini-2.5-pro",
+      "metric": "Unfairness & Bias",
+      "value": 78,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Gemini 2.5 Pro      90.5       94.7     91.7       95.3        84.3          97.0          92.3           78.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "Average",
+      "value": 90.5,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Kimi K2             90.5       93.0     93.3       95.0        90.3          97.3          93.0           71.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "Ethics & Morality",
+      "value": 93,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Kimi K2             90.5       93.0     93.3       95.0        90.3          97.3          93.0           71.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "Illegal Activities",
+      "value": 93.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Kimi K2             90.5       93.0     93.3       95.0        90.3          97.3          93.0           71.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "Mental Health",
+      "value": 95,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Kimi K2             90.5       93.0     93.3       95.0        90.3          97.3          93.0           71.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "Offensiveness",
+      "value": 90.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Kimi K2             90.5       93.0     93.3       95.0        90.3          97.3          93.0           71.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "Physical Health",
+      "value": 97.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Kimi K2             90.5       93.0     93.3       95.0        90.3          97.3          93.0           71.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "Privacy & Property",
+      "value": 93,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Kimi K2             90.5       93.0     93.3       95.0        90.3          97.3          93.0           71.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "moonshotai/Kimi-K2-Instruct",
+      "metric": "Unfairness & Bias",
+      "value": 71.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "Kimi K2             90.5       93.0     93.3       95.0        90.3          97.3          93.0           71.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "openai/gpt-4.1",
+      "metric": "Average",
+      "value": 89.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GPT-4.1             89.7       92.0     94.3       95.3        85.3          95.7          91.3           74.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "openai/gpt-4.1",
+      "metric": "Ethics & Morality",
+      "value": 92,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GPT-4.1             89.7       92.0     94.3       95.3        85.3          95.7          91.3           74.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "openai/gpt-4.1",
+      "metric": "Illegal Activities",
+      "value": 94.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GPT-4.1             89.7       92.0     94.3       95.3        85.3          95.7          91.3           74.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "openai/gpt-4.1",
+      "metric": "Mental Health",
+      "value": 95.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GPT-4.1             89.7       92.0     94.3       95.3        85.3          95.7          91.3           74.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "openai/gpt-4.1",
+      "metric": "Offensiveness",
+      "value": 85.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GPT-4.1             89.7       92.0     94.3       95.3        85.3          95.7          91.3           74.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "openai/gpt-4.1",
+      "metric": "Physical Health",
+      "value": 95.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GPT-4.1             89.7       92.0     94.3       95.3        85.3          95.7          91.3           74.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "openai/gpt-4.1",
+      "metric": "Privacy & Property",
+      "value": 91.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GPT-4.1             89.7       92.0     94.3       95.3        85.3          95.7          91.3           74.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "openai/gpt-4.1",
+      "metric": "Unfairness & Bias",
+      "value": 74,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "GPT-4.1             89.7       92.0     94.3       95.3        85.3          95.7          91.3           74.0"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "Average",
+      "value": 88.8,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-V3-0324    88.8       92.3     90.7       95.0        84.7          95.7          91.0           72.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "Ethics & Morality",
+      "value": 92.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-V3-0324    88.8       92.3     90.7       95.0        84.7          95.7          91.0           72.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "Illegal Activities",
+      "value": 90.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-V3-0324    88.8       92.3     90.7       95.0        84.7          95.7          91.0           72.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "Mental Health",
+      "value": 95,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-V3-0324    88.8       92.3     90.7       95.0        84.7          95.7          91.0           72.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "Offensiveness",
+      "value": 84.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-V3-0324    88.8       92.3     90.7       95.0        84.7          95.7          91.0           72.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "Physical Health",
+      "value": 95.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-V3-0324    88.8       92.3     90.7       95.0        84.7          95.7          91.0           72.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "Privacy & Property",
+      "value": 91,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-V3-0324    88.8       92.3     90.7       95.0        84.7          95.7          91.0           72.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-V3-0324",
+      "metric": "Unfairness & Bias",
+      "value": 72.3,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-V3-0324    88.8       92.3     90.7       95.0        84.7          95.7          91.0           72.3"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "metric": "Average",
+      "value": 83.5,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-R1-0528    83.5       87.0     81.7       86.7        77.7          92.0          85.7           73.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "metric": "Ethics & Morality",
+      "value": 87,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-R1-0528    83.5       87.0     81.7       86.7        77.7          92.0          85.7           73.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "metric": "Illegal Activities",
+      "value": 81.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-R1-0528    83.5       87.0     81.7       86.7        77.7          92.0          85.7           73.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "metric": "Mental Health",
+      "value": 86.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-R1-0528    83.5       87.0     81.7       86.7        77.7          92.0          85.7           73.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "metric": "Offensiveness",
+      "value": 77.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-R1-0528    83.5       87.0     81.7       86.7        77.7          92.0          85.7           73.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "metric": "Physical Health",
+      "value": 92,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-R1-0528    83.5       87.0     81.7       86.7        77.7          92.0          85.7           73.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "metric": "Privacy & Property",
+      "value": 85.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-R1-0528    83.5       87.0     81.7       86.7        77.7          92.0          85.7           73.7"
+      }
+    },
+    {
+      "rawEvalName": "SafetyBench",
+      "model": "deepseek-ai/DeepSeek-R1-0528",
+      "metric": "Unfairness & Bias",
+      "value": 73.7,
+      "unit": "percent",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "table": "Table 7",
+        "quote": "DeepSeek-R1-0528    83.5       87.0     81.7       86.7        77.7          92.0          85.7           73.7"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:23:33Z"
+  },
+  "notes": "Technical report (arXiv 2508.06471), not a system card. Covers GLM-4.5 and GLM-4.5-Air only; seed-linked GLM-4.6/4.7/4.7-Flash are not named in this report. Only safety eval with numbers is SafetyBench (Table 7, page 18); body text on page 17 gives slightly more precise overall/category scores (e.g. 89.87 vs table 89.9)—table values used for evalResults. Kimi K2 mapped to moonshotai/Kimi-K2-Instruct. Skipped capability evals per pilot override: SWE-bench Verified, Terminal-Bench, TAU-Bench, BFCL v3, BrowseComp, AIME 24, MATH-500, SciCode, GPQA, HLE, LiveCodeBench, MMLU/MMLU-Pro, SimpleQA, IFEval, SysBench, MultiChallenge, human chat evals (Tables 8–10), translation, and ARC overview figures. No external testers, risk framework levels, jailbreak/red-team rates, or bio/cyber/autonomy dangerous-capability numbers. License named only as open-source (Hugging Face/GitHub), no SPDX license string. Air activated params 12B from Table 1; abstract only states 32B for GLM-4.5."
+}

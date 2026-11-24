@@ -1,0 +1,211 @@
+{
+  "document": "google-translategemma-technical_report",
+  "alsoDocuments": ["google-translategemma-blog"],
+  "covers": [
+    {
+      "model": "google/translategemma-4b-it"
+    },
+    {
+      "rawModelName": "TranslateGemma 12B"
+    },
+    {
+      "rawModelName": "TranslateGemma 27B"
+    }
+  ],
+  "pageCount": 12,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text translation and image (multimodal) translation",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "models retain strong multimodal capabilities, with enhanced performance on the Vistra image translation"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "WMT24++ automatic evaluation across 55 language pairs; human evaluation on 10 pairs; SFT language coverage in Appendix C",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "across 55 language pairs."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "4B, 12B, and 27B parameters",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "and model sizes (4B, 12B, and 27B parameters)."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "open machine translation models based on the Gemma 3 foundation models",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We present TranslateGemma, a suite of open machine translation models based on the Gemma 3"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "high-quality large-scale synthetic parallel data and human-translated parallel data; MADLAD-400 monolingual source; SMOL and GATITOS; 30% generic Gemma 3 instruction-following data in SFT",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "mixture of high-quality large-scale synthetic parallel data generated via state-of-the-art models and"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "On Japanese→English human Multidimensional Quality Metrics (MQM), TranslateGemma regresses versus Gemma 3 27B; authors attribute this to named-entity mistranslation.", "tone": "neutral",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "is due to mistranslation of named entities, while"
+      }
+    },
+    {
+      "text": "Smaller TranslateGemma models often match larger Gemma 3 baselines on translation metrics.", "tone": "neutral",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Notably, smaller TranslateGemma models often achieve performance\n                                         comparable to larger baseline models, offering improved efficiency."
+      }
+    },
+    {
+      "text": "No multimodal data was used in supervised fine-tuning (SFT) or reinforcement learning (RL), yet image translation on Vistra still improves for larger sizes.", "tone": "neutral",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Note that no multimodal         do so using MQM (Freitag et al., 2021; Lom-\ntraining data was used in the SFT or RL steps"
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:05:04Z"
+  },
+  "notes": "Technical report (arXiv 2601.09012), not a system card. No safety, alignment, refusal, jailbreak, bias, privacy, toxicity, or dangerous-capability section or numbers. evalResults left empty per pilot safety-only rule. Skipped all translation-capability results: WMT24++ MetricX/Comet22 (Table 1 and per-pair Table 4), Vistra image translation (Table 2), WMT25 human MQM (Table 3), and related in-text language-pair MetricX examples. 512-token blob length is synthetic-data generation length, not a stated context window. Mentions of MetricX filtering and formatting filters are data-curation steps, not model safety claims. Seed lists only google/translategemma-4b-it; 12B and 27B covered via rawModelName as in the report."
+}

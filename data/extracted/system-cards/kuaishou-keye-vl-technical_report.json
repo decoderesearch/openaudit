@@ -1,0 +1,284 @@
+{
+  "document": "kuaishou-keye-vl-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "Kwai-Keye/Keye-VL-8B-Preview"
+    }
+  ],
+  "pageCount": 41,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "multimodal (vision-language; video and image)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "8-billion-parameter multimodal foundation model"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "thinking / non-thinking / auto-think / think with image",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "includes “thinking”, “non-thinking”, “auto-think”"
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "8-billion-parameter",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "8-billion-parameter multimodal foundation model"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Vision Transformer (ViT), MLP projector, and Qwen3-8B language decoder",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "includes three key components: a Vision Transformer (ViT), a MLP projector, and a language decoder."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "exceeding 600 billion tokens; six primary categories: Image Caption, OCR & VQA, Grounding & Counting, Interleaved, Video Understanding and Pure Text data",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "six primary categories: Image Caption, OCR &"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[HallusionBench](/evals/hallusionbench) 67.0 (Keye-VL 8B-Thinking) (higher is better)",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "HallusionBench         67.0           57.2           55.7        49.4        61.9      -          -"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "After CoT-Mix cold-start, Keye-VL’s HallucinationBench score rose by 3.0% (Non-Thinking) and 8.0% (Thinking).", "tone": "good",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "and 7.97% on HallucinationBench, respectively. These results demonstrate that training on CoT-Mix data"
+      }
+    },
+    {
+      "text": "The internal capability taxonomy lists Traditional Safety and Instruction Attacks under Safety, but the report publishes no numeric Safety scores.", "tone": "mixed",
+      "source": {
+        "page": "32",
+        "pdfPage": 32,
+        "quote": "Traditional Safety"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Kwai-Keye/Keye-VL-8B-Preview",
+      "metric": "accuracy",
+      "value": 67,
+      "unit": "percent",
+      "settings": {
+        "other": "8B-Thinking; Table 3 Thinking mode"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 3",
+        "quote": "HallusionBench         67.0           57.2           55.7        49.4        61.9      -          -"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Kwai-Keye/Keye-VL-8B-Preview",
+      "metric": "accuracy",
+      "value": 57.2,
+      "unit": "percent",
+      "settings": {
+        "other": "8B-Auto-Think; Table 3 Auto-Think mode"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 3",
+        "quote": "HallusionBench         67.0           57.2           55.7        49.4        61.9      -          -"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "Qwen2.5-VL 7B",
+      "metric": "accuracy",
+      "value": 55.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 3 comparison"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 3",
+        "quote": "HallusionBench         67.0           57.2           55.7        49.4        61.9      -          -"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "OpenGVLab/InternVL3-8B",
+      "metric": "accuracy",
+      "value": 49.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 3 comparison"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 3",
+        "quote": "HallusionBench         67.0           57.2           55.7        49.4        61.9      -          -"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "XiaomiMiMo/MiMo-VL-7B-RL",
+      "metric": "accuracy",
+      "value": 61.9,
+      "unit": "percent",
+      "settings": {
+        "other": "7B-RL; Table 3 comparison"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 3",
+        "quote": "HallusionBench         67.0           57.2           55.7        49.4        61.9      -          -"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:19:14Z"
+  },
+  "notes": "Capability technical report with almost no safety content. Only safety-relevant numeric eval is HallusionBench in Table 3 (hallucination/visual illusion). Skipped KC-MMBench Pornographic Comment (content-moderation classifier). Internal taxonomy lists Safety (Traditional Safety, Instruction Attacks) and Robustness, but Table 6 only reports Robustness (capability robustness: noise/bitrate/typos), not Safety scores. Iterative alignment uses rejection-sampling data that includes a safety domain (training method, no scores). Skipped all general capability tables (MMMU, AI2D, video, MATH, OCR, KC-MMBench non-safety tasks, ImageNet ViT, internal human ratings). Title-page date July 3, 2025 is not a model release date. HallucinationBench delta percentages in §7.1 are relative gains, not absolute scores; recorded as a finding."
+}

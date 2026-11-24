@@ -1,0 +1,796 @@
+{
+  "document": "google-shieldgemma-system_card",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "google/shieldgemma-2b"
+    },
+    {
+      "model": "google/shieldgemma-9b"
+    },
+    {
+      "model": "google/shieldgemma-27b"
+    }
+  ],
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text-to-text",
+      "source": {
+        "page": "Description",
+        "quote": "They are text-to-text, decoder-only large language models, available in English with open weights"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English",
+      "source": {
+        "page": "Description",
+        "quote": "available in English with open weights, including models of 3 sizes: 2B, 9B and 27B parameters."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Terms of Use",
+      "source": {
+        "page": "Header",
+        "quote": "Terms of Use: Terms"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "2B, 9B and 27B",
+      "source": {
+        "page": "Description",
+        "quote": "including models of 3 sizes: 2B, 9B and 27B parameters."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "text-to-text, decoder-only LLMs built upon Gemma 2",
+      "source": {
+        "page": "Description",
+        "quote": "safety content moderation models built upon Gemma 2 that target four harm categories"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Fine-tuned on synthetically generated internal data and publicly available datasets; base on Gemma 2 text data",
+      "source": {
+        "page": "Training Dataset",
+        "quote": "The ShieldGemma models were fine-tuned on synthetically generated internal data and publicly available datasets."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Content moderation for sexually explicit, dangerous content, hate, and harassment",
+      "source": {
+        "page": "Description",
+        "quote": "target four harm categories (sexually explicit, dangerous content, hate, and harassment)"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Dangerous-content policy includes instructions for suicide",
+      "source": {
+        "page": "Guidelines to use in prompts",
+        "quote": "building firearms and explosive devices, promotion of terrorism, instructions for suicide"
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Safety evaluation focused on fairness; models met internal guidelines",
+      "source": {
+        "page": "Evaluation Approach",
+        "quote": "Therefore, safety evaluation focused primarily on fairness characteristics."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Models are meant to run in scoring mode to predict Yes/No token probability, not free-form generation.", "tone": "neutral",
+      "source": {
+        "page": "Evaluation Approach",
+        "quote": "they are designed to be run in scoring mode to predict the probability that the next token would Yes or No."
+      }
+    },
+    {
+      "text": "The card says the models met internal ethics, safety, and fairness guidelines.", "tone": "good",
+      "source": {
+        "page": "Evaluation Results",
+        "quote": "These models were assessed for ethics, safety, and fairness considerations and met internal guidelines."
+      }
+    },
+    {
+      "text": "ShieldGemma is highly sensitive to the user's safety-principle wording and may behave unpredictably with ambiguous language.", "tone": "mixed",
+      "source": {
+        "page": "Limitations",
+        "quote": "ShieldGemma is also highly sensitive to the specific user-provided description of safety principles, and might perform unpredictably under conditions that require a good understanding of language ambiguity and nuance."
+      }
+    },
+    {
+      "text": "Content-moderation benchmarks are limited, so training and evaluation data may not match real-world use.", "tone": "mixed",
+      "source": {
+        "page": "Limitations",
+        "quote": "there are limited benchmarks that can be used to evaluate content moderation so the training and evaluation data might not be representative of real-world scenarios."
+      }
+    },
+    {
+      "text": "The card claims superior performance versus other comparably sized open model alternatives on the reported metrics.", "tone": "good",
+      "source": {
+        "page": "Benefits",
+        "quote": "these models have been shown to provide superior performance to other, comparably-sized open model alternatives."
+      }
+    },
+    {
+      "text": "Training used TPUv5e hardware with JAX and machine learning (ML) Pathways.", "tone": "neutral",
+      "source": {
+        "page": "Hardware",
+        "quote": "ShieldGemma was trained using the latest generation of Tensor Processing Unit (TPU) hardware (TPUv5e)"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "SG Prompt",
+      "model": "google/shieldgemma-2b",
+      "metric": "Optimal F1",
+      "value": 0.825,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (2B)\n\t0.825/0.887\n\t0.812/0.887\n\t0.704/0.778\n\t0.743/0.802"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "model": "google/shieldgemma-2b",
+      "metric": "AU-PRC",
+      "value": 0.887,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (2B)\n\t0.825/0.887\n\t0.812/0.887\n\t0.704/0.778\n\t0.743/0.802"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "model": "google/shieldgemma-2b",
+      "metric": "Optimal F1",
+      "value": 0.812,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (2B)\n\t0.825/0.887\n\t0.812/0.887\n\t0.704/0.778\n\t0.743/0.802"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "model": "google/shieldgemma-2b",
+      "metric": "AU-PRC",
+      "value": 0.887,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (2B)\n\t0.825/0.887\n\t0.812/0.887\n\t0.704/0.778\n\t0.743/0.802"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "model": "google/shieldgemma-2b",
+      "metric": "Optimal F1",
+      "value": 0.704,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (2B)\n\t0.825/0.887\n\t0.812/0.887\n\t0.704/0.778\n\t0.743/0.802"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "model": "google/shieldgemma-2b",
+      "metric": "AU-PRC",
+      "value": 0.778,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (2B)\n\t0.825/0.887\n\t0.812/0.887\n\t0.704/0.778\n\t0.743/0.802"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "model": "google/shieldgemma-2b",
+      "metric": "Optimal F1",
+      "value": 0.743,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (2B)\n\t0.825/0.887\n\t0.812/0.887\n\t0.704/0.778\n\t0.743/0.802"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "model": "google/shieldgemma-2b",
+      "metric": "AU-PRC",
+      "value": 0.802,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (2B)\n\t0.825/0.887\n\t0.812/0.887\n\t0.704/0.778\n\t0.743/0.802"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "model": "google/shieldgemma-9b",
+      "metric": "Optimal F1",
+      "value": 0.828,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (9B)\n\t0.828/0.894\n\t0.821/0.907\n\t0.694/0.782\n\t0.753/0.817"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "model": "google/shieldgemma-9b",
+      "metric": "AU-PRC",
+      "value": 0.894,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (9B)\n\t0.828/0.894\n\t0.821/0.907\n\t0.694/0.782\n\t0.753/0.817"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "model": "google/shieldgemma-9b",
+      "metric": "Optimal F1",
+      "value": 0.821,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (9B)\n\t0.828/0.894\n\t0.821/0.907\n\t0.694/0.782\n\t0.753/0.817"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "model": "google/shieldgemma-9b",
+      "metric": "AU-PRC",
+      "value": 0.907,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (9B)\n\t0.828/0.894\n\t0.821/0.907\n\t0.694/0.782\n\t0.753/0.817"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "model": "google/shieldgemma-9b",
+      "metric": "Optimal F1",
+      "value": 0.694,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (9B)\n\t0.828/0.894\n\t0.821/0.907\n\t0.694/0.782\n\t0.753/0.817"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "model": "google/shieldgemma-9b",
+      "metric": "AU-PRC",
+      "value": 0.782,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (9B)\n\t0.828/0.894\n\t0.821/0.907\n\t0.694/0.782\n\t0.753/0.817"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "model": "google/shieldgemma-9b",
+      "metric": "Optimal F1",
+      "value": 0.753,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (9B)\n\t0.828/0.894\n\t0.821/0.907\n\t0.694/0.782\n\t0.753/0.817"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "model": "google/shieldgemma-9b",
+      "metric": "AU-PRC",
+      "value": 0.817,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (9B)\n\t0.828/0.894\n\t0.821/0.907\n\t0.694/0.782\n\t0.753/0.817"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "model": "google/shieldgemma-27b",
+      "metric": "Optimal F1",
+      "value": 0.83,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (27B)\n\t0.830/0.883\n\t0.805/0.886\n\t0.729/0.811\n\t0.758/0.806"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "model": "google/shieldgemma-27b",
+      "metric": "AU-PRC",
+      "value": 0.883,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (27B)\n\t0.830/0.883\n\t0.805/0.886\n\t0.729/0.811\n\t0.758/0.806"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "model": "google/shieldgemma-27b",
+      "metric": "Optimal F1",
+      "value": 0.805,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (27B)\n\t0.830/0.883\n\t0.805/0.886\n\t0.729/0.811\n\t0.758/0.806"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "model": "google/shieldgemma-27b",
+      "metric": "AU-PRC",
+      "value": 0.886,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (27B)\n\t0.830/0.883\n\t0.805/0.886\n\t0.729/0.811\n\t0.758/0.806"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "model": "google/shieldgemma-27b",
+      "metric": "Optimal F1",
+      "value": 0.729,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (27B)\n\t0.830/0.883\n\t0.805/0.886\n\t0.729/0.811\n\t0.758/0.806"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "model": "google/shieldgemma-27b",
+      "metric": "AU-PRC",
+      "value": 0.811,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (27B)\n\t0.830/0.883\n\t0.805/0.886\n\t0.729/0.811\n\t0.758/0.806"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "model": "google/shieldgemma-27b",
+      "metric": "Optimal F1",
+      "value": 0.758,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (27B)\n\t0.830/0.883\n\t0.805/0.886\n\t0.729/0.811\n\t0.758/0.806"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "model": "google/shieldgemma-27b",
+      "metric": "AU-PRC",
+      "value": 0.806,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "ShieldGemma (27B)\n\t0.830/0.883\n\t0.805/0.886\n\t0.729/0.811\n\t0.758/0.806"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "rawModelName": "OpenAI Mod API",
+      "metric": "Optimal F1",
+      "value": 0.782,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "OpenAI Mod API\n\t0.782/0.840\n\t0.790/0.856\n\t0.254/0.588\n\t-"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "rawModelName": "OpenAI Mod API",
+      "metric": "AU-PRC",
+      "value": 0.84,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "OpenAI Mod API\n\t0.782/0.840\n\t0.790/0.856\n\t0.254/0.588\n\t-"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "rawModelName": "OpenAI Mod API",
+      "metric": "Optimal F1",
+      "value": 0.79,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "OpenAI Mod API\n\t0.782/0.840\n\t0.790/0.856\n\t0.254/0.588\n\t-"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "rawModelName": "OpenAI Mod API",
+      "metric": "AU-PRC",
+      "value": 0.856,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "OpenAI Mod API\n\t0.782/0.840\n\t0.790/0.856\n\t0.254/0.588\n\t-"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "rawModelName": "OpenAI Mod API",
+      "metric": "Optimal F1",
+      "value": 0.254,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "OpenAI Mod API\n\t0.782/0.840\n\t0.790/0.856\n\t0.254/0.588\n\t-"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "rawModelName": "OpenAI Mod API",
+      "metric": "AU-PRC",
+      "value": 0.588,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "OpenAI Mod API\n\t0.782/0.840\n\t0.790/0.856\n\t0.254/0.588\n\t-"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "model": "meta-llama/LlamaGuard-7b",
+      "metric": "Optimal F1",
+      "value": 0.758,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "LlamaGuard1 (7B)\n\t-\n\t0.758/0.847\n\t0.616/0.626\n\t-"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "model": "meta-llama/LlamaGuard-7b",
+      "metric": "AU-PRC",
+      "value": 0.847,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "LlamaGuard1 (7B)\n\t-\n\t0.758/0.847\n\t0.616/0.626\n\t-"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "model": "meta-llama/LlamaGuard-7b",
+      "metric": "Optimal F1",
+      "value": 0.616,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "LlamaGuard1 (7B)\n\t-\n\t0.758/0.847\n\t0.616/0.626\n\t-"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "model": "meta-llama/LlamaGuard-7b",
+      "metric": "AU-PRC",
+      "value": 0.626,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "LlamaGuard1 (7B)\n\t-\n\t0.758/0.847\n\t0.616/0.626\n\t-"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "rawModelName": "LlamaGuard2 (8B)",
+      "metric": "Optimal F1",
+      "value": 0.761,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "LlamaGuard2 (8B)\n\t-\n\t0.761/-\n\t0.471/-\n\t-"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "rawModelName": "LlamaGuard2 (8B)",
+      "metric": "Optimal F1",
+      "value": 0.471,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "LlamaGuard2 (8B)\n\t-\n\t0.761/-\n\t0.471/-\n\t-"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "rawModelName": "WildGuard (7B)",
+      "metric": "Optimal F1",
+      "value": 0.779,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "WildGuard (7B)\n\t0.779/-\n\t0.721/-\n\t0.708/-\n\t0.656/-"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "rawModelName": "WildGuard (7B)",
+      "metric": "Optimal F1",
+      "value": 0.721,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "WildGuard (7B)\n\t0.779/-\n\t0.721/-\n\t0.708/-\n\t0.656/-"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "rawModelName": "WildGuard (7B)",
+      "metric": "Optimal F1",
+      "value": 0.708,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "WildGuard (7B)\n\t0.779/-\n\t0.721/-\n\t0.708/-\n\t0.656/-"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "rawModelName": "WildGuard (7B)",
+      "metric": "Optimal F1",
+      "value": 0.656,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "WildGuard (7B)\n\t0.779/-\n\t0.721/-\n\t0.708/-\n\t0.656/-"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "model": "openai/gpt-4",
+      "metric": "Optimal F1",
+      "value": 0.81,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "GPT-4\n\t0.810/0.847\n\t0.705/-\n\t0.683/-\n\t0.713/0.749"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "model": "openai/gpt-4",
+      "metric": "AU-PRC",
+      "value": 0.847,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "GPT-4\n\t0.810/0.847\n\t0.705/-\n\t0.683/-\n\t0.713/0.749"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "model": "openai/gpt-4",
+      "metric": "Optimal F1",
+      "value": 0.705,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "GPT-4\n\t0.810/0.847\n\t0.705/-\n\t0.683/-\n\t0.713/0.749"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "model": "openai/gpt-4",
+      "metric": "Optimal F1",
+      "value": 0.683,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "GPT-4\n\t0.810/0.847\n\t0.705/-\n\t0.683/-\n\t0.713/0.749"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "model": "openai/gpt-4",
+      "metric": "Optimal F1",
+      "value": 0.713,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "GPT-4\n\t0.810/0.847\n\t0.705/-\n\t0.683/-\n\t0.713/0.749"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "model": "openai/gpt-4",
+      "metric": "AU-PRC",
+      "value": 0.749,
+      "unit": "score",
+      "source": {
+        "page": "Benchmark Results",
+        "table": "Benchmark Results",
+        "quote": "GPT-4\n\t0.810/0.847\n\t0.705/-\n\t0.683/-\n\t0.713/0.749"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:44:43Z"
+  },
+  "notes": "Web model card (not PDF); pageCount omitted. Seed lists only google/shieldgemma-2b; 9B and 27B are checkpoints so uses rawModelName. LlamaGuard2 (8B), WildGuard (7B), and OpenAI Mod API are not in seed. Benchmark table cells are Optimal F1/AU-PRC pairs; entries with '/-' report F1 only. Release date taken from page footer Last updated (2025-02-25), not the seed publishedDate 2024-07-31. No formal risk-framework decisions (ASL/FSF/etc.). Technical report (arxiv) is a separate seed document, not listed under this card by seed-lookup."
+}

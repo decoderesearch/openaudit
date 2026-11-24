@@ -1,0 +1,215 @@
+{
+  "document": "bytedance-seed1.5-thinking-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "bytedance/doubao-1.5-thinking-pro"
+    }
+  ],
+  "pageCount": 19,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "thinking before responding (long chain-of-thought)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "capable of reasoning through thinking before responding, resulting"
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "Chinese and English (creative-writing case studies)",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "showcase examples in both Chinese and English to demonstrate our model’s proficiency"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "200B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "featuring 20B activated\n                                           and 200B total parameters"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "20B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "featuring 20B activated\n                                           and 200B total parameters"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Mixture-of-Experts (MoE), 20B activated / 200B total",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Thinking is a Mixture-of-Experts (MoE) model with a relatively small size, featuring 20B activated"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "SFT 400k (300k verifiable + 100k non-verifiable incl. safety); RL on STEM (~100k), code, logic puzzles, and non-verifiable preference data",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "We curate an SFT data comprising 400k training instance, including 300k verifiable problems and\n100k non-verifiable problems"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "SFT model shows reduced harmfulness versus initiating reinforcement learning (RL) from a base model",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "the SFT\nmodel produces more readable outputs, exhibits fewer instances of hallucination, and demonstrates reduced\nharmfulness"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "SFT model exhibits fewer hallucinations than starting RL from a base model",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "the SFT\nmodel produces more readable outputs, exhibits fewer instances of hallucination, and demonstrates reduced\nharmfulness"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "No dedicated safety, alignment, or dangerous-capability evaluation section; safety appears only as a supervised fine-tuning (SFT) data category and brief qualitative claims about the SFT checkpoint.", "tone": "mixed",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "data are sourced from the SFT data used for Doubao-Pro 1.5 [7], covering areas such as creative writing,\nknowledge-based QA, safety, and function calling"
+      }
+    },
+    {
+      "text": "Seed-Thinking-Verifier is motivated partly to make reward hacking harder for non-thinking verifier models; this is about the reward model, not a Seed1.5-Thinking policy eval.", "tone": "neutral",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Reward Hacking: Non-thinking models may exploit loopholes to receive rewards without truly under-\n        standing the problem"
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:24:32Z"
+  },
+  "notes": "Capability-focused Seed1.5-Thinking RL technical report (arXiv:2504.13914). No safety/alignment/jailbreak/toxicity/honesty/dangerous-capability benchmark numbers. Qualitative claims only: SFT reduces hallucination and harmfulness vs base-model RL start (topics harmful_requests and hallucination). SFT mix listing “safety” is training data only—does not cover topics. Reward-hacking text is about Seed-Verifier / training interference, not a Seed1.5-Thinking behavior result—left reward_hacking uncovered. Paper Date April 10, 2025 is not a model release date. 32k token truncate is SFT training length, not stated inference context. Table 1 verifier accuracy is incomplete in the text layer (likely figure) and is not a safety eval. Skipped all capability benches in Table 2/3/4 and human preference win-rate: AIME 2024/2025, BeyondAIME, GPQA diamond, SuperGPQA, MMLU-PRO, Codeforces, LiveCodeBench v5, Aider Polyglot, SWE-bench verified, ARC-AGI, SimpleQA (factuality QA—capability), Collie, IFEval, RFT ablation, DAPO/VAPO rankings. Appendix creative-writing cases mention “safety” only as roleplay dialogue about Claude/GPT, not model evals. Covers bytedance/doubao-1.5-thinking-pro (Seed1.5-Thinking); Doubao-Pro 1.5 is only a data/preference source, not this report’s subject."
+}

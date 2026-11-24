@@ -1,0 +1,295 @@
+{
+  "document": "moonshot-kimi-k2.5-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "moonshotai/Kimi-K2.5"
+    }
+  ],
+  "pageCount": 31,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "256k tokens",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "all Kimi K2.5 evaluations use temperature = 1.0, top-p = 0.95, and a context length of 256k tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "multimodal (text and vision: image and video)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce Kimi K2.5, an open-source multimodal agentic model designed to advance general"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "thinking and instant modes",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "thinking and instant modes, chats and agents. It achieves strong performance across a broad range of agentic and"
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "1.04 trillion total parameters (Kimi K2 MoE foundation)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "The model comprises 1.04 trillion total parameters with 32 billion activated"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "32 billion activated parameters",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "The model comprises 1.04 trillion total parameters with 32 billion activated"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "MoonViT-3D + MLP projector + Kimi K2 MoE LLM; 384 experts, 8 activated per token (sparsity 48)",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "The multimodal architecture of Kimi K2.5 consists of three components: a three-dimensional native-resolution vision"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "approximately 15 trillion mixed visual and text tokens across three pre-training stages on the Kimi K2 checkpoint",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Kimi K2.5 is a native multimodal model built upon Kimi K2 through large-scale joint pre-training on approximately"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "Multiple generative reward model (GRM) rubrics used in reinforcement learning (RL) to mitigate reward hacking; Parallel-Agent Reinforcement Learning (PARL) rfinish blocks spurious parallelism reward hacking.",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "To mitigate reward hacking and overfitting to a single preference signal, we"
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "[CyberGym](/evals/cybergym) score 41.3 (difficulty level 1) on finding previously discovered vulnerabilities from a high-level weakness description.",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "41.3 on CyberGym, on the task of finding previously discovered vulnerabilities in real open-source software projects"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The report has no dedicated safety, alignment, or red-teaming section; the only dangerous-capability number is [CyberGym](/evals/cybergym) under Coding.", "tone": "mixed",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "41.3 on CyberGym, on the task of finding previously discovered vulnerabilities in real open-source software projects"
+      }
+    },
+    {
+      "text": "Caption pre-training uses strict limits on synthetic captions to mitigate hallucination, but that is a data filter, not a model-behavior eval.", "tone": "neutral",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "Caption data [49, 19] provides fundamental modality alignment, with strict limits on synthetic"
+      }
+    },
+    {
+      "text": "Weights are described as open-source / released post-trained checkpoints, but no license name is given.", "tone": "neutral",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "we open-source our"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "CyberGym",
+      "model": "moonshotai/Kimi-K2.5",
+      "metric": "score",
+      "value": 41.3,
+      "unit": "score",
+      "settings": {
+        "trials": 5,
+        "other": "difficulty level 1 (primary setting); Avg@5 coding"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 4",
+        "quote": "CyberGym                        41.3           50.6               -          39.9*           17.3*               -"
+      }
+    },
+    {
+      "rawEvalName": "CyberGym",
+      "model": "anthropic/claude-opus-4.5",
+      "metric": "score",
+      "value": 50.6,
+      "unit": "score",
+      "settings": {
+        "other": "difficulty level 1; Claude reported under non-thinking settings for this benchmark"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 4",
+        "quote": "CyberGym                        41.3           50.6               -          39.9*           17.3*               -"
+      }
+    },
+    {
+      "rawEvalName": "CyberGym",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "score",
+      "value": 39.9,
+      "unit": "score",
+      "settings": {
+        "other": "difficulty level 1; * internal re-evaluation under identical conditions"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 4",
+        "quote": "CyberGym                        41.3           50.6               -          39.9*           17.3*               -"
+      }
+    },
+    {
+      "rawEvalName": "CyberGym",
+      "model": "deepseek-ai/DeepSeek-V3.2",
+      "metric": "score",
+      "value": 17.3,
+      "unit": "score",
+      "settings": {
+        "other": "difficulty level 1; * internal re-evaluation; table column DeepSeek-V3.2 (thinking mode in baselines)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 4",
+        "quote": "CyberGym                        41.3           50.6               -          39.9*           17.3*               -"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:59:34Z"
+  },
+  "notes": "Technical report on Kimi K2.5 visual/agentic capability, not a system card. Seed-linked moonshotai/Kimi-K2.6 omitted from covers (not named in the report). Only safety-relevant eval with numbers is CyberGym (dangerous cyber capability) in Table 4; GPT-5.2 and Qwen3-VL have no CyberGym score ('-'). Skipped all general capability benches (HLE, AIME, SWE-Bench, BrowseComp, MMMU, Video-MME, OSWorld, SimpleQA Verified, etc.). No external safety testers or risk-framework decisions. Hallucination appears only as a caption-data filter. Param counts are inherited from the Kimi K2 MoE foundation described in §4.1."
+}

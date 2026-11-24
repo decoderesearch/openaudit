@@ -1,0 +1,789 @@
+{
+  "document": "qwen-qwen2-paper",
+  "alsoDocuments": ["qwen-qwen2-blog"],
+  "covers": [
+    {
+      "model": "Qwen/Qwen2-0.5B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen2-0.5B"
+    },
+    {
+      "model": "Qwen/Qwen2-1.5B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen2-1.5B"
+    },
+    {
+      "model": "Qwen/Qwen2-7B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen2-7B"
+    },
+    {
+      "model": "Qwen/Qwen2-72B-Instruct"
+    },
+    {
+      "model": "Qwen/Qwen2-72B"
+    },
+    {
+      "rawModelName": "Qwen2-57B-A14B"
+    },
+    {
+      "rawModelName": "Qwen2-57B-A14B-Instruct"
+    }
+  ],
+  "pageCount": 26,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "32,768 tokens in late pre-training; up to 131,072 tokens with YARN and Dual Chunk Attention",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "we augmented the context length from 4,096 tokens\nto 32,768 tokens during the concluding phase of pre-training."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "large language models (text); series grounded in Transformer next-token prediction",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Qwen2 is a series of LLMs, grounded in the\nTransformer architecture"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "approximately 30 languages, including English, Chinese, Spanish, French, German, Arabic, Russian, Korean, Japanese, Thai, and Vietnamese",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "This new dataset supports approximately 30 languages, such as English,\nChinese, Spanish, French, German, Arabic, Russian, Korean, Japanese, Thai, and Vietnamese."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "dense 0.5B, 1.5B, 7B, 72B; MoE 57B total (Qwen2-57B-A14B)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Our release comprises four dense models\nwith parameter counts of 0.5 billion, 1.5 billion, 7 billion, and 72 billion, plus a Mixture-of-Experts"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "14B activated per token for Qwen2-57B-A14B MoE",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "the model has 57B parameters in total and for each token 14B parameters are active"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Transformer with GQA, SwiGLU, RoPE, QKV bias, RMSNorm pre-norm; MoE with fine-grained shared/routed experts",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "We adopt Grouped Query Attention (GQA, Ainslie et al., 2023) instead\nof conventional multi-head attention (MHA)."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "over 7 trillion pre-training tokens for most dense models; 12T for Qwen2-0.5B; MoE +4.5T after upcycling; 500k+ SFT examples including safety",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "All models were pre-trained on a high-quality, large-scale dataset comprising over 7 trillion tokens,"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Multilingual safety eval reports lower harmful-response rates than GPT-4 and Mixtral-8x22B-Instruct on illegal, fraud, pornography, and privacy",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Qwen2-72B-Instruct rejected more prompts\nwith risks than the competitors."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Jailbreak-prone prompts used to test whether models reject and give safe responses",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "We have collected prompts prone to jail-breaking and use them to test\nwhether the models can provide safe responses by rejection."
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa) results used to claim smaller models do not necessarily suffer from hallucination; Qwen2-1.5B best among small models",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "In TruthfulQA, Qwen2-1.5B performs the\nbest, demonstrating that smaller models does not necessarily suffer from hallucination."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa) (0-shot) reported for all Qwen2 base sizes and comparison models",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "TruthfulQA (Lin et al., 2022a) (0-shot), ARC-C (Clark et al., 2018)"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Authors state Qwen2-72B-Instruct still has much room to improve on pornography, which they call hard even for humans.", "tone": "bad",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "be a safer and more responsible model, especially in terms of pornography, which is a conventionally\ndifficult category to differentiate even for humans."
+      }
+    },
+    {
+      "text": "Post-training aims for helpful, honest, and harmless generation via scalable alignment with minimal human annotation.", "tone": "neutral",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "making it helpful,\nhonest, and harmless. Unlike traditional methods that heavily rely on extensive human supervision,"
+      }
+    },
+    {
+      "text": "Safety and values use a constitution dataset so models produce aligned or deviant responses for demonstration and preference data.", "tone": "neutral",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "such as safety and values, a constitution dataset was compiled. This dataset delineates principles to\nbe followed and those to be avoided."
+      }
+    },
+    {
+      "text": "Instruction-tuned evaluation intro mentions multilingual safety assessments and red teaming; numeric safety results are only Table 14.", "tone": "mixed",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "Safety measures include multilingual safety assessments\nand red teaming exercises."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Mixtral-8x22B",
+      "metric": "score",
+      "value": 51,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": "TruthfulQA              51.0              45.6              59.6             49.6             54.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Llama-3-70B",
+      "metric": "score",
+      "value": 45.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": "TruthfulQA              51.0              45.6              59.6             49.6             54.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen1.5-72B",
+      "metric": "score",
+      "value": 59.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": "TruthfulQA              51.0              45.6              59.6             49.6             54.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen1.5-110B",
+      "metric": "score",
+      "value": 49.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": "TruthfulQA              51.0              45.6              59.6             49.6             54.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2-72B",
+      "metric": "score",
+      "value": 54.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "table": "Table 2",
+        "quote": "TruthfulQA              51.0              45.6              59.6             49.6             54.8"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Jamba",
+      "metric": "score",
+      "value": 46.4,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": " TruthfulQA          46.4          51.1            53.9             57.4                57.7"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Mixtral-8x7B",
+      "metric": "score",
+      "value": 51.1,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": " TruthfulQA          46.4          51.1            53.9             57.4                57.7"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "01-ai/Yi-1.5-34B",
+      "metric": "score",
+      "value": 53.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": " TruthfulQA          46.4          51.1            53.9             57.4                57.7"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen1.5-32B",
+      "metric": "score",
+      "value": 57.4,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": " TruthfulQA          46.4          51.1            53.9             57.4                57.7"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Qwen2-57B-A14B",
+      "metric": "score",
+      "value": 57.7,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 3",
+        "quote": " TruthfulQA          46.4          51.1            53.9             57.4                57.7"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Mistral-7B",
+      "metric": "score",
+      "value": 42.2,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; table header Mistral-7B; text cites Mistral-7B-v0.2"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 4",
+        "quote": "    TruthfulQA           42.2           44.8              44.0          51.1            54.2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-7b",
+      "metric": "score",
+      "value": 44.8,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 4",
+        "quote": "    TruthfulQA           42.2           44.8              44.0          51.1            54.2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Llama-3-8B",
+      "metric": "score",
+      "value": 44,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 4",
+        "quote": "    TruthfulQA           42.2           44.8              44.0          51.1            54.2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen1.5-7B",
+      "metric": "score",
+      "value": 51.1,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 4",
+        "quote": "    TruthfulQA           42.2           44.8              44.0          51.1            54.2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2-7B",
+      "metric": "score",
+      "value": 54.2,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "table": "Table 4",
+        "quote": "    TruthfulQA           42.2           44.8              44.0          51.1            54.2"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "microsoft/phi-2",
+      "metric": "score",
+      "value": 44.5,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "  TruthfulQA                    44.5          33.1               39.4          39.7         45.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-2b",
+      "metric": "score",
+      "value": 33.1,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "  TruthfulQA                    44.5          33.1               39.4          39.7         45.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen1.5-1.8B",
+      "metric": "score",
+      "value": 39.4,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "  TruthfulQA                    44.5          33.1               39.4          39.7         45.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2-0.5B",
+      "metric": "score",
+      "value": 39.7,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "  TruthfulQA                    44.5          33.1               39.4          39.7         45.9"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "Qwen/Qwen2-1.5B",
+      "metric": "score",
+      "value": 45.9,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "  TruthfulQA                    44.5          33.1               39.4          39.7         45.9"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "openai/gpt-4",
+      "metric": "proportion of harmful responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Illegal; multilingual; jailbreak-prone prompts; lower is better"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 14",
+        "quote": "               Illegal              0.00           6.87                  0.00"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "mistralai/Mixtral-8x22B-Instruct-v0.1",
+      "metric": "proportion of harmful responses",
+      "value": 6.87,
+      "unit": "percent",
+      "settings": {
+        "other": "Illegal; multilingual; jailbreak-prone prompts; lower is better; caption Mixtral-8x22B-Instruct"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 14",
+        "quote": "               Illegal              0.00           6.87                  0.00"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "Qwen/Qwen2-72B-Instruct",
+      "metric": "proportion of harmful responses",
+      "value": 0,
+      "unit": "percent",
+      "settings": {
+        "other": "Illegal; multilingual; jailbreak-prone prompts; lower is better"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 14",
+        "quote": "               Illegal              0.00           6.87                  0.00"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "openai/gpt-4",
+      "metric": "proportion of harmful responses",
+      "value": 3.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Fraud; multilingual; jailbreak-prone prompts; lower is better"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 14",
+        "quote": "               Fraud                3.40           8.49                  2.41"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "mistralai/Mixtral-8x22B-Instruct-v0.1",
+      "metric": "proportion of harmful responses",
+      "value": 8.49,
+      "unit": "percent",
+      "settings": {
+        "other": "Fraud; multilingual; jailbreak-prone prompts; lower is better; caption Mixtral-8x22B-Instruct"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 14",
+        "quote": "               Fraud                3.40           8.49                  2.41"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "Qwen/Qwen2-72B-Instruct",
+      "metric": "proportion of harmful responses",
+      "value": 2.41,
+      "unit": "percent",
+      "settings": {
+        "other": "Fraud; multilingual; jailbreak-prone prompts; lower is better"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 14",
+        "quote": "               Fraud                3.40           8.49                  2.41"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "openai/gpt-4",
+      "metric": "proportion of harmful responses",
+      "value": 23.63,
+      "unit": "percent",
+      "settings": {
+        "other": "Pornography; multilingual; jailbreak-prone prompts; lower is better"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 14",
+        "quote": "               Pornography         23.63          33.82                 22.91"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "mistralai/Mixtral-8x22B-Instruct-v0.1",
+      "metric": "proportion of harmful responses",
+      "value": 33.82,
+      "unit": "percent",
+      "settings": {
+        "other": "Pornography; multilingual; jailbreak-prone prompts; lower is better; caption Mixtral-8x22B-Instruct"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 14",
+        "quote": "               Pornography         23.63          33.82                 22.91"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "Qwen/Qwen2-72B-Instruct",
+      "metric": "proportion of harmful responses",
+      "value": 22.91,
+      "unit": "percent",
+      "settings": {
+        "other": "Pornography; multilingual; jailbreak-prone prompts; lower is better"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 14",
+        "quote": "               Pornography         23.63          33.82                 22.91"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "openai/gpt-4",
+      "metric": "proportion of harmful responses",
+      "value": 3.37,
+      "unit": "percent",
+      "settings": {
+        "other": "Privacy; multilingual; jailbreak-prone prompts; lower is better"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 14",
+        "quote": "               Privacy              3.37          15.03                  2.47"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "mistralai/Mixtral-8x22B-Instruct-v0.1",
+      "metric": "proportion of harmful responses",
+      "value": 15.03,
+      "unit": "percent",
+      "settings": {
+        "other": "Privacy; multilingual; jailbreak-prone prompts; lower is better; caption Mixtral-8x22B-Instruct"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 14",
+        "quote": "               Privacy              3.37          15.03                  2.47"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "Qwen/Qwen2-72B-Instruct",
+      "metric": "proportion of harmful responses",
+      "value": 2.47,
+      "unit": "percent",
+      "settings": {
+        "other": "Privacy; multilingual; jailbreak-prone prompts; lower is better"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 14",
+        "quote": "               Privacy              3.37          15.03                  2.47"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:51:51Z"
+  },
+  "notes": "Technical report (arXiv 2407.10671v4), not a system card. Safety-only evalResults per pilot: Table 14 multilingual safety (harmful-response %) and TruthfulQA from base Tables 2–5. Skipped capability (MMLU, coding, math, MT-Bench, Arena-Hard, AlignBench, IFEval, NeedleBench, multilingual preference Table 13, contamination Table 15). Safety SFT/RLHF/constitution methods noted in findings only; they do not cover topics. No external testers or formal risk thresholds. MoE Qwen2-57B-A14B(-Instruct) not in seed; covered as rawModelName. No named license or knowledge cutoff in the PDF."
+}

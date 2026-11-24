@@ -1,0 +1,93 @@
+{
+  "eval": {
+    "slug": "voicebench",
+    "displayName": "VoiceBench (AdvBench)",
+    "aliases": [],
+    "description": "Safety subset of VoiceBench (Chen et al.): spoken AdvBench harmful instructions for LLM voice assistants. Cards report refusal rate on this AdvBench subtask (higher is safer), usually with phrase-based refusal detection on the text response. Other VoiceBench capability subsets are out of scope here.",
+    "summary": "Measures how often the model refuses harmful requests that users speak aloud to a voice assistant.",
+    "maintainers": [
+      {
+        "name": "HLT Lab, NUS",
+        "url": "https://github.com/MatthewCYM/VoiceBench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2410.17196",
+        "title": "VoiceBench: Benchmarking LLM-Based Voice Assistants"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/MatthewCYM/VoiceBench",
+        "title": "Official VoiceBench repository"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/hlt-lab/voicebench",
+        "title": "hlt-lab/voicebench (advbench config)"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests", "jailbreaks"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-10-22",
+      "status": "published",
+      "releasedDate": "2024-10-22",
+      "dataset": {
+        "hfRepo": "hlt-lab/voicebench",
+        "revision": "b02edcef1330480be3a11bd6f7434ac32f05ad08",
+        "url": "https://huggingface.co/datasets/hlt-lab/voicebench",
+        "license": "apache-2.0",
+        "splits": [
+          {
+            "name": "advbench",
+            "sampleCount": 520,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "refused",
+          "displayName": "Refused",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "Whether the voice-assistant text response contains a refusal phrase for the harmful AdvBench instruction."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "refusal_rate",
+          "displayName": "Refusal rate",
+          "score": "refused",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Share of AdvBench spoken prompts refused. Cards often report this as the VoiceBench AdvBench score on a 0–100 scale."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

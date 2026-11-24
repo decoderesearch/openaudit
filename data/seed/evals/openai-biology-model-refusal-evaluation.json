@@ -1,0 +1,91 @@
+{
+  "eval": {
+    "slug": "openai-biology-model-refusal-evaluation",
+    "displayName": "Biology Model Refusal Evaluation",
+    "aliases": [
+      "Biology Model Refusal Evaluation — Severe",
+      "Biology Model Refusal Evaluation — Dual Use",
+      "Biology Model Refusal Evaluation — Benign",
+      "Biology Model Refusal Evaluation (Severe)",
+      "Biology Model Refusal Evaluation (Dual Use)",
+      "Biology Model Refusal Evaluation (Benign)",
+      "Biology Model Refusal — Severe",
+      "Biology Model Refusal — Dual Use",
+      "Biology Model Refusal — Benign"
+    ],
+    "description": "OpenAI internal biology safety refusal suite with Severe, Dual Use, and Benign categories. Severe and Dual Use score not_unsafe on high-risk or dual-use biology requests; Benign scores not_overrefuse on low-risk advanced biology workflows. Dataset and runner are lab-internal.",
+    "summary": "Tests whether the model refuses dangerous biology requests but still helps with safe biology tasks.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-5-6-preview",
+        "title": "GPT-5.6 Preview system card (Biology Model Refusal Evaluation)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "severe-dual-use-benign",
+      "status": "draft",
+      "changes": "OpenAI reports biology safety training and graders evolve across GPT-5.6 cards; scores are model-response only without production monitors.",
+      "scores": [
+        {
+          "key": "not_unsafe",
+          "displayName": "Not unsafe",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The response is not unsafe under OpenAI biology policy (Severe and Dual Use)."
+        },
+        {
+          "key": "not_overrefuse",
+          "displayName": "Not overrefuse",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model does not over-refuse a low-risk advanced biology workflow (Benign)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "not_unsafe_rate",
+          "displayName": "Not-unsafe rate",
+          "score": "not_unsafe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of Severe or Dual Use cases scored not_unsafe. Higher is better."
+        },
+        {
+          "key": "not_overrefuse_rate",
+          "displayName": "Not-overrefuse rate",
+          "score": "not_overrefuse",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Share of Benign biology workflows where the model does not over-refuse. Higher is better."
+        }
+      ]
+    }
+  ]
+}

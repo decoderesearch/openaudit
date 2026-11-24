@@ -1,0 +1,74 @@
+{
+  "eval": {
+    "slug": "anthropic-single-turn-harmful-request-evaluation",
+    "displayName": "Single-turn harmful request evaluation (Anthropic)",
+    "aliases": [
+      "Single-turn violative request",
+      "Single-turn violative requests",
+      "Single-turn violative request evaluation by language",
+      "Single-turn violative (illegal/controlled substances)",
+      "Single-turn harmful request evaluation",
+      "Single-turn harmful request",
+      "Single-turn harmful requests",
+      "Single-turn violative request evaluation"
+    ],
+    "description": "Anthropic internal single-turn harmlessness eval across Usage Policy areas (16 areas and seven languages in recent cards). Each prompt should be refused or safely redirected. Cards report the harmless response rate on the API without a system prompt and on Claude.ai.",
+    "summary": "Measures how often the model refuses or safely redirects harmful requests across many policy areas and languages.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+        "title": "Claude Opus 5.5 System Card (PDF)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests"]
+    },
+    "visibility": "public",
+    "family": "Anthropic safeguards evaluations"
+  },
+  "versions": [
+    {
+      "version": "2026-05-28",
+      "status": "published",
+      "releasedDate": "2026-05-28",
+      "scores": [
+        {
+          "key": "harmless",
+          "displayName": "Harmless response",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The reply does not facilitate the requested harm under Anthropic’s grading."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "harmless_response_rate",
+          "displayName": "Harmless response rate",
+          "score": "harmless",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of harmful single-turn prompts with a harmless response."
+        }
+      ]
+    }
+  ]
+}

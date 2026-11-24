@@ -1,0 +1,87 @@
+{
+  "eval": {
+    "slug": "openai-dynamic-benchmarks",
+    "displayName": "Dynamic Benchmarks with Adversarial User Simulations",
+    "aliases": [
+      "Dynamic Benchmarks with Adversarial User Simulations — Mental health",
+      "Dynamic Benchmarks with Adversarial User Simulations — Emotional reliance",
+      "Dynamic Benchmarks with Adversarial User Simulations — Self-harm",
+      "Dynamic Benchmarks with Adversarial User Simulations (Mental health)",
+      "Dynamic Benchmarks with Adversarial User Simulations (Emotional reliance)",
+      "Dynamic Benchmarks with Adversarial User Simulations (Self-harm)",
+      "Dynamic Benchmarks — Mental health",
+      "Dynamic Benchmarks — Emotional reliance",
+      "Dynamic Benchmarks — Self-harm",
+      "Dynamic Benchmarks (Mental health)",
+      "Dynamic Benchmarks (Emotional reliance)",
+      "Dynamic Benchmarks (Self-harm)",
+      "Dynamic — Mental health",
+      "Dynamic — Emotional reliance",
+      "Dynamic — Self-harm",
+      "Dynamic Mental Health Benchmarks — Mental health",
+      "Dynamic Mental Health Benchmarks — Emotional reliance",
+      "Dynamic Mental Health Benchmarks — Self-harm",
+      "Dynamic Mental Health Evaluations (mental health)",
+      "Dynamic Mental Health Evaluations (emotional reliance)",
+      "Dynamic Mental Health Evaluations (Self-harm)"
+    ],
+    "description": "OpenAI internal dynamic multi-turn safety evals where an adversarial user simulator continues the conversation based on model replies. Categories are mental health, emotional reliance, and self-harm. Unlike static multi-turn evals that score only the final reply, these score whether any assistant turn violates policy (not_unsafe / safe completion). Dataset and runner are lab-internal.",
+    "summary": "Tests whether the model stays safe across a whole conversation when a simulated user pushes on self-harm topics.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-5-4-thinking/gpt-5-4-thinking.pdf",
+        "title": "GPT-5.4 Thinking System Card (Dynamic Benchmarks)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "robustness"],
+      "formats": ["multi_turn"],
+      "cases": ["generated"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["self_harm", "harmful_requests", "manipulation"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-03-05",
+      "status": "draft",
+      "releasedDate": "2026-03-05",
+      "changes": "OpenAI reports these dynamic adversarial simulations were introduced ahead of GPT-5.3 Instant and first tabulated in the GPT-5.4 Thinking card. Policies, graders, and simulators may evolve.",
+      "scores": [
+        {
+          "key": "not_unsafe",
+          "displayName": "Not unsafe",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "An assistant turn in the dynamic conversation does not violate the relevant OpenAI policy."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "not_unsafe_rate",
+          "displayName": "Not-unsafe / safe-completion rate",
+          "score": "not_unsafe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of assistant messages scored not_unsafe across the dynamic conversation (also reported as safe). Higher is better. Per category."
+        }
+      ]
+    }
+  ]
+}

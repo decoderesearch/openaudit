@@ -1,0 +1,224 @@
+{
+  "document": "nvidia-llama-nemotron-paper-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1"
+    },
+    {
+      "model": "nvidia/Llama-3_3-Nemotron-Super-49B-v1"
+    },
+    {
+      "model": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1"
+    },
+    {
+      "rawModelName": "Llama-3.1-Nemotron-Ultra-253B-CPT-v1"
+    }
+  ],
+  "pageCount": 24,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "128K tokens",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "delivering strong reasoning performance and a context length of 128K tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (language / reasoning models)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce the Llama-Nemotron series of models, an open family of heterogeneous reasoning"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "dynamic reasoning toggle via system prompt \"detailed thinking on/off\" (standard chat vs reasoning)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "at inference time using a lightweight system prompt: \"detailed thinking on/off\"."
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "stated",
+      "value": "NVIDIA Open Model License Agreement",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "the commercially permissive NVIDIA Open Model License Agreement."
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "Nano 8B, Super 49B, Ultra 253B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "The family comes in three sizes—Nano (8B), Super (49B), and Ultra (253B)—"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Puzzle NAS from Llama 3 Instruct (heterogeneous transformer blocks); FFN Fusion for Ultra; derived from Llama 3.3-70B-Instruct (Super) and Llama 3.1-405B-Instruct (Ultra)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Puzzle is a neural architecture search (NAS) framework that transforms\nlarge language models into hardware-efficient variants under real-world deployment constraints, as"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Llama-Nemotron-Post-Training-Dataset (~33M samples: math, code, science, chat, instruction following, safety); Ultra also continued-pretrained on Nemotron-H phase 4 data",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "we also open-source the Llama-Nemotron-Post-Training-Dataset, a carefully\ncurated dataset used during the supervised and reinforcement learning stages of training for LN-Nano,\nLN-Super, and LN-Ultra."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "approximately 140k H100 hours for LN-Ultra reasoning RL",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "the whole training takes approximately 140k H100 hours."
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Safety appears only as supervised fine-tuning (SFT) training data (31,426 samples, 0.10% of the post-training mix) from public permissive safety datasets; the report gives no safety benchmark scores or risk decisions for the released models.", "tone": "mixed",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Safety                             31,426            0.10%"
+      }
+    },
+    {
+      "text": "Contributors list an \"Evaluations and Safety\" team, but the paper body has no dedicated safety evaluation section.", "tone": "mixed",
+      "source": {
+        "page": "18",
+        "pdfPage": 18,
+        "quote": "Evaluations and Safety\nSoumye Singhal*, Denys Fridman, Erick Galinkin, Michael Evans, Shaona Ghosh, Katherine Luna,"
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:24:34Z"
+  },
+  "notes": "Capability-only technical report (reasoning/chat). Skipped all capability tables (GPQA-Diamond, AIME24/25, MATH500, LiveCodeBench, BFCL V2 Live, IFEval, Arena-Hard) and JudgeBench (LLM-as-a-judge; pilot skips reward/judge benches). No safety/alignment/refusal/jailbreak/dangerous-capability scores found. Safety training mix does not cover topics per pilot rules. Artificial Analysis ranking is capability, not a safety tester."
+}

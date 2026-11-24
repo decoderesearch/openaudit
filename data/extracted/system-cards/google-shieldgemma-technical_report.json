@@ -1,0 +1,1018 @@
+{
+  "document": "google-shieldgemma-technical_report",
+  "alsoDocuments": ["google-gemma-2-2b-blog"],
+  "covers": [
+    {
+      "model": "google/shieldgemma-2b"
+    },
+    {
+      "model": "google/shieldgemma-9b"
+    },
+    {
+      "model": "google/shieldgemma-27b"
+    }
+  ],
+  "pageCount": 11,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "8k (training max sequence)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "with batch size of 16, a max sequence of 8𝑘, and a"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (user input and LLM-generated output moderation)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "harm types (sexually explicit, dangerous content, harassment, hate speech) in both user input and"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "language to be English only to generate a list"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "2B, 9B, and 27B",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Instruction-Tuned (IT) models (2B, 9B, and 27B"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "SFT of Gemma2 Instruction-Tuned models; Yes/No token classification",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "We further supervise fine-tune (SFT) Gemma2"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Primarily synthetic data plus Anthropic HH-RLHF; downsampled to 10,500 training examples",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Our training data is primarily synthetic, gener-"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "TPUv5 lite, batch size 16, 4k steps, learning rate 1e-6",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Our models are trained on TPUv5 lite"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Predicts safety risks for sexually explicit, dangerous content, harassment, and hate speech in user input and model output",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "sexually explicit, dangerous content, harassment, hate speech) in both user input and"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Dangerous Content policy includes instructions for suicide",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "instructions for suicide)."
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Counterfactual fairness expansion across identity categories; residual fairness label discrepancies noted",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "To improve fairness of our model, we leverage"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "On external benchmarks, SG-9B reports 10.8% higher average area under the precision-recall curve (AU-PRC) than LlamaGuard1 with similar size and training data volume.", "tone": "good",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "SG-9B achieves a 10.8% higher average"
+      }
+    },
+    {
+      "text": "SG-9B F1 exceeds [WildGuard](https://arxiv.org/abs/2406.18495) by 4.3% and GPT-4 by 6.4% on the reported comparison.", "tone": "good",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "4.3% and 6.4%, respectively."
+      }
+    },
+    {
+      "text": "On external benchmarks, 9B/27B average AU-PRC is 1.2%/1.7% higher than the 2B model.", "tone": "good",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "ing on average a 1.2%/1.7% higher AU-PRC than"
+      }
+    },
+    {
+      "text": "In zero-shot use, GPT-4 confuses harm types: 76% of hate-speech points were classified positive for harassment.", "tone": "neutral",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "For example 76%"
+      }
+    },
+    {
+      "text": "Authors advise scoring mode only (Yes/No token scores), not chat use, because the model can produce unethical or unsafe content without safety instruction-tuning.", "tone": "mixed",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "it solely for generating Yes/No token scores"
+      }
+    },
+    {
+      "text": "While trained on six harms, reported performance is only for four targeted harms (hate, dangerous, sexual, harassment).", "tone": "mixed",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "we report performance only on the four"
+      }
+    },
+    {
+      "text": "Fairness counterfactual expansion still leaves possible label discrepancies when identity groups are swapped, linked to pre-training bias.", "tone": "mixed",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Fairness: While we have implemented fairness"
+      }
+    },
+    {
+      "text": "Figure 3 (harm-type AU-PRC charts) has no readable numeric values in the text layer; numbers were not extracted.", "tone": "mixed",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "Figure 3 | Harm Type level performance (AU-PRC) for our test dataset SG Prompt (left) and SG"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "SG Prompt",
+      "metric": "Optimal F1",
+      "value": 0.825,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (2B)                           0.825/0.887                   0.812/0.887               0.704/0.778                  0.743/0.802"
+      },
+      "model": "google/shieldgemma-2b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "metric": "AU-PRC",
+      "value": 0.887,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (2B)                           0.825/0.887                   0.812/0.887               0.704/0.778                  0.743/0.802"
+      },
+      "model": "google/shieldgemma-2b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "metric": "Optimal F1",
+      "value": 0.812,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (2B)                           0.825/0.887                   0.812/0.887               0.704/0.778                  0.743/0.802"
+      },
+      "model": "google/shieldgemma-2b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "metric": "AU-PRC",
+      "value": 0.887,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (2B)                           0.825/0.887                   0.812/0.887               0.704/0.778                  0.743/0.802"
+      },
+      "model": "google/shieldgemma-2b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "Optimal F1",
+      "value": 0.704,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (2B)                           0.825/0.887                   0.812/0.887               0.704/0.778                  0.743/0.802"
+      },
+      "model": "google/shieldgemma-2b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "AU-PRC",
+      "value": 0.778,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (2B)                           0.825/0.887                   0.812/0.887               0.704/0.778                  0.743/0.802"
+      },
+      "model": "google/shieldgemma-2b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "metric": "Optimal F1",
+      "value": 0.743,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (2B)                           0.825/0.887                   0.812/0.887               0.704/0.778                  0.743/0.802"
+      },
+      "model": "google/shieldgemma-2b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "metric": "AU-PRC",
+      "value": 0.802,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (2B)                           0.825/0.887                   0.812/0.887               0.704/0.778                  0.743/0.802"
+      },
+      "model": "google/shieldgemma-2b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "metric": "Optimal F1",
+      "value": 0.828,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (9B)                           0.828/0.894                   0.821/0.907               0.694/0.782                  0.753/0.817"
+      },
+      "model": "google/shieldgemma-9b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "metric": "AU-PRC",
+      "value": 0.894,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (9B)                           0.828/0.894                   0.821/0.907               0.694/0.782                  0.753/0.817"
+      },
+      "model": "google/shieldgemma-9b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "metric": "Optimal F1",
+      "value": 0.821,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (9B)                           0.828/0.894                   0.821/0.907               0.694/0.782                  0.753/0.817"
+      },
+      "model": "google/shieldgemma-9b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "metric": "AU-PRC",
+      "value": 0.907,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (9B)                           0.828/0.894                   0.821/0.907               0.694/0.782                  0.753/0.817"
+      },
+      "model": "google/shieldgemma-9b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "Optimal F1",
+      "value": 0.694,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (9B)                           0.828/0.894                   0.821/0.907               0.694/0.782                  0.753/0.817"
+      },
+      "model": "google/shieldgemma-9b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "AU-PRC",
+      "value": 0.782,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (9B)                           0.828/0.894                   0.821/0.907               0.694/0.782                  0.753/0.817"
+      },
+      "model": "google/shieldgemma-9b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "metric": "Optimal F1",
+      "value": 0.753,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (9B)                           0.828/0.894                   0.821/0.907               0.694/0.782                  0.753/0.817"
+      },
+      "model": "google/shieldgemma-9b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "metric": "AU-PRC",
+      "value": 0.817,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (9B)                           0.828/0.894                   0.821/0.907               0.694/0.782                  0.753/0.817"
+      },
+      "model": "google/shieldgemma-9b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "metric": "Optimal F1",
+      "value": 0.83,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (27B)                          0.830/0.883                   0.805/0.886               0.729/0.811                  0.758/0.806"
+      },
+      "model": "google/shieldgemma-27b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "metric": "AU-PRC",
+      "value": 0.883,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (27B)                          0.830/0.883                   0.805/0.886               0.729/0.811                  0.758/0.806"
+      },
+      "model": "google/shieldgemma-27b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "metric": "Optimal F1",
+      "value": 0.805,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (27B)                          0.830/0.883                   0.805/0.886               0.729/0.811                  0.758/0.806"
+      },
+      "model": "google/shieldgemma-27b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "metric": "AU-PRC",
+      "value": 0.886,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (27B)                          0.830/0.883                   0.805/0.886               0.729/0.811                  0.758/0.806"
+      },
+      "model": "google/shieldgemma-27b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "Optimal F1",
+      "value": 0.729,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (27B)                          0.830/0.883                   0.805/0.886               0.729/0.811                  0.758/0.806"
+      },
+      "model": "google/shieldgemma-27b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "AU-PRC",
+      "value": 0.811,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (27B)                          0.830/0.883                   0.805/0.886               0.729/0.811                  0.758/0.806"
+      },
+      "model": "google/shieldgemma-27b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "metric": "Optimal F1",
+      "value": 0.758,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (27B)                          0.830/0.883                   0.805/0.886               0.729/0.811                  0.758/0.806"
+      },
+      "model": "google/shieldgemma-27b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "metric": "AU-PRC",
+      "value": 0.806,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    ShieldGemma (27B)                          0.830/0.883                   0.805/0.886               0.729/0.811                  0.758/0.806"
+      },
+      "model": "google/shieldgemma-27b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "metric": "Optimal F1",
+      "value": 0.782,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    OpenAI Mod API                             0.782/0.840                   0.790/0.856               0.254/0.588                  -"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "metric": "AU-PRC",
+      "value": 0.84,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    OpenAI Mod API                             0.782/0.840                   0.790/0.856               0.254/0.588                  -"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "metric": "Optimal F1",
+      "value": 0.79,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    OpenAI Mod API                             0.782/0.840                   0.790/0.856               0.254/0.588                  -"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "metric": "AU-PRC",
+      "value": 0.856,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    OpenAI Mod API                             0.782/0.840                   0.790/0.856               0.254/0.588                  -"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "Optimal F1",
+      "value": 0.254,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    OpenAI Mod API                             0.782/0.840                   0.790/0.856               0.254/0.588                  -"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "AU-PRC",
+      "value": 0.588,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    OpenAI Mod API                             0.782/0.840                   0.790/0.856               0.254/0.588                  -"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "metric": "Optimal F1",
+      "value": 0.758,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    LlamaGuard1 (7B)                           -                             0.758/0.847               0.616/0.626                  -"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "metric": "AU-PRC",
+      "value": 0.847,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    LlamaGuard1 (7B)                           -                             0.758/0.847               0.616/0.626                  -"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "Optimal F1",
+      "value": 0.616,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    LlamaGuard1 (7B)                           -                             0.758/0.847               0.616/0.626                  -"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "AU-PRC",
+      "value": 0.626,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    LlamaGuard1 (7B)                           -                             0.758/0.847               0.616/0.626                  -"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "metric": "Optimal F1",
+      "value": 0.761,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    LlamaGuard2 (8B)                           -                             0.761/-                   0.471/-                      -"
+      },
+      "rawModelName": "LlamaGuard2 (8B)",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "Optimal F1",
+      "value": 0.471,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    LlamaGuard2 (8B)                           -                             0.761/-                   0.471/-                      -"
+      },
+      "rawModelName": "LlamaGuard2 (8B)",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "metric": "Optimal F1",
+      "value": 0.779,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    WildGuard (7B)                             0.779/-                       0.721/-                   0.708/-                      0.656/-"
+      },
+      "rawModelName": "WildGuard (7B)",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "metric": "Optimal F1",
+      "value": 0.721,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    WildGuard (7B)                             0.779/-                       0.721/-                   0.708/-                      0.656/-"
+      },
+      "rawModelName": "WildGuard (7B)",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "Optimal F1",
+      "value": 0.708,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    WildGuard (7B)                             0.779/-                       0.721/-                   0.708/-                      0.656/-"
+      },
+      "rawModelName": "WildGuard (7B)",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "metric": "Optimal F1",
+      "value": 0.656,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    WildGuard (7B)                             0.779/-                       0.721/-                   0.708/-                      0.656/-"
+      },
+      "rawModelName": "WildGuard (7B)",
+      "settings": {
+        "other": "α=0, T=1 for probabilities (Table 1 caption)"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "metric": "Optimal F1",
+      "value": 0.81,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    GPT-4                                      0.810/0.847                   0.705/-                   0.683/-                      0.713/0.749"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "model=gpt-4-0613; α=0, T=1 for probabilities"
+      }
+    },
+    {
+      "rawEvalName": "SG Prompt",
+      "metric": "AU-PRC",
+      "value": 0.847,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    GPT-4                                      0.810/0.847                   0.705/-                   0.683/-                      0.713/0.749"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "model=gpt-4-0613; α=0, T=1 for probabilities"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Mod",
+      "metric": "Optimal F1",
+      "value": 0.705,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    GPT-4                                      0.810/0.847                   0.705/-                   0.683/-                      0.713/0.749"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "model=gpt-4-0613; α=0, T=1 for probabilities"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "Optimal F1",
+      "value": 0.683,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    GPT-4                                      0.810/0.847                   0.705/-                   0.683/-                      0.713/0.749"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "model=gpt-4-0613; α=0, T=1 for probabilities"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "metric": "Optimal F1",
+      "value": 0.713,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    GPT-4                                      0.810/0.847                   0.705/-                   0.683/-                      0.713/0.749"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "model=gpt-4-0613; α=0, T=1 for probabilities"
+      }
+    },
+    {
+      "rawEvalName": "SG Response",
+      "metric": "AU-PRC",
+      "value": 0.749,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 1",
+        "quote": "    GPT-4                                      0.810/0.847                   0.705/-                   0.683/-                      0.713/0.749"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "model=gpt-4-0613; α=0, T=1 for probabilities"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:54:01Z"
+  },
+  "notes": "Technical report (arXiv:2407.21772), not a system card. Guard-model exception applied: content-moderation AU-PRC/F1 results included. Figure 3 harm-type AU-PRC is chart-only with no numbers in the text layer; skipped. No formal risk framework/ASL/CCL decisions. July 2024 is paper header date, not stated model release date. 8k is training max sequence, not an explicit product context-window claim. Capability benchmarks absent (no SimpleQA etc.). Comparison deltas (10.8%, 4.3%, 6.4%, 1.2%/1.7%) put in findings, not evalResults. Seed alsoDocuments google-gemma-2-2b-blog not fetched per instructions."
+}

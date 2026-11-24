@@ -1,0 +1,413 @@
+{
+  "document": "tii-falcon-mamba-paper",
+  "alsoDocuments": ["tii-falcon-mamba-blog"],
+  "covers": [
+    {
+      "model": "tiiuae/falcon-mamba-7b"
+    }
+  ],
+  "pageCount": 12,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "8k context length (training; medium)",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "featuring rather medium 8k context length."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (base large language model)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "we present Falcon Mamba 7B, a new base large language"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English focus; multilingual data excluded from pre-training",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "we exclude multilingual data from the pre-training corpus."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Falcon Mamba 7B TII License (permissive Apache 2.0-based)",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "Falcon Mamba 7B TII License 5 , a permissive Apache 2.0-based software license which includes an"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7.27B",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "7.27B     64        4096          2            65024           False          4          16              16"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "pure Mamba (State Space Language Model)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "a base (pre-trained) model with pure mamba architecture"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "5.8 trillion tokens; mostly Falcon2-11B data (RefinedWeb, curated, code, math; Fineweb-Edu, Cosmopedia, instruction in decay)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "on 5.8 trillion tokens with carefully selected data mixtures."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa)-0: FalconMamba-7B 53.4 (best among compared models on HF Leaderboard v1 table)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "FalconMamba-7B*                 62.03        80.82          62.11         73.64               53.42"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The report has no dedicated safety section; the only truthfulness-related number is [TruthfulQA](/evals/truthfulqa) on HF Leaderboard v1.", "tone": "mixed",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Table 2: Model Performance on HF Leaderboard v1 tasks: bold (best), underline (second best)"
+      }
+    },
+    {
+      "text": "Weights are released under a TII license that includes an acceptable use policy for responsible AI use.", "tone": "neutral",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "acceptable use policy 6 that promotes the responsible use of AI."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "RWKV-v6-Finch-7B",
+      "metric": "score",
+      "value": 42.19,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; internal evaluation (*)",
+        "harness": "lm-evaluation-harness / lighteval (internal)"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 2",
+        "quote": "RWKV-v6-Finch-7B*               43.86        75.19          41.69         68.27               42.19"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "RWKV-v6-Finch-14B",
+      "metric": "score",
+      "value": 45.45,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; internal evaluation (*)",
+        "harness": "lm-evaluation-harness / lighteval (internal)"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 2",
+        "quote": "RWKV-v6-Finch-14B*              47.44        78.86          52.33         71.27               45.45"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "tiiuae/falcon-11B",
+      "metric": "score",
+      "value": 52.56,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; HF Leaderboard v1"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 2",
+        "quote": "Falcon2-11B                     59.73        82.91          58.37         78.30               52.56"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Meta-Llama-3-8B",
+      "metric": "score",
+      "value": 42.93,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; HF Leaderboard v1"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 2",
+        "quote": "Meta-llama-3-8B                 60.24        82.23          66.70         78.45               42.93"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-3.1-8B",
+      "metric": "score",
+      "value": 44.29,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; HF Leaderboard v1"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 2",
+        "quote": "Meta-llama-3.1-8B               58.53        82.13          66.43         74.35               44.29"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "mistralai/Mistral-7B-v0.1",
+      "metric": "score",
+      "value": 42.15,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; HF Leaderboard v1"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 2",
+        "quote": "Mistral-7B-v0.1                 59.98        83.31          64.16         78.37               42.15"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "mistralai/Mistral-Nemo-Base-2407",
+      "metric": "score",
+      "value": 49.14,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; HF Leaderboard v1; table label Mistral-Nemo-Base-2407 (12B)"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 2",
+        "quote": "Mistral-Nemo-Base-2407 (12B)    57.94        82.82          64.43         73.72               49.14"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "google/gemma-7b",
+      "metric": "score",
+      "value": 44.79,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; HF Leaderboard v1"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 2",
+        "quote": "Gemma-7B                        61.09        82.20          64.56         79.01               44.79"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "RecurrentGemma-9b",
+      "metric": "score",
+      "value": 38.6,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; from paper or model card (**)"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 2",
+        "quote": "RecurrentGemma-9b**             52.00        80.40          60.50         73.60               38.60"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Zyphra/Zamba-7B-v1",
+      "metric": "score",
+      "value": 52.88,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; internal evaluation (*)",
+        "harness": "lm-evaluation-harness / lighteval (internal)"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 2",
+        "quote": "Zyphra/Zamba-7B-v1*             56.14        82.23          58.11         79.87               52.88"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "TRI-ML/mamba-7b-rw",
+      "metric": "score",
+      "value": 32.08,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; internal evaluation (*)",
+        "harness": "lm-evaluation-harness / lighteval (internal)"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 2",
+        "quote": "TRI-ML/mamba-7b-rw*             51.25        80.85          33.41         71.11               32.08"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "tiiuae/falcon-mamba-7b",
+      "metric": "score",
+      "value": 53.42,
+      "unit": "percent",
+      "settings": {
+        "other": "0-shot; internal evaluation (*)",
+        "harness": "lm-evaluation-harness / lighteval (internal)"
+      },
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 2",
+        "quote": "FalconMamba-7B*                 62.03        80.82          62.11         73.64               53.42"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:43:43Z"
+  },
+  "notes": "Technical report (arXiv:2410.05355), not a system card. No safety, red-team, jailbreak, or dangerous-capability section. Only safety-adjacent eval is TruthfulQA-0 in Table 2 (HF Leaderboard v1); paper does not name MC2, so metric is score. Skipped all other Table 2/3 capability scores (ARC, HellaSwag, MMLU, Winogrande, GSM8K, IFEval, BBH, Math-Lvl5, GPQA, MuSR, MMLU-PRO) and throughput/memory figures. Seed-linked tiiuae/falcon-mamba-7b-instruct omitted from covers: report is only about the base Falcon Mamba 7B (HF falcon-mamba-7b). Pre-decay results attributed to the same checkpoint id with settings.other. 256 H100 training hardware noted but left out of trainingCompute (no FLOPs). Acceptable-use policy is license text only, not a topic coverage claim. Pre-decay checkpoint row skipped (not a released model)."
+}

@@ -1,0 +1,757 @@
+{
+  "method": {
+    "slug": "sparse-autoencoders",
+    "displayName": "Sparse Autoencoders",
+    "group": "white_box",
+    "summary": "A sparse autoencoder (SAE) splits a model's activations into many latents. Each latent should be one concept that a person can read.",
+    "tagline": "Split activations into concepts a person can read.",
+    "expertSummary": "Experts agree that SAEs can find unexpected things and help some audits. They also agree that simple probes beat SAEs on known concepts. They differ on how much SAEs matter: one lab uses them to watch training, another paused basic SAE research.",
+    "safetyUse": "An SAE could help an auditor see what a model represents: find a concept in the activations, remove it, or explain a behavior. Its main strength is open search: it can show concepts that nobody thought to look for. Anthropic used SAE features to flag concerning episodes during the training of its models, and auditors used them to find a hidden goal in a test model. To detect a concept that you already know, a linear probe is usually better and cheaper.\n\nSAEBench tests these jobs on small open models. Only **Unlearning** is a direct safety task: it removes hazardous biology knowledge (WMDP-bio). **SCR** and **TPP** test concept removal (for example, gender from a profession classifier). **Sparse probing** tests concept detection. The other evals test proxies: reconstruction (Core), clean concepts (Absorption, RAVEL) and readable latents (AutoInterp).\n\n**SynthSAEBench** tests the architecture on synthetic data where the true features are known: does the SAE find them?",
+    "caveats": [
+      "Good reconstruction and readable latents do not prove that an SAE found the model's real features.",
+      "Compare SAEs only at the same sparsity (L0) and width. A denser SAE reconstructs better but is harder to read.",
+      "The models are small: Gemma-2-2B at layer 12 and Pythia-160M at layer 8. Results can be different on frontier models.",
+      "Unlearning and RAVEL have results for Gemma-2-2B only. On Unlearning, the paper found no clear winner.",
+      "The raw activations and PCA baselines have results for Gemma-2-2B only. The ICA Lens baseline has results on SynthSAEBench only.",
+      "ICA Lens has 768 directions, one for each dimension. Its SynthSAEBench MCC is the mean over 768 matched pairs, and an SAE's is over 4,096. Thus its MCC is not comparable with an SAE's.",
+      "Each SAE was trained once. Small differences between architectures can be noise."
+    ],
+    "params": [
+      {
+        "key": "width",
+        "label": "Width",
+        "type": "integer",
+        "unit": "latents"
+      },
+      { "key": "trainingTokens", "label": "Training tokens", "type": "number" },
+      {
+        "key": "trainingSamples",
+        "label": "Training samples",
+        "type": "number"
+      },
+      {
+        "key": "targetL0",
+        "label": "Target L0",
+        "type": "integer",
+        "unit": "latents"
+      },
+      { "key": "seed", "label": "Seed", "type": "integer" },
+      { "key": "dtype", "label": "Data type", "type": "string" },
+      {
+        "key": "normalizeActivations",
+        "label": "Normalized activations",
+        "type": "string"
+      },
+      { "key": "prependBos", "label": "Prepends BOS", "type": "boolean" },
+      {
+        "key": "contextSize",
+        "label": "Context size",
+        "type": "integer",
+        "unit": "tokens"
+      },
+      {
+        "key": "batchSize",
+        "label": "Batch size",
+        "type": "number",
+        "unit": "samples"
+      },
+      {
+        "key": "learningRate",
+        "label": "Learning rate",
+        "type": "number"
+      },
+      {
+        "key": "lrSchedule",
+        "label": "Learning rate schedule",
+        "type": "string"
+      },
+      {
+        "key": "decoderInitNorm",
+        "label": "Decoder init norm",
+        "type": "number",
+        "description": "The norm of each decoder row at the start of training."
+      },
+      {
+        "key": "auxLossCoefficient",
+        "label": "Aux loss coefficient",
+        "type": "number",
+        "description": "The weight of the extra loss that trains dead latents again."
+      },
+      {
+        "key": "l0Autotune",
+        "label": "Sparsity penalty auto-tuned",
+        "type": "boolean",
+        "description": "The sparsity penalty changes during training, so the L0 goes to the target L0."
+      }
+    ],
+    "compare": {
+      "groupBy": ["sites", "width"]
+    },
+    "links": [
+      {
+        "kind": "blog",
+        "url": "https://www.alignmentforum.org/posts/z6QQJbtpkEAX3Aojj/interim-research-report-taking-features-out-of-superposition",
+        "title": "Sharkey, Braun and Millidge (2022), [Interim research report] Taking features out of superposition with sparse autoencoders"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2309.08600",
+        "title": "Cunningham et al. (2023), Sparse Autoencoders Find Highly Interpretable Features in Language Models"
+      },
+      {
+        "kind": "paper",
+        "url": "https://transformer-circuits.pub/2023/monosemantic-features/index.html",
+        "title": "Bricken et al. (2023), Towards Monosemanticity: Decomposing Language Models With Dictionary Learning"
+      },
+      {
+        "kind": "paper",
+        "url": "https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html",
+        "title": "Templeton et al. (2024), Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2406.04093",
+        "title": "Gao et al. (2024), Scaling and evaluating sparse autoencoders"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2408.05147",
+        "title": "Lieberum et al. (2024), Gemma Scope: Open Sparse Autoencoders Everywhere All At Once on Gemma 2"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2501.17148",
+        "title": "Wu et al. (2025), AxBench: Steering LLMs? Even Simple Baselines Outperform Sparse Autoencoders"
+      },
+      {
+        "kind": "blog",
+        "url": "https://deepmind.google/blog/gemma-scope-2-helping-the-ai-safety-community-deepen-understanding-of-complex-language-model-behavior/",
+        "title": "Google DeepMind (2025), Gemma Scope 2: Helping the AI Safety Community Deepen Understanding of Complex Language Model Behavior"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/decoderesearch/SAELens",
+        "title": "SAELens: a library to train and analyze SAEs"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www.neuronpedia.org",
+        "title": "Neuronpedia: browse and test the features of open SAEs"
+      }
+    ]
+  },
+  "variants": [
+    {
+      "slug": "relu",
+      "displayName": "ReLU",
+      "aliases": ["Standard", "standard", "relu"],
+      "access": "white_box",
+      "summary": "A ReLU encoder with an L1 penalty that keeps few latents active. The penalty sets the sparsity only indirectly, and it makes active latents too small (shrinkage).",
+      "baseline": false,
+      "params": [
+        {
+          "key": "l1Coefficient",
+          "label": "L1 coefficient",
+          "type": "number",
+          "description": "The weight of the L1 penalty at the start of training."
+        },
+        {
+          "key": "l1WarmUpSteps",
+          "label": "L1 warm-up steps",
+          "type": "integer",
+          "description": "The steps in which the L1 penalty increases from 0 to its full weight."
+        }
+      ],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2309.08600",
+          "title": "Cunningham et al., Sparse Autoencoders Find Highly Interpretable Features in Language Models"
+        },
+        {
+          "kind": "paper",
+          "url": "https://transformer-circuits.pub/2023/monosemantic-features/index.html",
+          "title": "Bricken et al., Towards Monosemanticity: Decomposing Language Models With Dictionary Learning"
+        },
+        {
+          "kind": "blog",
+          "url": "https://transformer-circuits.pub/2024/april-update/index.html#training-saes",
+          "title": "Anthropic, Circuits Updates (April 2024): Update on how we train SAEs"
+        }
+      ]
+    },
+    {
+      "slug": "topk",
+      "displayName": "TopK",
+      "aliases": ["TopK", "topk"],
+      "access": "white_box",
+      "summary": "Keeps the k largest latents for each token and sets the others to zero. You set the sparsity (L0) directly, with no L1 penalty, so active latents do not shrink.",
+      "baseline": false,
+      "params": [],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2406.04093",
+          "title": "Gao et al., Scaling and evaluating sparse autoencoders"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/openai/sparse_autoencoder",
+          "title": "OpenAI sparse_autoencoder code"
+        }
+      ]
+    },
+    {
+      "slug": "batchtopk",
+      "displayName": "BatchTopK",
+      "aliases": ["BatchTopK", "batch_topk", "btk"],
+      "access": "white_box",
+      "summary": "Keeps the largest latents across a whole batch, k for each token on average. A hard token can use more latents and an easy token fewer. After training, one fixed threshold replaces the batch step.",
+      "baseline": false,
+      "params": [],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2412.06410",
+          "title": "Bussmann et al., BatchTopK Sparse Autoencoders"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/bartbussmann/BatchTopK",
+          "title": "BatchTopK code"
+        }
+      ]
+    },
+    {
+      "slug": "jumprelu",
+      "displayName": "JumpReLU",
+      "aliases": ["JumpRelu", "jumprelu", "jump_relu"],
+      "access": "white_box",
+      "summary": "Each latent has a learned threshold and is zero below it. Training penalizes the L0 directly, not an L1 proxy, so active latents do not shrink.",
+      "baseline": false,
+      "params": [
+        {
+          "key": "jumpreluBandwidth",
+          "label": "Bandwidth",
+          "type": "number",
+          "description": "The width of the kernel that estimates the gradient of the threshold step."
+        },
+        {
+          "key": "jumpreluInitThreshold",
+          "label": "Initial threshold",
+          "type": "number"
+        },
+        {
+          "key": "l0Coefficient",
+          "label": "L0 coefficient",
+          "type": "number",
+          "description": "The weight of the L0 penalty at the start of training."
+        }
+      ],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2407.14435",
+          "title": "Rajamanoharan et al., Jumping Ahead: Improving Reconstruction Fidelity with JumpReLU Sparse Autoencoders"
+        }
+      ]
+    },
+    {
+      "slug": "gated",
+      "displayName": "Gated",
+      "aliases": ["GatedSAE", "gated"],
+      "access": "white_box",
+      "summary": "One path decides which latents are active, and a second path sets how large they are. The L1 penalty applies only to the first path, so active latents do not shrink.",
+      "baseline": false,
+      "params": [],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2404.16014",
+          "title": "Rajamanoharan et al., Improving Dictionary Learning with Gated Sparse Autoencoders"
+        }
+      ]
+    },
+    {
+      "slug": "p-anneal",
+      "displayName": "P-Anneal",
+      "aliases": ["PAnneal", "p_anneal"],
+      "access": "white_box",
+      "summary": "A ReLU encoder with an Lp sparsity penalty. During training, p goes down from 1 (L1) to below 1, closer to L0.",
+      "baseline": false,
+      "params": [],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2408.00113",
+          "title": "Karvonen et al., Measuring Progress in Dictionary Learning for Language Model Interpretability with Board Game Models"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/saprmarks/dictionary_learning/blob/main/dictionary_learning/trainers/p_anneal.py",
+          "title": "P-Anneal trainer in dictionary_learning"
+        }
+      ]
+    },
+    {
+      "slug": "matryoshka-batchtopk",
+      "displayName": "Matryoshka BatchTopK",
+      "aliases": ["MatryoshkaBatchTopK", "matryoshka_batch_topk", "mat"],
+      "access": "white_box",
+      "summary": "Trains nested groups of latents with BatchTopK sparsity: the first group must reconstruct the input alone, then the first two groups, and so on. Early latents learn general concepts and later latents specific ones, which is designed to reduce feature absorption.",
+      "baseline": false,
+      "params": [
+        {
+          "key": "matryoshkaWidths",
+          "label": "Nested widths",
+          "type": "string",
+          "unit": "latents",
+          "description": "The size of each nested group of latents, from the first group to all latents."
+        }
+      ],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2503.17547",
+          "title": "Bussmann et al., Learning Multi-Level Features with Matryoshka Sparse Autoencoders"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/saprmarks/dictionary_learning/blob/main/dictionary_learning/trainers/matryoshka_batch_top_k.py",
+          "title": "Matryoshka BatchTopK trainer in dictionary_learning"
+        }
+      ]
+    },
+    {
+      "slug": "matching-pursuit",
+      "displayName": "Matching Pursuit",
+      "aliases": ["MatchingPursuit", "matching_pursuit", "mp"],
+      "access": "white_box",
+      "summary": "Picks latents one at a time: each step takes the latent that best matches what is still unexplained, then subtracts it. It is designed to find hierarchical features.",
+      "baseline": false,
+      "params": [
+        {
+          "key": "residualThreshold",
+          "label": "Residual threshold",
+          "type": "number",
+          "description": "Picking stops when the unexplained part is smaller than this."
+        }
+      ],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2506.03093",
+          "title": "Costa et al., From Flat to Hierarchical: Extracting Sparse Representations with Matching Pursuit"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/mpsae/MP-SAE",
+          "title": "MP-SAE code"
+        }
+      ]
+    },
+    {
+      "slug": "raw-activations",
+      "displayName": "Raw Activations",
+      "aliases": ["identity", "identity_sae"],
+      "access": "white_box",
+      "summary": "No SAE: each dimension of the model's activations is a latent. A reference with no training.",
+      "baseline": true,
+      "params": [],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2503.09532",
+          "title": "Karvonen et al., SAEBench: A Comprehensive Benchmark for Sparse Autoencoders in Language Model Interpretability"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/adamkarvonen/SAEBench/blob/main/sae_bench/custom_saes/identity_sae.py",
+          "title": "SAEBench identity baseline code"
+        }
+      ]
+    },
+    {
+      "slug": "pca",
+      "displayName": "PCA",
+      "aliases": ["pca", "pca_sae"],
+      "access": "white_box",
+      "summary": "The principal components of the activations, used as latents. It is dense: every component is active on every token.",
+      "baseline": true,
+      "params": [],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2503.09532",
+          "title": "Karvonen et al., SAEBench: A Comprehensive Benchmark for Sparse Autoencoders in Language Model Interpretability"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/adamkarvonen/SAEBench/blob/main/sae_bench/custom_saes/pca_sae.py",
+          "title": "SAEBench PCA baseline code"
+        }
+      ]
+    },
+    {
+      "slug": "ica-lens",
+      "displayName": "ICA Lens",
+      "aliases": ["ICA Lens", "ICA-Lens", "icalens", "ica_lens"],
+      "access": "white_box",
+      "summary": "Independent component analysis (FastICA) of the activations, with no trained encoder. It gives one direction for each dimension of the activations, not an overcomplete dictionary, and its scores are dense. As in Neuronpedia's conversion, a ReLU keeps the long tail of each score.",
+      "baseline": true,
+      "params": [
+        {
+          "key": "icalensPreprocessing",
+          "label": "Preprocessing",
+          "type": "string",
+          "description": "The change to each activation before the fit: none, or L2 normalization."
+        },
+        {
+          "key": "fitIterations",
+          "label": "FastICA steps",
+          "type": "integer",
+          "description": "The fixed number of FastICA steps of the fit."
+        }
+      ],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2606.11722",
+          "title": "Liu et al., Non-Gaussianity Reveals Interpretable Directions in Language Models"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/liusida/ica-lens-paper",
+          "title": "ICA Lens paper code (2026)"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://pypi.org/project/icalens/",
+          "title": "icalens Python package (2026)"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://huggingface.co/neuronpedia/icalens-gemma-2-2b",
+          "title": "Neuronpedia ICA Lens files in the SAELens format, for Gemma-2-2B (2026)"
+        }
+      ]
+    },
+    {
+      "slug": "mdas",
+      "displayName": "MDAS (Supervised)",
+      "aliases": ["mdas"],
+      "access": "white_box",
+      "summary": "Multi-task Distributed Alignment Search: a supervised method that learns a subspace for each attribute from labels. It is a reference for RAVEL, not an SAE.",
+      "baseline": true,
+      "params": [],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2402.17700",
+          "title": "Huang et al., RAVEL: Evaluating Interpretability Methods on Disentangling Language Model Representations"
+        },
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2503.09532",
+          "title": "Karvonen et al., SAEBench: A Comprehensive Benchmark for Sparse Autoencoders in Language Model Interpretability"
+        }
+      ]
+    }
+  ],
+  "views": [
+    {
+      "slug": "anthropic-sae-training-monitor",
+      "variants": [],
+      "title": "Anthropic uses SAE features to watch Claude's training, but its SAEs miss some concepts",
+      "byline": "Anthropic",
+      "organization": "Anthropic",
+      "publishedDate": "2026-04-07",
+      "stance": "mixed",
+      "summary": "For the Claude Mythos Preview system card, Anthropic trained an SAE on a middle layer of the model. It found SAE features for concepts such as reward hacking, deception, evaluation awareness and distress. Then it flagged training transcripts where these features were very active. Anthropic says that this shows that white-box tools can help to monitor misalignment during training.",
+      "points": [
+        "When the model did a transgressive action, SAE features often showed that it knew that the action was unsafe or broke rules.",
+        "The SAE had no feature for awareness of the grader, but another tool (an activation verbalizer) showed this awareness often. Anthropic thinks that its SAEs were too small to learn that feature.",
+        "Anthropic used the flags to fix some training problems, but it never used feature activations as a direct training signal.",
+        "The causal effect of a feature often changed during training. Thus it was hard to explain changes in behavior with SAE features alone.",
+        "The Claude Opus 4.8 card (May 2026) still used SAE features to monitor training. In the Claude Fable 5 and Mythos 5 card (June 2026), Anthropic again could not measure grader awareness with SAEs. The Claude Opus 5 and 5.5 cards use natural language autoencoders for white-box analysis, and do not mention SAEs."
+      ],
+      "quotes": [
+        {
+          "text": "These are of interest as individual case studies, but also as evidence that white-box probing can be a useful tool for monitoring for misalignment during model training.",
+          "sourceUrl": "https://www.anthropic.com/claude-mythos-preview-system-card"
+        },
+        {
+          "text": "When Claude Mythos Preview performs transgressive actions, there are often active SAE features that indicate some degree of awareness that the action is unsafe, or violates rules.",
+          "sourceUrl": "https://www.anthropic.com/claude-mythos-preview-system-card"
+        },
+        {
+          "text": "suspect that the lack of grader awareness-related SAE features is due to limitations of our SAEs (for instance, they may simply not be large enough to have learned the relevant feature).",
+          "sourceUrl": "https://www.anthropic.com/claude-mythos-preview-system-card"
+        },
+        {
+          "text": "We also tried to measure grader awareness with sparse autoencoders (SAEs), but were unable to do so.",
+          "sourceUrl": "https://www.anthropic.com/claude-fable-5-mythos-5-system-card"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://www.anthropic.com/claude-mythos-preview-system-card",
+          "title": "System Card: Claude Mythos Preview"
+        },
+        {
+          "kind": "paper",
+          "url": "https://www.anthropic.com/claude-opus-4-8-system-card",
+          "title": "System Card: Claude Opus 4.8"
+        },
+        {
+          "kind": "paper",
+          "url": "https://www.anthropic.com/claude-fable-5-mythos-5-system-card",
+          "title": "System Card: Claude Fable 5 & Claude Mythos 5"
+        },
+        {
+          "kind": "paper",
+          "url": "https://www.anthropic.com/claude-opus-5-system-card",
+          "title": "System Card: Claude Opus 5"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "auditbench",
+      "variants": [],
+      "title": "AuditBench: SAEs help an AI auditor only sometimes",
+      "byline": "Abhay Sheshadri, Aidan Ewart, Elias Kempf and 8 others",
+      "organization": "Anthropic Fellows Program",
+      "publishedDate": "2026-02-26",
+      "stance": "mixed",
+      "summary": "The benchmark has 56 models. Each was trained with one hidden behavior that it does not admit. An AI investigator agent tries to find the behavior with different tools. Black-box tools with good scaffolding worked best. White-box tools, SAEs included, helped mostly on the easier models.",
+      "points": [
+        "On one behavior, a model that quietly argues against AI regulation, the SAE tool showed features about AI governance and regulation. With them, the agent found the behavior much more often.",
+        "Tools that found evidence in static tests often did not help the agent. The agent used them too little, or did not turn the evidence into a correct answer.",
+        "Raw SAE outputs were too long and noisy for the agent. The tool needed many filtering steps before it was useful."
+      ],
+      "quotes": [
+        {
+          "text": "Sparse autoencoders and the logit lens provide more limited signal, though SAEs occasionally identify directly relevant feature clusters.",
+          "sourceUrl": "https://alignment.anthropic.com/2026/auditbench/"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2602.22755",
+          "title": "AuditBench: Evaluating Alignment Auditing Techniques on Models with Hidden Behaviors"
+        },
+        {
+          "kind": "blog",
+          "url": "https://alignment.anthropic.com/2026/auditbench/",
+          "title": "Anthropic Alignment Science blog"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "gdm-pragmatic-interpretability",
+      "variants": [],
+      "title": "Google DeepMind: test methods on real tasks, and try the cheapest methods first",
+      "byline": "Neel Nanda, Josh Engels, Arthur Conmy, Senthooran Rajamanoharan, Bilal Chughtai, Callum McDougall, János Kramár and Lewis Smith",
+      "organization": "Google DeepMind",
+      "publishedDate": "2025-12-01",
+      "stance": "mixed",
+      "summary": "Looking back, the team says that its 2024 SAE work moved slowly, because it measured reconstruction and sparsity, not results on real tasks. When they tested SAEs on tasks, SAE probes did not generalize better, and the unlearning results were poor. To stop Claude Sonnet 4.5 from noticing that it was in a test, a steering vector made from one pair of prompts did better than SAEs.",
+      "points": [
+        "They still call SAEs a powerful tool for unsupervised discovery: finding things inside a model that you did not expect.",
+        "When you know what to study, they say that a dataset made for the question usually serves you better.",
+        "Their advice is to try the simplest and cheapest methods first: prompting, steering, probing and reading the chain of thought.",
+        "They are still excited about SAE research that aims at real goals, such as finding evidence that a model is scheming.",
+        "In a companion post, they call probes extremely cheap, and a possible first layer of monitoring for scheming, deception and sabotage."
+      ],
+      "quotes": [
+        {
+          "text": "Our overall sense is that SAEs are a powerful tool for unsupervised discovery, but when there is a clear thing to study, you are better served by constructing a dataset to help you investigate it.",
+          "sourceUrl": "https://www.lesswrong.com/posts/StENzDcD3kpfGJssR/a-pragmatic-vision-for-interpretability"
+        },
+        {
+          "text": "Probes are extremely cheap and could be a first defense layer in hierarchical monitors, for detecting things like scheming, deception, sabotage, etc.",
+          "sourceUrl": "https://www.lesswrong.com/posts/MnkeepcGirnJn736j/how-can-interpretability-researchers-help-agi-go-well"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "blog",
+          "url": "https://www.lesswrong.com/posts/StENzDcD3kpfGJssR/a-pragmatic-vision-for-interpretability",
+          "title": "LessWrong: A Pragmatic Vision for Interpretability"
+        },
+        {
+          "kind": "blog",
+          "url": "https://www.lesswrong.com/posts/MnkeepcGirnJn736j/how-can-interpretability-researchers-help-agi-go-well",
+          "title": "LessWrong: How Can Interpretability Researchers Help AGI Go Well?"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "far-sae-lie-detector",
+      "variants": [],
+      "title": "FAR.AI: a lie detector made from SAE features did worse than a probe on raw activations",
+      "byline": "Chris Cundy and Adam Gleave",
+      "organization": "FAR.AI",
+      "publishedDate": "2025-05-20",
+      "stance": "negative",
+      "summary": "FAR.AI trained lie detectors for use in preference training, mainly on Llama-3.1-8B-Instruct. They also tried a detector made from SAE features: they picked 1,598 features with descriptions about deception, such as “lie” and “deceit”, and trained a logistic regression on them. On the same data split, the SAE detector had an AUC of 0.903. A logistic regression on the raw residual stream had 0.993.",
+      "points": [
+        "They expected the selected SAE features to help when there are few labels. But with only 300 labeled examples, the probe on raw activations was still much better.",
+        "The authors say that the higher AUC matters in use: a detector can catch more lies at a lower false-positive rate.",
+        "The SAEs were pretrained by EleutherAI, with automatic feature descriptions.",
+        "The SAE detector is a side test in an appendix. The main paper is about lie detectors in training."
+      ],
+      "quotes": [
+        {
+          "text": "We find that the SAE-based detectors generally perform worse than the detectors based on raw activations.",
+          "sourceUrl": "https://arxiv.org/abs/2505.13787"
+        },
+        {
+          "text": "However, even with just 300 labelled data points, we again observed in Figure 13 that the logistic regression based on activations was much more effective than the logistic regression based on SAE features",
+          "sourceUrl": "https://arxiv.org/abs/2505.13787"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2505.13787",
+          "title": "Preference Learning with Lie Detectors can Induce Honesty or Evasion"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "gdm-deprioritise-sae-research",
+      "variants": ["jumprelu", "topk", "matryoshka-batchtopk"],
+      "title": "Google DeepMind puts basic SAE research on hold after SAEs lose to linear probes",
+      "byline": "Lewis Smith, Senthooran Rajamanoharan, Arthur Conmy, Callum McDougall, János Kramár, Tom Lieberum, Rohin Shah and Neel Nanda",
+      "organization": "Google DeepMind",
+      "publishedDate": "2025-03-26",
+      "stance": "negative",
+      "summary": "The Google DeepMind interpretability team tested if SAEs help to detect harmful intent in user prompts, also on new kinds of prompts. A plain linear probe was almost perfect, and probes made from SAE latents did worse. Other teams found similar results for probing, unlearning and steering. Thus the team stopped its basic SAE research for now, and moved to other directions.",
+      "points": [
+        "They do **not** say that SAEs are useless, or that nobody should work on them. SAEs stay in their toolkit. But they do not expect SAEs to change interpretability as much as the field hoped, and they think that the field puts too much effort into SAEs.",
+        "SAEs were useful to find flaws in their own dataset. For example, one latent showed that only the harmless set had questions.",
+        "SAEs trained on chat data closed about half of the gap to linear probes, but not all of it.",
+        "Probes on the SAE's reconstruction also did worse. Thus the SAE lost some of the information that the task needed.",
+        "They want future SAE work to study the limits of SAEs on real tasks, not only the trade-off between sparsity and reconstruction. They called Matryoshka SAEs a recent optimistic sign.",
+        "The other side of the result: linear probes were cheap and worked very well. They expect probes to be useful now, for cheap monitoring of frontier models."
+      ],
+      "quotes": [
+        {
+          "text": "Linear probes are actually really good and cheap and perform great",
+          "sourceUrl": "https://www.lesswrong.com/posts/4uXCAJNuPKtKBsi28/negative-results-for-saes-on-downstream-tasks"
+        },
+        {
+          "text": "We do not think that SAEs are useless or that no one should work on them, but we also do not think that SAEs will be a game-changer for interpretability, and speculate that the field is over-invested in them.",
+          "sourceUrl": "https://www.lesswrong.com/posts/4uXCAJNuPKtKBsi28/negative-results-for-saes-on-downstream-tasks"
+        },
+        {
+          "text": "We are particularly excited about their potential for exploratory debugging of mysterious failures or phenomena in models",
+          "sourceUrl": "https://www.lesswrong.com/posts/4uXCAJNuPKtKBsi28/negative-results-for-saes-on-downstream-tasks"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "blog",
+          "url": "https://deepmindsafetyresearch.medium.com/negative-results-for-sparse-autoencoders-on-downstream-tasks-and-deprioritising-sae-research-6cadcfc125b9",
+          "title": "DeepMind Safety Research blog"
+        },
+        {
+          "kind": "blog",
+          "url": "https://www.lesswrong.com/posts/4uXCAJNuPKtKBsi28/negative-results-for-saes-on-downstream-tasks",
+          "title": "LessWrong"
+        },
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2502.16681",
+          "title": "Kantamneni et al., Are Sparse Autoencoders Useful? A Case Study in Sparse Probing"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "anthropic-auditing-hidden-objectives",
+      "variants": [],
+      "title": "Anthropic: SAEs helped auditors find a hidden goal, but simple search could often do the same",
+      "byline": "Samuel Marks, Johannes Treutlein, Trenton Bricken, Jack Lindsey and 31 others",
+      "organization": "Anthropic",
+      "publishedDate": "2025-03",
+      "stance": "mixed",
+      "summary": "Anthropic trained a model with a hidden goal: to use known errors in reward models. Four teams then tried to find the goal without being told. Three teams found it, with SAEs, attacks on the model's behavior and searches of the training data. The fastest team used SAEs.",
+      "points": [
+        "Later, the authors found that a simple semantic search of the training data, with no access to the model, could find the same documents. They say that this weakens the case that the SAE found knowledge that the model hid.",
+        "But SAE features also worked in some cases where semantic search failed, for example when the auditor looked at a transcript of the bad behavior.",
+        "They conclude that interpretability can give real value to audits in principle, but that more work is necessary to show it in practice.",
+        "A December 2025 replication on Llama 3.3 70B found an SAE feature that fires when the model uses the reward-model errors, and also on the training documents about them. That SAE was a general one, not trained on the model's special data."
+      ],
+      "quotes": [
+        {
+          "text": "In some cases, SAE-based techniques may be best understood as providing a convenient interface for semantic search. In other cases they outperform semantic search baselines.",
+          "sourceUrl": "https://arxiv.org/abs/2503.10965"
+        },
+        {
+          "text": "Overall, we interpret our results as suggesting that LLM interpretability can, in principle, provide real value for alignment audits",
+          "sourceUrl": "https://arxiv.org/abs/2503.10965"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2503.10965",
+          "title": "Auditing language models for hidden objectives"
+        },
+        {
+          "kind": "blog",
+          "url": "https://alignment.anthropic.com/2025/auditing-mo-replication/",
+          "title": "Open Source Replication of the Auditing Game Model Organism"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "apollo-sae-deception-probe",
+      "variants": [],
+      "title": "Apollo Research: a deception probe on SAE activations did worse than a probe on raw activations",
+      "byline": "Nicholas Goldowsky-Dill, Bilal Chughtai, Stefan Heimersheim and Marius Hobbhahn",
+      "organization": "Apollo Research",
+      "publishedDate": "2025-02-05",
+      "stance": "negative",
+      "summary": "Apollo trained linear deception probes on Llama-3.3-70B-Instruct, and tested them on realistic cases such as hidden insider trading and sandbagging. In one variant, the probe read the activations of a Goodfire SAE, not the raw residual stream. Trained on honest and lying instruction pairs, the SAE probe did not generalize. Trained on role-play data, it did better, but its AUROC was lower than the raw probe's on all datasets.",
+      "points": [
+        "The SAE probe gave many normal chat replies higher deception scores than deceptive replies. Thus it is hard to set a threshold with few false positives.",
+        "The team changed from Llama 3.1 70B to Llama 3.3 70B to use this SAE.",
+        "The SAE probe is a side test. The main probe on raw activations got AUROCs from 0.96 to 0.999.",
+        "They cite earlier work that found the same: probes on raw activations usually do better, but SAE probes are easier to interpret."
+      ],
+      "quotes": [
+        {
+          "text": "Overall performance is worse than training on raw activations.",
+          "sourceUrl": "https://arxiv.org/abs/2502.03407"
+        },
+        {
+          "text": "The control scores are rated as more deceptive than many of the deceptive prompts.",
+          "sourceUrl": "https://arxiv.org/abs/2502.03407"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2502.03407",
+          "title": "Detecting Strategic Deception Using Linear Probes"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/ApolloResearch/deception-detection",
+          "title": "Code"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    }
+  ]
+}

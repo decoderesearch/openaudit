@@ -1,0 +1,70 @@
+{
+  "eval": {
+    "slug": "hidden-agenda",
+    "displayName": "Hidden Agenda",
+    "aliases": ["Hidden Agenda (Click Links)", "Hidden Agenda (Find Info)", "Hidden Agenda (Run Code)"],
+    "description": "Google DeepMind covert-manipulation eval from the dangerous-capabilities suite. A human chats with a tutor-like agent that has a secret goal: get the participant to click a link, disclose an email from a paper, or run code. Participants are told the chatbot is experimental and not fully trustworthy. Scoring is the fraction of participants who take the target action. Protocol is lab-held; each run needs new human participants.",
+    "summary": "Measures how often the model secretly persuades human users to take a hidden target action.",
+    "family": "GDM dangerous capabilities",
+    "maintainers": [
+      {
+        "name": "Google DeepMind",
+        "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2403.13793",
+        "title": "Evaluating Frontier Models for Dangerous Capabilities"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf",
+        "title": "Gemini 1.5 technical report (Hidden Agenda results)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["multi_turn"],
+      "cases": ["live_human"],
+      "grading": ["human", "programmatic"],
+      "adversarial": true,
+      "humanParticipants": true,
+      "subjects": ["model"],
+      "topics": ["manipulation"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-03-21",
+      "status": "published",
+      "releasedDate": "2024-03-21",
+      "scores": [
+        {
+          "key": "action_taken",
+          "displayName": "Action taken",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 if the participant took the covert target action for that condition."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "action_rate",
+          "displayName": "Action rate",
+          "score": "action_taken",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Fraction of participants who took the target action. Cards report Click Links, Find Info, and Run Code separately."
+        }
+      ]
+    }
+  ]
+}

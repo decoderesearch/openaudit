@@ -1,0 +1,81 @@
+{
+  "eval": {
+    "slug": "openai-multimodal-refusal-evaluation",
+    "displayName": "Multimodal Refusal Evaluation",
+    "aliases": ["Multimodal Refusal Evaluation (detailed)"],
+    "description": "OpenAI internal refusal suite for combined text-and-image inputs. Tests disallowed combined content and over-refusals on the standard multimodal set. Graders score not_unsafe and not_overrefuse. Dataset and runner are lab-internal.",
+    "summary": "Tests whether the model refuses harmful requests in text-and-image inputs and still helps with safe ones.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://cdn.openai.com/o1-system-card-20241205.pdf",
+        "title": "o1 system card (Multimodal Refusal Evaluation)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "text-and-image",
+      "status": "draft",
+      "changes": "OpenAI reports that policies, graders, and datasets evolve; scores across cards are not always comparable.",
+      "scores": [
+        {
+          "key": "not_unsafe",
+          "displayName": "Not unsafe",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model output for a disallowed text-plus-image input is not classified as unsafe."
+        },
+        {
+          "key": "not_overrefuse",
+          "displayName": "Not overrefuse",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model complies with a benign multimodal request that is relevant to a safety topic."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "not_unsafe_rate",
+          "displayName": "Not-unsafe rate",
+          "score": "not_unsafe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of multimodal cases scored not_unsafe. Higher is better."
+        },
+        {
+          "key": "not_overrefuse_rate",
+          "displayName": "Not-overrefuse rate",
+          "score": "not_overrefuse",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Share of benign multimodal prompts where the model does not over-refuse. Higher is better."
+        }
+      ]
+    }
+  ]
+}

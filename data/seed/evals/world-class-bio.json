@@ -1,0 +1,76 @@
+{
+  "eval": {
+    "slug": "world-class-bio",
+    "displayName": "World-Class Bio",
+    "aliases": [
+      "World-Class Bio (SecureBio)",
+      "World-Class Biology (WCB)",
+      "SecureBio World Class Biology",
+      "SecureBio WCB",
+      "WCB"
+    ],
+    "description": "SecureBio open-ended benchmark of rare, expert-level biology knowledge. It has 96 text questions graded by a model judge against must-have and must-not-have rubric criteria. SecureBio still treats the set as an early draft; in-field expert baseliners score about 22%.",
+    "summary": "Tests whether the model has rare, expert-level biology knowledge that could help cause harm.",
+    "family": "SecureBio",
+    "maintainers": [
+      {
+        "name": "SecureBio",
+        "url": "https://securebio.org/benchmarks/details/"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://securebio.org/benchmarks/details/",
+        "title": "SecureBio benchmark details (WCB)"
+      }
+    ],
+    "access": "held_out",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "96",
+      "status": "draft",
+      "changes": "Early draft of 96 rubric-graded open-ended items; SecureBio plans more questions and a fuller expert baseline.",
+      "scores": [
+        {
+          "key": "rubric_pass",
+          "displayName": "Rubric pass",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "A judge model finds all must-have criteria present and all must-not-have criteria absent."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "rubric_pass",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of answers that pass the rubric."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,4447 @@
+{
+  "document": "meta-llama-guard-paper-technical_report",
+  "alsoDocuments": ["meta-purple-llama-blog"],
+  "covers": [
+    {
+      "model": "meta-llama/LlamaGuard-7b"
+    }
+  ],
+  "pageCount": 15,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "sequence length of 4096 (training)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "sequence length of 4096, using model parallelism of 1"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (prompt classification and response classification)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "We provide different instructions for classifying human prompts (input to the LLM) vs AI model"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English (fine-tuning and most pretraining)",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "all fine-tuning data, as well as most pretraining data used for Llama Guard is in English"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7b (Llama2-7b)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Llama Guard, a Llama2-7b model that is"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Instruction-tuned Llama2-7b for prompt/response safety classification",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "We build Llama Guard on top of Llama2-7b (Touvron et al., 2023)."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "13,997 Anthropic hh-rlhf prompts with internal Llama responses; in-house red-team labels",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "dataset comprises of 13,997 prompts and responses, with their respective annotations."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "8xA100 80GB GPUs, batch size 2, 500 steps (~1 epoch), lr 2e-6",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "We train on a single machine with 8xA100 80GB GPUs using a batch size of 2, with"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "High AUPRC on prompt and response classification for the Llama Guard safety taxonomy",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "Llama Guard                 0.945                0.847               0.626                 0.953"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Self-Harm category AUPRC 0.84 prompt / 0.94 response on the internal test set (higher is better)",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "Self-Harm                                0.842/0.943         0.417/0.666          0.107/0.093"
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [
+    {
+      "name": "external red teaming contractors",
+      "scope": "Red teaming of Llama Guard; authors report no added risks beyond pretrained Llama2-7b",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "we have performed red teaming on Llama Guard"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "text": "Few-shot prompting with 2–4 in-context examples raises OpenAI-Mod area under the precision-recall curve (AUPRC) to 0.87 and beats the [OpenAI Moderation](/evals/openai-moderation) API (higher is better).", "tone": "good",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "Llama Guard Few-shot (w/ description and in-context examples)            0.872"
+      }
+    },
+    {
+      "text": "On [ToxicChat](/evals/toxicchat), Llama Guard needs only 20% of the training data to match Llama2-7b trained on 100%.", "tone": "good",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Llama Guard needs only 20% of the ToxicChat dataset to perform comparably with"
+      }
+    },
+    {
+      "text": "The released Llama Guard is not further fine-tuned on [ToxicChat](/evals/toxicchat).", "tone": "neutral",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Finally, we note that the Llama Guard model we’re releasing is not one further fine-tuned on ToxicChat."
+      }
+    },
+    {
+      "text": "External red teaming found no risks beyond those of pretrained Llama2-7b.", "tone": "good",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "Although the outcome of this exercise did not point us to additional"
+      }
+    },
+    {
+      "text": "When used as a chat model rather than a classifier, Llama Guard may generate unethical or unsafe language.", "tone": "bad",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "prompted as a chat model, instead of the intended use as a classifier, Llama Guard may generate language"
+      }
+    },
+    {
+      "text": "Authors warn Llama Guard may be susceptible to prompt injection attacks that alter or bypass intended use.", "tone": "bad",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "Llama Guard may be susceptible to prompt injection attacks that could"
+      }
+    },
+    {
+      "text": "Fine-tuning and most pretraining data are English, so other-language performance is not guaranteed.", "tone": "mixed",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "all fine-tuning data, as well as most pretraining data used for Llama Guard is in English"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.945,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": "Llama Guard                 0.945                0.847               0.626                 0.953"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Prompt Classification; zero-shot with target taxonomy"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Moderation Evaluation Dataset",
+      "metric": "AUPRC",
+      "value": 0.847,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": "Llama Guard                 0.945                0.847               0.626                 0.953"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "zero-shot with target taxonomy"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "AUPRC",
+      "value": 0.626,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": "Llama Guard                 0.945                0.847               0.626                 0.953"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "zero-shot with target taxonomy"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.953,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": "Llama Guard                 0.945                0.847               0.626                 0.953"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Response Classification; zero-shot with target taxonomy"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.764,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": "OpenAI API                  0.764                0.856               0.588                 0.769"
+      },
+      "rawModelName": "OpenAI API",
+      "settings": {
+        "other": "Prompt Classification; zero-shot with target taxonomy"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Moderation Evaluation Dataset",
+      "metric": "AUPRC",
+      "value": 0.856,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": "OpenAI API                  0.764                0.856               0.588                 0.769"
+      },
+      "rawModelName": "OpenAI API",
+      "settings": {
+        "other": "zero-shot with target taxonomy"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "AUPRC",
+      "value": 0.588,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": "OpenAI API                  0.764                0.856               0.588                 0.769"
+      },
+      "rawModelName": "OpenAI API",
+      "settings": {
+        "other": "zero-shot with target taxonomy"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.769,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": "OpenAI API                  0.764                0.856               0.588                 0.769"
+      },
+      "rawModelName": "OpenAI API",
+      "settings": {
+        "other": "Response Classification; zero-shot with target taxonomy"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.728,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": "Perspective API             0.728                0.787               0.532                 0.699"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Prompt Classification; zero-shot with target taxonomy"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Moderation Evaluation Dataset",
+      "metric": "AUPRC",
+      "value": 0.787,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": "Perspective API             0.728                0.787               0.532                 0.699"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "zero-shot with target taxonomy"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "AUPRC",
+      "value": 0.532,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": "Perspective API             0.728                0.787               0.532                 0.699"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "zero-shot with target taxonomy"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.699,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 2",
+        "quote": "Perspective API             0.728                0.787               0.532                 0.699"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Response Classification; zero-shot with target taxonomy"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.857,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Violence and Hate                        0.857/0.835         0.666/0.725          0.578/0.558"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Violence and Hate; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.835,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Violence and Hate                        0.857/0.835         0.666/0.725          0.578/0.558"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Violence and Hate; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.666,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Violence and Hate                        0.857/0.835         0.666/0.725          0.578/0.558"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Violence and Hate; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.725,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Violence and Hate                        0.857/0.835         0.666/0.725          0.578/0.558"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Violence and Hate; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.578,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Violence and Hate                        0.857/0.835         0.666/0.725          0.578/0.558"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Violence and Hate; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.558,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Violence and Hate                        0.857/0.835         0.666/0.725          0.578/0.558"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Violence and Hate; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.692,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Sexual Content                           0.692/0.787         0.231/0.258          0.243/0.161"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Sexual Content; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.787,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Sexual Content                           0.692/0.787         0.231/0.258          0.243/0.161"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Sexual Content; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.231,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Sexual Content                           0.692/0.787         0.231/0.258          0.243/0.161"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Sexual Content; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.258,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Sexual Content                           0.692/0.787         0.231/0.258          0.243/0.161"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Sexual Content; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.243,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Sexual Content                           0.692/0.787         0.231/0.258          0.243/0.161"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Sexual Content; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.161,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Sexual Content                           0.692/0.787         0.231/0.258          0.243/0.161"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Sexual Content; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.927,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Criminal Planning                        0.927/0.933         0.596/0.625          0.534/0.501"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Criminal Planning; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.933,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Criminal Planning                        0.927/0.933         0.596/0.625          0.534/0.501"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Criminal Planning; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.596,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Criminal Planning                        0.927/0.933         0.596/0.625          0.534/0.501"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Criminal Planning; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.625,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Criminal Planning                        0.927/0.933         0.596/0.625          0.534/0.501"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Criminal Planning; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.534,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Criminal Planning                        0.927/0.933         0.596/0.625          0.534/0.501"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Criminal Planning; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.501,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Criminal Planning                        0.927/0.933         0.596/0.625          0.534/0.501"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Criminal Planning; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.798,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Guns and Illegal Weapons                 0.798/0.716         0.035/0.060          0.054/0.048"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.716,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Guns and Illegal Weapons                 0.798/0.716         0.035/0.060          0.054/0.048"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.035,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Guns and Illegal Weapons                 0.798/0.716         0.035/0.060          0.054/0.048"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.06,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Guns and Illegal Weapons                 0.798/0.716         0.035/0.060          0.054/0.048"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.054,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Guns and Illegal Weapons                 0.798/0.716         0.035/0.060          0.054/0.048"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.048,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Guns and Illegal Weapons                 0.798/0.716         0.035/0.060          0.054/0.048"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.944,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Regulated or Controlled Substances       0.944/0.922         0.085/0.067          0.110/0.096"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.922,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Regulated or Controlled Substances       0.944/0.922         0.085/0.067          0.110/0.096"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.085,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Regulated or Controlled Substances       0.944/0.922         0.085/0.067          0.110/0.096"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.067,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Regulated or Controlled Substances       0.944/0.922         0.085/0.067          0.110/0.096"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.11,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Regulated or Controlled Substances       0.944/0.922         0.085/0.067          0.110/0.096"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.096,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Regulated or Controlled Substances       0.944/0.922         0.085/0.067          0.110/0.096"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.842,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Self-Harm                                0.842/0.943         0.417/0.666          0.107/0.093"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Self-Harm; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.943,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Self-Harm                                0.842/0.943         0.417/0.666          0.107/0.093"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Self-Harm; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.417,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Self-Harm                                0.842/0.943         0.417/0.666          0.107/0.093"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Self-Harm; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.666,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Self-Harm                                0.842/0.943         0.417/0.666          0.107/0.093"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Self-Harm; response classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.107,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Self-Harm                                0.842/0.943         0.417/0.666          0.107/0.093"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Self-Harm; prompt classification"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "AUPRC",
+      "value": 0.093,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "Self-Harm                                0.842/0.943         0.417/0.666          0.107/0.093"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Self-Harm; response classification"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Moderation Evaluation Dataset",
+      "metric": "AUPRC",
+      "value": 0.837,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "Llama Guard (no adaptation)                                              0.837"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "no adaptation"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI Moderation Evaluation Dataset",
+      "metric": "AUPRC",
+      "value": 0.872,
+      "unit": "fraction",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 4",
+        "quote": "Llama Guard Few-shot (w/ description and in-context examples)            0.872"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "few-shot with description and in-context examples"
+      }
+    },
+    {
+      "rawEvalName": "ToxicChat",
+      "metric": "AUPRC",
+      "value": 0,
+      "unit": "fraction",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "we set its AUPRC as zero, whereas Llama Guard achieves 0.626 AUPRC in the zero-shot setting."
+      },
+      "rawModelName": "Llama2-7b",
+      "settings": {
+        "other": "zero-shot; malformed outputs so AUPRC set to zero"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.88,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.864,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.872,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.874,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.25,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.389,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.788,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.515,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.623,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.817,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.219,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.346,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.717,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.947,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.816,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "Overall 0.880/0.864/0.872         0.874/0.250/0.389    0.788/0.515/0.623    0.817/0.219/0.346    0.717/0.947/0.816"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Overall; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.666,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.868,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.754,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.739,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.388,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.509,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.596,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.779,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.675,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.647,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.342,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.448,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.379,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.865,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.527,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "VH         0.666/0.868/0.754     0.739/0.388/0.509     0.596/0.779/0.675    0.647/0.342/0.448    0.379/0.865/0.527"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Violence and Hate; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.638,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.811,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.714,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.268,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.324,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.293,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.195,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.824,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.315,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.241,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.382,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.295,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.093,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.941,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.17,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SC         0.638/0.811/0.714      0.268/0.324/0.293    0.195/0.824/0.315    0.241/0.382/0.295    0.093/0.941/0.170"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Sexual Content; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.814,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.884,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.847,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.763,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.208,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.327,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.625,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.414,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.498,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.663,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.173,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.275,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.595,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.983,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.741,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "CP         0.814/0.884/0.847      0.763/0.208/0.327    0.625/0.414/0.498    0.663/0.173/0.275    0.595/0.983/0.741"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Criminal Planning; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.611,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.943,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.742,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.032,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.057,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.041,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.091,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.657,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.159,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.047,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.114,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.066,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.052,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.971,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.099,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "GIW        0.611/0.943/0.742      0.032/0.057/0.041    0.091/0.657/0.159    0.047/0.114/0.066    0.052/0.971/0.099"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Guns and Illegal Weapons; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.772,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.91,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.836,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.016,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.008,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.01,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.057,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.105,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.074,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.012,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.008,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.009,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.176,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 1,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.3,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "RCS        0.772/0.910/0.836      0.016/0.008/0.010    0.057/0.105/0.074    0.012/0.008/0.009    0.176/1.000/0.300"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Regulated or Controlled Substances; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.821,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.885,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.852,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.25,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.8,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.381,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.094,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.96,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.171,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.155,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.6,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.246,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.039,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 1,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.075,
+      "unit": "fraction",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "table": "Table 5",
+        "quote": "SH         0.821/0.885/0.852      0.250/0.800/0.381    0.094/0.960/0.171    0.155/0.600/0.246    0.039/1.000/0.075"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Self-Harm; prompt classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.9,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.867,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.884,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.874,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.329,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.478,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.749,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.564,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.644,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.751,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.248,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.373,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.813,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.788,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.801,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "Overall 0.900/0.867/0.884         0.874/0.329/0.478     0.749/0.564/0.644    0.751/0.248/0.373   0.813/0.788/0.801"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Overall; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.713,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.761,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.736,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.733,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.56,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.635,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.673,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.372,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.479,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.581,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.491,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.532,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.456,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.651,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.536,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "VH         0.713/0.761/0.736      0.733/0.560/0.635     0.673/0.372/0.479    0.581/0.491/0.532   0.456/0.651/0.536"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Violence and Hate; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.681,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.753,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.715,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.216,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.328,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.26,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.432,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.806,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.562,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.131,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.313,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.185,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.138,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.731,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.232,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SC         0.681/0.753/0.715      0.216/0.328/0.260    0.432/0.806/0.562     0.131/0.313/0.185   0.138/0.731/0.232"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Sexual Content; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.829,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.88,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.854,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.776,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.284,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.416,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.777,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.254,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.383,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.55,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.174,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.265,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.731,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.853,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.788,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "CP         0.829/0.880/0.854      0.776/0.284/0.416     0.777/0.254/0.383    0.550/0.174/0.265   0.731/0.853/0.788"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Criminal Planning; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.594,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.776,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.673,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.059,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.111,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.077,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.228,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.467,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.307,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.021,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.067,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.032,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.123,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.956,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.218,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "GIW        0.594/0.776/0.673      0.059/0.111/0.077     0.228/0.467/0.307    0.021/0.067/0.032   0.123/0.956/0.218"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Guns and Illegal Weapons; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.784,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.876,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.828,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.036,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.023,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.028,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.101,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.062,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.077,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.014,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.015,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.015,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.254,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.8,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.385,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "RCS        0.784/0.876/0.828      0.036/0.023/0.028     0.101/0.062/0.077    0.014/0.015/0.015   0.254/0.800/0.385"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Regulated or Controlled Substances; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.913,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.75,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.824,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "model": "meta-llama/LlamaGuard-7b",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.208,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.875,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.336,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "rawModelName": "OpenAI Mod API",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.22,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.833,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.348,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "rawModelName": "Azure API",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.115,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.75,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.199,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "rawModelName": "Perspective API",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "precision",
+      "value": 0.064,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "recall",
+      "value": 0.875,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    },
+    {
+      "rawEvalName": "Our Test Set",
+      "metric": "F1",
+      "value": 0.12,
+      "unit": "fraction",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 6",
+        "quote": "SH         0.913/0.750/0.824      0.208/0.875/0.336     0.220/0.833/0.348    0.115/0.750/0.199   0.064/0.875/0.120"
+      },
+      "model": "openai/gpt-4",
+      "settings": {
+        "other": "Self-Harm; response classification; threshold 0.5"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:10:53Z"
+  },
+  "notes": "Technical report for Llama Guard (exception: include content-moderation classifier metrics). Figure 2 and Figure 3 are charts without readable numeric values in the text layer; skipped. Table 4 OpenAI Mod API 0.856 and Llama Guard zero-shot 0.847 duplicate Table 2 and were kept once. Capability/general evals: none. Seed-linked model meta-llama/LlamaGuard-7b is covered. alsoDocuments meta-purple-llama-blog not fetched."
+}

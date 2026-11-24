@@ -1,0 +1,1940 @@
+{
+  "document": "shlab-internvl3-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "OpenGVLab/InternVL3-1B"
+    },
+    {
+      "model": "OpenGVLab/InternVL3-2B"
+    },
+    {
+      "model": "OpenGVLab/InternVL3-8B"
+    },
+    {
+      "model": "OpenGVLab/InternVL3-9B"
+    },
+    {
+      "model": "OpenGVLab/InternVL3-14B"
+    },
+    {
+      "model": "OpenGVLab/InternVL3-38B"
+    },
+    {
+      "model": "OpenGVLab/InternVL3-78B"
+    }
+  ],
+  "pageCount": 27,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "up to 32K tokens (training/sequence support via InternEVO)",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "To support sequences of up to 32K tokens, our approach incorporates both"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "multimodal (vision–language), including image, video, GUI, tool usage, and text",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "jointly acquires multimodal and linguistic capabilities from both diverse multimodal"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "Multilingual multimodal eval in English, Chinese, Portuguese, Arabic, Turkish, and Russian",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "evaluated are English (en), Chinese (zh), Portuguese (pt), Arabic (ar), Turkish (tr), and Russian (ru)."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "0.9B–78.4B across InternVL3-1B through InternVL3-78B (Table 1)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "InternVL3-78B     78.4B      InternViT-6B-448px-V2.5     Qwen2.5-72B                 79.5"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "ViT–MLP–LLM; InternViT-300M/6B + Qwen2.5 or InternLM3; pixel unshuffle; V2PE",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "The architecture of InternVL3 follows the same general framework as its predecessors, adhering to the “ViT-"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "~200B pre-training tokens (50B language + 150B multimodal); SFT + MPO post-training",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "the total number of training tokens is approximately 200 billion, comprising 50 billion from language data and"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Evaluated on [HallusionBench](/evals/hallusionbench), [MMHal](/evals/mmhal-bench), [CRPE](https://arxiv.org/abs/2402.19474), and [POPE](/evals/pope); competitive gains vs prior InternVL, with minor MMHal declines",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "We evaluate InternVL’s propensity for hallucinations on four established benchmarks—HallusionBench [45],"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "InternVL3 improves multimodal hallucination handling overall versus prior InternVL series, but shows minor declines on [MMHal](/evals/mmhal-bench).", "tone": "mixed",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "Despite these advancements, minor declines on certain benchmarks,"
+      }
+    },
+    {
+      "text": "Authors say optimizing data and training for more consistent hallucination gains remains future work.", "tone": "mixed",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "training strategies to achieve more consistent improvements remains an important direction for future work."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 27.9,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "LLaVA-OneVision-0.5B [60] 1438.0 61.6 / 55.5 59.6   32.2    –     37.7    –        27.9      –         –       –     –"
+      },
+      "rawModelName": "LLaVA-OneVision-0.5B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 34,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-1B [19]         1794.4 65.4 / 60.7 61.6   32.7   36.1   45.7   51.7      34.0    2.25      57.5     87.3 45.3"
+      },
+      "model": "OpenGVLab/InternVL2-1B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 2.25,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-1B [19]         1794.4 65.4 / 60.7 61.6   32.7   36.1   45.7   51.7      34.0    2.25      57.5     87.3 45.3"
+      },
+      "model": "OpenGVLab/InternVL2-1B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 57.5,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-1B [19]         1794.4 65.4 / 60.7 61.6   32.7   36.1   45.7   51.7      34.0    2.25      57.5     87.3 45.3"
+      },
+      "model": "OpenGVLab/InternVL2-1B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 87.3,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-1B [19]         1794.4 65.4 / 60.7 61.6   32.7   36.1   45.7   51.7      34.0    2.25      57.5     87.3 45.3"
+      },
+      "model": "OpenGVLab/InternVL2-1B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 39,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-1B [18]       1950.5 70.7 / 66.3 68.4   48.8   43.2   50.1   58.9      39.0    2.49      60.9     89.9 48.1"
+      },
+      "model": "OpenGVLab/InternVL2_5-1B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 2.49,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-1B [18]       1950.5 70.7 / 66.3 68.4   48.8   43.2   50.1   58.9      39.0    2.49      60.9     89.9 48.1"
+      },
+      "model": "OpenGVLab/InternVL2_5-1B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 60.9,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-1B [18]       1950.5 70.7 / 66.3 68.4   48.8   43.2   50.1   58.9      39.0    2.49      60.9     89.9 48.1"
+      },
+      "model": "OpenGVLab/InternVL2_5-1B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 89.9,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-1B [18]       1950.5 70.7 / 66.3 68.4   48.8   43.2   50.1   58.9      39.0    2.49      60.9     89.9 48.1"
+      },
+      "model": "OpenGVLab/InternVL2_5-1B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 41.4,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-1B              1934.4 72.6 / 67.9 69.9   59.5   47.5   51.5   61.9      41.4    2.59      64.0     90.7 49.7"
+      },
+      "model": "OpenGVLab/InternVL3-1B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 2.59,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-1B              1934.4 72.6 / 67.9 69.9   59.5   47.5   51.5   61.9      41.4    2.59      64.0     90.7 49.7"
+      },
+      "model": "OpenGVLab/InternVL3-1B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 64,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-1B              1934.4 72.6 / 67.9 69.9   59.5   47.5   51.5   61.9      41.4    2.59      64.0     90.7 49.7"
+      },
+      "model": "OpenGVLab/InternVL3-1B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 90.7,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-1B              1934.4 72.6 / 67.9 69.9   59.5   47.5   51.5   61.9      41.4    2.59      64.0     90.7 49.7"
+      },
+      "model": "OpenGVLab/InternVL3-1B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 41.7,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Qwen2-VL-2B [121]         1872.0 74.9 / 73.5 72.2   49.5    –     48.0    –        41.7      –         –       –     –"
+      },
+      "model": "Qwen/Qwen2-VL-2B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 46.3,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Qwen2.5-VL-3B [6]          2157 79.1 / 78.1  77.4   61.8    –     55.9    –        46.3      –       73.6      –     –"
+      },
+      "rawModelName": "Qwen2.5-VL-3B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 73.6,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Qwen2.5-VL-3B [6]          2157 79.1 / 78.1  77.4   61.8    –     55.9    –        46.3      –       73.6      –     –"
+      },
+      "rawModelName": "Qwen2.5-VL-3B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 37.9,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-2B [19]         1876.8 73.2 / 70.9 70.2   39.5   39.6   50.1   58.0      37.9    2.52      66.3     88.3 48.8"
+      },
+      "model": "OpenGVLab/InternVL2-2B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 2.52,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-2B [19]         1876.8 73.2 / 70.9 70.2   39.5   39.6   50.1   58.0      37.9    2.52      66.3     88.3 48.8"
+      },
+      "model": "OpenGVLab/InternVL2-2B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 66.3,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-2B [19]         1876.8 73.2 / 70.9 70.2   39.5   39.6   50.1   58.0      37.9    2.52      66.3     88.3 48.8"
+      },
+      "model": "OpenGVLab/InternVL2-2B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 88.3,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-2B [19]         1876.8 73.2 / 70.9 70.2   39.5   39.6   50.1   58.0      37.9    2.52      66.3     88.3 48.8"
+      },
+      "model": "OpenGVLab/InternVL2-2B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 42.6,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-2B [18]       2138.2 74.7 / 71.9 72.2   60.8   52.3   53.7   65.3      42.6    2.94      70.2     90.6 51.6"
+      },
+      "model": "OpenGVLab/InternVL2_5-2B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 2.94,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-2B [18]       2138.2 74.7 / 71.9 72.2   60.8   52.3   53.7   65.3      42.6    2.94      70.2     90.6 51.6"
+      },
+      "model": "OpenGVLab/InternVL2_5-2B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 70.2,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-2B [18]       2138.2 74.7 / 71.9 72.2   60.8   52.3   53.7   65.3      42.6    2.94      70.2     90.6 51.6"
+      },
+      "model": "OpenGVLab/InternVL2_5-2B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 90.6,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-2B [18]       2138.2 74.7 / 71.9 72.2   60.8   52.3   53.7   65.3      42.6    2.94      70.2     90.6 51.6"
+      },
+      "model": "OpenGVLab/InternVL2_5-2B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 42.5,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-2B              2221.2 81.1 / 78.4 78.6   62.2   53.9   60.7   69.8      42.5    3.26      71.5     89.6 51.7"
+      },
+      "model": "OpenGVLab/InternVL3-2B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.26,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-2B              2221.2 81.1 / 78.4 78.6   62.2   53.9   60.7   69.8      42.5    3.26      71.5     89.6 51.7"
+      },
+      "model": "OpenGVLab/InternVL3-2B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 71.5,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-2B              2221.2 81.1 / 78.4 78.6   62.2   53.9   60.7   69.8      42.5    3.26      71.5     89.6 51.7"
+      },
+      "model": "OpenGVLab/InternVL3-2B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 89.6,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-2B              2221.2 81.1 / 78.4 78.6   62.2   53.9   60.7   69.8      42.5    3.26      71.5     89.6 51.7"
+      },
+      "model": "OpenGVLab/InternVL3-2B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 50.6,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Qwen2-VL-7B [121]         2326.8 83.0 / 80.5 80.7   62.0    –     60.7    –        50.6    3.40      74.4     88.1 54.1"
+      },
+      "model": "Qwen/Qwen2-VL-7B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.4,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Qwen2-VL-7B [121]         2326.8 83.0 / 80.5 80.7   62.0    –     60.7    –        50.6    3.40      74.4     88.1 54.1"
+      },
+      "model": "Qwen/Qwen2-VL-7B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 74.4,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Qwen2-VL-7B [121]         2326.8 83.0 / 80.5 80.7   62.0    –     60.7    –        50.6    3.40      74.4     88.1 54.1"
+      },
+      "model": "Qwen/Qwen2-VL-7B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 88.1,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Qwen2-VL-7B [121]         2326.8 83.0 / 80.5 80.7   62.0    –     60.7    –        50.6    3.40      74.4     88.1 54.1"
+      },
+      "model": "Qwen/Qwen2-VL-7B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 52.9,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Qwen2.5-VL-7B [6]          2347 83.5 / 83.4  82.6   67.1    –     63.9    –        52.9      –       76.4      –     –"
+      },
+      "rawModelName": "Qwen2.5-VL-7B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 76.4,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Qwen2.5-VL-7B [6]          2347 83.5 / 83.4  82.6   67.1    –     63.9    –        52.9      –       76.4      –     –"
+      },
+      "rawModelName": "Qwen2.5-VL-7B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 48.1,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "MiniCPM-V2.6 [135]        2348.4 81.5 / 79.3 78.0   60.0    –     57.5    –        48.1    3.60      75.2     87.3 53.6"
+      },
+      "model": "openbmb/MiniCPM-V-2_6"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.6,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "MiniCPM-V2.6 [135]        2348.4 81.5 / 79.3 78.0   60.0    –     57.5    –        48.1    3.60      75.2     87.3 53.6"
+      },
+      "model": "openbmb/MiniCPM-V-2_6"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 75.2,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "MiniCPM-V2.6 [135]        2348.4 81.5 / 79.3 78.0   60.0    –     57.5    –        48.1    3.60      75.2     87.3 53.6"
+      },
+      "model": "openbmb/MiniCPM-V-2_6"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 87.3,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "MiniCPM-V2.6 [135]        2348.4 81.5 / 79.3 78.0   60.0    –     57.5    –        48.1    3.60      75.2     87.3 53.6"
+      },
+      "model": "openbmb/MiniCPM-V-2_6"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 45.2,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-8B [19]         2210.3 81.7 / 81.2 79.5   54.2   52.3   62.0   69.2      45.2    3.33      75.8     86.9 52.8"
+      },
+      "model": "OpenGVLab/InternVL2-8B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.33,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-8B [19]         2210.3 81.7 / 81.2 79.5   54.2   52.3   62.0   69.2      45.2    3.33      75.8     86.9 52.8"
+      },
+      "model": "OpenGVLab/InternVL2-8B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 75.8,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-8B [19]         2210.3 81.7 / 81.2 79.5   54.2   52.3   62.0   69.2      45.2    3.33      75.8     86.9 52.8"
+      },
+      "model": "OpenGVLab/InternVL2-8B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 86.9,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-8B [19]         2210.3 81.7 / 81.2 79.5   54.2   52.3   62.0   69.2      45.2    3.33      75.8     86.9 52.8"
+      },
+      "model": "OpenGVLab/InternVL2-8B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 50.1,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-8B [18]       2344.1 84.6 / 82.6 83.2   62.8   58.1   62.8   73.2      50.1    3.65      78.4     90.6 55.7"
+      },
+      "model": "OpenGVLab/InternVL2_5-8B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.65,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-8B [18]       2344.1 84.6 / 82.6 83.2   62.8   58.1   62.8   73.2      50.1    3.65      78.4     90.6 55.7"
+      },
+      "model": "OpenGVLab/InternVL2_5-8B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 78.4,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-8B [18]       2344.1 84.6 / 82.6 83.2   62.8   58.1   62.8   73.2      50.1    3.65      78.4     90.6 55.7"
+      },
+      "model": "OpenGVLab/InternVL2_5-8B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 90.6,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-8B [18]       2344.1 84.6 / 82.6 83.2   62.8   58.1   62.8   73.2      50.1    3.65      78.4     90.6 55.7"
+      },
+      "model": "OpenGVLab/InternVL2_5-8B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 49.9,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-8B              2415.4 83.4 / 82.2 81.7   81.3   66.3   68.2   77.7      49.9    3.61      76.3     91.1 55.2"
+      },
+      "model": "OpenGVLab/InternVL3-8B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.61,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-8B              2415.4 83.4 / 82.2 81.7   81.3   66.3   68.2   77.7      49.9    3.61      76.3     91.1 55.2"
+      },
+      "model": "OpenGVLab/InternVL3-8B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 76.3,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-8B              2415.4 83.4 / 82.2 81.7   81.3   66.3   68.2   77.7      49.9    3.61      76.3     91.1 55.2"
+      },
+      "model": "OpenGVLab/InternVL3-8B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 91.1,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-8B              2415.4 83.4 / 82.2 81.7   81.3   66.3   68.2   77.7      49.9    3.61      76.3     91.1 55.2"
+      },
+      "model": "OpenGVLab/InternVL3-8B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 51.2,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-9B              2372.8 83.4 / 82.2 81.7   76.2   65.4   66.3   76.3      51.2    3.47      75.0     90.4 55.0"
+      },
+      "model": "OpenGVLab/InternVL3-9B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.47,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-9B              2372.8 83.4 / 82.2 81.7   76.2   65.4   66.3   76.3      51.2    3.47      75.0     90.4 55.0"
+      },
+      "model": "OpenGVLab/InternVL3-9B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 75,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-9B              2372.8 83.4 / 82.2 81.7   76.2   65.4   66.3   76.3      51.2    3.47      75.0     90.4 55.0"
+      },
+      "model": "OpenGVLab/InternVL3-9B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 90.4,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-9B              2372.8 83.4 / 82.2 81.7   76.2   65.4   66.3   76.3      51.2    3.47      75.0     90.4 55.0"
+      },
+      "model": "OpenGVLab/InternVL3-9B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 55.1,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-14B             2478.3 85.6 / 84.1 83.5   80.2   68.4   68.8   79.0      55.1    3.49      77.3     90.2 56.5"
+      },
+      "model": "OpenGVLab/InternVL3-14B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.49,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-14B             2478.3 85.6 / 84.1 83.5   80.2   68.4   68.8   79.0      55.1    3.49      77.3     90.2 56.5"
+      },
+      "model": "OpenGVLab/InternVL3-14B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 77.3,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-14B             2478.3 85.6 / 84.1 83.5   80.2   68.4   68.8   79.0      55.1    3.49      77.3     90.2 56.5"
+      },
+      "model": "OpenGVLab/InternVL3-14B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 90.2,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-14B             2478.3 85.6 / 84.1 83.5   80.2   68.4   68.8   79.0      55.1    3.49      77.3     90.2 56.5"
+      },
+      "model": "OpenGVLab/InternVL3-14B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 50.3,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL-Chat-V1.5 [19]   2194.2 82.2 / 82.0 80.3   61.5   51.5   57.3   69.7      50.3    3.11      75.4     88.4 54.3"
+      },
+      "rawModelName": "InternVL-Chat-V1.5"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.11,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL-Chat-V1.5 [19]   2194.2 82.2 / 82.0 80.3   61.5   51.5   57.3   69.7      50.3    3.11      75.4     88.4 54.3"
+      },
+      "rawModelName": "InternVL-Chat-V1.5"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 75.4,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL-Chat-V1.5 [19]   2194.2 82.2 / 82.0 80.3   61.5   51.5   57.3   69.7      50.3    3.11      75.4     88.4 54.3"
+      },
+      "rawModelName": "InternVL-Chat-V1.5"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 88.4,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL-Chat-V1.5 [19]   2194.2 82.2 / 82.0 80.3   61.5   51.5   57.3   69.7      50.3    3.11      75.4     88.4 54.3"
+      },
+      "rawModelName": "InternVL-Chat-V1.5"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 50.7,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-26B [19]        2260.7 83.4 / 82.0 81.5   62.1   57.2   61.2   71.8      50.7    3.55      75.6     88.0 54.5"
+      },
+      "model": "OpenGVLab/InternVL2-26B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.55,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-26B [19]        2260.7 83.4 / 82.0 81.5   62.1   57.2   61.2   71.8      50.7    3.55      75.6     88.0 54.5"
+      },
+      "model": "OpenGVLab/InternVL2-26B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 75.6,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-26B [19]        2260.7 83.4 / 82.0 81.5   62.1   57.2   61.2   71.8      50.7    3.55      75.6     88.0 54.5"
+      },
+      "model": "OpenGVLab/InternVL2-26B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 88,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-26B [19]        2260.7 83.4 / 82.0 81.5   62.1   57.2   61.2   71.8      50.7    3.55      75.6     88.0 54.5"
+      },
+      "model": "OpenGVLab/InternVL2-26B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 55,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-26B [18]      2373.3 85.4 / 85.5 84.2   65.0   60.8   66.5   75.2      55.0    3.70      79.1     90.6 57.1"
+      },
+      "model": "OpenGVLab/InternVL2_5-26B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.7,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-26B [18]      2373.3 85.4 / 85.5 84.2   65.0   60.8   66.5   75.2      55.0    3.70      79.1     90.6 57.1"
+      },
+      "model": "OpenGVLab/InternVL2_5-26B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 79.1,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-26B [18]      2373.3 85.4 / 85.5 84.2   65.0   60.8   66.5   75.2      55.0    3.70      79.1     90.6 57.1"
+      },
+      "model": "OpenGVLab/InternVL2_5-26B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 90.6,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-26B [18]      2373.3 85.4 / 85.5 84.2   65.0   60.8   66.5   75.2      55.0    3.70      79.1     90.6 57.1"
+      },
+      "model": "OpenGVLab/InternVL2_5-26B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 41.6,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Cambrian-34B [116]           –   80.4 / 79.2 78.3   53.2    –     54.2    –        41.6      –         –       –     –"
+      },
+      "rawModelName": "Cambrian-34B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 56.9,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-40B [19]        2307.5 86.8 / 86.5 85.1   65.5   63.8   65.4   75.7      56.9    3.75      77.6     88.4 56.7"
+      },
+      "model": "OpenGVLab/InternVL2-40B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.75,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-40B [19]        2307.5 86.8 / 86.5 85.1   65.5   63.8   65.4   75.7      56.9    3.75      77.6     88.4 56.7"
+      },
+      "model": "OpenGVLab/InternVL2-40B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 77.6,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-40B [19]        2307.5 86.8 / 86.5 85.1   65.5   63.8   65.4   75.7      56.9    3.75      77.6     88.4 56.7"
+      },
+      "model": "OpenGVLab/InternVL2-40B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 88.4,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-40B [19]        2307.5 86.8 / 86.5 85.1   65.5   63.8   65.4   75.7      56.9    3.75      77.6     88.4 56.7"
+      },
+      "model": "OpenGVLab/InternVL2-40B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 56.8,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-38B [18]      2455.8 86.5 / 86.3 85.5   68.8   62.1   67.9   77.0      56.8    3.71      78.3     90.7 57.4"
+      },
+      "model": "OpenGVLab/InternVL2_5-38B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.71,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-38B [18]      2455.8 86.5 / 86.3 85.5   68.8   62.1   67.9   77.0      56.8    3.71      78.3     90.7 57.4"
+      },
+      "model": "OpenGVLab/InternVL2_5-38B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 78.3,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-38B [18]      2455.8 86.5 / 86.3 85.5   68.8   62.1   67.9   77.0      56.8    3.71      78.3     90.7 57.4"
+      },
+      "model": "OpenGVLab/InternVL2_5-38B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 90.7,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-38B [18]      2455.8 86.5 / 86.3 85.5   68.8   62.1   67.9   77.0      56.8    3.71      78.3     90.7 57.4"
+      },
+      "model": "OpenGVLab/InternVL2_5-38B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 57.1,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-38B             2523.6 87.6 / 86.8 86.9   83.9   69.6   71.5   81.5      57.1    3.77      77.1     90.6 57.1"
+      },
+      "model": "OpenGVLab/InternVL3-38B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.77,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-38B             2523.6 87.6 / 86.8 86.9   83.9   69.6   71.5   81.5      57.1    3.77      77.1     90.6 57.1"
+      },
+      "model": "OpenGVLab/InternVL3-38B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 77.1,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-38B             2523.6 87.6 / 86.8 86.9   83.9   69.6   71.5   81.5      57.1    3.77      77.1     90.6 57.1"
+      },
+      "model": "OpenGVLab/InternVL3-38B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 90.6,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-38B             2523.6 87.6 / 86.8 86.9   83.9   69.6   71.5   81.5      57.1    3.77      77.1     90.6 57.1"
+      },
+      "model": "OpenGVLab/InternVL3-38B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 46.5,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "GPT-4V [97]               1926.6 81.0 / 80.2 80.0   67.5   66.3   56.0   70.7      46.5      –         –       –     –"
+      },
+      "model": "openai/gpt-4-vision-preview"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 55,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "GPT-4o-20240513 [97]         –   83.4 / 82.1 83.1   69.1   71.0   64.7    –        55.0    4.00      76.6     86.9 55.6"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 4,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "GPT-4o-20240513 [97]         –   83.4 / 82.1 83.1   69.1   71.0   64.7    –        55.0    4.00      76.6     86.9 55.6"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 76.6,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "GPT-4o-20240513 [97]         –   83.4 / 82.1 83.1   69.1   71.0   64.7    –        55.0    4.00      76.6     86.9 55.6"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 86.9,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "GPT-4o-20240513 [97]         –   83.4 / 82.1 83.1   69.1   71.0   64.7    –        55.0    4.00      76.6     86.9 55.6"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 37.8,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Claude-3-Opus [3]         1586.8 63.3 / 59.2 60.1   51.7   55.8   45.7   55.5      37.8      –         –       –     –"
+      },
+      "model": "anthropic/claude-3-opus"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 55.5,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Claude-3.5-Sonnet [3]        –   82.6 / 83.5 80.9   70.1   71.8   65.1    –        55.5      –         –       –     –"
+      },
+      "rawModelName": "Claude-3.5-Sonnet"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 45.6,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Gemini-1.5-Pro [102]         –   73.9 / 73.8 74.6   64.0   66.9   59.1    –        45.6      –         –       –     –"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 49,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "LLaVA-OneVision-72B [60] 2261.0 85.8 / 85.3  85.0   60.6    –     65.8    –        49.0      –         –       –     –"
+      },
+      "rawModelName": "LLaVA-OneVision-72B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 58.1,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Qwen2-VL-72B [121]        2482.7 86.5 / 86.6 85.9   74.0   66.9   68.3   78.7      58.1      –         –       –     –"
+      },
+      "model": "Qwen/Qwen2-VL-72B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 55.2,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Qwen2.5-VL-72B [6]        2448.0 88.6 / 87.9 88.4   76.2    –     70.8    –        55.2      –       79.2      –     –"
+      },
+      "rawModelName": "Qwen2.5-VL-72B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 79.2,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "Qwen2.5-VL-72B [6]        2448.0 88.6 / 87.9 88.4   76.2    –     70.8    –        55.2      –       79.2      –     –"
+      },
+      "rawModelName": "Qwen2.5-VL-72B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 55.2,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-Llama3-76B [19] 2414.7 86.5 / 86.3 85.5   65.7   68.4   67.4   77.2      55.2    3.83      77.6     89.0 56.4"
+      },
+      "model": "OpenGVLab/InternVL2-Llama3-76B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.83,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-Llama3-76B [19] 2414.7 86.5 / 86.3 85.5   65.7   68.4   67.4   77.2      55.2    3.83      77.6     89.0 56.4"
+      },
+      "model": "OpenGVLab/InternVL2-Llama3-76B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 77.6,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-Llama3-76B [19] 2414.7 86.5 / 86.3 85.5   65.7   68.4   67.4   77.2      55.2    3.83      77.6     89.0 56.4"
+      },
+      "model": "OpenGVLab/InternVL2-Llama3-76B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 89,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2-Llama3-76B [19] 2414.7 86.5 / 86.3 85.5   65.7   68.4   67.4   77.2      55.2    3.83      77.6     89.0 56.4"
+      },
+      "model": "OpenGVLab/InternVL2-Llama3-76B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 57.4,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-78B [18]      2494.5 88.3 / 88.5 87.4   72.3   65.5   69.5   79.2      57.4    3.89      78.8     90.8 57.7"
+      },
+      "model": "OpenGVLab/InternVL2_5-78B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.89,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-78B [18]      2494.5 88.3 / 88.5 87.4   72.3   65.5   69.5   79.2      57.4    3.89      78.8     90.8 57.7"
+      },
+      "model": "OpenGVLab/InternVL2_5-78B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 78.8,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-78B [18]      2494.5 88.3 / 88.5 87.4   72.3   65.5   69.5   79.2      57.4    3.89      78.8     90.8 57.7"
+      },
+      "model": "OpenGVLab/InternVL2_5-78B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 90.8,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL2.5-78B [18]      2494.5 88.3 / 88.5 87.4   72.3   65.5   69.5   79.2      57.4    3.89      78.8     90.8 57.7"
+      },
+      "model": "OpenGVLab/InternVL2_5-78B"
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "metric": "avg",
+      "value": 59.1,
+      "unit": "percent",
+      "settings": {
+        "other": "HallBench (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-78B             2549.8 89.0 / 88.7 87.7   81.3   70.0   72.5   82.0      59.1    3.85      79.2     90.3 58.1"
+      },
+      "model": "OpenGVLab/InternVL3-78B"
+    },
+    {
+      "rawEvalName": "MMHal",
+      "metric": "score",
+      "value": 3.85,
+      "unit": "score",
+      "settings": {
+        "other": "MMHal (score)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-78B             2549.8 89.0 / 88.7 87.7   81.3   70.0   72.5   82.0      59.1    3.85      79.2     90.3 58.1"
+      },
+      "model": "OpenGVLab/InternVL3-78B"
+    },
+    {
+      "rawEvalName": "CRPE",
+      "metric": "relation",
+      "value": 79.2,
+      "unit": "percent",
+      "settings": {
+        "other": "relation"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-78B             2549.8 89.0 / 88.7 87.7   81.3   70.0   72.5   82.0      59.1    3.85      79.2     90.3 58.1"
+      },
+      "model": "OpenGVLab/InternVL3-78B"
+    },
+    {
+      "rawEvalName": "POPE",
+      "metric": "avg",
+      "value": 90.3,
+      "unit": "percent",
+      "settings": {
+        "other": "POPE (avg)"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 5",
+        "quote": "InternVL3-78B             2549.8 89.0 / 88.7 87.7   81.3   70.0   72.5   82.0      59.1    3.85      79.2     90.3 58.1"
+      },
+      "model": "OpenGVLab/InternVL3-78B"
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:25:00Z"
+  },
+  "notes": "Technical report (not a system card). Safety-only extraction: only Table 5 hallucination columns (HallusionBench/MMHal/CRPE/POPE). Skipped capability suites (MMMU, MathVista, OCR, video, grounding, multilingual, language, MME/MMBench/MMVet/MMStar). Skipped Table 12 POPE ablation (V2PE study on pre-trained InternVL3-8B). Skipped Figure 1 HallusionBench as duplicate of Table 5. No dedicated safety/red-team/risk section. Page numbers use printed footers. Qwen2.5-VL-* left as rawModelName because the report does not name Instruct."
+}

@@ -1,0 +1,199 @@
+{
+  "document": "01ai-yi-lightning-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "01-ai/yi-lightning"
+    }
+  ],
+  "pageCount": 17,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "64K tokens",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "extend the context\nwindow to 64K tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "multilingual (vocabulary expanded for multilingual support)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "we expand the vocabulary size to 100,352 tokens to enhance multilingual\nsupport."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "not_stated"
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Mixture-of-Experts (MoE) with fine-grained expert segmentation, EP/PEP routing, hybrid sliding-window + full attention, and cross-layer KV cache reuse",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Yi-Lightning is fundamentally built upon the Mixture-of-Experts (MoE) architecture."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "multilingual web documents (crawled through early 2024), books, academic papers, codebases, and question-answer pairs",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Our pre-training corpus comprises multilingual web documents (crawled through early 2024), books,\nacademic papers, codebases, and question-answer pairs."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "01.AI describes Responsible AI Safety Engine (RAISE), a four-part safety engine covering pre-training filtration, post-training safety rewards, and inference-time input/output controls, but reports no safety benchmark scores.", "tone": "mixed",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "we develop RAISE (Responsible AI Safety Engine), a\ncomprehensive safety framework illustrated in Figure 2."
+      }
+    },
+    {
+      "text": "Pre-training filtration uses Transformer and deep neural network (DNN) classifiers to reduce biased content and block personally identifiable information (PII) leakage in the corpus.", "tone": "neutral",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "minimizing erroneous information and biased\ncontent, preventing privacy data leakage, and enhancing model safety and compliance."
+      }
+    },
+    {
+      "text": "Inference input filters target malicious, discriminatory, or hateful content; output controls cover value alignment, bias detection, legal compliance, accuracy, and appropriateness.", "tone": "neutral",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "value alignment, bias detection, legal compliance, accuracy\nassessment, and content appropriateness."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:43:38Z"
+  },
+  "notes": "Technical report (arXiv 2412.01253), not a system card. Section 6 describes RAISE qualitatively only: no numerical safety, refusal, jailbreak, bias, toxicity, or dangerous-capability scores. Topics left uncovered: RAISE filters and RLHF safety rewards are training/serving methods, not topic tests or model-behavior claims per pilot. Skipped capability Tables 1–2 and Arena text: GPQA, MATH, HumanEval, IFEval, WildBench, Arena-Hard, AlignBench-v1.1, MT-Bench, Chatbot Arena. No parameter count or training FLOPs stated. October 16, 2024 is Chatbot Arena first appearance, not treated as releaseDate. yi-lightning-lite appears only in an Arena leaderboard snapshot, not as a model this report develops."
+}

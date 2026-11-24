@@ -1,0 +1,271 @@
+{
+  "eval": {
+    "slug": "workspace-probe-swap",
+    "displayName": "Workspace Probe Swap",
+    "aliases": ["probe-swap", "intermediate swap"],
+    "description": "Tests if the model uses a workspace lens's directions: when a lens swaps one hidden middle step for another, does the answer change to match?\n\nEach item is a prompt with a hidden middle step and a fixed swap. For example, \"the language spoken in the country where the Amazon River ends is\" needs \"Brazil\" to give \"Portuguese\". The lens's direction for \"Brazil\" is swapped with its direction for \"Mexico\" at the seven readout layers. The swap succeeds when \"Spanish\" becomes the model's top word.\n\nThe edit exchanges the two directions' amounts from the clean pass, times a scale (0.5, 1, 2 or 4). Each direction has length 1, so a lens does not win by larger vectors. A trial counts only when the model's own top word is the answer. Two controls use the same prompt: a swap of the answer itself (the ceiling), and a swap to an unrelated word such as \"button\" (should almost never work).\n\nGurnee et al. (2026) made the task. Ayonrinde and Lindsey adapted it for the J++ Lens paper, which reports it for Qwen3.6-27B only.",
+    "summary": "Tests if a model's answer changes to match when a workspace lens swaps its hidden middle step.",
+    "family": "Workspace lens evals",
+    "maintainers": [
+      {
+        "name": "Gurnee et al.",
+        "url": "https://transformer-circuits.pub/2026/workspace/index.html"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://transformer-circuits.pub/2026/workspace/index.html",
+        "title": "Gurnee et al., Verbalizable Representations Form a Global Workspace in Language Models (2026): the swap task"
+      },
+      {
+        "kind": "paper",
+        "url": "https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace",
+        "title": "Ayonrinde and Lindsey, J++ Lens: Jacobian Filtering Enables More Faithful Workspace Lenses (2026): the protocol that we run"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/safety-research/jpp_lens",
+        "title": "Ayonrinde and Lindsey, J++ Lens code and eval harness"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://github.com/safety-research/jpp_lens/blob/d7efc0de372e20589e899188c0cfe8434acc63ec/data/jlens/experiments/probe-swap.json",
+        "title": "The 90 swap items"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["method"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-11",
+      "status": "published",
+      "releasedDate": "2026-11",
+      "changes": "OpenAudit's own runs of the paper's harness ([jpp_lens](https://github.com/safety-research/jpp_lens) at `d7efc0de`), with the same lenses as Workspace Lens Readout 2026-10.2.\n\n- **Models:** five of the six readout models. The harness cannot edit DeepSeek-V4-Flash: its residual has more than one stream.\n- **Scale:** the headline is at each lens's best scale for each model, as in the paper. This picks the scale on the same items, so it is a little high. The \"at scale\" metrics pick no scale.\n- **Readout token:** a prompt that ends in a space is read without it, at the token before the answer (15 of the 90 items). The harness reads at the space, but most tokenizers join the space to the next word, so the model's top word there is often not the answer. The 14 items with a number answer keep the space, because the tokenizers split it from the number. Now 59 to 68 items count for each model, 1 to 10 more.\n- **gemma-4-31B:** the answer swap also fails often (0 to 23% at each lens's best scale), so its swap results say little about the lenses.\n- **Qwen3.6-27B:** read at the space, as in the harness, the logit lens and the J-Lens give the paper's numbers. At the token before the answer, all four lenses are 3 to 5 points lower.",
+      "dataset": {
+        "url": "https://github.com/safety-research/jpp_lens/blob/d7efc0de372e20589e899188c0cfe8434acc63ec/data/jlens/experiments/probe-swap.json",
+        "license": "Apache-2.0",
+        "splits": [
+          {
+            "name": "probe-swap",
+            "sampleCount": 90,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "r_lens",
+          "displayName": "R-Lens",
+          "type": "binary",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "1 when the R-Lens swap makes the new answer the model's top word, at the R-Lens's best scale for the model."
+        },
+        {
+          "key": "jacobian_lens",
+          "displayName": "Jacobian Lens",
+          "type": "binary",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "1 when the J-Lens swap makes the new answer the model's top word, at the J-Lens's best scale for the model."
+        },
+        {
+          "key": "jpp_lens",
+          "displayName": "J++ Lens",
+          "type": "binary",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "1 when the J++ Lens swap makes the new answer the model's top word, at the J++ Lens's best scale for the model."
+        },
+        {
+          "key": "logit_lens",
+          "displayName": "Logit Lens",
+          "type": "binary",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "1 when the logit lens swap makes the new answer the model's top word, at the logit lens's best scale for the model."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "swap_top1",
+          "displayName": "Swap top-1",
+          "aggregation": "custom",
+          "headline": true,
+          "min": 0,
+          "max": 1,
+          "description": "The share of trials in which the swap makes the new answer the model's top word, at the lens's best scale for the model (the paper's metric).",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "swap_top5",
+          "displayName": "Swap top-5",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "At the same scale: the share of trials in which the new answer enters the top five words. Only trials where it is not in the top five before the swap count.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "swap_top1_scale_1",
+          "displayName": "Swap top-1 at scale 1",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Swap top-1 at scale 1 for all lenses and models, so no scale is picked on the items.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "answer_swap_top1",
+          "displayName": "Answer swap top-1 (ceiling)",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A control at the same scale: the lens swaps the answer itself (Portuguese for Spanish). If this fails, the edit is too weak to test the hidden step.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "random_swap_top1",
+          "displayName": "Random swap top-1 (control)",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "A control at the same scale: the lens swaps the hidden step for an unrelated word (\"button\"), and the new answer still becomes the top word. This is the rate of success by chance; lower is better.",
+          "direction": "lower_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "swap_top1_scale_0_5",
+          "displayName": "Swap top-1 at scale 0.5",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Swap top-1 at scale 0.5 for all lenses and models, so no scale is picked on the items.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "swap_top1_scale_2",
+          "displayName": "Swap top-1 at scale 2",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Swap top-1 at scale 2 for all lenses and models, so no scale is picked on the items.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "swap_top1_scale_4",
+          "displayName": "Swap top-1 at scale 4",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Swap top-1 at scale 4 for all lenses and models, so no scale is picked on the items.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "answer_swap_top1_scale_0_5",
+          "displayName": "Answer swap top-1 at scale 0.5",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The answer swap control (the ceiling) at scale 0.5.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "answer_swap_top1_scale_1",
+          "displayName": "Answer swap top-1 at scale 1",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The answer swap control (the ceiling) at scale 1.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "answer_swap_top1_scale_2",
+          "displayName": "Answer swap top-1 at scale 2",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The answer swap control (the ceiling) at scale 2.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "answer_swap_top1_scale_4",
+          "displayName": "Answer swap top-1 at scale 4",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The answer swap control (the ceiling) at scale 4.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "random_swap_top1_scale_0_5",
+          "displayName": "Random swap top-1 at scale 0.5",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The random swap control at scale 0.5. Lower is better.",
+          "direction": "lower_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "random_swap_top1_scale_1",
+          "displayName": "Random swap top-1 at scale 1",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The random swap control at scale 1. Lower is better.",
+          "direction": "lower_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "random_swap_top1_scale_2",
+          "displayName": "Random swap top-1 at scale 2",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The random swap control at scale 2. Lower is better.",
+          "direction": "lower_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "random_swap_top1_scale_4",
+          "displayName": "Random swap top-1 at scale 4",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The random swap control at scale 4. Lower is better.",
+          "direction": "lower_is_better",
+          "safetyDirection": "neither"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "eval": {
+    "slug": "anthropic-browser-use-prompt-injection",
+    "displayName": "Browser use prompt injection (Anthropic)",
+    "aliases": [
+      "Browser use prompt injection",
+      "Browser-use prompt injection",
+      "Browser use prompt injection (Claude Cowork)",
+      "Prompt injection (browser use / Claude Cowork)",
+      "Professional red-teamer prompt injection (browser use)",
+      "Cowork browser prompt injection"
+    ],
+    "description": "Anthropic internal adaptive prompt-injection eval for browser products such as Claude in Chrome and Claude Cowork. Professional red-teamers craft attacks viewed via screenshots or page reads in curated environments held out from training (cards report on the order of 110–129 scenarios, often 10 attempts each). Headline metrics are attempt-level and scenario-level attack success rate, with and without product safeguards.",
+    "summary": "Measures how often hidden instructions on web pages trick AI agents into harmful actions.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www.anthropic.com/claude-opus-5-5-system-card",
+        "title": "Claude Opus 5.5 System Card (browser use prompt injection)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["agentic"],
+      "cases": ["fixed", "generated"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": true,
+      "humanParticipants": true,
+      "subjects": ["model"],
+      "topics": ["prompt_injection", "jailbreaks", "agentic_misuse"]
+    },
+    "visibility": "public",
+    "family": "Anthropic agentic safety"
+  },
+  "versions": [
+    {
+      "version": "cowork-redteam",
+      "status": "draft",
+      "changes": "Environment counts and attack sets change across cards (for example 129 then 110 scenarios).",
+      "scores": [
+        {
+          "key": "attack_succeeded",
+          "displayName": "Attack succeeded",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "The injected browser content diverted the agent from the user’s instructions on this attempt."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "attack_success_rate",
+          "displayName": "Attack success rate (attempts)",
+          "score": "attack_succeeded",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Fraction of attempts that succeed. Cards also report scenario-level ASR (any success in N attempts)."
+        }
+      ]
+    }
+  ]
+}

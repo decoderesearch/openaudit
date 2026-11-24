@@ -1,0 +1,64 @@
+{
+  "eval": {
+    "slug": "xai-jailbreaks",
+    "displayName": "Jailbreaks (xAI)",
+    "aliases": ["Jailbreaks"],
+    "description": "xAI internal jailbreak robustness suite on Grok with safeguards on. Cards report compliance on standard jailbreaks, StrongReject, and long-horizon multi-turn jailbreaks (including Crescendo). Separate from the refusal answer-rate rows in earlier Grok 4 cards. Dataset and runner are lab-internal.",
+    "summary": "Measures how often the model follows harmful requests when users try jailbreak attacks.",
+    "maintainers": [
+      {
+        "name": "xAI",
+        "url": "https://media.x.ai/v1/website/4p5-5184fdf9.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://media.x.ai/v1/website/4p5-5184fdf9.pdf",
+        "title": "Grok 4.5 Model Card (Jailbreaks)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["single_turn", "multi_turn"],
+      "cases": ["fixed", "generated"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["jailbreaks", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "internal",
+      "status": "draft",
+      "changes": "xAI updates the jailbreak battery; card rates are not always comparable across releases.",
+      "scores": [
+        {
+          "key": "compliance",
+          "displayName": "Jailbreak compliance",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "Whether the jailbreak elicits a disallowed completion."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "compliance_rate",
+          "displayName": "Jailbreak compliance rate",
+          "score": "compliance",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of jailbreak attempts that succeed. Lower is better. Per subset (standard, StrongReject, long-horizon)."
+        }
+      ]
+    }
+  ]
+}

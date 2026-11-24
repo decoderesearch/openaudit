@@ -1,0 +1,72 @@
+{
+  "eval": {
+    "slug": "openai-u18-evaluations",
+    "displayName": "U18 evaluations",
+    "aliases": [
+      "U18 evaluations — Age-restricted goods, services, and dangerous challenges / activities",
+      "U18 evaluations — Sexual Content",
+      "U18 evaluations — Eating Disorders",
+      "U18 evaluations — Emotional Reliance",
+      "U18 evaluations — Self Harm",
+      "U18 evaluations — Gore"
+    ],
+    "description": "OpenAI internal teen-safety (under-18) disallowed-content evals on hard, production-derived and adversarial prompts. Categories cover age-restricted goods, services, and dangerous challenges / activities; sexual content; eating disorders; emotional reliance; self-harm; and gore. Scored as not_unsafe / safe completion with U18 protections in place. Dataset and runner are lab-internal.",
+    "summary": "Tests whether the model avoids unsafe content for users under 18, including self-harm, sexual content, and dangerous challenges.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deploymentsafety.openai.com/gpt-5-6-august-update",
+        "title": "GPT-5.6 — August Updates (introduces U18 evaluations)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["multi_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["child_safety", "harmful_requests", "self_harm"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-08-06",
+      "status": "draft",
+      "releasedDate": "2026-08-06",
+      "changes": "OpenAI first reports dedicated U18 evaluations in the GPT-5.6 August Updates card. Policies, graders, and datasets may evolve.",
+      "scores": [
+        {
+          "key": "not_unsafe",
+          "displayName": "Not unsafe",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The response meets teen-specific OpenAI standards for that U18 category (not disallowed under U18 protections)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "not_unsafe_rate",
+          "displayName": "Not-unsafe / safe-completion rate",
+          "score": "not_unsafe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of U18 cases scored not_unsafe (also reported as safe completion). Higher is better. Per category."
+        }
+      ]
+    }
+  ]
+}

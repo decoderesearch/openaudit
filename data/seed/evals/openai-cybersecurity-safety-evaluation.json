@@ -1,0 +1,85 @@
+{
+  "eval": {
+    "slug": "openai-cybersecurity-safety-evaluation",
+    "displayName": "Cybersecurity Safety Evaluation",
+    "aliases": [
+      "Cyber safety — Production traffic",
+      "Cyber safety — Synthetic data",
+      "Cyber safety — Deidentified production data",
+      "Cyber safety policy compliance — Production data",
+      "Cyber safety policy compliance — Synthetic data",
+      "Cyber safety evaluations — Production data",
+      "Cyber safety evaluations — Synthetic data",
+      "Cyber model safety training",
+      "Cyber model safety training — Production data",
+      "Cyber model safety training — Synthetic data",
+      "Cyber Model Refusal Evaluation — Production data",
+      "Cyber Model Refusal Evaluation — Synthetic data",
+      "Cybersecurity Model Refusal Evaluation (Production data)",
+      "Cybersecurity Model Refusal Evaluation (Synthetic data)",
+      "Cybersecurity Safety — Production data",
+      "Cybersecurity Safety — Synthetic data",
+      "Cybersecurity Safety Evaluation — Production Chat",
+      "Cybersecurity Safety Evaluation — Synthetic Agentic Envs",
+      "Cybersecurity Safety Evaluation — Semi-Synthetic Agentic Envs"
+    ],
+    "description": "OpenAI internal cyber policy-compliance eval on production (or deidentified production) chat traffic and synthetic or semi-synthetic agentic environments. Covers benign, dual-use, and disallowed cyber requests, including MITRE ATT&CK-grounded scenarios. Scored as not_unsafe / policy compliance / safe completion / average safety score (higher is better). Dataset and runner are lab-internal. Cards rename the suite over time; categories stay the same eval.",
+    "summary": "Tests whether the model follows cyber policy by helping with safe requests and refusing harmful ones.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://cdn.openai.com/pdf/3a4153c8-c748-4b71-8e31-aecbde944f8d/oai_5_2_system-card.pdf",
+        "title": "GPT-5.2 system card (Cyber safety evaluations)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["multi_turn", "agentic"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["cyber", "harmful_requests", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "gpt-5.2",
+      "status": "draft",
+      "releasedDate": "2025-12-11",
+      "changes": "First tabled as Cyber safety evaluations in the GPT-5.2 system card (Production traffic / Synthetic data). Later cards rename the suite (Cyber model safety training, Cyber Model Refusal Evaluation, Cybersecurity Safety Evaluation) and add Semi-Synthetic Agentic Envs; policies and splits evolve.",
+      "scores": [
+        {
+          "key": "not_unsafe",
+          "displayName": "Not unsafe / policy compliant",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The response (and actions) comply with OpenAI cyber safety policy for that case (also reported as policy compliance or safe completion)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "not_unsafe_rate",
+          "displayName": "Not-unsafe / policy-compliance rate",
+          "score": "not_unsafe",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of cyber safety cases scored not_unsafe (also reported as policy compliance, safe completion, or average safety score). Higher is better. Per split (production vs synthetic / agentic)."
+        }
+      ]
+    }
+  ]
+}

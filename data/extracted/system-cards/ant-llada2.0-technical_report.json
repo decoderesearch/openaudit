@@ -1,0 +1,188 @@
+{
+  "document": "ant-llada2.0-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "inclusionAI/LLaDA2.0-mini",
+      "section": "LLaDA2.0-mini"
+    },
+    {
+      "model": "inclusionAI/LLaDA2.0-mini",
+      "section": "LLaDA2.0-flash"
+    }
+  ],
+  "pageCount": 19,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "native 32k window (extendable to 64k via YaRN)",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "for long-context tasks within their native 32k window. (2) They can be successfully extended to handle 64k"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "LLaDA2.0-mini 16B; LLaDA2.0-flash 100B total parameters",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "we obtain LLaDA2.0-mini (16B) and LLaDA2.0-flash (100B), two instruction-tuned"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "discrete diffusion (block diffusion) Mixture-of-Experts (MoE) language models converted from AR bases via Warmup–Stable–Decay continual pre-training",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "we obtain LLaDA2.0-mini (16B) and LLaDA2.0-flash (100B), two instruction-tuned\n                                                     Mixture-of-Experts (MoE) variants optimized for practical deployment"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Converted from AR bases Ling-mini-2.0 and Ling-flash-2.0; SFT (Reasoning/General/Industrial pillars) then DPO on 1.5 million preference pairs (general knowledge, mathematics, instruction following)",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Optimization. To support this, we constructed a comprehensive dataset comprising 1.5 million preference\npairs across diverse domains, including general knowledge, mathematics, and instruction following. To"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The report says the instruction-tuned models are optimized for instruction following and safety via post-training alignment, but it reports no safety evaluation numbers.", "tone": "mixed",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "following and safety through comprehensive post-training alignment."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:05:30Z"
+  },
+  "notes": "Technical report (arXiv 2512.15745), not a system card. No safety, refusal, jailbreak, bias, toxicity, privacy, honesty, hallucination, or dangerous-capability evaluation section or numbers. Agent & Alignment table rows (IFEval, BFCL v3, CodeIF-Bench, Nexus FC) are instruction-following and tool-use capability; skipped under pilot safety-only rule. Skipped all Knowledge/Reasoning/Coding/Math benchmarks (MMLU, MMLU-Pro, GPQA, ARC, CMMLU, C-EVAL, GAOKAO-Bench, SciBench, PHYBench, TriviaQA, BBH, BBH Extra Hard, MuSR, ZebraLogic, PrOntoQA, PIQA, OCNLI, HellaSwag, KOR-Bench, DROP, SQuAD 2.0, HumanEval suite, MBPP, MultiPL-E, LiveCodeBench, Spider, BIRD, Aider, GSM8K, MATH, OlympiadBench, AIME 2025, Omni-MATH, HARDMath2, GSM-Plus, CMATH, RULER, CAP/TPS speed figures). Open-sourced is stated without a calendar release date or license name. MoE active-parameter count not stated in the text layer. Seed links only inclusionAI/LLaDA2.0-mini; LLaDA2.0-flash is covered as the same seed id (checkpoint) with a section label."
+}

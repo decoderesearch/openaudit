@@ -1,0 +1,381 @@
+{
+  "document": "meta-chameleon-paper-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "facebook/chameleon-7b",
+      "section": "Chameleon-7B; Table 1; Table 5"
+    },
+    {
+      "model": "facebook/chameleon-30b",
+      "section": "Chameleon-34B / 30B; Table 1; Table 5"
+    }
+  ],
+  "pageCount": 27,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4k tokens",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "Chameleon      7B             4k           ×      4.4T     1.0 × 10−4      2.1      0.1     10−5       ✓"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "images, text, and code",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "images, text, and code."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7B and 34B",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "Chameleon      7B             4k           ×      4.4T     1.0 × 10−4      2.1      0.1     10−5       ✓"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "LLaMa-2-style transformer with QK-Norm; early-fusion token-based mixed-modal",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Our architecture largely follows LLaMa-2 (Touvron et al., 2023)."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "2.9T text-only tokens; 1.5T text-image tokens (1.4B pairs); 400B interleaved text-image tokens; ~9.2T tokens seen",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "a total of 2.9 trillion text-only tokens."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Crowdsourced unsafe-prompt safety testing: 99.2% (7B) and 99.7% (34B) safe",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "We crowdsource prompts that provoke the model to create unsafe content in predefined categories such as"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Safety testing includes self-harm as a predefined unsafe category",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "self-harm, violence and hate, and criminal planning. These prompts cover both text and mixed-modal inputs,"
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Internal red team: 93.9% safe / 1.6% unsafe / 4.5% unsure on 445 adversarial interactions (34B)",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "an internal red team probed the 30B model over 445 prompt-response interactions, including"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "On 20,000 crowdsourced unsafe prompts, only 78 (0.39%) of 7B responses and 19 (0.095%) of 30B responses were labeled unsafe.", "tone": "good",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "an overwhelming majority of Chameleon’s responses are considered safe, with only 78 (0.39%) unsafe"
+      }
+    },
+    {
+      "text": "Authors note that further reinforcement learning from human feedback (RLHF)/reinforcement learning from AI feedback (RLAIF) safety tuning would further harden against jailbreaking; current supervised fine-tuning (SFT) safety is framed as protection for benign research use.", "tone": "mixed",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "the model against jailbreaking and intentional malicious attacks, these results demonstrate that our current"
+      }
+    },
+    {
+      "text": "In absolute human evaluation, annotators unanimously found all compared models produced safe responses on objectionable content such as hate speech.", "tone": "good",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "objectionable content (e.g., hate speech); in this case, all models produce safe responses. For some questions,"
+      }
+    },
+    {
+      "text": "Safety SFT pairs unsafe prompts with refusals covering violence, controlled substances, privacy, sexual content, cyber security, and mixed-modal attacks.", "tone": "good",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "wide variety of sensitive topics, such as violence, controlled substances, privacy, and sexual content. Our"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Safety testing",
+      "model": "facebook/chameleon-7b",
+      "metric": "Safe",
+      "value": 99.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Crowdsourced; Params 7B"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 5",
+        "quote": "7B           99.2%       0.4%       0.4%"
+      }
+    },
+    {
+      "rawEvalName": "Safety testing",
+      "model": "facebook/chameleon-7b",
+      "metric": "Unsafe",
+      "value": 0.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Crowdsourced; Params 7B"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 5",
+        "quote": "7B           99.2%       0.4%       0.4%"
+      }
+    },
+    {
+      "rawEvalName": "Safety testing",
+      "model": "facebook/chameleon-7b",
+      "metric": "Unsure",
+      "value": 0.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Crowdsourced; Params 7B"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 5",
+        "quote": "7B           99.2%       0.4%       0.4%"
+      }
+    },
+    {
+      "rawEvalName": "Safety testing",
+      "model": "facebook/chameleon-30b",
+      "metric": "Safe",
+      "value": 99.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Crowdsourced; Params 34B"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 5",
+        "quote": "34B          99.7%       0.1%       0.2%"
+      }
+    },
+    {
+      "rawEvalName": "Safety testing",
+      "model": "facebook/chameleon-30b",
+      "metric": "Unsafe",
+      "value": 0.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Crowdsourced; Params 34B"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 5",
+        "quote": "34B          99.7%       0.1%       0.2%"
+      }
+    },
+    {
+      "rawEvalName": "Safety testing",
+      "model": "facebook/chameleon-30b",
+      "metric": "Unsure",
+      "value": 0.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Crowdsourced; Params 34B"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 5",
+        "quote": "34B          99.7%       0.1%       0.2%"
+      }
+    },
+    {
+      "rawEvalName": "Safety testing",
+      "model": "facebook/chameleon-30b",
+      "metric": "Safe",
+      "value": 93.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Red Team; Params 34B; 445 prompt-response interactions"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 5",
+        "quote": "Red Team            34B          93.9%       1.6%       4.5%"
+      }
+    },
+    {
+      "rawEvalName": "Safety testing",
+      "model": "facebook/chameleon-30b",
+      "metric": "Unsafe",
+      "value": 1.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Red Team; Params 34B; 445 prompt-response interactions"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 5",
+        "quote": "Red Team            34B          93.9%       1.6%       4.5%"
+      }
+    },
+    {
+      "rawEvalName": "Safety testing",
+      "model": "facebook/chameleon-30b",
+      "metric": "Unsure",
+      "value": 4.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Red Team; Params 34B; 445 prompt-response interactions"
+      },
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "table": "Table 5",
+        "quote": "Red Team            34B          93.9%       1.6%       4.5%"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:03:34Z"
+  },
+  "notes": "Technical report (not a system card). Paper names the larger model both Chameleon-34B (tables) and 30B (safety prose); mapped to seed checkpoint facebook/chameleon-30b (~34B params on HF). Paper Date May 17, 2024 is not treated as a model release date. Safety SFT/cyber examples in training data do not count as topic coverage. Internal Meta red team omitted from testers. Skipped all general capability tables (text reasoning Table 6, math, captioning, VQA, mixed-modal human preference win rates). Table 2 GPU hours recorded only in notes (not FLOPs). Quotes taken from pdftotext layout of arXiv PDF 2405.09818."
+}

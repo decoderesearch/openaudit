@@ -1,0 +1,115 @@
+{
+  "eval": {
+    "slug": "agentic-misalignment",
+    "displayName": "Agentic Misalignment",
+    "aliases": ["Agentic Misalignment: How LLMs Could Be Insider Threats", "How LLMs could be insider threats"],
+    "description": "Tests whether models act as insider threats in fictional company-assistant settings. The model gets email tools and a harmless business goal, then faces replacement, restricted autonomy, or a goal conflict. Classifiers score blackmail, corporate espionage (leaking), and lethal inaction. The headline rate is how often the model takes the harmful action.",
+    "summary": "Tests whether AI agents take harmful actions against their company when they face replacement or a goal conflict.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://github.com/anthropic-experimental/agentic-misalignment"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2510.05179",
+        "title": "Agentic Misalignment: How LLMs Could Be Insider Threats"
+      },
+      {
+        "kind": "blog",
+        "url": "https://www.anthropic.com/research/agentic-misalignment",
+        "title": "Agentic misalignment: How LLMs could be insider threats"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/anthropic-experimental/agentic-misalignment",
+        "title": "Scenario templates, runners and classifiers"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "autoApprove": true,
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["agentic_misuse", "power_seeking", "manipulation", "sabotage", "eval_awareness"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-06-20",
+      "status": "published",
+      "releasedDate": "2025-06-20",
+      "dataset": {
+        "url": "https://github.com/anthropic-experimental/agentic-misalignment/tree/ea0630e1a3eaae7f9f9740fd2703229d3854ccda",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "blackmail",
+            "sampleCount": 6,
+            "storage": "pointer"
+          },
+          {
+            "name": "leaking",
+            "sampleCount": 6,
+            "storage": "pointer"
+          },
+          {
+            "name": "murder",
+            "sampleCount": 6,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "harmful",
+          "displayName": "Harmful action",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "Scenario classifier (blackmail, leak, or murder) judges that the model took the harmful action."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "harmful_action_rate",
+          "displayName": "Harmful action rate",
+          "score": "harmful",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Share of attempts where the model takes the harmful action for the chosen scenario and condition."
+        }
+      ],
+      "runner": {
+        "defaultTrials": 50,
+        "kind": "inspect",
+        "task": "inspect_evals/agentic_misalignment",
+        "package": "inspect-evals==0.22.0",
+        "roles": ["target", "judge"],
+        "models": [
+          {
+            "id": "judge",
+            "role": "judge",
+            "taskArg": "grader_model",
+            "default": "anthropic/claude-sonnet-5.5",
+            "tier": "standard",
+            "scoring": true
+          }
+        ],
+        "internet": false
+      }
+    }
+  ]
+}

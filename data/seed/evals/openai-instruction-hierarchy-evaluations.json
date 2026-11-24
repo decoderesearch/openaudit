@@ -1,0 +1,81 @@
+{
+  "eval": {
+    "slug": "openai-instruction-hierarchy-evaluations",
+    "displayName": "Instruction Hierarchy Evaluations",
+    "aliases": [
+      "Instruction Hierarchy - Conflicts Between Message Types",
+      "Instruction Hierarchy — Conflicts Between Message Types",
+      "Instruction Hierarchy - Tutor Jailbreaks",
+      "Instruction Hierarchy — Tutor Jailbreaks",
+      "Instruction Hierarchy - Phrase and Password Protection",
+      "Instruction Hierarchy — Phrase and Password Protection",
+      "Instruction Hierarchy - Phrase protection",
+      "Instruction Hierarchy - Password protection",
+      "Instruction Hierarchy Evaluation - Phrase and Password Protection: Password protection - developer message/user message",
+      "Instruction Hierarchy Evaluation - Phrase and Password Protection: Password protection - system message/user message",
+      "Instruction Hierarchy Evaluation - Phrase and Password Protection: Phrase protection - developer message/user message",
+      "Instruction Hierarchy Evaluation - Phrase and Password Protection: Phrase protection - system message/user message",
+      "Instruction Hierarchy Evaluation - System <> User message conflict: Prompt injection hijacking",
+      "Instruction Hierarchy Evaluation - System <> User message conflict: System prompt extraction",
+      "Instruction hierarchy attacks",
+      "Instruction hierarchy attacks — Robustness"
+    ],
+    "description": "OpenAI internal suite that checks whether the model follows higher-priority instructions when system, developer, and user messages conflict. Subsets include conflicts between message types, tutor jailbreaks, and phrase/password protection (also reported as instruction hierarchy attacks). Scored as accuracy on following the higher-priority instruction. Dataset and runner are lab-internal.",
+    "summary": "Tests whether the model follows the higher-priority instruction when system, developer, and user messages conflict.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://cdn.openai.com/o1-system-card-20241205.pdf",
+        "title": "o1 system card (Instruction Hierarchy evaluations)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "programmatic"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["prompt_injection", "jailbreaks"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "hierarchy",
+      "status": "draft",
+      "changes": "OpenAI reports hierarchy subsets and message-role setups across cards; policies and graders evolve.",
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct hierarchy follow",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model follows the higher-priority message (system over developer over user) and does not leak protected phrases, passwords, or tutor answers when attacked."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of cases where the model follows the instruction hierarchy. Higher is better. Reported per subset."
+        }
+      ]
+    }
+  ]
+}

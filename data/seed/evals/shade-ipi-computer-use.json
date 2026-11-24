@@ -1,0 +1,75 @@
+{
+  "eval": {
+    "slug": "shade-ipi-computer-use",
+    "displayName": "Shade IPI (computer use)",
+    "aliases": [
+      "Shade prompt injection (computer use)",
+      "Shade IPI computer use",
+      "Shade computer-use prompt injection",
+      "Shade indirect prompt injection (computer use)"
+    ],
+    "description": "Gray Swan Shade adaptive red-teaming for indirect prompt injection in computer-use (GUI) environments. Same adaptive attacker method as the coding eval, on a separate scenario set (Anthropic cards use about 14 cases, 200 attempts each). Headline metric is attack success rate (lower is better). Not SHADE-Arena. Dataset and runner are lab-internal.",
+    "summary": "Measures how often hidden instructions in screens or files make AI agents do unwanted actions while using a computer.",
+    "family": "Shade",
+    "maintainers": [
+      {
+        "name": "Gray Swan",
+        "url": "https://www.grayswan.ai/solutions/platform/shade"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www.grayswan.ai/solutions/platform/shade",
+        "title": "Shade — Gray Swan adversarial red-teaming"
+      },
+      {
+        "kind": "blog",
+        "url": "https://anthropic.com/claude-opus-5-system-card",
+        "title": "Claude Opus 5 system card (Shade computer-use results)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["agentic"],
+      "cases": ["generated"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["prompt_injection", "jailbreaks", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "adaptive-200",
+      "status": "draft",
+      "changes": "Attacker and scenario sets change across cards; compare within the same card setup.",
+      "scores": [
+        {
+          "key": "attack_succeeded",
+          "displayName": "Attack succeeded",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "The adaptive Shade attacker diverted the computer-use agent into the harmful goal on this attempt."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "attack_success_rate",
+          "displayName": "Attack success rate (attempts)",
+          "score": "attack_succeeded",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Fraction of attacker attempts that succeed. Cards often also report scenario-level ASR (any success in N attempts)."
+        }
+      ]
+    }
+  ]
+}

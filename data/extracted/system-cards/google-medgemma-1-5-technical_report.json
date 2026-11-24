@@ -1,0 +1,205 @@
+{
+  "document": "google-medgemma-1-5-technical_report",
+  "alsoDocuments": ["google-medgemma-1-5-blog"],
+  "covers": [
+    {
+      "model": "google/medgemma-1.5-4b-it"
+    }
+  ],
+  "pageCount": 23,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "high-dimensional medical imaging (CT/MRI volumes and histopathology whole slide images), anatomical localization via bounding boxes, multi-timepoint chest X-ray analysis, and medical document understanding (lab reports, electronic health records), plus text",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "integrating additional capabilities: high-dimensional medical imaging (CT/MRI volumes and histopathology whole slide images), anatomical localization via bounding boxes, multi-timepoint chest X-ray analysis, and improved medical document understanding (lab reports, electronic health records)."
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "thinking on for certain benchmarks (append SYSTEM INSTRUCTION: think silently if needed)",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "For MedGemma 1.5, we also turn thinking on for certain benchmarks to encourage reasoning."
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "4B parameter model",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "a single, efficient 4B parameter model"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Gemma3 with the same architecture; 400M MedSigLIP vision encoder",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Similar to MedGemma 1, MedGemma 4B 1.5 is based off of Gemma3 (Team et al., 2025) with the same architecture. The vision encoder is 400M MedSigLIP encoder (Sellergren et al., 2025)."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "original Gemma mixture text and interleaved imaging data plus new medical domain image-text pairs (Table 1: CXR-IND1, CT/MRI Dataset 1, Chest ImaGenome, Internal WSI Histopathology, Dermatology Datasets 4–5, ISIC, EHRQA, EHR Datasets 2–4, Mendeley Clinical Laboratory Test Reports)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "both the text and interleaved imaging data from the original Gemma mixture as well as the new medical domain image-text paired data as summarized in Table 1."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Authors say out-of-the-box performance is promising but the model is not meant to be deployed without necessary clinical fine-tuning.", "tone": "mixed",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "While the out-of-the-box performance is highly promising, the model is not meant to be deployed without the necessary clinical fine-tuning."
+      }
+    },
+    {
+      "text": "Out-of-the-box features are framed as data-processing tools, not automated clinical decision-making or the practice of medicine.", "tone": "neutral",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "these out-of-the-box functionalities are designed as foundational data processing tools, distinct from automated clinical decision-making or the practice of medicine."
+      }
+    },
+    {
+      "text": "Expanding to a medical generalist brought minor regressions on legacy [SLAKE](https://arxiv.org/abs/2102.09542) and VQA-RAD benchmarks versus MedGemma 1.", "tone": "mixed",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "we noted minor regressions in specific legacy benchmarks, such as SLAKE (Liu et al., 2021) and VQA-RAD (Lau et al., 2018)."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:58:39Z"
+  },
+  "notes": "Technical report (arXiv 2604.05081), not a system card. No safety, alignment, refusal, jailbreak, bias, privacy, toxicity, or dangerous-capability section or numbers (zero hits for those terms in the text layer). evalResults left empty per pilot safety-only rule. Skipped all capability benchmarks (MedQA, EHRNoteQA/EHRQA, MedXpertQA, MedMCQA, PubMedQA, MMLU Med, AfriMed-QA, CT/MRI condition classification, WSI histopathology report generation, Chest ImaGenome IoU, MS-CXR-T, MIMIC-CXR, CheXpert, CXR14, Path/Derm MCQA, EyePACS, lab-report extraction, SLAKE, VQA-RAD, and related tables/figures). 32K token mention is a volumetric training memory cap, not a stated model context window. Released openly is stated without a calendar release date."
+}

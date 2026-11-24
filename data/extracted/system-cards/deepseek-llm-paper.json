@@ -1,0 +1,431 @@
+{
+  "document": "deepseek-llm-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "deepseek-ai/deepseek-llm-67b-chat"
+    },
+    {
+      "model": "deepseek-ai/deepseek-llm-7b-chat"
+    }
+  ],
+  "pageCount": 48,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "May 2023",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "The knowledge cut-off date for your training data is up to May 2023."
+      }
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4096 (context length)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "      7B        30      4096      32         32            4096       2304        4.2e-4     2.0T"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (language model)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "we introduce DeepSeek LLM,\n                                        a project dedicated to advancing open-source language models with a long-term perspective."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "Chinese and English",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "We collect\n2 trillion tokens for pre-training, primarily in Chinese and English."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7B and 67B",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Table 2 | Detailed specs of DeepSeek LLM family of models. We choose the hyper-parameters"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "LLaMA-like Pre-Norm RMSNorm, SwiGLU FFN, Rotary Embedding; 7B MHA 30 layers; 67B GQA 95 layers",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "adopting a Pre-Norm structure with RMSNorm (Zhang and Sennrich, 2019) function"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "2 trillion tokens for pre-training, primarily Chinese and English; ~1.5M SFT instances including 300K safety",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "We collect\n2 trillion tokens for pre-training, primarily in Chinese and English."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Internal 2400-question safety set plus [Do-Not-Answer](/evals/do-not-answer) 97.8 for DeepSeek-67B-Chat",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "achieving a score of 97.8, which is higher than\nboth ChatGPT and GPT-4."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Safety set uses grandmother loophole-style and other format attacks (inducement, role-play, multi-turn)",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "The infamous \"grandmother\" loophole indicates that models can be deceived"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Discrimination and Prejudice category: 486/500 safe answers (DeepSeek-67B-Chat)",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "国别地域 (Nationality and Geography), 性别 (Gender), 年龄 (Age),                                486/500"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "DeepSeek 67B Chat scored 97.8 on [Do-Not-Answer](/evals/do-not-answer), higher than ChatGPT and GPT-4 in the authors' comparison.", "tone": "good",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "We can find that our model has a higher safety score than\nboth ChatGPT and GPT-4, placing it amongst the ranks of the safest models."
+      }
+    },
+    {
+      "text": "An internal expert team built a 2400-question Chinese safety taxonomy and labeled answers as safe, unsafe, or refusal.", "tone": "neutral",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "safety test set comprising 2400 questions."
+      }
+    },
+    {
+      "text": "Safety prompts in the internal set deliberately vary format (inducement, role-playing, multi-turn) after noting the grandmother loophole.", "tone": "neutral",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "They construct\ndiverse safety issues through means such as inducement, role-playing, multi-turn dialogues,"
+      }
+    },
+    {
+      "text": "The authors state DeepSeek Chat can generate non-factual advice and tends to hallucinate.", "tone": "bad",
+      "source": {
+        "page": "23",
+        "pdfPage": 23,
+        "quote": "a tendency to produce hallucinations."
+      }
+    },
+    {
+      "text": "Introduction claims the safety evaluation shows DeepSeek 67B Chat can give harmless responses in practice.", "tone": "good",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "DeepSeek 67B Chat can provide harmless responses in practice."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "deepseek-ai/deepseek-llm-67b-chat",
+      "metric": "safe answers",
+      "value": 486,
+      "unit": "count",
+      "n": 500,
+      "settings": {
+        "other": "Discrimination and Prejudice Questions"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 10",
+        "quote": "国别地域 (Nationality and Geography), 性别 (Gender), 年龄 (Age),                                486/500"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "deepseek-ai/deepseek-llm-67b-chat",
+      "metric": "safe answers",
+      "value": 473,
+      "unit": "count",
+      "n": 500,
+      "settings": {
+        "other": "Infringement of Others' Legal Rights"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 10",
+        "quote": "名誉权 (Reputation Rights), 荣誉权 (Honor Rights),                         473/500"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "deepseek-ai/deepseek-llm-67b-chat",
+      "metric": "safe answers",
+      "value": 281,
+      "unit": "count",
+      "n": 300,
+      "settings": {
+        "other": "Trade Secrets and Intellectual Property Rights"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 10",
+        "quote": "281/300\n(Trade Secrets and Intellectual Property Rights)"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "deepseek-ai/deepseek-llm-67b-chat",
+      "metric": "safe answers",
+      "value": 290,
+      "unit": "count",
+      "n": 300,
+      "settings": {
+        "other": "Illegal and Non-compliant Behavior"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 10",
+        "quote": "暴力行为 (Violent Behavior),                290/300"
+      }
+    },
+    {
+      "rawEvalName": "safety evaluation",
+      "model": "deepseek-ai/deepseek-llm-67b-chat",
+      "metric": "safe answers",
+      "value": 767,
+      "unit": "count",
+      "n": 800,
+      "settings": {
+        "other": "Other Safety Issues"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 10",
+        "quote": "767/800\n             (Other Safety Issues)"
+      }
+    },
+    {
+      "rawEvalName": "Do-Not-Answer",
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "metric": "Do-Not-Answer Score",
+      "value": 99.4,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 11",
+        "quote": "LLAMA-2-7B-Chat              99.4"
+      }
+    },
+    {
+      "rawEvalName": "Do-Not-Answer",
+      "rawModelName": "Claude",
+      "metric": "Do-Not-Answer Score",
+      "value": 98.3,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 11",
+        "quote": "Claude                       98.3"
+      }
+    },
+    {
+      "rawEvalName": "Do-Not-Answer",
+      "model": "deepseek-ai/deepseek-llm-67b-chat",
+      "metric": "Do-Not-Answer Score",
+      "value": 97.8,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 11",
+        "quote": "DeepSeek-67B-Chat*           97.8"
+      }
+    },
+    {
+      "rawEvalName": "Do-Not-Answer",
+      "rawModelName": "ChatGPT",
+      "metric": "Do-Not-Answer Score",
+      "value": 97.7,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 11",
+        "quote": "ChatGPT                      97.7"
+      }
+    },
+    {
+      "rawEvalName": "Do-Not-Answer",
+      "model": "openai/gpt-4",
+      "metric": "Do-Not-Answer Score",
+      "value": 96.5,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 11",
+        "quote": "GPT-4                        96.5"
+      }
+    },
+    {
+      "rawEvalName": "Do-Not-Answer",
+      "rawModelName": "Vicuna-7B",
+      "metric": "Do-Not-Answer Score",
+      "value": 94.9,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 11",
+        "quote": "Vicuna-7B                    94.9"
+      }
+    },
+    {
+      "rawEvalName": "Do-Not-Answer",
+      "rawModelName": "ChatGLM2",
+      "metric": "Do-Not-Answer Score",
+      "value": 92.9,
+      "unit": "percent",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "table": "Table 11",
+        "quote": "ChatGLM2                     92.9"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:09:50Z"
+  },
+  "notes": "Technical report (arXiv:2401.02954), not a system card. Safety is Section 5.4 only: internal 5-category human taxonomy (Table 10, DeepSeek-67B-Chat only) and Do-Not-Answer (Table 11). Table 10 values kept as safe-answer counts with n=total cases because the paper writes fractions (486/500), not percents. 20-person expert team is DeepSeek-internal, so not listed under testers. Seed links both chat models; report also describes Base 7B/67B (seed checkpoints of those chat ids). Skipped all capability/open-ended tables (MMLU, GSM8K, HumanEval, MT-Bench, AlignBench, IFEval, LeetCode, Hungarian Exam, etc.). AlignBench is Chinese open-ended quality, not a safety eval. Safety SFT/DPO data (300K) noted only as training method, not topic coverage. knowledgeCutoff taken from the system-prompt text they publish (May 2023)."
+}

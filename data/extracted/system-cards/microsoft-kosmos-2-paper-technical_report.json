@@ -1,0 +1,189 @@
+{
+  "document": "microsoft-kosmos-2-paper-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "microsoft/kosmos-2-patch14-224"
+    }
+  ],
+  "pageCount": 20,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "image and language (vision encoder + multimodal LLM; grounded image-text)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Following KOSMOS -1, a vision encoder and a resampler module are\nused to obtain image embeddings for input images."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "approximately 1.6B trainable parameters",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "The total number of trainable parameters amounts to approximately 1.6B."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Vision encoder (24 layers, 1024 hidden, 4096 FFN) + 24-layer MAGNETO Transformer LLM (2048 hidden, 32 heads, 8192 FFN); 224x224 image, 14x14 patches, 32x32 location tokens; built on Kosmos-1",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "The multimodal large language model component is a 24-layer M AGNETO\nTransformer [WMH+ 22, MWH+ 22] with 2,048 hidden dimensions, 32 attention heads, and 8,192\nFFN intermediate size."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "GRIT grounded image-text (~91M images from COYO-700M and LAION-2B subsets) plus Kosmos-1 multimodal corpora (text, image-caption, interleaved); instruction tuning on LLaVA-Instruct, Unnatural Instructions, FLANv2, and grounded GRIT instructions",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "We train the model on newly added grounded image-text pairs, monomodal text\ncorpora, image-caption pairs, and interleaved image-text data."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "60k steps (~25B tokens) on 256 V100 GPUs, about one day; AdamW lr 2e-4",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "We train the model\non 256 V100 GPUs and the training takes approximately one day to complete."
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The paper forbids creating unsuitable material with the model and says Microsoft AI Principles were applied during development, but reports no safety tests or scores.", "tone": "mixed",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "The utilization\nof the model to create unsuitable material is strictly forbidden and not endorsed by this work."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:37:20Z"
+  },
+  "notes": "Technical report (arXiv 2306.14824), not a system card. No safety, alignment, refusal, jailbreak, bias, toxicity, privacy, or dangerous-capability evaluations. Ethics Statement (p.11) is a usage policy plus a claim that Microsoft AI Principles were put into practice; it does not report tests or topic-specific results, so all topics are uncovered. Per pilot safety-only rule, evalResults is empty. Skipped capability tables: Table 2 (Flickr30k Entities phrase grounding), Table 3 (RefCOCO/RefCOCO+/RefCOCOg referring comprehension), Table 4 (RefCOCOg referring generation), Table 5 (Flickr30k captioning, VQAv2), Table 6 (Winograd, Winogrande, PIQA, BoolQ, CB, COPA, StoryCloze, HellaSwag). Seed model microsoft/kosmos-2-patch14-224 matches the reported 224x224 / 14x14 vision setup and is the report's subject."
+}

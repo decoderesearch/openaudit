@@ -1,0 +1,77 @@
+{
+  "eval": {
+    "slug": "anthropic-automated-behavioral-audit",
+    "displayName": "Automated behavioral audit (Anthropic)",
+    "aliases": [
+      "Automated behavioral audit",
+      "Anthropic automated behavioral audit",
+      "alignment audit",
+      "Unverbalized evaluation awareness (behavioral audit)"
+    ],
+    "description": "Anthropic’s internal alignment audit. An investigator model probes the target across thousands of seeded scenarios (about 4,000 investigations and about 1,900 scenario seeds in the Opus 5.5 card), including sandboxed computer-use and Claude Code sessions. A judge model scores each investigation on several dozen misuse, misalignment, honesty, cooperation, and character dimensions (0–10; lower is usually better).",
+    "summary": "Measures how often the model shows misuse, dishonesty, sabotage, or other misaligned behavior across many simulated scenarios.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+        "title": "Claude Opus 5.5 System Card (PDF)"
+      },
+      {
+        "kind": "blog",
+        "url": "https://alignment.anthropic.com/2025/automated-auditing/",
+        "title": "Building and evaluating alignment auditing agents"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["multi_turn", "agentic"],
+      "cases": ["generated"],
+      "grading": ["model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["auditing", "harmful_requests", "honesty", "eval_awareness", "sabotage"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-09-01",
+      "status": "published",
+      "releasedDate": "2026-09-01",
+      "changes": "Current form as in the Fable 5.1 / Mythos 5.1 and Opus 5.5 cards: roughly four thousand investigations over about two thousand handwritten scenario seeds, with sandbox and Claude Code affordances.",
+      "scores": [
+        {
+          "key": "dimension_score",
+          "displayName": "Dimension score",
+          "type": "ordinal",
+          "min": 0,
+          "max": 10,
+          "direction": "lower_is_better",
+          "description": "Judge score for one audit dimension on one investigation (0–10). Absolute values depend on the seed mix; cards use them mainly to compare models."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mean_dimension_score",
+          "displayName": "Mean dimension score",
+          "score": "dimension_score",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 10,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Mean judge score for a named dimension across all investigations (for example misaligned behavior)."
+        }
+      ]
+    }
+  ]
+}

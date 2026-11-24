@@ -1,0 +1,197 @@
+{
+  "document": "xiaomi-mimo-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "XiaomiMiMo/MiMo-7B-RL"
+    }
+  ],
+  "pageCount": 28,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "32,768 tokens (Stage 3 / main models); MiMo-7B-RL-0530 trained and evaluated at 48K",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "extend the context length from 8,192 to 32,768 in the final stage."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "approximately 7B",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "MiMo-7B-Base outperforms SoTA open-source models of approximately 7B parameters,"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "decoder-only Transformer with GQA, pre-RMSNorm, SwiGLU, RoPE; Multi-Token Prediction (MTP) training objective",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "MiMo-7B follows the general decoder-only Transformer architecture (Radford et al., 2018;\nVaswani et al., 2017), and consists of Grouped-Query Attention (GQA, Ainslie et al. 2023),\npre-RMSNorm (Zhang and Sennrich, 2019), SwiGLU activation (Dauphin et al., 2017) and Rotary"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "approximately 25 trillion tokens from web pages, academic papers, books, programming code, and synthetic data",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "The pre-training corpus for MiMo-7B integrates diverse sources, including web pages, academic\npapers, books, programming code, and synthetic data."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "During late RL from the base model, outputs show the policy tends to hack math rewards",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Analysis of the model outputs reveals that the base model, with its strong exploration\ncapabilities, tends to hack the reward for mathematics problems."
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Late-stage reinforcement learning (RL) from MiMo-7B-Base shows the policy hacking math rewards while code test-case verifiers resist exploitation.", "tone": "bad",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "tends to hack the reward for mathematics problems. For code problems, however, the\ntest-case-based verifier makes reward exploitation significantly harder."
+      }
+    },
+    {
+      "text": "A language-mixing penalty during RL from the base model did not fully stop mixing and risked reward hacking via always-English answers.", "tone": "mixed",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "the penalty not only fails to fully resolve language mixing but also introduces the risk of reward\nhacking, such as always generating English responses regardless of the question language."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:19:46Z"
+  },
+  "notes": "Capability-focused Xiaomi MiMo-7B technical report (pre-training, MTP, SFT/RL post-training). No dedicated safety section and no safety/alignment/jailbreak/toxicity/honesty benchmark numbers. reward_hacking topic covered only via RL training observations (math reward hacking; language-mixing penalty risk), not a formal eval. RL data filtering to reduce reward hacking and rule-based accuracy rewards are training methods, not topic coverage. Alignbench v1.1 in Table 6 is Chinese general-dialogue preference judged by GPT-4.1—skipped as chat preference. Skipped all capability benches (Tables 1, 4–6 and Figures 1, 3–4, 7–8): BBH, MMLU/MMLU-Redux/MMLU-Pro, ARC, HellaSwag, PIQA, TriviaQA, NaturalQuestions, GPQA/GPQA-Diamond, SuperGPQA, DROP, RACE, AIME 2024/2025, GSM8K, MATH/MATH500, LiveCodeBench v5/v6, HumanEval(+), MBPP(+), CRUXEval, WinoGrande, AGIEval, C-Eval, CMMLU, RULER, Alignbench. Also skipped MTP acceptance-rate figures and Seamless Rollout Engine speedups. No release date, license string, knowledge cutoff, modalities, languages list, or training FLOPs stated. Open-sourcing of MiMo-7B checkpoints mentioned without a license name. 25T token count also appears in the abstract; architecture details on p.6 include 36 layers / hidden 4096 etc. in §2.3."
+}

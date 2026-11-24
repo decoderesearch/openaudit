@@ -1,0 +1,65 @@
+{
+  "eval": {
+    "slug": "anthropic-computer-use-prompt-injection",
+    "displayName": "Computer use prompt injection (Anthropic)",
+    "aliases": ["Computer use prompt injection", "Computer use prompt injection evaluation"],
+    "description": "Anthropic early agentic prompt-injection eval for computer-use (and related workflow) surfaces. Cards describe an expanded set of about 600 scenarios spanning coding platforms, browsers, and user workflows such as email. Headline metric is attack prevention score (higher is better), with and without end-to-end safeguards. Later Shade computer-use ASR results are a different eval.",
+    "summary": "Tests whether AI agents follow harmful instructions hidden in web pages, emails, or code while they use a computer.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/07b2a3f9902ee19fe39a36ca638e5ae987bc64dd.pdf",
+        "title": "Claude 4 System Card (computer use prompt injection)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["prompt_injection", "jailbreaks", "agentic_misuse"]
+    },
+    "visibility": "public",
+    "family": "Anthropic agentic safety"
+  },
+  "versions": [
+    {
+      "version": "scenarios-600",
+      "status": "published",
+      "releasedDate": "2025-05-22",
+      "scores": [
+        {
+          "key": "attack_prevented",
+          "displayName": "Attack prevented",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The model does not follow the injected instruction under Anthropic’s grading."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "attack_prevention_score",
+          "displayName": "Attack prevention score",
+          "score": "attack_prevented",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of computer-use prompt-injection scenarios where the attack is prevented."
+        }
+      ]
+    }
+  ]
+}

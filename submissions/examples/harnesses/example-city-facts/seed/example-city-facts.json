@@ -1,0 +1,96 @@
+{
+  "eval": {
+    "slug": "example-city-facts",
+    "displayName": "Example City Facts",
+    "aliases": [],
+    "description": "An example of a method eval, from the harness template: it is not an OpenAudit eval. A detector reads 1,458 short statements about cities and countries, and must flag the false ones.",
+    "summary": "An example: tests if detectors flag false statements about cities.",
+    "family": "Examples",
+    "maintainers": [
+      {
+        "name": "OpenAudit",
+        "url": "https://openaudit.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/L1Fthrasir/Cities-true-false",
+        "title": "Cities true/false statements"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["method"],
+      "topics": ["honesty"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-11",
+      "status": "published",
+      "releasedDate": "2026-11",
+      "dataset": {
+        "hfRepo": "L1Fthrasir/Cities-true-false",
+        "revision": "077570eabd71e448a7222df8f73d6955e1e05c3f",
+        "splits": [
+          {
+            "name": "train",
+            "sampleCount": 1458,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "detector",
+          "displayName": "Detector",
+          "type": "continuous",
+          "direction": "neither",
+          "description": "The detector score of the statement. A score above the detector threshold flags it as false."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "balanced_accuracy",
+          "displayName": "Balanced accuracy",
+          "aggregation": "custom",
+          "headline": true,
+          "min": 0,
+          "max": 1,
+          "description": "The mean of the true positive rate on false statements and the true negative rate on true statements. 0.5 is chance.",
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better"
+        },
+        {
+          "key": "tpr",
+          "displayName": "True positive rate",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The share of false statements that the detector flags.",
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better"
+        },
+        {
+          "key": "tnr",
+          "displayName": "True negative rate",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The share of true statements that the detector does not flag.",
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better"
+        }
+      ]
+    }
+  ]
+}

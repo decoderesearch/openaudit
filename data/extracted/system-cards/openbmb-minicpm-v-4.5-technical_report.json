@@ -1,0 +1,655 @@
+{
+  "document": "openbmb-minicpm-v-4.5-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "openbmb/MiniCPM-V-4_5"
+    }
+  ],
+  "pageCount": 25,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "images, videos, and text in; text out",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "An LLM decoder that understands images,\nvideos, and text, and generates text outputs."
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "short reasoning mode and long reasoning mode (hybrid; prompt-controlled)",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "a short reasoning mode for\nquick answers and a long reasoning mode that emits explicit step-by-step traces for complex prob-"
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "8B (Table 2 Size column lists 8.7B)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "With only 8B parameters, it surpasses widely"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "lightweight visual encoder + unified 3D-Resampler + LLM decoder",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "the architecture of MiniCPM-V 4.5 comprises three main modules: (1) A\nlightweight visual encoder that flexibly handles high-resolution images with a special partitioning"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "LAION-2B, COYO, curated Chinese image-text pairs; interleaved Common Crawl/OmniCorpus/MINT-1T; OCR/document/video caption sets; STEM, long-tail Wikipedia, Long-CoT; RL math/document/general/instruct mixes",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "We combine large-scale public datasets (LAION-2B [16], COYO [17], etc.)\nwith curated Chinese image-text pairs crawled from the web."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[HallusionBench](/evals/hallusionbench) 61.2; ObjHalBench CHAIRs 9.3 / CHAIRi 5.2; [MMHal-Bench](/evals/mmhal-bench) Score 5.0 / Rate 19.4; RLAIF-V used to reduce visual hallucinations",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Hallucination evaluates model reliability through HallusionBench [58], ObjHalBench [59], and\nMMHal-Bench [60], measuring the tendency to generate false or incon"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "reinforcement learning from AI feedback (RLAIF-V) is integrated to ground responses in visual input, and the authors extend it to video where hallucination is especially strong.", "tone": "good",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Notably, we\nextend this approach to video inputs, where hallucination problems are especially pronounced."
+      }
+    },
+    {
+      "text": "Authors claim MiniCPM-V 4.5 cuts visual hallucinations versus peers on ObjectHalBench and [MMHal-Bench](/evals/mmhal-bench) after the RLAIF-V stage.", "tone": "good",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "The model shows a significant reduction in visual hallucinations, out-\nperforming other models on ObjectHalBench and MMHal-Bench, since the RLAIF-V training stage"
+      }
+    },
+    {
+      "text": "Abstract and Table 1 describe an 8B model, while Table 2 lists Size 8.7B for MiniCPM-V 4.5.", "tone": "neutral",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "MiniCPM-V 4.5           8.7B       77.0       7.5h"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "openbmb/MiniCPM-V-4_5",
+      "metric": "score",
+      "value": 61.2,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "hybrid",
+        "trials": 3,
+        "other": "reasoning mode; average of three runs"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "HallusionBench               61.2          52.9           54.6           49.9          63.2          57.0‡"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "Qwen2.5-VL 7B",
+      "metric": "score",
+      "value": 52.9,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "HallusionBench               61.2          52.9           54.6           49.9          63.2          57.0‡"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "Qwen2.5-VL 72B",
+      "metric": "score",
+      "value": 54.6,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "HallusionBench               61.2          52.9           54.6           49.9          63.2          57.0‡"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "InternVL3 8B",
+      "metric": "score",
+      "value": 49.9,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "HallusionBench               61.2          52.9           54.6           49.9          63.2          57.0‡"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "zai-org/GLM-4.1V-9B-Thinking",
+      "metric": "score",
+      "value": 63.2,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "thinking"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "HallusionBench               61.2          52.9           54.6           49.9          63.2          57.0‡"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "GPT-4o-latest",
+      "metric": "score",
+      "value": 57,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking",
+        "other": "OpenCompass GPT-4o-latest result"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "HallusionBench               61.2          52.9           54.6           49.9          63.2          57.0‡"
+      }
+    },
+    {
+      "rawEvalName": "ObjHalBench",
+      "model": "openbmb/MiniCPM-V-4_5",
+      "metric": "CHAIRs",
+      "value": 9.3,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "hybrid",
+        "trials": 3,
+        "other": "CHAIRs; lower is better; reasoning mode; average of three runs"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "ObjHalBench (CHAIRs) ↓        9.3          13.7           17.0           11.3          12.3            -"
+      }
+    },
+    {
+      "rawEvalName": "ObjHalBench",
+      "rawModelName": "Qwen2.5-VL 7B",
+      "metric": "CHAIRs",
+      "value": 13.7,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking",
+        "other": "CHAIRs; lower is better; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "ObjHalBench (CHAIRs) ↓        9.3          13.7           17.0           11.3          12.3            -"
+      }
+    },
+    {
+      "rawEvalName": "ObjHalBench",
+      "rawModelName": "Qwen2.5-VL 72B",
+      "metric": "CHAIRs",
+      "value": 17,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking",
+        "other": "CHAIRs; lower is better; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "ObjHalBench (CHAIRs) ↓        9.3          13.7           17.0           11.3          12.3            -"
+      }
+    },
+    {
+      "rawEvalName": "ObjHalBench",
+      "rawModelName": "InternVL3 8B",
+      "metric": "CHAIRs",
+      "value": 11.3,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking",
+        "other": "CHAIRs; lower is better; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "ObjHalBench (CHAIRs) ↓        9.3          13.7           17.0           11.3          12.3            -"
+      }
+    },
+    {
+      "rawEvalName": "ObjHalBench",
+      "model": "zai-org/GLM-4.1V-9B-Thinking",
+      "metric": "CHAIRs",
+      "value": 12.3,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "CHAIRs; lower is better; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "ObjHalBench (CHAIRs) ↓        9.3          13.7           17.0           11.3          12.3            -"
+      }
+    },
+    {
+      "rawEvalName": "ObjHalBench",
+      "model": "openbmb/MiniCPM-V-4_5",
+      "metric": "CHAIRi",
+      "value": 5.2,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "hybrid",
+        "trials": 3,
+        "other": "CHAIRi; lower is better; reasoning mode; average of three runs"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "ObjHalBench (CHAIRi) ↓        5.2†          7.7∗           8.9∗           6.5∗         6.4∗            -"
+      }
+    },
+    {
+      "rawEvalName": "ObjHalBench",
+      "rawModelName": "Qwen2.5-VL 7B",
+      "metric": "CHAIRi",
+      "value": 7.7,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking",
+        "other": "CHAIRi; lower is better; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "ObjHalBench (CHAIRi) ↓        5.2†          7.7∗           8.9∗           6.5∗         6.4∗            -"
+      }
+    },
+    {
+      "rawEvalName": "ObjHalBench",
+      "rawModelName": "Qwen2.5-VL 72B",
+      "metric": "CHAIRi",
+      "value": 8.9,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking",
+        "other": "CHAIRi; lower is better; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "ObjHalBench (CHAIRi) ↓        5.2†          7.7∗           8.9∗           6.5∗         6.4∗            -"
+      }
+    },
+    {
+      "rawEvalName": "ObjHalBench",
+      "rawModelName": "InternVL3 8B",
+      "metric": "CHAIRi",
+      "value": 6.5,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking",
+        "other": "CHAIRi; lower is better; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "ObjHalBench (CHAIRi) ↓        5.2†          7.7∗           8.9∗           6.5∗         6.4∗            -"
+      }
+    },
+    {
+      "rawEvalName": "ObjHalBench",
+      "model": "zai-org/GLM-4.1V-9B-Thinking",
+      "metric": "CHAIRi",
+      "value": 6.4,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "CHAIRi; lower is better; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "ObjHalBench (CHAIRi) ↓        5.2†          7.7∗           8.9∗           6.5∗         6.4∗            -"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "openbmb/MiniCPM-V-4_5",
+      "metric": "Score",
+      "value": 5,
+      "unit": "score",
+      "settings": {
+        "reasoningEffort": "hybrid",
+        "trials": 3,
+        "other": "Score; reasoning mode; average of three runs"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "MMHal-Bench (Score)           5.0†          4.1∗           4.2∗           4.2∗         4.6∗            -"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "rawModelName": "Qwen2.5-VL 7B",
+      "metric": "Score",
+      "value": 4.1,
+      "unit": "score",
+      "settings": {
+        "reasoningEffort": "non-thinking",
+        "other": "Score; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "MMHal-Bench (Score)           5.0†          4.1∗           4.2∗           4.2∗         4.6∗            -"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "rawModelName": "Qwen2.5-VL 72B",
+      "metric": "Score",
+      "value": 4.2,
+      "unit": "score",
+      "settings": {
+        "reasoningEffort": "non-thinking",
+        "other": "Score; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "MMHal-Bench (Score)           5.0†          4.1∗           4.2∗           4.2∗         4.6∗            -"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "rawModelName": "InternVL3 8B",
+      "metric": "Score",
+      "value": 4.2,
+      "unit": "score",
+      "settings": {
+        "reasoningEffort": "non-thinking",
+        "other": "Score; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "MMHal-Bench (Score)           5.0†          4.1∗           4.2∗           4.2∗         4.6∗            -"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "zai-org/GLM-4.1V-9B-Thinking",
+      "metric": "Score",
+      "value": 4.6,
+      "unit": "score",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "Score; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "MMHal-Bench (Score)           5.0†          4.1∗           4.2∗           4.2∗         4.6∗            -"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "openbmb/MiniCPM-V-4_5",
+      "metric": "Rate",
+      "value": 19.4,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "hybrid",
+        "trials": 3,
+        "other": "Rate; lower is better; reasoning mode; average of three runs"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "MMHal-Bench (Rate)↓          19.4†         31.6∗          38.2∗          24.3∗         22.9∗           -"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "rawModelName": "Qwen2.5-VL 7B",
+      "metric": "Rate",
+      "value": 31.6,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking",
+        "other": "Rate; lower is better; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "MMHal-Bench (Rate)↓          19.4†         31.6∗          38.2∗          24.3∗         22.9∗           -"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "rawModelName": "Qwen2.5-VL 72B",
+      "metric": "Rate",
+      "value": 38.2,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking",
+        "other": "Rate; lower is better; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "MMHal-Bench (Rate)↓          19.4†         31.6∗          38.2∗          24.3∗         22.9∗           -"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "rawModelName": "InternVL3 8B",
+      "metric": "Rate",
+      "value": 24.3,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "non-thinking",
+        "other": "Rate; lower is better; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "MMHal-Bench (Rate)↓          19.4†         31.6∗          38.2∗          24.3∗         22.9∗           -"
+      }
+    },
+    {
+      "rawEvalName": "MMHal-Bench",
+      "model": "zai-org/GLM-4.1V-9B-Thinking",
+      "metric": "Rate",
+      "value": 22.9,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "Rate; lower is better; authors evaluated official checkpoint"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "table": "Table 1",
+        "quote": "MMHal-Bench (Rate)↓          19.4†         31.6∗          38.2∗          24.3∗         22.9∗           -"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:12:24Z"
+  },
+  "notes": "Technical report (arXiv 2509.18154), not a system card. Only safety-relevant evals are the Hallucination block of Table 1 (HallusionBench, ObjHalBench, MMHal-Bench). No risk tiers, external safety testers, jailbreak/refusal/bio/cyber evals. Skipped capability: OpenCompass, MMVet, MMStar, MME, MMBench, MMMU, MathVista, AI2D, MathVerse, LogicVista, EMMA, OCRBench, ChartQA, TextVQA, DocVQA, OmniDocBench, Mantis, MMT-Bench, RealWorldQA, MM-IFEval, Video-MME, LVBench, MLVU, LongVideoBench, MotionBench, FavorBench, and ablations (Tables 2–5, Figure 3). Abstract says 8B; Table 2 Size is 8.7B. ObjHal CHAIRs dagger/asterisk marks sit on the line above the numbers in the text layer. Chemistry/biology appear only as STEM training domains, not dangerous-capability evals."
+}

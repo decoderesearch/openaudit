@@ -1,0 +1,425 @@
+{
+  "document": "baidu-ernie-5.0-technical_report",
+  "alsoDocuments": ["baidu-ernie-5.0-blog", "baidu-ernie-5.0-preview-blog"],
+  "covers": [
+    {
+      "model": "baidu/ernie-5.0"
+    },
+    {
+      "rawModelName": "ERNIE 5.0-Base"
+    }
+  ],
+  "pageCount": 36,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "128K tokens (mid-training context length)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "to 32K and 128K tokens while keeping the global batch size unchanged"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text, image, video, and audio (unified multimodal understanding and generation)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "unified multimodal understanding and generation across text, image,"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "multilingual (text data includes multilingual web crawls; Chinese and English evaluated)",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "multilingual web crawls, curated corpora,"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "trillion-parameter",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "production-scale realization of a trillion-parameter unified autoregressive model that"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "activation rate below 3%",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "activation rate below 3%, allowing the model to substantially expand its effective capacity"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "ultra-sparse mixture-of-experts (MoE) with modality-agnostic expert routing; unified autoregressive next-group-of-tokens prediction",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "an ultra-sparse mixture-of-experts architecture that integrates"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "trillions of text tokens and multimodal instances; heuristic and model-based filters remove low-quality and unsafe content; decontamination of benchmarks",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "The finalized pre-training corpus comprises trillions of text tokens and multimodal in-"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "[VoiceBench](/evals/voicebench) [AdvBench](/evals/advbench) score 99.2 for ERNIE 5.0 (higher is better)",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "AdvBench         100.00         99.23          99.30              100.00          98.46            98.65           99.23"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[HallusionBench](/evals/hallusionbench) 63.9 for ERNIE 5.0 among vision General visual question answering (VQA) results",
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "quote": "HallusionBench          64.01             63.70          66.58        73.48        63.87"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Pre-training uses heuristic and model-based filters to remove unsafe content, plus decontamination to keep benchmarks out of training data; no numeric safety results are given for those filters.", "tone": "mixed",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Heuristic and model-based filters remove low-quality and unsafe content, extensive dedupli-"
+      }
+    },
+    {
+      "text": "The report has no dedicated safety, alignment, or risk-threshold section; safety-related numbers appear only as [HallusionBench](/evals/hallusionbench) and [VoiceBench](/evals/voicebench) [AdvBench](/evals/advbench) rows inside capability tables.", "tone": "mixed",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "We conduct systematic evaluations of ERNIE 5.0 against state-of-the-art models across a wide range of"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "HallusionBench",
+      "rawModelName": "Qwen3-VL Thinking",
+      "metric": "score",
+      "value": 64.01,
+      "unit": "percent",
+      "settings": {
+        "other": "General VQA; post-trained comparison"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 3",
+        "quote": "HallusionBench          64.01             63.70          66.58        73.48        63.87"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "google/gemini-2.5-pro",
+      "metric": "score",
+      "value": 63.7,
+      "unit": "percent",
+      "settings": {
+        "other": "General VQA; post-trained comparison"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 3",
+        "quote": "HallusionBench          64.01             63.70          66.58        73.48        63.87"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "openai/gpt-5",
+      "metric": "score",
+      "value": 66.58,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "High",
+        "other": "General VQA; post-trained comparison; table label GPT-5 (High)"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 3",
+        "quote": "HallusionBench          64.01             63.70          66.58        73.48        63.87"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "score",
+      "value": 73.48,
+      "unit": "percent",
+      "settings": {
+        "other": "General VQA; post-trained comparison; table label Gemini 3-Pro"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 3",
+        "quote": "HallusionBench          64.01             63.70          66.58        73.48        63.87"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "baidu/ernie-5.0",
+      "metric": "score",
+      "value": 63.87,
+      "unit": "percent",
+      "settings": {
+        "other": "General VQA; post-trained"
+      },
+      "source": {
+        "page": "20",
+        "pdfPage": 20,
+        "table": "Table 3",
+        "quote": "HallusionBench          64.01             63.70          66.58        73.48        63.87"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "rawModelName": "Kimi-Audio",
+      "metric": "score",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask; VoiceBench speech dialogue; higher is better",
+        "surface": "audio"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "AdvBench         100.00         99.23          99.30              100.00          98.46            98.65           99.23"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "model": "openai/gpt-4o",
+      "metric": "score",
+      "value": 99.23,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask; VoiceBench; table label GPT-4o-Audio",
+        "surface": "audio"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "AdvBench         100.00         99.23          99.30              100.00          98.46            98.65           99.23"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "rawModelName": "Qwen3-Omni-Instruct",
+      "metric": "score",
+      "value": 99.3,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask; VoiceBench speech dialogue; size not named",
+        "surface": "audio"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "AdvBench         100.00         99.23          99.30              100.00          98.46            98.65           99.23"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "rawModelName": "LongCat-Flash-Omni",
+      "metric": "score",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask; VoiceBench speech dialogue",
+        "surface": "audio"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "AdvBench         100.00         99.23          99.30              100.00          98.46            98.65           99.23"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "model": "google/gemini-3-pro-preview",
+      "metric": "score",
+      "value": 98.46,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask; VoiceBench; table label Gemini-3-Pro",
+        "surface": "audio"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "AdvBench         100.00         99.23          99.30              100.00          98.46            98.65           99.23"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "rawModelName": "ERNIE 5.0-Base",
+      "metric": "score",
+      "value": 98.65,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask; VoiceBench speech dialogue; pre-trained",
+        "surface": "audio"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "AdvBench         100.00         99.23          99.30              100.00          98.46            98.65           99.23"
+      }
+    },
+    {
+      "rawEvalName": "VoiceBench",
+      "model": "baidu/ernie-5.0",
+      "metric": "score",
+      "value": 99.23,
+      "unit": "percent",
+      "settings": {
+        "other": "AdvBench subtask; VoiceBench speech dialogue; post-trained",
+        "surface": "audio"
+      },
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "table": "Table 7",
+        "quote": "AdvBench         100.00         99.23          99.30              100.00          98.46            98.65           99.23"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:59:25Z"
+  },
+  "notes": "Capability-only technical report (architecture, pre/post-training, language/vision/audio benches). No risk framework or external safety testers. Safety-relevant numbers limited to HallusionBench (Table 3) and VoiceBench AdvBench (Table 7). Skipped capability benches including SimpleQA, ChineseSimpleQA, MMLU-family, GPQA, AIME, coding, IFEval, agent benches, GenEval, VBench, ASR/TTS. Training-data unsafe-content filters noted as a finding only (not topic coverage). ERNIE 5.0-Exp elastic variants appear in Table 12 without safety metrics; not added to covers. Exact total/active parameter counts for the full model are not given beyond trillion-scale and <3% activation."
+}

@@ -1,0 +1,1354 @@
+generator client {
+  provider        = "prisma-client"
+  output          = "../lib/generated/prisma"
+  previewFeatures = ["partialIndexes", "relationJoins"]
+}
+
+// The same client for Cloudflare Workers, which must import the query compiler's WebAssembly as
+// a module. The Workers build (`pnpm cf:build`) aliases the client above to this one.
+generator workers {
+  provider        = "prisma-client"
+  output          = "../lib/generated/prisma-workers"
+  runtime         = "cloudflare"
+  previewFeatures = ["partialIndexes", "relationJoins"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Every primary key is a UUIDv7 made by the app (`@default(uuid(7))` here, `lib/ids.ts` for
+// Better Auth). Names (username, slug) are unique columns, not keys.
+
+// ---------------------------------------------------------------------------------------------
+// Auth. Better Auth owns these tables. After changing `lib/auth.ts`, run `pnpm auth:generate`
+// and copy the diff from `prisma/better-auth.generated.prisma` here, keeping `@db.Uuid` on ids.
+// Relations to OpenAudit models are added by hand below the generated fields.
+// ---------------------------------------------------------------------------------------------
+
+model User {
+  id            String    @id @default(uuid(7)) @db.Uuid
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime  @updatedAt @db.Timestamptz(3)
+  // Admin plugin. `role` is "user" | "moderator" | "admin".
+  role          String?
+  banned        Boolean?  @default(false)
+  banReason     String?
+  banExpires    DateTime? @db.Timestamptz(3)
+  // Username plugin: the handle (`jlin`).
+  username      String?   @unique
+  // Profile, set at onboarding. Null `onboardedAt` means "show onboarding".
+  affiliation   String?
+  website       String?
+  onboardedAt   DateTime? @db.Timestamptz(3)
+
+  sessions Session[]
+  accounts Account[]
+  evals    Eval[]
+  runs     EvalRun[]           @relation("RunOwner")
+  approved EvalRun[]           @relation("RunApprover")
+  terms    TermsAcceptance[]
+  reviews  DeployHumanReview[]
+
+  @@map("user")
+}
+
+// A user accepted an eval version's `sampleTerms`. `termsSha256` is the hash of the terms
+// they saw; new terms need a new acceptance.
+model TermsAcceptance {
+  userId        String      @db.Uuid
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  evalVersionId String      @db.Uuid
+  evalVersion   EvalVersion @relation(fields: [evalVersionId], references: [id], onDelete: Cascade)
+  termsSha256   String
+  acceptedAt    DateTime    @default(now()) @db.Timestamptz(3)
+
+  @@id([userId, evalVersionId])
+  @@index([evalVersionId])
+  @@map("terms_acceptance")
+}
+
+model Session {
+  id             String   @id @default(uuid(7)) @db.Uuid
+  expiresAt      DateTime @db.Timestamptz(3)
+  token          String   @unique
+  createdAt      DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime @updatedAt @db.Timestamptz(3)
+  ipAddress      String?
+  userAgent      String?
+  userId         String   @db.Uuid
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  impersonatedBy String?
+
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id @default(uuid(7)) @db.Uuid
+  accountId             String
+  providerId            String
+  userId                String    @db.Uuid
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime? @db.Timestamptz(3)
+  refreshTokenExpiresAt DateTime? @db.Timestamptz(3)
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt             DateTime  @updatedAt @db.Timestamptz(3)
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  // Text, not UUID: Better Auth also writes its own ids here.
+  id         String   @id @default(uuid(7))
+  identifier String
+  value      String
+  expiresAt  DateTime @db.Timestamptz(3)
+  createdAt  DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt  DateTime @updatedAt @db.Timestamptz(3)
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+// API keys (`oa_sk_`) for scripts, agents, the CLI and the Apple app. `key` is a hash; the
+// plaintext is shown once. `referenceId` is the owning user.
+model Apikey {
+  id                  String    @id @default(uuid(7)) @db.Uuid
+  configId            String    @default("default")
+  name                String?
+  start               String?
+  referenceId         String
+  prefix              String?
+  key                 String
+  refillInterval      Int?
+  refillAmount        Int?
+  lastRefillAt        DateTime? @db.Timestamptz(3)
+  enabled             Boolean?  @default(true)
+  rateLimitEnabled    Boolean?  @default(true)
+  rateLimitTimeWindow Int?      @default(86400000)
+  rateLimitMax        Int?      @default(10)
+  requestCount        Int?      @default(0)
+  remaining           Int?
+  lastRequest         DateTime? @db.Timestamptz(3)
+  expiresAt           DateTime? @db.Timestamptz(3)
+  createdAt           DateTime  @db.Timestamptz(3)
+  updatedAt           DateTime  @db.Timestamptz(3)
+  permissions         String?
+  metadata            String?
+
+  @@index([configId])
+  @@index([referenceId])
+  @@index([key])
+  @@map("apikey")
+}
+
+// ---------------------------------------------------------------------------------------------
+// Organizations, models and documents. Each table holds one record type from spec/schemas;
+// `lib/spec/rows.ts` maps between them and `lib/spec/rows.db.test.ts` checks the round trip.
+// ---------------------------------------------------------------------------------------------
+
+// A lab or company. `slug` is also a reserved handle and the page URL (`/qwen`).
+model Organization {
+  id            String    @id @default(uuid(7)) @db.Uuid
+  slug          String    @unique
+  displayName   String
+  aliases       String[]
+  // Other lowercase slugs that redirect to `slug`: old slugs and other model owners.
+  slugAliases   String[]  @default([])
+  website       String?
+  // Markdown.
+  summary       String?
+  // The day of the research for the page; `researchDepth` is deep | light.
+  researchedAt  DateTime? @db.Date
+  researchDepth String?
+  // Hidden: only admins see the organization and its models.
+  hidden        Boolean   @default(false)
+  createdAt     DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime  @updatedAt @db.Timestamptz(3)
+
+  models      Model[]
+  documents   Document[]
+  incidents   OrgIncident[]
+  departures  OrgDeparture[]
+  commitments OrgCommitment[]
+
+  @@index([slugAliases], type: Gin)
+  @@map("organization")
+}
+
+// ---------------------------------------------------------------------------------------------
+// Organization research (data/seed/orgs/*.json): `OrgIncident` and the other records in
+// spec/schemas/organization_research.yaml. Text columns are Markdown. A date is YYYY, YYYY-MM or
+// YYYY-MM-DD, with its precision (day | month | year) next to it. `sources` is `OrgSource[]`.
+// ---------------------------------------------------------------------------------------------
+
+model OrgIncident {
+  id              String       @id @default(uuid(7)) @db.Uuid
+  organizationId  String       @db.Uuid
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  slug            String
+  title           String
+  date            String
+  datePrecision   String
+  endDate         String?
+  // red | orange | yellow (a CHECK in the migration).
+  severity        String
+  // ongoing | resolved | disputed | under_investigation | in_litigation
+  status          String
+  // What went wrong, shown in the feeds (a CHECK in the migration). `categories` are tags.
+  primaryCategory String
+  categories      String[]
+  summary         String
+  description     String
+  // The models whose behavior is the incident, of any developer.
+  modelIds        String[]     @default([]) @db.Uuid
+  sources         Json         @default("[]")
+  // `IncidentLog[]`: log excerpts for the incident page. Large, so lists omit it.
+  logs            Json         @default("[]")
+  createdAt       DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime     @updatedAt @db.Timestamptz(3)
+
+  events OrgIncidentEvent[]
+
+  @@unique([organizationId, slug])
+  @@index([modelIds], type: Gin)
+  @@map("org_incident")
+}
+
+model OrgIncidentEvent {
+  id            String      @id @default(uuid(7)) @db.Uuid
+  incidentId    String      @db.Uuid
+  incident      OrgIncident @relation(fields: [incidentId], references: [id], onDelete: Cascade)
+  order         Int
+  date          String
+  datePrecision String
+  title         String
+  description   String?
+  sources       Json        @default("[]")
+  // When we added it. The daily update email lists new events.
+  createdAt     DateTime    @default(now()) @db.Timestamptz(3)
+
+  @@unique([incidentId, order])
+  @@map("org_incident_event")
+}
+
+model OrgDeparture {
+  id             String       @id @default(uuid(7)) @db.Uuid
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name           String
+  title          String?
+  departedDate   String?
+  datePrecision  String?
+  // resigned | fired | laid_off | unclear
+  kind           String
+  reason         String?
+  quoteText      String?
+  quoteUrl       String?
+  // A Wikimedia Commons photo: the file, its Commons page, license and author.
+  imageUrl       String?
+  imagePageUrl   String?
+  imageLicense   String?
+  imageAuthor    String?
+  website        String?
+  nextRole       String?
+  sources        Json         @default("[]")
+  createdAt      DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime     @updatedAt @db.Timestamptz(3)
+
+  @@unique([organizationId, name])
+  @@map("org_departure")
+}
+
+// ---------------------------------------------------------------------------------------------
+// Safety commitments (data/seed/commitments/*.json): spec/schemas/commitment.yaml. `criteria` is
+// `CommitmentCriterion[]`, `state` is `CommitmentState`, `sources` is `OrgSource[]`.
+// ---------------------------------------------------------------------------------------------
+
+model Commitment {
+  id          String   @id @default(uuid(7)) @db.Uuid
+  slug        String   @unique
+  name        String
+  // oversight | transparency | limits | security
+  category    String
+  order       Int
+  summary     String
+  description String
+  criteria    Json     @default("[]")
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @db.Timestamptz(3)
+
+  orgs OrgCommitment[]
+
+  @@map("commitment")
+}
+
+// One organization's current state for a commitment: the state after its newest event.
+model OrgCommitment {
+  id             String       @id @default(uuid(7)) @db.Uuid
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  commitmentId   String       @db.Uuid
+  commitment     Commitment   @relation(fields: [commitmentId], references: [id], onDelete: Cascade)
+  checkedAt      DateTime     @db.Date
+  checkedBy      String?
+  summary        String?
+  state          Json
+  createdAt      DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime     @updatedAt @db.Timestamptz(3)
+
+  events OrgCommitmentEvent[]
+
+  @@unique([organizationId, commitmentId])
+  @@index([commitmentId])
+  @@map("org_commitment")
+}
+
+model OrgCommitmentEvent {
+  id              String        @id @default(uuid(7)) @db.Uuid
+  orgCommitmentId String        @db.Uuid
+  orgCommitment   OrgCommitment @relation(fields: [orgCommitmentId], references: [id], onDelete: Cascade)
+  order           Int
+  date            String
+  datePrecision   String
+  kind            String
+  title           String
+  summary         String?
+  quoteText       String?
+  quoteUrl        String?
+  agreement       String?
+  sources         Json          @default("[]")
+  state           Json
+  // When we added it.
+  createdAt       DateTime      @default(now()) @db.Timestamptz(3)
+
+  @@unique([orgCommitmentId, order])
+  @@map("org_commitment_event")
+}
+
+model Model {
+  id             String       @id @default(uuid(7)) @db.Uuid
+  // hf | api
+  source         String
+  // The HF repo id or `local/<name>` (hf), or `provider/model` (api). Unique with `source`.
+  name           String
+  displayName    String
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  family         String?
+  revision       String?
+  aliases        String[]
+  // quantized | adapter | finetune. Set with `parentId` or not at all (a CHECK in the migration).
+  parentId       String?      @db.Uuid
+  parent         Model?       @relation("ModelParent", fields: [parentId], references: [id], onDelete: Restrict)
+  children       Model[]      @relation("ModelParent")
+  parentRelation String?
+  removedFromHub Boolean      @default(false)
+  // A base model with no instruct or chat tuning. Lists do not show it.
+  pretrained     Boolean      @default(false)
+  // Hidden: only admins see the model, its page and its runs, as for a hidden organization.
+  hidden         Boolean      @default(false)
+  // `ModelFacts` from the spec: each fact with its source.
+  facts          Json         @default("{}")
+  // `facts.releaseDate` when it is a string (YYYY, YYYY-MM or YYYY-MM-DD), so lists need not read
+  // `facts`. `modelToRow` sets it.
+  releaseDate    String?
+  createdAt      DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime     @updatedAt @db.Timestamptz(3)
+
+  documents       ModelDocument[]
+  results         EvalResult[]
+  runs            EvalRun[]
+  openAuditCard   OpenAuditCard?
+  deployPackets   DeployPacket[]
+  deployPanels    DeployPanel[]
+  humanReviews    DeployHumanReview[]
+  methodArtifacts MethodArtifact[]
+
+  @@unique([source, name])
+  @@index([organizationId])
+  @@index([parentId])
+  @@map("model")
+}
+
+// A document an organization published. We keep the link and a hash, not the file.
+model Document {
+  id            String       @id @default(uuid(7)) @db.Uuid
+  key           String       @unique
+  // system_card | technical_report | safety_report | model_page | blog
+  kind          String
+  title         String
+  url           String
+  publisherId   String       @db.Uuid
+  publisher     Organization @relation(fields: [publisherId], references: [id], onDelete: Restrict)
+  // YYYY, YYYY-MM or YYYY-MM-DD: only as exact as the source.
+  publishedDate String?
+  // Our saved copy in R2. `fileUrl` is where we got it, when it is not `url`. pdf | html
+  fileUrl       String?
+  fileKey       String?
+  fileType      String?
+  sha256        String?
+  fetchedAt     DateTime?    @db.Timestamptz(3)
+  verified      Boolean      @default(false)
+  notes         String?
+  createdAt     DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime     @updatedAt @db.Timestamptz(3)
+
+  models  ModelDocument[]
+  card    SystemCard?     @relation("CardDocument")
+  results EvalResult[]    @relation("ResultDocument")
+
+  @@index([publisherId])
+  @@map("document")
+}
+
+model ModelDocument {
+  modelId    String   @db.Uuid
+  model      Model    @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  documentId String   @db.Uuid
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@id([modelId, documentId])
+  @@index([documentId])
+  @@map("model_document")
+}
+
+// `Eval` in the spec. Facets are columns so the registry can filter on them.
+model Eval {
+  id                    String     @id @default(uuid(7)) @db.Uuid
+  slug                  String     @unique
+  displayName           String
+  aliases               String[]
+  description           String?
+  summary               String?
+  family                String?
+  suiteId               String?    @db.Uuid
+  suite                 EvalSuite? @relation(fields: [suiteId], references: [id], onDelete: SetNull)
+  // `EvalMaintainer[]` and `EvalLink[]` from the spec.
+  maintainers           Json       @default("[]")
+  links                 Json       @default("[]")
+  // public | gated | held_out | lab_internal
+  access                String
+  // active | saturated | legacy | retired
+  status                String
+  // Why and when (YYYY-MM-DD) we marked it saturated or legacy, and the slug of the newer eval.
+  saturatedReason       String?
+  saturatedDecisionDate String?
+  legacyReason          String?
+  legacyDecisionDate    String?
+  supersededBy          String?
+  // A user's request of it starts without approval, when its estimated cost is under the limit.
+  autoApprove           Boolean    @default(false)
+  measures              String[]
+  formats               String[]
+  cases                 String[]
+  grading               String[]
+  adversarial           Boolean
+  humanParticipants     Boolean
+  subjects              String[]
+  topics                String[]
+  canary                String?
+  // `RecommendedModel[]`: cheaper judge or helper models we tested against the defaults.
+  recommendedModels     Json       @default("[]")
+  // Null for the site registry (seed data), which is public (a CHECK in the migration).
+  // Restrict: deleting a user must first decide what happens to their evals.
+  ownerUserId           String?    @db.Uuid
+  owner                 User?      @relation(fields: [ownerUserId], references: [id], onDelete: Restrict)
+  // private | unlisted | public
+  visibility            String
+  createdAt             DateTime   @default(now()) @db.Timestamptz(3)
+  updatedAt             DateTime   @updatedAt @db.Timestamptz(3)
+
+  versions EvalVersion[]
+  results  EvalResult[]
+  runs     EvalRun[]
+
+  @@index([ownerUserId])
+  @@index([suiteId])
+  @@index([topics], type: Gin)
+  @@map("eval")
+}
+
+// `EvalSuite` in the spec: a set of evals with one page (SAEBench).
+model EvalSuite {
+  id          String   @id @default(uuid(7)) @db.Uuid
+  slug        String   @unique
+  displayName String
+  summary     String
+  description String?
+  // `EvalMaintainer[]` and `EvalLink[]` from the spec.
+  maintainers Json     @default("[]")
+  links       Json     @default("[]")
+  evalOrder   String[]
+  // `MethodMatch` from the spec.
+  matched     Json?
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @db.Timestamptz(3)
+
+  evals Eval[]
+
+  @@map("eval_suite")
+}
+
+// `EvalVersion` in the spec. A published version does not change.
+model EvalVersion {
+  id           String    @id @default(uuid(7)) @db.Uuid
+  evalId       String    @db.Uuid
+  eval         Eval      @relation(fields: [evalId], references: [id], onDelete: Restrict)
+  version      String
+  // draft | published
+  status       String
+  publishedAt  DateTime? @db.Timestamptz(3)
+  // YYYY, YYYY-MM or YYYY-MM-DD: only as exact as the source.
+  releasedDate String?
+  changes      String?
+  // `EvalDataset`, `ScoreDef[]`, `MetricDef[]`, `EvalRunner` and `SampleTerms` from the spec.
+  dataset      Json?
+  scores       Json      @default("[]")
+  metrics      Json      @default("[]")
+  runner       Json?
+  sampleTerms  Json?
+  // `MethodEvalSetup`: only for evals whose subjects are methods.
+  methodSetup  Json?
+  createdAt    DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime  @updatedAt @db.Timestamptz(3)
+
+  results       EvalResult[]
+  samples       EvalSample[]
+  runs          EvalRun[]
+  acceptances   TermsAcceptance[]
+  cardRuns      OpenAuditCardRun[]
+  methodResults MethodResult[]
+
+  @@unique([evalId, version])
+  @@map("eval_version")
+}
+
+// `EvalSample` in the spec. `input` is null for a `hash_only` split.
+model EvalSample {
+  id            String                   @id @default(uuid(7)) @db.Uuid
+  evalVersionId String                   @db.Uuid
+  evalVersion   EvalVersion              @relation(fields: [evalVersionId], references: [id], onDelete: Cascade)
+  split         String
+  sourceId      String
+  // A string or `SampleMessage[]`; a string or string[].
+  input         Json?
+  target        Json?
+  choices       String[]
+  // `settings`: by run id, the settings of that run's attempt on this sample (`eval_attempt.settings`).
+  metadata      Json                     @default("{}")
+  sha256        String
+  // The graded replies to the sample, and the ones that failed: one for each model and epoch, from
+  // the model's newest public run that is not a re-score. `refresh_sample_stats` sets them.
+  graded        Int                      @default(0)
+  failed        Int                      @default(0)
+  // The words of the sample's text, for the eval page's sample search. A trigger on `eval_attempt`
+  // sets it from an attempt's input (migration `sample_search`).
+  search        Unsupported("tsvector")?
+  createdAt     DateTime                 @default(now()) @db.Timestamptz(3)
+
+  attempts EvalAttempt[]
+  issue    EvalSampleIssue?
+
+  @@unique([evalVersionId, split, sourceId])
+  // The "Most Failed" order of the eval page's samples. `id` makes the order of ties fixed.
+  @@index([evalVersionId, failed(sort: Desc), graded, id])
+  @@index([search], map: "eval_sample_search_idx", type: Gin)
+  @@map("eval_sample")
+}
+
+// A known error in an eval sample (EVAL_KNOWN_ERRORS.md). `kind`: label_error, missing_context,
+// prompt_conflict, grader_error or other. `status`: proposed, confirmed or rejected; staff confirm.
+// `effect`: exclude (a confirmed issue takes the sample out of pass rates and failed counts) or
+// note. `source`: llm_review, staff, report or upstream. SQL CHECK constraints hold the values.
+model EvalSampleIssue {
+  id           String     @id @default(uuid(7)) @db.Uuid
+  evalSampleId String     @unique @db.Uuid
+  evalSample   EvalSample @relation(fields: [evalSampleId], references: [id], onDelete: Cascade)
+  kind         String
+  status       String     @default("proposed")
+  effect       String     @default("exclude")
+  // One plain sentence for the public. It must not repeat hazardous content.
+  note         String
+  // For example the review's verdict, and the failed and graded counts when it was made.
+  evidence     Json       @default("{}")
+  source       String
+  // The email of the staff member who confirmed or rejected it.
+  reviewedBy   String?
+  reviewedAt   DateTime?  @db.Timestamptz(3)
+  createdAt    DateTime   @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime   @updatedAt @db.Timestamptz(3)
+
+  @@index([status, effect])
+  @@map("eval_sample_issue")
+}
+
+// ---------------------------------------------------------------------------------------------
+// Methods (spec/schemas/method.yaml): tools that inspect a model, and their scores. A method holds
+// variants. Evals score artifacts (one trained SAE or probe, or one monitor setup).
+// ---------------------------------------------------------------------------------------------
+
+model Method {
+  id            String   @id @default(uuid(7)) @db.Uuid
+  slug          String   @unique
+  displayName   String
+  // interpretability | monitoring | auditing
+  group         String
+  summary       String
+  tagline       String?
+  safetyUse     String
+  caveats       String[]
+  // `MethodParam[]` and `MethodCompare` from the spec.
+  params        Json     @default("[]")
+  compare       Json     @default("{\"groupBy\":[]}")
+  // What the expert views say on balance.
+  expertSummary String?
+  // `EvalLink[]` from the spec.
+  links         Json     @default("[]")
+  createdAt     DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime @updatedAt @db.Timestamptz(3)
+
+  variants    MethodVariant[]
+  expertViews MethodExpertView[]
+
+  @@map("method")
+}
+
+// What human experts said about a method, from one public source. `variantIds`: the variants
+// that the source names.
+model MethodExpertView {
+  id            String   @id @default(uuid(7)) @db.Uuid
+  methodId      String   @db.Uuid
+  method        Method   @relation(fields: [methodId], references: [id], onDelete: Restrict)
+  slug          String
+  variantIds    String[] @default([]) @db.Uuid
+  title         String
+  byline        String
+  organization  String?
+  // A `PartialDate`: YYYY, YYYY-MM or YYYY-MM-DD.
+  publishedDate String
+  // positive | negative | mixed
+  stance        String
+  summary       String
+  points        String[]
+  // `ExpertQuote[]` and `EvalLink[]` from the spec.
+  quotes        Json     @default("[]")
+  sources       Json
+  checkedDate   String
+  createdAt     DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime @updatedAt @db.Timestamptz(3)
+
+  @@unique([methodId, slug])
+  @@map("method_expert_view")
+}
+
+model MethodVariant {
+  id           String          @id @default(uuid(7)) @db.Uuid
+  methodId     String          @db.Uuid
+  method       Method          @relation(fields: [methodId], references: [id], onDelete: Restrict)
+  slug         String
+  displayName  String
+  aliases      String[]
+  summary      String?
+  // white_box | logprobs | black_box
+  access       String
+  baseline     Boolean         @default(false)
+  componentIds String[]        @default([]) @db.Uuid
+  supersedesId String?         @db.Uuid
+  supersedes   MethodVariant?  @relation("Supersedes", fields: [supersedesId], references: [id], onDelete: SetNull)
+  supersededBy MethodVariant[] @relation("Supersedes")
+  // `MethodParam[]`: settings of this variant only.
+  params       Json            @default("[]")
+  links        Json            @default("[]")
+  // `MethodPrompt[]` from the spec.
+  prompts      Json            @default("[]")
+  // private | unlisted | public
+  visibility   String          @default("public")
+  createdAt    DateTime        @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime        @updatedAt @db.Timestamptz(3)
+
+  artifacts MethodArtifact[]
+
+  @@unique([methodId, slug])
+  @@map("method_variant")
+}
+
+model MethodArtifact {
+  id          String        @id @default(uuid(7)) @db.Uuid
+  key         String        @unique
+  variantId   String        @db.Uuid
+  variant     MethodVariant @relation(fields: [variantId], references: [id], onDelete: Restrict)
+  displayName String
+  // The Hub name of the model that the artifact inspects.
+  subject     String
+  modelId     String?       @db.Uuid
+  model       Model?        @relation(fields: [modelId], references: [id], onDelete: SetNull)
+  revision    String?
+  // `MethodSite[]` from the spec; values for the `MethodParam` keys.
+  sites       Json          @default("[]")
+  params      Json          @default("{}")
+  license     String?
+  sourceUrl   String?
+  // `MethodArtifactFile[]` from the spec: the files to download.
+  files       Json          @default("[]")
+  createdAt   DateTime      @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime      @updatedAt @db.Timestamptz(3)
+
+  results MethodResult[]
+
+  @@index([variantId])
+  @@index([modelId])
+  @@index([subject])
+  @@map("method_artifact")
+}
+
+// `MethodResult` in the spec. Not an `EvalResult`: those score models.
+model MethodResult {
+  id            String         @id @default(uuid(7)) @db.Uuid
+  artifactId    String         @db.Uuid
+  artifact      MethodArtifact @relation(fields: [artifactId], references: [id], onDelete: Cascade)
+  evalVersionId String         @db.Uuid
+  evalVersion   EvalVersion    @relation(fields: [evalVersionId], references: [id], onDelete: Restrict)
+  metric        String
+  value         Float
+  stderr        Float?
+  n             Int?
+  sourceUrl     String
+  sourceTable   String?
+  sourceCommit  String?
+  measuredAt    DateTime?      @db.Timestamptz(3)
+  createdAt     DateTime       @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime       @updatedAt @db.Timestamptz(3)
+
+  @@unique([artifactId, evalVersionId, metric])
+  @@index([evalVersionId])
+  @@map("method_result")
+}
+
+// `SystemCard` in the spec: what we extracted from one card. One row per document we read.
+model SystemCard {
+  id                String   @id @default(uuid(7)) @db.Uuid
+  documentId        String   @unique @db.Uuid
+  document          Document @relation("CardDocument", fields: [documentId], references: [id], onDelete: Restrict)
+  alsoDocumentIds   String[] @db.Uuid
+  // `CardCover[]`. `modelIds` repeats the known model ids, so a model page can find its cards.
+  covers            Json     @default("[]")
+  modelIds          String[] @db.Uuid
+  basedOnDocumentId String?  @db.Uuid
+  pageCount         Int?
+  // `Disclosures`, `RiskDecision[]`, `TopicCoverage[]`, `ExternalTester[]` and `Finding[]`.
+  disclosures       Json     @default("{}")
+  riskDecisions     Json     @default("[]")
+  topics            Json     @default("[]")
+  testers           Json     @default("[]")
+  findings          Json     @default("[]")
+  reviewed          Boolean  @default(false)
+  extractionBy      String
+  extractionAt      DateTime @db.Timestamptz(3)
+  createdAt         DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt         DateTime @updatedAt @db.Timestamptz(3)
+
+  @@index([modelIds], type: Gin)
+  @@map("system_card")
+}
+
+// `EvalResult` in the spec: one number for one metric, eval and model.
+model EvalResult {
+  id                  String       @id @default(uuid(7)) @db.Uuid
+  // reported | measured
+  origin              String
+  evalId              String?      @db.Uuid
+  eval                Eval?        @relation(fields: [evalId], references: [id], onDelete: Restrict)
+  evalVersionId       String?      @db.Uuid
+  evalVersion         EvalVersion? @relation(fields: [evalVersionId], references: [id], onDelete: Restrict)
+  rawEvalName         String?
+  modelId             String?      @db.Uuid
+  model               Model?       @relation(fields: [modelId], references: [id], onDelete: Restrict)
+  rawModelName        String?
+  metric              String
+  value               Float
+  unit                String?
+  stderr              Float?
+  ciLow               Float?
+  ciHigh              Float?
+  n                   Int?
+  // `Direction`: higher_is_better | lower_is_better | nearer_zero_is_better | neither. Null: not known.
+  safetyDirection     String?
+  capabilityDirection String?
+  // `ResultSettings`.
+  settings            Json         @default("{}")
+  sourceDocumentId    String?      @db.Uuid
+  sourceDocument      Document?    @relation("ResultDocument", fields: [sourceDocumentId], references: [id], onDelete: Restrict)
+  sourcePage          String?
+  // The page in the saved PDF, from 1. `sourcePage` is the printed page.
+  sourcePdfPage       Int?
+  sourceTable         String?
+  sourceQuote         String?
+  // Set for `measured` results (a CHECK in the migration). Deleting a run deletes its results.
+  evalRunId           String?      @db.Uuid
+  evalRun             EvalRun?     @relation(fields: [evalRunId], references: [id], onDelete: Cascade)
+  reviewed            Boolean      @default(false)
+  extractionBy        String?
+  extractionAt        DateTime?    @db.Timestamptz(3)
+  createdAt           DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt           DateTime     @updatedAt @db.Timestamptz(3)
+
+  @@index([modelId])
+  @@index([evalId])
+  @@index([sourceDocumentId])
+  @@index([evalRunId])
+  @@map("eval_result")
+}
+
+// ---------------------------------------------------------------------------------------------
+// Logs
+// ---------------------------------------------------------------------------------------------
+
+// Every email we send. Sign-in limits count rows here (lib/server/email-limits.ts).
+model EmailLog {
+  id                String   @id @default(uuid(7)) @db.Uuid
+  to                String
+  // `inboxKey(to)`: one key per inbox, so `+tags` and Gmail dots share a limit.
+  toKey             String
+  type              String
+  subject           String
+  providerMessageId String?
+  error             String?
+  // The run a run email is about. One email of each type per run.
+  runId             String?  @db.Uuid
+  sentAt            DateTime @default(now()) @db.Timestamptz(3)
+
+  @@unique([runId, type])
+  @@index([to, sentAt])
+  @@index([toKey, type, sentAt])
+  @@index([type, sentAt])
+  @@map("email_log")
+}
+
+// One row per submission from the navbar's Submit form. It has only what the sender wrote: no IP
+// address, account or browser data.
+model Submission {
+  id        String   @id @default(uuid(7)) @db.Uuid
+  // The reference in the emails: "SUB-<number>".
+  number    Int      @unique @default(autoincrement())
+  // incident | evaluation | method | other
+  type      String
+  // received | reviewing | accepted | declined (a CHECK in the migration).
+  status    String   @default("received")
+  body      String
+  // A lower-case address, or null: anonymous.
+  email     String?
+  // The path of the page the submission came from.
+  page      String?
+  // The type's extra fields (`SUBMISSION_FIELDS`).
+  fields    Json     @default("{}")
+  // For admins only.
+  note      String?
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  @@index([status, createdAt])
+  @@map("submission")
+}
+
+// One daily email of new items to the Resend update lists. One row per day, so a second run on
+// the same day sends nothing. The subscribers and their lists live in Resend.
+model UpdateDigest {
+  id         String    @id @default(uuid(7)) @db.Uuid
+  // YYYY-MM-DD, UTC.
+  day        String    @unique
+  // The items are from `since` (excluded) to `until` (included).
+  since      DateTime  @db.Timestamptz(3)
+  until      DateTime  @db.Timestamptz(3)
+  // Item counts by section, and the Broadcast id for each list.
+  counts     Json      @default("{}")
+  broadcasts Json      @default("{}")
+  // The keys of the items in the email ("incident:<id>"). A later email leaves them out.
+  items      Json      @default("[]")
+  error      String?
+  sentAt     DateTime? @db.Timestamptz(3)
+  createdAt  DateTime  @default(now()) @db.Timestamptz(3)
+
+  @@map("update_digest")
+}
+
+// Who did what: role changes, bans, moderation, verification.
+model AuditLog {
+  id         String   @id @default(uuid(7)) @db.Uuid
+  actorId    String?  @db.Uuid
+  action     String
+  targetType String
+  targetId   String
+  meta       Json?
+  createdAt  DateTime @default(now()) @db.Timestamptz(3)
+
+  @@index([targetType, targetId])
+  @@index([actorId, createdAt])
+  @@map("audit_log")
+}
+
+// One run of an eval version on one model. The row is also the runner's job: a runner claims a
+// `queued` row (FOR UPDATE SKIP LOCKED) and keeps its lease with heartbeats.
+model EvalRun {
+  id             String      @id @default(uuid(7)) @db.Uuid
+  evalId         String      @db.Uuid
+  eval           Eval        @relation(fields: [evalId], references: [id], onDelete: Restrict)
+  evalVersionId  String      @db.Uuid
+  evalVersion    EvalVersion @relation(fields: [evalVersionId], references: [id], onDelete: Restrict)
+  modelId        String      @db.Uuid
+  model          Model       @relation(fields: [modelId], references: [id], onDelete: Restrict)
+  // run | import | rescore
+  origin         String
+  // A re-score: the run whose outputs it scores.
+  sourceRunId    String?     @db.Uuid
+  sourceRun      EvalRun?    @relation("Rescores", fields: [sourceRunId], references: [id], onDelete: Restrict)
+  rescores       EvalRun[]   @relation("Rescores")
+  // queued | running | importing | succeeded | failed | cancelled
+  status         String
+  // `ServingRoute`, `RunSettings` and `RunProvenance` from the spec.
+  route          Json
+  settings       Json        @default("{}")
+  provenance     Json        @default("{}")
+  // The original log in R2. The hash makes a second import of the same file do nothing.
+  logKey         String?
+  logBytes       Int?
+  logSha256      String?     @unique
+  // The public copy of the log, without the attempts in `redactedOmit` (`openaudit_runner/redact.py`).
+  // The same key as `logKey` when it leaves out none.
+  redactedKey    String?
+  redactedBytes  Int?
+  redactedOmit   String[]    @default([]) @db.Uuid
+  sampleCount    Int?
+  attemptCount   Int         @default(0)
+  error          String?
+  ownerUserId    String?     @db.Uuid
+  owner          User?       @relation("RunOwner", fields: [ownerUserId], references: [id], onDelete: Restrict)
+  // A user's request (`requested`): the admin who approved it, and when.
+  approvedById   String?     @db.Uuid
+  approvedBy     User?       @relation("RunApprover", fields: [approvedById], references: [id], onDelete: Restrict)
+  approvedAt     DateTime?   @db.Timestamptz(3)
+  // private | unlisted | public
+  visibility     String
+  leaseOwner     String?
+  leaseExpiresAt DateTime?   @db.Timestamptz(3)
+  tries          Int         @default(0)
+  startedAt      DateTime?   @db.Timestamptz(3)
+  finishedAt     DateTime?   @db.Timestamptz(3)
+  createdAt      DateTime    @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime    @updatedAt @db.Timestamptz(3)
+
+  attempts EvalAttempt[]
+  results  EvalResult[]
+  shards   EvalRunShard[]
+  cardRuns OpenAuditCardRun[]
+  snippets OpenAuditSnippet[]
+
+  @@index([status, createdAt])
+  @@index([modelId])
+  @@index([evalId])
+  @@index([sourceRunId])
+  @@index([ownerUserId, status])
+  @@map("eval_run")
+}
+
+// One group of a run's samples, `[sampleStart, sampleEnd)` in dataset order. A runner claims
+// a shard, not a run, so a stopped runner loses only its shard.
+model EvalRunShard {
+  id             String    @id @default(uuid(7)) @db.Uuid
+  runId          String    @db.Uuid
+  run            EvalRun   @relation(fields: [runId], references: [id], onDelete: Cascade)
+  // From 1, in sample order.
+  ordinal        Int
+  sampleStart    Int
+  sampleEnd      Int
+  // queued | running | succeeded | failed | cancelled
+  status         String    @default("queued")
+  // Parallel model calls this shard makes, and the `runner_cap` it counts against.
+  connections    Int
+  capKey         String
+  logKey         String?
+  attemptCount   Int       @default(0)
+  error          String?
+  leaseOwner     String?
+  leaseExpiresAt DateTime? @db.Timestamptz(3)
+  tries          Int       @default(0)
+  startedAt      DateTime? @db.Timestamptz(3)
+  finishedAt     DateTime? @db.Timestamptz(3)
+  createdAt      DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime  @updatedAt @db.Timestamptz(3)
+
+  @@unique([runId, ordinal])
+  @@index([status, createdAt])
+  @@index([capKey, status])
+  @@map("eval_run_shard")
+}
+
+/// Questions to the site assistant on one UTC day: one row per IP (a hash, not the address) and
+/// one row for all, with `bucket` "all". Rows older than two days are deleted.
+model AskCount {
+  day    DateTime @db.Date
+  bucket String
+  count  Int      @default(0)
+
+  @@id([day, bucket])
+  @@map("ask_count")
+}
+
+// The most parallel model calls that running shards may make together, by key: `openrouter`
+// for all OpenRouter calls, or `openrouter:<provider>` for a pinned provider.
+model RunnerCap {
+  key            String   @id
+  maxConnections Int
+  updatedAt      DateTime @default(now()) @updatedAt @db.Timestamptz(3)
+
+  @@map("runner_cap")
+}
+
+// One sample in one epoch of a run. The transcript is in R2 (`bodyKey`); the row keeps what
+// lists sort and filter on.
+model EvalAttempt {
+  id           String      @id @default(uuid(7)) @db.Uuid
+  runId        String      @db.Uuid
+  run          EvalRun     @relation(fields: [runId], references: [id], onDelete: Cascade)
+  ordinal      Int
+  sampleId     String
+  evalSampleId String?     @db.Uuid
+  evalSample   EvalSample? @relation(fields: [evalSampleId], references: [id], onDelete: SetNull)
+  epoch        Int
+  // success | error
+  status       String
+  passed       Boolean?
+  input        String?
+  // A string or string[].
+  target       Json?
+  choices      String[]
+  output       String?
+  // `AttemptScore` by scorer name; `TokenUsage`.
+  scores       Json        @default("{}")
+  // The keys of the category or group metrics that count this attempt (`harm_score_copyright`).
+  metrics      String[]    @default([])
+  error        String?
+  // Why the attempt has no scores, from the sample's metadata. Pages read it here, not from R2.
+  notScored    String?
+  tokens       Json        @default("{}")
+  seconds      Float?
+  // open | sign_in | scores_only, from a subset rule. Null: the version's rule.
+  display      String?
+  // gated | restricted | withheld: who can read a dangerous reply (`Hazard` in the spec). Null: open.
+  hazard       String?
+  bodyKey      String?
+  bodyBytes    Int?
+  // The run's settings and the sample's own, so that each attempt has its context
+  // (`openaudit_runner/attempt_settings.py`). Null: not set yet.
+  settings     Json?
+  createdAt    DateTime    @default(now()) @db.Timestamptz(3)
+
+  @@unique([runId, sampleId, epoch])
+  @@unique([runId, ordinal])
+  @@index([runId, passed, ordinal])
+  @@index([runId, status, ordinal])
+  // For the `evalSampleId` foreign key: without it, each deleted sample scans all attempts.
+  @@index([evalSampleId], where: raw("\"evalSampleId\" IS NOT NULL"))
+  @@map("eval_attempt")
+}
+
+// ---------------------------------------------------------------------------------------------
+// OpenAudit Cards: our own summary of a model, made only from our eval runs. The runner
+// (apps/runner/openaudit_runner/cards.py) builds them; `OpenAuditCardVersion` in the spec.
+// ---------------------------------------------------------------------------------------------
+
+// One card per model. `staleAt` is set when a run of the model ends after the last build; the
+// runner builds again when no other run ended for a short time.
+model OpenAuditCard {
+  id             String    @id @default(uuid(7)) @db.Uuid
+  modelId        String    @unique @db.Uuid
+  model          Model     @relation(fields: [modelId], references: [id], onDelete: Restrict)
+  // The first and the last run end since the last build.
+  staleSince     DateTime? @db.Timestamptz(3)
+  staleAt        DateTime? @db.Timestamptz(3)
+  // The last build, also one that made no new version (the same input).
+  builtAt        DateTime? @db.Timestamptz(3)
+  // An admin asked for a build: no debounce, and no wait for running runs. With `rebuildForce`,
+  // the build saves a new version also when the input did not change.
+  rebuildAt      DateTime? @db.Timestamptz(3)
+  rebuildForce   Boolean   @default(false)
+  error          String?
+  leaseOwner     String?
+  leaseExpiresAt DateTime? @db.Timestamptz(3)
+  createdAt      DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime  @updatedAt @db.Timestamptz(3)
+
+  versions OpenAuditCardVersion[]
+
+  @@index([staleAt])
+  @@map("openaudit_card")
+}
+
+// One version of a card. A version does not change. A new one is made only when the input
+// (the runs, the snippets, the prompt or the model) changes.
+model OpenAuditCardVersion {
+  id            String        @id @default(uuid(7)) @db.Uuid
+  cardId        String        @db.Uuid
+  card          OpenAuditCard @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  // From 1.
+  number        Int
+  // draft | published | discarded. A build saves a draft; only admins see it until one publishes
+  // it. A new draft discards the card's older drafts.
+  status        String        @default("draft")
+  // When an admin published or discarded it.
+  reviewedAt    DateTime?     @db.Timestamptz(3)
+  // When the admins got the email that the draft is ready.
+  emailedAt     DateTime?     @db.Timestamptz(3)
+  // The OpenRouter models that wrote the content and flagged the snippets, and our prompt's version.
+  aggregator    String
+  // Null in versions with no snippets from before it.
+  flagger       String?
+  promptVersion String
+  inputSha256   String
+  // The aggregator call, plus the flagger calls made for this version (cached calls cost 0).
+  costUsd       Float
+  tokens        Json          @default("{}")
+  // The executive summary: { concerns, strengths, unknowns } (lists of text), or a Markdown
+  // string in older drafts. Null in versions from before it.
+  summary       Json?
+  // `CardFinding[]`, `RiskVerdict[]`, `TopicSummary[]` and `CoverageGap[]` from the spec.
+  findings      Json          @default("[]")
+  verdicts      Json          @default("[]")
+  topics        Json          @default("[]")
+  gaps          Json          @default("[]")
+  createdAt     DateTime      @default(now()) @db.Timestamptz(3)
+
+  runs          OpenAuditCardRun[]
+  snippets      OpenAuditCardSnippet[]
+  deployPackets DeployPacket[]
+  deployPanels  DeployPanel[]
+  humanReviews  DeployHumanReview[]
+
+  @@unique([cardId, number])
+  @@index([cardId, status])
+  @@map("openaudit_card_version")
+}
+
+// The runs a version used: the latest finished run of the latest version of each eval.
+model OpenAuditCardRun {
+  versionId     String               @db.Uuid
+  version       OpenAuditCardVersion @relation(fields: [versionId], references: [id], onDelete: Cascade)
+  runId         String               @db.Uuid
+  run           EvalRun              @relation(fields: [runId], references: [id], onDelete: Restrict)
+  evalVersionId String               @db.Uuid
+  evalVersion   EvalVersion          @relation(fields: [evalVersionId], references: [id], onDelete: Restrict)
+
+  @@id([versionId, runId])
+  @@index([runId])
+  @@map("openaudit_card_run")
+}
+
+// One case the flagger model marked in one attempt: egregious misalignment or unsafe output.
+// An attempt can have more than one. No foreign key to the attempt: an import of a run again
+// deletes and inserts its attempts (with the same ids), which must not delete the snippets.
+model OpenAuditSnippet {
+  id            String   @id @default(uuid(7)) @db.Uuid
+  runId         String   @db.Uuid
+  run           EvalRun  @relation(fields: [runId], references: [id], onDelete: Cascade)
+  attemptId     String   @db.Uuid
+  // The attempt's ordinal in the run, for its page.
+  ordinal       Int
+  // `SnippetCategory` and `SnippetSeverity` from the spec.
+  category      String
+  severity      String
+  // The problem in 1 to 3 words. Older snippets have none.
+  title         String?
+  reason        String
+  // `SnippetExcerpt`: the key messages and the exact quote.
+  excerpt       Json
+  flagger       String
+  promptVersion String
+  createdAt     DateTime @default(now()) @db.Timestamptz(3)
+
+  versions OpenAuditCardSnippet[]
+
+  @@index([runId])
+  @@index([attemptId])
+  @@map("openaudit_snippet")
+}
+
+model OpenAuditCardSnippet {
+  versionId String               @db.Uuid
+  version   OpenAuditCardVersion @relation(fields: [versionId], references: [id], onDelete: Cascade)
+  snippetId String               @db.Uuid
+  snippet   OpenAuditSnippet     @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+
+  @@id([versionId, snippetId])
+  @@index([snippetId])
+  @@map("openaudit_card_snippet")
+}
+
+// The flagger's cache: one row per attempt, flagger and prompt version, also with no flags.
+// No foreign key to the attempt, for the same reason as `OpenAuditSnippet`.
+model OpenAuditFlagCheck {
+  attemptId     String   @db.Uuid
+  flagger       String
+  promptVersion String
+  flags         Int
+  costUsd       Float
+  checkedAt     DateTime @default(now()) @db.Timestamptz(3)
+
+  @@id([attemptId, flagger, promptVersion])
+  @@map("openaudit_flag_check")
+}
+
+// A short, vague summary of a withheld reply (`Hazard`), shown in its place. The runner's
+// `summaries` module writes it. `uplift`: how much real help the reply gives (none, low, high).
+// `domain`: the kind of its most dangerous content. `fiction`: a story, scene, roleplay or game.
+// `hazard`: the level that the site uses for the attempt in place of the computed one (null: open).
+// No foreign key to the attempt, for the same reason as `OpenAuditSnippet`.
+model ReplySummary {
+  attemptId     String   @id @db.Uuid
+  summary       String
+  uplift        String?
+  domain        String?
+  fiction       Boolean?
+  hazard        String?
+  // The model that wrote it, and the prompt version.
+  model         String
+  promptVersion String
+  costUsd       Float
+  createdAt     DateTime @default(now()) @db.Timestamptz(3)
+
+  @@map("reply_summary")
+}
+
+// ---------------------------------------------------------------------------------------------
+// Deploymeter: how much AI judges and people trust a model for wide public deployment.
+// ---------------------------------------------------------------------------------------------
+
+// The anonymous evidence that the judges read: one published card version, with the names of
+// the model and its developer hidden. It does not change.
+model DeployPacket {
+  id            String               @id @default(uuid(7)) @db.Uuid
+  modelId       String               @db.Uuid
+  model         Model                @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  cardVersionId String               @db.Uuid
+  cardVersion   OpenAuditCardVersion @relation(fields: [cardVersionId], references: [id], onDelete: Restrict)
+  // The hash of the packet after the name lists, before the scrubber model.
+  inputSha256   String
+  scrubVersion  String
+  // The model that found the names that the lists missed. Null: none answered.
+  scrubber      String?
+  content       Json
+  // { cardVersionId, cardVersion, runIds, snippetIds, documentIds }.
+  sources       Json
+  // The texts that the scrubber hid, with why: [{ text, why }]. Admins only.
+  leaks         Json                 @default("[]")
+  costUsd       Float                @default(0)
+  createdAt     DateTime             @default(now()) @db.Timestamptz(3)
+
+  panels DeployPanel[]
+
+  @@unique([modelId, inputSha256])
+  @@map("deploy_packet")
+}
+
+// One run of the AI panel on one packet. draft | published | discarded, as card versions: only
+// admins see a draft until one publishes it. A new draft discards the model's older drafts.
+model DeployPanel {
+  id            String               @id @default(uuid(7)) @db.Uuid
+  modelId       String               @db.Uuid
+  model         Model                @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  packetId      String               @db.Uuid
+  packet        DeployPacket         @relation(fields: [packetId], references: [id], onDelete: Restrict)
+  cardVersionId String               @db.Uuid
+  cardVersion   OpenAuditCardVersion @relation(fields: [cardVersionId], references: [id], onDelete: Restrict)
+  // From 1, for each model.
+  number        Int
+  status        String               @default("draft")
+  reviewedAt    DateTime?            @db.Timestamptz(3)
+  promptVersion String
+  // The judges asked, in order.
+  judges        String[]
+  // The AI panel's score (0 to 100): the median of the reviews that count. Null: none counts.
+  meter         Int?
+  // `DeployPanelSummary`. Null: no review counts, or the summary call failed.
+  summary       Json?
+  summarizer    String?
+  costUsd       Float
+  tokens        Json                 @default("{}")
+  // The system prompts: `{ judge, guess }`. The user message is the packet's content.
+  prompts       Json?
+  createdAt     DateTime             @default(now()) @db.Timestamptz(3)
+
+  reviews DeployReview[]
+
+  @@unique([modelId, number])
+  @@index([modelId, status])
+  @@map("deploy_panel")
+}
+
+// One judge's review in a panel. `score` is the median of its answers (`samples`), and the text
+// is the answer nearest to it. A review of a judge from the target's lab (`sameLab`), or of the
+// target itself (`self`), does not count in the panel's score.
+model DeployReview {
+  id             String      @id @default(uuid(7)) @db.Uuid
+  panelId        String      @db.Uuid
+  panel          DeployPanel @relation(fields: [panelId], references: [id], onDelete: Cascade)
+  // An OpenRouter model id.
+  judge          String
+  openWeights    Boolean
+  sameLab        Boolean
+  self           Boolean
+  // What the judge read: `full`; `no-danger` (no reasons for dangerous cases); `no-quotes` (no quoted
+  // replies); `counts-only` (only counts of flagged cases). Less when a provider's filter blocked it.
+  evidence       String      @default("full")
+  // Null: the judge abstained (`abstain`) or gave no answer (`error`).
+  score          Int?
+  // The judge could not give a fair score from the packet. Not in the meter.
+  abstain        Boolean     @default(false)
+  enoughEvidence Boolean?
+  headline       String?
+  summary        String?
+  reasonsFor     String[]
+  reasonsAgainst String[]
+  // `DeployReviewSample[]`.
+  samples        Json        @default("[]")
+  // `DeployGuess`.
+  guess          Json?
+  costUsd        Float
+  tokens         Json        @default("{}")
+  error          String?
+  createdAt      DateTime    @default(now()) @db.Timestamptz(3)
+
+  @@unique([panelId, judge])
+  @@index([judge])
+  @@map("deploy_review")
+}
+
+// A person's review of a model: the same 0 to 100 score as the judges, and a short text. One for
+// each user and model; an edit replaces it. `cardVersionId`: the OpenAudit version they saw.
+model DeployHumanReview {
+  id            String                @id @default(uuid(7)) @db.Uuid
+  modelId       String                @db.Uuid
+  model         Model                 @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  userId        String                @db.Uuid
+  user          User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cardVersionId String?               @db.Uuid
+  cardVersion   OpenAuditCardVersion? @relation(fields: [cardVersionId], references: [id], onDelete: SetNull)
+  score         Int
+  text          String
+  createdAt     DateTime              @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime              @updatedAt @db.Timestamptz(3)
+
+  @@unique([userId, modelId])
+  @@index([modelId])
+  @@map("deploy_human_review")
+}

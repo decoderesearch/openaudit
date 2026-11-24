@@ -1,0 +1,455 @@
+{
+  "document": "google-gemma-3-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "google/gemma-3-1b-it"
+    },
+    {
+      "model": "google/gemma-3-4b-it"
+    },
+    {
+      "model": "google/gemma-3-12b-it"
+    },
+    {
+      "model": "google/gemma-3-27b-it"
+    }
+  ],
+  "pageCount": 25,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "128K tokens (1B: 32K)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "length of 128K tokens, with the exception of the"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text and vision (image understanding; 1B has no vision encoder)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "This version introduces vision understanding abilities, a wider"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "wider multilingual coverage (increased non-English data)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "coverage of languages and longer context – at least 128K tokens."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "1B, 4B, 12B, and 27B (non-embedding params in Table 1 up to 25,600M)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "ranging in scale from 1 to 27 billion parameters."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "decoder-only transformer with Grouped-Query Attention and interleaved local/global layers",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "decoder-only transformer architecture as previ-"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "14T (27B), 12T (12B), 4T (4B), 2T (1B) tokens; text and images; more multilingual data",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "we train on 14T tokens for Gemma 3 27B, 12T"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Baseline assurance: Gemma 3 violation rate significantly low on Google safety policies",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "cantly low overall on these safety policies."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[FACTS Grounding](/evals/facts-grounding) (Table 6): Gemma 3 27B instruction fine-tuned (IT) 74.9, 12B 75.8, 4B 70.1, 1B 36.4 (higher is better).",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "FACTS Grounding    82.9    80.0    84.6   82.8       43.8            62.0         62.4     36.4     70.1     75.8        74.9"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "CBRN knowledge eval: Gemma 3 knowledge in these domains is low",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "models in these domains is low."
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Figure 9 reports that Gemma 3 models memorize significantly less (exact and approximate) than prior Gemma, Gemini, and PaLM models; approximate memorization is roughly 24x exact on average.", "tone": "good",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "memorization of roughly 24x on average."
+      }
+    },
+    {
+      "text": "No personal information was detected (Google Cloud Sensitive Data Protection) in memorization-classified outputs for all Gemma 3 models.", "tone": "good",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "We observed no personal information in"
+      }
+    },
+    {
+      "text": "Baseline assurance uses synthetic adversarial queries and human raters; the report claims a significantly low safety-policy violation rate without giving a numeric rate.", "tone": "good",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "Baseline assurance captures the model violation"
+      }
+    },
+    {
+      "text": "Internal chemical, biological, radiological, and nuclear (CBRN) knowledge evals (closed-ended multiple-choice questions; chemical hazards per Macknight et al.) find low knowledge; no numeric scores given.", "tone": "good",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "models in these domains is low."
+      }
+    },
+    {
+      "text": "The release is said to have a negligible effect on the overall risk landscape relative to larger open models; Frontier Safety Framework (FSF) commitments are cited without Critical Capability Level (CCL) labels.", "tone": "good",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "negligible effect on the overall risk landscape."
+      }
+    },
+    {
+      "text": "Authors report no received reports of malicious use for Gemma at time of writing, while monitoring continues.", "tone": "good",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "receive any reports of malicious use for Gemma,"
+      }
+    },
+    {
+      "text": "Safety policies named include child sexual abuse material (CSAM), personally identifiable information (PII), hate, dangerous/malicious content (including self-harm), sexually explicit content, and contrary medical advice; train-time filtering plus supervised fine-tuning (SFT)/reinforcement learning from human feedback (RLHF) are used.", "tone": "neutral",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "Child sexual abuse and exploitation"
+      }
+    },
+    {
+      "text": "ShieldGemma 2 (4B image safety classifier built with Gemma 3) is cited as a socially beneficial application, not as an eval of Gemma 3 itself.", "tone": "neutral",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "ShieldGemma 2, a 4B"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-flash-1.5",
+      "metric": "score",
+      "value": 82.9,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 6",
+        "quote": "FACTS Grounding    82.9    80.0    84.6   82.8       43.8            62.0         62.4     36.4     70.1     75.8        74.9"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-pro-1.5",
+      "metric": "score",
+      "value": 80,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 6",
+        "quote": "FACTS Grounding    82.9    80.0    84.6   82.8       43.8            62.0         62.4     36.4     70.1     75.8        74.9"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-2.0-flash-001",
+      "metric": "score",
+      "value": 84.6,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 6",
+        "quote": "FACTS Grounding    82.9    80.0    84.6   82.8       43.8            62.0         62.4     36.4     70.1     75.8        74.9"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemini-2.0-pro-exp-02-05",
+      "metric": "score",
+      "value": 82.8,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 6",
+        "quote": "FACTS Grounding    82.9    80.0    84.6   82.8       43.8            62.0         62.4     36.4     70.1     75.8        74.9"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemma-2-2b-it",
+      "metric": "score",
+      "value": 43.8,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 6",
+        "quote": "FACTS Grounding    82.9    80.0    84.6   82.8       43.8            62.0         62.4     36.4     70.1     75.8        74.9"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemma-2-9b-it",
+      "metric": "score",
+      "value": 62,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 6",
+        "quote": "FACTS Grounding    82.9    80.0    84.6   82.8       43.8            62.0         62.4     36.4     70.1     75.8        74.9"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemma-2-27b-it",
+      "metric": "score",
+      "value": 62.4,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 6",
+        "quote": "FACTS Grounding    82.9    80.0    84.6   82.8       43.8            62.0         62.4     36.4     70.1     75.8        74.9"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemma-3-1b-it",
+      "metric": "score",
+      "value": 36.4,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 6",
+        "quote": "FACTS Grounding    82.9    80.0    84.6   82.8       43.8            62.0         62.4     36.4     70.1     75.8        74.9"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemma-3-4b-it",
+      "metric": "score",
+      "value": 70.1,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 6",
+        "quote": "FACTS Grounding    82.9    80.0    84.6   82.8       43.8            62.0         62.4     36.4     70.1     75.8        74.9"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemma-3-12b-it",
+      "metric": "score",
+      "value": 75.8,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 6",
+        "quote": "FACTS Grounding    82.9    80.0    84.6   82.8       43.8            62.0         62.4     36.4     70.1     75.8        74.9"
+      }
+    },
+    {
+      "rawEvalName": "FACTS Grounding",
+      "model": "google/gemma-3-27b-it",
+      "metric": "score",
+      "value": 74.9,
+      "unit": "percent",
+      "settings": {
+        "other": "zero-shot"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 6",
+        "quote": "FACTS Grounding    82.9    80.0    84.6   82.8       43.8            62.0         62.4     36.4     70.1     75.8        74.9"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:24:43Z"
+  },
+  "notes": "Technical report (arXiv 2503.19786), not a system card. Safety section (§6–7) is mostly qualitative. Figure 9 memorization bars are chart-only on a log scale with no numeric labels in the text layer; skipped evalResults rather than invent percentages (same approach as other Google TR extractions). Baseline assurance and CBRN give only qualitative claims (significantly low / low knowledge). FSF is cited without domain CCL outcomes, so riskDecisions empty. Child/self-harm appear only in the policy list, so those topics are covered false per pilot review rules. Hallucination appears only as post-training data filtering, not a behavior eval. Seed-linked google/gemma-3-270m-it is not named in this report (Gemma 3 here is 1B–27B only). Skipped all capability tables (Chatbot Arena Elo, MMLU, math/code/vision/multilingual/long-context, etc.). Two-column PDF hyphenates many quotes. FACTS Grounding rows from Table 6 (hallucination); SimpleQA skipped as capability."
+}

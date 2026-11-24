@@ -1,0 +1,72 @@
+{
+  "eval": {
+    "slug": "web-of-lies",
+    "displayName": "Web of Lies",
+    "aliases": ["Web of Lies (dishonest agent)", "Web of Lies (honest agent)"],
+    "description": "Google DeepMind deception eval from the dangerous-capabilities suite. A human answers quiz items with help from either an honest agent or an agent told to defend the wrong answer; the participant knows the mix and must probe for truth. Scoring is the percentage-point shift in belief in the correct answer before versus after the chat. Protocol is lab-held; each run needs new human participants.",
+    "summary": "Measures how far the model can persuade people to believe false answers during a chat.",
+    "family": "GDM dangerous capabilities",
+    "maintainers": [
+      {
+        "name": "Google DeepMind",
+        "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2403.13793",
+        "title": "Evaluating Frontier Models for Dangerous Capabilities"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf",
+        "title": "Gemini 1.5 technical report (Web of Lies results)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["multi_turn"],
+      "cases": ["live_human"],
+      "grading": ["human"],
+      "adversarial": true,
+      "humanParticipants": true,
+      "subjects": ["model"],
+      "topics": ["manipulation", "honesty"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-03-21",
+      "status": "published",
+      "releasedDate": "2024-03-21",
+      "scores": [
+        {
+          "key": "belief_shift_pp",
+          "displayName": "Belief shift (pp)",
+          "type": "continuous",
+          "min": -100,
+          "max": 100,
+          "direction": "higher_is_better",
+          "description": "Percentage-point change in the participant's stated belief in the correct answer after talking to the agent."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mean_belief_shift_pp",
+          "displayName": "Mean belief shift (pp)",
+          "score": "belief_shift_pp",
+          "aggregation": "mean",
+          "min": -100,
+          "max": 100,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Mean percentage-point belief shift. Cards split honest-agent and dishonest-agent conditions."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "eval": {
+    "slug": "synth-sae-bench-16k",
+    "displayName": "SynthSAEBench-16k",
+    "aliases": ["SynthSAEBench", "synth-sae-bench-16k-v1"],
+    "description": "Trains an SAE on synthetic activations with 16,384 known features in 768 dimensions, then compares the SAE with the true features. The data has realistic feature traits: correlation, hierarchy, superposition and Zipf-like firing rates. Measured on the data: the true L0 is 34.5. Firing rates go from 0.05% to 40%. The hierarchy has 128 root features, each with 4 children, 3 levels deep; children of one parent do not fire together. For each feature, the largest absolute cosine with another feature is 0.145 on average (superposition), and the mean over all pairs is 0.028. Feature firings have an RMS correlation of 0.05. It is a lower bound: an SAE design that fails here, where each feature is a straight line by construction, is unlikely to work on a real model. Each SAE has width 4,096 and trains on 200M samples.",
+    "summary": "Tests if an SAE finds the true features of synthetic data, where the answer is known.",
+    "suite": "synthsaebench",
+    "maintainers": [
+      {
+        "name": "Chanin and Garriga-Alonso",
+        "url": "https://github.com/decoderesearch/synth-sae-bench-experiments"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2602.14687",
+        "title": "SynthSAEBench: Evaluating Sparse Autoencoders on Scalable Realistic Synthetic Data"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/decoderesearch/synth-sae-bench-experiments",
+        "title": "SynthSAEBench experiment code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/decoderesearch/synth-sae-bench-16k-v1",
+        "title": "The SynthSAEBench-16k synthetic model"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/decoderesearch/synth-sae-bench-16k-v1-saes",
+        "title": "The SAEs and their results"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["method"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "16k-v1",
+      "status": "published",
+      "releasedDate": "2026-02",
+      "scores": [],
+      "metrics": [
+        {
+          "key": "mcc",
+          "displayName": "Feature match (MCC)",
+          "aggregation": "custom",
+          "headline": true,
+          "min": 0,
+          "max": 1,
+          "description": "How well the SAE's decoder directions match the true feature directions: the mean absolute cosine similarity of the best one-to-one match.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "f1_score",
+          "displayName": "Probing F1",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Each latent used as a detector for its best-matched true feature: the mean F1 score.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "precision",
+          "displayName": "Probing precision",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Of the times a latent fires, the share when its true feature fires too. The mean over latents.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "recall",
+          "displayName": "Probing recall",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "Of the times a true feature fires, the share when its latent fires too. The mean over latents.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "explained_variance",
+          "displayName": "Explained variance",
+          "aggregation": "custom",
+          "max": 1,
+          "description": "How much of the activations the SAE reconstructs. High reconstruction does not mean good latents.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "uniqueness",
+          "displayName": "Uniqueness",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "description": "The number of different true features that the latents best match, divided by the number of latents. 1 means that each latent tracks a different feature.",
+          "direction": "higher_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "l0",
+          "displayName": "L0",
+          "aggregation": "custom",
+          "unit": "latents",
+          "description": "The mean number of active latents for each sample. The true L0 of the data is about 34.",
+          "direction": "neither",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "dead_latents",
+          "displayName": "Dead latents",
+          "aggregation": "custom",
+          "unit": "latents",
+          "min": 0,
+          "description": "The latents that never activate on the evaluation samples.",
+          "direction": "lower_is_better",
+          "safetyDirection": "neither"
+        },
+        {
+          "key": "shrinkage",
+          "displayName": "Shrinkage",
+          "aggregation": "custom",
+          "description": "The mean of the reconstruction's norm divided by the input's norm. 1 is no shrinkage; less than 1 means that the SAE makes its outputs too small.",
+          "direction": "neither",
+          "safetyDirection": "neither"
+        }
+      ]
+    }
+  ]
+}

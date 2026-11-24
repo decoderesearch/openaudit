@@ -1,0 +1,791 @@
+{
+  "document": "shlab-internlm-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "rawModelName": "InternLM"
+    }
+  ],
+  "fileUrl": "https://github.com/InternLM/InternLM-techreport/raw/main/InternLM.pdf",
+  "pageCount": 18,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "2K",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Limited by its context window length at 2K (compared"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "multilingual, especially English and Chinese",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "a language model with multilingual capabilities, especially English\nand Chinese."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "104B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "a multilingual foundational language model with 104B\n             parameters."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "transformer-based decoder-only, 82 layers, 80 heads, d_head=128, d_model=10240",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "We adopt the transformer-based decoder-only architecture similar to the GPT series [28; 29; 30]."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "1.6T tokens from web pages, books, academic papers, codes, etc.",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "our model was pretrained on a subset with 1.6T tokens"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "[TruthfulQA](/evals/truthfulqa): InternLM Truthful 0.63 and Informative 0.68, above GPT-3 and LLaMA-65B",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "Results in Table 12 demonstrate that our\nmodel outperforms GPT-3 and LLaMA-65B in both metrics."
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "[CrowS-Pairs](/evals/crows-pairs) average bias 65.4 for InternLM vs 67.2 GPT-3 and 66.6 LLaMA-65B (lower is better)",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "Average                      67.2           66.6             65.4"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "RLHF is reported to reduce toxicity of InternLM outputs after SFT",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Empirically, we found\nthat RLHF can help reduce the toxicity of the outputs."
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The authors say [TruthfulQA](/evals/truthfulqa) and [CrowS-Pairs](/evals/crows-pairs) are only a small piece of the larger safety issue for large language models (LLMs).", "tone": "mixed",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "these benchmarks represent just a small piece of the larger issue surrounding large language models."
+      }
+    },
+    {
+      "text": "Misleading responses on [TruthfulQA](/evals/truthfulqa) are still said to be inevitable for InternLM despite better scores.", "tone": "bad",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "Still, misleading responses are currently\ninevitable."
+      }
+    },
+    {
+      "text": "Empirically, reinforcement learning from human feedback (RLHF) is reported to reduce toxicity of InternLM outputs after supervised fine-tuning (SFT) and reward-model training on 3H criteria.", "tone": "good",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Empirically, we found\nthat RLHF can help reduce the toxicity of the outputs."
+      }
+    },
+    {
+      "text": "On [CrowS-Pairs](/evals/crows-pairs), different models win on different bias categories; InternLM is not best on every category.", "tone": "mixed",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "On the reduction of bias, there are multiple aspects. Different models win on different\n  aspects."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "openai/gpt-3",
+      "metric": "Truthful",
+      "value": 0.28,
+      "unit": "fraction",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 12",
+        "quote": "Truthful            0.28              0.57            0.63"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta/llama-65b",
+      "metric": "Truthful",
+      "value": 0.57,
+      "unit": "fraction",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 12",
+        "quote": "Truthful            0.28              0.57            0.63"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InternLM",
+      "metric": "Truthful",
+      "value": 0.63,
+      "unit": "fraction",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 12",
+        "quote": "Truthful            0.28              0.57            0.63"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "openai/gpt-3",
+      "metric": "Informative",
+      "value": 0.25,
+      "unit": "fraction",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 12",
+        "quote": "Informative         0.25              0.53            0.68"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta/llama-65b",
+      "metric": "Informative",
+      "value": 0.53,
+      "unit": "fraction",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 12",
+        "quote": "Informative         0.25              0.53            0.68"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InternLM",
+      "metric": "Informative",
+      "value": 0.68,
+      "unit": "fraction",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 12",
+        "quote": "Informative         0.25              0.53            0.68"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 62.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Gender; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Gender                       62.6           70.6             60.3"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/llama-65b",
+      "metric": "bias score",
+      "value": 70.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Gender; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Gender                       62.6           70.6             60.3"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InternLM",
+      "metric": "bias score",
+      "value": 60.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Gender; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Gender                       62.6           70.6             60.3"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 73.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Religion; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Religion                     73.3           79.0             76.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/llama-65b",
+      "metric": "bias score",
+      "value": 79,
+      "unit": "percent",
+      "settings": {
+        "other": "Religion; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Religion                     73.3           79.0             76.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InternLM",
+      "metric": "bias score",
+      "value": 76.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Religion; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Religion                     73.3           79.0             76.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 64.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Race/Color; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Race/Color                   64.7           57.0              62"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/llama-65b",
+      "metric": "bias score",
+      "value": 57,
+      "unit": "percent",
+      "settings": {
+        "other": "Race/Color; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Race/Color                   64.7           57.0              62"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InternLM",
+      "metric": "bias score",
+      "value": 62,
+      "unit": "percent",
+      "settings": {
+        "other": "Race/Color; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Race/Color                   64.7           57.0              62"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 76.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Sexual orientation; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Sexual orientation           76.2           81.0             70.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/llama-65b",
+      "metric": "bias score",
+      "value": 81,
+      "unit": "percent",
+      "settings": {
+        "other": "Sexual orientation; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Sexual orientation           76.2           81.0             70.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InternLM",
+      "metric": "bias score",
+      "value": 70.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Sexual orientation; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Sexual orientation           76.2           81.0             70.2"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 64.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Age; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Age                          64.4           70.1             70.1"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/llama-65b",
+      "metric": "bias score",
+      "value": 70.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Age; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Age                          64.4           70.1             70.1"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InternLM",
+      "metric": "bias score",
+      "value": 70.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Age; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Age                          64.4           70.1             70.1"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 61.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Nationality; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Nationality                  61.6           64.2             62.9"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/llama-65b",
+      "metric": "bias score",
+      "value": 64.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Nationality; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Nationality                  61.6           64.2             62.9"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InternLM",
+      "metric": "bias score",
+      "value": 62.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Nationality; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Nationality                  61.6           64.2             62.9"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 76.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Disability; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Disability                   76.7           66.7             78.3"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/llama-65b",
+      "metric": "bias score",
+      "value": 66.7,
+      "unit": "percent",
+      "settings": {
+        "other": "Disability; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Disability                   76.7           66.7             78.3"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InternLM",
+      "metric": "bias score",
+      "value": 78.3,
+      "unit": "percent",
+      "settings": {
+        "other": "Disability; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Disability                   76.7           66.7             78.3"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 74.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Physical appearance; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Physical appearance          74.6           77.8              73"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/llama-65b",
+      "metric": "bias score",
+      "value": 77.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Physical appearance; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Physical appearance          74.6           77.8              73"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InternLM",
+      "metric": "bias score",
+      "value": 73,
+      "unit": "percent",
+      "settings": {
+        "other": "Physical appearance; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Physical appearance          74.6           77.8              73"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 73.8,
+      "unit": "percent",
+      "settings": {
+        "other": "Socioeconomic status; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Socioeconomic status         73.8           71.5             66.9"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/llama-65b",
+      "metric": "bias score",
+      "value": 71.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Socioeconomic status; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Socioeconomic status         73.8           71.5             66.9"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InternLM",
+      "metric": "bias score",
+      "value": 66.9,
+      "unit": "percent",
+      "settings": {
+        "other": "Socioeconomic status; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Socioeconomic status         73.8           71.5             66.9"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "bias score",
+      "value": 67.2,
+      "unit": "percent",
+      "settings": {
+        "other": "Average; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Average                      67.2           66.6             65.4"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "meta/llama-65b",
+      "metric": "bias score",
+      "value": 66.6,
+      "unit": "percent",
+      "settings": {
+        "other": "Average; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Average                      67.2           66.6             65.4"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InternLM",
+      "metric": "bias score",
+      "value": 65.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Average; zero-shot"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 13",
+        "quote": "Average                      67.2           66.6             65.4"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:37:38Z"
+  },
+  "notes": "Technical report on InternLM 104B (Shanghai AI Lab / SenseTime), not a system card. Safety section (Sec 4) has only TruthfulQA (Table 12) and CrowS-Pairs (Table 13). Seed-linked internlm/internlm-chat-7b is never named; report covers the 104B InternLM only, so covers uses rawModelName. Alignment (SFT/RM/RLHF with toxic prompts and 3H) is training method, not topic coverage. Skipped capability: MMLU, AGIEval, C-Eval, GAOKAO-Bench, TriviaQA, NaturalQuestions, RACE, C3, GSM8K, MATH, HumanEval, MBPP, Flores-101, and InternLM-code HumanEval 45.7. Figures 2–3 are charts; Tables 9–11 are capability. No risk framework levels or external safety testers."
+}

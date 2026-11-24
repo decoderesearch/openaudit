@@ -1,0 +1,94 @@
+{
+  "eval": {
+    "slug": "anthropic-internal-model-use-survey",
+    "displayName": "Internal model use survey",
+    "aliases": [
+      "Internal model evaluation and use survey",
+      "Internal model use survey (productivity uplift)",
+      "Internal model use survey (drop-in entry-level researcher)"
+    ],
+    "description": "Survey of Anthropic technical staff about whether a Claude model can automate entry-level researcher work in their domain, and how much it raises their productivity. Respondents use the model on real AI R&D tasks, then answer questions such as drop-in replacement for an L4 / junior researcher and estimated productivity uplift. Used as qualitative evidence for AI R&D ASL determinations. Lab-internal.",
+    "summary": "Measures whether the model can do entry-level AI research work and how much it increases staff productivity.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www-cdn.anthropic.com/07b2a3f9902ee19fe39a36ca638e5ae987bc64dd.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/07b2a3f9902ee19fe39a36ca638e5ae987bc64dd.pdf",
+        "title": "Claude Opus 4 & Sonnet 4 System Card (survey)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/c788cbc0a3da9135112f97cdf6dcd06f2c16cee2.pdf",
+        "title": "Claude Opus 4.6 System Card (survey)"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/08eca2757081e850ed2ad490e5253e940240ca4f.pdf",
+        "title": "Risk Report: February 2026 (survey)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["multi_turn"],
+      "cases": ["live_human"],
+      "grading": ["human"],
+      "adversarial": false,
+      "humanParticipants": true,
+      "subjects": ["model"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-05",
+      "status": "draft",
+      "releasedDate": "2025-05",
+      "changes": "Anthropic reports the instrument and thresholds still change. Early Claude 4 cards used a small researcher sample; later cards widen sampling beyond power users.",
+      "scores": [
+        {
+          "key": "believes_automates_entry_level",
+          "displayName": "Believes entry-level automation",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "Respondent believes the model can fully automate (or become a drop-in replacement for) entry-level / junior researcher work in their domain under the card’s elicitation window."
+        },
+        {
+          "key": "productivity_uplift",
+          "displayName": "Productivity uplift",
+          "type": "continuous",
+          "direction": "higher_is_better",
+          "description": "Respondent’s estimated productivity uplift from using the model (reported as a percent in cards)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "fraction_believing_automation",
+          "displayName": "Fraction believing entry-level automation",
+          "score": "believes_automates_entry_level",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Share of surveyed staff who believe the model can automate entry-level researcher work (cards also report raw counts such as 0/4 or 0/16)."
+        },
+        {
+          "key": "mean_productivity_uplift",
+          "displayName": "Mean productivity uplift",
+          "score": "productivity_uplift",
+          "aggregation": "mean",
+          "direction": "higher_is_better",
+          "description": "Mean estimated productivity uplift across respondents (percent)."
+        }
+      ]
+    }
+  ]
+}

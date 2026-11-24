@@ -1,0 +1,2720 @@
+{
+  "document": "cohere-aya-101-technical_report",
+  "alsoDocuments": ["cohere-aya-101-blog"],
+  "covers": [
+    {
+      "model": "CohereLabs/aya-101"
+    },
+    {
+      "rawModelName": "Aya Safe",
+      "section": "§6 Safety Mitigation / Aya Safe"
+    }
+  ],
+  "pageCount": 118,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text; multilingual generative instruction-following",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Our work introduces Aya, a massively multilingual generative language model that follows instruc-\n                                         tions in 101 languages of which over 50% are considered as lower-resourced."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "101 languages (51 lower-resourced)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Among the 101 languages covered by Aya, 51 are\n     deemed lower-resourced [Joshi et al., 2020]."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Aya model is available with a fully open-source Apache 2.0 License3\nhere: https://hf.co/CohereForAI/aya-101."
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "13 billion (mT5; 1B in token embeddings)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "which has 13 billion parameters, where 1\nbillion parameters are used by token embeddings. mT5 is an encoder-decoder transformer that has"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "mT5 encoder-decoder Transformer, finetuned from largest mT5 (13B)",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "which has 13 billion parameters, where 1\nbillion parameters are used by token embeddings. mT5 is an encoder-decoder transformer that has"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Instruction mix: xP3x, Data Provenance Collection, Aya Collection (templated + translated), Aya Dataset, ShareGPT-Command; optional safety distillation set from AdvBench/XSafety",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Table 1: A list of training data sources used for instruction finetuning Aya models."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "[AdvBench](/evals/advbench) harmfulness drops sharply after multilingual safety context distillation (Aya Safe)",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "Safety context distillation reduces harm. Human and GPT-4 ratings (Figure 12) confirm the\neffectiveness of the multilingual safety context distillation strategy across languages."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Human feedback noted repetitive Aya generations with hallucinated loops",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "Aya generations were repetitive or contained hallucinated “loops”"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Toxicity, social bias, and gender-bias analysis across 18 languages including [Wino-MT](/evals/winomt)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "we perform an analysis of toxicity, social bias, and gender bias in models’ generations\n       across 18 languages (§7)."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "[RealToxicityPrompts](/evals/real-toxicity-prompts) expected maximum toxicity is 22% for Aya and 24% for Aya Safe (lower is better)",
+      "source": {
+        "page": "32",
+        "pdfPage": 32,
+        "quote": "i.e. maximum toxicity generations for Aya and Aya Safe are 22% and 24% respectively, and both\nmodels have an 8% chance on average of generating toxic completions for the sample size of k = 25."
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Without mitigation, Aya complied with most [AdvBench](/evals/advbench) adversarial prompts: human-judged harmful rates of 89–90% across Arabic, English, and Hindi.", "tone": "bad",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "it generates harmful\noutputs for a vast majority of the adversarial prompts across languages, with harmful rates of 89–\n90%."
+      }
+    },
+    {
+      "text": "Safety distillation cut human-judged [AdvBench](/evals/advbench) harmfulness for Aya Safe to about 4–11% (78–89% relative reduction vs unmitigated Aya).", "tone": "good",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "This step reduces harmful generations for adversarial\n       prompts by 78–89% as judged by human experts."
+      }
+    },
+    {
+      "text": "Professional-level jailbreak scenarios were explicitly out of scope for this study.", "tone": "mixed",
+      "source": {
+        "page": "25",
+        "pdfPage": 25,
+        "quote": "Professional-level jailbreak scenarios are out of\nthe scope for this study."
+      }
+    },
+    {
+      "text": "Aya was not more prone to multilingual safety attacks than English; lower-capability languages sometimes produced less actionable harmful answers.", "tone": "good",
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "we find that the Aya model is not more prone to\nsafety attacks for languages other than English, as it has simply not been safety-mitigated for any"
+      }
+    },
+    {
+      "text": "Safety preamble at inference raised toxicity on open-ended prompts (~19% higher toxic outputs against racial/gender identity groups) despite helping refusals on harmful prompts.", "tone": "mixed",
+      "source": {
+        "page": "26",
+        "pdfPage": 26,
+        "quote": "as its probability of generating toxic outputs\nagainst racial and gender identity groups increases by around 19%."
+      }
+    },
+    {
+      "text": "Lower-resourced languages (Zulu, Gaelic) needed a higher safety-data mixture weight (3% vs 0.5%) for adequate [AdvBench](/evals/advbench) mitigation.", "tone": "mixed",
+      "source": {
+        "page": "114",
+        "pdfPage": 114,
+        "quote": "For Zulu and Gaelic, the two lowest-resource languages in our evaluation, a higher\ndistillation data weight (3%) is necessary for reducing the harmfulness sufficiently."
+      }
+    },
+    {
+      "text": "Authors judge Aya Safe sufficiently safety-mitigated for adversarial-harm intents despite a small capability trade-off, while noting this covers only one aspect of large language model (LLM) safety.", "tone": "mixed",
+      "source": {
+        "page": "30",
+        "pdfPage": 30,
+        "quote": "we consider that Aya Safe is\nsufficiently safety-mitigated with a small performance trade-off."
+      }
+    },
+    {
+      "text": "Perspective API language bias may inflate German and Portuguese toxicity scores relative to other languages.", "tone": "mixed",
+      "source": {
+        "page": "32",
+        "pdfPage": 32,
+        "quote": "we caution the readers to keep the potential language bias\nof Perspective API (the toxicity evaluator) in mind."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.85,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; English; 120 held-out prompts; no preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "English        HR     0.85"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.08,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; English; 120 held-out prompts; with safety preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "English        HR     0.85        0.08"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "ratio of harmful completions",
+      "value": 0.83,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; English; 120 held-out prompts"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "English        HR     0.85        0.08         0.83"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.04,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; English; 120 held-out prompts; safety distillation weight 0.5%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "English        HR     0.85        0.08         0.83      0.04"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.01,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; English; 120 held-out prompts; safety distillation weight 3%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "English        HR     0.85        0.08         0.83      0.04        0.01"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.77,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Arabic; 120 held-out prompts; no preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Arabic         HR     0.77"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.07,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Arabic; 120 held-out prompts; with safety preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Arabic         HR     0.77        0.07"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "ratio of harmful completions",
+      "value": 0.82,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Arabic; 120 held-out prompts"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Arabic         HR     0.77        0.07         0.82"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.06,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Arabic; 120 held-out prompts; safety distillation weight 0.5%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Arabic         HR     0.77        0.07         0.82      0.06"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.03,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Arabic; 120 held-out prompts; safety distillation weight 3%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Arabic         HR     0.77        0.07         0.82      0.06        0.03"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.78,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Hindi; 120 held-out prompts; no preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Hindi          HR     0.78"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.23,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Hindi; 120 held-out prompts; with safety preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Hindi          HR     0.78        0.23"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "ratio of harmful completions",
+      "value": 0.82,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Hindi; 120 held-out prompts"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Hindi          HR     0.78        0.23         0.82"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.1,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Hindi; 120 held-out prompts; safety distillation weight 0.5%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Hindi          HR     0.78        0.23         0.82      0.10"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.13,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Hindi; 120 held-out prompts; safety distillation weight 3%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Hindi          HR     0.78        0.23         0.82      0.10        0.13"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.81,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Chinese; 120 held-out prompts; no preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Chinese        HR     0.81"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.08,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Chinese; 120 held-out prompts; with safety preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Chinese        HR     0.81        0.08"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "ratio of harmful completions",
+      "value": 0.76,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Chinese; 120 held-out prompts"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Chinese        HR     0.81        0.08         0.76"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.07,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Chinese; 120 held-out prompts; safety distillation weight 0.5%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Chinese        HR     0.81        0.08         0.76      0.07"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.01,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Chinese; 120 held-out prompts; safety distillation weight 3%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Chinese        HR     0.81        0.08         0.76      0.07        0.01"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.85,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Ukrainian; 120 held-out prompts; no preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Ukrainian      MR     0.85"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.03,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Ukrainian; 120 held-out prompts; with safety preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Ukrainian      MR     0.85        0.03"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "ratio of harmful completions",
+      "value": 0.88,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Ukrainian; 120 held-out prompts"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Ukrainian      MR     0.85        0.03         0.88"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.04,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Ukrainian; 120 held-out prompts; safety distillation weight 0.5%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Ukrainian      MR     0.85        0.03         0.88      0.04"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.02,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Ukrainian; 120 held-out prompts; safety distillation weight 3%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Ukrainian      MR     0.85        0.03         0.88      0.04        0.02"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.78,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Thai; 120 held-out prompts; no preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Thai           MR     0.78"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.11,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Thai; 120 held-out prompts; with safety preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Thai           MR     0.78        0.11"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "ratio of harmful completions",
+      "value": 0.88,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Thai; 120 held-out prompts"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Thai           MR     0.78        0.11         0.88"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.13,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Thai; 120 held-out prompts; safety distillation weight 0.5%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Thai           MR     0.78        0.11         0.88      0.13"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.08,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Thai; 120 held-out prompts; safety distillation weight 3%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Thai           MR     0.78        0.11         0.88      0.13        0.08"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.81,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Hebrew; 120 held-out prompts; no preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Hebrew         MR     0.81"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.14,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Hebrew; 120 held-out prompts; with safety preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Hebrew         MR     0.81        0.14"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "ratio of harmful completions",
+      "value": 0.89,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Hebrew; 120 held-out prompts"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Hebrew         MR     0.81        0.14         0.89"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.08,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Hebrew; 120 held-out prompts; safety distillation weight 0.5%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Hebrew         MR     0.81        0.14         0.89      0.08"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.05,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Hebrew; 120 held-out prompts; safety distillation weight 3%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Hebrew         MR     0.81        0.14         0.89      0.08        0.05"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.78,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Bengali; 120 held-out prompts; no preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Bengali        MR     0.78"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.08,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Bengali; 120 held-out prompts; with safety preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Bengali        MR     0.78        0.08"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "ratio of harmful completions",
+      "value": 0.88,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Bengali; 120 held-out prompts"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Bengali        MR     0.78        0.08         0.88"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.1,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Bengali; 120 held-out prompts; safety distillation weight 0.5%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Bengali        MR     0.78        0.08         0.88      0.10"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.03,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Bengali; 120 held-out prompts; safety distillation weight 3%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Bengali        MR     0.78        0.08         0.88      0.10        0.03"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.88,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Italian; 120 held-out prompts; no preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Italian        HR     0.88"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.03,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Italian; 120 held-out prompts; with safety preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Italian        HR     0.88        0.03"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "ratio of harmful completions",
+      "value": 0.93,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Italian; 120 held-out prompts"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Italian        HR     0.88        0.03         0.93"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.06,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Italian; 120 held-out prompts; safety distillation weight 0.5%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Italian        HR     0.88        0.03         0.93      0.06"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.03,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Italian; 120 held-out prompts; safety distillation weight 3%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Italian        HR     0.88        0.03         0.93      0.06        0.03"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.6,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Zulu; 120 held-out prompts; no preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Zulu           LR     0.60"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.14,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Zulu; 120 held-out prompts; with safety preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Zulu           LR     0.60        0.14"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "ratio of harmful completions",
+      "value": 0.65,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Zulu; 120 held-out prompts"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Zulu           LR     0.60        0.14         0.65"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.26,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Zulu; 120 held-out prompts; safety distillation weight 0.5%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Zulu           LR     0.60        0.14         0.65      0.26"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.03,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Zulu; 120 held-out prompts; safety distillation weight 3%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Zulu           LR     0.60        0.14         0.65      0.26        0.03"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.69,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Gaelic; 120 held-out prompts; no preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Gaelic         LR     0.69"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.28,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Gaelic; 120 held-out prompts; with safety preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Gaelic         LR     0.69        0.28"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "ratio of harmful completions",
+      "value": 0.71,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Gaelic; 120 held-out prompts"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Gaelic         LR     0.69        0.28         0.71"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.31,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Gaelic; 120 held-out prompts; safety distillation weight 0.5%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Gaelic         LR     0.69        0.28         0.71      0.31"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.1,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; Gaelic; 120 held-out prompts; safety distillation weight 3%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Gaelic         LR     0.69        0.28         0.71      0.31        0.10"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.78,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; average over 11 languages; 120 held-out prompts; no preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Average               0.78"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Beta",
+      "metric": "ratio of harmful completions",
+      "value": 0.12,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; average over 11 languages; 120 held-out prompts; with safety preamble"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Average               0.78        0.12"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "ratio of harmful completions",
+      "value": 0.82,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; average over 11 languages; 120 held-out prompts"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Average               0.78        0.12         0.82"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.11,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; average over 11 languages; 120 held-out prompts; safety distillation weight 0.5%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Average               0.78        0.12         0.82      0.11"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful completions",
+      "value": 0.05,
+      "unit": "fraction",
+      "settings": {
+        "trials": 120,
+        "other": "GPT-4 judge; average over 11 languages; 120 held-out prompts; safety distillation weight 3%"
+      },
+      "source": {
+        "page": "113",
+        "pdfPage": 113,
+        "table": "Table 24",
+        "quote": "Average               0.78        0.12         0.82      0.11        0.05"
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "rawModelName": "Aya Safe",
+      "metric": "ratio of harmful generations",
+      "value": 11,
+      "unit": "percent",
+      "settings": {
+        "other": "Hindi; human annotators; held-out prompts; safety distillation"
+      },
+      "source": {
+        "page": "28",
+        "pdfPage": 28,
+        "quote": "Hindi is the one with the highest remaining harmfulness after mitigation (11%\naccording to human ratings, 13% according to GPT-4)."
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "refusal rate",
+      "value": 88,
+      "unit": "percent",
+      "settings": {
+        "other": "average across languages; with safety preamble at inference"
+      },
+      "source": {
+        "page": "26",
+        "pdfPage": 26,
+        "quote": "from multilingual AdvBench [Yong et al., 2023a], Aya successfully rejects on average 88% of these\nrequests with meaningful refusal messages."
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "refusal rate",
+      "value": 72,
+      "unit": "percent",
+      "settings": {
+        "other": "Scottish Gaelic; with safety preamble at inference"
+      },
+      "source": {
+        "page": "26",
+        "pdfPage": 26,
+        "quote": "with the least refusals for Scottish Gaelic (72%) and Hindi (77%) (full results in Appendix J.1)."
+      }
+    },
+    {
+      "rawEvalName": "AdvBench",
+      "model": "CohereLabs/aya-101",
+      "metric": "refusal rate",
+      "value": 77,
+      "unit": "percent",
+      "settings": {
+        "other": "Hindi; with safety preamble at inference"
+      },
+      "source": {
+        "page": "26",
+        "pdfPage": 26,
+        "quote": "with the least refusals for Scottish Gaelic (72%) and Hindi (77%) (full results in Appendix J.1)."
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "model": "CohereLabs/aya-101",
+      "metric": "expected maximum toxicity",
+      "value": 22,
+      "unit": "percent",
+      "settings": {
+        "trials": 25,
+        "other": "average over 14 languages; non-toxic prompts; Perspective API; multilingual RTP"
+      },
+      "source": {
+        "page": "32",
+        "pdfPage": 32,
+        "quote": "i.e. maximum toxicity generations for Aya and Aya Safe are 22% and 24% respectively, and both\nmodels have an 8% chance on average of generating toxic completions for the sample size of k = 25."
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "Aya Safe",
+      "metric": "expected maximum toxicity",
+      "value": 24,
+      "unit": "percent",
+      "settings": {
+        "trials": 25,
+        "other": "average over 14 languages; non-toxic prompts; Perspective API; multilingual RTP"
+      },
+      "source": {
+        "page": "32",
+        "pdfPage": 32,
+        "quote": "i.e. maximum toxicity generations for Aya and Aya Safe are 22% and 24% respectively, and both\nmodels have an 8% chance on average of generating toxic completions for the sample size of k = 25."
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "model": "CohereLabs/aya-101",
+      "metric": "toxicity probability",
+      "value": 8,
+      "unit": "percent",
+      "settings": {
+        "trials": 25,
+        "other": "average over 14 languages; non-toxic prompts; Perspective API; multilingual RTP"
+      },
+      "source": {
+        "page": "32",
+        "pdfPage": 32,
+        "quote": "i.e. maximum toxicity generations for Aya and Aya Safe are 22% and 24% respectively, and both\nmodels have an 8% chance on average of generating toxic completions for the sample size of k = 25."
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "Aya Safe",
+      "metric": "toxicity probability",
+      "value": 8,
+      "unit": "percent",
+      "settings": {
+        "trials": 25,
+        "other": "average over 14 languages; non-toxic prompts; Perspective API; multilingual RTP"
+      },
+      "source": {
+        "page": "32",
+        "pdfPage": 32,
+        "quote": "i.e. maximum toxicity generations for Aya and Aya Safe are 22% and 24% respectively, and both\nmodels have an 8% chance on average of generating toxic completions for the sample size of k = 25."
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "overall accuracy",
+      "value": 54.2,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→spa"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "mT0x        54.2"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "overall accuracy",
+      "value": 50.9,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→fra"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "mT0x        54.2     50.9"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "overall accuracy",
+      "value": 47.5,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→ita"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "mT0x        54.2     50.9       47.5"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "overall accuracy",
+      "value": 38.6,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→rus"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "mT0x        54.2     50.9       47.5        38.6"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "overall accuracy",
+      "value": 41.9,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→ukr"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "mT0x        54.2     50.9       47.5        38.6        41.9"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "overall accuracy",
+      "value": 54,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→heb"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "mT0x        54.2     50.9       47.5        38.6        41.9     54.0"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "overall accuracy",
+      "value": 52.5,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→ara"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "mT0x        54.2     50.9       47.5        38.6        41.9     54.0     52.5"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "overall accuracy",
+      "value": 56.6,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→deu"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "mT0x        54.2     50.9       47.5        38.6        41.9     54.0     52.5    56.6"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "overall accuracy",
+      "value": 49.5,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; average over 8 target languages"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "mT0x        54.2     50.9       47.5        38.6        41.9     54.0     52.5    56.6     49.5"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "overall accuracy",
+      "value": 61.2,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→spa"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya         61.2"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "overall accuracy",
+      "value": 54.7,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→fra"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya         61.2     54.7"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "overall accuracy",
+      "value": 52.4,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→ita"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya         61.2     54.7       52.4"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "overall accuracy",
+      "value": 41.1,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→rus"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya         61.2     54.7       52.4        41.1"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "overall accuracy",
+      "value": 41.8,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→ukr"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya         61.2     54.7       52.4        41.1        41.8"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "overall accuracy",
+      "value": 51.8,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→heb"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya         61.2     54.7       52.4        41.1        41.8     51.8"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "overall accuracy",
+      "value": 49.3,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→ara"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya         61.2     54.7       52.4        41.1        41.8     51.8     49.3"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "overall accuracy",
+      "value": 62.2,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→deu"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya         61.2     54.7       52.4        41.1        41.8     51.8     49.3    62.2"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "overall accuracy",
+      "value": 51.8,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; average over 8 target languages"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya         61.2     54.7       52.4        41.1        41.8     51.8     49.3    62.2     51.8"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "overall accuracy",
+      "value": 65,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→spa"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya Safe    65.0"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "overall accuracy",
+      "value": 57.7,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→fra"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya Safe    65.0     57.7"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "overall accuracy",
+      "value": 56.2,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→ita"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya Safe    65.0     57.7       56.2"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "overall accuracy",
+      "value": 40.2,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→rus"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya Safe    65.0     57.7       56.2        40.2"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "overall accuracy",
+      "value": 40.7,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→ukr"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya Safe    65.0     57.7       56.2        40.2        40.7"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "overall accuracy",
+      "value": 50.4,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→heb"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya Safe    65.0     57.7       56.2        40.2        40.7     50.4"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "overall accuracy",
+      "value": 49.3,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→ara"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya Safe    65.0     57.7       56.2        40.2        40.7     50.4     49.3"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "overall accuracy",
+      "value": 60.5,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; English→deu"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya Safe    65.0     57.7       56.2        40.2        40.7     50.4     49.3    60.5"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "overall accuracy",
+      "value": 52.5,
+      "unit": "percent",
+      "settings": {
+        "other": "overall gender translation accuracy; average over 8 target languages"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 9",
+        "quote": "Aya Safe    65.0     57.7       56.2        40.2        40.7     50.4     49.3    60.5     52.5"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔS",
+      "value": 17.3,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→spa; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x        17.3"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔS",
+      "value": 20.4,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→fra; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x        17.3        20.4"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔS",
+      "value": 23.8,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→ita; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x        17.3        20.4        23.8"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔS",
+      "value": 10.8,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→rus; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x        17.3        20.4        23.8        10.8"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔS",
+      "value": 8.1,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→ukr; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x        17.3        20.4        23.8        10.8        8.1"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔS",
+      "value": 32.9,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→heb; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x        17.3        20.4        23.8        10.8        8.1   32.9"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔS",
+      "value": 21.2,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→ara; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x        17.3        20.4        23.8        10.8        8.1   32.9     21.2"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔS",
+      "value": 20.6,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→deu; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x        17.3        20.4        23.8        10.8        8.1   32.9     21.2    20.6"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔS",
+      "value": 19.4,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; average over 8 target languages; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x        17.3        20.4        23.8        10.8        8.1   32.9     21.2    20.6     19.4"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔS",
+      "value": 25.2,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→spa; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆S     Aya         25.2"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔS",
+      "value": 20.1,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→fra; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆S     Aya         25.2        20.1"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔS",
+      "value": 26.4,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→ita; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆S     Aya         25.2        20.1        26.4"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔS",
+      "value": 13.3,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→rus; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆S     Aya         25.2        20.1        26.4        13.3"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔS",
+      "value": 11.5,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→ukr; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆S     Aya         25.2        20.1        26.4        13.3       11.5"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔS",
+      "value": 36,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→heb; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆S     Aya         25.2        20.1        26.4        13.3       11.5   36.0"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔS",
+      "value": 18.1,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→ara; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆S     Aya         25.2        20.1        26.4        13.3       11.5   36.0     18.1"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔS",
+      "value": 27.7,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→deu; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆S     Aya         25.2        20.1        26.4        13.3       11.5   36.0     18.1    27.7"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔS",
+      "value": 22.3,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; average over 8 target languages; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆S     Aya         25.2        20.1        26.4        13.3       11.5   36.0     18.1    27.7     22.3"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔS",
+      "value": 25.5,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→spa; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe    25.5"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔS",
+      "value": 20.1,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→fra; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe    25.5        20.1"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔS",
+      "value": 24.8,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→ita; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe    25.5        20.1        24.8"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔS",
+      "value": 9.4,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→rus; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe    25.5        20.1        24.8         9.4"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔS",
+      "value": 9.5,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→ukr; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe    25.5        20.1        24.8         9.4        9.5"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔS",
+      "value": 29.5,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→heb; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe    25.5        20.1        24.8         9.4        9.5   29.5"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔS",
+      "value": 17.9,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→ara; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe    25.5        20.1        24.8         9.4        9.5   29.5     17.9"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔS",
+      "value": 24.5,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; English→deu; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe    25.5        20.1        24.8         9.4        9.5   29.5     17.9    24.5"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔS",
+      "value": 20.2,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔS; average over 8 target languages; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe    25.5        20.1        24.8         9.4        9.5   29.5     17.9    24.5     20.2"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔG",
+      "value": 29,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→spa; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x           29.0"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔG",
+      "value": 27.1,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→fra; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x           29.0     27.1"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔG",
+      "value": 27.8,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→ita; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x           29.0     27.1        27.8"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔG",
+      "value": 30.7,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→rus; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x           29.0     27.1        27.8      30.7"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔG",
+      "value": 28,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→ukr; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x           29.0     27.1        27.8      30.7       28.0"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔG",
+      "value": 8.6,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→heb; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x           29.0     27.1        27.8      30.7       28.0        8.6"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔG",
+      "value": 12.9,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→ara; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x           29.0     27.1        27.8      30.7       28.0        8.6   12.9"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔG",
+      "value": 28.8,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→deu; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x           29.0     27.1        27.8      30.7       28.0        8.6   12.9    28.8"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "mT0x",
+      "metric": "ΔG",
+      "value": 24.1,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; average over 8 target languages; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "mT0x           29.0     27.1        27.8      30.7       28.0        8.6   12.9    28.8     24.1"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔG",
+      "value": 15,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→spa; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆G     Aya            15.0"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔG",
+      "value": 19.7,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→fra; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆G     Aya            15.0     19.7"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔG",
+      "value": 16.7,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→ita; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆G     Aya            15.0     19.7        16.7"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔG",
+      "value": 24.4,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→rus; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆G     Aya            15.0     19.7        16.7      24.4"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔG",
+      "value": 33,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→ukr; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆G     Aya            15.0     19.7        16.7      24.4       33.0"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔG",
+      "value": 12.8,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→heb; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆G     Aya            15.0     19.7        16.7      24.4       33.0       12.8"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔG",
+      "value": 22,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→ara; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆G     Aya            15.0     19.7        16.7      24.4       33.0       12.8   22.0"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔG",
+      "value": 18.1,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→deu; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆G     Aya            15.0     19.7        16.7      24.4       33.0       12.8   22.0    18.1"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "model": "CohereLabs/aya-101",
+      "metric": "ΔG",
+      "value": 20.2,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; average over 8 target languages; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "↓ ∆G     Aya            15.0     19.7        16.7      24.4       33.0       12.8   22.0    18.1     20.2"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔG",
+      "value": 9.4,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→spa; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe        9.4"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔG",
+      "value": 14.8,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→fra; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe        9.4     14.8"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔG",
+      "value": 10.1,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→ita; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe        9.4     14.8        10.1"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔG",
+      "value": 27.8,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→rus; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe        9.4     14.8        10.1      27.8"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔG",
+      "value": 31,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→ukr; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe        9.4     14.8        10.1      27.8       31.0"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔG",
+      "value": 10.4,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→heb; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe        9.4     14.8        10.1      27.8       31.0       10.4"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔG",
+      "value": 20.9,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→ara; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe        9.4     14.8        10.1      27.8       31.0       10.4   20.9"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔG",
+      "value": 11.9,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; English→deu; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe        9.4     14.8        10.1      27.8       31.0       10.4   20.9    11.9"
+      }
+    },
+    {
+      "rawEvalName": "Wino-MT",
+      "rawModelName": "Aya Safe",
+      "metric": "ΔG",
+      "value": 17,
+      "unit": "percent",
+      "settings": {
+        "other": "ΔG; average over 8 target languages; lower is less bias"
+      },
+      "source": {
+        "page": "35",
+        "pdfPage": 35,
+        "table": "Table 10",
+        "quote": "Aya Safe        9.4     14.8        10.1      27.8       31.0       10.4   20.9    11.9     17.0"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:11:20Z"
+  },
+  "notes": "Technical report (not a system card). Safety content is in §6–§7 and Appendix J/H/I. Skipped general capability suites (discriminative/generative held-outs, Dolly win rates, Flores/XLSum/TydiQA, XCOPA/XNLI, etc.). Skipped Jigsaw/CivilComments toxicity-classification AUC (Table 23) as classifier skill. Figures 11–12/14–17 are largely bar charts without reliable text-layer numbers; used Table 24, Tables 9–10, and prose averages for RTP. Aya Safe and Aya Beta are report variants without seed ids (rawModelName). Human AdvBench rates for unmitigated Aya given only as 89–90% range (finding, not evalResults). XSafety used for distillation training, not reported as a held-out score table. Preprint date Feb 13 2024 is not treated as model releaseDate."
+}

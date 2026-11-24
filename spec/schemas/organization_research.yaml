@@ -1,0 +1,340 @@
+# What the organization page shows from our research: safety incidents with their timelines,
+# and notable departures. Text fields are Markdown with
+# inline source links. Allegations are written as allegations ("reportedly", "was accused of").
+$defs:
+  Markdown:
+    description: Markdown text. Raw HTML is not shown.
+    type: string
+    minLength: 1
+
+  DatePrecision:
+    description: How exact the date next to it is. It agrees with the date's form (YYYY-MM-DD, YYYY-MM, YYYY).
+    type: string
+    enum: [day, month, year]
+
+  OrgSource:
+    description: A public source for a fact.
+    type: object
+    additionalProperties: false
+    required: [url]
+    properties:
+      url:
+        $ref: '#/$defs/Url'
+      title:
+        type: string
+        minLength: 1
+        description: The headline or page title.
+      publisher:
+        type: string
+        minLength: 1
+        description: The outlet or site (`Reuters`).
+      date:
+        $ref: '#/$defs/PartialDate'
+
+  IncidentSeverity:
+    description: >-
+      `red`: someone died, or many people were severely harmed, in credible reports or lawsuits.
+      `orange`: a regulator or court action, a serious security breach, or credible reports of a
+      significant safety failure or a broken safety commitment, with no death or severe harm to
+      many people. `yellow`: concerning, but limited or disputed.
+    type: string
+    enum: [red, orange, yellow]
+
+  IncidentStatus:
+    type: string
+    enum: [ongoing, resolved, disputed, under_investigation, in_litigation]
+
+  IncidentPrimaryCategory:
+    description: >-
+      What went wrong. `model_hacking`: a model broke into systems, took credentials or got out of
+      its limits by itself. `model_deception`: a model lied, schemed or hid what it did.
+      `model_misbehavior`: a model did other harmful things that nobody asked for.
+      `suicide_and_delusion`: chats linked to suicide, self-harm or delusions.
+      `sexual_content_with_minors`: sexual chats with minors, or child abuse images.
+      `nonconsensual_images`: sexual or fake images of real people. `false_or_hateful_claims`: the
+      model stated false information or hate. `used_by_attackers`: criminals or state actors used
+      the model for attacks, targeting, influence operations or violence. `safeguards_failed`: the
+      model gave dangerous help, or its safeguards were weak or off. `systems_breached`: attackers
+      got into the organization's systems or accounts. `data_exposed`: the organization leaked
+      user data, keys, code or weights. `prompt_injection`: a product flaw lets outside content
+      control an agent. `privacy_violation`: the organization collected, used or uploaded data
+      without clear consent. `safety_related_cut`: the organization dropped safety commitments,
+      testing, reports, teams or staff.
+    type: string
+    enum:
+      - model_hacking
+      - model_deception
+      - model_misbehavior
+      - suicide_and_delusion
+      - sexual_content_with_minors
+      - nonconsensual_images
+      - false_or_hateful_claims
+      - used_by_attackers
+      - safeguards_failed
+      - systems_breached
+      - data_exposed
+      - prompt_injection
+      - privacy_violation
+      - safety_related_cut
+
+  IncidentCategory:
+    type: string
+    enum:
+      - security
+      - privacy
+      - misuse
+      - model_behavior
+      - deception
+      - safety_process
+      - governance
+      - legal
+      - child_safety
+      - mental_health
+      - misinformation
+      - bias
+      - copyright
+      - labor
+      - other
+
+  IncidentLogRole:
+    description: >-
+      Who wrote a log step. `reasoning`: the model's thinking (chain of thought). `tool_call`: a
+      command or tool call by the model. `tool_result`: what a tool or the environment returned.
+      `note`: our short note between steps; it is not from the log.
+    type: string
+    enum: [system, user, assistant, reasoning, tool_call, tool_result, note]
+
+  IncidentLogStep:
+    type: object
+    additionalProperties: false
+    required: [role, text]
+    properties:
+      role:
+        $ref: '#/$defs/IncidentLogRole'
+      label:
+        type: string
+        minLength: 1
+        description: The source's label for the step (`Tool result — Slack message`).
+      text:
+        type: string
+        minLength: 1
+        description: >-
+          As the source shows it. `[...]` marks text that the source cut, and `[name]` text that it
+          replaced.
+
+  IncidentLog:
+    description: >-
+      One excerpt of a log (a chat, chain of thought or tool calls) from a source, with the steps
+      copied as the source shows them.
+    type: object
+    additionalProperties: false
+    required: [title, description, source, steps]
+    properties:
+      title:
+        type: string
+        minLength: 1
+        description: A few words about the excerpt (`The model reads the Slack thread`).
+      description:
+        $ref: '#/$defs/Markdown'
+        description: 1 or 2 short sentences about what the excerpt shows.
+      source:
+        $ref: '#/$defs/OrgSource'
+      model:
+        type: string
+        minLength: 1
+        description: The model as the source names it.
+      ocr:
+        type: boolean
+        description: The steps are read from a screenshot.
+      steps:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/IncidentLogStep'
+
+  OrgIncident:
+    title: OrgIncident
+    description: >-
+      A significant AI safety, security or responsible-AI event that involves the organization or
+      its models, with at least one safety category. Not copyright, scraping, likeness, labor,
+      privacy-regulator, censorship, bias, sanction or corporate-governance matters. Its page is
+      `/<organization slug>/incidents/<slug>`.
+    type: object
+    additionalProperties: false
+    required:
+      - id
+      - organizationId
+      - slug
+      - title
+      - date
+      - datePrecision
+      - severity
+      - status
+      - primaryCategory
+      - categories
+      - summary
+      - description
+      - sources
+    properties:
+      id:
+        $ref: '#/$defs/Id'
+      organizationId:
+        $ref: '#/$defs/Id'
+      slug:
+        $ref: '#/$defs/Slug'
+        description: Unique in the organization (`2023-internal-forum-breach`).
+      title:
+        type: string
+        minLength: 1
+      date:
+        $ref: '#/$defs/PartialDate'
+        description: When the incident started.
+      datePrecision:
+        $ref: '#/$defs/DatePrecision'
+      endDate:
+        $ref: '#/$defs/PartialDate'
+      severity:
+        $ref: '#/$defs/IncidentSeverity'
+      status:
+        $ref: '#/$defs/IncidentStatus'
+      primaryCategory:
+        $ref: '#/$defs/IncidentPrimaryCategory'
+        description: The one category that the feeds show.
+      categories:
+        type: array
+        description: Tags.
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/IncidentCategory'
+      summary:
+        $ref: '#/$defs/Markdown'
+        description: 1 or 2 sentences.
+      description:
+        $ref: '#/$defs/Markdown'
+        description: 2 or 3 short sentences, on the incident page.
+      modelIds:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/$defs/Id'
+        description: >-
+          The models whose behavior is the incident: the model that did the unsafe act, that people
+          misused, or whose weights leaked or safeguard failed. Any developer. Empty when no model's
+          behavior is part of it. A model with no public name has a placeholder model
+          (`openai/unreleased-hf-hack`, `xai/unknown-deepfakes`).
+      sources:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/OrgSource'
+      logs:
+        type: array
+        description: Log excerpts that show the model's behavior, in source order.
+        items:
+          $ref: '#/$defs/IncidentLog'
+
+  OrgIncidentEvent:
+    title: OrgIncidentEvent
+    description: One event in an incident's timeline.
+    type: object
+    additionalProperties: false
+    required: [id, incidentId, order, date, datePrecision, title, sources]
+    properties:
+      id:
+        $ref: '#/$defs/Id'
+      incidentId:
+        $ref: '#/$defs/Id'
+      order:
+        type: integer
+        minimum: 0
+        description: The place in the timeline, from 0. Events with the same date keep this order.
+      date:
+        $ref: '#/$defs/PartialDate'
+      datePrecision:
+        $ref: '#/$defs/DatePrecision'
+      title:
+        type: string
+        minLength: 1
+      description:
+        $ref: '#/$defs/Markdown'
+        description: One sentence.
+      sources:
+        type: array
+        items:
+          $ref: '#/$defs/OrgSource'
+
+  DepartureKind:
+    type: string
+    enum: [resigned, fired, laid_off, unclear]
+
+  OrgDeparture:
+    title: OrgDeparture
+    description: >-
+      A person who left in 2023 or later over AI safety concerns at the organization, or a
+      safety leader who left. Not ethics, copyright or personal reasons.
+    type: object
+    additionalProperties: false
+    required: [id, organizationId, name, kind, sources]
+    properties:
+      id:
+        $ref: '#/$defs/Id'
+      organizationId:
+        $ref: '#/$defs/Id'
+      name:
+        type: string
+        minLength: 1
+        description: Unique in the organization.
+      title:
+        type: string
+        minLength: 1
+        description: The person's role at the organization.
+      departedDate:
+        $ref: '#/$defs/PartialDate'
+      datePrecision:
+        $ref: '#/$defs/DatePrecision'
+      kind:
+        $ref: '#/$defs/DepartureKind'
+      reason:
+        $ref: '#/$defs/Markdown'
+      quote:
+        description: The person's own words, copied exactly from the source.
+        type: object
+        additionalProperties: false
+        required: [text, url]
+        properties:
+          text:
+            type: string
+            minLength: 1
+          url:
+            $ref: '#/$defs/Url'
+      image:
+        description: A freely licensed photo from Wikimedia Commons.
+        type: object
+        additionalProperties: false
+        required: [url, pageUrl, license, author]
+        properties:
+          url:
+            type: string
+            pattern: '^https://upload\.wikimedia\.org/'
+          pageUrl:
+            type: string
+            pattern: '^https://commons\.wikimedia\.org/'
+            description: The Commons file page.
+          license:
+            type: string
+            minLength: 1
+          author:
+            type: string
+            minLength: 1
+            description: The author as Commons states it.
+      website:
+        $ref: '#/$defs/Url'
+        description: The person's own site.
+      nextRole:
+        $ref: '#/$defs/Markdown'
+      sources:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/OrgSource'

@@ -1,0 +1,132 @@
+{
+  "eval": {
+    "slug": "gdm-stealth",
+    "displayName": "GDM stealth",
+    "aliases": [
+      "Stealth evaluations",
+      "Stealth challenges",
+      "Deceptive alignment stealth challenges",
+      "GDM-Stealth",
+      "GDM Stealth",
+      "GDM Dangerous Capabilities: Stealth",
+      "Stealth capability evals",
+      "GDM Stealth (challenge thr=25%)",
+      "GDM Stealth (challenge thr=47%)",
+      "GDM Stealth (challenge thr=56%)",
+      "GDM Stealth (challenge thr=76%)"
+    ],
+    "description": "Four open Google DeepMind agentic stealth challenges (classifier evasion, cover your tracks, oversight pattern, strategic rule breaking) from the same paper as GDM self-reasoning. The agent has an official task plus a secret side goal under automated oversight. Scoring is challenge-specific (binary success and/or continuous score); cards report challenges solved of 4. The paper's fifth challenge, decision_sabotage, is human-in-the-loop and is not in Inspect Evals.",
+    "summary": "Tests whether AI agents can pursue a secret side goal while they avoid detection by automated oversight.",
+    "family": "GDM stealth and situational awareness",
+    "maintainers": [
+      {
+        "name": "Google DeepMind",
+        "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/src/inspect_evals/gdm_stealth"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2505.01420",
+        "title": "Evaluating Frontier Models for Stealth and Situational Awareness"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/src/inspect_evals/gdm_stealth",
+        "title": "Inspect Evals gdm_stealth"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["sabotage", "situational_awareness"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-05-18",
+      "status": "published",
+      "releasedDate": "2025-05-18",
+      "dataset": {
+        "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/b49df6bc9e30b2d24571084bc710b9439b9ffa77/src/inspect_evals/gdm_stealth",
+        "license": "mit",
+        "splits": [
+          { "name": "classifier_evasion", "sampleCount": 9, "storage": "pointer" },
+          { "name": "cover_your_tracks", "sampleCount": 2, "storage": "pointer" },
+          { "name": "oversight_pattern", "sampleCount": 2, "storage": "pointer" },
+          { "name": "strategic_rule_breaking", "sampleCount": 1, "storage": "pointer" }
+        ]
+      },
+      "scores": [
+        {
+          "key": "success",
+          "displayName": "Success",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The agent fully solves the stealth challenge on that trial (challenge-specific criteria)."
+        },
+        {
+          "key": "score",
+          "displayName": "Score",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Challenge-specific numeric progress (for example milestone fraction or normalized ticket score)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "challenges_passed",
+          "displayName": "Challenges passed",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 4,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Count of the four open challenges that pass the paper's human-baseline thresholds. Card names with challenge thr=% report the same suite at those thresholds."
+        },
+        {
+          "key": "success_rate",
+          "displayName": "Success rate",
+          "score": "success",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Per challenge. Fraction of trials that fully succeed."
+        },
+        {
+          "key": "mean_score",
+          "displayName": "Mean score",
+          "score": "score",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "description": "Per challenge when a continuous score applies (Inspect also reports median and max reducers)."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "inspect_evals/gdm_classifier_evasion",
+        "package": "inspect-evals[gdm_stealth]==0.22.0",
+        "roles": ["target", "judge"],
+        "sandbox": "docker",
+        "internet": false,
+        "defaultTrials": 10
+      }
+    }
+  ]
+}

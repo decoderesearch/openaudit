@@ -1,0 +1,312 @@
+{
+  "document": "deepseek-r1-nature-paper",
+  "alsoDocuments": ["deepseek-r1-blog"],
+  "covers": [
+    {
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    }
+  ],
+  "pageCount": 11,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "about 17 January 2025 (one week before 24 January 2025 screenshot)",
+      "source": {
+        "page": "35",
+        "quote": "The screenshot is captured on January 24, 2025, one week after model release."
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "July 2024 (DeepSeek-V3 base)",
+      "source": {
+        "page": "31",
+        "quote": "DeepSeek-V3 base has\na knowledge cutoff date of July 2024, predating evaluation benchmarks like CNMO"
+      }
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "stated",
+      "value": "RL sampling max length 32,768 tokens then 65,536 after step 8.2k",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "we sample 16 outputs with a maximum length of 32,768 tokens\n                                                                            before the 8.2k step and 65,536 tokens afterward."
+      }
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text / language model",
+      "source": {
+        "page": "633",
+        "pdfPage": 1,
+        "quote": "abilities of LLMs can be incentivized through pure reinforcement learning (RL),"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "long chain-of-thought reasoning before the final answer",
+      "source": {
+        "page": "634",
+        "pdfPage": 2,
+        "quote": "template to require DeepSeek-R1-Zero to first produce a reasoning"
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "optimized for Chinese and English; multilingual safety tested in 50 languages",
+      "source": {
+        "page": "636",
+        "pdfPage": 4,
+        "quote": "DeepSeek-R1 is at present optimized for Chinese and English, which"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "MIT license",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "under an MIT license at https://github.com/deepseek-ai/DeepSeek-R1"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "671B",
+      "source": {
+        "page": "32",
+        "quote": "# Total Params                   -             -         671B    -      -     671B"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "37B",
+      "source": {
+        "page": "32",
+        "quote": "# Activated Params               -             -          37B    -      -     37B"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "MoE (built on DeepSeek-V3 Base)",
+      "source": {
+        "page": "32",
+        "quote": "Architecture                     -             -         MoE     -      -     MoE"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "DeepSeek-V3 base pre-trained on 14.8 trillion tokens; then RL/SFT pipeline for R1",
+      "source": {
+        "page": "4",
+        "quote": "was pre-trained on an expansive dataset of 14.8 trillion high-quality, diverse tokens,"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "147K H800 GPU hours total for DeepSeek-R1 training stages",
+      "source": {
+        "page": "27",
+        "quote": "in H800 GPU Hours                       101K                        5K                  41K         147K"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "On public safety benchmarks, DeepSeek-R1 average Safety Score is 95.0 with risk control (85.9 without) (higher is better)",
+      "source": {
+        "page": "39",
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "[Simple Safety Tests](https://arxiv.org/abs/2311.08370) includes Child Abuse among evaluated categories",
+      "source": {
+        "page": "38",
+        "quote": "Illegal Items, Physical\n  Harm, Scams & Fraud, Child Abuse, and Suicide, Self-Harm & Eating Disorders"
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "[SST](https://arxiv.org/abs/2311.08370) covers Suicide, Self-Harm & Eating Disorders",
+      "source": {
+        "page": "38",
+        "quote": "Suicide, Self-Harm & Eating Disorders\n  (SH & ED)."
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Without risk control, R1 jailbreak Unsafe rises to 85.9% (+60.7); with risk control jailbreak Unsafe is 4.3%",
+      "source": {
+        "page": "46",
+        "quote": "          DeepSeek-R1               25.2    85.9   +60.7   5.6    1.9     -3.7"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "[BBQ](/evals/bbq) Safety Score 96.6 for DeepSeek-R1 (higher is better); in-house Discrimination Unsafe 19.7% without risk control",
+      "source": {
+        "page": "39",
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "Supplementary Fig. 4 shows reward rising while CodeForces performance falls during reinforcement learning (RL)",
+      "source": {
+        "page": "27",
+        "quote": "Supplementary Fig. 4: Reward hacking: the reward exhibits an increasing trend as\nthe performance on CodeForces decreases for training."
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": true,
+      "headline": "Safety table reports DeepSeek-R1 (hide cot) separately from DeepSeek R1 with chain-of-thought (CoT) shown",
+      "source": {
+        "page": "39",
+        "quote": "DeepSeek-R1 (hide cot) 98.0    96.6   97.2    94.4   93.7   96.3 (58.0)    96.0 (89.7)"
+      }
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Authors say inherent DeepSeek-R1 safety is generally at a moderate level, comparable with GPT-4o (2024-05-13), and higher with the risk control system.", "tone": "mixed",
+      "source": {
+        "page": "636",
+        "pdfPage": 4,
+        "quote": "is generally at a moderate level (compara-"
+      }
+    },
+    {
+      "text": "DeepSeek recommends deploying an external risk-control system because it greatly improves safety, especially against jailbreaks.", "tone": "mixed",
+      "source": {
+        "page": "38",
+        "quote": "dangerous tactics such as jailbreak attacks. Therefore, we recommend that developers"
+      }
+    },
+    {
+      "text": "Without risk control, DeepSeek-R1 jailbreak Unsafe jumps from 25.2% to 85.9%; with risk control jailbreak Unsafe falls to 4.3% while rejection rises to 87.3%.", "tone": "bad",
+      "source": {
+        "page": "46",
+        "quote": "          DeepSeek-R1               25.2    85.9   +60.7   5.6    1.9     -3.7"
+      }
+    },
+    {
+      "text": "R1 is weak on [HarmBench](/evals/harmbench) intellectual-property prompts such as lyric generation, which lowers its HarmBench score versus other frontier models.", "tone": "mixed",
+      "source": {
+        "page": "39",
+        "quote": "R1 performs poorly\non questions related to intellectual property rights within the HarmBench testset."
+      }
+    },
+    {
+      "text": "Showing the chain-of-thought lowers [HarmBench](/evals/harmbench) Safety Score (89.3 with risk control, 35.0 without) versus hide-cot (96.3 / 58.0).", "tone": "bad",
+      "source": {
+        "page": "39",
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      }
+    },
+    {
+      "text": "On the in-house taxonomy, authors place R1 with risk control in a second safety tier (~10% Unsafe); without risk control they call it relatively unsafe (>20%).", "tone": "bad",
+      "source": {
+        "page": "43",
+        "quote": "while DeepSeek-\n  R1 (without risk control) and GPT-4o (2024-05-13) are relatively unsafe models\n  (unsafe rate beyond 20%)."
+      }
+    },
+    {
+      "text": "Across 50 languages, R1 with risk control scores 85.9% aggregate safety versus 74.2% without; authors report no high-risk languages for R1 without risk control.", "tone": "mixed",
+      "source": {
+        "page": "44",
+        "quote": "Without risk control system, DeepSeek-V3 (75.3%) and DeepSeek-R1 (74.2%) get\n  safety scores across 50 languages comparable to GPT-4o(2024-05-13)’s performance\n  (75.2%)."
+      }
+    },
+    {
+      "text": "Ethics statement warns R1 can be jailbroken into generating dangerous content such as explosive manufacturing plans.", "tone": "bad",
+      "source": {
+        "page": "636",
+        "pdfPage": 4,
+        "quote": "be subject to jailbreak attacks, leading to the generation of dangerous"
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:15:04Z"
+  },
+  "notes": "Nature main PDF is 12 pages (printed 633–638 plus Methods/Extended Data); safety numbers are in Supplementary Information section 4.3 (SI pages ~35–46). SI text layer was appended to $W/text.txt for quote checks. Skipped general capability tables (AIME, MATH, LiveCodeBench, Arena-Hard, MMLU, SimpleQA, coding, etc.). Skipped per-language bars in Supplementary Fig. 12 (broken OCR); kept aggregate scores stated in prose. Table 8 Origin Unsafe/Reject duplicates Table 7 Overall, so only Jailbreak and GAP columns were kept. HELM supplied some Table 6 scores but is a leaderboard, so testers is empty. Distill models appear only in capability sections and were left out of covers. No formal risk-framework thresholds; riskDecisions empty. Topics cyber/bio_chem/manipulation/hallucination left uncovered (taxonomy mentions or SimpleQA capability only). Safety results are in the Supplementary Information section 4.3, which is its own document (deepseek-r1-safety); they are not repeated here."
+}

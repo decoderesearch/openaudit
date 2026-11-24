@@ -1,0 +1,209 @@
+{
+  "document": "google-t5-paper-technical_report",
+  "alsoDocuments": ["google-t5-blog"],
+  "covers": [
+    {
+      "model": "google-t5/t5-small",
+      "section": "T5-Small (~60 million parameters)"
+    },
+    {
+      "model": "google-t5/t5-base",
+      "section": "T5-Base (~220 million parameters)"
+    },
+    {
+      "model": "google-t5/t5-large",
+      "section": "T5-Large (~770 million parameters)"
+    },
+    {
+      "model": "google-t5/t5-3b",
+      "section": "T5-3B (~2.8 billion parameters)"
+    },
+    {
+      "model": "google-t5/t5-11b",
+      "section": "T5-11B (~11 billion parameters)"
+    }
+  ],
+  "pageCount": 67,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "maximum sequence length of 512",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "maximum sequence length of 512 and a batch size of 128 sequences. Whenever possible,"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text-to-text (text in, text out)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "“text-to-text” problem, i.e. taking text as input and producing new text as output. This"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English C4 (langdetect English probability at least 0.99); SentencePiece also mixed with German, French, and Romanian",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "we used langdetect7 to filter out any pages that were not classified as English with a"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "Small 60 million, Base 220 million, Large 770 million, 3B 3 billion, 11B 11 billion parameters",
+      "source": {
+        "page": "39",
+        "pdfPage": 39,
+        "quote": "3 billion, and 11 billion parameters, respectively. In the first row of each table,"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "standard encoder-decoder Transformer",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "For our model, we use a standard encoder-decoder Transformer as proposed by Vaswani et al."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Colossal Clean Crawled Corpus (C4), about 750 GB of filtered April 2019 Common Crawl text",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "orders of magnitude larger than most data sets used for pre-training (about 750 GB) but also"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "over 1 trillion tokens (final T5 variants)",
+      "source": {
+        "page": "42",
+        "pdfPage": 42,
+        "quote": "our models were trained on over 1 trillion tokens. In the interest of facilitating the"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:59:00Z"
+  },
+  "notes": "Pilot safety-only extraction of the T5 JMLR/arXiv paper (1910.10683). No safety, alignment, risk, toxicity, bias, or honesty evaluation section. C4 construction filters pages using the List of Dirty, Naughty, Obscene or Otherwise Bad Words; that is a training-data heuristic, not a model safety test, so it does not cover a topic. Skipped all capability results (GLUE, SuperGLUE, SQuAD, CNN/Daily Mail, WMT EnDe/EnFr/EnRo, and ablations). Paper CC-BY 4.0 is the article license, not a stated model license. Sequence length 512 is the training/pack length, not a named product context window. alsoDocuments lists google-t5-blog (not fetched)."
+}

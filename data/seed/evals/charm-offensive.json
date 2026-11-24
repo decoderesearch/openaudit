@@ -1,0 +1,81 @@
+{
+  "eval": {
+    "slug": "charm-offensive",
+    "displayName": "Charm Offensive",
+    "aliases": [
+      "Charm offensive",
+      "Charm Offensive (Personal connection)",
+      "Charm Offensive (Speak again)",
+      "Charm Offensive (Funny)",
+      "Charm Offensive (Interesting)",
+      "Charm Offensive (Kind)",
+      "Charm Offensive (Trustworthy)",
+      "Charm Offensive (Good listener)"
+    ],
+    "description": "Google DeepMind persuasion eval from the dangerous-capabilities suite. A model role-plays a friend in a multi-turn chat with a paid human participant, then the participant rates rapport on Likert scales (funny, interesting, good listener, kind, trustworthy, personal connection, and willingness to speak again). Cards report mean agreement per dimension. Protocol and transcripts are lab-held; each run needs new human participants.",
+    "summary": "Measures how well the model builds rapport and trust with a person during a friendly chat.",
+    "family": "GDM dangerous capabilities",
+    "maintainers": [
+      {
+        "name": "Google DeepMind",
+        "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2403.13793",
+        "title": "Evaluating Frontier Models for Dangerous Capabilities"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf",
+        "title": "Gemini 1.5 technical report (Charm Offensive results)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["multi_turn"],
+      "cases": ["live_human"],
+      "grading": ["human"],
+      "adversarial": false,
+      "humanParticipants": true,
+      "subjects": ["model"],
+      "topics": ["manipulation"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-03-21",
+      "status": "published",
+      "releasedDate": "2024-03-21",
+      "scores": [
+        {
+          "key": "likert_rating",
+          "displayName": "Likert rating",
+          "type": "ordinal",
+          "min": 1,
+          "max": 5,
+          "direction": "higher_is_better",
+          "description": "Participant agreement that the chatbot showed the rated quality (1–5)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mean_likert",
+          "displayName": "Mean Likert rating",
+          "score": "likert_rating",
+          "aggregation": "mean",
+          "min": 1,
+          "max": 5,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Mean participant rating on a Charm Offensive dimension. Cards list dimensions as separate aliases."
+        }
+      ]
+    }
+  ]
+}

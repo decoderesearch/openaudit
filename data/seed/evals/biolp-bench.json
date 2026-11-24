@@ -1,0 +1,91 @@
+{
+  "eval": {
+    "slug": "biolp-bench",
+    "displayName": "BioLP-Bench",
+    "aliases": ["BioLP-bench"],
+    "description": "Tests whether a model can spot the single change that would make a biological lab protocol fail, among other non-fatal edits. Covers common research protocols. Scored as accuracy over about 800 cases.",
+    "summary": "Tests whether the model can find the one error that makes a biology lab protocol fail.",
+    "maintainers": [
+      {
+        "name": "Oxford Biosecurity Group",
+        "url": "https://github.com/baceolus/BioLP-bench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://www.biorxiv.org/content/10.1101/2024.08.21.608694v4",
+        "title": "BioLP-bench: Measuring understanding of biological lab protocols by large language models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/baceolus/BioLP-bench",
+        "title": "BioLP-Bench Inspect runner and protocols"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/baceolus/biolp-bench",
+        "title": "baceolus/biolp-bench (card; samples live in the GitHub repo)"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "1.0",
+      "status": "published",
+      "releasedDate": "2024-08-21",
+      "dataset": {
+        "url": "https://github.com/baceolus/BioLP-bench/tree/148d5a2dd90c185ce2859c77c368b79c2173d907",
+        "license": "cc-by-nc-sa-4.0",
+        "splits": [
+          {
+            "name": "test",
+            "sampleCount": 800,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the model names the protocol change that would cause the run to fail."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy",
+          "score": "correct",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of cases where the failing change is identified."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "judge"],
+        "internet": false
+      }
+    }
+  ]
+}

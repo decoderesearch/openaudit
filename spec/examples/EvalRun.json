@@ -1,0 +1,106 @@
+[
+  {
+    "id": "01a0ea3a-e128-76e4-9de1-e7c100000001",
+    "evalId": "01a0ea3a-e128-76e4-9de1-e7a100000002",
+    "evalVersionId": "01a0ea3a-e128-76e4-9de1-e7b100000002",
+    "modelId": "01a0ea3a-e128-76e4-9de2-0191575418a7",
+    "origin": "run",
+    "status": "succeeded",
+    "route": {
+      "kind": "openrouter",
+      "model": "openai/gpt-oss-20b",
+      "providers": ["DeepInfra"],
+      "allowFallbacks": false,
+      "quantization": "fp4"
+    },
+    "settings": {
+      "reasoning": "none",
+      "limit": 100,
+      "models": {
+        "binary_judge": { "kind": "openrouter", "model": "openai/gpt-4o", "allowFallbacks": true },
+        "numeric_judge": { "kind": "openrouter", "model": "openai/o3-mini", "allowFallbacks": true }
+      }
+    },
+    "provenance": {
+      "tool": "inspect_ai",
+      "toolVersion": "0.3.273",
+      "packages": { "inspect_ai": "0.3.273", "inspect_evals": "0.22.0" },
+      "task": "inspect_evals/mask",
+      "logModel": "openrouter/openai/gpt-oss-20b",
+      "servedBy": ["DeepInfra"],
+      "host": "lab-box",
+      "runnerVersion": "0.1.0",
+      "startedAt": "2026-09-30T06:00:00.000Z",
+      "finishedAt": "2026-09-30T06:04:10.000Z",
+      "tokens": { "input": 41200, "output": 9800, "reasoning": 0 },
+      "costUsd": 0.021,
+      "byModel": {
+        "openrouter/openai/gpt-oss-20b": {
+          "tokens": { "input": 41200, "output": 9800, "reasoning": 0 },
+          "costUsd": 0.006,
+          "servedBy": ["DeepInfra"]
+        },
+        "openrouter/openai/gpt-4o": { "tokens": { "input": 5200, "output": 200 }, "costUsd": 0.015 }
+      }
+    },
+    "log": {
+      "key": "runs/01a0ea3a-e128-76e4-9de1-e7c100000001/log.eval",
+      "bytes": 482113,
+      "sha256": "9f2c4d6e8a0b1c3d5e7f9a1b3c5d7e9f0a2b4c6d8e0f1a3b5c7d9e1f3a5b7c9d"
+    },
+    "sampleCount": 100,
+    "attemptCount": 100,
+    "visibility": "public",
+    "createdAt": "2026-09-30T05:59:30.000Z"
+  },
+  {
+    "id": "01a0ea3a-e128-76e4-9de1-e7c100000002",
+    "evalId": "01a0ea3a-e128-76e4-9de1-e7a100000001",
+    "evalVersionId": "01a0ea3a-e128-76e4-9de1-e7b100000001",
+    "modelId": "01a0ea3a-e128-76e4-9de1-fe88bef34728",
+    "origin": "run",
+    "status": "queued",
+    "route": { "kind": "direct", "model": "gpt-5" },
+    "settings": {},
+    "visibility": "private",
+    "createdAt": "2026-09-30T06:10:00.000Z"
+  },
+  {
+    "id": "01a0ea3a-e128-76e4-9de1-e7c100000003",
+    "evalId": "01a0ea3a-e128-76e4-9de1-e7a100000002",
+    "evalVersionId": "01a0ea3a-e128-76e4-9de1-e7b100000002",
+    "modelId": "01a0ea3a-e128-76e4-9de2-0191575418a7",
+    "origin": "rescore",
+    "sourceRunId": "01a0ea3a-e128-76e4-9de1-e7c100000001",
+    "status": "succeeded",
+    "route": {
+      "kind": "openrouter",
+      "model": "openai/gpt-oss-20b",
+      "providers": ["DeepInfra"],
+      "allowFallbacks": false,
+      "quantization": "fp4"
+    },
+    "settings": {
+      "reasoning": "none",
+      "limit": 100,
+      "models": {
+        "binary_judge": { "kind": "openrouter", "model": "openai/gpt-4o-mini", "allowFallbacks": true },
+        "numeric_judge": { "kind": "openrouter", "model": "openai/o3-mini", "allowFallbacks": true }
+      }
+    },
+    "provenance": {
+      "costUsd": 0.001,
+      "byModel": {
+        "openrouter/openai/gpt-4o-mini": {
+          "tokens": { "input": 5200, "output": 210 },
+          "costUsd": 0.001,
+          "costEstimated": true
+        }
+      }
+    },
+    "sampleCount": 100,
+    "attemptCount": 100,
+    "visibility": "public",
+    "createdAt": "2026-09-30T06:20:00.000Z"
+  }
+]

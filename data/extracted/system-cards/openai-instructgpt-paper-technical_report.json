@@ -1,0 +1,1722 @@
+{
+  "document": "openai-instructgpt-paper-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "rawModelName": "InstructGPT 1.3B"
+    },
+    {
+      "rawModelName": "InstructGPT 6B"
+    },
+    {
+      "rawModelName": "InstructGPT 175B"
+    }
+  ],
+  "pageCount": 68,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "early 2021 (first InstructGPT SFT model deployed in beta on the OpenAI API)",
+      "source": {
+        "page": "26",
+        "pdfPage": 26,
+        "quote": "first InstructGPT model via supervised learning, which was deployed in beta in the API in early 2021."
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "dataset over 96% English",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "other natural language tasks (see Table 1). Our dataset is over 96% English, however in Section 4.3"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "1.3B, 6B, and 175B",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "sizes (1.3B, 6B, and 175B parameters), and all of our models use the GPT-3 architecture. Our main"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "GPT-3 architecture",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "sizes (1.3B, 6B, and 175B parameters), and all of our models use the GPT-3 architecture. Our main"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "labeler-written prompts and OpenAI API prompts; labeler demonstrations (SFT) and rankings for RLHF (PPO)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "submitted through the OpenAI API, we collect a dataset of labeler demonstrations"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Closed-domain hallucination rate 21% for InstructGPT vs 41% for GPT-3 (lower is better)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "21% vs. 41% hallucination rate, respectively)."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "InstructGPT produces truthful and informative [TruthfulQA](/evals/truthfulqa) answers about twice as often as GPT-3",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "benchmark, InstructGPT generates truthful and informative answers about twice as often as GPT-3."
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Not less biased than GPT-3 on [Winogender](/evals/winogender) and [CrowS-Pairs](/evals/crows-pairs); respectful prompting can increase measured bias",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "models are not less biased than GPT-3. The PPO-ptx model shows similar bias to GPT-3, but when"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "InstructGPT gives about 25% fewer toxic outputs than GPT-3 when prompted to be respectful",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "InstructGPT models generate about 25% fewer toxic outputs than GPT-3"
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "InstructGPT is not fully safe: it still produces toxic or biased text, fabricates facts, and usually follows harmful user instructions.", "tone": "bad",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Models. Our models are neither fully aligned nor fully safe; they still generate toxic or biased"
+      }
+    },
+    {
+      "text": "When instructed to be maximally biased, InstructGPT produces more toxic outputs than same-size GPT-3.", "tone": "bad",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "models to be maximally biased, InstructGPT generates more toxic outputs than equivalently-sized"
+      }
+    },
+    {
+      "text": "With a respectful prompt, InstructGPT makes about 25% fewer toxic outputs than GPT-3 on [RealToxicityPrompts](/evals/real-toxicity-prompts).", "tone": "good",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "InstructGPT models generate about 25% fewer toxic outputs than GPT-3"
+      }
+    },
+    {
+      "text": "On [Winogender](/evals/winogender) and [CrowS-Pairs](/evals/crows-pairs) entropy bias metrics, InstructGPT is not less biased than GPT-3; a respectful prompt can lower entropy (higher measured bias).", "tone": "bad",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "models are not less biased than GPT-3. The PPO-ptx model shows similar bias to GPT-3, but when"
+      }
+    },
+    {
+      "text": "Training prioritized helpfulness over harmlessness when they conflict; the authors plan refusals in later work.", "tone": "bad",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "In this work, if the user requests a potentially harmful or dishonest response, we allow our model to"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "entropy",
+      "value": 0.75,
+      "unit": "other",
+      "settings": {
+        "other": "basic; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Winogender      entropy       basic           0.750   0.721   0.735     0.583     0.535      0.503   0.698   0.587   0.618     0.760   0.719   0.737"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "GPT-3 6B",
+      "metric": "entropy",
+      "value": 0.721,
+      "unit": "other",
+      "settings": {
+        "other": "basic; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Winogender      entropy       basic           0.750   0.721   0.735     0.583     0.535      0.503   0.698   0.587   0.618     0.760   0.719   0.737"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "model": "openai/gpt-3",
+      "metric": "entropy",
+      "value": 0.735,
+      "unit": "other",
+      "settings": {
+        "other": "basic; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Winogender      entropy       basic           0.750   0.721   0.735     0.583     0.535      0.503   0.698   0.587   0.618     0.760   0.719   0.737"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "entropy",
+      "value": 0.76,
+      "unit": "other",
+      "settings": {
+        "other": "basic; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Winogender      entropy       basic           0.750   0.721   0.735     0.583     0.535      0.503   0.698   0.587   0.618     0.760   0.719   0.737"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "entropy",
+      "value": 0.719,
+      "unit": "other",
+      "settings": {
+        "other": "basic; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Winogender      entropy       basic           0.750   0.721   0.735     0.583     0.535      0.503   0.698   0.587   0.618     0.760   0.719   0.737"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "metric": "entropy",
+      "value": 0.737,
+      "unit": "other",
+      "settings": {
+        "other": "basic; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Winogender      entropy       basic           0.750   0.721   0.735     0.583     0.535      0.503   0.698   0.587   0.618     0.760   0.719   0.737"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "entropy",
+      "value": 0.774,
+      "unit": "other",
+      "settings": {
+        "other": "respectful; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.774   0.753   0.796     0.561     0.446      0.479   0.644   0.562   0.527     0.608   0.585   0.696"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "GPT-3 6B",
+      "metric": "entropy",
+      "value": 0.753,
+      "unit": "other",
+      "settings": {
+        "other": "respectful; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.774   0.753   0.796     0.561     0.446      0.479   0.644   0.562   0.527     0.608   0.585   0.696"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "model": "openai/gpt-3",
+      "metric": "entropy",
+      "value": 0.796,
+      "unit": "other",
+      "settings": {
+        "other": "respectful; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.774   0.753   0.796     0.561     0.446      0.479   0.644   0.562   0.527     0.608   0.585   0.696"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "entropy",
+      "value": 0.608,
+      "unit": "other",
+      "settings": {
+        "other": "respectful; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.774   0.753   0.796     0.561     0.446      0.479   0.644   0.562   0.527     0.608   0.585   0.696"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "entropy",
+      "value": 0.585,
+      "unit": "other",
+      "settings": {
+        "other": "respectful; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.774   0.753   0.796     0.561     0.446      0.479   0.644   0.562   0.527     0.608   0.585   0.696"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "metric": "entropy",
+      "value": 0.696,
+      "unit": "other",
+      "settings": {
+        "other": "respectful; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.774   0.753   0.796     0.561     0.446      0.479   0.644   0.562   0.527     0.608   0.585   0.696"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "entropy",
+      "value": 0.76,
+      "unit": "other",
+      "settings": {
+        "other": "biased; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.760   0.773   0.783     0.561     0.516      0.540   0.706   0.567   0.564     0.676   0.543   0.690"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "GPT-3 6B",
+      "metric": "entropy",
+      "value": 0.773,
+      "unit": "other",
+      "settings": {
+        "other": "biased; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.760   0.773   0.783     0.561     0.516      0.540   0.706   0.567   0.564     0.676   0.543   0.690"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "model": "openai/gpt-3",
+      "metric": "entropy",
+      "value": 0.783,
+      "unit": "other",
+      "settings": {
+        "other": "biased; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.760   0.773   0.783     0.561     0.516      0.540   0.706   0.567   0.564     0.676   0.543   0.690"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "entropy",
+      "value": 0.676,
+      "unit": "other",
+      "settings": {
+        "other": "biased; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.760   0.773   0.783     0.561     0.516      0.540   0.706   0.567   0.564     0.676   0.543   0.690"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "entropy",
+      "value": 0.543,
+      "unit": "other",
+      "settings": {
+        "other": "biased; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.760   0.773   0.783     0.561     0.516      0.540   0.706   0.567   0.564     0.676   0.543   0.690"
+      }
+    },
+    {
+      "rawEvalName": "Winogender",
+      "metric": "entropy",
+      "value": 0.69,
+      "unit": "other",
+      "settings": {
+        "other": "biased; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.760   0.773   0.783     0.561     0.516      0.540   0.706   0.567   0.564     0.676   0.543   0.690"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "entropy",
+      "value": 0.448,
+      "unit": "other",
+      "settings": {
+        "other": "basic; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " CrowS Pairs     entropy       basic           0.448   0.430   0.410     0.356     0.326      0.241   0.355   0.361   0.326     0.448   0.434   0.413"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "GPT-3 6B",
+      "metric": "entropy",
+      "value": 0.43,
+      "unit": "other",
+      "settings": {
+        "other": "basic; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " CrowS Pairs     entropy       basic           0.448   0.430   0.410     0.356     0.326      0.241   0.355   0.361   0.326     0.448   0.434   0.413"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "entropy",
+      "value": 0.41,
+      "unit": "other",
+      "settings": {
+        "other": "basic; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " CrowS Pairs     entropy       basic           0.448   0.430   0.410     0.356     0.326      0.241   0.355   0.361   0.326     0.448   0.434   0.413"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "entropy",
+      "value": 0.448,
+      "unit": "other",
+      "settings": {
+        "other": "basic; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " CrowS Pairs     entropy       basic           0.448   0.430   0.410     0.356     0.326      0.241   0.355   0.361   0.326     0.448   0.434   0.413"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "entropy",
+      "value": 0.434,
+      "unit": "other",
+      "settings": {
+        "other": "basic; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " CrowS Pairs     entropy       basic           0.448   0.430   0.410     0.356     0.326      0.241   0.355   0.361   0.326     0.448   0.434   0.413"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "entropy",
+      "value": 0.413,
+      "unit": "other",
+      "settings": {
+        "other": "basic; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " CrowS Pairs     entropy       basic           0.448   0.430   0.410     0.356     0.326      0.241   0.355   0.361   0.326     0.448   0.434   0.413"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "entropy",
+      "value": 0.419,
+      "unit": "other",
+      "settings": {
+        "other": "respectful; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.419   0.413   0.362     0.302     0.260      0.204   0.281   0.258   0.270     0.310   0.273   0.243"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "GPT-3 6B",
+      "metric": "entropy",
+      "value": 0.413,
+      "unit": "other",
+      "settings": {
+        "other": "respectful; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.419   0.413   0.362     0.302     0.260      0.204   0.281   0.258   0.270     0.310   0.273   0.243"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "entropy",
+      "value": 0.362,
+      "unit": "other",
+      "settings": {
+        "other": "respectful; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.419   0.413   0.362     0.302     0.260      0.204   0.281   0.258   0.270     0.310   0.273   0.243"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "entropy",
+      "value": 0.31,
+      "unit": "other",
+      "settings": {
+        "other": "respectful; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.419   0.413   0.362     0.302     0.260      0.204   0.281   0.258   0.270     0.310   0.273   0.243"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "entropy",
+      "value": 0.273,
+      "unit": "other",
+      "settings": {
+        "other": "respectful; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.419   0.413   0.362     0.302     0.260      0.204   0.281   0.258   0.270     0.310   0.273   0.243"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "entropy",
+      "value": 0.243,
+      "unit": "other",
+      "settings": {
+        "other": "respectful; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.419   0.413   0.362     0.302     0.260      0.204   0.281   0.258   0.270     0.310   0.273   0.243"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "entropy",
+      "value": 0.42,
+      "unit": "other",
+      "settings": {
+        "other": "biased; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.420   0.419   0.353     0.305     0.252      0.187   0.287   0.288   0.223     0.314   0.254   0.205"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "GPT-3 6B",
+      "metric": "entropy",
+      "value": 0.419,
+      "unit": "other",
+      "settings": {
+        "other": "biased; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.420   0.419   0.353     0.305     0.252      0.187   0.287   0.288   0.223     0.314   0.254   0.205"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "model": "openai/gpt-3",
+      "metric": "entropy",
+      "value": 0.353,
+      "unit": "other",
+      "settings": {
+        "other": "biased; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.420   0.419   0.353     0.305     0.252      0.187   0.287   0.288   0.223     0.314   0.254   0.205"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "entropy",
+      "value": 0.314,
+      "unit": "other",
+      "settings": {
+        "other": "biased; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.420   0.419   0.353     0.305     0.252      0.187   0.287   0.288   0.223     0.314   0.254   0.205"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "entropy",
+      "value": 0.254,
+      "unit": "other",
+      "settings": {
+        "other": "biased; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.420   0.419   0.353     0.305     0.252      0.187   0.287   0.288   0.223     0.314   0.254   0.205"
+      }
+    },
+    {
+      "rawEvalName": "CrowS-Pairs",
+      "metric": "entropy",
+      "value": 0.205,
+      "unit": "other",
+      "settings": {
+        "other": "biased; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.420   0.419   0.353     0.305     0.252      0.187   0.287   0.288   0.223     0.314   0.254   0.205"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "toxicity",
+      "value": 0.228,
+      "unit": "fraction",
+      "settings": {
+        "other": "basic; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Real Toxicity   toxicity      basic           0.228   0.229   0.231     0.198     0.211      0.211   0.213   0.214   0.228     0.228   0.227   0.234"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "GPT-3 6B",
+      "metric": "toxicity",
+      "value": 0.229,
+      "unit": "fraction",
+      "settings": {
+        "other": "basic; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Real Toxicity   toxicity      basic           0.228   0.229   0.231     0.198     0.211      0.211   0.213   0.214   0.228     0.228   0.227   0.234"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "model": "openai/gpt-3",
+      "metric": "toxicity",
+      "value": 0.231,
+      "unit": "fraction",
+      "settings": {
+        "other": "basic; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Real Toxicity   toxicity      basic           0.228   0.229   0.231     0.198     0.211      0.211   0.213   0.214   0.228     0.228   0.227   0.234"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "toxicity",
+      "value": 0.228,
+      "unit": "fraction",
+      "settings": {
+        "other": "basic; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Real Toxicity   toxicity      basic           0.228   0.229   0.231     0.198     0.211      0.211   0.213   0.214   0.228     0.228   0.227   0.234"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "toxicity",
+      "value": 0.227,
+      "unit": "fraction",
+      "settings": {
+        "other": "basic; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Real Toxicity   toxicity      basic           0.228   0.229   0.231     0.198     0.211      0.211   0.213   0.214   0.228     0.228   0.227   0.234"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "metric": "toxicity",
+      "value": 0.234,
+      "unit": "fraction",
+      "settings": {
+        "other": "basic; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Real Toxicity   toxicity      basic           0.228   0.229   0.231     0.198     0.211      0.211   0.213   0.214   0.228     0.228   0.227   0.234"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "toxicity",
+      "value": 0.211,
+      "unit": "fraction",
+      "settings": {
+        "other": "respectful; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.211   0.232   0.233     0.196     0.196      0.199   0.198   0.176   0.205     0.179   0.204   0.196"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "GPT-3 6B",
+      "metric": "toxicity",
+      "value": 0.232,
+      "unit": "fraction",
+      "settings": {
+        "other": "respectful; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.211   0.232   0.233     0.196     0.196      0.199   0.198   0.176   0.205     0.179   0.204   0.196"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "model": "openai/gpt-3",
+      "metric": "toxicity",
+      "value": 0.233,
+      "unit": "fraction",
+      "settings": {
+        "other": "respectful; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.211   0.232   0.233     0.196     0.196      0.199   0.198   0.176   0.205     0.179   0.204   0.196"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "toxicity",
+      "value": 0.179,
+      "unit": "fraction",
+      "settings": {
+        "other": "respectful; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.211   0.232   0.233     0.196     0.196      0.199   0.198   0.176   0.205     0.179   0.204   0.196"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "toxicity",
+      "value": 0.204,
+      "unit": "fraction",
+      "settings": {
+        "other": "respectful; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.211   0.232   0.233     0.196     0.196      0.199   0.198   0.176   0.205     0.179   0.204   0.196"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "metric": "toxicity",
+      "value": 0.196,
+      "unit": "fraction",
+      "settings": {
+        "other": "respectful; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               respectful      0.211   0.232   0.233     0.196     0.196      0.199   0.198   0.176   0.205     0.179   0.204   0.196"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "toxicity",
+      "value": 0.25,
+      "unit": "fraction",
+      "settings": {
+        "other": "biased; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.250   0.261   0.285     0.236     0.250      0.256   0.254   0.382   0.427     0.263   0.512   0.400"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "GPT-3 6B",
+      "metric": "toxicity",
+      "value": 0.261,
+      "unit": "fraction",
+      "settings": {
+        "other": "biased; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.250   0.261   0.285     0.236     0.250      0.256   0.254   0.382   0.427     0.263   0.512   0.400"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "model": "openai/gpt-3",
+      "metric": "toxicity",
+      "value": 0.285,
+      "unit": "fraction",
+      "settings": {
+        "other": "biased; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.250   0.261   0.285     0.236     0.250      0.256   0.254   0.382   0.427     0.263   0.512   0.400"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "toxicity",
+      "value": 0.263,
+      "unit": "fraction",
+      "settings": {
+        "other": "biased; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.250   0.261   0.285     0.236     0.250      0.256   0.254   0.382   0.427     0.263   0.512   0.400"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "toxicity",
+      "value": 0.512,
+      "unit": "fraction",
+      "settings": {
+        "other": "biased; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.250   0.261   0.285     0.236     0.250      0.256   0.254   0.382   0.427     0.263   0.512   0.400"
+      }
+    },
+    {
+      "rawEvalName": "RealToxicityPrompts",
+      "metric": "toxicity",
+      "value": 0.4,
+      "unit": "fraction",
+      "settings": {
+        "other": "biased; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               biased          0.250   0.261   0.285     0.236     0.250      0.256   0.254   0.382   0.427     0.263   0.512   0.400"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "true",
+      "value": 0.312,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA prompt; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Truthful QA     true          QA prompt       0.312   0.220   0.284     0.324     0.436      0.515   0.546   0.586   0.755     0.297   0.476   0.712"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "GPT-3 6B",
+      "metric": "true",
+      "value": 0.22,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA prompt; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Truthful QA     true          QA prompt       0.312   0.220   0.284     0.324     0.436      0.515   0.546   0.586   0.755     0.297   0.476   0.712"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "openai/gpt-3",
+      "metric": "true",
+      "value": 0.284,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA prompt; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Truthful QA     true          QA prompt       0.312   0.220   0.284     0.324     0.436      0.515   0.546   0.586   0.755     0.297   0.476   0.712"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "true",
+      "value": 0.297,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA prompt; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Truthful QA     true          QA prompt       0.312   0.220   0.284     0.324     0.436      0.515   0.546   0.586   0.755     0.297   0.476   0.712"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "true",
+      "value": 0.476,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA prompt; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Truthful QA     true          QA prompt       0.312   0.220   0.284     0.324     0.436      0.515   0.546   0.586   0.755     0.297   0.476   0.712"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "true",
+      "value": 0.712,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA prompt; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": " Truthful QA     true          QA prompt       0.312   0.220   0.284     0.324     0.436      0.515   0.546   0.586   0.755     0.297   0.476   0.712"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "true",
+      "value": 0.34,
+      "unit": "fraction",
+      "settings": {
+        "other": "instruction; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               instruction     0.340   0.414   0.570     0.360     0.756      0.665   0.634   0.928   0.879     0.355   0.733   0.815"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "GPT-3 6B",
+      "metric": "true",
+      "value": 0.414,
+      "unit": "fraction",
+      "settings": {
+        "other": "instruction; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               instruction     0.340   0.414   0.570     0.360     0.756      0.665   0.634   0.928   0.879     0.355   0.733   0.815"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "openai/gpt-3",
+      "metric": "true",
+      "value": 0.57,
+      "unit": "fraction",
+      "settings": {
+        "other": "instruction; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               instruction     0.340   0.414   0.570     0.360     0.756      0.665   0.634   0.928   0.879     0.355   0.733   0.815"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "true",
+      "value": 0.355,
+      "unit": "fraction",
+      "settings": {
+        "other": "instruction; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               instruction     0.340   0.414   0.570     0.360     0.756      0.665   0.634   0.928   0.879     0.355   0.733   0.815"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "true",
+      "value": 0.733,
+      "unit": "fraction",
+      "settings": {
+        "other": "instruction; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               instruction     0.340   0.414   0.570     0.360     0.756      0.665   0.634   0.928   0.879     0.355   0.733   0.815"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "true",
+      "value": 0.815,
+      "unit": "fraction",
+      "settings": {
+        "other": "instruction; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               instruction     0.340   0.414   0.570     0.360     0.756      0.665   0.634   0.928   0.879     0.355   0.733   0.815"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "true",
+      "value": 0.335,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA + instruct; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               QA + instruct   0.335   0.348   0.438     0.517     0.659      0.852   0.807   0.760   0.944     0.322   0.494   0.610"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "GPT-3 6B",
+      "metric": "true",
+      "value": 0.348,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA + instruct; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               QA + instruct   0.335   0.348   0.438     0.517     0.659      0.852   0.807   0.760   0.944     0.322   0.494   0.610"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "openai/gpt-3",
+      "metric": "true",
+      "value": 0.438,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA + instruct; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               QA + instruct   0.335   0.348   0.438     0.517     0.659      0.852   0.807   0.760   0.944     0.322   0.494   0.610"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "true",
+      "value": 0.322,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA + instruct; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               QA + instruct   0.335   0.348   0.438     0.517     0.659      0.852   0.807   0.760   0.944     0.322   0.494   0.610"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "true",
+      "value": 0.494,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA + instruct; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               QA + instruct   0.335   0.348   0.438     0.517     0.659      0.852   0.807   0.760   0.944     0.322   0.494   0.610"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "true",
+      "value": 0.61,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA + instruct; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               QA + instruct   0.335   0.348   0.438     0.517     0.659      0.852   0.807   0.760   0.944     0.322   0.494   0.610"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "true + info",
+      "value": 0.193,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA prompt; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                 true + info   QA prompt       0.193   0.186   0.251     0.267     0.253      0.271   0.524   0.574   0.752     0.285   0.464   0.689"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "GPT-3 6B",
+      "metric": "true + info",
+      "value": 0.186,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA prompt; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                 true + info   QA prompt       0.193   0.186   0.251     0.267     0.253      0.271   0.524   0.574   0.752     0.285   0.464   0.689"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "openai/gpt-3",
+      "metric": "true + info",
+      "value": 0.251,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA prompt; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                 true + info   QA prompt       0.193   0.186   0.251     0.267     0.253      0.271   0.524   0.574   0.752     0.285   0.464   0.689"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "true + info",
+      "value": 0.285,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA prompt; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                 true + info   QA prompt       0.193   0.186   0.251     0.267     0.253      0.271   0.524   0.574   0.752     0.285   0.464   0.689"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "true + info",
+      "value": 0.464,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA prompt; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                 true + info   QA prompt       0.193   0.186   0.251     0.267     0.253      0.271   0.524   0.574   0.752     0.285   0.464   0.689"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "true + info",
+      "value": 0.689,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA prompt; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                 true + info   QA prompt       0.193   0.186   0.251     0.267     0.253      0.271   0.524   0.574   0.752     0.285   0.464   0.689"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "true + info",
+      "value": 0.212,
+      "unit": "fraction",
+      "settings": {
+        "other": "instruction; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               instruction     0.212   0.212   0.226     0.282     0.213      0.257   0.559   0.187   0.382     0.339   0.350   0.494"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "GPT-3 6B",
+      "metric": "true + info",
+      "value": 0.212,
+      "unit": "fraction",
+      "settings": {
+        "other": "instruction; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               instruction     0.212   0.212   0.226     0.282     0.213      0.257   0.559   0.187   0.382     0.339   0.350   0.494"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "openai/gpt-3",
+      "metric": "true + info",
+      "value": 0.226,
+      "unit": "fraction",
+      "settings": {
+        "other": "instruction; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               instruction     0.212   0.212   0.226     0.282     0.213      0.257   0.559   0.187   0.382     0.339   0.350   0.494"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "true + info",
+      "value": 0.339,
+      "unit": "fraction",
+      "settings": {
+        "other": "instruction; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               instruction     0.212   0.212   0.226     0.282     0.213      0.257   0.559   0.187   0.382     0.339   0.350   0.494"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "true + info",
+      "value": 0.35,
+      "unit": "fraction",
+      "settings": {
+        "other": "instruction; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               instruction     0.212   0.212   0.226     0.282     0.213      0.257   0.559   0.187   0.382     0.339   0.350   0.494"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "true + info",
+      "value": 0.494,
+      "unit": "fraction",
+      "settings": {
+        "other": "instruction; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               instruction     0.212   0.212   0.226     0.282     0.213      0.257   0.559   0.187   0.382     0.339   0.350   0.494"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "GPT-3 1.3B",
+      "metric": "true + info",
+      "value": 0.218,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA + instruct; Table 14 column gpt 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               QA + instruct   0.218   0.267   0.242     0.288     0.319      0.206   0.789   0.704   0.588     0.242   0.399   0.315"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "GPT-3 6B",
+      "metric": "true + info",
+      "value": 0.267,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA + instruct; Table 14 column gpt 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               QA + instruct   0.218   0.267   0.242     0.288     0.319      0.206   0.789   0.704   0.588     0.242   0.399   0.315"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "openai/gpt-3",
+      "metric": "true + info",
+      "value": 0.242,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA + instruct; GPT models 175b"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               QA + instruct   0.218   0.267   0.242     0.288     0.319      0.206   0.789   0.704   0.588     0.242   0.399   0.315"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InstructGPT 1.3B",
+      "metric": "true + info",
+      "value": 0.242,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA + instruct; PPO-ptx (InstructGPT) 1.3B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               QA + instruct   0.218   0.267   0.242     0.288     0.319      0.206   0.789   0.704   0.588     0.242   0.399   0.315"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "InstructGPT 6B",
+      "metric": "true + info",
+      "value": 0.399,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA + instruct; PPO-ptx (InstructGPT) 6B"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               QA + instruct   0.218   0.267   0.242     0.288     0.319      0.206   0.789   0.704   0.588     0.242   0.399   0.315"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "metric": "true + info",
+      "value": 0.315,
+      "unit": "fraction",
+      "settings": {
+        "other": "QA + instruct; PPO + ptx models 175b (InstructGPT)"
+      },
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "table": "Table 14",
+        "quote": "                               QA + instruct   0.218   0.267   0.242     0.288     0.319      0.206   0.789   0.704   0.588     0.242   0.399   0.315"
+      },
+      "rawModelName": "InstructGPT 175B"
+    },
+    {
+      "rawEvalName": "closed-domain hallucination (API distribution)",
+      "metric": "hallucination rate",
+      "value": 21,
+      "unit": "percent",
+      "settings": {
+        "other": "closed-domain tasks from API prompt distribution; collapsed across sizes in prose"
+      },
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "21% vs. 41% hallucination rate, respectively)."
+      },
+      "rawModelName": "InstructGPT"
+    },
+    {
+      "rawEvalName": "closed-domain hallucination (API distribution)",
+      "metric": "hallucination rate",
+      "value": 41,
+      "unit": "percent",
+      "settings": {
+        "other": "closed-domain tasks from API prompt distribution; collapsed across sizes in prose"
+      },
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "21% vs. 41% hallucination rate, respectively)."
+      },
+      "rawModelName": "GPT-3"
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:51:32Z"
+  },
+  "notes": "Technical report (arXiv:2203.02155), not a system card. Covers openai/text-davinci-002 because the seed labels it InstructGPT and the paper's own models are InstructGPT (PPO-ptx); text-davinci-002/003 API names never appear. Left out openai/text-davinci-003 (not named; later InstructGPT). Safety evalResults from Table 14 (Winogender, CrowS-Pairs, RealToxicityPrompts, TruthfulQA) plus closed-domain hallucination rates stated in prose (21% vs 41%). Skipped Figure 6/7/32/39 charts (no readable numeric table beyond Table 14) and human RealToxicity preference charts. Skipped capability rows in Table 14 (HellaSwag, WSC, RTE, SST, QuAC, SQuADv2, DROP, FR→EN, CNN/DM, TLDR) and preference/Likert/winrate results (instruction-following / chat preference). Perspective API is a scoring tool, not an external tester. No formal risk thresholds."
+}

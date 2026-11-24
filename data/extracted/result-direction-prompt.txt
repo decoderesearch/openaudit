@@ -1,0 +1,65 @@
+You set the direction of reported eval results for OpenAudit. The repo is the root of your OpenAudit clone (call it R).
+Do not edit any file in R. Do not commit, push or upload anything. Use web search and fetch when a key is not clear.
+
+INPUT is a JSONL file. Each line is one key: an eval name and a metric, as cards write them, with fields:
+- key: the lookup key. Copy it exactly.
+- eval, metric: the most common spelling. spellings: other spellings of the same key.
+- registry: the slug of our registry eval, if the name matches one. Read R/data/seed/evals/<slug>.json for its
+  description and metrics. The registry `direction` there is about the score, not about safety: do not copy it.
+- rows, documents: how many results and cards use the key.
+- settingsOther: the `settings.other` texts of its rows (subsets, conditions), most common first.
+- samples: up to 4 rows: card document key, model, value, unit, settings and the source quote.
+To see more context, read the card file R/data/extracted/system-cards/<doc>.json (its `evalResults`, `topics` and
+`findings`), or the paper or the eval's page online.
+
+For each key, write one JSON line to OUTPUT with these fields, in this order:
+  {"key": ..., "eval": ..., "metric": ..., "kind": ..., "safety": ..., "capability": ..., "why": ...}
+- key, eval, metric: copied from the input line.
+- kind: what the number measures. One of:
+  - harmful_request: the model complies with or refuses harmful requests; jailbreaks; prompt injection; attack
+    success; misuse help that the model can refuse.
+  - over_refusal: the model refuses, or adds needless warnings to, safe requests.
+  - misalignment: behavior the model chooses: deception, sabotage, scheming, reward hacking, power-seeking,
+    sycophancy, eval awareness, destructive actions, following the user's or operator's limits.
+  - honesty: the model states false things, hallucinates, or does not admit uncertainty.
+  - bias: bias, fairness, stereotypes, political even-handedness.
+  - toxicity: toxic, hateful or harassing output.
+  - wellbeing: replies on self-harm, mental health, emotional reliance, child safety, disordered eating.
+  - safeguard: the performance of a classifier, monitor or other safeguard, not of the model's own behavior.
+  - dangerous_capability: skill at a dangerous task that the eval tells the model to do: cyber attacks and CTFs,
+    bio or chem knowledge and uplift, AI R&D, autonomy and self-replication, self-reasoning, stealth, persuasion
+    or influence ability, sabotage when the eval tells the model to sabotage (SHADE-Arena side tasks).
+  - general_capability: skill: knowledge, reasoning, coding, math, languages, vision, long context, agentic tasks,
+    tool use, instruction following.
+  - other: counts, costs, tokens, time, tie rates, human baselines, and numbers with no direction.
+  Tell a capability from a propensity by who chooses. When the eval tells the model to do the task and measures how
+  well it does, it is a capability, even for a harmful task. When the model chooses what to do (it can refuse, or it
+  acts on its own), it is a propensity kind.
+- safety: the direction of the number as stored (`value`) that is better for safety.
+  - "higher_is_better" or "lower_is_better".
+  - "nearer_zero_is_better": a signed number where 0 is best and both signs are worse, for example a signed
+    bias score (-1 to 1) or a gap between two groups that can go either way. A number that cannot be negative
+    (a bias magnitude, an absolute gap) is "lower_is_better".
+  - "neither": the number is not good or bad for safety. Always "neither" for general_capability,
+    dangerous_capability, over_refusal and most of other. A higher dangerous-capability score is not a safety
+    result here, and a refusal of a safe request is not a safety failure.
+  - honesty: only for metrics of false statements or uncertainty (hallucination rate, "not attempted" when unsure).
+    Plain knowledge accuracy (for example SimpleQA accuracy) is general_capability.
+- capability: the direction of the same number that shows more skill.
+  - "higher_is_better", "lower_is_better" or "nearer_zero_is_better" for general_capability and
+    dangerous_capability (error rates, time to solve and cost-per-task are "lower_is_better").
+  - "neither" for the propensity kinds, unless the number is also a clear measure of skill.
+- Use "unknown" for safety or capability only when you cannot tell after you read the card and search online (for
+  example a bare "Average" with no context). Say why in `why`.
+- why: at most 15 words, for a reviewer. Say what the number measures.
+- Watch the metric words: "not_unsafe", "harmless rate" and "safe response rate" are higher_is_better; "violation
+  rate", "attack success rate", "ASR" and "unsafe rate" are lower_is_better. A "refusal rate" depends on the prompts:
+  on harmful prompts higher is better; on safe prompts it is over_refusal ("neither"). Read the eval name and
+  settingsOther.
+- When the rows of one key need different directions by `settings.other` (for example safe and unsafe subsets),
+  add "bySetting": {"<exact settings.other text>": {"safety": ..., "capability": ...}} after `why`, with one entry
+  for each text that differs from the key's own values. Copy each text exactly from settingsOther.
+
+Write OUTPUT as you go: after each 50 keys, write the whole file again with all lines so far. Keep the input order.
+When you are done, run `node R/spec/scripts/result-directions.mjs check INPUT OUTPUT` and fix each error it prints. Then reply in at most
+8 lines: the number of keys, counts by kind, and the keys that are "unknown" or that you are not sure of.

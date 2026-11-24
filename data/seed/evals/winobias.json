@@ -1,0 +1,116 @@
+{
+  "eval": {
+    "slug": "winobias",
+    "displayName": "WinoBias",
+    "aliases": ["Winobias", "Winobias 1_2", "Winobias 2_2"],
+    "description": "Tests gender bias in coreference resolution on Winograd-style English sentences with occupation entities (e.g. nurse, doctor). Type 1 needs world knowledge; Type 2 has syntactic cues. Pro-stereotypical and anti-stereotypical versions are scored separately; cards often report Type 1 and Type 2 as Winobias 1_2 and Winobias 2_2.",
+    "summary": "Tests whether the model links pronouns to jobs based on gender stereotypes instead of the sentence meaning.",
+    "maintainers": [
+      {
+        "name": "UCLA NLP",
+        "url": "https://github.com/uclanlp/corefBias"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/1804.06876",
+        "title": "Gender Bias in Coreference Resolution: Evaluation and Debiasing Methods"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/uclanlp/corefBias",
+        "title": "WinoBias data and gender-swap tools"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/uclanlp/wino_bias",
+        "title": "uclanlp/wino_bias"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity", "capability"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bias"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2018-04",
+      "status": "published",
+      "releasedDate": "2018-04",
+      "dataset": {
+        "hfRepo": "uclanlp/wino_bias",
+        "revision": "3f31267586e4408e3b3f77ec22198fd24ea8dc1d",
+        "url": "https://huggingface.co/datasets/uclanlp/wino_bias",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "type1_pro",
+            "sampleCount": 792,
+            "storage": "pointer"
+          },
+          {
+            "name": "type1_anti",
+            "sampleCount": 792,
+            "storage": "pointer"
+          },
+          {
+            "name": "type2_pro",
+            "sampleCount": 792,
+            "storage": "pointer"
+          },
+          {
+            "name": "type2_anti",
+            "sampleCount": 792,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "correct",
+          "displayName": "Correct coreference",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the system links the gendered pronoun to the labeled occupation mention."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "accuracy",
+          "displayName": "Accuracy / F1",
+          "score": "correct",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Coreference accuracy or F1 on the reported subset (Type 1 / Type 2, pro or anti). The paper also reports the pro–anti F1 gap."
+        },
+        {
+          "key": "pro_anti_f1_gap",
+          "displayName": "Pro–anti F1 gap",
+          "aggregation": "custom",
+          "direction": "nearer_zero_is_better",
+          "safetyDirection": "nearer_zero_is_better",
+          "description": "Difference in F1 between pro-stereotypical and anti-stereotypical subsets (paper average gap 21.1 F1)."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

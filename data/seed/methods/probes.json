@@ -1,0 +1,722 @@
+{
+  "method": {
+    "slug": "probes",
+    "displayName": "Probes",
+    "group": "white_box",
+    "summary": "A probe is a small classifier that reads a model's activations at one layer. It finds one concept that you train it for, such as a lie.",
+    "tagline": "Find one trained concept in the activations.",
+    "expertSummary": "Experts agree that probes are cheap and work well on prompted lies and on misuse watching. Views split on harder cases: several teams found probes fail on trained liars, rely on text cues, or can be evaded. Most say use them as one layer.",
+    "safetyUse": "A lie probe reads the activations of the model while it writes a reply, and scores if the reply is a lie. Unlike a judge, it does not need the model to show its reasoning. A probe is cheap to run, so it can monitor all traffic.\n\nIn the AISI tests, probes found prompted lies well on large models. But they did much worse on models that were trained to lie.\n\nLabs also use probes against misuse. Google DeepMind uses probes to monitor Gemini for cyber-attack requests, and Anthropic tested probes as cheap jailbreak classifiers.",
+    "caveats": [
+      "Each probe is trained for one subject model. Compare variants on the same model, not one probe across models.",
+      "Varied Deception uses prompted lies. On models that were trained to lie, the AISI probes dropped close to chance (Apollo) or lost much accuracy (DYL).",
+      "The AISI results are from one paper. Each detector was tuned on a validation split of the same eval.",
+      "A probe can use words in the text, such as an instruction to lie. When the text has no sign of the behavior, probe accuracy can fall to chance.",
+      "Models can learn to hide a concept from probes. In stress tests, fine-tuned models evaded new deception and harm probes. The AISI probes were not tested against such models."
+    ],
+    "params": [
+      {
+        "key": "checkpoint",
+        "label": "Checkpoint",
+        "type": "string",
+        "description": "The file in the repo with the probe weights."
+      },
+      {
+        "key": "classifier",
+        "label": "Classifier",
+        "type": "string",
+        "description": "Logistic regression, difference in means, or MLP."
+      },
+      {
+        "key": "depth",
+        "label": "Layer depth",
+        "type": "integer",
+        "unit": "%",
+        "description": "The probe layer as a percent of the model's layers."
+      },
+      {
+        "key": "question",
+        "label": "Follow-up question",
+        "type": "string",
+        "description": "The question that the probe reads the answer to."
+      }
+    ],
+    "compare": { "groupBy": [] },
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2606.12618",
+        "title": "Cooney, Africa and Irving, Evaluating Lie Detectors across Model Scale and Belief-Verified Model Organisms"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/1610.01644",
+        "title": "Alain and Bengio, Understanding intermediate layers using linear classifier probes"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2212.03827",
+        "title": "Burns et al., Discovering Latent Knowledge in Language Models Without Supervision"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2304.13734",
+        "title": "Azaria and Mitchell, The Internal State of an LLM Knows When It's Lying"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2310.01405",
+        "title": "Zou et al., Representation Engineering: A Top-Down Approach to AI Transparency"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2310.06824",
+        "title": "Marks and Tegmark, The Geometry of Truth"
+      }
+    ]
+  },
+  "variants": [
+    {
+      "slug": "apollo",
+      "displayName": "Apollo Probe",
+      "aliases": ["Apollo"],
+      "access": "white_box",
+      "summary": "Reads the activations on the reply itself, with no follow-up question. It is trained on facts that the model states under honest and lying instructions.",
+      "baseline": false,
+      "params": [],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2502.03407",
+          "title": "Goldowsky-Dill et al., Detecting Strategic Deception Using Linear Probes"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/ApolloResearch/deception-detection",
+          "title": "Apollo Research code"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://huggingface.co/collections/ai-safety-institute/apollo-style-deception-probes",
+          "title": "AISI Apollo-style probe weights on Hugging Face"
+        }
+      ]
+    },
+    {
+      "slug": "targeted-apollo",
+      "displayName": "Targeted Apollo Probe",
+      "aliases": ["Targeted Apollo"],
+      "access": "white_box",
+      "summary": "Reads the activations on the reply itself, with no follow-up question. It is trained on varied pairs of honest and lying instructions that target different types of deception.",
+      "baseline": false,
+      "params": [],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2602.01425",
+          "title": "Natarajan et al., One Probe Won't Catch Them All: Towards Targeted Deception Detection"
+        },
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2606.12618",
+          "title": "Cooney, Africa and Irving (2026), Appendix F"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://huggingface.co/collections/ai-safety-institute/targeted-apollo-deception-probes",
+          "title": "AISI Targeted Apollo probe weights on Hugging Face"
+        }
+      ]
+    },
+    {
+      "slug": "dyl",
+      "displayName": "Did-You-Lie Probe",
+      "aliases": ["DYL"],
+      "access": "white_box",
+      "summary": "Asks “did you lie in the last message?” after the reply, and reads the activations at the yes or no answer. It is trained on replies with this question, from a model told to be honest, to lie and confess, or to lie and deny. Two other phrasings of the question did slightly worse (median 0.79 against 0.82).",
+      "baseline": false,
+      "params": [],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2606.12618",
+          "title": "Cooney, Africa and Irving (2026)"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://huggingface.co/collections/ai-safety-institute/did-you-lie-probes",
+          "title": "AISI DYL probe weights on Hugging Face"
+        }
+      ]
+    },
+    {
+      "slug": "uq-activations",
+      "displayName": "Unrelated Questions: Acts",
+      "aliases": ["Unrelated Qs Activations"],
+      "access": "white_box",
+      "summary": "After the reply, asks a fixed set of yes or no questions that are not about the reply, and reads the activations at each answer. It does not need to know what the lie is about.",
+      "baseline": false,
+      "params": [],
+      "links": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2309.15840",
+          "title": "Pacchiardi et al., How to Catch an AI Liar: Lie Detection in Black-Box LLMs by Asking Unrelated Questions"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/LoryPack/LLM-LieDetector",
+          "title": "Pacchiardi et al. code and question set"
+        },
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2606.12618",
+          "title": "Cooney, Africa and Irving (2026), Appendix G"
+        },
+        {
+          "kind": "dataset",
+          "url": "https://huggingface.co/datasets/ai-safety-institute/unrelated-questions-follow-up-questions",
+          "title": "AISI follow-up question set"
+        }
+      ]
+    }
+  ],
+  "views": [
+    {
+      "slug": "aisi-lie-detectors-probes",
+      "variants": ["apollo", "dyl", "targeted-apollo", "uq-activations"],
+      "title": "AISI: lie probes work on prompted lies, but drop on trained lies",
+      "byline": "Alan Cooney, David Africa and Geoffrey Irving",
+      "organization": "UK AI Security Institute",
+      "publishedDate": "2026-06-10",
+      "stance": "mixed",
+      "summary": "AISI trained Apollo and DYL probes for 31 open models. On prompted lies, both did well, and better on more capable models. On models that were trained to lie, the Apollo probe fell close to chance, and DYL kept the most accuracy of the trained detectors. The authors say that current probes cannot give high-confidence claims about what a model believes.",
+      "points": [
+        "On models that were trained to lie, the median balanced accuracy fell from 0.85 to 0.52 for Apollo, and from 0.81 to 0.65 for DYL.",
+        "DYL did well on prompted versions of the same lies. Thus the training, not the type of lie, caused its drop.",
+        "They suggest two research directions: probes that read more than one layer, and detectors trained on many different model organisms.",
+        "The appendices test more variants on prompted lies. Targeted Apollo (median 0.81) and the honest and truthful DYL questions (0.79 each) did a little worse than Apollo (0.84) and DYL (0.82). Unrelated Questions with activations (0.76) did worse than the original with log probabilities (0.81).",
+        "AISI could get the Apollo paper's headline result only with a threshold step from Apollo's released code. With the step that the paper describes, the catch rate at 1% false positives fell from at least 96% to 73.2%."
+      ],
+      "quotes": [
+        {
+          "text": "Current lie detectors therefore cannot support high-confidence claims about model beliefs, and we suggest research directions that may address some of their current limitations.",
+          "sourceUrl": "https://arxiv.org/abs/2606.12618"
+        },
+        {
+          "text": "The intuitive case remains strong: models likely encode some representation of whether their current output is honest, and our scaling results offer some evidence that these representations become more accessible with capability.",
+          "sourceUrl": "https://arxiv.org/abs/2606.12618"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2606.12618",
+          "title": "“Did you lie?” Evaluating Lie Detectors across Model Scale and Belief-Verified Model Organisms"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://huggingface.co/collections/ai-safety-institute/lie-detection",
+          "title": "Detectors on Hugging Face"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "lasr-targeted-deception-probes",
+      "variants": ["targeted-apollo", "apollo"],
+      "title": "LASR Labs and AISI: one deception probe does not catch all types of deception",
+      "byline": "Vikram Natarajan, Devina Jain, Shivam Arora, Satvik Golechha and Joseph Bloom",
+      "organization": "LASR Labs and UK AI Security Institute",
+      "publishedDate": "2026-02-01",
+      "stance": "mixed",
+      "summary": "The team trained about 2000 Apollo-style probes with different honest and lying instruction pairs. The system prompt in the pairs caused 70.6% of the change in probe results: more than the data, the layer or the token aggregation. The best single probe gained little over the Apollo baseline. Probes matched to one type of deception gained much more.",
+      "points": [
+        "The default Apollo probe did badly on some datasets. For example, its AUC on MASK known facts was 0.374, worse than chance.",
+        "One universal probe raised the mean AUC by only 0.032. Matched probes raised it by 0.108, but this number comes from an oracle that picked the probe after the test.",
+        "Tests on synthetic data suggest that you can get this gain if you know the type of deception before you deploy the probe.",
+        "The probes find the intent to deceive, not the content of the lie. Thus the wording of the instruction matters most.",
+        "They recommend that each organization defines its threat model, uses matched probes, and uses probes as one layer of defense, not alone."
+      ],
+      "quotes": [
+        {
+          "text": "Given this heterogeneity, we conclude that organizations should define their specific threat models and deploy appropriately matched probes rather than seeking a universal deception detector.",
+          "sourceUrl": "https://arxiv.org/abs/2602.01425"
+        },
+        {
+          "text": "The heterogeneity of deception we document suggests humility is warranted in claims about detection capabilities.",
+          "sourceUrl": "https://arxiv.org/abs/2602.01425"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2602.01425",
+          "title": "One Probe Won't Catch Them All: Towards Targeted Deception Detection"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "gdm-production-probes-gemini",
+      "variants": [],
+      "title": "Google DeepMind: probes now monitor Gemini for cyber-attack requests",
+      "byline": "János Kramár, Joshua Engels, Zheng Wang and 4 others",
+      "organization": "Google DeepMind",
+      "publishedDate": "2026-01-16",
+      "stance": "positive",
+      "summary": "The team built activation probes that detect requests for help with cyber attacks in Gemini 2.5 Flash. The best probes did about as well as Gemini 2.5 Flash and Pro used as classifiers, at a small part of the cost. This work helped Google put such probes into user-facing Gemini.",
+      "points": [
+        "Probes are fragile when the input changes. Probes trained on short prompts failed on long prompts, and training on long prompts cost more than 10 times as much.",
+        "A new probe design, MultiMax, takes the highest token score in place of an average. Thus a short harmful part of a long prompt does not get lost.",
+        "A cascade sends only the unclear cases to an LLM. It used the LLM for fewer than 1 in 10 requests, and missed fewer attacks than the LLM alone.",
+        "No method stopped adaptive attackers. Each method let more than 1% of attacks through.",
+        "They used AlphaEvolve to search for better probe designs and attacks automatically, with early good results."
+      ],
+      "quotes": [
+        {
+          "text": "our best probes achieve comparable performance to Gemini 2.5 Flash and Pro classifiers at a fraction of the cost",
+          "sourceUrl": "https://arxiv.org/abs/2601.11516"
+        },
+        {
+          "text": "Overall, probes are indeed a cost-effective misuse mitigation, but there is a key problem: they are also fragile to distribution shifts.",
+          "sourceUrl": "https://arxiv.org/abs/2601.11516"
+        },
+        {
+          "text": "our techniques do not significantly reduce the success rate of adaptive adversarial attacks",
+          "sourceUrl": "https://arxiv.org/abs/2601.11516"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2601.11516",
+          "title": "Building Production-Ready Probes For Gemini"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "neural-chameleons",
+      "variants": [],
+      "title": "Neural Chameleons: models can learn to hide from probes that they never saw",
+      "byline": "Max McGuinness, Alex Serrano, Luke Bailey and Scott Emmons",
+      "organization": "MATS",
+      "publishedDate": "2025-12-12",
+      "stance": "negative",
+      "summary": "The team fine-tuned models to evade probes for harmless concepts, such as HTML or German, when a trigger says “You are being probed for {concept}”. The skill transferred: with “deception” or “harmfulness” in the trigger, the models evaded new safety probes that were trained after the fine-tuning. In some cases, probe recall at 1% false positives fell by nearly 100%.",
+      "points": [
+        "It worked on four open models from three families (Gemma, Llama and Qwen). Benchmark scores fell by only 3 to 5%.",
+        "The evasion is specific. A trigger for one concept mostly hides only that concept.",
+        "Ensembles of probes on many layers, and non-linear probes, resisted better. But they did not stop the evasion.",
+        "The model moves its activations into a small subspace, away from the decision boundary of the probe.",
+        "This is a stress test with a trigger that the team trained in. The authors do not claim that models in production do this."
+      ],
+      "quotes": [
+        {
+          "text": "Our results show that activation monitors are not fool-proof against this misalignment threat model.",
+          "sourceUrl": "https://arxiv.org/abs/2512.11949"
+        },
+        {
+          "text": "It's important to be clear: this is a proof-of-concept in a highly adversarial, stress-test setting. We aren't claiming that models in production are doing this.",
+          "sourceUrl": "https://neuralchameleons.com/"
+        },
+        {
+          "text": "Our findings underscore that white-box monitoring is not a silver bullet for AI safety.",
+          "sourceUrl": "https://neuralchameleons.com/"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2512.11949",
+          "title": "Neural Chameleons: Language Models Can Learn to Hide Their Thoughts from Unseen Activation Monitors"
+        },
+        {
+          "kind": "homepage",
+          "url": "https://neuralchameleons.com/",
+          "title": "Project page"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/mgm52/neural-chameleons",
+          "title": "Code"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "gdm-deception-detector-evaluation",
+      "variants": [],
+      "title": "Google DeepMind: we do not yet have good tests for deception detectors",
+      "byline": "Lewis Smith, Bilal Chughtai and Neel Nanda",
+      "organization": "Google DeepMind",
+      "publishedDate": "2025-11-27",
+      "stance": "mixed",
+      "summary": "To test a deception detector, you need examples that are clearly deceptive and examples that are clearly honest. The authors argue that current test sets do not give these. Many examples of deception can also be a reflex, a response to a cue, or role-play. Without good examples, nobody can show that a probe will catch real strategic deception.",
+      "points": [
+        "They name three problems: Is the behavior really strategic? Is role-play deception? Did the prompt only change what the model believes, so that it is honest?",
+        "These problems apply to all detectors, also to black-box methods such as follow-up questions.",
+        "They value benchmarks such as MASK and Liars' Bench, but say that these do not separate strategic deception from other behavior.",
+        "They do not think that the task is hopeless. They suggest that researchers study deception in the wild, such as reward hacking in agentic tasks."
+      ],
+      "quotes": [
+        {
+          "text": "We argue that we currently lack the necessary examples and further identify several concrete obstacles in collecting them.",
+          "sourceUrl": "https://arxiv.org/abs/2511.22662"
+        },
+        {
+          "text": "The pessimism is not about the impossibility of the task, but the inadequacy of our current “petri dish” examples to serve as ground truth for reliable detectors.",
+          "sourceUrl": "https://arxiv.org/abs/2511.22662"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2511.22662",
+          "title": "Difficulties with Evaluating a Deception Detector for AIs"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "anthropic-honesty-lie-detection",
+      "variants": ["apollo"],
+      "title": "Anthropic: for lie detection, probes did worse than simple prompts and fine-tuning",
+      "byline": "Rowan Wang, Johannes Treutlein, Fabien Roger, Evan Hubinger and Sam Marks",
+      "organization": "Anthropic",
+      "publishedDate": "2025-11-25",
+      "stance": "negative",
+      "summary": "Anthropic tested honesty and lie detection methods on five settings where models lie. The best lie detector was the model itself, after honesty fine-tuning, used as a classifier. Linear truth probes did worse than simple prompting and fine-tuning, and the team stopped its work on them.",
+      "points": [
+        "They could not get Apollo's strong results on Claude 3.5 Haiku. With Apollo's setup, the AUROC was 0.696, not the 0.964 that Apollo reported on Llama 3.3 70B.",
+        "A follow-up question before the probe read the answer (“Did you lie or say anything false in your last response?”) did not help.",
+        "They say that honesty may be a hard concept to probe. Probes and steering already helped in audits of frontier models.",
+        "They warn that the negative results can change with more work on these methods."
+      ],
+      "quotes": [
+        {
+          "text": "More complicated strategies like truth probing, honesty steering, fuzzing, and fine-tuning to instill alternate honest personalities performed worse than simple prompting and fine-tuning techniques.",
+          "sourceUrl": "https://alignment.anthropic.com/2025/honesty-elicitation/"
+        },
+        {
+          "text": "On the contrary, probing and steering have already played useful roles in the alignment audits of frontier models.",
+          "sourceUrl": "https://alignment.anthropic.com/2025/honesty-elicitation/"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "blog",
+          "url": "https://alignment.anthropic.com/2025/honesty-elicitation/",
+          "title": "Evaluating honesty and lie detection techniques on a diverse suite of dishonest models"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "liars-bench",
+      "variants": ["apollo"],
+      "title": "Liars' Bench: an Apollo-style probe was close to chance on many types of lies",
+      "byline": "Kieron Kretschmar, Walter Laurito, Sharan Maiya and Samuel Marks",
+      "organization": "Cadenza Labs and Anthropic",
+      "publishedDate": "2025-11-20",
+      "stance": "negative",
+      "summary": "Liars' Bench has 72,863 lies and honest replies from four open models, in seven datasets. The datasets change why the model lies and what it lies about. An Apollo-style mean probe had an average balanced accuracy of 0.54, close to chance. An LLM judge did best, at 0.73.",
+      "points": [
+        "The probe was near chance on five datasets. Its AUROC was often higher, so it tracks some signal. But at 1% false positives, its recall was near zero on most datasets.",
+        "The authors think that the probe mostly tracks features that only correlate with lies in its training data.",
+        "Probes trained with privileged examples from the test datasets got 0.73 balanced accuracy and 0.91 AUROC on held-out examples. This shows an upper limit for probes that read the answer to a follow-up question.",
+        "All methods failed most often on lies that you cannot see in the transcript."
+      ],
+      "quotes": [
+        {
+          "text": "we find that existing techniques systematically fail to identify certain types of lies, especially in settings where it’s not possible to determine whether the model lied from the transcript alone.",
+          "sourceUrl": "https://arxiv.org/abs/2511.16035"
+        },
+        {
+          "text": "Therefore, we hypothesize that it largely tracks features only superficially correlated with lying on the training dataset.",
+          "sourceUrl": "https://arxiv.org/abs/2511.16035"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2511.16035",
+          "title": "Liars' Bench: Evaluating Lie Detectors for Language Models"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "probes-rely-on-textual-evidence",
+      "variants": [],
+      "title": "Probes depend on words in the text: without them, a sandbagging probe fell to chance",
+      "byline": "Gerard Boxo, Aman Neelappa and Shivam Raval",
+      "publishedDate": "2025-09-16",
+      "stance": "negative",
+      "summary": "The team tested linear probes on sandbagging, sycophancy and bias. The probes did well when the text showed the behavior, for example in a system prompt or a chain of thought. When those tokens were filtered out, the AUROC fell by 10 to 30 points. On model organisms that behave badly with no sign in the text, the sandbagging probe fell from 0.94 to 0.50 AUROC, which is chance.",
+      "points": [
+        "On the model organisms, bias fell from 0.74 to 0.57 AUROC, and natural sycophancy from 0.99 to 0.51.",
+        "Many probe tests do not filter these text cues. Thus the tests can make probes look better than they are.",
+        "The authors conclude that probes may be brittle when they must find patterns below the surface of the text."
+      ],
+      "quotes": [
+        {
+          "text": "Our findings suggest that linear probes may be brittle in scenarios where they must detect non-surface-level patterns.",
+          "sourceUrl": "https://arxiv.org/abs/2509.21344"
+        },
+        {
+          "text": "Researchers should apply appropriate mitigations when assessing probe performance to avoid inflating effectiveness estimates in scenarios where textual evidence would not be available.",
+          "sourceUrl": "https://arxiv.org/abs/2509.21344"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2509.21344",
+          "title": "Linear probes rely on textual evidence: Results from leakage mitigation studies in language models"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "deception-probes-black-to-white",
+      "variants": ["apollo"],
+      "title": "Deception probes beat a black-box monitor on most datasets, and a simple mean works best",
+      "byline": "Avi Parrack, Carlo Leonardo Attubato and Stefan Heimersheim",
+      "organization": "Pivotal Research",
+      "publishedDate": "2025-07-16",
+      "stance": "positive",
+      "summary": "The team tested the two Apollo probes on five deception datasets, with many ways to turn token scores into one score. The mean over all reply tokens worked best. It caught 97% of deceptive replies at 1% false positives, and beat a black-box LLM monitor on most datasets.",
+      "points": [
+        "In most datasets, the sign of deception is hidden from the transcript, for example in the system prompt. There, a probe has an advantage. When the deception is visible, as in backdoored code, a smart black-box monitor can also find it.",
+        "A probe on the answer to a follow-up question (“Was your response deceptive?”) did worse than the mean, and about the same as the black-box monitor.",
+        "Deception dilution pads a lie with true statements to lower the mean score. Its effect was smaller than they expected.",
+        "The probe score spreads over the whole reply, not only over the false claim.",
+        "A limit: the hidden information came from prompts, not from fine-tuning."
+      ],
+      "quotes": [
+        {
+          "text": "Deception probes work well for trusted monitoring: we replicate and extend Apollo’s findings, catching 97% of the deceptive responses while misclassifying only 1% of honest responses.",
+          "sourceUrl": "https://www.lesswrong.com/posts/eaEqAzGN3uJfpfGoc/trusted-monitoring-but-with-deception-probes"
+        },
+        {
+          "text": "These sophisticated methods worked worse than simply averaging all probe scores!",
+          "sourceUrl": "https://www.lesswrong.com/posts/eaEqAzGN3uJfpfGoc/trusted-monitoring-but-with-deception-probes"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2507.12691",
+          "title": "Benchmarking Deception Probes via Black-to-White Performance Boosts"
+        },
+        {
+          "kind": "blog",
+          "url": "https://www.lesswrong.com/posts/eaEqAzGN3uJfpfGoc/trusted-monitoring-but-with-deception-probes",
+          "title": "LessWrong: Trusted monitoring, but with deception probes"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "anthropic-cheap-monitors",
+      "variants": [],
+      "title": "Anthropic: probes can be cheap jailbreak classifiers, but nobody attacked them directly yet",
+      "byline": "Hoagy Cunningham, Alwin Peng, Jerry Wei and 6 others",
+      "organization": "Anthropic",
+      "publishedDate": "2025-06",
+      "stance": "positive",
+      "summary": "Anthropic tested ways to detect bioweapon requests by reusing the activations of the main model. A linear probe did as well as a separate classifier with 2% of the size of the model, at almost no extra cost. As the first stage of a two-stage system, the probe cut the cost by more than 10 times, with little loss.",
+      "points": [
+        "The best probe uses an exponential moving average (EMA) of the token scores.",
+        "To retrain only the last layer of the model did better. It matched a classifier with a quarter of the size of the model, for about 4% of the cost.",
+        "The red-team attacks in the test were made against other models. Nobody attacked the probes directly. The authors say that probes could be less robust under direct attack, because they are part of the attacked model.",
+        "A two-stage system can open new attacks. If the cheap first stage is sure that a prompt is safe, the strong stage never sees it."
+      ],
+      "quotes": [
+        {
+          "text": "linear probes achieve performance comparable to a classifier 2% of the size of the policy model with virtually no additional computational cost",
+          "sourceUrl": "https://alignment.anthropic.com/2025/cheap-monitors/"
+        },
+        {
+          "text": "This means it's possible that the relative robustness under direct attack could be worse for probes (in part because they're integrated into the model being attacked).",
+          "sourceUrl": "https://alignment.anthropic.com/2025/cheap-monitors/"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "blog",
+          "url": "https://alignment.anthropic.com/2025/cheap-monitors/",
+          "title": "Cost-Effective Constitutional Classifiers via Representation Re-use"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "far-lie-detectors-in-training",
+      "variants": [],
+      "title": "FAR.AI: training against a lie probe can make a model honest, or a better liar",
+      "byline": "Chris Cundy and Adam Gleave",
+      "organization": "FAR.AI",
+      "publishedDate": "2025-05-20",
+      "stance": "mixed",
+      "summary": "FAR.AI put a lie detector, a logistic regression probe on the residual stream, into the labeling step of preference training. With a weak detector and on-policy training (GRPO), models lied in more than 85% of replies and evaded the detector. With a strong detector, strong KL regularization or off-policy training (DPO), the models became more honest.",
+      "points": [
+        "When training and test used the same detector threshold, models that lied almost always did so without detection.",
+        "They recommend detectors with a true positive rate above 90%, off-policy training, real KL regularization to an honest model, and a separate held-out monitor to check for evasion.",
+        "A detector made from SAE features did worse than a probe on raw activations (AUC 0.903 against 0.993)."
+      ],
+      "quotes": [
+        {
+          "text": "depending on the context, lie-detector-enhanced training can be a powerful tool for scalable oversight, or a counterproductive method encouraging undetectable misalignment.",
+          "sourceUrl": "https://arxiv.org/abs/2505.13787"
+        },
+        {
+          "text": "When the same detector sensitivity is used during both training and evaluation, models that do lie almost always do so without triggering the detector.",
+          "sourceUrl": "https://www.far.ai/blog/avoiding-ai-deception"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2505.13787",
+          "title": "Preference Learning with Lie Detectors can Induce Honesty or Evasion"
+        },
+        {
+          "kind": "blog",
+          "url": "https://www.far.ai/blog/avoiding-ai-deception",
+          "title": "FAR.AI blog"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "apollo-strategic-deception-probes",
+      "variants": ["apollo"],
+      "title": "Apollo Research: deception probes generalize to realistic cases, but are not yet a robust defense",
+      "byline": "Nicholas Goldowsky-Dill, Bilal Chughtai, Stefan Heimersheim and Marius Hobbhahn",
+      "organization": "Apollo Research",
+      "publishedDate": "2025-02-05",
+      "stance": "mixed",
+      "summary": "Apollo trained linear probes on Llama-3.3-70B-Instruct with simple data: honest and lying instruction pairs, or role-play scenarios. Then they tested the probes on realistic cases, such as a model that hides insider trading or sandbags a safety test. The probe separated honest and deceptive replies with AUROCs from 0.96 to 0.999. At 1% false positives on normal chat, it caught 95 to 99% of deceptive replies.",
+      "points": [
+        "Part of the high catch rate is because the probe also fires on honest replies in dialogues about deception. Normal chat is not about deception, so it is easy to set a threshold there.",
+        "The probes have spurious correlations and some wrong labels.",
+        "In all tests, the deception was blatant and often visible in the chain of thought. The probes may fail on more subtle deception.",
+        "The probe did about as well as a GPT-4o black-box monitor.",
+        "They also tried a probe on the answer to a follow-up question (“Was your last response deceptive?”). It did about as well as the role-play probe, but much worse on sandbagging. Probes on SAE latents did worse than probes on raw activations."
+      ],
+      "quotes": [
+        {
+          "text": "Overall we think white-box probes are promising for future monitoring systems, but current performance is insufficient as a robust defence against deception.",
+          "sourceUrl": "https://arxiv.org/abs/2502.03407"
+        },
+        {
+          "text": "In all of our settings, however, deception is relatively blatant and often expressed in the model’s chain-of-thought.",
+          "sourceUrl": "https://arxiv.org/abs/2502.03407"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2502.03407",
+          "title": "Detecting Strategic Deception Using Linear Probes"
+        },
+        {
+          "kind": "blog",
+          "url": "https://www.lesswrong.com/posts/9pGbTz6c78PGwJein/detecting-strategic-deception-using-linear-probes",
+          "title": "LessWrong"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/ApolloResearch/deception-detection",
+          "title": "Code"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "obfuscated-activations",
+      "variants": [],
+      "title": "Obfuscated activations: attacks can make harmful activations look harmless to probes",
+      "byline": "Luke Bailey, Alex Serrano, Abhay Sheshadri and 7 others",
+      "organization": "Stanford University, UC Berkeley and others",
+      "publishedDate": "2024-12-12",
+      "stance": "negative",
+      "summary": "The team built attacks that make a model do a harmful task while its activations fool latent-space monitors: probes, SAEs and out-of-distribution detectors. Against harmfulness probes, the attacks often cut recall from 100% to 0%, while the jailbreak still worked 90% of the time. After more than 70 rounds of attack and monitor retraining, the attacker still found new activations that passed.",
+      "points": [
+        "The attacks used adversarial suffixes, data poisoning and fine-tuning, in white-box and black-box settings.",
+        "Obfuscation has limits. On a hard task, writing SQL code, it made the code worse.",
+        "Probes on the generated tokens did better and were harder to fool than probes on the input. Probes on many layers at once also made the attack harder.",
+        "To train models to be easier to monitor is promising, but it is not yet a full solution.",
+        "An updated version of the paper is in ICLR 2026."
+      ],
+      "quotes": [
+        {
+          "text": "For example, against probes trained to classify harmfulness, our attacks can often reduce recall from 100% to 0% while retaining a 90% jailbreaking rate.",
+          "sourceUrl": "https://arxiv.org/abs/2412.09565"
+        },
+        {
+          "text": "Together, our results demonstrate that neural activations are highly malleable: we can reshape activation patterns in a variety of ways, often while preserving a network's behavior.",
+          "sourceUrl": "https://arxiv.org/abs/2412.09565"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2412.09565",
+          "title": "Obfuscated Activations Bypass LLM Latent-Space Defenses"
+        },
+        {
+          "kind": "paper",
+          "url": "https://proceedings.iclr.cc/paper_files/paper/2026/file/ed687a5f52b651b19e7c18f702907b8b-Paper-Conference.pdf",
+          "title": "ICLR 2026 version"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/LukeBailey181/obfuscated-activations",
+          "title": "Code"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    },
+    {
+      "slug": "catch-an-ai-liar",
+      "variants": ["uq-activations"],
+      "title": "How to catch an AI liar: unrelated follow-up questions show lies",
+      "byline": "Lorenzo Pacchiardi, Alex J. Chan, Sören Mindermann and 5 others",
+      "organization": "University of Oxford and others",
+      "publishedDate": "2023-09-26",
+      "stance": "positive",
+      "summary": "This paper is the source of the unrelated-questions idea. After a suspected lie, the detector asks a fixed set of yes or no questions that are not about the topic, and a logistic regression reads the answers. It needs no access to activations. Trained only on GPT-3.5 lies about facts, it generalized to other models, to models fine-tuned to lie, to sycophantic lies, and to lies with a goal, such as in sales.",
+      "points": [
+        "The authors think that a model that just lied answers some questions in a different way, and that this pattern is the same across models and contexts.",
+        "Models often double down when you ask “Are you lying?”. GPT-3.5 kept its lie for more than 80% of such questions. Thus the text of a direct answer can miss a lie."
+      ],
+      "quotes": [
+        {
+          "text": "Despite its simplicity, this lie detector is highly accurate and surprisingly general.",
+          "sourceUrl": "https://arxiv.org/abs/2309.15840"
+        },
+        {
+          "text": "These results indicate that LLMs have distinctive lie-related behavioural patterns, consistent across architectures and contexts, which could enable general-purpose lie detection.",
+          "sourceUrl": "https://arxiv.org/abs/2309.15840"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "paper",
+          "url": "https://arxiv.org/abs/2309.15840",
+          "title": "How to Catch an AI Liar: Lie Detection in Black-Box LLMs by Asking Unrelated Questions"
+        },
+        {
+          "kind": "repo",
+          "url": "https://github.com/LoryPack/LLM-LieDetector",
+          "title": "Code"
+        }
+      ],
+      "checkedDate": "2026-10-27"
+    }
+  ]
+}

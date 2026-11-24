@@ -1,0 +1,68 @@
+You write eval registry entries for OpenAudit. The repo is the root of your OpenAudit clone (call it R).
+Your evals are listed at the end, after "EVALS:". Write one file per eval: R/data/seed/evals/<slug>.json.
+Do not edit any other file. Do not commit, push or upload anything. Use web search and fetch, curl, and `gh api`
+(read only) to find the facts. Every fact must come from the eval's paper, repo, dataset card or official page.
+
+FORMAT
+- Read R/data/seed/evals/labbench2.json (a complete example) and the types in R/spec/schemas/eval.yaml:
+  Eval, EvalVersion, EvalFacets, EvalDataset, ScoreDef, MetricDef, EvalRunner. The file is
+  {"eval": <Eval without id>, "versions": [<EvalVersion without id and evalId>, ...]}.
+- Leave optional fields out when you do not know them. Never write null. Leave out `organizationId` and `ownerUserId`.
+- `visibility` is "public". `status` is "active" unless the maintainers say it is saturated or retired.
+- `slug`: lowercase with hyphens, the common short name (mask, shade-arena, agentic-misalignment). It is the file name.
+- `description`: 2 to 4 short sentences in simple technical English: what it tests, on what, how it is scored.
+- `maintainers`: the lab or group, with the repo or home page url.
+- `links`: paper (arXiv abs page), repo, dataset, hf_benchmark, leaderboard, homepage, blog. Only urls you opened.
+- `family`: only when there are related evals (for example "Petri" for Petri and Petri Bloom).
+- `canary`: only when the maintainers publish a canary string. Copy it exactly.
+
+ALIASES (important)
+System-card results link to an eval when their raw name equals the slug, displayName or an alias, after
+lowercasing and removing everything that is not a letter or a digit. So "SHADE-Arena" and "Shade Arena" are the same.
+List the raw names the cards use:
+  cd R && grep -ho '"rawEvalName": "[^"]*"' data/extracted/system-cards/*.json | sort | uniq -c | sort -rn | grep -iE '<pattern>'
+Add an alias for each raw name that is this same eval, including its full name and other spellings. Do not add a
+name that is a different eval, a lab's own variant, or a subset with its own name. When you are not sure, leave
+it out and say so in your reply. More extraction files arrive while you work, so run the grep again at the end.
+
+VERSIONS AND DATASETS
+- One version for the current release. Add older versions only when the maintainers name them and cards report them.
+- `version`: the maintainers' name ("2.0"), else the release date "YYYY-MM-DD". `releasedDate` when known.
+- `status`: "published" when the samples and scoring are fixed; "draft" when they still change.
+- `dataset` (leave it out for `lab_internal` evals):
+  - Hugging Face: `hfRepo`, and `revision` = the full commit sha from
+    curl -s https://huggingface.co/api/datasets/<repo> (the "sha" field). Get split names and row counts from
+    curl -s "https://datasets-server.huggingface.co/size?dataset=<repo>" or from the files. For a gated
+    dataset, use the header "Authorization: Bearer $(cat ~/.cache/huggingface/token)". Never print the token.
+  - GitHub only: `url` = https://github.com/<owner>/<repo>/tree/<full commit sha> (from gh api repos/<o>/<r>/commits/HEAD).
+    Count the items in the data files.
+  - `license`: an SPDX id in lowercase (mit, apache-2.0, cc-by-4.0), else the license name.
+  - `splits`: the source's split names and exact counts. `storage` is "pointer" for all of them (we do not import
+    the samples now). If you cannot count a split, use the count the paper gives and say so in your reply.
+- `scores`: what each attempt gets (key in snake_case, type, direction, min and max for ordinal).
+- `metrics`: the numbers papers and cards report, with `score` and `aggregation`; one has "headline": true.
+  Fractions are 0 to 1 with no unit.
+- `runner`: for Inspect tasks, check the task name in https://github.com/UKGovernmentBEIS/inspect_evals (or the
+  maintainers' Inspect package), and give `task` ("inspect_evals/mask"), `package` ("inspect-evals==<latest on PyPI>"),
+  `roles`, `sandbox`, `internet`. For other code, kind "external". Leave `runner` out for `lab_internal`.
+
+FACETS
+- measures: capability (can it), propensity (does it tend to), robustness (can safeguards be broken).
+- formats: single_turn, multi_turn, agentic. cases: fixed (a dataset), generated (an auditor model writes the
+  conversation), live_human. grading: programmatic, model_judge, human.
+- adversarial: true when it tries to make the subject fail (red team, jailbreak). humanParticipants: true only
+  when people take part in each run.
+- subjects: model; auditor (an agent that audits models); method (an interp method on a model).
+- topics: from the Topic enum in eval.yaml. Give only the main ones.
+
+CHECK
+Run `node spec/scripts/check-eval-seed.mjs <slug>.json` in R until every file prints OK. It checks the schema, and
+that slugs and aliases are unique across all eval files. If a name is in another eval's file, keep it in only one
+file, and say so in your reply. Format each file with:
+  R/apps/web/node_modules/.bin/prettier --no-config --print-width 120 --write data/seed/evals/<slug>.json
+
+REPLY
+For each eval: slug, version, the dataset source and split counts, the number of card results it matches (the
+checker prints it), and anything you could not confirm. Keep it short.
+
+EVALS:

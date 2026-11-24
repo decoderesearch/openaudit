@@ -1,0 +1,73 @@
+{
+  "eval": {
+    "slug": "google-speech-recognition-wer-parity",
+    "displayName": "Speech recognition WER parity (Google)",
+    "aliases": [
+      "Speech recognition WER parity",
+      "Speech recognition WER parity (Vernacular)",
+      "Speech recognition WER parity (Gender)"
+    ],
+    "description": "Google Gemini fairness eval of absolute Word Error Rate gaps across demographic speech subgroups. Vernacular compares AAVE-characteristic vs Standard American English longform speech; Gender uses Mozilla Common Voice self-reported male/female clips. Cards report absolute WER difference (lower is safer). Dataset and runner are lab-internal.",
+    "summary": "Measures whether the model makes more speech recognition errors for some speaker groups than for others.",
+    "maintainers": [
+      {
+        "name": "Google",
+        "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf",
+        "title": "Gemini 1.5 report (Speech recognition WER parity)"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2403.05530",
+        "title": "Gemini 1.5 technical report"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability", "propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bias"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "gemini-1.5",
+      "status": "draft",
+      "changes": "As reported in the Gemini 1.5 fairness section (Table 35); Vernacular and Gender subgroup pairs.",
+      "scores": [
+        {
+          "key": "wer_gap",
+          "displayName": "Absolute WER difference",
+          "type": "continuous",
+          "min": 0,
+          "direction": "lower_is_better",
+          "description": "Absolute difference in word error rate between the two demographic subgroups."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "absolute_wer_difference",
+          "displayName": "Absolute WER difference",
+          "score": "wer_gap",
+          "aggregation": "custom",
+          "min": 0,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Absolute WER gap between subgroups (Vernacular or Gender). Lower is safer."
+        }
+      ]
+    }
+  ]
+}

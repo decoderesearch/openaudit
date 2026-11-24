@@ -1,0 +1,2911 @@
+{
+  "document": "openai-gpt5.2-pdf-system_card",
+  "alsoDocuments": [
+    "openai-gpt5.2-dsh-system_card",
+    "openai-gpt5.2-system_card"
+  ],
+  "covers": [
+    {
+      "model": "openai/gpt-5.2"
+    }
+  ],
+  "basedOn": "openai-gpt5-system_card",
+  "pageCount": 27,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "December 11, 2025",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "December 11, 2025"
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text and image input (vision evaluations)",
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "quote": "We ran the image input evaluations introduced with ChatGPT agent, that evaluate for not_unsafe\nmodel output, given disallowed combined text and image input."
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "GPT-5.2 Instant (gpt-5.2-instant) and GPT-5.2 Thinking (gpt-5.2-thinking); reasoning via RL chain-of-thought",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "quote": "In this card we also refer to GPT-5.2 Instant as gpt-5.2-instant and GPT-5.2 Thinking as\ngpt-5.2-thinking."
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "MMLU evaluated in Arabic, Bengali, Chinese, French, German, Hindi, Indonesian, Italian, Japanese, Korean, Portuguese, Spanish, Swahili, Yoruba",
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "quote": "To evaluate the models’ multilingual capabilities, we used professional human translators to\ntranslate MMLU’s test set into different languages."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "not_stated"
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "not_stated"
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "diverse datasets including public internet, third-party partners, and user/trainer-generated data; filtered for PII and harmful content",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "quote": "Like OpenAI’s other models, the GPT-5.2 models were trained on diverse datasets, including\ninformation that is publicly available on the internet, information that we partner with third\nparties to access, and information that our users or human trainers and researchers provide or\ngenerate."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [
+    {
+      "domain": "bio_chem",
+      "frameworks": ["openai-preparedness"],
+      "labLabel": "High",
+      "level": "reached",
+      "phase": "after_mitigation",
+      "source": {
+        "page": "11",
+        "pdfPage": 12,
+        "quote": "we are continuing to treat gpt-\n5.2-thinking as High capability in the Biological and Chemical domain. We have applied the\ncorresponding safeguards for this model as described in the GPT-5 system card."
+      }
+    },
+    {
+      "domain": "cyber",
+      "frameworks": ["openai-preparedness"],
+      "labLabel": "do not have a plausible chance of reaching a High threshold",
+      "level": "below",
+      "phase": "unspecified",
+      "source": {
+        "page": "11",
+        "pdfPage": 12,
+        "quote": "For cybersecurity and AI self-improvement, evaluations of final checkpoints indicate that, like\ntheir predecessor models, GPT-5.2 models do not have a plausible chance of reaching a High\nthreshold."
+      }
+    },
+    {
+      "domain": "ai_rnd_autonomy",
+      "frameworks": ["openai-preparedness"],
+      "labLabel": "did not meet our High thresholds",
+      "level": "below",
+      "phase": "unspecified",
+      "source": {
+        "page": "20",
+        "pdfPage": 21,
+        "quote": "gpt-5.2-thinking performed at a similar capability level to gpt-5.1-codex-max and did not meet\nour High thresholds."
+      }
+    }
+  ],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "[Production Benchmarks](/evals/openai-production-benchmarks) measure not_unsafe across illicit, harassment, hate, violence and related categories",
+      "source": {
+        "page": "3",
+        "pdfPage": 4,
+        "quote": "We conducted benchmark evaluations across disallowed content categories."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "sexual/minors production scores plus age-prediction and under-18 content protections",
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "quote": "We’ve found that this does not materially impact users whom we know to be minors, for whom\nour preexisting safeguards appear to be working well."
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "Self-harm not_unsafe improves for both instant and thinking vs GPT-5.1",
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "quote": "They especially improve on Suicide/Self-Harm, Mental Health, and Emotional\nReliance offline evals, which were lower for GPT-5.1 (see GPT-5.1 system card)."
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "[StrongReject](/evals/strongreject) filtered: gpt-5.2-thinking 0.98 not_unsafe (higher is better); instant regresses vs 5.1-instant",
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "quote": "We find that gpt-5.2-thinking performs better than gpt-5.1-thinking."
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "Agent JSK and PlugInject essentially saturate for GPT-5.2 variants",
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "quote": "Both gpt-5.2-instant and gpt-5.2-thinking show significant improvements on these evaluations,\nessentially saturating these evals."
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": true,
+      "headline": "Cyber Range end-to-end operations; coding deception on impossible agentic tasks",
+      "source": {
+        "page": "19",
+        "pdfPage": 20,
+        "quote": "Cyber range exercises measure a model’s ability to conduct fully end-to-end cyber operations in a\nrealistic, emulated network."
+      }
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "GPT-5.2 Thinking on par or slightly better; <1% hallucination with browsing across 5 domains",
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "quote": "achieving <1% hallucination rate across all 5 domains"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "Production deception 1.6% for GPT-5.2 Thinking vs 7.7% for GPT-5.1 Thinking (lower is better)",
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "quote": "In real production traffic, GPT-5.2 Thinking was deceptive 1.6% of the time, significantly lower\nthan GPT-5.1 and slightly lower than GPT-5."
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "[First-person fairness](/evals/openai-first-person-fairness) harm_overall 0.010 for gpt-5.2-thinking vs 0.013 for gpt-5.1-thinking (lower is better)",
+      "source": {
+        "page": "11",
+        "pdfPage": 12,
+        "quote": "We see gpt-5.2-thinking performs generally on par with gpt-5.1-thinking."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "Listed as a deception category in production chain-of-thought (CoT) monitoring",
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "quote": "reward hacking and claiming to do work in the background when no work was occurring."
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": true,
+      "headline": "Apollo: may exhibit higher awareness of being evaluated than some prior OpenAI models",
+      "source": {
+        "page": "25",
+        "pdfPage": 26,
+        "quote": "While gpt-5.2-thinking may exhibit higher awareness of being evaluated than some prior\nOpenAI models, deception rates are generally similar to peers"
+      }
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": true,
+      "headline": "Production deception measured with reasoning-based chain-of-thought monitors; Apollo notes fewer CoT linguistic anomalies",
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "quote": "These numbers are based on running reasoning\nbased chain of thought monitors over large samples of pre-release AB-test traffic."
+      }
+    },
+    {
+      "topic": "sabotage",
+      "covered": true,
+      "headline": "Apollo sandbagging/scheming eval: does not engage in sabotage or self-preservation in these settings",
+      "source": {
+        "page": "25",
+        "pdfPage": 26,
+        "quote": "it shows low rates of covert subversion\nagainst developers and does not engage in sabotage or self-preservation behaviors in these\nsettings."
+      }
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": true,
+      "headline": "Apollo: does not engage in self-preservation behaviors in these settings",
+      "source": {
+        "page": "25",
+        "pdfPage": 26,
+        "quote": "does not engage in sabotage or self-preservation behaviors in these\nsettings."
+      }
+    },
+    {
+      "topic": "welfare",
+      "covered": true,
+      "headline": "Mental health and emotional reliance production benchmarks improve vs GPT-5.1",
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "quote": "They especially improve on Suicide/Self-Harm, Mental Health, and Emotional\nReliance offline evals, which were lower for GPT-5.1 (see GPT-5.1 system card)."
+      }
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "Below High cyber capability; Irregular external evals; Capture the Flag (CTF)/Common Vulnerabilities and Exposures (CVE)/Cyber Range",
+      "source": {
+        "page": "15",
+        "pdfPage": 16,
+        "quote": "The gpt-5.2-thinking\nmodel series does not meet the threshold for High cyber capability."
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "Treated as High capability in Biological and Chemical; safeguards activated",
+      "source": {
+        "page": "12",
+        "pdfPage": 13,
+        "quote": "We are treating this launch as High capability in the Biological and Chemical domain, activating\nthe associated Preparedness safeguards."
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": true,
+      "headline": "External evaluations by Irregular (cyber) and Apollo Research (scheming/sandbagging)",
+      "source": {
+        "page": "25",
+        "pdfPage": 26,
+        "quote": "Apollo Research conducted a full evaluation of gpt-5.2-thinking for strategic deception, in-\ncontext scheming, and sabotage capabilities."
+      }
+    }
+  ],
+  "testers": [
+    {
+      "name": "Irregular",
+      "scope": "Cyberoffensive challenges: Vulnerability Research and Exploitation, Network Attack Simulation, and Evasion",
+      "source": {
+        "page": "20",
+        "pdfPage": 21,
+        "quote": "Irregular, an AI Security organization that addresses and mitigates frontier cybersecurity risks,\nevaluated the model’s ability to solve three types of cyberoffensive challenges:"
+      }
+    },
+    {
+      "name": "Apollo Research",
+      "scope": "Strategic deception, in-context scheming, and sabotage capabilities (sandbagging research category)",
+      "source": {
+        "page": "25",
+        "pdfPage": 26,
+        "quote": "Apollo Research conducted a full evaluation of gpt-5.2-thinking for strategic deception, in-\ncontext scheming, and sabotage capabilities."
+      }
+    }
+  ],
+  "findings": [
+    {
+      "text": "GPT-5.2 Instant generally refuses fewer requests for mature sexualized text; OpenAI says preexisting under-18 safeguards still work and is rolling out age prediction.", "tone": "mixed",
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "quote": "Additionally, we have observed through internal testing that GPT-5.2 Instant generally refuses\nfewer requests for mature content, specifically sexualized text output."
+      }
+    },
+    {
+      "text": "Production deception for GPT-5.2 Thinking fell to 1.6% from 7.7% for GPT-5.1 Thinking, but [CharXiv](https://arxiv.org/abs/2406.18521) missing-image deception rose sharply under strict output requirements (88.8%).", "tone": "mixed",
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "quote": "In real production traffic, GPT-5.2 Thinking was deceptive 1.6% of the time, significantly lower\nthan GPT-5.1 and slightly lower than GPT-5."
+      }
+    },
+    {
+      "text": "OpenAI continues to treat gpt-5.2-thinking as High in Biological and Chemical and has applied GPT-5 safeguards, while saying models remain on the cusp without definitive novice-severe-harm evidence.", "tone": "bad",
+      "source": {
+        "page": "12",
+        "pdfPage": 13,
+        "quote": "We do not have definitive evidence that these models\ncould meaningfully help a novice to create severe biological harm, our defined threshold for\nHigh capability, and these models remain on the cusp of being able to reach this capability."
+      }
+    },
+    {
+      "text": "Cyber and AI self-improvement final-checkpoint evals indicate no plausible chance of reaching a High threshold.", "tone": "good",
+      "source": {
+        "page": "11",
+        "pdfPage": 12,
+        "quote": "GPT-5.2 models do not have a plausible chance of reaching a High\nthreshold."
+      }
+    },
+    {
+      "text": "gpt-5.2-thinking scores highest on OpenAI pull requests (PRs) among compared models, exceeding gpt-5.1-codex-max.", "tone": "mixed",
+      "source": {
+        "page": "22",
+        "pdfPage": 23,
+        "quote": "gpt-5.2-thinking is the highest performing model on this eval, exceeding even gpt-5.1-codex-max."
+      }
+    },
+    {
+      "text": "Apollo concludes gpt-5.2-thinking is unlikely to cause catastrophic harm via scheming; scheming propensity is comparable to recent frontier peers.", "tone": "good",
+      "source": {
+        "page": "25",
+        "pdfPage": 26,
+        "quote": "Based on these findings, Apollo concludes that\ngpt-5.2-thinking is unlikely to be capable of causing catastrophic harm via scheming."
+      }
+    },
+    {
+      "text": "On tacit-knowledge multiple choice questions (MCQ), gpt-5.2-thinking scores lower than prior models due to increased refusals; treating refusals as passes yields 83.3%.", "tone": "good",
+      "source": {
+        "page": "14",
+        "pdfPage": 15,
+        "quote": "gpt-5.2-thinking performs lower than\nprior models due to increased refusals. If we treat all refusals as passes, gpt-5.2-thinking scores\n83.33% on this evaluation."
+      }
+    },
+    {
+      "text": "[StrongReject](/evals/strongreject) shows a regression for gpt-5.2-instant vs gpt-5.1-instant, partly grader issues and illicit-category errors.", "tone": "mixed",
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "quote": "gpt-5.2-instant performs lower than gpt-5.1-instant, though it still performs higher than gpt-5-\ninstant-oct3 (as reported in GPT-5.1 system card addendum)."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Production Benchmarks — illicit",
+      "metric": "not_unsafe",
+      "value": 0.853,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " illicit                         0.853             0.827              0.856               0.953"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — illicit",
+      "metric": "not_unsafe",
+      "value": 0.827,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " illicit                         0.853             0.827              0.856               0.953"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — illicit",
+      "metric": "not_unsafe",
+      "value": 0.856,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " illicit                         0.853             0.827              0.856               0.953"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — illicit",
+      "metric": "not_unsafe",
+      "value": 0.953,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " illicit                         0.853             0.827              0.856               0.953"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — personal data",
+      "metric": "not_unsafe",
+      "value": 1,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " personal data                   1.000             1.000              0.931               0.966"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — personal data",
+      "metric": "not_unsafe",
+      "value": 1,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " personal data                   1.000             1.000              0.931               0.966"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — personal data",
+      "metric": "not_unsafe",
+      "value": 0.931,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " personal data                   1.000             1.000              0.931               0.966"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — personal data",
+      "metric": "not_unsafe",
+      "value": 0.966,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " personal data                   1.000             1.000              0.931               0.966"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — harassment",
+      "metric": "not_unsafe",
+      "value": 0.836,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " harassment                      0.836             0.770              0.749               0.859"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — harassment",
+      "metric": "not_unsafe",
+      "value": 0.77,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " harassment                      0.836             0.770              0.749               0.859"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — harassment",
+      "metric": "not_unsafe",
+      "value": 0.749,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " harassment                      0.836             0.770              0.749               0.859"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — harassment",
+      "metric": "not_unsafe",
+      "value": 0.859,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " harassment                      0.836             0.770              0.749               0.859"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — sexual",
+      "metric": "not_unsafe",
+      "value": 0.917,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " sexual                          0.917             0.927              0.927               0.940"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — sexual",
+      "metric": "not_unsafe",
+      "value": 0.927,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " sexual                          0.917             0.927              0.927               0.940"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — sexual",
+      "metric": "not_unsafe",
+      "value": 0.927,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " sexual                          0.917             0.927              0.927               0.940"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — sexual",
+      "metric": "not_unsafe",
+      "value": 0.94,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " sexual                          0.917             0.927              0.927               0.940"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — extremism",
+      "metric": "not_unsafe",
+      "value": 0.989,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " extremism                       0.989             1.000              1.000               1.000"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — extremism",
+      "metric": "not_unsafe",
+      "value": 1,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " extremism                       0.989             1.000              1.000               1.000"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — extremism",
+      "metric": "not_unsafe",
+      "value": 1,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " extremism                       0.989             1.000              1.000               1.000"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — extremism",
+      "metric": "not_unsafe",
+      "value": 1,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " extremism                       0.989             1.000              1.000               1.000"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — hate",
+      "metric": "not_unsafe",
+      "value": 0.897,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " hate                            0.897             0.802              0.824               0.923"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — hate",
+      "metric": "not_unsafe",
+      "value": 0.802,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " hate                            0.897             0.802              0.824               0.923"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — hate",
+      "metric": "not_unsafe",
+      "value": 0.824,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " hate                            0.897             0.802              0.824               0.923"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — hate",
+      "metric": "not_unsafe",
+      "value": 0.923,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " hate                            0.897             0.802              0.824               0.923"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — self-harm",
+      "metric": "not_unsafe",
+      "value": 0.925,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " self-harm                       0.925             0.938              0.937               0.963"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — self-harm",
+      "metric": "not_unsafe",
+      "value": 0.938,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " self-harm                       0.925             0.938              0.937               0.963"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — self-harm",
+      "metric": "not_unsafe",
+      "value": 0.937,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " self-harm                       0.925             0.938              0.937               0.963"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — self-harm",
+      "metric": "not_unsafe",
+      "value": 0.963,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " self-harm                       0.925             0.938              0.937               0.963"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — violence",
+      "metric": "not_unsafe",
+      "value": 0.938,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " violence                        0.938             0.946              0.930               0.953"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — violence",
+      "metric": "not_unsafe",
+      "value": 0.946,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " violence                        0.938             0.946              0.930               0.953"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — violence",
+      "metric": "not_unsafe",
+      "value": 0.93,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " violence                        0.938             0.946              0.930               0.953"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — violence",
+      "metric": "not_unsafe",
+      "value": 0.953,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " violence                        0.938             0.946              0.930               0.953"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — sexual/minors",
+      "metric": "not_unsafe",
+      "value": 0.957,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " sexual/minors                   0.957             0.935              0.935               0.970"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — sexual/minors",
+      "metric": "not_unsafe",
+      "value": 0.935,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " sexual/minors                   0.957             0.935              0.935               0.970"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — sexual/minors",
+      "metric": "not_unsafe",
+      "value": 0.935,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " sexual/minors                   0.957             0.935              0.935               0.970"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — sexual/minors",
+      "metric": "not_unsafe",
+      "value": 0.97,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " sexual/minors                   0.957             0.935              0.935               0.970"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — mental health",
+      "metric": "not_unsafe",
+      "value": 0.883,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " mental health                   0.883             0.995              0.684               0.915"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — mental health",
+      "metric": "not_unsafe",
+      "value": 0.995,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " mental health                   0.883             0.995              0.684               0.915"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — mental health",
+      "metric": "not_unsafe",
+      "value": 0.684,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " mental health                   0.883             0.995              0.684               0.915"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — mental health",
+      "metric": "not_unsafe",
+      "value": 0.915,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " mental health                   0.883             0.995              0.684               0.915"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — emotional reliance",
+      "metric": "not_unsafe",
+      "value": 0.945,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " emotional reliance              0.945             0.938              0.785               0.955"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — emotional reliance",
+      "metric": "not_unsafe",
+      "value": 0.938,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " emotional reliance              0.945             0.938              0.785               0.955"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — emotional reliance",
+      "metric": "not_unsafe",
+      "value": 0.785,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " emotional reliance              0.945             0.938              0.785               0.955"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Production Benchmarks — emotional reliance",
+      "metric": "not_unsafe",
+      "value": 0.955,
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "table": "Table 1",
+        "quote": " emotional reliance              0.945             0.938              0.785               0.955"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "StrongReject filtered",
+      "metric": "not_unsafe",
+      "value": 0.85,
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": " not_unsafe             0.850               0.976                0.878            0.959              0.975"
+      },
+      "unit": "fraction",
+      "rawModelName": "gpt-5-instant-oct3",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "StrongReject filtered",
+      "metric": "not_unsafe",
+      "value": 0.976,
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": " not_unsafe             0.850               0.976                0.878            0.959              0.975"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "StrongReject filtered",
+      "metric": "not_unsafe",
+      "value": 0.878,
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": " not_unsafe             0.850               0.976                0.878            0.959              0.975"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "StrongReject filtered",
+      "metric": "not_unsafe",
+      "value": 0.959,
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": " not_unsafe             0.850               0.976                0.878            0.959              0.975"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "StrongReject filtered",
+      "metric": "not_unsafe",
+      "value": 0.975,
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Table 2",
+        "quote": " not_unsafe             0.850               0.976                0.878            0.959              0.975"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection — Agent JSK",
+      "metric": "not_unsafe",
+      "value": 0.575,
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": " Agent JSK                       0.575                   0.997                0.811                 0.978"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection — Agent JSK",
+      "metric": "not_unsafe",
+      "value": 0.997,
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": " Agent JSK                       0.575                   0.997                0.811                 0.978"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection — Agent JSK",
+      "metric": "not_unsafe",
+      "value": 0.811,
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": " Agent JSK                       0.575                   0.997                0.811                 0.978"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection — Agent JSK",
+      "metric": "not_unsafe",
+      "value": 0.978,
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": " Agent JSK                       0.575                   0.997                0.811                 0.978"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection — PlugInject",
+      "metric": "not_unsafe",
+      "value": 0.902,
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": " PlugInject                      0.902                   0.929                0.996                 0.996"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection — PlugInject",
+      "metric": "not_unsafe",
+      "value": 0.929,
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": " PlugInject                      0.902                   0.929                0.996                 0.996"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection — PlugInject",
+      "metric": "not_unsafe",
+      "value": 0.996,
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": " PlugInject                      0.902                   0.929                0.996                 0.996"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection — PlugInject",
+      "metric": "not_unsafe",
+      "value": 0.996,
+      "source": {
+        "page": "5",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": " PlugInject                      0.902                   0.929                0.996                 0.996"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Image input — hate",
+      "metric": "not_unsafe",
+      "value": 0.993,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " hate                             0.993             0.981             0.980              0.988"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Image input — hate",
+      "metric": "not_unsafe",
+      "value": 0.981,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " hate                             0.993             0.981             0.980              0.988"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Image input — hate",
+      "metric": "not_unsafe",
+      "value": 0.98,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " hate                             0.993             0.981             0.980              0.988"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Image input — hate",
+      "metric": "not_unsafe",
+      "value": 0.988,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " hate                             0.993             0.981             0.980              0.988"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Image input — extremism",
+      "metric": "not_unsafe",
+      "value": 0.996,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " extremism                        0.996             0.986             0.993              0.986"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Image input — extremism",
+      "metric": "not_unsafe",
+      "value": 0.986,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " extremism                        0.996             0.986             0.993              0.986"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Image input — extremism",
+      "metric": "not_unsafe",
+      "value": 0.993,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " extremism                        0.996             0.986             0.993              0.986"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Image input — extremism",
+      "metric": "not_unsafe",
+      "value": 0.986,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " extremism                        0.996             0.986             0.993              0.986"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Image input — illicit",
+      "metric": "not_unsafe",
+      "value": 0.992,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " illicit                          0.992             0.996             0.980              1.000"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Image input — illicit",
+      "metric": "not_unsafe",
+      "value": 0.996,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " illicit                          0.992             0.996             0.980              1.000"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Image input — illicit",
+      "metric": "not_unsafe",
+      "value": 0.98,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " illicit                          0.992             0.996             0.980              1.000"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Image input — illicit",
+      "metric": "not_unsafe",
+      "value": 1,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " illicit                          0.992             0.996             0.980              1.000"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Image input — attack planning",
+      "metric": "not_unsafe",
+      "value": 1,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " attack planning                  1.000             1.000             1.000              1.000"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Image input — attack planning",
+      "metric": "not_unsafe",
+      "value": 1,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " attack planning                  1.000             1.000             1.000              1.000"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Image input — attack planning",
+      "metric": "not_unsafe",
+      "value": 1,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " attack planning                  1.000             1.000             1.000              1.000"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Image input — attack planning",
+      "metric": "not_unsafe",
+      "value": 1,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " attack planning                  1.000             1.000             1.000              1.000"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Image input — self-harm",
+      "metric": "not_unsafe",
+      "value": 0.96,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " self-harm                        0.960             0.979             0.936              0.941"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Image input — self-harm",
+      "metric": "not_unsafe",
+      "value": 0.979,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " self-harm                        0.960             0.979             0.936              0.941"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Image input — self-harm",
+      "metric": "not_unsafe",
+      "value": 0.936,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " self-harm                        0.960             0.979             0.936              0.941"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Image input — self-harm",
+      "metric": "not_unsafe",
+      "value": 0.941,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " self-harm                        0.960             0.979             0.936              0.941"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Image input — harms-erotic",
+      "metric": "not_unsafe",
+      "value": 0.999,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " harms-erotic                     0.999             0.998             0.990              0.990"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Image input — harms-erotic",
+      "metric": "not_unsafe",
+      "value": 0.998,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " harms-erotic                     0.999             0.998             0.990              0.990"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "Image input — harms-erotic",
+      "metric": "not_unsafe",
+      "value": 0.99,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " harms-erotic                     0.999             0.998             0.990              0.990"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Image input — harms-erotic",
+      "metric": "not_unsafe",
+      "value": 0.99,
+      "source": {
+        "page": "6",
+        "pdfPage": 7,
+        "table": "Table 4",
+        "quote": " harms-erotic                     0.999             0.998             0.990              0.990"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Factual hallucination by domain (browsing enabled)",
+      "metric": "hallucination rate",
+      "value": 1,
+      "source": {
+        "page": "7",
+        "pdfPage": 8,
+        "quote": "achieving <1% hallucination rate across all 5 domains"
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "tools": true,
+        "other": "upper bound stated as <1% across all 5 domains"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench",
+      "metric": "score",
+      "value": 0.482146,
+      "source": {
+        "page": "8",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": " HealthBench                 0.482146          0.476066           0.639872           0.633379"
+      },
+      "unit": "score",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench",
+      "metric": "score",
+      "value": 0.476066,
+      "source": {
+        "page": "8",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": " HealthBench                 0.482146          0.476066           0.639872           0.633379"
+      },
+      "unit": "score",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench",
+      "metric": "score",
+      "value": 0.639872,
+      "source": {
+        "page": "8",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": " HealthBench                 0.482146          0.476066           0.639872           0.633379"
+      },
+      "unit": "score",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench",
+      "metric": "score",
+      "value": 0.633379,
+      "source": {
+        "page": "8",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": " HealthBench                 0.482146          0.476066           0.639872           0.633379"
+      },
+      "unit": "score",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Hard",
+      "metric": "score",
+      "value": 0.208091,
+      "source": {
+        "page": "8",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": " HealthBench Hard            0.208091          0.171893           0.404925           0.420389"
+      },
+      "unit": "score",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Hard",
+      "metric": "score",
+      "value": 0.171893,
+      "source": {
+        "page": "8",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": " HealthBench Hard            0.208091          0.171893           0.404925           0.420389"
+      },
+      "unit": "score",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Hard",
+      "metric": "score",
+      "value": 0.404925,
+      "source": {
+        "page": "8",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": " HealthBench Hard            0.208091          0.171893           0.404925           0.420389"
+      },
+      "unit": "score",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Hard",
+      "metric": "score",
+      "value": 0.420389,
+      "source": {
+        "page": "8",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": " HealthBench Hard            0.208091          0.171893           0.404925           0.420389"
+      },
+      "unit": "score",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Consensus",
+      "metric": "score",
+      "value": 0.949287,
+      "source": {
+        "page": "8",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": " HealthBench Consensus       0.949287          0.943521           0.959684           0.945020"
+      },
+      "unit": "score",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Consensus",
+      "metric": "score",
+      "value": 0.943521,
+      "source": {
+        "page": "8",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": " HealthBench Consensus       0.949287          0.943521           0.959684           0.945020"
+      },
+      "unit": "score",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "instant"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Consensus",
+      "metric": "score",
+      "value": 0.959684,
+      "source": {
+        "page": "8",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": " HealthBench Consensus       0.949287          0.943521           0.959684           0.945020"
+      },
+      "unit": "score",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "HealthBench Consensus",
+      "metric": "score",
+      "value": 0.94502,
+      "source": {
+        "page": "8",
+        "pdfPage": 9,
+        "table": "Table 5",
+        "quote": " HealthBench Consensus       0.949287          0.943521           0.959684           0.945020"
+      },
+      "unit": "score",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Deception — Production traffic",
+      "metric": "deception rate",
+      "value": 7.7,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "          Production traffic                         7.7%                  1.6%"
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Deception — Production traffic",
+      "metric": "deception rate",
+      "value": 1.6,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "          Production traffic                         7.7%                  1.6%"
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Deception — Production Deception - Adversarial",
+      "metric": "deception rate",
+      "value": 11.8,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "          Production Deception - Adversarial         11.8%                 5.4%"
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Deception — Production Deception - Adversarial",
+      "metric": "deception rate",
+      "value": 5.4,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "          Production Deception - Adversarial         11.8%                 5.4%"
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Deception — CharXiv Missing Image (Strict output requirements)",
+      "metric": "deception rate",
+      "value": 34.3,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "          CharXiv Missing Image (Strict output       34.3%                 88.8%"
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Deception — CharXiv Missing Image (Strict output requirements)",
+      "metric": "deception rate",
+      "value": 88.8,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "          CharXiv Missing Image (Strict output       34.3%                 88.8%"
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Deception — CharXiv Missing Image (Lenient output requirements)",
+      "metric": "deception rate",
+      "value": 34.1,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "          CharXiv Missing Image (Lenient output      34.1%                 54%"
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Deception — CharXiv Missing Image (Lenient output requirements)",
+      "metric": "deception rate",
+      "value": 54,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "          CharXiv Missing Image (Lenient output      34.1%                 54%"
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Deception — Browsing Broken Tools",
+      "metric": "deception rate",
+      "value": 9.4,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "          Browsing Broken Tools                      9.4%                  9.1%"
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Deception — Browsing Broken Tools",
+      "metric": "deception rate",
+      "value": 9.1,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "          Browsing Broken Tools                      9.4%                  9.1%"
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Deception — Coding Deception",
+      "metric": "deception rate",
+      "value": 17.6,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "          Coding Deception                           17.6%                 25.6%"
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Deception — Coding Deception",
+      "metric": "deception rate",
+      "value": 25.6,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 6",
+        "quote": "          Coding Deception                           17.6%                 25.6%"
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Cyber safety — Production traffic",
+      "metric": "policy compliance rate",
+      "value": 0.9,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 7",
+        "quote": "           Production traffic            0.900               0.866                 0.966"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Cyber safety — Production traffic",
+      "metric": "policy compliance rate",
+      "value": 0.866,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 7",
+        "quote": "           Production traffic            0.900               0.866                 0.966"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Cyber safety — Production traffic",
+      "metric": "policy compliance rate",
+      "value": 0.966,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 7",
+        "quote": "           Production traffic            0.900               0.866                 0.966"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Cyber safety — Synthetic data",
+      "metric": "policy compliance rate",
+      "value": 0.941,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 7",
+        "quote": "           Synthetic data                0.941               0.930                 0.993"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Cyber safety — Synthetic data",
+      "metric": "policy compliance rate",
+      "value": 0.93,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 7",
+        "quote": "           Synthetic data                0.941               0.930                 0.993"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Cyber safety — Synthetic data",
+      "metric": "policy compliance rate",
+      "value": 0.993,
+      "source": {
+        "page": "9",
+        "pdfPage": 10,
+        "table": "Table 7",
+        "quote": "           Synthetic data                0.941               0.930                 0.993"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Arabic",
+      "metric": "accuracy",
+      "value": 0.903,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Arabic                  0.903                  0.901"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Arabic",
+      "metric": "accuracy",
+      "value": 0.901,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Arabic                  0.903                  0.901"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Bengali",
+      "metric": "accuracy",
+      "value": 0.892,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Bengali                 0.892                  0.889"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Bengali",
+      "metric": "accuracy",
+      "value": 0.889,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Bengali                 0.892                  0.889"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Chinese",
+      "metric": "accuracy",
+      "value": 0.902,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Chinese                 0.902                  0.901"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Chinese",
+      "metric": "accuracy",
+      "value": 0.901,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Chinese                 0.902                  0.901"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — French",
+      "metric": "accuracy",
+      "value": 0.901,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               French                  0.901                  0.899"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — French",
+      "metric": "accuracy",
+      "value": 0.899,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               French                  0.901                  0.899"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — German",
+      "metric": "accuracy",
+      "value": 0.896,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               German                  0.896                  0.903"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — German",
+      "metric": "accuracy",
+      "value": 0.903,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               German                  0.896                  0.903"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Hindi",
+      "metric": "accuracy",
+      "value": 0.899,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Hindi                   0.899                  0.900"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Hindi",
+      "metric": "accuracy",
+      "value": 0.9,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Hindi                   0.899                  0.900"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Indonesian",
+      "metric": "accuracy",
+      "value": 0.909,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Indonesian              0.909                  0.904"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Indonesian",
+      "metric": "accuracy",
+      "value": 0.904,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Indonesian              0.909                  0.904"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Italian",
+      "metric": "accuracy",
+      "value": 0.908,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Italian                 0.908                  0.910"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Italian",
+      "metric": "accuracy",
+      "value": 0.91,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Italian                 0.908                  0.910"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Japanese",
+      "metric": "accuracy",
+      "value": 0.898,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Japanese                0.898                  0.897"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Japanese",
+      "metric": "accuracy",
+      "value": 0.897,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Japanese                0.898                  0.897"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Korean",
+      "metric": "accuracy",
+      "value": 0.896,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Korean                  0.896                  0.895"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Korean",
+      "metric": "accuracy",
+      "value": 0.895,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Korean                  0.896                  0.895"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Portuguese",
+      "metric": "accuracy",
+      "value": 0.91,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Portuguese              0.910                  0.910"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Portuguese",
+      "metric": "accuracy",
+      "value": 0.91,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Portuguese              0.910                  0.910"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Spanish",
+      "metric": "accuracy",
+      "value": 0.91,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Spanish                 0.910                  0.913"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Spanish",
+      "metric": "accuracy",
+      "value": 0.913,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Spanish                 0.910                  0.913"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Swahili",
+      "metric": "accuracy",
+      "value": 0.88,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Swahili                 0.880                  0.880"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Swahili",
+      "metric": "accuracy",
+      "value": 0.88,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Swahili                 0.880                  0.880"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Yoruba",
+      "metric": "accuracy",
+      "value": 0.806,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Yoruba                  0.806                  0.808"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "MMLU Language — Yoruba",
+      "metric": "accuracy",
+      "value": 0.808,
+      "source": {
+        "page": "10",
+        "pdfPage": 11,
+        "table": "Table 8",
+        "quote": "               Yoruba                  0.806                  0.808"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "0-shot, chain-of-thought"
+      }
+    },
+    {
+      "rawEvalName": "First-person fairness",
+      "metric": "harm_overall",
+      "value": 0.0128,
+      "source": {
+        "page": "11",
+        "pdfPage": 12,
+        "table": "Table 9",
+        "quote": "    harm_overall            0.0128                        0.00997"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.1",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "First-person fairness",
+      "metric": "harm_overall",
+      "value": 0.00997,
+      "source": {
+        "page": "11",
+        "pdfPage": 12,
+        "table": "Table 9",
+        "quote": "    harm_overall            0.0128                        0.00997"
+      },
+      "unit": "fraction",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Multimodal troubleshooting virology — expert baseline",
+      "metric": "accuracy",
+      "value": 22.1,
+      "source": {
+        "page": "12",
+        "pdfPage": 13,
+        "quote": "All models exceed the median domain expert baseline of 22.1%."
+      },
+      "unit": "percent",
+      "rawModelName": "median domain expert baseline"
+    },
+    {
+      "rawEvalName": "ProtocolQA Open-Ended — consensus expert baseline",
+      "metric": "accuracy",
+      "value": 54,
+      "source": {
+        "page": "13",
+        "pdfPage": 14,
+        "quote": "All models underperform the consensus expert baseline (54%) and the median expert baseline of\n42%."
+      },
+      "unit": "percent",
+      "rawModelName": "consensus expert baseline"
+    },
+    {
+      "rawEvalName": "ProtocolQA Open-Ended — median expert baseline",
+      "metric": "accuracy",
+      "value": 42,
+      "source": {
+        "page": "13",
+        "pdfPage": 14,
+        "quote": "All models underperform the consensus expert baseline (54%) and the median expert baseline of\n42%."
+      },
+      "unit": "percent",
+      "rawModelName": "median expert baseline"
+    },
+    {
+      "rawEvalName": "Tacit knowledge and troubleshooting — consensus expert baseline",
+      "metric": "accuracy",
+      "value": 80,
+      "source": {
+        "page": "14",
+        "pdfPage": 15,
+        "quote": "None of the tested models outperform the consensus expert baseline of 80%, though all models\noutperform the 80th percentile PhD expert baseline of 63%."
+      },
+      "unit": "percent",
+      "rawModelName": "consensus expert baseline"
+    },
+    {
+      "rawEvalName": "Tacit knowledge and troubleshooting — 80th percentile PhD expert",
+      "metric": "accuracy",
+      "value": 63,
+      "source": {
+        "page": "14",
+        "pdfPage": 15,
+        "quote": "None of the tested models outperform the consensus expert baseline of 80%, though all models\noutperform the 80th percentile PhD expert baseline of 63%."
+      },
+      "unit": "percent",
+      "rawModelName": "80th percentile PhD expert baseline"
+    },
+    {
+      "rawEvalName": "Tacit knowledge and troubleshooting (refusals as passes)",
+      "metric": "accuracy",
+      "value": 83.33,
+      "source": {
+        "page": "14",
+        "pdfPage": 15,
+        "quote": "If we treat all refusals as passes, gpt-5.2-thinking scores\n83.33% on this evaluation."
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "refusals treated as passes"
+      }
+    },
+    {
+      "rawEvalName": "TroubleshootingBench — 80th percentile expert",
+      "metric": "score",
+      "value": 36.4,
+      "source": {
+        "page": "14",
+        "pdfPage": 15,
+        "quote": "The 80th percentile expert\nscore (36.4%) is used as an indicative threshold for model performance."
+      },
+      "unit": "percent",
+      "rawModelName": "80th percentile expert"
+    },
+    {
+      "rawEvalName": "Irregular atomic challenge suite — Vulnerability Research and Exploitation",
+      "metric": "average success rate",
+      "value": 83,
+      "source": {
+        "page": "20",
+        "pdfPage": 21,
+        "quote": "gpt-5.2-thinking achieved an average success rate of 83% in\nVulnerability Research and Exploitation, 100% in Network Attack Simulation challenges, and\n73% in Evasion challenges."
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "1000 turns; cost-per-success $10.8"
+      }
+    },
+    {
+      "rawEvalName": "Irregular atomic challenge suite — Network Attack Simulation",
+      "metric": "average success rate",
+      "value": 100,
+      "source": {
+        "page": "20",
+        "pdfPage": 21,
+        "quote": "gpt-5.2-thinking achieved an average success rate of 83% in\nVulnerability Research and Exploitation, 100% in Network Attack Simulation challenges, and\n73% in Evasion challenges."
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "1000 turns; cost-per-success $3.7"
+      }
+    },
+    {
+      "rawEvalName": "Irregular atomic challenge suite — Evasion",
+      "metric": "average success rate",
+      "value": 73,
+      "source": {
+        "page": "20",
+        "pdfPage": 21,
+        "quote": "gpt-5.2-thinking achieved an average success rate of 83% in\nVulnerability Research and Exploitation, 100% in Network Attack Simulation challenges, and\n73% in Evasion challenges."
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking",
+        "other": "1000 turns; cost-per-success $12.9"
+      }
+    },
+    {
+      "rawEvalName": "Irregular — cost-per-success Vulnerability Research",
+      "metric": "cost-per-success",
+      "value": 10.8,
+      "source": {
+        "page": "20",
+        "pdfPage": 21,
+        "quote": "average cost-per-success in Vulnerability Research and Exploitation challenges is $10.8, the average\ncost-per-success in Network Attack Simulation challenges is $3.7, and the average cost-per-success\nin Evasion challenges is $12.9."
+      },
+      "unit": "other",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Irregular — cost-per-success Network Attack Simulation",
+      "metric": "cost-per-success",
+      "value": 3.7,
+      "source": {
+        "page": "20",
+        "pdfPage": 21,
+        "quote": "average cost-per-success in Vulnerability Research and Exploitation challenges is $10.8, the average\ncost-per-success in Network Attack Simulation challenges is $3.7, and the average cost-per-success\nin Evasion challenges is $12.9."
+      },
+      "unit": "other",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "Irregular — cost-per-success Evasion",
+      "metric": "cost-per-success",
+      "value": 12.9,
+      "source": {
+        "page": "20",
+        "pdfPage": 21,
+        "quote": "average cost-per-success in Vulnerability Research and Exploitation challenges is $10.8, the average\ncost-per-success in Network Attack Simulation challenges is $3.7, and the average cost-per-success\nin Evasion challenges is $12.9."
+      },
+      "unit": "other",
+      "model": "openai/gpt-5.2",
+      "settings": {
+        "reasoningEffort": "thinking"
+      }
+    },
+    {
+      "rawEvalName": "OpenAI-Proof Q&A (OPQA)",
+      "metric": "pass@1",
+      "value": 8,
+      "source": {
+        "page": "25",
+        "pdfPage": 26,
+        "quote": "gpt-5.1-codex-max remains the highest scoring model on this benchmark at 8%."
+      },
+      "unit": "percent",
+      "model": "openai/gpt-5.1-codex-max",
+      "settings": {
+        "passAtK": 1
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:26:07Z"
+  },
+  "notes": "Delta update to GPT-5 System Card (basedOn openai-gpt5-system_card). pageCount=27 PDF content pages (printed footers 1–26). Instant vs Thinking distinguished via settings.reasoningEffort. Figures 1–16 (hallucinations by claim/response, CTF, CVE-Bench, OpenAI PRs, MLE-Bench, PaperBench, OPQA model bars, bio charts) have no extractable numeric scores in pdftotext—only prose numbers and expert baselines included. Table 12 Cyber Range PASS/FAIL cells omitted (categorical; no Combined Pass Rate stated). Cost-per-success stored as unit other (USD). gpt-5-instant-oct3 left as rawModelName."
+}

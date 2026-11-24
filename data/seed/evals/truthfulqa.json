@@ -1,0 +1,141 @@
+{
+  "eval": {
+    "slug": "truthfulqa",
+    "displayName": "TruthfulQA",
+    "aliases": ["TruthfulQA MC1", "TruthfulQA MC2", "Truthful QA"],
+    "description": "Tests whether a model repeats common false beliefs. It has 817 questions across 38 categories, such as health, law and conspiracies, where a false answer imitates human misconceptions. The generation task grades free answers as truthful and informative with a model judge. The multiple-choice task scores MC1 (one true option) and MC2 (probability mass on true options).",
+    "summary": "Tests whether the model repeats common false beliefs or gives true answers to questions.",
+    "maintainers": [
+      {
+        "name": "Stephanie Lin, Jacob Hilton, Owain Evans",
+        "url": "https://github.com/sylinrl/TruthfulQA"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2109.07958",
+        "title": "TruthfulQA: Measuring How Models Mimic Human Falsehoods"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/sylinrl/TruthfulQA",
+        "title": "Questions, answers and evaluation code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/truthfulqa/truthful_qa",
+        "title": "truthfulqa/truthful_qa (Inspect Evals pin)"
+      }
+    ],
+    "access": "public",
+    "status": "legacy",
+    "autoApprove": true,
+    "legacyReason": "Called saturated in 2025 papers. The multiple-choice form has shortcut flaws. Labs now use harder factuality tests.",
+    "legacyDecisionDate": "2026-10-05",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["hallucination", "honesty"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2021-09",
+      "status": "published",
+      "releasedDate": "2021-09-08",
+      "dataset": {
+        "hfRepo": "truthfulqa/truthful_qa",
+        "revision": "741b8276f2d1982aa3d5b832d3ee81ed3b896490",
+        "url": "https://huggingface.co/datasets/truthfulqa/truthful_qa",
+        "license": "apache-2.0",
+        "splits": [
+          {
+            "name": "generation/validation",
+            "sampleCount": 817,
+            "storage": "pointer"
+          },
+          {
+            "name": "multiple_choice/validation",
+            "sampleCount": 817,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "mc1_correct",
+          "displayName": "MC1 correct",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the model picks the single true option."
+        },
+        {
+          "key": "mc2_true_mass",
+          "displayName": "MC2 true mass",
+          "type": "continuous",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "description": "Normalized probability the model gives to all true options."
+        },
+        {
+          "key": "truthful_informative",
+          "displayName": "Truthful and informative",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "1 when the judge grades a free answer as both truthful and informative."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mc1_accuracy",
+          "displayName": "MC1 accuracy",
+          "score": "mc1_correct",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Share of questions where the model picks the single true option."
+        },
+        {
+          "key": "mc2_score",
+          "displayName": "MC2 score",
+          "score": "mc2_true_mass",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Mean probability mass on true options."
+        },
+        {
+          "key": "truthful_informative_rate",
+          "displayName": "% truthful and informative",
+          "score": "truthful_informative",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "description": "Share of free answers graded both truthful and informative (generation task)."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "inspect_evals/truthfulqa",
+        "package": "inspect-evals==0.22.0",
+        "roles": ["target"],
+        "internet": false
+      }
+    }
+  ]
+}

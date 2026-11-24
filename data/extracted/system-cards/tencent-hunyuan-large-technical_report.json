@@ -1,0 +1,217 @@
+{
+  "document": "tencent-hunyuan-large-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "tencent/Tencent-Hunyuan-Large"
+    }
+  ],
+  "pageCount": 18,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "256K tokens",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "featuring an unprecedented 389 billion\ntotal parameters and 52 billion activated parameters, capable of handling up to 256K tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text / conventional NLP (question answering, reasoning, reading comprehension, mathematics, coding, multi-turn interaction, multilinguality)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "supports conventional NLP abilities such as question answering, reasoning, reading comprehension,\nand specific LLM capabilities such as mathematics, coding, multi-turn interaction, and multilinguality."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "primarily Chinese and English",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "primarily consisting of Chinese and English languages for practical demands."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "389B",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "This model has\n389B total parameters and 52B activated parameters. There are 1 shared expert and 1 specialized\nexpert activated for each token."
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "52B",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "This model has\n389B total parameters and 52B activated parameters. There are 1 shared expert and 1 specialized\nexpert activated for each token."
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Transformer MoE: 64 layers, 80 attention heads, 8 KV heads (GQA), 1 shared + 16 specialized experts (1 specialized activated), SwiGLU, RoPE, vocab 128K, hidden size 6400, CLA every 2 layers",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "This model has\n389B total parameters and 52B activated parameters. There are 1 shared expert and 1 specialized\nexpert activated for each token."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "7T pre-training tokens (nearly 1.5T synthetic); SFT volume exceeds 1 million",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "In total, Hunyuan-Large is pre-trained on 7T tokens, which contains nearly\n  1.5T tokens of high-quality and diverse synthetic data."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Pre-training data is filtered for toxicity and anonymized for privacy-sensitive and other harmful content, with no safety benchmark scores reported.", "tone": "mixed",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "filter the data based on criteria such as writing quality, educational value, and toxicity to ensure\nits high quality. Additionally, we anonymize all privacy-sensitive data and other harmful data."
+      }
+    },
+    {
+      "text": "Supervised fine-tuning (SFT) places emphasis on data security and aiming for human-value alignment in most circumstances, without measured safety outcomes.", "tone": "mixed",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "emphasis on data security, striving to ensure that the model aligns with human values under most\ncircumstances."
+      }
+    },
+    {
+      "text": "Direct Preference Optimization (DPO) training uses an exponential moving average strategy said to mitigate reward hacking, with no reward-hacking evaluation results.", "tone": "mixed",
+      "source": {
+        "page": "10",
+        "pdfPage": 10,
+        "quote": "exponential moving average strategy to mitigate reward hacking and reduce alignment tax (Ouyang\net al., 2022), ensuring a more stable training process across a larger dataset."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:43:44Z"
+  },
+  "notes": "Technical report (arXiv 2411.02265), not a system card. No dedicated safety section and no safety, refusal, jailbreak, toxicity, bias, honesty, hallucination, or dangerous-capability numeric evals. Safety-adjacent content is only pre-training toxicity/privacy filters, an SFT data-security / human-values claim, and DPO EMA to mitigate reward hacking — all training methods/claims, so topics stay uncovered per pilot rules. AlignBench is listed with MT-Bench/Arena-Hard/AlpacaEval as preference/instruction alignment and was skipped (not a safety eval). Skipped capability results: Table 3–6 including MMLU, MMLU-Pro, BBH, CMMLU, C-Eval, HellaSwag, CommonsenseQA, WinoGrande, PIQA, DROP, C3, NaturalQuestions, ARC-C, TriviaQA, GSM8K, MATH, CMATH, HumanEval, MBPP, GPQA_diamond, AlignBench, MT-Bench, IFEval, Arena-Hard, AlpacaEval-2.0, RULER, LV-Eval, PenguinScrolls. Open-source stated without a license name. arXiv date is not a model release date."
+}

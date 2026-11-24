@@ -1,0 +1,233 @@
+{
+  "document": "google-medgemma-technical_report",
+  "alsoDocuments": ["google-medgemma-blog"],
+  "covers": [
+    {
+      "model": "google/medgemma-4b-it"
+    },
+    {
+      "model": "google/medgemma-27b-it"
+    },
+    {
+      "rawModelName": "MedSigLIP"
+    }
+  ],
+  "pageCount": 60,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "128k",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "long context (128k)"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "4B: text, images, or both as input with text output; 27B text-only: text input and output; also MedSigLIP medical image encoder",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "a 4B variant that can accept text, images,\nor both as input, and a 27B variant that is optimized for text-only inputs. Both models output text."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "stated",
+      "value": "permissive license",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "By providing these\nMedGemma and MedSigLIP models to the developer community with a permissive license, we hope"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "4B and 27B (MedGemma); MedSigLIP 400M-parameter",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "models based on Gemma 3 4B and 27B"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Follows Gemma 3; SigLIP 400M vision encoder; 896×896 images; image-text interleaving",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "The MedGemma model architecture follows Gemma 3 (Gemma-Team et al., 2025) and is compatible\nwith all existing Gemma infrastructure."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "SigLIP and Gemma 3 mixtures plus medical text QA (MedQA, MedMCQA, PubMedQA, MedExpQA, AfriMed-QA, HealthSearchQA, LiveQA, synthetic) and multimodal radiology, histopathology, dermatology, ophthalmology, and PMC image-text data (Table 1)",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "For general purpose data replay during pretraining, original data mixtures from SigLIP (Zhai et al.,\n2023) and Gemma 3 (Gemma-Team et al., 2025) were leveraged."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Authors say thoughtful validation of safety, performance, and reliability remains critical for downstream medical applications, but report no safety eval numbers.", "tone": "mixed",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "thoughtful validation of safety, performance, and reliability for any downstream applications\nremains a critical aspect to advance the use of multimodal AI models in medicine."
+      }
+    },
+    {
+      "text": "Authors note that strong scores on public medical benchmarks may partly reflect test data leakage.", "tone": "mixed",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "raises the possibility of test data leakage, as these benchmarks are publicly available and frequently\nused in model development and evaluation."
+      }
+    },
+    {
+      "text": "Authors state that automated medical benchmarks are only a first step and have limitations for real-world utility.", "tone": "mixed",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "limitations exist for these benchmarks. For one, automated benchmarks represent only the first\nstep towards validating real-world utility"
+      }
+    },
+    {
+      "text": "Evaluation used only public datasets because of data privacy and license terms.", "tone": "neutral",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Due to data privacy and license terms, only publicly available datasets were used in evaluating models"
+      }
+    },
+    {
+      "text": "MedGemma 4B and Gemma 3 4B struggled to follow AgentClinic system instructions in the agentic setup.", "tone": "mixed",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "the 4B variants\n(MedGemma and Gemma 3) were not well suited for this task, demonstrating difficulty following\nsystem instructions for the agentic framework as provided by AgentClinic."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:19:13Z"
+  },
+  "notes": "Technical report (arXiv 2507.05201), not a system card. No dedicated safety, alignment, refusal, jailbreak, bias, toxicity, privacy-of-the-model, or dangerous-capability section or numeric results; evalResults left empty per pilot safety-only rule. Skipped all capability medical and general benchmarks (MedQA, MedMCQA, PubMedQA, MMLU Med, MedXpertQA, AfriMed-QA, AgentClinic, SLAKE, VQA-RAD, MIMIC-CXR classification and report generation, CheXpert, CXR14, Path/Derm MCQA, EyePACS, EHRQA, Table 12 general benchmarks, MedSigLIP AUCs, Table A14, and related figures). Covers includes MedSigLIP (rawModelName) because the report introduces and evaluates it as a released Google model; seed did not link it. MedGemma 27B multimodal is also released (Appendix F) under the same family as google/medgemma-27b-it; report default MedGemma 27B is text-only (checkpoint google/medgemma-27b-text-it). No calendar model release date—only that models were released openly. TPU training mentioned without FLOPs so trainingCompute not_stated."
+}

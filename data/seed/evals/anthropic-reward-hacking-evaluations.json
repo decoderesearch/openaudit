@@ -1,0 +1,73 @@
+{
+  "eval": {
+    "slug": "anthropic-reward-hacking-evaluations",
+    "displayName": "Reward hacking evaluations (Anthropic)",
+    "aliases": [
+      "Reward hacking evaluations",
+      "Blatant reward hacking",
+      "Reward-hack-prone coding tasks",
+      "Reward-hack-prone coding tasks v2",
+      "Claude Code Impossible Tasks",
+      "Impossible Tasks",
+      "Training distribution"
+    ],
+    "description": "Anthropic internal suite for task-gaming in coding: hard-coding or special-casing tests instead of solving the task. Categories include reward-hack-prone coding tasks (classifier and hidden-test rates), Claude Code impossible tasks (with and without anti-hack prompts), and training-distribution environments. Cards report classifier or automated-grader hack rates (lower is better).",
+    "summary": "Measures how often the model games coding tasks by special-casing tests instead of solving the real problem.",
+    "maintainers": [
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/07b2a3f9902ee19fe39a36ca638e5ae987bc64dd.pdf",
+        "title": "Claude 4 System Card (reward hacking evaluations)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["agentic", "single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "programmatic"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["reward_hacking", "honesty"]
+    },
+    "visibility": "public",
+    "family": "Anthropic alignment evaluations"
+  },
+  "versions": [
+    {
+      "version": "claude-4-suite",
+      "status": "draft",
+      "changes": "Problem sets and scaffolding are updated across cards (for example reward-hack-prone coding tasks v2).",
+      "scores": [
+        {
+          "key": "hacked",
+          "displayName": "Reward hack",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "The attempt games the task (hard-coding, special-casing, or similar) under Anthropic’s classifiers or graders."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "hack_rate",
+          "displayName": "Reward hacking rate",
+          "score": "hacked",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of attempts graded as reward hacking in a category (classifier or hidden-test)."
+        }
+      ]
+    }
+  ]
+}

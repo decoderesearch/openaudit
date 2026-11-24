@@ -1,0 +1,220 @@
+{
+  "document": "google-ul2-technical_report",
+  "alsoDocuments": ["google-ul2-blog"],
+  "covers": [
+    {
+      "model": "google/ul2",
+      "section": "UL2 20B encoder-decoder; main scaled model"
+    },
+    {
+      "model": "google/flan-ul2",
+      "section": "Instruction Tuned UL2 20B with FLAN"
+    }
+  ],
+  "pageCount": 39,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "512/512 inputs and targets (pretraining); Flan adaptation 1024/1024, Flan training 2048/512",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "sequence length is set to 512/512 for inputs and targets."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (language model)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "This paper proposes a step towards making a universally applicable language model possible."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English (C4 pretraining; English 32K sentencepiece)",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "Our submission is pretrained on only English C4 then finetuned on only the provided"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "approximately 20B (19.5 exact)",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "We train UL2 at a scale of approximately 20B total parameters."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "encoder-decoder Transformer (32 encoder/32 decoder layers, d_model 4096, d_ff 16384, 16 heads); Mixture-of-Denoisers pretraining",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "we use an encoder-decoder architecture for this run."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "C4 corpus",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "We follow the same training protocol in earlier experiments by pretraining on the C4 corpus but by also scaling"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "1 trillion tokens on C4 (2 million steps); batch 1024 on 512 TPUv4 chips",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "The model is trained on a total of 1 trillion tokens on C4 (2 million steps)."
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "GENIE XSUM human H-No-Hallucination: UL2 20B 54.0 (leaderboard) vs prior state of the art (SOTA) 53.0",
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "quote": "GENIE - XSUM                      H-No-Hallucination         Test   Clive et al.           53.0      54.0(l)"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [],
+  "evalResults": [
+    {
+      "rawEvalName": "GENIE",
+      "model": "google/ul2",
+      "metric": "H-No-Hallucination",
+      "value": 54,
+      "unit": "score",
+      "settings": {
+        "other": "XSUM subtask; Test; leaderboard submission"
+      },
+      "source": {
+        "page": "19",
+        "pdfPage": 19,
+        "table": "Table 8",
+        "quote": "GENIE - XSUM                      H-No-Hallucination         Test   Clive et al.           53.0      54.0(l)"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:50:28Z"
+  },
+  "notes": "Pilot safety-only extraction of the UL2 technical report (arXiv 2205.05131). No dedicated safety, alignment, or risk section. Only safety-relevant numeric result kept: GENIE XSUM human H-No-Hallucination for UL2 20B. Skipped Civil Comments and Wikipedia Toxicity F1 as content-moderation classifier tasks. Skipped all capability suites (MMLU, BBH, SuperGLUE, Scrolls, CoT arithmetic, summarization ROUGE, etc.). No external safety testers or risk decisions. Checkpoint release is stated but no calendar release/launch date. alsoDocuments lists google-ul2-blog (not fetched)."
+}

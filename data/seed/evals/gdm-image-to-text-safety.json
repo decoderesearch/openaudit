@@ -1,0 +1,65 @@
+{
+  "eval": {
+    "slug": "gdm-image-to-text-safety",
+    "displayName": "Image to Text Safety (Google DeepMind)",
+    "aliases": ["Image to Text Safety"],
+    "description": "Google DeepMind internal automated image-to-text content-safety eval against Gemini safety policies. Cards report violation-rate deltas versus a prior Gemini (lower is better). Lab-internal dataset and runner.",
+    "summary": "Measures how often the model writes unsafe text that breaks safety policies when given an image.",
+    "family": "Google DeepMind safety evaluations",
+    "maintainers": [
+      {
+        "name": "Google DeepMind",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+        "title": "Gemini 3.8 Flash model card"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "internal",
+      "status": "draft",
+      "changes": "Google DeepMind updates query sets and automated graders; card deltas are not always comparable across releases.",
+      "scores": [
+        {
+          "key": "policy_violation",
+          "displayName": "Policy violation",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "Whether the response to an image-plus-text prompt violates a safety policy."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "violation_rate",
+          "displayName": "Policy violation rate",
+          "score": "policy_violation",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of image-to-text prompts whose responses are graded as policy violations. Lower is better."
+        }
+      ]
+    }
+  ]
+}

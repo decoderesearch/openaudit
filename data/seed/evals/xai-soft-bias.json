@@ -1,0 +1,66 @@
+{
+  "eval": {
+    "slug": "xai-soft-bias",
+    "displayName": "Soft Bias (Internal)",
+    "aliases": ["Soft Bias (Internal)"],
+    "description": "xAI internal political soft-bias eval on paired sociopolitical prompts of the form \"Is A … B\" and \"Is B … A\". An LLM judge scores whether the two answers differ in sentiment, hedging, or moral force (0 / 0.5 / 1). Cards report average bias; lower is better. Dataset and runner are lab-internal.",
+    "summary": "Measures how often the model gives answers with different tone or certainty when a political question is reversed.",
+    "maintainers": [
+      {
+        "name": "xAI",
+        "url": "https://data.x.ai/2025-08-20-grok-4-model-card.pdf"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://data.x.ai/2025-08-20-grok-4-model-card.pdf",
+        "title": "Grok 4 Model Card (Soft Bias)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bias"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "internal",
+      "status": "draft",
+      "changes": "xAI updates the paired prompt set and judge; average bias across cards is not always comparable.",
+      "scores": [
+        {
+          "key": "pair_bias",
+          "displayName": "Pair bias",
+          "type": "ordinal",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "description": "LLM-judge bias on a prompt pair: 0 (none), 0.5 (some), or 1 (significant)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "average_bias",
+          "displayName": "Average bias",
+          "score": "pair_bias",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Mean pair-bias score over the soft-bias set. Lower is better."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1207 @@
+{
+  "document": "baichuan-baichuan2-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "baichuan-inc/Baichuan2-7B-Chat"
+    },
+    {
+      "model": "baichuan-inc/Baichuan2-13B-Chat"
+    },
+    {
+      "model": "baichuan-inc/Baichuan2-7B-Base"
+    },
+    {
+      "model": "baichuan-inc/Baichuan2-13B-Base"
+    }
+  ],
+  "pageCount": 28,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4,096",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Baichuan 2-7B           RoPE              4,096       11,008      32          32         4,096     2e-4"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "language",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "a series of large-scale multilingual language"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "multilingual; safety optimized for Chinese and English",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "optimized for Chinese and English for safety, the"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7 billion and 13 billion",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "models containing 7 billion and 13 billion\n                                             parameters, trained from scratch, on 2.6 trillion"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Transformer; RoPE (7B) / ALiBi (13B); SwiGLU; RMSNorm; NormHead",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "The model architecture of Baichuan 2 is based on\n                                                          the prevailing Transformer (Vaswani et al., 2017)."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "2.6 trillion tokens from webpages, books, research papers, codebases, and more",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "models were trained on 2.6 trillion tokens, which"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Baichuan 2 chat models match or outperform peers on BHED safety categories including illegal/unethical content",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "Table 9: The result of different chat models on our safety evaluation benchmarks."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Baichuan 2-13B-chat scores 99.0% on the discrimination category of the Baichuan Harmless Evaluation Dataset (BHED) (higher is better)",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "Baichuan 2-13B-chat                      87.10%               98.97%"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": true,
+      "headline": "[Toxigen](/evals/toxigen) hate-speech rates for Baichuan 2 foundation models are lower than LLaMA 2",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "to LLaMA 2, the Baichuan 2-7B and Baichuan"
+      }
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Safety alignment left helpfulness largely unchanged while substantially improving harmlessness (Figure 6; chart has no readable numbers).", "tone": "good",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "did not hurt the helpfulness while significantly"
+      }
+    },
+    {
+      "text": "Despite [Toxigen](/evals/toxigen) and filtering, the authors say toxicity risks cannot be eliminated and toxicity tends to increase with model size.", "tone": "bad",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "cannot be eliminated, and toxicity tends to increase"
+      }
+    },
+    {
+      "text": "Safety work is optimized for Chinese and English; the model may not fully capture biases in other languages and cultures.", "tone": "mixed",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "optimized for Chinese and English for safety, the"
+      }
+    },
+    {
+      "text": "Pre-training used rules and models to remove violence, pornography, racial discrimination, and hate speech; a red-team process with 6 attack types produced ~200K attack prompts for alignment training (no jailbreak scores reported).", "tone": "mixed",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "We build a red-teaming procedure consisting of"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Toxigen",
+      "metric": "Toxigen",
+      "value": 11.48,
+      "unit": "score",
+      "settings": {
+        "other": "6-shot; temperature 0.1; top-p 0.9; HateBert classifier; foundation models"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 8",
+        "quote": "Baichuan 2-13B        11.48"
+      },
+      "model": "baichuan-inc/Baichuan2-13B-Base"
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "metric": "Toxigen",
+      "value": 11.72,
+      "unit": "score",
+      "settings": {
+        "other": "6-shot; temperature 0.1; top-p 0.9; HateBert classifier; foundation models"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 8",
+        "quote": "Baichuan 2-7B         11.72"
+      },
+      "model": "baichuan-inc/Baichuan2-7B-Base"
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "metric": "Toxigen",
+      "value": 12.28,
+      "unit": "score",
+      "settings": {
+        "other": "6-shot; temperature 0.1; top-p 0.9; HateBert classifier; foundation models"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 8",
+        "quote": "LLaMA 2-7B            12.28"
+      },
+      "model": "meta-llama/Llama-2-7b-hf"
+    },
+    {
+      "rawEvalName": "Toxigen",
+      "metric": "Toxigen",
+      "value": 13.24,
+      "unit": "score",
+      "settings": {
+        "other": "6-shot; temperature 0.1; top-p 0.9; HateBert classifier; foundation models"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "table": "Table 8",
+        "quote": "LLaMA 2-13B           13.24"
+      },
+      "model": "meta-llama/Llama-2-13b-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 61.8,
+      "unit": "percent",
+      "settings": {
+        "other": "sensitive topics"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "ChatGLM 2-6B                             61.80%"
+      },
+      "model": "zai-org/chatglm2-6b"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 96.4,
+      "unit": "percent",
+      "settings": {
+        "other": "bias/discrimination"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "ChatGLM 2-6B                             61.80%               96.40%"
+      },
+      "model": "zai-org/chatglm2-6b"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 99.1,
+      "unit": "percent",
+      "settings": {
+        "other": "insults/profanity"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "ChatGLM 2-6B                             61.80%               96.40%             99.10%"
+      },
+      "model": "zai-org/chatglm2-6b"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 97.31,
+      "unit": "percent",
+      "settings": {
+        "other": "illegal/unethical content"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "ChatGLM 2-6B                             61.80%               96.40%             99.10%           97.31%"
+      },
+      "model": "zai-org/chatglm2-6b"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "physical health"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "ChatGLM 2-6B                             61.80%               96.40%             99.10%           97.31%                100.00%"
+      },
+      "model": "zai-org/chatglm2-6b"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 98.23,
+      "unit": "percent",
+      "settings": {
+        "other": "mental health"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "ChatGLM 2-6B                             61.80%               96.40%             99.10%           97.31%                100.00%                98.23%"
+      },
+      "model": "zai-org/chatglm2-6b"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 97.34,
+      "unit": "percent",
+      "settings": {
+        "other": "financial privacy"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "ChatGLM 2-6B                             61.80%               96.40%             99.10%           97.31%                100.00%                98.23%             97.34%"
+      },
+      "model": "zai-org/chatglm2-6b"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 93.01,
+      "unit": "percent",
+      "settings": {
+        "other": "Average"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "ChatGLM 2-6B                             61.80%               96.40%             99.10%           97.31%                100.00%                98.23%             97.34%               93.01%"
+      },
+      "model": "zai-org/chatglm2-6b"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 61,
+      "unit": "percent",
+      "settings": {
+        "other": "sensitive topics"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Vicuna 13B                               61.00%"
+      },
+      "rawModelName": "Vicuna 13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 98.03,
+      "unit": "percent",
+      "settings": {
+        "other": "bias/discrimination"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Vicuna 13B                               61.00%               98.03%"
+      },
+      "rawModelName": "Vicuna 13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 99.1,
+      "unit": "percent",
+      "settings": {
+        "other": "insults/profanity"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Vicuna 13B                               61.00%               98.03%             99.10%"
+      },
+      "rawModelName": "Vicuna 13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 98.32,
+      "unit": "percent",
+      "settings": {
+        "other": "illegal/unethical content"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Vicuna 13B                               61.00%               98.03%             99.10%           98.32%"
+      },
+      "rawModelName": "Vicuna 13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 99.8,
+      "unit": "percent",
+      "settings": {
+        "other": "physical health"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Vicuna 13B                               61.00%               98.03%             99.10%           98.32%                 99.80%"
+      },
+      "rawModelName": "Vicuna 13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 99.4,
+      "unit": "percent",
+      "settings": {
+        "other": "mental health"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Vicuna 13B                               61.00%               98.03%             99.10%           98.32%                 99.80%                99.40%"
+      },
+      "rawModelName": "Vicuna 13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 98.5,
+      "unit": "percent",
+      "settings": {
+        "other": "financial privacy"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Vicuna 13B                               61.00%               98.03%             99.10%           98.32%                 99.80%                99.40%             98.50%"
+      },
+      "rawModelName": "Vicuna 13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 93.58,
+      "unit": "percent",
+      "settings": {
+        "other": "Average"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Vicuna 13B                               61.00%               98.03%             99.10%           98.32%                 99.80%                99.40%             98.50%               93.58%"
+      },
+      "rawModelName": "Vicuna 13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 51.9,
+      "unit": "percent",
+      "settings": {
+        "other": "sensitive topics"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 7B-chat                          51.90%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 95.23,
+      "unit": "percent",
+      "settings": {
+        "other": "bias/discrimination"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 7B-chat                          51.90%               95.23%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 98.23,
+      "unit": "percent",
+      "settings": {
+        "other": "insults/profanity"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 7B-chat                          51.90%               95.23%             98.23%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 97.25,
+      "unit": "percent",
+      "settings": {
+        "other": "illegal/unethical content"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 7B-chat                          51.90%               95.23%             98.23%           97.25%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 99.6,
+      "unit": "percent",
+      "settings": {
+        "other": "physical health"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 7B-chat                          51.90%               95.23%             98.23%           97.25%                 99.60%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 98.23,
+      "unit": "percent",
+      "settings": {
+        "other": "mental health"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 7B-chat                          51.90%               95.23%             98.23%           97.25%                 99.60%                98.23%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 95.34,
+      "unit": "percent",
+      "settings": {
+        "other": "financial privacy"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 7B-chat                          51.90%               95.23%             98.23%           97.25%                 99.60%                98.23%             95.34%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 90.83,
+      "unit": "percent",
+      "settings": {
+        "other": "Average"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 7B-chat                          51.90%               95.23%             98.23%           97.25%                 99.60%                98.23%             95.34%               90.83%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 53.4,
+      "unit": "percent",
+      "settings": {
+        "other": "sensitive topics"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 13B-chat                         53.40%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 98.27,
+      "unit": "percent",
+      "settings": {
+        "other": "bias/discrimination"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 13B-chat                         53.40%               98.27%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 99.04,
+      "unit": "percent",
+      "settings": {
+        "other": "insults/profanity"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 13B-chat                         53.40%               98.27%             99.04%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 97.25,
+      "unit": "percent",
+      "settings": {
+        "other": "illegal/unethical content"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 13B-chat                         53.40%               98.27%             99.04%           97.25%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "physical health"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 13B-chat                         53.40%               98.27%             99.04%           97.25%                100.00%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 99.8,
+      "unit": "percent",
+      "settings": {
+        "other": "mental health"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 13B-chat                         53.40%               98.27%             99.04%           97.25%                100.00%                99.80%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 97.79,
+      "unit": "percent",
+      "settings": {
+        "other": "financial privacy"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 13B-chat                         53.40%               98.27%             99.04%           97.25%                100.00%                99.80%             97.79%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 92.25,
+      "unit": "percent",
+      "settings": {
+        "other": "Average"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "LLaMA 2 13B-chat                         53.40%               98.27%             99.04%           97.25%                100.00%                99.80%             97.79%               92.25%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 53.2,
+      "unit": "percent",
+      "settings": {
+        "other": "sensitive topics"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Chinese Alpaca 2-13B                     53.20%"
+      },
+      "rawModelName": "Chinese Alpaca 2-13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 96.34,
+      "unit": "percent",
+      "settings": {
+        "other": "bias/discrimination"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Chinese Alpaca 2-13B                     53.20%               96.34%"
+      },
+      "rawModelName": "Chinese Alpaca 2-13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 93.17,
+      "unit": "percent",
+      "settings": {
+        "other": "insults/profanity"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Chinese Alpaca 2-13B                     53.20%               96.34%             93.17%"
+      },
+      "rawModelName": "Chinese Alpaca 2-13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 85.12,
+      "unit": "percent",
+      "settings": {
+        "other": "illegal/unethical content"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Chinese Alpaca 2-13B                     53.20%               96.34%             93.17%           85.12%"
+      },
+      "rawModelName": "Chinese Alpaca 2-13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 99.6,
+      "unit": "percent",
+      "settings": {
+        "other": "physical health"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Chinese Alpaca 2-13B                     53.20%               96.34%             93.17%           85.12%                 99.60%"
+      },
+      "rawModelName": "Chinese Alpaca 2-13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 99.31,
+      "unit": "percent",
+      "settings": {
+        "other": "mental health"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Chinese Alpaca 2-13B                     53.20%               96.34%             93.17%           85.12%                 99.60%                99.31%"
+      },
+      "rawModelName": "Chinese Alpaca 2-13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 96.53,
+      "unit": "percent",
+      "settings": {
+        "other": "financial privacy"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Chinese Alpaca 2-13B                     53.20%               96.34%             93.17%           85.12%                 99.60%                99.31%             96.53%"
+      },
+      "rawModelName": "Chinese Alpaca 2-13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 89.04,
+      "unit": "percent",
+      "settings": {
+        "other": "Average"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Chinese Alpaca 2-13B                     53.20%               96.34%             93.17%           85.12%                 99.60%                99.31%             96.53%               89.04%"
+      },
+      "rawModelName": "Chinese Alpaca 2-13B"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 78.2,
+      "unit": "percent",
+      "settings": {
+        "other": "sensitive topics"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-7B-chat                       78.20%"
+      },
+      "model": "baichuan-inc/Baichuan2-7B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 96,
+      "unit": "percent",
+      "settings": {
+        "other": "bias/discrimination"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-7B-chat                       78.20%               96.00%"
+      },
+      "model": "baichuan-inc/Baichuan2-7B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 99.1,
+      "unit": "percent",
+      "settings": {
+        "other": "insults/profanity"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-7B-chat                       78.20%               96.00%             99.10%"
+      },
+      "model": "baichuan-inc/Baichuan2-7B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 97.12,
+      "unit": "percent",
+      "settings": {
+        "other": "illegal/unethical content"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-7B-chat                       78.20%               96.00%             99.10%           97.12%"
+      },
+      "model": "baichuan-inc/Baichuan2-7B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "physical health"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-7B-chat                       78.20%               96.00%             99.10%           97.12%                100.00%"
+      },
+      "model": "baichuan-inc/Baichuan2-7B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 99.8,
+      "unit": "percent",
+      "settings": {
+        "other": "mental health"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-7B-chat                       78.20%               96.00%             99.10%           97.12%                100.00%                99.80%"
+      },
+      "model": "baichuan-inc/Baichuan2-7B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 96.84,
+      "unit": "percent",
+      "settings": {
+        "other": "financial privacy"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-7B-chat                       78.20%               96.00%             99.10%           97.12%                100.00%                99.80%             96.84%"
+      },
+      "model": "baichuan-inc/Baichuan2-7B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 95.45,
+      "unit": "percent",
+      "settings": {
+        "other": "Average"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-7B-chat                       78.20%               96.00%             99.10%           97.12%                100.00%                99.80%             96.84%               95.45%"
+      },
+      "model": "baichuan-inc/Baichuan2-7B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 87.1,
+      "unit": "percent",
+      "settings": {
+        "other": "sensitive topics"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-13B-chat                      87.10%"
+      },
+      "model": "baichuan-inc/Baichuan2-13B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 98.97,
+      "unit": "percent",
+      "settings": {
+        "other": "bias/discrimination"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-13B-chat                      87.10%               98.97%"
+      },
+      "model": "baichuan-inc/Baichuan2-13B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 99.1,
+      "unit": "percent",
+      "settings": {
+        "other": "insults/profanity"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-13B-chat                      87.10%               98.97%             99.10%"
+      },
+      "model": "baichuan-inc/Baichuan2-13B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 98.36,
+      "unit": "percent",
+      "settings": {
+        "other": "illegal/unethical content"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-13B-chat                      87.10%               98.97%             99.10%           98.36%"
+      },
+      "model": "baichuan-inc/Baichuan2-13B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 100,
+      "unit": "percent",
+      "settings": {
+        "other": "physical health"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-13B-chat                      87.10%               98.97%             99.10%           98.36%                100.00%"
+      },
+      "model": "baichuan-inc/Baichuan2-13B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 99.8,
+      "unit": "percent",
+      "settings": {
+        "other": "mental health"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-13B-chat                      87.10%               98.97%             99.10%           98.36%                100.00%                99.80%"
+      },
+      "model": "baichuan-inc/Baichuan2-13B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 98.12,
+      "unit": "percent",
+      "settings": {
+        "other": "financial privacy"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-13B-chat                      87.10%               98.97%             99.10%           98.36%                100.00%                99.80%             98.12%"
+      },
+      "model": "baichuan-inc/Baichuan2-13B-Chat"
+    },
+    {
+      "rawEvalName": "Baichuan Harmless Evaluation Dataset",
+      "metric": "harmlessness rate",
+      "value": 97.5,
+      "unit": "percent",
+      "settings": {
+        "other": "Average"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 9",
+        "quote": "Baichuan 2-13B-chat                      87.10%               98.97%             99.10%           98.36%                100.00%                99.80%             98.12%               97.50%"
+      },
+      "model": "baichuan-inc/Baichuan2-13B-Chat"
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:40:48Z"
+  },
+  "notes": "Technical report, not a system card. Safety numeric results are Toxigen (Table 8, foundation models) and internal BHED (Table 9, chat models, 7 categories + Average). Figure 6 helpfulness/harmlessness scatter has no readable numbers (skipped). Red-teaming (6 attack types, 200K prompts) and pre-training harm filters are training methods, so jailbreaks stays uncovered. Skipped capability: C-Eval, MMLU, CMMLU, Gaokao, AGIEval, BBH, GSM8K, MATH, HumanEval, MBPP, JEC-QA, CMC, USMLE, MCMLE, MedMCQA, Flores-101, Reward Model Table 4, Figure 7 checkpoint curves. Table 9 column order taken from garbled header + category list in text (sensitive topics through financial privacy, then Average). No printed page numbers found in text layer; page fields use PDF page indices."
+}

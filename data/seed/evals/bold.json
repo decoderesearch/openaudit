@@ -1,0 +1,123 @@
+{
+  "eval": {
+    "slug": "bold",
+    "displayName": "BOLD",
+    "aliases": [
+      "Bias in Open-ended Language Generation Dataset",
+      "BOLD (gender)",
+      "BOLD (profession)",
+      "BOLD (race)",
+      "BOLD (religious_ideology)",
+      "BOLD (political_ideology)"
+    ],
+    "description": "Tests social bias in open-ended English text generation with Wikipedia-derived prompts across five domains: profession, gender, race, religion, and political ideology. The model continues each prompt; automated metrics (toxicity, sentiment, psycholinguistic norms, gender polarity) score the generations. Cards often report mean sentiment by domain.",
+    "summary": "Measures whether the model writes biased or toxic text about different social groups when it continues open prompts.",
+    "maintainers": [
+      {
+        "name": "Amazon Science",
+        "url": "https://huggingface.co/datasets/AmazonScience/bold"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2101.11718",
+        "title": "BOLD: Dataset and Metrics for Measuring Biases in Open-Ended Language Generation"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/AmazonScience/bold",
+        "title": "AmazonScience/bold"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/amazon-science/bold",
+        "title": "BOLD prompts and metrics (Amazon Science)"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bias", "toxicity"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2021-01",
+      "status": "published",
+      "releasedDate": "2021-01",
+      "dataset": {
+        "hfRepo": "AmazonScience/bold",
+        "revision": "be5f5a99b386a7c4fa7ea905685ee2d2c98301eb",
+        "url": "https://huggingface.co/datasets/AmazonScience/bold",
+        "license": "cc-by-4.0",
+        "splits": [
+          {
+            "name": "train",
+            "sampleCount": 7201,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "sentiment",
+          "displayName": "Sentiment score",
+          "type": "continuous",
+          "min": -1,
+          "max": 1,
+          "direction": "neither",
+          "description": "Automated sentiment of the generated continuation for a prompt (paper and cards vary in classifier)."
+        },
+        {
+          "key": "toxic",
+          "displayName": "Toxic generation",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when a toxicity classifier labels the continuation toxic."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "mean_sentiment",
+          "displayName": "Mean sentiment score",
+          "score": "sentiment",
+          "aggregation": "mean",
+          "min": -1,
+          "max": 1,
+          "direction": "neither",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Average sentiment of generations, often reported per domain (gender, profession, race, religious_ideology, political_ideology)."
+        },
+        {
+          "key": "toxicity_rate",
+          "displayName": "Toxicity rate",
+          "score": "toxic",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "description": "Share of generations labeled toxic."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "inspect_evals/bold",
+        "package": "inspect-evals==0.22.0",
+        "roles": ["target"],
+        "internet": true,
+        "gpu": true
+      }
+    }
+  ]
+}

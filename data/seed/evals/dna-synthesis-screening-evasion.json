@@ -1,0 +1,86 @@
+{
+  "eval": {
+    "slug": "dna-synthesis-screening-evasion",
+    "displayName": "DNA Synthesis Screening Evasion",
+    "aliases": [
+      "Synthesis Screening Evasion",
+      "Synthesis Screening Evasion Criterion 3",
+      "Synthesis Screening Evasion Criterion 4"
+    ],
+    "description": "SecureBio held-out agentic eval (also described as an ABC-Bench screening-evasion task) that tests whether a model can design DNA fragments that would assemble into a target while bypassing gene-synthesis screening checks. Cards score viability and evasion criteria across pathogens; Anthropic later deprecated the eval for interpretability reasons. Samples are not public.",
+    "summary": "Tests whether AI agents can design DNA fragments that avoid gene-synthesis screening checks.",
+    "maintainers": [
+      {
+        "name": "SecureBio",
+        "url": "https://securebio.org/benchmarks/details/"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://securebio.org/benchmarks/details/",
+        "title": "SecureBio benchmark details (ABC-Bench Screening Evasion)"
+      },
+      {
+        "kind": "blog",
+        "url": "https://securebio.org/blog/securebios-ai-team-overview-biorisk-evaluations/",
+        "title": "SecureBio AI team overview"
+      },
+      {
+        "kind": "homepage",
+        "url": "https://www-cdn.anthropic.com/07b2a3f9902ee19fe39a36ca638e5ae987bc64dd.pdf",
+        "title": "Claude 4 System Card (DNA Synthesis Screening Evasion)"
+      }
+    ],
+    "access": "held_out",
+    "status": "retired",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic", "single_turn"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "human"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem", "agentic_misuse"]
+    },
+    "visibility": "public",
+    "family": "SecureBio biorisk"
+  },
+  "versions": [
+    {
+      "version": "securebio-abc-bench",
+      "status": "draft",
+      "changes": "Criteria and pathogen set used in partner testing; Anthropic cards report per-criterion scores and saturated-criteria counts.",
+      "scores": [
+        {
+          "key": "criterion_passed",
+          "displayName": "Criterion passed",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "Whether a design meets a stated assembly or screening-evasion criterion for a pathogen trial."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "criterion_score",
+          "displayName": "Criterion score",
+          "score": "criterion_passed",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of trials that pass a criterion, or related aggregates cards report (for example criteria saturated)."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target"],
+        "sandbox": "none",
+        "internet": false
+      }
+    }
+  ]
+}

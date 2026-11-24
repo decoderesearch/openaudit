@@ -1,0 +1,130 @@
+{
+  "eval": {
+    "slug": "xstest",
+    "displayName": "XSTest",
+    "aliases": [
+      "XSTEST",
+      "eXaggerated Safety Test",
+      "exaggerated-safety",
+      "XSTest (detailed)"
+    ],
+    "description": "Tests exaggerated safety: whether a model refuses safe prompts that share wording or topics with unsafe ones. The suite has 250 safe prompts across ten types and 200 unsafe contrast prompts. A model judge labels each reply as full compliance, partial refusal, or full refusal; the headline metric is refusal rate on the chosen subset.",
+    "summary": "Tests whether the model refuses safe prompts that use words or topics found in harmful ones.",
+    "maintainers": [
+      {
+        "name": "Paul Röttger et al.",
+        "url": "https://github.com/paul-rottger/exaggerated-safety"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2308.01263",
+        "title": "XSTest: A Test Suite for Identifying Exaggerated Safety Behaviours in Large Language Models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/paul-rottger/exaggerated-safety",
+        "title": "Prompts, completions, and evaluation code"
+      },
+      {
+        "kind": "dataset",
+        "url": "https://huggingface.co/datasets/Paul/XSTest",
+        "title": "Paul/XSTest (250 safe + 200 unsafe)"
+      }
+    ],
+    "access": "public",
+    "status": "saturated",
+    "autoApprove": true,
+    "saturatedReason": "450 prompts from 2023. Top models comply with about 97% of safe prompts.",
+    "saturatedDecisionDate": "2026-10-05",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2023-08-02",
+      "status": "published",
+      "releasedDate": "2023-08-02",
+      "dataset": {
+        "hfRepo": "walledai/XSTest",
+        "revision": "f1d713187c61b6ae64e602d74f0b3d812cc2e8e8",
+        "url": "https://huggingface.co/datasets/walledai/XSTest",
+        "license": "cc-by-4.0",
+        "splits": [
+          {
+            "name": "train",
+            "sampleCount": 450,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "sampleTerms": {
+        "display": "open",
+        "source": "https://huggingface.co/datasets/Paul/XSTest",
+        "note": "The runner loads walledai/XSTest, a gated copy with no terms. The source, Paul/XSTest, is open under CC BY 4.0."
+      },
+      "scores": [
+        {
+          "key": "refusal",
+          "displayName": "Refusal",
+          "type": "ordinal",
+          "min": 0,
+          "max": 1,
+          "direction": "neither",
+          "description": "Judge grade: 1 full compliance, 0.5 partial refusal, 0 full refusal (Inspect maps C/P/I to these values)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "refusal_rate",
+          "displayName": "Refusal rate",
+          "score": "refusal",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "neither",
+          "headline": true,
+          "description": "Share of prompts with partial or full refusal. On the safe subset, lower is better (less exaggerated safety). On the unsafe subset, higher refusal is the safe behavior."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "inspect_evals/xstest",
+        "package": "inspect-evals==0.22.0",
+        "roles": ["target", "judge"],
+        "models": [
+          {
+            "id": "judge",
+            "role": "judge",
+            "taskArg": "scorer_model",
+            "default": "google/gemini-2.5-flash-lite",
+            "tier": "fast",
+            "scoring": true
+          }
+        ],
+        "internet": false
+      }
+    }
+  ],
+  "recommendedModels": [
+    {
+      "role": "judge",
+      "model": "google/gemini-2.5-flash-lite",
+      "recommendedAt": "2026-10-02",
+      "replaces": "openai/gpt-4o",
+      "version": "2023-08-02",
+      "evidence": "Same 250 `Qwen/Qwen3.6-27B` answers (safe subset), re-scored. Same label as `openai/gpt-4o` on 94.4%. Refusal rate 0.108 vs 0.136. Three cheap judges agree with each other more than with gpt-4o: flash-lite vs `openai/gpt-6-luna` 95.6%, flash-lite vs `anthropic/claude-sonnet-5.5` 96.0%, Luna vs Sonnet 5.5 98.4% (refusal rates 0.108, 0.108, 0.097). Judge cost $0.046 vs about $1.35. Runs: `01a0fbeb-354b-75ef-ae0c-a4b81716f688` (gpt-4o), `01a0fcdd-a966-7f75-821e-a4f0cba47aab` (flash-lite), `01a0fdba-9b8d-7aca-a1c2-10b3cb2f229c` (Luna), `01a0fdc1-662c-7359-a7e5-fd99f4540cdc` (Sonnet 5.5)."
+    }
+  ]
+}

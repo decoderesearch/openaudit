@@ -1,0 +1,522 @@
+{
+  "document": "deepseek-janus-pro-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "deepseek-ai/Janus-Pro-7B"
+    },
+    {
+      "model": "deepseek-ai/Janus-Pro-1B"
+    }
+  ],
+  "pageCount": 13,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "4096",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "we utilize DeepSeek-LLM (1.5B and 7B) [3] with a maximum supported\nsequence length of 4096 as the base language model."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "multimodal understanding and text-to-image generation (image + text)",
+      "source": {
+        "page": "2",
+        "pdfPage": 1,
+        "quote": "advancements in both multimodal understanding and text-to-image instruction-following capa-\nbilities, while also enhancing the stability of text-to-image generation."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "includes Chinese conversational data (among Stage III SFT additions)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "we also incorporate additional\ndatasets from DeepSeek-VL2, such as MEME understanding, Chinese conversational data,"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "Janus-Pro series 1B and 7B; LLM bases DeepSeek-LLM 1.5B and 7B",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "The Janus-Pro series includes two model sizes: 1B and 7B, demonstrating scalability"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Decoupled visual encoding (SigLIP for understanding, VQ tokenizer for generation) into a unified autoregressive LLM",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "The core\ndesign principle of the overall architecture is to decouple visual encoding for multimodal\nunderstanding and generation."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "~90M added multimodal Stage II samples; ~72M synthetic aesthetic generation samples (real:synthetic 1:1 in unified pretraining); Stage III data ratio multimodal:text:t2i = 5:1:4",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "For the Stage II pretraining data, we refer to DeepSeek-\nVL2 [49] and add approximately 90 million samples."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "About 9/14 days on 16/32 nodes of 8×A100 40GB for 1.5B/7B",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "The whole training process took about 9/14 days\non a cluster of 16/32 nodes for 1.5B/7B model, each equipped with 8 Nvidia A100 (40GB) GPUs."
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[POPE](/evals/pope) object-hallucination scores reported for Janus-Pro-1B (86.2) and Janus-Pro-7B (87.4) (higher is better)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Janus-Pro-7B                  7B      87.4   1567.1   79.2   72.1   62.0   41.0   50.0"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [],
+  "evalResults": [
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "LLaVA-v1.5-Phi-1.5",
+      "metric": "accuracy",
+      "value": 84.1,
+      "unit": "percent",
+      "settings": {
+        "other": "1.3B LLM; Und. Only"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "LLaVA-v1.5-Phi-1.5 [50]      1.3B     84.1   1128.0    -      -     56.5   30.7    -"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "MobileVLM",
+      "metric": "accuracy",
+      "value": 84.5,
+      "unit": "percent",
+      "settings": {
+        "other": "1.4B LLM; Und. Only"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "MobileVLM [6]                1.4B     84.5   1196.2   53.2    -     56.1    -      -"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "MobileVLM-V2",
+      "metric": "accuracy",
+      "value": 84.3,
+      "unit": "percent",
+      "settings": {
+        "other": "1.4B LLM; Und. Only"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "MobileVLM-V2 [7]             1.4B     84.3   1302.8   57.7    -     59.3    -      -"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "MobileVLM",
+      "metric": "accuracy",
+      "value": 84.9,
+      "unit": "percent",
+      "settings": {
+        "other": "2.7B LLM; Und. Only"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "MobileVLM [6]                2.7B     84.9   1288.9   59.6    -     59.0    -      -"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "MobileVLM-V2",
+      "metric": "accuracy",
+      "value": 84.7,
+      "unit": "percent",
+      "settings": {
+        "other": "2.7B LLM; Und. Only"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "MobileVLM-V2 [7]             2.7B     84.7   1440.5   63.2    -     61.1    -      -"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "LLaVA-Phi",
+      "metric": "accuracy",
+      "value": 85,
+      "unit": "percent",
+      "settings": {
+        "other": "2.7B LLM; Und. Only"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "LLaVA-Phi [56]               2.7B     85.0   1335.1   59.8    -      -      -     28.9"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "LLaVA",
+      "metric": "accuracy",
+      "value": 76.3,
+      "unit": "percent",
+      "settings": {
+        "other": "7B LLM; Und. Only"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "LLaVA [27]                    7B      76.3    809.6   38.7   33.5    -      -     25.5"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "LLaVA-v1.5",
+      "metric": "accuracy",
+      "value": 85.9,
+      "unit": "percent",
+      "settings": {
+        "other": "7B LLM; Und. Only"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "LLaVA-v1.5 [26]               7B      85.9   1510.7   64.3   58.6   62.0   35.4   31.1"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "Emu3-Chat",
+      "metric": "accuracy",
+      "value": 85.2,
+      "unit": "percent",
+      "settings": {
+        "other": "8B LLM; Und. Only"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "Emu3-Chat [45]                8B      85.2    1244    58.5   68.2   60.3   31.6   37.2"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "InstructBLIP",
+      "metric": "accuracy",
+      "value": 78.9,
+      "unit": "percent",
+      "settings": {
+        "other": "13B LLM; Und. Only"
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "InstructBLIP [8]             13B      78.9   1212.8    -      -     49.5    -     25.6"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "Show-o-256",
+      "metric": "accuracy",
+      "value": 73.8,
+      "unit": "percent",
+      "settings": {
+        "other": "1.3B LLM; Und. and Gen."
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "Show-o-256 [50]              1.3B     73.8    948.4    -      -     48.7   25.1     -"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "Show-o-512",
+      "metric": "accuracy",
+      "value": 80,
+      "unit": "percent",
+      "settings": {
+        "other": "1.3B LLM; Und. and Gen."
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "Show-o-512 [50]              1.3B     80.0   1097.2    -      -     58.0   26.7     -"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "D-Dit",
+      "metric": "accuracy",
+      "value": 84,
+      "unit": "percent",
+      "settings": {
+        "other": "2.0B LLM; Und. and Gen."
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "D-Dit [24]                   2.0B     84.0   1124.7    -      -     59.2    -       -"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "ILLUME",
+      "metric": "accuracy",
+      "value": 88.5,
+      "unit": "percent",
+      "settings": {
+        "other": "7B LLM; Und. and Gen."
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "ILLUME [44]                   7B      88.5   1445.3   65.1   72.9    −     38.2   37.0"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "TokenFlow-XL",
+      "metric": "accuracy",
+      "value": 86.8,
+      "unit": "percent",
+      "settings": {
+        "other": "13B LLM; Und. and Gen."
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "TokenFlow-XL [34]            13B      86.8   1545.9   68.9   68.7   62.7   38.7   40.7"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "LWM",
+      "metric": "accuracy",
+      "value": 75.2,
+      "unit": "percent",
+      "settings": {
+        "other": "7B LLM; Und. and Gen."
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "LWM [28]                      7B      75.2      -      -      -     44.8    -      9.6"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "VILA-U",
+      "metric": "accuracy",
+      "value": 85.8,
+      "unit": "percent",
+      "settings": {
+        "other": "7B LLM; Und. and Gen."
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "VILA-U [48]                   7B      85.8   1401.8    -     59.0   60.8    -     33.5"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "rawModelName": "Janus",
+      "metric": "accuracy",
+      "value": 87,
+      "unit": "percent",
+      "settings": {
+        "other": "1.5B LLM; Und. and Gen."
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "Janus                        1.5B     87.0   1338.0   69.4   63.7   59.1   30.5   34.3"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "model": "deepseek-ai/Janus-Pro-1B",
+      "metric": "accuracy",
+      "value": 86.2,
+      "unit": "percent",
+      "settings": {
+        "other": "1.5B LLM; Und. and Gen."
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "Janus-Pro-1B                 1.5B     86.2   1444.0   75.5   68.3   59.3   36.3   39.8"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "model": "deepseek-ai/Janus-Pro-7B",
+      "metric": "accuracy",
+      "value": 87.4,
+      "unit": "percent",
+      "settings": {
+        "other": "7B LLM; Und. and Gen."
+      },
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Table 3",
+        "quote": "Janus-Pro-7B                  7B      87.4   1567.1   79.2   72.1   62.0   41.0   50.0"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:33:17Z"
+  },
+  "notes": "Capability/architecture technical report (arXiv 2501.17811). No safety, alignment, refusal, jailbreak, bias, toxicity, privacy, or dangerous-capability section. Only safety-relevant numbered eval is POPE (object hallucination; citation [23] Evaluating object hallucination), taken from Table 3; all other Table 3 columns and GenEval/DPG-Bench skipped as capability. ArXiv date is not treated as model releaseDate. Code/models 'publicly available' is not a license. Limitations discuss OCR/resolution detail, not safety. Seed linked deepseek-ai/Janus-Pro-7B; covered both Janus-Pro-7B and checkpoint Janus-Pro-1B as named in the report."
+}

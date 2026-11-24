@@ -1,0 +1,214 @@
+{
+  "document": "mistral-magistral-paper",
+  "alsoDocuments": ["mistral-magistral-blog"],
+  "covers": [
+    {
+      "model": "mistralai/Magistral-Small-2506",
+      "section": "Magistral Small"
+    },
+    {
+      "model": "mistralai/magistral-medium-2506",
+      "section": "Magistral Medium"
+    }
+  ],
+  "pageCount": 23,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text and vision (multimodal; retain vision encoders from base models)",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "Mistral Small 3 and Mistral Medium 3, are multimodal\nmodels and come with associated vision encoders."
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "reasoning with <think> chain-of-thought tags",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce Magistral, Mistral’s first reasoning model and our own scalable rein-"
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "English plus French, Spanish, Italian, German, Chinese, and Russian (and arbitrary languages after training)",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "languages: French, Spanish, Italian, German, Chinese, and Russian."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2 (Magistral Small weights)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We release the weights of Magistral Small (24B) under the Apache 2 license1 ."
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "24B (Magistral Small); Medium size not stated",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We release the weights of Magistral Small (24B) under the Apache 2 license1 ."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "based on Mistral Small 3 and Mistral Medium 3 respectively; trained with GRPO RL",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "based on the Mistral Small 3 and Mistral Medium 3 models respectively"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "filtered math and code RL problems; Magistral Small also SFT on Magistral Medium traces plus OpenThoughts and OpenR1 code subset; 10% general instruction data",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "This process resulted in a dataset of 35k\ncode problems."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Reinforcement learning (RL) on text-only data did not degrade multimodal ability and improved multimodal reasoning benchmarks ([MMMU](https://arxiv.org/abs/2311.16502) +5% to 70%, MMMU-Pro-Standard +4.4% to 57.9%, MMMU-Pro-Vision +12% to 52.1%).", "tone": "mixed",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "MMMU (+5%, reaching 70%), MMMU-Pro-Standard (+4.4%, reaching 57.9%) and\nMMMU-Pro-Vision (+12%, reaching 52.1%)."
+      }
+    },
+    {
+      "text": "Pure RL without cold-start reasoning traces raised Magistral Medium AIME-24 pass@1 by nearly 50% over Mistral Medium 3.", "tone": "mixed",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "We find our RL pipeline alone yields a nearly 50%\naccuracy increase in AIME ’24 (pass@1), and 30% on LiveCodeBench (v5)."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:19:35Z"
+  },
+  "notes": "Technical report on Magistral RL reasoning training only. No safety, alignment, refusal, jailbreak, bias/fairness, toxicity, privacy, or dangerous-capability section or evals; evalResults left empty per pilot safety-only rule. Capability-only results skipped: AIME’24/’25, MATH-500, GPQA, LiveCodeBench v5/v6, Aider Polyglot, Humanity’s Last Exam (text), multilingual AIME’24, MathVista/MMMU/MMMU-Pro (Figure 10 chart), IFEval, Internal function-calling bench (Table 6). Figure 1/5/10/13 numbers are partly image-only; caption text used where cited in findings. Mentions of “bias” and “alignment” are length/KL training details, not safety topics. Medium parameter count not stated. Apache 2 license stated only for Magistral Small."
+}

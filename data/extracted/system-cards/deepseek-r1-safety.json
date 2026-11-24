@@ -1,0 +1,5367 @@
+{
+  "document": "deepseek-r1-safety",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "deepseek-ai/DeepSeek-R1",
+      "section": "4.3 DeepSeek-R1 Safety Report"
+    }
+  ],
+  "pageCount": 83,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "one week before January 24, 2025",
+      "source": {
+        "page": "35",
+        "pdfPage": 36,
+        "quote": "The screenshot is captured on January 24, 2025, one week after model release."
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "stated",
+      "value": "July 2024 (DeepSeek-V3 base)",
+      "source": {
+        "page": "31",
+        "pdfPage": 32,
+        "quote": "DeepSeek-V3 base has\na knowledge cutoff date of July 2024, predating evaluation benchmarks like CNMO"
+      }
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "long CoT",
+      "source": {
+        "page": "12",
+        "pdfPage": 13,
+        "quote": "construct and collect a small amount of long CoT data to fine-"
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "Chinese and English; multilingual safety tested in 50 languages",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "quote": "model’s safety performance in both Chinese and English. Ultimately, we developed"
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "MIT License",
+      "source": {
+        "page": "34",
+        "pdfPage": 35,
+        "quote": "an open-source model under the MIT License could achieve comparable perfor-"
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "671B",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "quote": "# Total Params                   -             -         671B    -      -     671B"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "37B",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "quote": "# Activated Params               -             -          37B    -      -     37B"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "MoE",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "quote": "Architecture                     -             -         MoE     -      -     MoE"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "DeepSeek-V3 base pre-trained on 14.8 trillion tokens",
+      "source": {
+        "page": "4",
+        "pdfPage": 5,
+        "quote": "was pre-trained on an expansive dataset of 14.8 trillion high-quality, diverse tokens,"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "147K H800 GPU hours total ($294K at $2/GPU hour)",
+      "source": {
+        "page": "27",
+        "pdfPage": 28,
+        "quote": "in H800 GPU Hours                       101K                        5K                  41K         147K"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "R1 average safety score 95.0 with risk control on public benchmarks; weaker on [HarmBench](/evals/harmbench) intellectual property (IP) prompts",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": true,
+      "headline": "SST includes Child Abuse among five safety categories",
+      "source": {
+        "page": "38",
+        "pdfPage": 39,
+        "quote": "Illegal Items, Physical\n  Harm, Scams & Fraud, Child Abuse, and Suicide, Self-Harm & Eating Disorders"
+      }
+    },
+    {
+      "topic": "self_harm",
+      "covered": true,
+      "headline": "SST covers Suicide, Self-Harm & Eating Disorders; risk standards forbid inducing self-harm",
+      "source": {
+        "page": "38",
+        "pdfPage": 39,
+        "quote": "Suicide, Self-Harm & Eating Disorders\n  (SH & ED)."
+      }
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Without risk control, R1 jailbreak unsafe rate rises to 85.9% (+60.7); with risk control it falls to 4.3%",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "quote": "          DeepSeek-R1               25.2    85.9   +60.7   5.6    1.9     -3.7"
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[SimpleQA](https://arxiv.org/abs/2411.04368) Correct for DeepSeek-R1 is 30.1 (higher is better)",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "quote": "        SimpleQA (Correct)              28.4         38.2        24.9    7.0   47.0   30.1"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "[BBQ](/evals/bbq) safety score 96.6 (higher is better); in-house Discrimination unsafe 19.7% without risk control",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "Supplementary Fig. 4 shows reward hacking during reinforcement learning (RL) where reward rises while test Pass@1 falls",
+      "source": {
+        "page": "27",
+        "pdfPage": 28,
+        "quote": "Supplementary Fig. 4: Reward hacking: the reward exhibits an increasi"
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": true,
+      "headline": "Safety table reports DeepSeek-R1 (hide cot) separately from DeepSeek R1 with chain of thought (CoT) shown",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "quote": "DeepSeek-R1 (hide cot) 98.0    96.6   97.2    94.4   93.7   96.3 (58.0)    96.0 (89.7)"
+      }
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": true,
+      "headline": "Risk standards cover emotional manipulation; harmful taxonomy includes mental manipulation",
+      "source": {
+        "page": "36",
+        "pdfPage": 37,
+        "quote": "5. [Emotional Manipulation and Social Division]: Responses should not use exaggerated, emotional"
+      }
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "Illegal taxonomy and risk standards cover cybercrime including hacking and data theft",
+      "source": {
+        "page": "36",
+        "pdfPage": 37,
+        "quote": "cybercrime, including hacking, information theft, data\n      tampering, or online fraud"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "Risk standards forbid advice on manufacturing controlled biochemicals and drugs",
+      "source": {
+        "page": "36",
+        "pdfPage": 37,
+        "quote": "manufacturing dangerous items (weapons, ammunition, drugs,\n      controlled biochemicals)"
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [
+    {
+      "name": "HELM",
+      "scope": "Independent third-party safety leaderboard results for SST, BBQ, ART, and XSTest (recorded April 2025)",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "quote": "obtained from the independent third-\nparty evaluation platform HELM"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "text": "DeepSeek recommends deploying an external risk-control system (keyword filter plus DeepSeek-V3 review) because it greatly improves safety, especially against jailbreaks.", "tone": "mixed",
+      "source": {
+        "page": "38",
+        "pdfPage": 39,
+        "quote": "dangerous tactics such as jailbreak attacks. Therefore, we recommend that developers"
+      }
+    },
+    {
+      "text": "Without risk control, DeepSeek-R1’s jailbreak unsafe rate jumps from 25.2% to 85.9%, far worse than closed models; with risk control jailbreak unsafe falls to 4.3% while rejection rises to 87.3%.", "tone": "bad",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "quote": "          DeepSeek-R1               25.2    85.9   +60.7   5.6    1.9     -3.7"
+      }
+    },
+    {
+      "text": "R1 is weak on [HarmBench](/evals/harmbench) intellectual-property prompts (for example lyric generation), which drives a large safety gap versus other frontier models.", "tone": "mixed",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "quote": "R1 performs poorly\non questions related to intellectual property rights within the HarmBench testset."
+      }
+    },
+    {
+      "text": "Showing the chain-of-thought lowers [HarmBench](/evals/harmbench) safety (89.3 with risk control, 35.0 without) versus hide-cot (96.3 / 58.0).", "tone": "bad",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      }
+    },
+    {
+      "text": "Authors place R1 with risk control in a second safety tier (~10% unsafe) on their in-house taxonomy; without risk control they call it relatively unsafe (>20%).", "tone": "bad",
+      "source": {
+        "page": "43",
+        "pdfPage": 44,
+        "quote": "R1 (without risk control) and GPT-4o (2024-05-13) are relatively unsafe models\n  (unsafe rate beyond 20%)."
+      }
+    },
+    {
+      "text": "With risk control, multilingual safety across 50 languages is 85.9% for R1, near Claude-3.7-Sonnet’s 88.3%; without risk control R1 scores 74.2%.", "tone": "mixed",
+      "source": {
+        "page": "45",
+        "pdfPage": 46,
+        "quote": "With risk control system in place, DeepSeek-V3 (86.5%) and DeepSeek-R1 (85.9%)"
+      }
+    },
+    {
+      "text": "Open-source DeepSeek/Qwen models face harder jailbreak risk when deployed without a risk-control layer, unlike typical closed-source services.", "tone": "mixed",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "quote": "Open-source models (DeepSeek, Qwen) face more severe jailbreak security challenges"
+      }
+    },
+    {
+      "text": "DeepSeek-R1 (without risk control) had zero high-risk languages (safety score below 60) among 50 languages tested.", "tone": "good",
+      "source": {
+        "page": "45",
+        "pdfPage": 46,
+        "quote": "DeepSeek-R1 (without risk control system) and Claude-3.7-\n  Sonnet have zero high-risk languages"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "SST",
+      "metric": "Safety Score",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "Claude-3.7-Sonnet      100.0   92.1   99.7    96.4   95.9      83.3           94.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "BBQ",
+      "metric": "Safety Score",
+      "value": 92.1,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "Claude-3.7-Sonnet      100.0   92.1   99.7    96.4   95.9      83.3           94.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "ART",
+      "metric": "Safety Score",
+      "value": 99.7,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "Claude-3.7-Sonnet      100.0   92.1   99.7    96.4   95.9      83.3           94.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "Safety Score",
+      "value": 96.4,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "Claude-3.7-Sonnet      100.0   92.1   99.7    96.4   95.9      83.3           94.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "Do-Not-Answer",
+      "metric": "Safety Score",
+      "value": 95.9,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "Claude-3.7-Sonnet      100.0   92.1   99.7    96.4   95.9      83.3           94.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "Safety Score",
+      "value": 83.3,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "Claude-3.7-Sonnet      100.0   92.1   99.7    96.4   95.9      83.3           94.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "safety benchmarks average",
+      "metric": "Safety Score",
+      "value": 94.6,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "Claude-3.7-Sonnet      100.0   92.1   99.7    96.4   95.9      83.3           94.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "SST",
+      "metric": "Safety Score",
+      "value": 99,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "o1 (2024-12-17)        99.0    97.3   98.3    97.0   86.2      84.0           93.6"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "BBQ",
+      "metric": "Safety Score",
+      "value": 97.3,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "o1 (2024-12-17)        99.0    97.3   98.3    97.0   86.2      84.0           93.6"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "ART",
+      "metric": "Safety Score",
+      "value": 98.3,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "o1 (2024-12-17)        99.0    97.3   98.3    97.0   86.2      84.0           93.6"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "Safety Score",
+      "value": 97,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "o1 (2024-12-17)        99.0    97.3   98.3    97.0   86.2      84.0           93.6"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "Do-Not-Answer",
+      "metric": "Safety Score",
+      "value": 86.2,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "o1 (2024-12-17)        99.0    97.3   98.3    97.0   86.2      84.0           93.6"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "Safety Score",
+      "value": 84,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "o1 (2024-12-17)        99.0    97.3   98.3    97.0   86.2      84.0           93.6"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "safety benchmarks average",
+      "metric": "Safety Score",
+      "value": 93.6,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "o1 (2024-12-17)        99.0    97.3   98.3    97.0   86.2      84.0           93.6"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "SST",
+      "metric": "Safety Score",
+      "value": 98.5,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "GPT-4o (2024-05-13)    98.5    95.1   99.1    97.3   90.6      72.7           92.2"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "BBQ",
+      "metric": "Safety Score",
+      "value": 95.1,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "GPT-4o (2024-05-13)    98.5    95.1   99.1    97.3   90.6      72.7           92.2"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "ART",
+      "metric": "Safety Score",
+      "value": 99.1,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "GPT-4o (2024-05-13)    98.5    95.1   99.1    97.3   90.6      72.7           92.2"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "Safety Score",
+      "value": 97.3,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "GPT-4o (2024-05-13)    98.5    95.1   99.1    97.3   90.6      72.7           92.2"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "Do-Not-Answer",
+      "metric": "Safety Score",
+      "value": 90.6,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "GPT-4o (2024-05-13)    98.5    95.1   99.1    97.3   90.6      72.7           92.2"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "Safety Score",
+      "value": 72.7,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "GPT-4o (2024-05-13)    98.5    95.1   99.1    97.3   90.6      72.7           92.2"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "safety benchmarks average",
+      "metric": "Safety Score",
+      "value": 92.2,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "GPT-4o (2024-05-13)    98.5    95.1   99.1    97.3   90.6      72.7           92.2"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "SST",
+      "metric": "Safety Score",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "Qwen2.5 Instruct (72B) 100.0   95.4   99.6    97.9   95.9      83.0           95.3"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "BBQ",
+      "metric": "Safety Score",
+      "value": 95.4,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "Qwen2.5 Instruct (72B) 100.0   95.4   99.6    97.9   95.9      83.0           95.3"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "ART",
+      "metric": "Safety Score",
+      "value": 99.6,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "Qwen2.5 Instruct (72B) 100.0   95.4   99.6    97.9   95.9      83.0           95.3"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "Safety Score",
+      "value": 97.9,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "Qwen2.5 Instruct (72B) 100.0   95.4   99.6    97.9   95.9      83.0           95.3"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "Do-Not-Answer",
+      "metric": "Safety Score",
+      "value": 95.9,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "Qwen2.5 Instruct (72B) 100.0   95.4   99.6    97.9   95.9      83.0           95.3"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "Safety Score",
+      "value": 83,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "Qwen2.5 Instruct (72B) 100.0   95.4   99.6    97.9   95.9      83.0           95.3"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "safety benchmarks average",
+      "metric": "Safety Score",
+      "value": 95.3,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "Qwen2.5 Instruct (72B) 100.0   95.4   99.6    97.9   95.9      83.0           95.3"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "SST",
+      "metric": "Safety Score",
+      "value": 95.3,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-V3            95.3    96.7   97.1    97.1   95.6   96.0 (67.0)    96.3 (91.5)"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "metric": "Safety Score",
+      "value": 96.7,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-V3            95.3    96.7   97.1    97.1   95.6   96.0 (67.0)    96.3 (91.5)"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "ART",
+      "metric": "Safety Score",
+      "value": 97.1,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-V3            95.3    96.7   97.1    97.1   95.6   96.0 (67.0)    96.3 (91.5)"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "Safety Score",
+      "value": 97.1,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-V3            95.3    96.7   97.1    97.1   95.6   96.0 (67.0)    96.3 (91.5)"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "Do-Not-Answer",
+      "metric": "Safety Score",
+      "value": 95.6,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-V3            95.3    96.7   97.1    97.1   95.6   96.0 (67.0)    96.3 (91.5)"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "Safety Score",
+      "value": 96,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-V3            95.3    96.7   97.1    97.1   95.6   96.0 (67.0)    96.3 (91.5)"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "safety benchmarks average",
+      "metric": "Safety Score",
+      "value": 96.3,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-V3            95.3    96.7   97.1    97.1   95.6   96.0 (67.0)    96.3 (91.5)"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "Safety Score",
+      "value": 67,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-V3            95.3    96.7   97.1    97.1   95.6   96.0 (67.0)    96.3 (91.5)"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "safety benchmarks average",
+      "metric": "Safety Score",
+      "value": 91.5,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-V3            95.3    96.7   97.1    97.1   95.6   96.0 (67.0)    96.3 (91.5)"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "SST",
+      "metric": "Safety Score",
+      "value": 98,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-R1 (hide cot) 98.0    96.6   97.2    94.4   93.7   96.3 (58.0)    96.0 (89.7)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true,
+        "other": "hide cot"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "metric": "Safety Score",
+      "value": 96.6,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-R1 (hide cot) 98.0    96.6   97.2    94.4   93.7   96.3 (58.0)    96.0 (89.7)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true,
+        "other": "hide cot"
+      }
+    },
+    {
+      "rawEvalName": "ART",
+      "metric": "Safety Score",
+      "value": 97.2,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-R1 (hide cot) 98.0    96.6   97.2    94.4   93.7   96.3 (58.0)    96.0 (89.7)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true,
+        "other": "hide cot"
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "Safety Score",
+      "value": 94.4,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-R1 (hide cot) 98.0    96.6   97.2    94.4   93.7   96.3 (58.0)    96.0 (89.7)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true,
+        "other": "hide cot"
+      }
+    },
+    {
+      "rawEvalName": "Do-Not-Answer",
+      "metric": "Safety Score",
+      "value": 93.7,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-R1 (hide cot) 98.0    96.6   97.2    94.4   93.7   96.3 (58.0)    96.0 (89.7)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true,
+        "other": "hide cot"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "Safety Score",
+      "value": 96.3,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-R1 (hide cot) 98.0    96.6   97.2    94.4   93.7   96.3 (58.0)    96.0 (89.7)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true,
+        "other": "hide cot"
+      }
+    },
+    {
+      "rawEvalName": "safety benchmarks average",
+      "metric": "Safety Score",
+      "value": 96,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-R1 (hide cot) 98.0    96.6   97.2    94.4   93.7   96.3 (58.0)    96.0 (89.7)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true,
+        "other": "hide cot"
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "Safety Score",
+      "value": 58,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-R1 (hide cot) 98.0    96.6   97.2    94.4   93.7   96.3 (58.0)    96.0 (89.7)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false,
+        "other": "hide cot"
+      }
+    },
+    {
+      "rawEvalName": "safety benchmarks average",
+      "metric": "Safety Score",
+      "value": 89.7,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek-R1 (hide cot) 98.0    96.6   97.2    94.4   93.7   96.3 (58.0)    96.0 (89.7)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false,
+        "other": "hide cot"
+      }
+    },
+    {
+      "rawEvalName": "SST",
+      "metric": "Safety Score",
+      "value": 97.5,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "metric": "Safety Score",
+      "value": 96.6,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "ART",
+      "metric": "Safety Score",
+      "value": 96.2,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "XSTest",
+      "metric": "Safety Score",
+      "value": 95.3,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "Do-Not-Answer",
+      "metric": "Safety Score",
+      "value": 94.8,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "Safety Score",
+      "value": 89.3,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "safety benchmarks average",
+      "metric": "Safety Score",
+      "value": 95,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "HarmBench",
+      "metric": "Safety Score",
+      "value": 35,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "safety benchmarks average",
+      "metric": "Safety Score",
+      "value": 85.9,
+      "unit": "percent",
+      "source": {
+        "page": "39",
+        "pdfPage": 40,
+        "table": "Supplementary Table 6",
+        "quote": "DeepSeek R1            97.5    96.6   96.2    95.3   94.8   89.3 (35.0)    95.0 (85.9)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Unsafe",
+      "value": 8.4,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Claude-3.7-Sonnet         8.4     2.5   14.1        4.5     9.5    5.5    7.5    0.6   10.7    3.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Reject",
+      "value": 2.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Claude-3.7-Sonnet         8.4     2.5   14.1        4.5     9.5    5.5    7.5    0.6   10.7    3.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Unsafe",
+      "value": 14.1,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Claude-3.7-Sonnet         8.4     2.5   14.1        4.5     9.5    5.5    7.5    0.6   10.7    3.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Reject",
+      "value": 4.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Claude-3.7-Sonnet         8.4     2.5   14.1        4.5     9.5    5.5    7.5    0.6   10.7    3.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Unsafe",
+      "value": 9.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Claude-3.7-Sonnet         8.4     2.5   14.1        4.5     9.5    5.5    7.5    0.6   10.7    3.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Reject",
+      "value": 5.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Claude-3.7-Sonnet         8.4     2.5   14.1        4.5     9.5    5.5    7.5    0.6   10.7    3.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Unsafe",
+      "value": 7.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Claude-3.7-Sonnet         8.4     2.5   14.1        4.5     9.5    5.5    7.5    0.6   10.7    3.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Reject",
+      "value": 0.6,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Claude-3.7-Sonnet         8.4     2.5   14.1        4.5     9.5    5.5    7.5    0.6   10.7    3.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Unsafe",
+      "value": 10.7,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Claude-3.7-Sonnet         8.4     2.5   14.1        4.5     9.5    5.5    7.5    0.6   10.7    3.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Reject",
+      "value": 3.6,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Claude-3.7-Sonnet         8.4     2.5   14.1        4.5     9.5    5.5    7.5    0.6   10.7    3.6"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Unsafe",
+      "value": 7.2,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  o1 (2024-12-17)           7.2    37.8   12.3        54.8    5.0   73.5    8.8   34.4   9.0    50.4"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Reject",
+      "value": 37.8,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  o1 (2024-12-17)           7.2    37.8   12.3        54.8    5.0   73.5    8.8   34.4   9.0    50.4"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Unsafe",
+      "value": 12.3,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  o1 (2024-12-17)           7.2    37.8   12.3        54.8    5.0   73.5    8.8   34.4   9.0    50.4"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Reject",
+      "value": 54.8,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  o1 (2024-12-17)           7.2    37.8   12.3        54.8    5.0   73.5    8.8   34.4   9.0    50.4"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Unsafe",
+      "value": 5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  o1 (2024-12-17)           7.2    37.8   12.3        54.8    5.0   73.5    8.8   34.4   9.0    50.4"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Reject",
+      "value": 73.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  o1 (2024-12-17)           7.2    37.8   12.3        54.8    5.0   73.5    8.8   34.4   9.0    50.4"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Unsafe",
+      "value": 8.8,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  o1 (2024-12-17)           7.2    37.8   12.3        54.8    5.0   73.5    8.8   34.4   9.0    50.4"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Reject",
+      "value": 34.4,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  o1 (2024-12-17)           7.2    37.8   12.3        54.8    5.0   73.5    8.8   34.4   9.0    50.4"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Unsafe",
+      "value": 9,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  o1 (2024-12-17)           7.2    37.8   12.3        54.8    5.0   73.5    8.8   34.4   9.0    50.4"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Reject",
+      "value": 50.4,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  o1 (2024-12-17)           7.2    37.8   12.3        54.8    5.0   73.5    8.8   34.4   9.0    50.4"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Unsafe",
+      "value": 19.1,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  GPT-4o (2024-05-13)       19.1    6.2   22.5        28.4   28.0   19.5   18.8   4.4    22.0   17.1"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Reject",
+      "value": 6.2,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  GPT-4o (2024-05-13)       19.1    6.2   22.5        28.4   28.0   19.5   18.8   4.4    22.0   17.1"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Unsafe",
+      "value": 22.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  GPT-4o (2024-05-13)       19.1    6.2   22.5        28.4   28.0   19.5   18.8   4.4    22.0   17.1"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Reject",
+      "value": 28.4,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  GPT-4o (2024-05-13)       19.1    6.2   22.5        28.4   28.0   19.5   18.8   4.4    22.0   17.1"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Unsafe",
+      "value": 28,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  GPT-4o (2024-05-13)       19.1    6.2   22.5        28.4   28.0   19.5   18.8   4.4    22.0   17.1"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Reject",
+      "value": 19.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  GPT-4o (2024-05-13)       19.1    6.2   22.5        28.4   28.0   19.5   18.8   4.4    22.0   17.1"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Unsafe",
+      "value": 18.8,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  GPT-4o (2024-05-13)       19.1    6.2   22.5        28.4   28.0   19.5   18.8   4.4    22.0   17.1"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Reject",
+      "value": 4.4,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  GPT-4o (2024-05-13)       19.1    6.2   22.5        28.4   28.0   19.5   18.8   4.4    22.0   17.1"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Unsafe",
+      "value": 22,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  GPT-4o (2024-05-13)       19.1    6.2   22.5        28.4   28.0   19.5   18.8   4.4    22.0   17.1"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Reject",
+      "value": 17.1,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  GPT-4o (2024-05-13)       19.1    6.2   22.5        28.4   28.0   19.5   18.8   4.4    22.0   17.1"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Unsafe",
+      "value": 12.8,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Qwen2.5 Instruct (72B)    12.8    2.5   14.5        9.5    15.5   5.0    11.9   0.0    13.8    5.4"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Reject",
+      "value": 2.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Qwen2.5 Instruct (72B)    12.8    2.5   14.5        9.5    15.5   5.0    11.9   0.0    13.8    5.4"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Unsafe",
+      "value": 14.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Qwen2.5 Instruct (72B)    12.8    2.5   14.5        9.5    15.5   5.0    11.9   0.0    13.8    5.4"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Reject",
+      "value": 9.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Qwen2.5 Instruct (72B)    12.8    2.5   14.5        9.5    15.5   5.0    11.9   0.0    13.8    5.4"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Unsafe",
+      "value": 15.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Qwen2.5 Instruct (72B)    12.8    2.5   14.5        9.5    15.5   5.0    11.9   0.0    13.8    5.4"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Reject",
+      "value": 5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Qwen2.5 Instruct (72B)    12.8    2.5   14.5        9.5    15.5   5.0    11.9   0.0    13.8    5.4"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Unsafe",
+      "value": 11.9,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Qwen2.5 Instruct (72B)    12.8    2.5   14.5        9.5    15.5   5.0    11.9   0.0    13.8    5.4"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Reject",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Qwen2.5 Instruct (72B)    12.8    2.5   14.5        9.5    15.5   5.0    11.9   0.0    13.8    5.4"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Unsafe",
+      "value": 13.8,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Qwen2.5 Instruct (72B)    12.8    2.5   14.5        9.5    15.5   5.0    11.9   0.0    13.8    5.4"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Reject",
+      "value": 5.4,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  Qwen2.5 Instruct (72B)    12.8    2.5   14.5        9.5    15.5   5.0    11.9   0.0    13.8    5.4"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct"
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Unsafe",
+      "value": 20.3,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-V3               20.3    2.5   17.3        13.9   17.5   9.5    13.1   1.9    17.6    8.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Reject",
+      "value": 2.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-V3               20.3    2.5   17.3        13.9   17.5   9.5    13.1   1.9    17.6    8.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Unsafe",
+      "value": 17.3,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-V3               20.3    2.5   17.3        13.9   17.5   9.5    13.1   1.9    17.6    8.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Reject",
+      "value": 13.9,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-V3               20.3    2.5   17.3        13.9   17.5   9.5    13.1   1.9    17.6    8.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Unsafe",
+      "value": 17.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-V3               20.3    2.5   17.3        13.9   17.5   9.5    13.1   1.9    17.6    8.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Reject",
+      "value": 9.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-V3               20.3    2.5   17.3        13.9   17.5   9.5    13.1   1.9    17.6    8.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Unsafe",
+      "value": 13.1,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-V3               20.3    2.5   17.3        13.9   17.5   9.5    13.1   1.9    17.6    8.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Reject",
+      "value": 1.9,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-V3               20.3    2.5   17.3        13.9   17.5   9.5    13.1   1.9    17.6    8.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Unsafe",
+      "value": 17.6,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-V3               20.3    2.5   17.3        13.9   17.5   9.5    13.1   1.9    17.6    8.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Reject",
+      "value": 8.1,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-V3               20.3    2.5   17.3        13.9   17.5   9.5    13.1   1.9    17.6    8.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Unsafe",
+      "value": 8.1,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     8.1    16.9    3.2        35.5    7.0   22.5    3.1   18.1   5.3    25.4"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Reject",
+      "value": 16.9,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     8.1    16.9    3.2        35.5    7.0   22.5    3.1   18.1   5.3    25.4"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Unsafe",
+      "value": 3.2,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     8.1    16.9    3.2        35.5    7.0   22.5    3.1   18.1   5.3    25.4"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Reject",
+      "value": 35.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     8.1    16.9    3.2        35.5    7.0   22.5    3.1   18.1   5.3    25.4"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Unsafe",
+      "value": 7,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     8.1    16.9    3.2        35.5    7.0   22.5    3.1   18.1   5.3    25.4"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Reject",
+      "value": 22.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     8.1    16.9    3.2        35.5    7.0   22.5    3.1   18.1   5.3    25.4"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Unsafe",
+      "value": 3.1,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     8.1    16.9    3.2        35.5    7.0   22.5    3.1   18.1   5.3    25.4"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Reject",
+      "value": 18.1,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     8.1    16.9    3.2        35.5    7.0   22.5    3.1   18.1   5.3    25.4"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Unsafe",
+      "value": 5.3,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     8.1    16.9    3.2        35.5    7.0   22.5    3.1   18.1   5.3    25.4"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Reject",
+      "value": 25.4,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     8.1    16.9    3.2        35.5    7.0   22.5    3.1   18.1   5.3    25.4"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Unsafe",
+      "value": 19.7,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-R1               19.7    3.8   28.9        8.6    32.5   6.0    16.9   0.6    25.2    5.6"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Reject",
+      "value": 3.8,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-R1               19.7    3.8   28.9        8.6    32.5   6.0    16.9   0.6    25.2    5.6"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Unsafe",
+      "value": 28.9,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-R1               19.7    3.8   28.9        8.6    32.5   6.0    16.9   0.6    25.2    5.6"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Reject",
+      "value": 8.6,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-R1               19.7    3.8   28.9        8.6    32.5   6.0    16.9   0.6    25.2    5.6"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Unsafe",
+      "value": 32.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-R1               19.7    3.8   28.9        8.6    32.5   6.0    16.9   0.6    25.2    5.6"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Reject",
+      "value": 6,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-R1               19.7    3.8   28.9        8.6    32.5   6.0    16.9   0.6    25.2    5.6"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Unsafe",
+      "value": 16.9,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-R1               19.7    3.8   28.9        8.6    32.5   6.0    16.9   0.6    25.2    5.6"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Reject",
+      "value": 0.6,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-R1               19.7    3.8   28.9        8.6    32.5   6.0    16.9   0.6    25.2    5.6"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Unsafe",
+      "value": 25.2,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-R1               19.7    3.8   28.9        8.6    32.5   6.0    16.9   0.6    25.2    5.6"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Reject",
+      "value": 5.6,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  DeepSeek-R1               19.7    3.8   28.9        8.6    32.5   6.0    16.9   0.6    25.2    5.6"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Unsafe",
+      "value": 9.1,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     9.1    17.2    6.6        39.1   13.0   29.0    6.9   13.1   8.5    27.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Discrimination and Prejudice",
+      "metric": "Reject",
+      "value": 17.2,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     9.1    17.2    6.6        39.1   13.0   29.0    6.9   13.1   8.5    27.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Unsafe",
+      "value": 6.6,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     9.1    17.2    6.6        39.1   13.0   29.0    6.9   13.1   8.5    27.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Illegal and Criminal Behavior",
+      "metric": "Reject",
+      "value": 39.1,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     9.1    17.2    6.6        39.1   13.0   29.0    6.9   13.1   8.5    27.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Unsafe",
+      "value": 13,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     9.1    17.2    6.6        39.1   13.0   29.0    6.9   13.1   8.5    27.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Harmful Behavior",
+      "metric": "Reject",
+      "value": 29,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     9.1    17.2    6.6        39.1   13.0   29.0    6.9   13.1   8.5    27.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Unsafe",
+      "value": 6.9,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     9.1    17.2    6.6        39.1   13.0   29.0    6.9   13.1   8.5    27.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Moral and Ethical Issues",
+      "metric": "Reject",
+      "value": 13.1,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     9.1    17.2    6.6        39.1   13.0   29.0    6.9   13.1   8.5    27.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Unsafe",
+      "value": 8.5,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     9.1    17.2    6.6        39.1   13.0   29.0    6.9   13.1   8.5    27.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "in-house safety Overall",
+      "metric": "Reject",
+      "value": 27.3,
+      "unit": "percent",
+      "source": {
+        "page": "42",
+        "pdfPage": 43,
+        "table": "Supplementary Table 7",
+        "quote": "  + risk control system     9.1    17.2    6.6        39.1   13.0   29.0    6.9   13.1   8.5    27.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "multilingual safety (50 languages)",
+      "metric": "safety score",
+      "value": 86.5,
+      "unit": "percent",
+      "source": {
+        "page": "45",
+        "pdfPage": 46,
+        "table": "Supplementary Fig. 12",
+        "quote": "With risk control system in place, DeepSeek-V3 (86.5%) and DeepSeek-R1 (85.9%)"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "multilingual safety (50 languages)",
+      "metric": "safety score",
+      "value": 85.9,
+      "unit": "percent",
+      "source": {
+        "page": "45",
+        "pdfPage": 46,
+        "table": "Supplementary Fig. 12",
+        "quote": "With risk control system in place, DeepSeek-V3 (86.5%) and DeepSeek-R1 (85.9%)"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true
+      }
+    },
+    {
+      "rawEvalName": "multilingual safety (50 languages)",
+      "metric": "safety score",
+      "value": 88.3,
+      "unit": "percent",
+      "source": {
+        "page": "45",
+        "pdfPage": 46,
+        "table": "Supplementary Fig. 12",
+        "quote": "Claude-3.7-Sonnet (88.3%). This demonstrates that DeepSeek has reached state-of-"
+      },
+      "model": "anthropic/claude-3.7-sonnet"
+    },
+    {
+      "rawEvalName": "multilingual safety (50 languages)",
+      "metric": "safety score",
+      "value": 75.3,
+      "unit": "percent",
+      "source": {
+        "page": "45",
+        "pdfPage": 46,
+        "table": "Supplementary Fig. 12",
+        "quote": "Without risk control system, DeepSeek-V3 (75.3%) and DeepSeek-R1 (74.2%) get"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "multilingual safety (50 languages)",
+      "metric": "safety score",
+      "value": 74.2,
+      "unit": "percent",
+      "source": {
+        "page": "45",
+        "pdfPage": 46,
+        "table": "Supplementary Fig. 12",
+        "quote": "Without risk control system, DeepSeek-V3 (75.3%) and DeepSeek-R1 (74.2%) get"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false
+      }
+    },
+    {
+      "rawEvalName": "multilingual safety (50 languages)",
+      "metric": "safety score",
+      "value": 75.2,
+      "unit": "percent",
+      "source": {
+        "page": "45",
+        "pdfPage": 46,
+        "table": "Supplementary Fig. 12",
+        "quote": "comparable to GPT-4o(2024-05-13)’s performance\n  (75.2%)"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 10.7,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          Claude-3.7-Sonnet         10.7    26.2   +15.5   3.6    21.9   +18.3"
+      },
+      "model": "anthropic/claude-3.7-sonnet",
+      "settings": {
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 26.2,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          Claude-3.7-Sonnet         10.7    26.2   +15.5   3.6    21.9   +18.3"
+      },
+      "model": "anthropic/claude-3.7-sonnet",
+      "settings": {
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 3.6,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          Claude-3.7-Sonnet         10.7    26.2   +15.5   3.6    21.9   +18.3"
+      },
+      "model": "anthropic/claude-3.7-sonnet",
+      "settings": {
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 21.9,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          Claude-3.7-Sonnet         10.7    26.2   +15.5   3.6    21.9   +18.3"
+      },
+      "model": "anthropic/claude-3.7-sonnet",
+      "settings": {
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 9,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          o1 (2024-12-17)           9.0     12.1   +3.1    50.4   79.8   +29.4"
+      },
+      "model": "openai/o1",
+      "settings": {
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 12.1,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          o1 (2024-12-17)           9.0     12.1   +3.1    50.4   79.8   +29.4"
+      },
+      "model": "openai/o1",
+      "settings": {
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 50.4,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          o1 (2024-12-17)           9.0     12.1   +3.1    50.4   79.8   +29.4"
+      },
+      "model": "openai/o1",
+      "settings": {
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 79.8,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          o1 (2024-12-17)           9.0     12.1   +3.1    50.4   79.8   +29.4"
+      },
+      "model": "openai/o1",
+      "settings": {
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 22,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          GPT-4o (2024-05-13)       22.0    30.4   +8.4    17.1   57.3   +40.2"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 30.4,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          GPT-4o (2024-05-13)       22.0    30.4   +8.4    17.1   57.3   +40.2"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 17.1,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          GPT-4o (2024-05-13)       22.0    30.4   +8.4    17.1   57.3   +40.2"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 57.3,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          GPT-4o (2024-05-13)       22.0    30.4   +8.4    17.1   57.3   +40.2"
+      },
+      "model": "openai/gpt-4o",
+      "settings": {
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 13.8,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          Qwen2.5 Instruct (72B)    13.8    29.7   +15.9   5.4    25.2   +19.8"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct",
+      "settings": {
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 29.7,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          Qwen2.5 Instruct (72B)    13.8    29.7   +15.9   5.4    25.2   +19.8"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct",
+      "settings": {
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 5.4,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          Qwen2.5 Instruct (72B)    13.8    29.7   +15.9   5.4    25.2   +19.8"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct",
+      "settings": {
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 25.2,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          Qwen2.5 Instruct (72B)    13.8    29.7   +15.9   5.4    25.2   +19.8"
+      },
+      "model": "Qwen/Qwen2.5-72B-Instruct",
+      "settings": {
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 17.6,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          DeepSeek-V3               17.6    36.4   +18.8   8.1    8.9    +0.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false,
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 36.4,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          DeepSeek-V3               17.6    36.4   +18.8   8.1    8.9    +0.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false,
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 8.1,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          DeepSeek-V3               17.6    36.4   +18.8   8.1    8.9    +0.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false,
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 8.9,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          DeepSeek-V3               17.6    36.4   +18.8   8.1    8.9    +0.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": false,
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 5.3,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          + risk control system     5.3     2.3     -3.0   25.4   46.5   +21.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true,
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 2.3,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          + risk control system     5.3     2.3     -3.0   25.4   46.5   +21.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true,
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 25.4,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          + risk control system     5.3     2.3     -3.0   25.4   46.5   +21.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true,
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 46.5,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          + risk control system     5.3     2.3     -3.0   25.4   46.5   +21.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3",
+      "settings": {
+        "safeguards": true,
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 25.2,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          DeepSeek-R1               25.2    85.9   +60.7   5.6    1.9     -3.7"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false,
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 85.9,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          DeepSeek-R1               25.2    85.9   +60.7   5.6    1.9     -3.7"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false,
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 5.6,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          DeepSeek-R1               25.2    85.9   +60.7   5.6    1.9     -3.7"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false,
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 1.9,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          DeepSeek-R1               25.2    85.9   +60.7   5.6    1.9     -3.7"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": false,
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 8.5,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          + risk control system     8.5     4.3     -4.2   27.3   87.3   +60.0"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true,
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "unsafe ratio",
+      "value": 4.3,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          + risk control system     8.5     4.3     -4.2   27.3   87.3   +60.0"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true,
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 27.3,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          + risk control system     8.5     4.3     -4.2   27.3   87.3   +60.0"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true,
+        "other": "condition:Origin"
+      }
+    },
+    {
+      "rawEvalName": "jailbreaking scenarios",
+      "metric": "rejected ratio",
+      "value": 87.3,
+      "unit": "percent",
+      "source": {
+        "page": "46",
+        "pdfPage": 47,
+        "table": "Supplementary Table 8",
+        "quote": "          + risk control system     8.5     4.3     -4.2   27.3   87.3   +60.0"
+      },
+      "model": "deepseek-ai/DeepSeek-R1",
+      "settings": {
+        "safeguards": true,
+        "other": "condition:Jailbreak"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "EM",
+      "value": 88.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU (EM)                       88.3         87.2        88.5   85.2   91.8   90.8"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "EM",
+      "value": 87.2,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU (EM)                       88.3         87.2        88.5   85.2   91.8   90.8"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "EM",
+      "value": 88.5,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU (EM)                       88.3         87.2        88.5   85.2   91.8   90.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "EM",
+      "value": 85.2,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU (EM)                       88.3         87.2        88.5   85.2   91.8   90.8"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "EM",
+      "value": 91.8,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU (EM)                       88.3         87.2        88.5   85.2   91.8   90.8"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "EM",
+      "value": 90.8,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU (EM)                       88.3         87.2        88.5   85.2   91.8   90.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "MMLU-Redux",
+      "metric": "EM",
+      "value": 88.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU-Redux (EM)                 88.9         88.0        89.1   86.7    -     92.9"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "MMLU-Redux",
+      "metric": "EM",
+      "value": 88,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU-Redux (EM)                 88.9         88.0        89.1   86.7    -     92.9"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "MMLU-Redux",
+      "metric": "EM",
+      "value": 89.1,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU-Redux (EM)                 88.9         88.0        89.1   86.7    -     92.9"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "MMLU-Redux",
+      "metric": "EM",
+      "value": 86.7,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU-Redux (EM)                 88.9         88.0        89.1   86.7    -     92.9"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "MMLU-Redux",
+      "metric": "EM",
+      "value": 92.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU-Redux (EM)                 88.9         88.0        89.1   86.7    -     92.9"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "MMLU-Pro",
+      "metric": "EM",
+      "value": 78,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU-Pro (EM)                   78.0         72.6        75.9   80.3    -     84.0"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "MMLU-Pro",
+      "metric": "EM",
+      "value": 72.6,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU-Pro (EM)                   78.0         72.6        75.9   80.3    -     84.0"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "MMLU-Pro",
+      "metric": "EM",
+      "value": 75.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU-Pro (EM)                   78.0         72.6        75.9   80.3    -     84.0"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "MMLU-Pro",
+      "metric": "EM",
+      "value": 80.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU-Pro (EM)                   78.0         72.6        75.9   80.3    -     84.0"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "MMLU-Pro",
+      "metric": "EM",
+      "value": 84,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        MMLU-Pro (EM)                   78.0         72.6        75.9   80.3    -     84.0"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "DROP",
+      "metric": "3-shot F1",
+      "value": 88.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        DROP (3-shot F1)                88.3         83.7        91.6   83.9   90.2   92.2"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "DROP",
+      "metric": "3-shot F1",
+      "value": 83.7,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        DROP (3-shot F1)                88.3         83.7        91.6   83.9   90.2   92.2"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "DROP",
+      "metric": "3-shot F1",
+      "value": 91.6,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        DROP (3-shot F1)                88.3         83.7        91.6   83.9   90.2   92.2"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "DROP",
+      "metric": "3-shot F1",
+      "value": 83.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        DROP (3-shot F1)                88.3         83.7        91.6   83.9   90.2   92.2"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "DROP",
+      "metric": "3-shot F1",
+      "value": 90.2,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        DROP (3-shot F1)                88.3         83.7        91.6   83.9   90.2   92.2"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "DROP",
+      "metric": "3-shot F1",
+      "value": 92.2,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        DROP (3-shot F1)                88.3         83.7        91.6   83.9   90.2   92.2"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "IF-Eval",
+      "metric": "Prompt Strict",
+      "value": 86.5,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        IF-Eval (Prompt Strict)         86.5         84.3        86.1   84.8    -     83.3"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "IF-Eval",
+      "metric": "Prompt Strict",
+      "value": 84.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        IF-Eval (Prompt Strict)         86.5         84.3        86.1   84.8    -     83.3"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "IF-Eval",
+      "metric": "Prompt Strict",
+      "value": 86.1,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        IF-Eval (Prompt Strict)         86.5         84.3        86.1   84.8    -     83.3"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "IF-Eval",
+      "metric": "Prompt Strict",
+      "value": 84.8,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        IF-Eval (Prompt Strict)         86.5         84.3        86.1   84.8    -     83.3"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "IF-Eval",
+      "metric": "Prompt Strict",
+      "value": 83.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        IF-Eval (Prompt Strict)         86.5         84.3        86.1   84.8    -     83.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "GPQA Diamond",
+      "metric": "Pass@1",
+      "value": 65,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        GPQA Diamond (Pass@1)           65.0         49.9        59.1   60.0   75.7   71.5"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "GPQA Diamond",
+      "metric": "Pass@1",
+      "value": 49.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        GPQA Diamond (Pass@1)           65.0         49.9        59.1   60.0   75.7   71.5"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "GPQA Diamond",
+      "metric": "Pass@1",
+      "value": 59.1,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        GPQA Diamond (Pass@1)           65.0         49.9        59.1   60.0   75.7   71.5"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "GPQA Diamond",
+      "metric": "Pass@1",
+      "value": 60,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        GPQA Diamond (Pass@1)           65.0         49.9        59.1   60.0   75.7   71.5"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "GPQA Diamond",
+      "metric": "Pass@1",
+      "value": 75.7,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        GPQA Diamond (Pass@1)           65.0         49.9        59.1   60.0   75.7   71.5"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "GPQA Diamond",
+      "metric": "Pass@1",
+      "value": 71.5,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        GPQA Diamond (Pass@1)           65.0         49.9        59.1   60.0   75.7   71.5"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "metric": "Correct",
+      "value": 28.4,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        SimpleQA (Correct)              28.4         38.2        24.9    7.0   47.0   30.1"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "metric": "Correct",
+      "value": 38.2,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        SimpleQA (Correct)              28.4         38.2        24.9    7.0   47.0   30.1"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "metric": "Correct",
+      "value": 24.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        SimpleQA (Correct)              28.4         38.2        24.9    7.0   47.0   30.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "metric": "Correct",
+      "value": 7,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        SimpleQA (Correct)              28.4         38.2        24.9    7.0   47.0   30.1"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "metric": "Correct",
+      "value": 47,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        SimpleQA (Correct)              28.4         38.2        24.9    7.0   47.0   30.1"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "metric": "Correct",
+      "value": 30.1,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        SimpleQA (Correct)              28.4         38.2        24.9    7.0   47.0   30.1"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "FRAMES",
+      "metric": "Acc.",
+      "value": 72.5,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        FRAMES (Acc.)                   72.5         80.5        73.3   76.9    -     82.5"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "FRAMES",
+      "metric": "Acc.",
+      "value": 80.5,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        FRAMES (Acc.)                   72.5         80.5        73.3   76.9    -     82.5"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "FRAMES",
+      "metric": "Acc.",
+      "value": 73.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        FRAMES (Acc.)                   72.5         80.5        73.3   76.9    -     82.5"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "FRAMES",
+      "metric": "Acc.",
+      "value": 76.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        FRAMES (Acc.)                   72.5         80.5        73.3   76.9    -     82.5"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "FRAMES",
+      "metric": "Acc.",
+      "value": 82.5,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        FRAMES (Acc.)                   72.5         80.5        73.3   76.9    -     82.5"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "AlpacaEval2.0",
+      "metric": "LC-winrate",
+      "value": 52,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        AlpacaEval2.0 (LC-winrate)      52.0         51.1        70.0   57.8    -     87.6"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "AlpacaEval2.0",
+      "metric": "LC-winrate",
+      "value": 51.1,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        AlpacaEval2.0 (LC-winrate)      52.0         51.1        70.0   57.8    -     87.6"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "AlpacaEval2.0",
+      "metric": "LC-winrate",
+      "value": 70,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        AlpacaEval2.0 (LC-winrate)      52.0         51.1        70.0   57.8    -     87.6"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "AlpacaEval2.0",
+      "metric": "LC-winrate",
+      "value": 57.8,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        AlpacaEval2.0 (LC-winrate)      52.0         51.1        70.0   57.8    -     87.6"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "AlpacaEval2.0",
+      "metric": "LC-winrate",
+      "value": 87.6,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        AlpacaEval2.0 (LC-winrate)      52.0         51.1        70.0   57.8    -     87.6"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "ArenaHard",
+      "metric": "GPT-4-1106",
+      "value": 85.2,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        ArenaHard (GPT-4-1106)          85.2         80.4        85.5   92.0    -     92.3"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "ArenaHard",
+      "metric": "GPT-4-1106",
+      "value": 80.4,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        ArenaHard (GPT-4-1106)          85.2         80.4        85.5   92.0    -     92.3"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "ArenaHard",
+      "metric": "GPT-4-1106",
+      "value": 85.5,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        ArenaHard (GPT-4-1106)          85.2         80.4        85.5   92.0    -     92.3"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "ArenaHard",
+      "metric": "GPT-4-1106",
+      "value": 92,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        ArenaHard (GPT-4-1106)          85.2         80.4        85.5   92.0    -     92.3"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "ArenaHard",
+      "metric": "GPT-4-1106",
+      "value": 92.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        ArenaHard (GPT-4-1106)          85.2         80.4        85.5   92.0    -     92.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "LiveCodeBench",
+      "metric": "Pass@1-COT",
+      "value": 38.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        LiveCodeBench (Pass@1-COT)      38.9         32.9        36.2   53.8   63.4   65.9"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "LiveCodeBench",
+      "metric": "Pass@1-COT",
+      "value": 32.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        LiveCodeBench (Pass@1-COT)      38.9         32.9        36.2   53.8   63.4   65.9"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "LiveCodeBench",
+      "metric": "Pass@1-COT",
+      "value": 36.2,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        LiveCodeBench (Pass@1-COT)      38.9         32.9        36.2   53.8   63.4   65.9"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "LiveCodeBench",
+      "metric": "Pass@1-COT",
+      "value": 53.8,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        LiveCodeBench (Pass@1-COT)      38.9         32.9        36.2   53.8   63.4   65.9"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "LiveCodeBench",
+      "metric": "Pass@1-COT",
+      "value": 63.4,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        LiveCodeBench (Pass@1-COT)      38.9         32.9        36.2   53.8   63.4   65.9"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "LiveCodeBench",
+      "metric": "Pass@1-COT",
+      "value": 65.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        LiveCodeBench (Pass@1-COT)      38.9         32.9        36.2   53.8   63.4   65.9"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Percentile",
+      "value": 20.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Codeforces (Percentile)         20.3         23.6        58.7   93.4   96.6   96.3"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Percentile",
+      "value": 23.6,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Codeforces (Percentile)         20.3         23.6        58.7   93.4   96.6   96.3"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Percentile",
+      "value": 58.7,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Codeforces (Percentile)         20.3         23.6        58.7   93.4   96.6   96.3"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Percentile",
+      "value": 93.4,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Codeforces (Percentile)         20.3         23.6        58.7   93.4   96.6   96.3"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Percentile",
+      "value": 96.6,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Codeforces (Percentile)         20.3         23.6        58.7   93.4   96.6   96.3"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Percentile",
+      "value": 96.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Codeforces (Percentile)         20.3         23.6        58.7   93.4   96.6   96.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Rating",
+      "value": 717,
+      "unit": "score",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Codeforces (Rating)             717          759         1134   1820   2061   2029"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Rating",
+      "value": 759,
+      "unit": "score",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Codeforces (Rating)             717          759         1134   1820   2061   2029"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Rating",
+      "value": 1134,
+      "unit": "score",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Codeforces (Rating)             717          759         1134   1820   2061   2029"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Rating",
+      "value": 1820,
+      "unit": "score",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Codeforces (Rating)             717          759         1134   1820   2061   2029"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Rating",
+      "value": 2061,
+      "unit": "score",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Codeforces (Rating)             717          759         1134   1820   2061   2029"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Rating",
+      "value": 2029,
+      "unit": "score",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Codeforces (Rating)             717          759         1134   1820   2061   2029"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "SWE Verified",
+      "metric": "Resolved",
+      "value": 50.8,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        SWE Verified (Resolved)         50.8         38.8        42.0   41.6   48.9   49.2"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "SWE Verified",
+      "metric": "Resolved",
+      "value": 38.8,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        SWE Verified (Resolved)         50.8         38.8        42.0   41.6   48.9   49.2"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "SWE Verified",
+      "metric": "Resolved",
+      "value": 42,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        SWE Verified (Resolved)         50.8         38.8        42.0   41.6   48.9   49.2"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "SWE Verified",
+      "metric": "Resolved",
+      "value": 41.6,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        SWE Verified (Resolved)         50.8         38.8        42.0   41.6   48.9   49.2"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "SWE Verified",
+      "metric": "Resolved",
+      "value": 48.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        SWE Verified (Resolved)         50.8         38.8        42.0   41.6   48.9   49.2"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "SWE Verified",
+      "metric": "Resolved",
+      "value": 49.2,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        SWE Verified (Resolved)         50.8         38.8        42.0   41.6   48.9   49.2"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "Aider-Polyglot",
+      "metric": "Acc.",
+      "value": 45.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Aider-Polyglot (Acc.)           45.3         16.0        49.6   32.9   61.7   53.3"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "Aider-Polyglot",
+      "metric": "Acc.",
+      "value": 16,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Aider-Polyglot (Acc.)           45.3         16.0        49.6   32.9   61.7   53.3"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "Aider-Polyglot",
+      "metric": "Acc.",
+      "value": 49.6,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Aider-Polyglot (Acc.)           45.3         16.0        49.6   32.9   61.7   53.3"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "Aider-Polyglot",
+      "metric": "Acc.",
+      "value": 32.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Aider-Polyglot (Acc.)           45.3         16.0        49.6   32.9   61.7   53.3"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "Aider-Polyglot",
+      "metric": "Acc.",
+      "value": 61.7,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Aider-Polyglot (Acc.)           45.3         16.0        49.6   32.9   61.7   53.3"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "Aider-Polyglot",
+      "metric": "Acc.",
+      "value": 53.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        Aider-Polyglot (Acc.)           45.3         16.0        49.6   32.9   61.7   53.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "AIME 2024",
+      "metric": "Pass@1",
+      "value": 16,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        AIME 2024 (Pass@1)              16.0          9.3        39.2   63.6   79.2   79.8"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "AIME 2024",
+      "metric": "Pass@1",
+      "value": 9.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        AIME 2024 (Pass@1)              16.0          9.3        39.2   63.6   79.2   79.8"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "AIME 2024",
+      "metric": "Pass@1",
+      "value": 39.2,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        AIME 2024 (Pass@1)              16.0          9.3        39.2   63.6   79.2   79.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "AIME 2024",
+      "metric": "Pass@1",
+      "value": 63.6,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        AIME 2024 (Pass@1)              16.0          9.3        39.2   63.6   79.2   79.8"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "AIME 2024",
+      "metric": "Pass@1",
+      "value": 79.2,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        AIME 2024 (Pass@1)              16.0          9.3        39.2   63.6   79.2   79.8"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "AIME 2024",
+      "metric": "Pass@1",
+      "value": 79.8,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        AIME 2024 (Pass@1)              16.0          9.3        39.2   63.6   79.2   79.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "Pass@1",
+      "value": 78.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": " Math   MATH-500 (Pass@1)               78.3         74.6        90.2   90.0   96.4   97.3"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "Pass@1",
+      "value": 74.6,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": " Math   MATH-500 (Pass@1)               78.3         74.6        90.2   90.0   96.4   97.3"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "Pass@1",
+      "value": 90.2,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": " Math   MATH-500 (Pass@1)               78.3         74.6        90.2   90.0   96.4   97.3"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "Pass@1",
+      "value": 90,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": " Math   MATH-500 (Pass@1)               78.3         74.6        90.2   90.0   96.4   97.3"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "Pass@1",
+      "value": 96.4,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": " Math   MATH-500 (Pass@1)               78.3         74.6        90.2   90.0   96.4   97.3"
+      },
+      "model": "openai/o1"
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "Pass@1",
+      "value": 97.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": " Math   MATH-500 (Pass@1)               78.3         74.6        90.2   90.0   96.4   97.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "CNMO 2024",
+      "metric": "Pass@1",
+      "value": 13.1,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        CNMO 2024 (Pass@1)              13.1         10.8        43.2   67.6    -     78.8"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "CNMO 2024",
+      "metric": "Pass@1",
+      "value": 10.8,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        CNMO 2024 (Pass@1)              13.1         10.8        43.2   67.6    -     78.8"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "CNMO 2024",
+      "metric": "Pass@1",
+      "value": 43.2,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        CNMO 2024 (Pass@1)              13.1         10.8        43.2   67.6    -     78.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "CNMO 2024",
+      "metric": "Pass@1",
+      "value": 67.6,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        CNMO 2024 (Pass@1)              13.1         10.8        43.2   67.6    -     78.8"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "CNMO 2024",
+      "metric": "Pass@1",
+      "value": 78.8,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        CNMO 2024 (Pass@1)              13.1         10.8        43.2   67.6    -     78.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "CLUEWSC",
+      "metric": "EM",
+      "value": 85.4,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        CLUEWSC (EM)                    85.4         87.9        90.9   89.9    -     92.8"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "CLUEWSC",
+      "metric": "EM",
+      "value": 87.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        CLUEWSC (EM)                    85.4         87.9        90.9   89.9    -     92.8"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "CLUEWSC",
+      "metric": "EM",
+      "value": 90.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        CLUEWSC (EM)                    85.4         87.9        90.9   89.9    -     92.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "CLUEWSC",
+      "metric": "EM",
+      "value": 89.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        CLUEWSC (EM)                    85.4         87.9        90.9   89.9    -     92.8"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "CLUEWSC",
+      "metric": "EM",
+      "value": 92.8,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        CLUEWSC (EM)                    85.4         87.9        90.9   89.9    -     92.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "C-Eval",
+      "metric": "EM",
+      "value": 76.7,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "Chinese C-Eval (EM)                     76.7         76.0        86.5   68.9    -     91.8"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "C-Eval",
+      "metric": "EM",
+      "value": 76,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "Chinese C-Eval (EM)                     76.7         76.0        86.5   68.9    -     91.8"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "C-Eval",
+      "metric": "EM",
+      "value": 86.5,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "Chinese C-Eval (EM)                     76.7         76.0        86.5   68.9    -     91.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "C-Eval",
+      "metric": "EM",
+      "value": 68.9,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "Chinese C-Eval (EM)                     76.7         76.0        86.5   68.9    -     91.8"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "C-Eval",
+      "metric": "EM",
+      "value": 91.8,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "Chinese C-Eval (EM)                     76.7         76.0        86.5   68.9    -     91.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "C-SimpleQA",
+      "metric": "Correct",
+      "value": 55.4,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        C-SimpleQA (Correct)            55.4         58.7        68.0   40.3    -     63.7"
+      },
+      "model": "anthropic/claude-3.5-sonnet"
+    },
+    {
+      "rawEvalName": "C-SimpleQA",
+      "metric": "Correct",
+      "value": 58.7,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        C-SimpleQA (Correct)            55.4         58.7        68.0   40.3    -     63.7"
+      },
+      "model": "openai/gpt-4o"
+    },
+    {
+      "rawEvalName": "C-SimpleQA",
+      "metric": "Correct",
+      "value": 68,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        C-SimpleQA (Correct)            55.4         58.7        68.0   40.3    -     63.7"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "C-SimpleQA",
+      "metric": "Correct",
+      "value": 40.3,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        C-SimpleQA (Correct)            55.4         58.7        68.0   40.3    -     63.7"
+      },
+      "model": "openai/o1-mini"
+    },
+    {
+      "rawEvalName": "C-SimpleQA",
+      "metric": "Correct",
+      "value": 63.7,
+      "unit": "percent",
+      "source": {
+        "page": "32",
+        "pdfPage": 33,
+        "table": "Supplementary Table 5",
+        "quote": "        C-SimpleQA (Correct)            55.4         58.7        68.0   40.3    -     63.7"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "EM",
+      "value": 87.1,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  MMLU (EM)                      87.1   88.5   88.8   90.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3-Base"
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "EM",
+      "value": 88.5,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  MMLU (EM)                      87.1   88.5   88.8   90.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "EM",
+      "value": 88.8,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  MMLU (EM)                      87.1   88.5   88.8   90.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "EM",
+      "value": 90.8,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  MMLU (EM)                      87.1   88.5   88.8   90.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "MMLU-Redux",
+      "metric": "EM",
+      "value": 86.2,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  MMLU-Redux (EM)                86.2   89.1   85.6   92.9"
+      },
+      "model": "deepseek-ai/DeepSeek-V3-Base"
+    },
+    {
+      "rawEvalName": "MMLU-Redux",
+      "metric": "EM",
+      "value": 89.1,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  MMLU-Redux (EM)                86.2   89.1   85.6   92.9"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "MMLU-Redux",
+      "metric": "EM",
+      "value": 85.6,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  MMLU-Redux (EM)                86.2   89.1   85.6   92.9"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "MMLU-Redux",
+      "metric": "EM",
+      "value": 92.9,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  MMLU-Redux (EM)                86.2   89.1   85.6   92.9"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "MMLU-Pro",
+      "metric": "EM",
+      "value": 64.4,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  MMLU-Pro (EM)                  64.4   75.9   68.9   84.0"
+      },
+      "model": "deepseek-ai/DeepSeek-V3-Base"
+    },
+    {
+      "rawEvalName": "MMLU-Pro",
+      "metric": "EM",
+      "value": 75.9,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  MMLU-Pro (EM)                  64.4   75.9   68.9   84.0"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "MMLU-Pro",
+      "metric": "EM",
+      "value": 68.9,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  MMLU-Pro (EM)                  64.4   75.9   68.9   84.0"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "MMLU-Pro",
+      "metric": "EM",
+      "value": 84,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  MMLU-Pro (EM)                  64.4   75.9   68.9   84.0"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "DROP",
+      "metric": "3-shot F1",
+      "value": 89,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  DROP (3-shot F1)               89.0   91.6   89.1   92.2"
+      },
+      "model": "deepseek-ai/DeepSeek-V3-Base"
+    },
+    {
+      "rawEvalName": "DROP",
+      "metric": "3-shot F1",
+      "value": 91.6,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  DROP (3-shot F1)               89.0   91.6   89.1   92.2"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "DROP",
+      "metric": "3-shot F1",
+      "value": 89.1,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  DROP (3-shot F1)               89.0   91.6   89.1   92.2"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "DROP",
+      "metric": "3-shot F1",
+      "value": 92.2,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  DROP (3-shot F1)               89.0   91.6   89.1   92.2"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "IF-Eval",
+      "metric": "Prompt Strict",
+      "value": 58.6,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  IF-Eval (Prompt Strict)        58.6   86.1   46.6   83.3"
+      },
+      "model": "deepseek-ai/DeepSeek-V3-Base"
+    },
+    {
+      "rawEvalName": "IF-Eval",
+      "metric": "Prompt Strict",
+      "value": 86.1,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  IF-Eval (Prompt Strict)        58.6   86.1   46.6   83.3"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "IF-Eval",
+      "metric": "Prompt Strict",
+      "value": 46.6,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  IF-Eval (Prompt Strict)        58.6   86.1   46.6   83.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "IF-Eval",
+      "metric": "Prompt Strict",
+      "value": 83.3,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  IF-Eval (Prompt Strict)        58.6   86.1   46.6   83.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "GPQA Diamond",
+      "metric": "Pass@1",
+      "value": 59.1,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  GPQA Diamond (Pass@1)           -     59.1   75.8   71.5"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "GPQA Diamond",
+      "metric": "Pass@1",
+      "value": 75.8,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  GPQA Diamond (Pass@1)           -     59.1   75.8   71.5"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "GPQA Diamond",
+      "metric": "Pass@1",
+      "value": 71.5,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  GPQA Diamond (Pass@1)           -     59.1   75.8   71.5"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "metric": "Correct",
+      "value": 20.1,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  SimpleQA (Correct)             20.1   24.9   30.3   30.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3-Base"
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "metric": "Correct",
+      "value": 24.9,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  SimpleQA (Correct)             20.1   24.9   30.3   30.1"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "metric": "Correct",
+      "value": 30.3,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  SimpleQA (Correct)             20.1   24.9   30.3   30.1"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "SimpleQA",
+      "metric": "Correct",
+      "value": 30.1,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  SimpleQA (Correct)             20.1   24.9   30.3   30.1"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "FRAMES",
+      "metric": "Acc.",
+      "value": 73.3,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  FRAMES (Acc.)                   -     73.3   82.3   82.5"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "FRAMES",
+      "metric": "Acc.",
+      "value": 82.3,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  FRAMES (Acc.)                   -     73.3   82.3   82.5"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "FRAMES",
+      "metric": "Acc.",
+      "value": 82.5,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  FRAMES (Acc.)                   -     73.3   82.3   82.5"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "AlpacaEval2.0",
+      "metric": "LC-winrate",
+      "value": 70,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  AlpacaEval2.0 (LC-winrate)      -     70.0   24.7   87.6"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "AlpacaEval2.0",
+      "metric": "LC-winrate",
+      "value": 24.7,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  AlpacaEval2.0 (LC-winrate)      -     70.0   24.7   87.6"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "AlpacaEval2.0",
+      "metric": "LC-winrate",
+      "value": 87.6,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  AlpacaEval2.0 (LC-winrate)      -     70.0   24.7   87.6"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "ArenaHard",
+      "metric": "GPT-4-1106",
+      "value": 85.5,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  ArenaHard (GPT-4-1106)          -     85.5   53.6   92.3"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "ArenaHard",
+      "metric": "GPT-4-1106",
+      "value": 53.6,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  ArenaHard (GPT-4-1106)          -     85.5   53.6   92.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "ArenaHard",
+      "metric": "GPT-4-1106",
+      "value": 92.3,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  ArenaHard (GPT-4-1106)          -     85.5   53.6   92.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "LiveCodeBench",
+      "metric": "Pass@1-COT",
+      "value": 36.2,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  LiveCodeBench (Pass@1-COT)       -    36.2   50.0   65.9"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "LiveCodeBench",
+      "metric": "Pass@1-COT",
+      "value": 50,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  LiveCodeBench (Pass@1-COT)       -    36.2   50.0   65.9"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "LiveCodeBench",
+      "metric": "Pass@1-COT",
+      "value": 65.9,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  LiveCodeBench (Pass@1-COT)       -    36.2   50.0   65.9"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Percentile",
+      "value": 58.7,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  Codeforces (Percentile)          -    58.7   80.4   96.3"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Percentile",
+      "value": 80.4,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  Codeforces (Percentile)          -    58.7   80.4   96.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Percentile",
+      "value": 96.3,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  Codeforces (Percentile)          -    58.7   80.4   96.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Rating",
+      "value": 1134,
+      "unit": "score",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  Codeforces (Rating)              -    1134   1444   2029"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Rating",
+      "value": 1444,
+      "unit": "score",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  Codeforces (Rating)              -    1134   1444   2029"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "Codeforces",
+      "metric": "Rating",
+      "value": 2029,
+      "unit": "score",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  Codeforces (Rating)              -    1134   1444   2029"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "SWE Verified",
+      "metric": "Resolved",
+      "value": 42,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "           Code   SWE Verified (Resolved)          -    42.0   43.2   49.2"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "SWE Verified",
+      "metric": "Resolved",
+      "value": 43.2,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "           Code   SWE Verified (Resolved)          -    42.0   43.2   49.2"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "SWE Verified",
+      "metric": "Resolved",
+      "value": 49.2,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "           Code   SWE Verified (Resolved)          -    42.0   43.2   49.2"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "Aider-Polyglot",
+      "metric": "Acc.",
+      "value": 49.6,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  Aider-Polyglot (Acc.)            -    49.6   12.2   53.3"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "Aider-Polyglot",
+      "metric": "Acc.",
+      "value": 12.2,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  Aider-Polyglot (Acc.)            -    49.6   12.2   53.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "Aider-Polyglot",
+      "metric": "Acc.",
+      "value": 53.3,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  Aider-Polyglot (Acc.)            -    49.6   12.2   53.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "AIME 2024",
+      "metric": "Pass@1",
+      "value": 39.2,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                AIME 2024 (Pass@1)                 -    39.2   77.9   79.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "AIME 2024",
+      "metric": "Pass@1",
+      "value": 77.9,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                AIME 2024 (Pass@1)                 -    39.2   77.9   79.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "AIME 2024",
+      "metric": "Pass@1",
+      "value": 79.8,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                AIME 2024 (Pass@1)                 -    39.2   77.9   79.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "Pass@1",
+      "value": 90.2,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "           Math MATH-500 (Pass@1)                  -    90.2   95.9   97.3"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "Pass@1",
+      "value": 95.9,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "           Math MATH-500 (Pass@1)                  -    90.2   95.9   97.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "MATH-500",
+      "metric": "Pass@1",
+      "value": 97.3,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "           Math MATH-500 (Pass@1)                  -    90.2   95.9   97.3"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "CNMO 2024",
+      "metric": "Pass@1",
+      "value": 43.2,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                CNMO 2024 (Pass@1)                 -    43.2   88.1   78.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "CNMO 2024",
+      "metric": "Pass@1",
+      "value": 88.1,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                CNMO 2024 (Pass@1)                 -    43.2   88.1   78.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "CNMO 2024",
+      "metric": "Pass@1",
+      "value": 78.8,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                CNMO 2024 (Pass@1)                 -    43.2   88.1   78.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "CLUEWSC",
+      "metric": "EM",
+      "value": 82.7,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  CLUEWSC (EM)                   82.7   90.9   93.1   92.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3-Base"
+    },
+    {
+      "rawEvalName": "CLUEWSC",
+      "metric": "EM",
+      "value": 90.9,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  CLUEWSC (EM)                   82.7   90.9   93.1   92.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "CLUEWSC",
+      "metric": "EM",
+      "value": 93.1,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  CLUEWSC (EM)                   82.7   90.9   93.1   92.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "CLUEWSC",
+      "metric": "EM",
+      "value": 92.8,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  CLUEWSC (EM)                   82.7   90.9   93.1   92.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "C-Eval",
+      "metric": "EM",
+      "value": 90.1,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "          Chinese C-Eval (EM)                    90.1   86.5   92.8   91.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3-Base"
+    },
+    {
+      "rawEvalName": "C-Eval",
+      "metric": "EM",
+      "value": 86.5,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "          Chinese C-Eval (EM)                    90.1   86.5   92.8   91.8"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "C-Eval",
+      "metric": "EM",
+      "value": 92.8,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "          Chinese C-Eval (EM)                    90.1   86.5   92.8   91.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "C-Eval",
+      "metric": "EM",
+      "value": 91.8,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "          Chinese C-Eval (EM)                    90.1   86.5   92.8   91.8"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    },
+    {
+      "rawEvalName": "C-SimpleQA",
+      "metric": "Correct",
+      "value": 68,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  C-SimpleQA (Correct)            -     68.0   66.4   63.7"
+      },
+      "model": "deepseek-ai/DeepSeek-V3"
+    },
+    {
+      "rawEvalName": "C-SimpleQA",
+      "metric": "Correct",
+      "value": 66.4,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  C-SimpleQA (Correct)            -     68.0   66.4   63.7"
+      },
+      "model": "deepseek-ai/DeepSeek-R1-Zero"
+    },
+    {
+      "rawEvalName": "C-SimpleQA",
+      "metric": "Correct",
+      "value": 63.7,
+      "unit": "percent",
+      "source": {
+        "page": "48",
+        "pdfPage": 49,
+        "table": "Supplementary Table 9",
+        "quote": "                  C-SimpleQA (Correct)            -     68.0   66.4   63.7"
+      },
+      "model": "deepseek-ai/DeepSeek-R1"
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:32:39Z"
+  },
+  "notes": "Nature SI PDF (84 pages); safety is section 4.3. Architecture/params and 14.8T tokens are stated for DeepSeek-V3/R1 MoE in Table 5 / V3 background. Knowledge cutoff is for DeepSeek-V3 base. Multilingual Fig. 12 is a chart with garbled pdftotext glyphs—only prose averages extracted. Per-language chart numbers and other capability charts (Figs. 13–14) skipped. No ASL/Preparedness-style risk thresholds, so riskDecisions empty. Table 6 parentheticals treated as safeguards:false. GAP columns in Table 8 omitted as derived deltas."
+}

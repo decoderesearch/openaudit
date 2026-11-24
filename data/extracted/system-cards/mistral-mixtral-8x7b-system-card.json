@@ -1,0 +1,2598 @@
+{
+  "document": "mistral-mixtral-8x7b-system-card",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "mistralai/Mixtral-8x7B-Instruct-v0.1"
+    },
+    {
+      "rawModelName": "Mixtral 8x7B"
+    }
+  ],
+  "pageCount": 13,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "32k tokens",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Mixtral was trained with a context size of 32k tokens"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "not_stated"
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "multilingual (English, French, German, Spanish, Italian evaluated)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Mixtral significantly outperforms Llama 2 70B\nin French, German, Spanish, and Italian, as shown in Table 4."
+      }
+    },
+    "license": {
+      "status": "stated",
+      "value": "Apache 2.0",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Both the base and instruct models are released under the Apache 2.0 license."
+      }
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "47B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "has access to 47B parameters, but only uses 13B active parameters during"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "13B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "has access to 47B parameters, but only uses 13B active parameters during"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Sparse Mixture of Experts (SMoE); 8 experts, top-2 routing; same base as Mistral 7B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce Mixtral 8x7B, a Sparse Mixture of Experts (SMoE) language"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "multilingual pretraining data (proportion of multilingual data upsampled vs Mistral 7B); Instruct uses SFT then DPO",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Compared to Mistral 7B, we significantly upsample the proportion of multilingual data during\npretraining."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Mixtral presents less bias on [BBQ](/evals/bbq) (56.0% vs Llama 2 51.5%) and more positive [BOLD](/evals/bold) sentiment",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Compared to Llama 2, Mixtral presents less bias on the BBQ benchmark\n(56.0% vs 51.5%)."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [
+    {
+      "name": "LMSys",
+      "scope": "Independent human evaluation / Chatbot Arena leaderboard for Mixtral 8x7B Instruct",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Independent human evaluation conducted by LMSys is reported in Figure 63 and shows that"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "text": "Mixtral presents less bias than Llama 2 70B on [BBQ](/evals/bbq) (56.0% vs 51.5%) and more positive [BOLD](/evals/bold) sentiment with similar within-group variance.", "tone": "good",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Compared to Llama 2, Mixtral presents less bias on the BBQ benchmark\n(56.0% vs 51.5%)."
+      }
+    },
+    {
+      "text": "Routing analysis found no obvious domain specialization of experts; assignment looks more syntactic than topical.", "tone": "neutral",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Surprisingly, we do not observe obvious\n  patterns in the assignment of experts based on the topic."
+      }
+    },
+    {
+      "text": "Mixtral 8x7B Instruct reached MT-Bench 8.3 and was described as the best open-weights model as of December 2023.", "tone": "neutral",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Mixtral – Instruct reaches a\nscore of 8.30 on MT-Bench [33] (see Table 2), making it the best open-weights model as of December"
+      }
+    },
+    {
+      "text": "On the passkey retrieval task, Mixtral achieved 100% accuracy across context lengths and passkey positions up to 32k.", "tone": "neutral",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Mixtral achieves a\n100% retrieval accuracy regardless of the context length or the position of passkey in the sequence."
+      }
+    },
+    {
+      "text": "LMSys Arena (Dec 22, 2023 screenshot) listed Mixtral 8x7B Instruct v0.1 at Elo 1121, above Claude-2.1, GPT-3.5-Turbo, Gemini Pro, and Llama-2-70b-chat.", "tone": "neutral",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Mixtral 8x7B Instruct v0.1 achieves an Arena\nElo rating of 1121 outperforming Claude-2.1 (1117), all versions of GPT-3.5-Turbo (1117 best), Gemini Pro"
+      }
+    },
+    {
+      "text": "Authors note evaluation protocol differences vs the Llama 2 paper on MBPP (hand-verified subset) and [TriviaQA](https://arxiv.org/abs/1705.03551) (no Wikipedia contexts).", "tone": "neutral",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "on MBPP, we use the hand-verified subset 2)\non TriviaQA, we do not provide Wikipedia contexts."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "MMLU",
+      "metric": "accuracy",
+      "value": 44.4,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 7B       7B    44.4%   77.1%   69.5%   77.9%   68.7%   43.2%   17.5%   56.6%   11.6%   26.1%   3.9%    16.0%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 77.1,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 7B       7B    44.4%   77.1%   69.5%   77.9%   68.7%   43.2%   17.5%   56.6%   11.6%   26.1%   3.9%    16.0%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "settings": {
+        "other": "0-shot (commonsense reasoning category)"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 69.5,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 7B       7B    44.4%   77.1%   69.5%   77.9%   68.7%   43.2%   17.5%   56.6%   11.6%   26.1%   3.9%    16.0%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "settings": {
+        "other": "0-shot (commonsense reasoning category)"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "metric": "accuracy",
+      "value": 77.9,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 7B       7B    44.4%   77.1%   69.5%   77.9%   68.7%   43.2%   17.5%   56.6%   11.6%   26.1%   3.9%    16.0%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Easy",
+      "metric": "accuracy",
+      "value": 68.7,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 7B       7B    44.4%   77.1%   69.5%   77.9%   68.7%   43.2%   17.5%   56.6%   11.6%   26.1%   3.9%    16.0%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge",
+      "metric": "accuracy",
+      "value": 43.2,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 7B       7B    44.4%   77.1%   69.5%   77.9%   68.7%   43.2%   17.5%   56.6%   11.6%   26.1%   3.9%    16.0%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "NaturalQuestions",
+      "metric": "accuracy",
+      "value": 17.5,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 7B       7B    44.4%   77.1%   69.5%   77.9%   68.7%   43.2%   17.5%   56.6%   11.6%   26.1%   3.9%    16.0%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA",
+      "metric": "accuracy",
+      "value": 56.6,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 7B       7B    44.4%   77.1%   69.5%   77.9%   68.7%   43.2%   17.5%   56.6%   11.6%   26.1%   3.9%    16.0%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval",
+      "metric": "pass@1",
+      "value": 11.6,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 7B       7B    44.4%   77.1%   69.5%   77.9%   68.7%   43.2%   17.5%   56.6%   11.6%   26.1%   3.9%    16.0%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "MBPP",
+      "metric": "pass@1",
+      "value": 26.1,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 7B       7B    44.4%   77.1%   69.5%   77.9%   68.7%   43.2%   17.5%   56.6%   11.6%   26.1%   3.9%    16.0%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "settings": {
+        "other": "3-shot"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 3.9,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 7B       7B    44.4%   77.1%   69.5%   77.9%   68.7%   43.2%   17.5%   56.6%   11.6%   26.1%   3.9%    16.0%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "settings": {
+        "passAtK": 4,
+        "other": "4-shot with maj@4"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 16,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 7B       7B    44.4%   77.1%   69.5%   77.9%   68.7%   43.2%   17.5%   56.6%   11.6%   26.1%   3.9%    16.0%"
+      },
+      "model": "meta-llama/Llama-2-7b-chat-hf",
+      "settings": {
+        "passAtK": 8,
+        "other": "8-shot with maj@8"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "accuracy",
+      "value": 55.6,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 13B      13B   55.6%   80.7%   72.9%   80.8%   75.2%   48.8%   16.7%   64.0%   18.9%   35.4%   6.0%    34.3%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 80.7,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 13B      13B   55.6%   80.7%   72.9%   80.8%   75.2%   48.8%   16.7%   64.0%   18.9%   35.4%   6.0%    34.3%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "settings": {
+        "other": "0-shot (commonsense reasoning category)"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 72.9,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 13B      13B   55.6%   80.7%   72.9%   80.8%   75.2%   48.8%   16.7%   64.0%   18.9%   35.4%   6.0%    34.3%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "settings": {
+        "other": "0-shot (commonsense reasoning category)"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "metric": "accuracy",
+      "value": 80.8,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 13B      13B   55.6%   80.7%   72.9%   80.8%   75.2%   48.8%   16.7%   64.0%   18.9%   35.4%   6.0%    34.3%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Easy",
+      "metric": "accuracy",
+      "value": 75.2,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 13B      13B   55.6%   80.7%   72.9%   80.8%   75.2%   48.8%   16.7%   64.0%   18.9%   35.4%   6.0%    34.3%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge",
+      "metric": "accuracy",
+      "value": 48.8,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 13B      13B   55.6%   80.7%   72.9%   80.8%   75.2%   48.8%   16.7%   64.0%   18.9%   35.4%   6.0%    34.3%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "NaturalQuestions",
+      "metric": "accuracy",
+      "value": 16.7,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 13B      13B   55.6%   80.7%   72.9%   80.8%   75.2%   48.8%   16.7%   64.0%   18.9%   35.4%   6.0%    34.3%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA",
+      "metric": "accuracy",
+      "value": 64,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 13B      13B   55.6%   80.7%   72.9%   80.8%   75.2%   48.8%   16.7%   64.0%   18.9%   35.4%   6.0%    34.3%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval",
+      "metric": "pass@1",
+      "value": 18.9,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 13B      13B   55.6%   80.7%   72.9%   80.8%   75.2%   48.8%   16.7%   64.0%   18.9%   35.4%   6.0%    34.3%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "MBPP",
+      "metric": "pass@1",
+      "value": 35.4,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 13B      13B   55.6%   80.7%   72.9%   80.8%   75.2%   48.8%   16.7%   64.0%   18.9%   35.4%   6.0%    34.3%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "settings": {
+        "other": "3-shot"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 6,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 13B      13B   55.6%   80.7%   72.9%   80.8%   75.2%   48.8%   16.7%   64.0%   18.9%   35.4%   6.0%    34.3%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "settings": {
+        "passAtK": 4,
+        "other": "4-shot with maj@4"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 34.3,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 13B      13B   55.6%   80.7%   72.9%   80.8%   75.2%   48.8%   16.7%   64.0%   18.9%   35.4%   6.0%    34.3%"
+      },
+      "model": "meta-llama/Llama-2-13b-chat-hf",
+      "settings": {
+        "passAtK": 8,
+        "other": "8-shot with maj@8"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "accuracy",
+      "value": 56.8,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 1 33B      33B   56.8%   83.7%   76.2%   82.2%   79.6%   54.4%   24.1%   68.5%   25.0%   40.9%   8.4%    44.1%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 83.7,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 1 33B      33B   56.8%   83.7%   76.2%   82.2%   79.6%   54.4%   24.1%   68.5%   25.0%   40.9%   8.4%    44.1%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "0-shot (commonsense reasoning category)"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 76.2,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 1 33B      33B   56.8%   83.7%   76.2%   82.2%   79.6%   54.4%   24.1%   68.5%   25.0%   40.9%   8.4%    44.1%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "0-shot (commonsense reasoning category)"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "metric": "accuracy",
+      "value": 82.2,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 1 33B      33B   56.8%   83.7%   76.2%   82.2%   79.6%   54.4%   24.1%   68.5%   25.0%   40.9%   8.4%    44.1%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Easy",
+      "metric": "accuracy",
+      "value": 79.6,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 1 33B      33B   56.8%   83.7%   76.2%   82.2%   79.6%   54.4%   24.1%   68.5%   25.0%   40.9%   8.4%    44.1%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge",
+      "metric": "accuracy",
+      "value": 54.4,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 1 33B      33B   56.8%   83.7%   76.2%   82.2%   79.6%   54.4%   24.1%   68.5%   25.0%   40.9%   8.4%    44.1%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "NaturalQuestions",
+      "metric": "accuracy",
+      "value": 24.1,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 1 33B      33B   56.8%   83.7%   76.2%   82.2%   79.6%   54.4%   24.1%   68.5%   25.0%   40.9%   8.4%    44.1%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA",
+      "metric": "accuracy",
+      "value": 68.5,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 1 33B      33B   56.8%   83.7%   76.2%   82.2%   79.6%   54.4%   24.1%   68.5%   25.0%   40.9%   8.4%    44.1%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval",
+      "metric": "pass@1",
+      "value": 25,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 1 33B      33B   56.8%   83.7%   76.2%   82.2%   79.6%   54.4%   24.1%   68.5%   25.0%   40.9%   8.4%    44.1%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "MBPP",
+      "metric": "pass@1",
+      "value": 40.9,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 1 33B      33B   56.8%   83.7%   76.2%   82.2%   79.6%   54.4%   24.1%   68.5%   25.0%   40.9%   8.4%    44.1%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "3-shot"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 8.4,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 1 33B      33B   56.8%   83.7%   76.2%   82.2%   79.6%   54.4%   24.1%   68.5%   25.0%   40.9%   8.4%    44.1%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "passAtK": 4,
+        "other": "4-shot with maj@4"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 44.1,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 1 33B      33B   56.8%   83.7%   76.2%   82.2%   79.6%   54.4%   24.1%   68.5%   25.0%   40.9%   8.4%    44.1%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "passAtK": 8,
+        "other": "8-shot with maj@8"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "accuracy",
+      "value": 69.9,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 70B      70B   69.9%   85.4%   80.4%   82.6%   79.9%   56.5%   25.4%   73.0%   29.3%   49.8%   13.8%   69.6%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 85.4,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 70B      70B   69.9%   85.4%   80.4%   82.6%   79.9%   56.5%   25.4%   73.0%   29.3%   49.8%   13.8%   69.6%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "0-shot (commonsense reasoning category)"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 80.4,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 70B      70B   69.9%   85.4%   80.4%   82.6%   79.9%   56.5%   25.4%   73.0%   29.3%   49.8%   13.8%   69.6%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "0-shot (commonsense reasoning category)"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "metric": "accuracy",
+      "value": 82.6,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 70B      70B   69.9%   85.4%   80.4%   82.6%   79.9%   56.5%   25.4%   73.0%   29.3%   49.8%   13.8%   69.6%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Easy",
+      "metric": "accuracy",
+      "value": 79.9,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 70B      70B   69.9%   85.4%   80.4%   82.6%   79.9%   56.5%   25.4%   73.0%   29.3%   49.8%   13.8%   69.6%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge",
+      "metric": "accuracy",
+      "value": 56.5,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 70B      70B   69.9%   85.4%   80.4%   82.6%   79.9%   56.5%   25.4%   73.0%   29.3%   49.8%   13.8%   69.6%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "NaturalQuestions",
+      "metric": "accuracy",
+      "value": 25.4,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 70B      70B   69.9%   85.4%   80.4%   82.6%   79.9%   56.5%   25.4%   73.0%   29.3%   49.8%   13.8%   69.6%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA",
+      "metric": "accuracy",
+      "value": 73,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 70B      70B   69.9%   85.4%   80.4%   82.6%   79.9%   56.5%   25.4%   73.0%   29.3%   49.8%   13.8%   69.6%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval",
+      "metric": "pass@1",
+      "value": 29.3,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 70B      70B   69.9%   85.4%   80.4%   82.6%   79.9%   56.5%   25.4%   73.0%   29.3%   49.8%   13.8%   69.6%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "MBPP",
+      "metric": "pass@1",
+      "value": 49.8,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 70B      70B   69.9%   85.4%   80.4%   82.6%   79.9%   56.5%   25.4%   73.0%   29.3%   49.8%   13.8%   69.6%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "3-shot"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 13.8,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 70B      70B   69.9%   85.4%   80.4%   82.6%   79.9%   56.5%   25.4%   73.0%   29.3%   49.8%   13.8%   69.6%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "passAtK": 4,
+        "other": "4-shot with maj@4"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 69.6,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "LLaMA 2 70B      70B   69.9%   85.4%   80.4%   82.6%   79.9%   56.5%   25.4%   73.0%   29.3%   49.8%   13.8%   69.6%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "passAtK": 8,
+        "other": "8-shot with maj@8"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "accuracy",
+      "value": 62.5,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mistral 7B       7B    62.5%   81.0%   74.2%   82.2%   80.5%   54.9%   23.2%   62.5%   26.2%   50.2%   12.7%   50.0%"
+      },
+      "rawModelName": "Mistral 7B",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 81,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mistral 7B       7B    62.5%   81.0%   74.2%   82.2%   80.5%   54.9%   23.2%   62.5%   26.2%   50.2%   12.7%   50.0%"
+      },
+      "rawModelName": "Mistral 7B",
+      "settings": {
+        "other": "0-shot (commonsense reasoning category)"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 74.2,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mistral 7B       7B    62.5%   81.0%   74.2%   82.2%   80.5%   54.9%   23.2%   62.5%   26.2%   50.2%   12.7%   50.0%"
+      },
+      "rawModelName": "Mistral 7B",
+      "settings": {
+        "other": "0-shot (commonsense reasoning category)"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "metric": "accuracy",
+      "value": 82.2,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mistral 7B       7B    62.5%   81.0%   74.2%   82.2%   80.5%   54.9%   23.2%   62.5%   26.2%   50.2%   12.7%   50.0%"
+      },
+      "rawModelName": "Mistral 7B",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Easy",
+      "metric": "accuracy",
+      "value": 80.5,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mistral 7B       7B    62.5%   81.0%   74.2%   82.2%   80.5%   54.9%   23.2%   62.5%   26.2%   50.2%   12.7%   50.0%"
+      },
+      "rawModelName": "Mistral 7B",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge",
+      "metric": "accuracy",
+      "value": 54.9,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mistral 7B       7B    62.5%   81.0%   74.2%   82.2%   80.5%   54.9%   23.2%   62.5%   26.2%   50.2%   12.7%   50.0%"
+      },
+      "rawModelName": "Mistral 7B",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "NaturalQuestions",
+      "metric": "accuracy",
+      "value": 23.2,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mistral 7B       7B    62.5%   81.0%   74.2%   82.2%   80.5%   54.9%   23.2%   62.5%   26.2%   50.2%   12.7%   50.0%"
+      },
+      "rawModelName": "Mistral 7B",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA",
+      "metric": "accuracy",
+      "value": 62.5,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mistral 7B       7B    62.5%   81.0%   74.2%   82.2%   80.5%   54.9%   23.2%   62.5%   26.2%   50.2%   12.7%   50.0%"
+      },
+      "rawModelName": "Mistral 7B",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval",
+      "metric": "pass@1",
+      "value": 26.2,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mistral 7B       7B    62.5%   81.0%   74.2%   82.2%   80.5%   54.9%   23.2%   62.5%   26.2%   50.2%   12.7%   50.0%"
+      },
+      "rawModelName": "Mistral 7B",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "MBPP",
+      "metric": "pass@1",
+      "value": 50.2,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mistral 7B       7B    62.5%   81.0%   74.2%   82.2%   80.5%   54.9%   23.2%   62.5%   26.2%   50.2%   12.7%   50.0%"
+      },
+      "rawModelName": "Mistral 7B",
+      "settings": {
+        "other": "3-shot"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 12.7,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mistral 7B       7B    62.5%   81.0%   74.2%   82.2%   80.5%   54.9%   23.2%   62.5%   26.2%   50.2%   12.7%   50.0%"
+      },
+      "rawModelName": "Mistral 7B",
+      "settings": {
+        "passAtK": 4,
+        "other": "4-shot with maj@4"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 50,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mistral 7B       7B    62.5%   81.0%   74.2%   82.2%   80.5%   54.9%   23.2%   62.5%   26.2%   50.2%   12.7%   50.0%"
+      },
+      "rawModelName": "Mistral 7B",
+      "settings": {
+        "passAtK": 8,
+        "other": "8-shot with maj@8"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "accuracy",
+      "value": 70.6,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mixtral 8x7B     13B   70.6%   84.4%   77.2%   83.6%   83.1%   59.7%   30.6%   71.5%   40.2%   60.7%   28.4%   74.4%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 84.4,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mixtral 8x7B     13B   70.6%   84.4%   77.2%   83.6%   83.1%   59.7%   30.6%   71.5%   40.2%   60.7%   28.4%   74.4%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "0-shot (commonsense reasoning category)"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 77.2,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mixtral 8x7B     13B   70.6%   84.4%   77.2%   83.6%   83.1%   59.7%   30.6%   71.5%   40.2%   60.7%   28.4%   74.4%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "0-shot (commonsense reasoning category)"
+      }
+    },
+    {
+      "rawEvalName": "PIQA",
+      "metric": "accuracy",
+      "value": 83.6,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mixtral 8x7B     13B   70.6%   84.4%   77.2%   83.6%   83.1%   59.7%   30.6%   71.5%   40.2%   60.7%   28.4%   74.4%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Easy",
+      "metric": "accuracy",
+      "value": 83.1,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mixtral 8x7B     13B   70.6%   84.4%   77.2%   83.6%   83.1%   59.7%   30.6%   71.5%   40.2%   60.7%   28.4%   74.4%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge",
+      "metric": "accuracy",
+      "value": 59.7,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mixtral 8x7B     13B   70.6%   84.4%   77.2%   83.6%   83.1%   59.7%   30.6%   71.5%   40.2%   60.7%   28.4%   74.4%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "NaturalQuestions",
+      "metric": "accuracy",
+      "value": 30.6,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mixtral 8x7B     13B   70.6%   84.4%   77.2%   83.6%   83.1%   59.7%   30.6%   71.5%   40.2%   60.7%   28.4%   74.4%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "TriviaQA",
+      "metric": "accuracy",
+      "value": 71.5,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mixtral 8x7B     13B   70.6%   84.4%   77.2%   83.6%   83.1%   59.7%   30.6%   71.5%   40.2%   60.7%   28.4%   74.4%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "HumanEval",
+      "metric": "pass@1",
+      "value": 40.2,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mixtral 8x7B     13B   70.6%   84.4%   77.2%   83.6%   83.1%   59.7%   30.6%   71.5%   40.2%   60.7%   28.4%   74.4%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "0-shot"
+      }
+    },
+    {
+      "rawEvalName": "MBPP",
+      "metric": "pass@1",
+      "value": 60.7,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mixtral 8x7B     13B   70.6%   84.4%   77.2%   83.6%   83.1%   59.7%   30.6%   71.5%   40.2%   60.7%   28.4%   74.4%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "3-shot"
+      }
+    },
+    {
+      "rawEvalName": "MATH",
+      "metric": "accuracy",
+      "value": 28.4,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mixtral 8x7B     13B   70.6%   84.4%   77.2%   83.6%   83.1%   59.7%   30.6%   71.5%   40.2%   60.7%   28.4%   74.4%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "passAtK": 4,
+        "other": "4-shot with maj@4"
+      }
+    },
+    {
+      "rawEvalName": "GSM8K",
+      "metric": "accuracy",
+      "value": 74.4,
+      "unit": "percent",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "table": "Table 2",
+        "quote": "Mixtral 8x7B     13B   70.6%   84.4%   77.2%   83.6%   83.1%   59.7%   30.6%   71.5%   40.2%   60.7%   28.4%   74.4%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "passAtK": 8,
+        "other": "8-shot with maj@8"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "accuracy",
+      "value": 69.9,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                            MMLU                   69.9%            70.0%            70.6%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "MCQ in 57 subjects"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "accuracy",
+      "value": 70,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                            MMLU                   69.9%            70.0%            70.6%"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "MCQ in 57 subjects"
+      }
+    },
+    {
+      "rawEvalName": "MMLU",
+      "metric": "accuracy",
+      "value": 70.6,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                            MMLU                   69.9%            70.0%            70.6%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "MCQ in 57 subjects"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 87.1,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                          HellaSwag                87.1%            85.5%            86.7%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "10-shot"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 85.5,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                          HellaSwag                87.1%            85.5%            86.7%"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "10-shot"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag",
+      "metric": "accuracy",
+      "value": 86.7,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                          HellaSwag                87.1%            85.5%            86.7%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "10-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC Challenge",
+      "metric": "accuracy",
+      "value": 85.1,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                        ARC Challenge              85.1%            85.2%            85.8%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "25-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC Challenge",
+      "metric": "accuracy",
+      "value": 85.2,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                        ARC Challenge              85.1%            85.2%            85.8%"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "25-shot"
+      }
+    },
+    {
+      "rawEvalName": "ARC Challenge",
+      "metric": "accuracy",
+      "value": 85.8,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                        ARC Challenge              85.1%            85.2%            85.8%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "25-shot"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 83.2,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                         WinoGrande                83.2%            81.6%            81.2%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 81.6,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                         WinoGrande                83.2%            81.6%            81.2%"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "WinoGrande",
+      "metric": "accuracy",
+      "value": 81.2,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                         WinoGrande                83.2%            81.6%            81.2%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "MBPP",
+      "metric": "pass@1",
+      "value": 49.8,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                             MBPP                  49.8%            52.2%            60.7%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "pass@1"
+      }
+    },
+    {
+      "rawEvalName": "MBPP",
+      "metric": "pass@1",
+      "value": 52.2,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                             MBPP                  49.8%            52.2%            60.7%"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "pass@1"
+      }
+    },
+    {
+      "rawEvalName": "MBPP",
+      "metric": "pass@1",
+      "value": 60.7,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                             MBPP                  49.8%            52.2%            60.7%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "pass@1"
+      }
+    },
+    {
+      "rawEvalName": "GSM-8K",
+      "metric": "accuracy",
+      "value": 53.6,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                           GSM-8K                  53.6%            57.1%            58.4%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "GSM-8K",
+      "metric": "accuracy",
+      "value": 57.1,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                           GSM-8K                  53.6%            57.1%            58.4%"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "GSM-8K",
+      "metric": "accuracy",
+      "value": 58.4,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                           GSM-8K                  53.6%            57.1%            58.4%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "5-shot"
+      }
+    },
+    {
+      "rawEvalName": "MT Bench",
+      "metric": "score",
+      "value": 6.86,
+      "unit": "score",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                           MT Bench                 6.86             8.32              8.30"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "for Instruct Models"
+      }
+    },
+    {
+      "rawEvalName": "MT Bench",
+      "metric": "score",
+      "value": 8.32,
+      "unit": "score",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                           MT Bench                 6.86             8.32              8.30"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "for Instruct Models"
+      }
+    },
+    {
+      "rawEvalName": "MT Bench",
+      "metric": "score",
+      "value": 8.3,
+      "unit": "score",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 3",
+        "quote": "                           MT Bench                 6.86             8.32              8.30"
+      },
+      "model": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+      "settings": {
+        "other": "for Instruct Models"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge (French)",
+      "metric": "accuracy",
+      "value": 39.3,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 1 33B     33B       39.3% 68.1% 49.9%      41.1% 63.3%     48.7%   45.7% 69.8%    52.3%    42.9% 65.4% 49.0%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "multilingual French"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag (French)",
+      "metric": "accuracy",
+      "value": 68.1,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 1 33B     33B       39.3% 68.1% 49.9%      41.1% 63.3%     48.7%   45.7% 69.8%    52.3%    42.9% 65.4% 49.0%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "multilingual French"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (French)",
+      "metric": "accuracy",
+      "value": 49.9,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 1 33B     33B       39.3% 68.1% 49.9%      41.1% 63.3%     48.7%   45.7% 69.8%    52.3%    42.9% 65.4% 49.0%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "multilingual French"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge (German)",
+      "metric": "accuracy",
+      "value": 41.1,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 1 33B     33B       39.3% 68.1% 49.9%      41.1% 63.3%     48.7%   45.7% 69.8%    52.3%    42.9% 65.4% 49.0%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "multilingual German"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag (German)",
+      "metric": "accuracy",
+      "value": 63.3,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 1 33B     33B       39.3% 68.1% 49.9%      41.1% 63.3%     48.7%   45.7% 69.8%    52.3%    42.9% 65.4% 49.0%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "multilingual German"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (German)",
+      "metric": "accuracy",
+      "value": 48.7,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 1 33B     33B       39.3% 68.1% 49.9%      41.1% 63.3%     48.7%   45.7% 69.8%    52.3%    42.9% 65.4% 49.0%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "multilingual German"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge (Spanish)",
+      "metric": "accuracy",
+      "value": 45.7,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 1 33B     33B       39.3% 68.1% 49.9%      41.1% 63.3%     48.7%   45.7% 69.8%    52.3%    42.9% 65.4% 49.0%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "multilingual Spanish"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag (Spanish)",
+      "metric": "accuracy",
+      "value": 69.8,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 1 33B     33B       39.3% 68.1% 49.9%      41.1% 63.3%     48.7%   45.7% 69.8%    52.3%    42.9% 65.4% 49.0%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "multilingual Spanish"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (Spanish)",
+      "metric": "accuracy",
+      "value": 52.3,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 1 33B     33B       39.3% 68.1% 49.9%      41.1% 63.3%     48.7%   45.7% 69.8%    52.3%    42.9% 65.4% 49.0%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "multilingual Spanish"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge (Italian)",
+      "metric": "accuracy",
+      "value": 42.9,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 1 33B     33B       39.3% 68.1% 49.9%      41.1% 63.3%     48.7%   45.7% 69.8%    52.3%    42.9% 65.4% 49.0%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "multilingual Italian"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag (Italian)",
+      "metric": "accuracy",
+      "value": 65.4,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 1 33B     33B       39.3% 68.1% 49.9%      41.1% 63.3%     48.7%   45.7% 69.8%    52.3%    42.9% 65.4% 49.0%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "multilingual Italian"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (Italian)",
+      "metric": "accuracy",
+      "value": 49,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 1 33B     33B       39.3% 68.1% 49.9%      41.1% 63.3%     48.7%   45.7% 69.8%    52.3%    42.9% 65.4% 49.0%"
+      },
+      "rawModelName": "LLaMA 1 33B",
+      "settings": {
+        "other": "multilingual Italian"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge (French)",
+      "metric": "accuracy",
+      "value": 49.9,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 2 70B     70B       49.9% 72.5% 64.3%      47.3% 68.7%     64.2%   50.5% 74.5%    66.0%    49.4% 70.9% 65.1%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "multilingual French"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag (French)",
+      "metric": "accuracy",
+      "value": 72.5,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 2 70B     70B       49.9% 72.5% 64.3%      47.3% 68.7%     64.2%   50.5% 74.5%    66.0%    49.4% 70.9% 65.1%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "multilingual French"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (French)",
+      "metric": "accuracy",
+      "value": 64.3,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 2 70B     70B       49.9% 72.5% 64.3%      47.3% 68.7%     64.2%   50.5% 74.5%    66.0%    49.4% 70.9% 65.1%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "multilingual French"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge (German)",
+      "metric": "accuracy",
+      "value": 47.3,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 2 70B     70B       49.9% 72.5% 64.3%      47.3% 68.7%     64.2%   50.5% 74.5%    66.0%    49.4% 70.9% 65.1%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "multilingual German"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag (German)",
+      "metric": "accuracy",
+      "value": 68.7,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 2 70B     70B       49.9% 72.5% 64.3%      47.3% 68.7%     64.2%   50.5% 74.5%    66.0%    49.4% 70.9% 65.1%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "multilingual German"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (German)",
+      "metric": "accuracy",
+      "value": 64.2,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 2 70B     70B       49.9% 72.5% 64.3%      47.3% 68.7%     64.2%   50.5% 74.5%    66.0%    49.4% 70.9% 65.1%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "multilingual German"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge (Spanish)",
+      "metric": "accuracy",
+      "value": 50.5,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 2 70B     70B       49.9% 72.5% 64.3%      47.3% 68.7%     64.2%   50.5% 74.5%    66.0%    49.4% 70.9% 65.1%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "multilingual Spanish"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag (Spanish)",
+      "metric": "accuracy",
+      "value": 74.5,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 2 70B     70B       49.9% 72.5% 64.3%      47.3% 68.7%     64.2%   50.5% 74.5%    66.0%    49.4% 70.9% 65.1%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "multilingual Spanish"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (Spanish)",
+      "metric": "accuracy",
+      "value": 66,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 2 70B     70B       49.9% 72.5% 64.3%      47.3% 68.7%     64.2%   50.5% 74.5%    66.0%    49.4% 70.9% 65.1%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "multilingual Spanish"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge (Italian)",
+      "metric": "accuracy",
+      "value": 49.4,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 2 70B     70B       49.9% 72.5% 64.3%      47.3% 68.7%     64.2%   50.5% 74.5%    66.0%    49.4% 70.9% 65.1%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "multilingual Italian"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag (Italian)",
+      "metric": "accuracy",
+      "value": 70.9,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 2 70B     70B       49.9% 72.5% 64.3%      47.3% 68.7%     64.2%   50.5% 74.5%    66.0%    49.4% 70.9% 65.1%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "multilingual Italian"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (Italian)",
+      "metric": "accuracy",
+      "value": 65.1,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "LLaMA 2 70B     70B       49.9% 72.5% 64.3%      47.3% 68.7%     64.2%   50.5% 74.5%    66.0%    49.4% 70.9% 65.1%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "multilingual Italian"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge (French)",
+      "metric": "accuracy",
+      "value": 58.2,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Mixtral 8x7B    13B       58.2% 77.4% 70.9%      54.3% 73.0%     71.5%   55.4% 77.6%    72.5%    52.8% 75.1% 70.9%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "multilingual French"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag (French)",
+      "metric": "accuracy",
+      "value": 77.4,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Mixtral 8x7B    13B       58.2% 77.4% 70.9%      54.3% 73.0%     71.5%   55.4% 77.6%    72.5%    52.8% 75.1% 70.9%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "multilingual French"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (French)",
+      "metric": "accuracy",
+      "value": 70.9,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Mixtral 8x7B    13B       58.2% 77.4% 70.9%      54.3% 73.0%     71.5%   55.4% 77.6%    72.5%    52.8% 75.1% 70.9%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "multilingual French"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge (German)",
+      "metric": "accuracy",
+      "value": 54.3,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Mixtral 8x7B    13B       58.2% 77.4% 70.9%      54.3% 73.0%     71.5%   55.4% 77.6%    72.5%    52.8% 75.1% 70.9%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "multilingual German"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag (German)",
+      "metric": "accuracy",
+      "value": 73,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Mixtral 8x7B    13B       58.2% 77.4% 70.9%      54.3% 73.0%     71.5%   55.4% 77.6%    72.5%    52.8% 75.1% 70.9%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "multilingual German"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (German)",
+      "metric": "accuracy",
+      "value": 71.5,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Mixtral 8x7B    13B       58.2% 77.4% 70.9%      54.3% 73.0%     71.5%   55.4% 77.6%    72.5%    52.8% 75.1% 70.9%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "multilingual German"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge (Spanish)",
+      "metric": "accuracy",
+      "value": 55.4,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Mixtral 8x7B    13B       58.2% 77.4% 70.9%      54.3% 73.0%     71.5%   55.4% 77.6%    72.5%    52.8% 75.1% 70.9%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "multilingual Spanish"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag (Spanish)",
+      "metric": "accuracy",
+      "value": 77.6,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Mixtral 8x7B    13B       58.2% 77.4% 70.9%      54.3% 73.0%     71.5%   55.4% 77.6%    72.5%    52.8% 75.1% 70.9%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "multilingual Spanish"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (Spanish)",
+      "metric": "accuracy",
+      "value": 72.5,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Mixtral 8x7B    13B       58.2% 77.4% 70.9%      54.3% 73.0%     71.5%   55.4% 77.6%    72.5%    52.8% 75.1% 70.9%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "multilingual Spanish"
+      }
+    },
+    {
+      "rawEvalName": "ARC-Challenge (Italian)",
+      "metric": "accuracy",
+      "value": 52.8,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Mixtral 8x7B    13B       58.2% 77.4% 70.9%      54.3% 73.0%     71.5%   55.4% 77.6%    72.5%    52.8% 75.1% 70.9%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "multilingual Italian"
+      }
+    },
+    {
+      "rawEvalName": "HellaSwag (Italian)",
+      "metric": "accuracy",
+      "value": 75.1,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Mixtral 8x7B    13B       58.2% 77.4% 70.9%      54.3% 73.0%     71.5%   55.4% 77.6%    72.5%    52.8% 75.1% 70.9%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "multilingual Italian"
+      }
+    },
+    {
+      "rawEvalName": "MMLU (Italian)",
+      "metric": "accuracy",
+      "value": 70.9,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "table": "Table 4",
+        "quote": "Mixtral 8x7B    13B       58.2% 77.4% 70.9%      54.3% 73.0%     71.5%   55.4% 77.6%    72.5%    52.8% 75.1% 70.9%"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "multilingual Italian"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "metric": "accuracy",
+      "value": 51.5,
+      "unit": "percent",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Figure 5",
+        "quote": "BBQ accuracy               51.5%              56.0%"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf"
+    },
+    {
+      "rawEvalName": "BBQ",
+      "metric": "accuracy",
+      "value": 56,
+      "unit": "percent",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Figure 5",
+        "quote": "BBQ accuracy               51.5%              56.0%"
+      },
+      "rawModelName": "Mixtral 8x7B"
+    },
+    {
+      "rawEvalName": "BOLD (gender)",
+      "metric": "sentiment score (avg)",
+      "value": 0.293,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Figure 5",
+        "quote": "gender                0.293 ± 0.073       0.323 ±0.045"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "std 0.073"
+      }
+    },
+    {
+      "rawEvalName": "BOLD (gender)",
+      "metric": "sentiment score (avg)",
+      "value": 0.323,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Figure 5",
+        "quote": "gender                0.293 ± 0.073       0.323 ±0.045"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "std 0.045"
+      }
+    },
+    {
+      "rawEvalName": "BOLD (profession)",
+      "metric": "sentiment score (avg)",
+      "value": 0.218,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Figure 5",
+        "quote": "profession            0.218 ± 0.073       0.243 ± 0.087"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "std 0.073"
+      }
+    },
+    {
+      "rawEvalName": "BOLD (profession)",
+      "metric": "sentiment score (avg)",
+      "value": 0.243,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Figure 5",
+        "quote": "profession            0.218 ± 0.073       0.243 ± 0.087"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "std 0.087"
+      }
+    },
+    {
+      "rawEvalName": "BOLD (religious_ideology)",
+      "metric": "sentiment score (avg)",
+      "value": 0.188,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Figure 5",
+        "quote": "religious_ideology    0.188 ± 0.133       0.144 ± 0.089"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "std 0.133"
+      }
+    },
+    {
+      "rawEvalName": "BOLD (religious_ideology)",
+      "metric": "sentiment score (avg)",
+      "value": 0.144,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Figure 5",
+        "quote": "religious_ideology    0.188 ± 0.133       0.144 ± 0.089"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "std 0.089"
+      }
+    },
+    {
+      "rawEvalName": "BOLD (political_ideology)",
+      "metric": "sentiment score (avg)",
+      "value": 0.149,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Figure 5",
+        "quote": "political_ideology    0.149 ± 0.140       0.186 ± 0.146"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "std 0.14"
+      }
+    },
+    {
+      "rawEvalName": "BOLD (political_ideology)",
+      "metric": "sentiment score (avg)",
+      "value": 0.186,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Figure 5",
+        "quote": "political_ideology    0.149 ± 0.140       0.186 ± 0.146"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "std 0.146"
+      }
+    },
+    {
+      "rawEvalName": "BOLD (race)",
+      "metric": "sentiment score (avg)",
+      "value": 0.232,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Figure 5",
+        "quote": "race                  0.232 ± 0.049       0.232 ± 0.052"
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "settings": {
+        "other": "std 0.049"
+      }
+    },
+    {
+      "rawEvalName": "BOLD (race)",
+      "metric": "sentiment score (avg)",
+      "value": 0.232,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "table": "Figure 5",
+        "quote": "race                  0.232 ± 0.049       0.232 ± 0.052"
+      },
+      "rawModelName": "Mixtral 8x7B",
+      "settings": {
+        "other": "std 0.052"
+      }
+    },
+    {
+      "rawEvalName": "Passkey retrieval",
+      "metric": "retrieval accuracy",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Mixtral achieves a\n100% retrieval accuracy regardless of the context length or the position of passkey in the sequence."
+      },
+      "rawModelName": "Mixtral 8x7B"
+    },
+    {
+      "rawEvalName": "LMSys Chatbot Arena",
+      "metric": "Arena Elo rating",
+      "value": 1121,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Mixtral 8x7B Instruct v0.1 achieves an Arena\nElo rating of 1121 outperforming Claude-2.1 (1117), all versions of GPT-3.5-Turbo (1117 best), Gemini Pro"
+      },
+      "model": "mistralai/Mixtral-8x7B-Instruct-v0.1"
+    },
+    {
+      "rawEvalName": "LMSys Chatbot Arena",
+      "metric": "Arena Elo rating",
+      "value": 1117,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Mixtral 8x7B Instruct v0.1 achieves an Arena\nElo rating of 1121 outperforming Claude-2.1 (1117), all versions of GPT-3.5-Turbo (1117 best), Gemini Pro"
+      },
+      "model": "anthropic/claude-2.1"
+    },
+    {
+      "rawEvalName": "LMSys Chatbot Arena",
+      "metric": "Arena Elo rating",
+      "value": 1117,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Mixtral 8x7B Instruct v0.1 achieves an Arena\nElo rating of 1121 outperforming Claude-2.1 (1117), all versions of GPT-3.5-Turbo (1117 best), Gemini Pro"
+      },
+      "model": "openai/gpt-3.5-turbo",
+      "settings": {
+        "other": "best among GPT-3.5-Turbo versions"
+      }
+    },
+    {
+      "rawEvalName": "LMSys Chatbot Arena",
+      "metric": "Arena Elo rating",
+      "value": 1111,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Elo rating of 1121 outperforming Claude-2.1 (1117), all versions of GPT-3.5-Turbo (1117 best), Gemini Pro\n(1111), and Llama-2-70b-chat (1077). Mixtral is currently the best open-weights model by a large margin."
+      },
+      "rawModelName": "Gemini Pro"
+    },
+    {
+      "rawEvalName": "LMSys Chatbot Arena",
+      "metric": "Arena Elo rating",
+      "value": 1077,
+      "unit": "score",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "Elo rating of 1121 outperforming Claude-2.1 (1117), all versions of GPT-3.5-Turbo (1117 best), Gemini Pro\n(1111), and Llama-2-70b-chat (1077). Mixtral is currently the best open-weights model by a large margin."
+      },
+      "model": "meta-llama/Llama-2-70b-chat-hf"
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:57:20Z"
+  },
+  "notes": "Docs page (seed URL) is a thin product stub linking Blog + arXiv Technical Report; extracted from the linked PDF arXiv:2401.04088 (13 pages). alsoDocuments empty (only one seed document). Release date Dec 11, 2023 appears on the docs/blog pages but not as a release statement in the PDF, so releaseDate=not_stated. Figures 2/3/4(right)/7/9/10 are charts without extractable numeric tables—skipped. Table 5 expert-assignment repetition rates are routing locality stats, not capability/safety scores—omitted from evalResults (noted in findings). Bias numbers appear beside Figure 5; body text also calls them Table 5 (numbering clash with the later expert Table 5). BBH/AGI Eval/BoolQ/QuAC/SIQA/etc. are listed as evaluated but only shown in charts. Used rawModelName Mixtral 8x7B for base Table 2/3/4/5 results; seed id for Instruct-only MT-Bench and Arena Elo. Llama/Mistral comparison models mapped to nearest seed ids where lookup found them; Llama 1 33B and Gemini Pro use rawModelName."
+}

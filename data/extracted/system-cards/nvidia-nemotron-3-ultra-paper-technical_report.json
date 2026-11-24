@@ -1,0 +1,469 @@
+{
+  "document": "nvidia-nemotron-3-ultra-paper-technical_report",
+  "alsoDocuments": ["nvidia-nemotron-3-ultra-blog"],
+  "covers": [
+    {
+      "model": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16"
+    }
+  ],
+  "pageCount": 69,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "1M tokens",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We pre-trained Nemotron 3 Ultra on 20 trillion text\ntokens, then extended the context length to 1M tokens, and post-trained using Supervised Fine Tuning"
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (language model)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce Nemotron 3 Ultra, a 550 billion total and 55 billion active parameter Mixture-of-Experts\nHybrid Mamba-Attention language model."
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "reasoning-off, regular and medium-effort",
+      "source": {
+        "page": "31",
+        "pdfPage": 35,
+        "quote": "Nemotron 3 Ultra is trained for three reasoning modes: reasoning-off, regular and medium-effort."
+      }
+    },
+    "languages": {
+      "status": "stated",
+      "value": "multilingual pretraining spanning 11 languages (Arabic, Chinese, French, German, Hebrew, Hindi, Italian, Japanese, Korean, Portuguese, Spanish)",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "multilingual data\nspanning 11 languages (Arabic, Chinese, French, German, Hebrew, Hindi, Italian, Japanese, Korean,\nPortuguese, Spanish)"
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "550 billion",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce Nemotron 3 Ultra, a 550 billion total and 55 billion active parameter Mixture-of-Experts"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "55 billion",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce Nemotron 3 Ultra, a 550 billion total and 55 billion active parameter Mixture-of-Experts"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "hybrid Mamba-Attention Mixture-of-Experts (MoE) with LatentMoE and Multi-Token Prediction",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Nemotron 3 Ultra uses the same hybrid Mamba-Attention Mixture-of-Experts (MoE) architecture as\nNemotron 3 Super (NVIDIA, 2026), extended to 550B total parameters with 55B active parameters\nper token."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "20 trillion text tokens pretraining, then long-context extension and post-training (SFT, RL, MOPD); datasets released on HuggingFace",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We pre-trained Nemotron 3 Ultra on 20 trillion text\ntokens, then extended the context length to 1M tokens, and post-trained using Supervised Fine Tuning\n(SFT), Reinforcement Learning (RL), and Multi-teacher On-Policy Distillation (MOPD)."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "SFT safety blend with policy-mapped prompts and policy-compliant responses (~135K multilingual samples)",
+      "source": {
+        "page": "16",
+        "pdfPage": 20,
+        "quote": "Safety. To instill robust safety behaviors, first, we retain the 45K safety data blend curated\nin Nemotron 3 Super (NVIDIA, 2026) with prompts curated from diverse sources and responses\nsynthetically generated conditioned on a response policy mapped to each prompt."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "Agentic Safety Teacher targets indirect prompt injection in tool-response content across four attack categories",
+      "source": {
+        "page": "24",
+        "pdfPage": 28,
+        "quote": "Agentic Safety Teacher. We introduce an agentic safety teacher to improve the robustness of\nmodels against indirect prompt injection attacks where malicious instructions are embedded in\ntool-response data rather than issued directly by the user."
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Highest [AA-Omniscience](/evals/aa-omniscience) non-hallucination score (78.7) among compared open models; abstention training for hallucination reduction",
+      "source": {
+        "page": "39",
+        "pdfPage": 43,
+        "quote": "On AA-Omniscience, Nemotron 3\nUltra achieves the highest non-hallucination score, 78.7, suggesting a favorable reliability profile and\na lower tendency to produce unsupported answers when knowledge is uncertain."
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": true,
+      "headline": "Ultra-based GenRM scaled to mitigate reward hacking during reinforcement learning from human feedback (RLHF)",
+      "source": {
+        "page": "24",
+        "pdfPage": 28,
+        "quote": "Generative Reward Models (GenRM) (Wang et al., 2025c)\nwith reasoning capabilities help mitigate such reward hacking behaviors, but substantial failure\ncases still remain."
+      }
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Nemotron 3 Ultra leads the open-model comparison on [AA-Omniscience](/evals/aa-omniscience) non-hallucination at 78.7, while several larger peers score in the single digits.", "tone": "good",
+      "source": {
+        "page": "38",
+        "pdfPage": 42,
+        "quote": "OmniScience Non-Hallucination                      78.7       74.4      66.8       67.1      7.4      5.7       2.8"
+      }
+    },
+    {
+      "text": "An Agentic Safety Teacher uses automated red-teaming (Nemotron 3 Super attacker, Nemotron 3 Nano defender) for verifiable indirect prompt-injection resistance.", "tone": "neutral",
+      "source": {
+        "page": "24",
+        "pdfPage": 28,
+        "quote": "To generate challenging attacks, we use an automated red-teaming loop in which an attacker model\niteratively rewrites the injected instruction against a defender model until the defender follows it and\nonly successful attacks are retained."
+      }
+    },
+    {
+      "text": "The final multilingual safety supervised fine-tuning (SFT) blend is about 135K samples (about 45K English plus about 15K each in six translated languages).", "tone": "neutral",
+      "source": {
+        "page": "16",
+        "pdfPage": 20,
+        "quote": "The final safety\nblend contains about ≈ 135K samples: ≈ 45K in English and ≈ 15K from each of the translated\nlanguages."
+      }
+    },
+    {
+      "text": "NVFP4 quantization lowers OmniScience Non-Hallucination from 78.7 (BF16) to 75.5.", "tone": "mixed",
+      "source": {
+        "page": "47",
+        "pdfPage": 51,
+        "quote": "OmniScience Non-Hallucination                                      78.7                                      75.5"
+      }
+    },
+    {
+      "text": "Multi-teacher On-Policy Distillation (MOPD) training raises OmniScience Non-Hallucination from 4.8 (SFT) to 78.7 (MOPD2), closing most of the gap to the specialized teacher (87.0).", "tone": "good",
+      "source": {
+        "page": "27",
+        "pdfPage": 31,
+        "quote": "OmniScience Non-Hallucination          4.8      46.3      77.9        78.7        87.0          79.6%"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "AA-Omniscience",
+      "model": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+      "metric": "non-hallucination",
+      "value": 78.7,
+      "unit": "percent",
+      "source": {
+        "page": "38",
+        "pdfPage": 42,
+        "table": "Table 10",
+        "quote": "OmniScience Non-Hallucination                      78.7       74.4      66.8       67.1      7.4      5.7       2.8"
+      }
+    },
+    {
+      "rawEvalName": "AA-Omniscience",
+      "rawModelName": "MiniMax-2.7",
+      "metric": "non-hallucination",
+      "value": 74.4,
+      "unit": "percent",
+      "settings": {
+        "other": "230B-A10B"
+      },
+      "source": {
+        "page": "38",
+        "pdfPage": 42,
+        "table": "Table 10",
+        "quote": "OmniScience Non-Hallucination                      78.7       74.4      66.8       67.1      7.4      5.7       2.8"
+      }
+    },
+    {
+      "rawEvalName": "AA-Omniscience",
+      "model": "zai-org/GLM-5.1",
+      "metric": "non-hallucination",
+      "value": 66.8,
+      "unit": "percent",
+      "settings": {
+        "other": "744B-A40B"
+      },
+      "source": {
+        "page": "38",
+        "pdfPage": 42,
+        "table": "Table 10",
+        "quote": "OmniScience Non-Hallucination                      78.7       74.4      66.8       67.1      7.4      5.7       2.8"
+      }
+    },
+    {
+      "rawEvalName": "AA-Omniscience",
+      "model": "moonshotai/Kimi-K2.6",
+      "metric": "non-hallucination",
+      "value": 67.1,
+      "unit": "percent",
+      "settings": {
+        "other": "1T-A32B"
+      },
+      "source": {
+        "page": "38",
+        "pdfPage": 42,
+        "table": "Table 10",
+        "quote": "OmniScience Non-Hallucination                      78.7       74.4      66.8       67.1      7.4      5.7       2.8"
+      }
+    },
+    {
+      "rawEvalName": "AA-Omniscience",
+      "model": "Qwen/Qwen3.5-397B-A17B",
+      "metric": "non-hallucination",
+      "value": 7.4,
+      "unit": "percent",
+      "settings": {
+        "other": "Qwen-3.5 397B-17B as labeled in Table 10"
+      },
+      "source": {
+        "page": "38",
+        "pdfPage": 42,
+        "table": "Table 10",
+        "quote": "OmniScience Non-Hallucination                      78.7       74.4      66.8       67.1      7.4      5.7       2.8"
+      }
+    },
+    {
+      "rawEvalName": "AA-Omniscience",
+      "model": "deepseek-ai/DeepSeek-V4-Pro",
+      "metric": "non-hallucination",
+      "value": 5.7,
+      "unit": "percent",
+      "settings": {
+        "other": "DS-v4-Pro 1.6T-A49B"
+      },
+      "source": {
+        "page": "38",
+        "pdfPage": 42,
+        "table": "Table 10",
+        "quote": "OmniScience Non-Hallucination                      78.7       74.4      66.8       67.1      7.4      5.7       2.8"
+      }
+    },
+    {
+      "rawEvalName": "AA-Omniscience",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "metric": "non-hallucination",
+      "value": 2.8,
+      "unit": "percent",
+      "settings": {
+        "other": "DS-v4-Flash 284B-A13B"
+      },
+      "source": {
+        "page": "38",
+        "pdfPage": 42,
+        "table": "Table 10",
+        "quote": "OmniScience Non-Hallucination                      78.7       74.4      66.8       67.1      7.4      5.7       2.8"
+      }
+    },
+    {
+      "rawEvalName": "AA-Omniscience",
+      "model": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+      "metric": "non-hallucination",
+      "value": 4.8,
+      "unit": "percent",
+      "settings": {
+        "other": "SFT stage"
+      },
+      "source": {
+        "page": "27",
+        "pdfPage": 31,
+        "table": "Table 5",
+        "quote": "OmniScience Non-Hallucination          4.8      46.3      77.9        78.7        87.0          79.6%"
+      }
+    },
+    {
+      "rawEvalName": "AA-Omniscience",
+      "model": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+      "metric": "non-hallucination",
+      "value": 46.3,
+      "unit": "percent",
+      "settings": {
+        "other": "RLVR stage"
+      },
+      "source": {
+        "page": "27",
+        "pdfPage": 31,
+        "table": "Table 5",
+        "quote": "OmniScience Non-Hallucination          4.8      46.3      77.9        78.7        87.0          79.6%"
+      }
+    },
+    {
+      "rawEvalName": "AA-Omniscience",
+      "model": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+      "metric": "non-hallucination",
+      "value": 77.9,
+      "unit": "percent",
+      "settings": {
+        "other": "MOPD1 stage"
+      },
+      "source": {
+        "page": "27",
+        "pdfPage": 31,
+        "table": "Table 5",
+        "quote": "OmniScience Non-Hallucination          4.8      46.3      77.9        78.7        87.0          79.6%"
+      }
+    },
+    {
+      "rawEvalName": "AA-Omniscience",
+      "model": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+      "metric": "non-hallucination",
+      "value": 78.7,
+      "unit": "percent",
+      "settings": {
+        "other": "MOPD2 stage"
+      },
+      "source": {
+        "page": "27",
+        "pdfPage": 31,
+        "table": "Table 5",
+        "quote": "OmniScience Non-Hallucination          4.8      46.3      77.9        78.7        87.0          79.6%"
+      }
+    },
+    {
+      "rawEvalName": "AA-Omniscience",
+      "model": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+      "metric": "non-hallucination",
+      "value": 78.7,
+      "unit": "percent",
+      "settings": {
+        "other": "BF16"
+      },
+      "source": {
+        "page": "47",
+        "pdfPage": 51,
+        "table": "Table 18",
+        "quote": "OmniScience Non-Hallucination                                      78.7                                      75.5"
+      }
+    },
+    {
+      "rawEvalName": "AA-Omniscience",
+      "model": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+      "metric": "non-hallucination",
+      "value": 75.5,
+      "unit": "percent",
+      "source": {
+        "page": "47",
+        "pdfPage": 51,
+        "table": "Table 18",
+        "quote": "OmniScience Non-Hallucination                                      78.7                                      75.5"
+      },
+      "settings": {
+        "other": "NVFP4 checkpoint (vLLM 0.22.0)"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T17:48:34Z"
+  },
+  "notes": "Technical report (not a system card). Safety content is thin relative to capability evals: training claims for SFT safety data and an Agentic Safety Teacher (indirect prompt injection) with no published attack-success numbers. Only numeric safety-adjacent results are AA-Omniscience / OmniScience Non-Hallucination (Tables 5, 10, 18). Skipped OmniScience Accuracy and all capability suites (agentic, reasoning, IFBench, long-context, multilingual, Arena-style). Skipped Table 5 Teacher column (specialized teacher, not Ultra). Skipped Table 13 (PTQ sweep on an unnamed intermediate checkpoint). No external safety testers or risk-framework decisions. Header date 2026-6-9 is not treated as a model releaseDate. Code data cut-off Sep 30, 2025 is not treated as knowledgeCutoff. License name not stated despite HuggingFace open release. PDF text had null bytes from extraction; stripped for quote matching."
+}

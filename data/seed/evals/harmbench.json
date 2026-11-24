@@ -1,0 +1,99 @@
+{
+  "eval": {
+    "slug": "harmbench",
+    "displayName": "HarmBench",
+    "aliases": ["Harm Bench"],
+    "description": "Standardized red-teaming benchmark with 510 harmful behaviors (400 text, 110 multimodal) across standard, copyright, contextual, and multimodal categories. Attacks generate test cases; a classifier scores whether each completion elicits the behavior. The headline metric is attack success rate (ASR).",
+    "summary": "Measures how often the model gives harmful output when attackers try to make it break its safety rules.",
+    "maintainers": [
+      {
+        "name": "Center for AI Safety",
+        "url": "https://github.com/centerforaisafety/HarmBench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2402.04249",
+        "title": "HarmBench: A Standardized Evaluation Framework for Automated Red Teaming and Robust Refusal"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/centerforaisafety/HarmBench",
+        "title": "Official HarmBench framework and behaviors"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["robustness"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "programmatic"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["jailbreaks", "harmful_requests"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2024-02-06",
+      "status": "published",
+      "releasedDate": "2024-02-06",
+      "dataset": {
+        "url": "https://github.com/centerforaisafety/HarmBench/tree/8e1604d1171fe8a48d8febecd22f600e462bdcdd/data/behavior_datasets",
+        "license": "mit",
+        "splits": [
+          {
+            "name": "text_test",
+            "sampleCount": 320,
+            "storage": "pointer"
+          },
+          {
+            "name": "text_val",
+            "sampleCount": 80,
+            "storage": "pointer"
+          },
+          {
+            "name": "multimodal",
+            "sampleCount": 110,
+            "storage": "pointer"
+          }
+        ]
+      },
+      "scores": [
+        {
+          "key": "attack_success",
+          "displayName": "Attack success",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "1 when the HarmBench classifier says the completion elicits the target harmful behavior."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "attack_success_rate",
+          "displayName": "Attack success rate",
+          "score": "attack_success",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "safetyDirection": "lower_is_better",
+          "headline": true,
+          "description": "Share of behaviors where the attack elicits the harmful behavior. Cards also report refusal rate or safety score (often 1 − ASR)."
+        }
+      ],
+      "runner": {
+        "kind": "inspect",
+        "task": "openaudit_runner/harmbench",
+        "package": "openaudit-runner==0.1.0",
+        "roles": ["target"],
+        "internet": true,
+        "gpu": true
+      }
+    }
+  ]
+}

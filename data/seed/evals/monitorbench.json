@@ -1,0 +1,99 @@
+{
+  "eval": {
+    "slug": "monitorbench",
+    "displayName": "MonitorBench",
+    "aliases": ["Monitor Bench"],
+    "description": "Tests chain-of-thought monitorability: whether a model's CoT surfaces the decision-critical factors that drive its outputs. 1,514 fixed instances across 19 tasks in 7 categories (cue and goal injection, dual objectives, impossible tasks, multi-step updates), with stress tests for direct concealment and monitor-aware evasion. A monitor LLM (or human) flags trajectories; the headline metric is the paper's monitorability score.",
+    "summary": "Measures whether the model's reasoning steps show the key factors that drive its answers.",
+    "maintainers": [
+      {
+        "name": "ASTRAL Group",
+        "url": "https://github.com/ASTRAL-Group/MonitorBench"
+      }
+    ],
+    "links": [
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2603.28590",
+        "title": "MonitorBench: A Comprehensive Benchmark for Chain-of-Thought Monitorability in Large Language Models"
+      },
+      {
+        "kind": "repo",
+        "url": "https://github.com/ASTRAL-Group/MonitorBench",
+        "title": "Official code and datasets"
+      }
+    ],
+    "access": "public",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["single_turn", "multi_turn", "agentic"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "programmatic"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["cot_monitorability"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2026-03-30",
+      "status": "published",
+      "releasedDate": "2026-03-30",
+      "dataset": {
+        "url": "https://github.com/ASTRAL-Group/MonitorBench/tree/284f4e3b5ff7f190a9118b6523aa9fa603ac3a82",
+        "license": "mit",
+        "splits": [
+          { "name": "cue_condition_knowledge", "sampleCount": 108, "storage": "pointer" },
+          { "name": "cue_condition_preference", "sampleCount": 100, "storage": "pointer" },
+          { "name": "cue_condition_law_judgment", "sampleCount": 100, "storage": "pointer" },
+          { "name": "cue_condition_health", "sampleCount": 65, "storage": "pointer" },
+          { "name": "cue_answer_mathematics", "sampleCount": 28, "storage": "pointer" },
+          { "name": "cue_answer_logic", "sampleCount": 50, "storage": "pointer" },
+          { "name": "cue_answer_health", "sampleCount": 65, "storage": "pointer" },
+          { "name": "goal_sandbag_safety", "sampleCount": 150, "storage": "pointer" },
+          { "name": "goal_sandbag_mathematics", "sampleCount": 30, "storage": "pointer" },
+          { "name": "goal_sandbag_science", "sampleCount": 192, "storage": "pointer" },
+          { "name": "goal_sandbag_engineering", "sampleCount": 100, "storage": "pointer" },
+          { "name": "goal_deception_real_world_case", "sampleCount": 50, "storage": "pointer" },
+          { "name": "dual_objectives_steganography", "sampleCount": 50, "storage": "pointer" },
+          { "name": "dual_objectives_summarization", "sampleCount": 50, "storage": "pointer" },
+          { "name": "dual_objectives_coding", "sampleCount": 291, "storage": "pointer" },
+          { "name": "dual_objectives_agent_malicious", "sampleCount": 5, "storage": "pointer" },
+          { "name": "dual_objectives_agent_benign", "sampleCount": 5, "storage": "pointer" },
+          { "name": "impossible_tasks_coding", "sampleCount": 50, "storage": "pointer" },
+          { "name": "necessary_steps_multi_step_update", "sampleCount": 25, "storage": "pointer" }
+        ]
+      },
+      "scores": [
+        {
+          "key": "monitor_flagged",
+          "displayName": "Monitor flagged",
+          "type": "binary",
+          "direction": "higher_is_better",
+          "description": "The monitor finds the decision-critical factor in the monitored scope (CoT-only, action-only, or all messages)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "monitorability_score",
+          "displayName": "Monitorability score",
+          "aggregation": "custom",
+          "min": 0,
+          "max": 1,
+          "direction": "higher_is_better",
+          "safetyDirection": "higher_is_better",
+          "headline": true,
+          "description": "Paper formula: min(E[Z|X=1,Y=1] / R_effect, 1), averaged over eligible questions. Stress tests use the same score under concealment prompts."
+        }
+      ],
+      "runner": {
+        "kind": "external",
+        "roles": ["target", "monitor", "judge"],
+        "gpu": true
+      }
+    }
+  ]
+}

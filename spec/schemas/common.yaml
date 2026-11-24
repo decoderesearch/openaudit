@@ -1,0 +1,47 @@
+# Shared types. Every file adds to one `$defs` namespace, so refs are `#/$defs/<Name>`.
+$defs:
+  Id:
+    description: A UUIDv7, made by the client that creates the record. Lowercase, with dashes.
+    type: string
+    pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$'
+
+  Slug:
+    description: A lowercase name for URLs and lookups (`google`, `01-ai`).
+    type: string
+    pattern: '^[a-z0-9]+(-[a-z0-9]+)*$'
+    maxLength: 64
+
+  DocumentKey:
+    description: A lowercase key for a document (`openai-gpt2-blog`).
+    type: string
+    pattern: '^[a-z0-9]+([._-][a-z0-9]+)*$'
+    maxLength: 100
+
+  PartialDate:
+    description: A date only as exact as its source says (YYYY, YYYY-MM or YYYY-MM-DD).
+    type: string
+    pattern: '^\d{4}(-(0[1-9]|1[0-2])(-(0[1-9]|[12]\d|3[01]))?)?$'
+
+  Timestamp:
+    description: An RFC 3339 time with a time zone.
+    type: string
+    format: date-time
+
+  Url:
+    description: An http or https URL.
+    type: string
+    pattern: '^https?://'
+
+  Sha256:
+    description: A SHA-256 digest, lowercase hex.
+    type: string
+    pattern: '^[0-9a-f]{64}$'
+
+  Aliases:
+    description: Other names for the record, for search and for matching names in documents.
+    type: array
+    items:
+      title: Alias
+      type: string
+      minLength: 1
+    uniqueItems: true

@@ -1,0 +1,5525 @@
+{
+  "document": "google-gemini-1-5-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "model": "google/gemini-flash-1.5"
+    },
+    {
+      "model": "google/gemini-flash-1.5-8b",
+      "section": "Flash-8B: Pushing the frontier for more efficient models"
+    }
+  ],
+  "pageCount": 154,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "February 2024 initial release; May 2024 updated Gemini 1.5 Pro",
+      "source": {
+        "page": "4",
+        "pdfPage": 4,
+        "quote": "Since the initial release in February, Gemini 1.5 Pro has undergone a number of pre-training and post-training iterations."
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "up to at least 10M tokens (commercially 2M+ context)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "they have the ability to recall and reason over fine-grained information from up to at least 10M tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text, video (up to two hours), images, audio (up to 22 hours); output text",
+      "source": {
+        "page": "105",
+        "pdfPage": 105,
+        "quote": "Text string (e.g., a question, a prompt, a document(s) to be summarized), video (up to two hours), images, audio files (up to 22 hours)."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "multilingual training data and multilingual evaluations",
+      "source": {
+        "page": "106",
+        "pdfPage": 106,
+        "quote": "Gemini 1.5 models are trained on a variety of multimodal and multilingual data. Refer to Section 4 (Training Infrastructure and Dataset)."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "not_stated"
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Gemini 1.5 Pro: sparse MoE Transformer; Gemini 1.5 Flash: dense Transformer distilled from Pro",
+      "source": {
+        "page": "105",
+        "pdfPage": 105,
+        "quote": "Gemini 1.5 Pro is a sparse mixture-of-expert (MoE) Transformer based model that builds on scaling MoE vision/language models"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "multimodal and multilingual data including web documents, code, image, audio, and video; instruction-tuned on paired multimodal data and human preference data",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "Our pre-training dataset includes data sourced across many different domains, including web documents and code, and incorporates image, audio, and video content."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Large reductions in content-policy violation rates vs Gemini 1.0 Ultra across T2T/I2T/A2T",
+      "source": {
+        "page": "52",
+        "pdfPage": 52,
+        "quote": "Gemini 1.5 Pro and Flash are our safest models to date per these evaluations, showcasing large improvements in policy violations."
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": true,
+      "headline": "Improved [JailbreakBench](/evals/jailbreakbench) robustness vs 1.0 Ultra; still vulnerable to human-readable attacks",
+      "source": {
+        "page": "55",
+        "pdfPage": 55,
+        "quote": "Gemini 1.5 Pro/Flash exhibit improved robustness relative to Gemini 1.0 Ultra, at least to the specific attacks we have applied."
+      }
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": true,
+      "headline": "Handcrafted prompt-injection attack success rate (ASR) often near 100%; optimization attacks largely fail",
+      "source": {
+        "page": "61",
+        "pdfPage": 61,
+        "quote": "We find that the handcrafted templates are much more successful than the optimization-based attacks"
+      }
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": true,
+      "headline": "[Self-proliferation](/evals/gdm-self-proliferation): 0/10 end-to-end; more milestones than 1.0 Ultra",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "quote": "Neither Gemini 1.0 models nor Gemini 1.5 Pro can pass any challenge from start to finish, but Gemini 1.5 Pro is significantly better on individual ‘milestone’ sub-steps."
+      }
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "STEM QA with Context: fewer inaccurate sentences than Gemini 1.0 models",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "quote": "the Gemini 1.5 models all significantly outperform the Gemini 1.0 Pro and Ultra models in this evaluation with 4-5% more accurate and 6-7% fewer inaccurate response sentences"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "[BBQ](/evals/bbq) bias scores improved vs 1.0 Ultra; Dollar Street and speech word error rate (WER) parity measured",
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "quote": "We observe an improvement in bias scores compared to the baseline Gemini 1.0 Ultra model, with low bias scores reported across models on this benchmark."
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": true,
+      "headline": "Persuasion suite: [Charm Offensive](/evals/charm-offensive) up; [Hidden Agenda](/evals/hidden-agenda)/[Money Talks](/evals/money-talks)/[Web of Lies](/evals/web-of-lies) mixed",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "quote": "Across the board (Table 41) we see improvements in how much participants like the character played by Gemini 1.5 Pro."
+      }
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "[InterCode-CTF](/evals/intercode-ctf) gains; no [Hack the Box](/evals/hack-the-box) solves; vulnerability detection flat",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "quote": "Though we see no progress on our internal challenge suite (Phuong et al., 2024), our in-house ‘worm’ challenge, or Hack the Box (a cybersecurity training platform), we see a significant increase in performance on the easiest set of challenges, InterCode-CTF"
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": true,
+      "headline": "chemical, biological, radiological, and nuclear (CBRN): more qualitative refusals; quantitative performance not improved vs prior",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "quote": "Preliminary results for the qualitative results indicate that the frequency of refusals from the model is increased compared to previous models."
+      }
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Long-context adversarial needle did not increase safety risk vs short context; violations lower partly because the model sometimes fails to find the needle.", "tone": "good",
+      "source": {
+        "page": "56",
+        "pdfPage": 56,
+        "quote": "In general, we observe that safety violation rates for this toy task are lower overall compared to the short-context text-to-text evaluation"
+      }
+    },
+    {
+      "text": "Models resist non-interpretable Greedy-Coordinate-Gradient (GCG) jailbreak tokens but remain susceptible to human-readable instruction attacks.", "tone": "mixed",
+      "source": {
+        "page": "55",
+        "pdfPage": 55,
+        "quote": "Gemini 1.5 Pro/Flash can successfully resist attacks that involve non human-interpretable tokens computed using gradient-based optimization of prompts (rows 1 and 5), but remain susceptible to attacks that involve human readable instructions."
+      }
+    },
+    {
+      "text": "Divergence attack succeeds 44% of the time; only 0.35% of diverged generations are training data (vs around 2.8% for ChatGPT 3.5).", "tone": "mixed",
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "quote": "Overall, we find that divergence occurs 44% of the time."
+      }
+    },
+    {
+      "text": "Longer prompts make divergence easier: 35.6% success at 1,000 repeats vs 61.5% at 999,000 repeats.", "tone": "bad",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "quote": "while the short prompts succeed at divergence only 35.6% of the time, the long prompts succeed at causing divergence 61.5% of the time."
+      }
+    },
+    {
+      "text": "External radiological/nuclear testers found no major risks of concern; generated info mostly low or intermediate accuracy.", "tone": "good",
+      "source": {
+        "page": "73",
+        "pdfPage": 73,
+        "quote": "The results did not raise any major or specific risks of concern."
+      }
+    },
+    {
+      "text": "External cyber testers: model gives minor code-obfuscation uplift vs established tools; dual expertise still required.", "tone": "mixed",
+      "source": {
+        "page": "73",
+        "pdfPage": 73,
+        "quote": "External evaluators found that the model can provide some degree of capability enhancement in code obfuscation. However, these improvements are relatively minor compared to the results achieved by established obfuscation tools."
+      }
+    },
+    {
+      "text": "Tone regresses vs 1.0 Ultra on helpfulness metrics despite overall preference gains.", "tone": "mixed",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "quote": "We do see a regression in tone, which we will prioritize addressing in our future work."
+      }
+    },
+    {
+      "text": "Assurance evals: Pro/Flash achieved best performance in highest-severity policy testing across modalities vs prior Gemini generations.", "tone": "good",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "quote": "Both Pro and Flash 1.5 achieved our best performance in highest severity policy testing across modalities."
+      }
+    },
+    {
+      "text": "Memorization figures are chart-only; text states 1.5 Pro/Flash memorize less than prior models including smaller Gemma, with ~14× more approximate than exact memorization.", "tone": "good",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "quote": "We find that Gemini 1.5 Pro and Gemini 1.5 Flash memorize less than existing models, even models which are smaller."
+      }
+    },
+    {
+      "text": "No memorized high-sensitivity personal data found via Google Cloud Sensitive Data Protection (SDP) rules in tested memorized outputs.", "tone": "good",
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "quote": "We did not find any memorized data with high sensitivity levels."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Policy Violations",
+      "metric": "reduction in violation rate vs Gemini 1.0 Ultra",
+      "value": -53,
+      "unit": "percent",
+      "source": {
+        "page": "52",
+        "pdfPage": 52,
+        "table": "Table 23",
+        "quote": "Gemini 1.5 Flash          -53%                      -36%                                      -43%"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Text to Text; English"
+      }
+    },
+    {
+      "rawEvalName": "Policy Violations",
+      "metric": "reduction in violation rate vs Gemini 1.0 Ultra",
+      "value": -36,
+      "unit": "percent",
+      "source": {
+        "page": "52",
+        "pdfPage": 52,
+        "table": "Table 23",
+        "quote": "Gemini 1.5 Flash          -53%                      -36%                                      -43%"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Text to Text; Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "Policy Violations",
+      "metric": "reduction in violation rate vs Gemini 1.0 Ultra",
+      "value": -43,
+      "unit": "percent",
+      "source": {
+        "page": "52",
+        "pdfPage": 52,
+        "table": "Table 23",
+        "quote": "Gemini 1.5 Flash          -53%                      -36%                                      -43%"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Image to Text"
+      }
+    },
+    {
+      "rawEvalName": "Policy Violations",
+      "metric": "reduction in violation rate vs Gemini 1.0 Ultra",
+      "value": -58,
+      "unit": "percent",
+      "source": {
+        "page": "52",
+        "pdfPage": 52,
+        "table": "Table 23",
+        "quote": "Gemini 1.5 Pro          -58%                      -44%                                      -62%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Text to Text; English"
+      }
+    },
+    {
+      "rawEvalName": "Policy Violations",
+      "metric": "reduction in violation rate vs Gemini 1.0 Ultra",
+      "value": -44,
+      "unit": "percent",
+      "source": {
+        "page": "52",
+        "pdfPage": 52,
+        "table": "Table 23",
+        "quote": "Gemini 1.5 Pro          -58%                      -44%                                      -62%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Text to Text; Multilingual"
+      }
+    },
+    {
+      "rawEvalName": "Policy Violations",
+      "metric": "reduction in violation rate vs Gemini 1.0 Ultra",
+      "value": -62,
+      "unit": "percent",
+      "source": {
+        "page": "52",
+        "pdfPage": 52,
+        "table": "Table 23",
+        "quote": "Gemini 1.5 Pro          -58%                      -44%                                      -62%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Image to Text"
+      }
+    },
+    {
+      "rawEvalName": "Policy Violations",
+      "metric": "reduction in violation rate from T2T",
+      "value": -4.5,
+      "unit": "percent",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "table": "Table 25",
+        "quote": "Gemini 1.5 Flash                           -4.5%"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Audio to Text relative to Text to Text"
+      }
+    },
+    {
+      "rawEvalName": "Policy Violations",
+      "metric": "reduction in violation rate from T2T",
+      "value": -10.1,
+      "unit": "percent",
+      "source": {
+        "page": "54",
+        "pdfPage": 54,
+        "table": "Table 25",
+        "quote": "Gemini 1.5 Pro                            -10.1%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Audio to Text relative to Text to Text"
+      }
+    },
+    {
+      "rawEvalName": "JailbreakBench",
+      "metric": "gain in attack success rate over Gemini 1.0 Ultra",
+      "value": -6,
+      "unit": "percent",
+      "source": {
+        "page": "55",
+        "pdfPage": 55,
+        "table": "Table 26",
+        "quote": "GCG (Zou et al., 2023)                   Transfer (from Gemini 1.0 Nano)   600,000                          −6%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Transfer (from Gemini 1.0 Nano); attack=GCG",
+        "harness": "JailbreakBench"
+      }
+    },
+    {
+      "rawEvalName": "JailbreakBench",
+      "metric": "gain in attack success rate over Gemini 1.0 Ultra",
+      "value": -51,
+      "unit": "percent",
+      "source": {
+        "page": "55",
+        "pdfPage": 55,
+        "table": "Table 26",
+        "quote": "Template (Andriushchenko et al., 2024)   Blackbox                          0                               −51%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Blackbox; attack=Template",
+        "harness": "JailbreakBench"
+      }
+    },
+    {
+      "rawEvalName": "JailbreakBench",
+      "metric": "gain in attack success rate over Gemini 1.0 Ultra",
+      "value": 7,
+      "unit": "percent",
+      "source": {
+        "page": "55",
+        "pdfPage": 55,
+        "table": "Table 26",
+        "quote": "Template + Mutations                     Greybox                           60,000                           +7%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Greybox; attack=Template + Mutations",
+        "harness": "JailbreakBench"
+      }
+    },
+    {
+      "rawEvalName": "JailbreakBench",
+      "metric": "gain in attack success rate over Gemini 1.0 Ultra",
+      "value": -23,
+      "unit": "percent",
+      "source": {
+        "page": "55",
+        "pdfPage": 55,
+        "table": "Table 26",
+        "quote": "Template + Mutations                     Transfer (from Gemini 1.0 Nano)   60,000                          −23%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Transfer (from Gemini 1.0 Nano); attack=Template + Mutations",
+        "harness": "JailbreakBench"
+      }
+    },
+    {
+      "rawEvalName": "JailbreakBench",
+      "metric": "gain in attack success rate over Gemini 1.0 Ultra",
+      "value": -6,
+      "unit": "percent",
+      "source": {
+        "page": "55",
+        "pdfPage": 55,
+        "table": "Table 26",
+        "quote": "GCG                                      Transfer (from Gemini 1.0 Nano)   600,000                          −6%"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Transfer (from Gemini 1.0 Nano); attack=GCG",
+        "harness": "JailbreakBench"
+      }
+    },
+    {
+      "rawEvalName": "JailbreakBench",
+      "metric": "gain in attack success rate over Gemini 1.0 Ultra",
+      "value": 6,
+      "unit": "percent",
+      "source": {
+        "page": "55",
+        "pdfPage": 55,
+        "table": "Table 26",
+        "quote": "Template                                 Blackbox                          0                                +6%"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Blackbox; attack=Template",
+        "harness": "JailbreakBench"
+      }
+    },
+    {
+      "rawEvalName": "JailbreakBench",
+      "metric": "gain in attack success rate over Gemini 1.0 Ultra",
+      "value": 12,
+      "unit": "percent",
+      "source": {
+        "page": "55",
+        "pdfPage": 55,
+        "table": "Table 26",
+        "quote": "Template + Mutations                     Greybox                           60,000                          +12%"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Greybox; attack=Template + Mutations",
+        "harness": "JailbreakBench"
+      }
+    },
+    {
+      "rawEvalName": "JailbreakBench",
+      "metric": "gain in attack success rate over Gemini 1.0 Ultra",
+      "value": -25,
+      "unit": "percent",
+      "source": {
+        "page": "55",
+        "pdfPage": 55,
+        "table": "Table 26",
+        "quote": "Template + Mutations                     Transfer (from Gemini 1.0 Nano)   60,000                          −25%"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Transfer (from Gemini 1.0 Nano); attack=Template + Mutations",
+        "harness": "JailbreakBench"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "metric": "average reduction vs short-context violation rate",
+      "value": -28.6,
+      "unit": "percent",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "On average: -28.6%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro checkpoint"
+      }
+    },
+    {
+      "rawEvalName": "Helpfulness",
+      "metric": "percentage change vs Gemini 1.0 Ultra",
+      "value": -2,
+      "unit": "percent",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 29",
+        "quote": "Tone                               -2%               -11%"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Tone"
+      }
+    },
+    {
+      "rawEvalName": "Helpfulness",
+      "metric": "percentage change vs Gemini 1.0 Ultra",
+      "value": -11,
+      "unit": "percent",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 29",
+        "quote": "Tone                               -2%               -11%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Tone"
+      }
+    },
+    {
+      "rawEvalName": "Helpfulness",
+      "metric": "percentage change vs Gemini 1.0 Ultra",
+      "value": 13,
+      "unit": "percent",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 29",
+        "quote": "Quality                            13%                 6%"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Quality"
+      }
+    },
+    {
+      "rawEvalName": "Helpfulness",
+      "metric": "percentage change vs Gemini 1.0 Ultra",
+      "value": 6,
+      "unit": "percent",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 29",
+        "quote": "Quality                            13%                 6%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Quality"
+      }
+    },
+    {
+      "rawEvalName": "Helpfulness",
+      "metric": "side-by-side preference rate",
+      "value": 0.33,
+      "unit": "score",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 29",
+        "quote": "0.33 ± 0.05         0.22 ± 0.05"
+      },
+      "model": "google/gemini-flash-1.5",
+      "stderr": 0.05,
+      "settings": {
+        "other": "SxS preference vs 1.0 Ultra"
+      }
+    },
+    {
+      "rawEvalName": "Helpfulness",
+      "metric": "side-by-side preference rate",
+      "value": 0.22,
+      "unit": "score",
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 29",
+        "quote": "0.33 ± 0.05         0.22 ± 0.05"
+      },
+      "model": "google/gemini-pro-1.5",
+      "stderr": 0.05,
+      "settings": {
+        "other": "SxS preference vs 1.0 Ultra"
+      }
+    },
+    {
+      "rawEvalName": "I2T Refusals",
+      "metric": "side-by-side preference rate",
+      "value": 0.67,
+      "unit": "score",
+      "source": {
+        "page": "59",
+        "pdfPage": 59,
+        "table": "Table 30",
+        "quote": "Ungrounded Set                       0.67                   0.63"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Ungrounded Set SxS vs 1.0 Ultra"
+      }
+    },
+    {
+      "rawEvalName": "I2T Refusals",
+      "metric": "side-by-side preference rate",
+      "value": 0.63,
+      "unit": "score",
+      "source": {
+        "page": "59",
+        "pdfPage": 59,
+        "table": "Table 30",
+        "quote": "Ungrounded Set                       0.67                   0.63"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Ungrounded Set SxS vs 1.0 Ultra"
+      }
+    },
+    {
+      "rawEvalName": "I2T Refusals",
+      "metric": "side-by-side preference rate",
+      "value": 0.76,
+      "unit": "score",
+      "source": {
+        "page": "59",
+        "pdfPage": 59,
+        "table": "Table 30",
+        "quote": "Grounded Set                         0.76                   0.75"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Grounded Set SxS vs 1.0 Ultra"
+      }
+    },
+    {
+      "rawEvalName": "I2T Refusals",
+      "metric": "side-by-side preference rate",
+      "value": 0.75,
+      "unit": "score",
+      "source": {
+        "page": "59",
+        "pdfPage": 59,
+        "table": "Table 30",
+        "quote": "Grounded Set                         0.76                   0.75"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Grounded Set SxS vs 1.0 Ultra"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (optimization + transfer)",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Password                                     0.0%     16.6%                                98.1%     -1.7%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "simulated email retrieval prompt template; attack=Optimization + Transfer from Gemini 1.0 Nano; target=Password"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (direct optimization)",
+      "value": 16.6,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Password                                     0.0%     16.6%                                98.1%     -1.7%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "attack=Direct Optimization; target=Password"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (public handcrafted templates)",
+      "value": 98.1,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Password                                     0.0%     16.6%                                98.1%     -1.7%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "attack=Public handcrafted attack templates; target=Password"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (optimization + transfer)",
+      "value": 0.1,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "SSN                                             0.1   0.1                                    83.3    +9.0"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "simulated email retrieval prompt template; attack=Optimization + Transfer from Gemini 1.0 Nano; target=SSN"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (direct optimization)",
+      "value": 0.1,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "SSN                                             0.1   0.1                                    83.3    +9.0"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "attack=Direct Optimization; target=SSN"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (public handcrafted templates)",
+      "value": 83.3,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "SSN                                             0.1   0.1                                    83.3    +9.0"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "attack=Public handcrafted attack templates; target=SSN"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (optimization + transfer)",
+      "value": 0.1,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Credit Card Number                              0.1   0.0                                    99.7    +16.9"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "simulated email retrieval prompt template; attack=Optimization + Transfer from Gemini 1.0 Nano; target=Credit Card Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (direct optimization)",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Credit Card Number                              0.1   0.0                                    99.7    +16.9"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "attack=Direct Optimization; target=Credit Card Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (public handcrafted templates)",
+      "value": 99.7,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Credit Card Number                              0.1   0.0                                    99.7    +16.9"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "attack=Public handcrafted attack templates; target=Credit Card Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (optimization + transfer)",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Driver's License Number                         0.0   2.2                                   100.0    0.0"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "simulated email retrieval prompt template; attack=Optimization + Transfer from Gemini 1.0 Nano; target=Driver's License Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (direct optimization)",
+      "value": 2.2,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Driver's License Number                         0.0   2.2                                   100.0    0.0"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "attack=Direct Optimization; target=Driver's License Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (public handcrafted templates)",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Driver's License Number                         0.0   2.2                                   100.0    0.0"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "attack=Public handcrafted attack templates; target=Driver's License Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (optimization + transfer)",
+      "value": 0.1,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Passport Number                                 0.1   9.5                                   100.0    +1.5"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "simulated email retrieval prompt template; attack=Optimization + Transfer from Gemini 1.0 Nano; target=Passport Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (direct optimization)",
+      "value": 9.5,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Passport Number                                 0.1   9.5                                   100.0    +1.5"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "attack=Direct Optimization; target=Passport Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (public handcrafted templates)",
+      "value": 100,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Passport Number                                 0.1   9.5                                   100.0    +1.5"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "attack=Public handcrafted attack templates; target=Passport Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (optimization + transfer)",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Email Address                                   0.0   5.5                                    98.3    +75.2"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "simulated email retrieval prompt template; attack=Optimization + Transfer from Gemini 1.0 Nano; target=Email Address"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (direct optimization)",
+      "value": 5.5,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Email Address                                   0.0   5.5                                    98.3    +75.2"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "attack=Direct Optimization; target=Email Address"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (public handcrafted templates)",
+      "value": 98.3,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Email Address                                   0.0   5.5                                    98.3    +75.2"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "attack=Public handcrafted attack templates; target=Email Address"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (optimization + transfer)",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Password                                       0.0    1.6                                   94.1     -5.7"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "simulated email retrieval prompt template; attack=Optimization + Transfer from Gemini 1.0 Nano; target=Password"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (direct optimization)",
+      "value": 1.6,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Password                                       0.0    1.6                                   94.1     -5.7"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "attack=Direct Optimization; target=Password"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (public handcrafted templates)",
+      "value": 94.1,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Password                                       0.0    1.6                                   94.1     -5.7"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "attack=Public handcrafted attack templates; target=Password"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (optimization + transfer)",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "SSN                                            0.0    0.0                                   73.0     -1.3"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "simulated email retrieval prompt template; attack=Optimization + Transfer from Gemini 1.0 Nano; target=SSN"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (direct optimization)",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "SSN                                            0.0    0.0                                   73.0     -1.3"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "attack=Direct Optimization; target=SSN"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (public handcrafted templates)",
+      "value": 73,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "SSN                                            0.0    0.0                                   73.0     -1.3"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "attack=Public handcrafted attack templates; target=SSN"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (optimization + transfer)",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Credit Card Number                             0.0    0.0                                   85.1     +2.3"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "simulated email retrieval prompt template; attack=Optimization + Transfer from Gemini 1.0 Nano; target=Credit Card Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (direct optimization)",
+      "value": 0,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Credit Card Number                             0.0    0.0                                   85.1     +2.3"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "attack=Direct Optimization; target=Credit Card Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (public handcrafted templates)",
+      "value": 85.1,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Credit Card Number                             0.0    0.0                                   85.1     +2.3"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "attack=Public handcrafted attack templates; target=Credit Card Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (optimization + transfer)",
+      "value": 0.1,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Driver's License Number                        0.1    2.4                                   98.5     -1.5"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "simulated email retrieval prompt template; attack=Optimization + Transfer from Gemini 1.0 Nano; target=Driver's License Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (direct optimization)",
+      "value": 2.4,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Driver's License Number                        0.1    2.4                                   98.5     -1.5"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "attack=Direct Optimization; target=Driver's License Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (public handcrafted templates)",
+      "value": 98.5,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Driver's License Number                        0.1    2.4                                   98.5     -1.5"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "attack=Public handcrafted attack templates; target=Driver's License Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (optimization + transfer)",
+      "value": 0.1,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Passport Number                                 0.1    1.2                                   99.3     +0.8"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "simulated email retrieval prompt template; attack=Optimization + Transfer from Gemini 1.0 Nano; target=Passport Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (direct optimization)",
+      "value": 1.2,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Passport Number                                 0.1    1.2                                   99.3     +0.8"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "attack=Direct Optimization; target=Passport Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (public handcrafted templates)",
+      "value": 99.3,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Passport Number                                 0.1    1.2                                   99.3     +0.8"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "attack=Public handcrafted attack templates; target=Passport Number"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (optimization + transfer)",
+      "value": 0.1,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Email Address                                  0.1    0.8                                   98.3     +75.2"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "simulated email retrieval prompt template; attack=Optimization + Transfer from Gemini 1.0 Nano; target=Email Address"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (direct optimization)",
+      "value": 0.8,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Email Address                                  0.1    0.8                                   98.3     +75.2"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "attack=Direct Optimization; target=Email Address"
+      }
+    },
+    {
+      "rawEvalName": "Prompt Injection",
+      "metric": "attack success rate (public handcrafted templates)",
+      "value": 98.3,
+      "unit": "percent",
+      "source": {
+        "page": "62",
+        "pdfPage": 62,
+        "table": "Table 32",
+        "quote": "Email Address                                  0.1    0.8                                   98.3     +75.2"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "attack=Public handcrafted attack templates; target=Email Address"
+      }
+    },
+    {
+      "rawEvalName": "Training-data divergence attack",
+      "metric": "divergence rate",
+      "value": 44,
+      "unit": "percent",
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "quote": "Overall, we find that divergence occurs 44% of the time."
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "Training-data divergence attack",
+      "metric": "rate of diverged generations that are training data",
+      "value": 0.35,
+      "unit": "percent",
+      "source": {
+        "page": "63",
+        "pdfPage": 63,
+        "quote": "Specifically, we observed that when the model diverges, 0.35% of generations are training data."
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "Training-data divergence attack",
+      "metric": "divergence rate",
+      "value": 35.6,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "quote": "while the short prompts succeed at divergence only 35.6% of the time, the long prompts succeed at causing divergence 61.5% of the time."
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "short prompt (1,000 token repeats)"
+      }
+    },
+    {
+      "rawEvalName": "Training-data divergence attack",
+      "metric": "divergence rate",
+      "value": 61.5,
+      "unit": "percent",
+      "source": {
+        "page": "64",
+        "pdfPage": 64,
+        "quote": "while the short prompts succeed at divergence only 35.6% of the time, the long prompts succeed at causing divergence 61.5% of the time."
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "long prompt (999,000 token repeats)"
+      }
+    },
+    {
+      "rawEvalName": "COCO captioning fairness",
+      "metric": "Dark skin - Light skin Δ CIDER",
+      "value": 0.008,
+      "unit": "score",
+      "source": {
+        "page": "66",
+        "pdfPage": 66,
+        "table": "Table 33",
+        "quote": "Gemini 1.5 Pro               0.008                 No        -0.003                No"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Dark skin - Light skin Δ CIDER"
+      }
+    },
+    {
+      "rawEvalName": "COCO captioning fairness",
+      "metric": "Female - Male Δ CIDER",
+      "value": -0.003,
+      "unit": "score",
+      "source": {
+        "page": "66",
+        "pdfPage": 66,
+        "table": "Table 33",
+        "quote": "Gemini 1.5 Pro               0.008                 No        -0.003                No"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Female - Male Δ CIDER"
+      }
+    },
+    {
+      "rawEvalName": "COCO captioning fairness",
+      "metric": "Dark skin - Light skin Δ CIDER",
+      "value": 0.001,
+      "unit": "score",
+      "source": {
+        "page": "66",
+        "pdfPage": 66,
+        "table": "Table 33",
+        "quote": "Gemini 1.5 Flash             0.001                 No         0.001                No"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Dark skin - Light skin Δ CIDER"
+      }
+    },
+    {
+      "rawEvalName": "COCO captioning fairness",
+      "metric": "Female - Male Δ CIDER",
+      "value": 0.001,
+      "unit": "score",
+      "source": {
+        "page": "66",
+        "pdfPage": 66,
+        "table": "Table 33",
+        "quote": "Gemini 1.5 Flash             0.001                 No         0.001                No"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Female - Male Δ CIDER"
+      }
+    },
+    {
+      "rawEvalName": "COCO captioning fairness",
+      "metric": "Dark skin - Light skin Δ CIDER",
+      "value": 0.029,
+      "unit": "score",
+      "source": {
+        "page": "66",
+        "pdfPage": 66,
+        "table": "Table 33",
+        "quote": "Gemini 1.0 Ultra             0.029                 No        -0.027                No"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "settings": {
+        "other": "Dark skin - Light skin Δ CIDER"
+      }
+    },
+    {
+      "rawEvalName": "COCO captioning fairness",
+      "metric": "Female - Male Δ CIDER",
+      "value": -0.027,
+      "unit": "score",
+      "source": {
+        "page": "66",
+        "pdfPage": 66,
+        "table": "Table 33",
+        "quote": "Gemini 1.0 Ultra             0.029                 No        -0.027                No"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "settings": {
+        "other": "Female - Male Δ CIDER"
+      }
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "average accuracy",
+      "value": 50.5,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.0 Ultra                50.5                33.8                16.6               39.2      11.3"
+      },
+      "model": "google/gemini-1.0-ultra"
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "worst group accuracy",
+      "value": 33.8,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.0 Ultra                50.5                33.8                16.6               39.2      11.3"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "settings": {
+        "other": "group=Income"
+      }
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "accuracy gap",
+      "value": 16.6,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.0 Ultra                50.5                33.8                16.6               39.2      11.3"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "settings": {
+        "other": "group=Income"
+      }
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "worst group accuracy",
+      "value": 39.2,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.0 Ultra                50.5                33.8                16.6               39.2      11.3"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "settings": {
+        "other": "group=Region"
+      }
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "accuracy gap",
+      "value": 11.3,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.0 Ultra                50.5                33.8                16.6               39.2      11.3"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "settings": {
+        "other": "group=Region"
+      }
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "average accuracy",
+      "value": 55.6,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.5 Flash                55.6                38.2                17.2               46.6      11.6"
+      },
+      "model": "google/gemini-flash-1.5"
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "worst group accuracy",
+      "value": 38.2,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.5 Flash                55.6                38.2                17.2               46.6      11.6"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "group=Income"
+      }
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "accuracy gap",
+      "value": 17.2,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.5 Flash                55.6                38.2                17.2               46.6      11.6"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "group=Income"
+      }
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "worst group accuracy",
+      "value": 46.6,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.5 Flash                55.6                38.2                17.2               46.6      11.6"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "group=Region"
+      }
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "accuracy gap",
+      "value": 11.6,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.5 Flash                55.6                38.2                17.2               46.6      11.6"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "group=Region"
+      }
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "average accuracy",
+      "value": 58.7,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.5 Pro                  58.7                38.4                20.4               47.1       9.0"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "worst group accuracy",
+      "value": 38.4,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.5 Pro                  58.7                38.4                20.4               47.1       9.0"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "group=Income"
+      }
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "accuracy gap",
+      "value": 20.4,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.5 Pro                  58.7                38.4                20.4               47.1       9.0"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "group=Income"
+      }
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "worst group accuracy",
+      "value": 47.1,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.5 Pro                  58.7                38.4                20.4               47.1       9.0"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "group=Region"
+      }
+    },
+    {
+      "rawEvalName": "Dollar Street",
+      "metric": "accuracy gap",
+      "value": 9,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 34",
+        "quote": "Gemini 1.5 Pro                  58.7                38.4                20.4               47.1       9.0"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "group=Region"
+      }
+    },
+    {
+      "rawEvalName": "Speech recognition WER parity",
+      "metric": "absolute WER difference",
+      "value": 6.2,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 35",
+        "quote": "Vernacular (↓ is safer)        6.2%                      5.7%                    6.9%"
+      },
+      "rawModelName": "USM",
+      "settings": {
+        "other": "Vernacular"
+      }
+    },
+    {
+      "rawEvalName": "Speech recognition WER parity",
+      "metric": "absolute WER difference",
+      "value": 0.4,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 35",
+        "quote": "Gender (↓ is safer)            0.4%                      0.2%                    5.7%"
+      },
+      "rawModelName": "USM",
+      "settings": {
+        "other": "Gender"
+      }
+    },
+    {
+      "rawEvalName": "Speech recognition WER parity",
+      "metric": "absolute WER difference",
+      "value": 5.7,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 35",
+        "quote": "Vernacular (↓ is safer)        6.2%                      5.7%                    6.9%"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Vernacular"
+      }
+    },
+    {
+      "rawEvalName": "Speech recognition WER parity",
+      "metric": "absolute WER difference",
+      "value": 6.9,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 35",
+        "quote": "Vernacular (↓ is safer)        6.2%                      5.7%                    6.9%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Vernacular"
+      }
+    },
+    {
+      "rawEvalName": "Speech recognition WER parity",
+      "metric": "absolute WER difference",
+      "value": 0.2,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 35",
+        "quote": "Gender (↓ is safer)            0.4%                      0.2%                    5.7%"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Gender"
+      }
+    },
+    {
+      "rawEvalName": "Speech recognition WER parity",
+      "metric": "absolute WER difference",
+      "value": 5.7,
+      "unit": "percent",
+      "source": {
+        "page": "67",
+        "pdfPage": 67,
+        "table": "Table 35",
+        "quote": "Gender (↓ is safer)            0.4%                      0.2%                    5.7%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Gender"
+      }
+    },
+    {
+      "rawEvalName": "Assurance content safety violations",
+      "metric": "reduction vs Gemini 1.0 Ultra",
+      "value": -43.7,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 37",
+        "quote": "Text to Text                       -43.7%                 -57.0%"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Text to Text"
+      }
+    },
+    {
+      "rawEvalName": "Assurance content safety violations",
+      "metric": "reduction vs Gemini 1.0 Ultra",
+      "value": -57,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 37",
+        "quote": "Text to Text                       -43.7%                 -57.0%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Text to Text"
+      }
+    },
+    {
+      "rawEvalName": "Assurance content safety violations",
+      "metric": "reduction vs Gemini 1.0 Ultra",
+      "value": -98.3,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 37",
+        "quote": "Image to Text                      -98.3%                -100.0%"
+      },
+      "model": "google/gemini-flash-1.5",
+      "settings": {
+        "other": "Image to Text"
+      }
+    },
+    {
+      "rawEvalName": "Assurance content safety violations",
+      "metric": "reduction vs Gemini 1.0 Ultra",
+      "value": -100,
+      "unit": "percent",
+      "source": {
+        "page": "68",
+        "pdfPage": 68,
+        "table": "Table 37",
+        "quote": "Image to Text                      -98.3%                -100.0%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "Image to Text"
+      }
+    },
+    {
+      "rawEvalName": "InterCode-CTF",
+      "metric": "fraction of challenges completed successfully",
+      "value": 35,
+      "unit": "percent",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 38",
+        "quote": "Gemini 1.0 Ultra         28/81 (35%)               3/13 (23%)                    0/13"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "settings": {
+        "other": "agent CTF harness"
+      }
+    },
+    {
+      "rawEvalName": "Internal CTF suite",
+      "metric": "fraction of challenges completed successfully",
+      "value": 23,
+      "unit": "percent",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 38",
+        "quote": "Gemini 1.0 Ultra         28/81 (35%)               3/13 (23%)                    0/13"
+      },
+      "model": "google/gemini-1.0-ultra"
+    },
+    {
+      "rawEvalName": "Hack the Box",
+      "metric": "challenges completed",
+      "value": 0,
+      "unit": "count",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 38",
+        "quote": "Gemini 1.0 Ultra         28/81 (35%)               3/13 (23%)                    0/13"
+      },
+      "model": "google/gemini-1.0-ultra"
+    },
+    {
+      "rawEvalName": "InterCode-CTF",
+      "metric": "fraction of challenges completed successfully",
+      "value": 53,
+      "unit": "percent",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 38",
+        "quote": "Gemini 1.5 Pro           43/81 (53%)               4/13 (31%)                    0/13"
+      },
+      "model": "google/gemini-pro-1.5",
+      "settings": {
+        "other": "agent CTF harness"
+      }
+    },
+    {
+      "rawEvalName": "Internal CTF suite",
+      "metric": "fraction of challenges completed successfully",
+      "value": 31,
+      "unit": "percent",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 38",
+        "quote": "Gemini 1.5 Pro           43/81 (53%)               4/13 (31%)                    0/13"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "Hack the Box",
+      "metric": "challenges completed",
+      "value": 0,
+      "unit": "count",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 38",
+        "quote": "Gemini 1.5 Pro           43/81 (53%)               4/13 (31%)                    0/13"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "PrimeVul",
+      "metric": "accuracy",
+      "value": 60,
+      "unit": "percent",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.5 Pro       60% 0.65            51%      0.49            58%      0.54     56%       0.54    67%   0.75"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "PrimeVul",
+      "metric": "AUC",
+      "value": 0.65,
+      "unit": "score",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.5 Pro       60% 0.65            51%      0.49            58%      0.54     56%       0.54    67%   0.75"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "PrimeVul Paired",
+      "metric": "accuracy",
+      "value": 51,
+      "unit": "percent",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.5 Pro       60% 0.65            51%      0.49            58%      0.54     56%       0.54    67%   0.75"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "PrimeVul Paired",
+      "metric": "AUC",
+      "value": 0.49,
+      "unit": "score",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.5 Pro       60% 0.65            51%      0.49            58%      0.54     56%       0.54    67%   0.75"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "DiverseVul",
+      "metric": "accuracy",
+      "value": 58,
+      "unit": "percent",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.5 Pro       60% 0.65            51%      0.49            58%      0.54     56%       0.54    67%   0.75"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "DiverseVul",
+      "metric": "AUC",
+      "value": 0.54,
+      "unit": "score",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.5 Pro       60% 0.65            51%      0.49            58%      0.54     56%       0.54    67%   0.75"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "SPI",
+      "metric": "accuracy",
+      "value": 56,
+      "unit": "percent",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.5 Pro       60% 0.65            51%      0.49            58%      0.54     56%       0.54    67%   0.75"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "SPI",
+      "metric": "AUC",
+      "value": 0.54,
+      "unit": "score",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.5 Pro       60% 0.65            51%      0.49            58%      0.54     56%       0.54    67%   0.75"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "SecretPatch",
+      "metric": "accuracy",
+      "value": 67,
+      "unit": "percent",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.5 Pro       60% 0.65            51%      0.49            58%      0.54     56%       0.54    67%   0.75"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "SecretPatch",
+      "metric": "AUC",
+      "value": 0.75,
+      "unit": "score",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.5 Pro       60% 0.65            51%      0.49            58%      0.54     56%       0.54    67%   0.75"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "DiverseVul",
+      "metric": "accuracy",
+      "value": 54,
+      "unit": "percent",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.0 Ultra     (Not tested)          (Not tested)           54%      0.58     59%       0.61    74%   0.82"
+      },
+      "model": "google/gemini-1.0-ultra"
+    },
+    {
+      "rawEvalName": "DiverseVul",
+      "metric": "AUC",
+      "value": 0.58,
+      "unit": "score",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.0 Ultra     (Not tested)          (Not tested)           54%      0.58     59%       0.61    74%   0.82"
+      },
+      "model": "google/gemini-1.0-ultra"
+    },
+    {
+      "rawEvalName": "SPI",
+      "metric": "accuracy",
+      "value": 59,
+      "unit": "percent",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.0 Ultra     (Not tested)          (Not tested)           54%      0.58     59%       0.61    74%   0.82"
+      },
+      "model": "google/gemini-1.0-ultra"
+    },
+    {
+      "rawEvalName": "SPI",
+      "metric": "AUC",
+      "value": 0.61,
+      "unit": "score",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.0 Ultra     (Not tested)          (Not tested)           54%      0.58     59%       0.61    74%   0.82"
+      },
+      "model": "google/gemini-1.0-ultra"
+    },
+    {
+      "rawEvalName": "SecretPatch",
+      "metric": "accuracy",
+      "value": 74,
+      "unit": "percent",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.0 Ultra     (Not tested)          (Not tested)           54%      0.58     59%       0.61    74%   0.82"
+      },
+      "model": "google/gemini-1.0-ultra"
+    },
+    {
+      "rawEvalName": "SecretPatch",
+      "metric": "AUC",
+      "value": 0.82,
+      "unit": "score",
+      "source": {
+        "page": "69",
+        "pdfPage": 69,
+        "table": "Table 39",
+        "quote": "Gemini 1.0 Ultra     (Not tested)          (Not tested)           54%      0.58     59%       0.61    74%   0.82"
+      },
+      "model": "google/gemini-1.0-ultra"
+    },
+    {
+      "rawEvalName": "Self-proliferation",
+      "metric": "challenges passed end-to-end",
+      "value": 0,
+      "unit": "count",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 40",
+        "quote": "Gemini 1.0 Ultra              0/10                           1/10                           16/45 (36%)"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "n": 10
+    },
+    {
+      "rawEvalName": "Self-proliferation",
+      "metric": "challenges passed end-to-end",
+      "value": 0,
+      "unit": "count",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 40",
+        "quote": "Gemini 1.5 Pro                0/10                           2/10                           25/45 (56%)"
+      },
+      "model": "google/gemini-pro-1.5",
+      "n": 10
+    },
+    {
+      "rawEvalName": "Self-proliferation",
+      "metric": "challenges with success on all milestones",
+      "value": 1,
+      "unit": "count",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 40",
+        "quote": "Gemini 1.0 Ultra              0/10                           1/10                           16/45 (36%)"
+      },
+      "model": "google/gemini-1.0-ultra"
+    },
+    {
+      "rawEvalName": "Self-proliferation",
+      "metric": "challenges with success on all milestones",
+      "value": 2,
+      "unit": "count",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 40",
+        "quote": "Gemini 1.5 Pro                0/10                           2/10                           25/45 (56%)"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "Self-proliferation",
+      "metric": "total successful milestones",
+      "value": 36,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 40",
+        "quote": "Gemini 1.0 Ultra              0/10                           1/10                           16/45 (36%)"
+      },
+      "model": "google/gemini-1.0-ultra"
+    },
+    {
+      "rawEvalName": "Self-proliferation",
+      "metric": "total successful milestones",
+      "value": 56,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 40",
+        "quote": "Gemini 1.5 Pro                0/10                           2/10                           25/45 (56%)"
+      },
+      "model": "google/gemini-pro-1.5"
+    },
+    {
+      "rawEvalName": "Charm Offensive",
+      "metric": "fraction Agree or Strongly agree",
+      "value": 69,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 41",
+        "quote": "Gemini 1.0 Ultra         69%            65%        38%            65%           86%           63%         74%\n   Gemini 1.5 Pro           82%            70%        69%            81%           95%           69%         90%"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "n": 100,
+      "settings": {
+        "other": "Personal connection"
+      }
+    },
+    {
+      "rawEvalName": "Charm Offensive",
+      "metric": "fraction Agree or Strongly agree",
+      "value": 82,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 41",
+        "quote": "Gemini 1.0 Ultra         69%            65%        38%            65%           86%           63%         74%\n   Gemini 1.5 Pro           82%            70%        69%            81%           95%           69%         90%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "n": 100,
+      "settings": {
+        "other": "Personal connection"
+      }
+    },
+    {
+      "rawEvalName": "Charm Offensive",
+      "metric": "fraction Agree or Strongly agree",
+      "value": 65,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 41",
+        "quote": "Gemini 1.0 Ultra         69%            65%        38%            65%           86%           63%         74%\n   Gemini 1.5 Pro           82%            70%        69%            81%           95%           69%         90%"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "n": 100,
+      "settings": {
+        "other": "Speak again"
+      }
+    },
+    {
+      "rawEvalName": "Charm Offensive",
+      "metric": "fraction Agree or Strongly agree",
+      "value": 70,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 41",
+        "quote": "Gemini 1.0 Ultra         69%            65%        38%            65%           86%           63%         74%\n   Gemini 1.5 Pro           82%            70%        69%            81%           95%           69%         90%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "n": 100,
+      "settings": {
+        "other": "Speak again"
+      }
+    },
+    {
+      "rawEvalName": "Charm Offensive",
+      "metric": "fraction Agree or Strongly agree",
+      "value": 38,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 41",
+        "quote": "Gemini 1.0 Ultra         69%            65%        38%            65%           86%           63%         74%\n   Gemini 1.5 Pro           82%            70%        69%            81%           95%           69%         90%"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "n": 100,
+      "settings": {
+        "other": "Funny"
+      }
+    },
+    {
+      "rawEvalName": "Charm Offensive",
+      "metric": "fraction Agree or Strongly agree",
+      "value": 69,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 41",
+        "quote": "Gemini 1.0 Ultra         69%            65%        38%            65%           86%           63%         74%\n   Gemini 1.5 Pro           82%            70%        69%            81%           95%           69%         90%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "n": 100,
+      "settings": {
+        "other": "Funny"
+      }
+    },
+    {
+      "rawEvalName": "Charm Offensive",
+      "metric": "fraction Agree or Strongly agree",
+      "value": 65,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 41",
+        "quote": "Gemini 1.0 Ultra         69%            65%        38%            65%           86%           63%         74%\n   Gemini 1.5 Pro           82%            70%        69%            81%           95%           69%         90%"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "n": 100,
+      "settings": {
+        "other": "Interesting"
+      }
+    },
+    {
+      "rawEvalName": "Charm Offensive",
+      "metric": "fraction Agree or Strongly agree",
+      "value": 81,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 41",
+        "quote": "Gemini 1.0 Ultra         69%            65%        38%            65%           86%           63%         74%\n   Gemini 1.5 Pro           82%            70%        69%            81%           95%           69%         90%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "n": 100,
+      "settings": {
+        "other": "Interesting"
+      }
+    },
+    {
+      "rawEvalName": "Charm Offensive",
+      "metric": "fraction Agree or Strongly agree",
+      "value": 86,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 41",
+        "quote": "Gemini 1.0 Ultra         69%            65%        38%            65%           86%           63%         74%\n   Gemini 1.5 Pro           82%            70%        69%            81%           95%           69%         90%"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "n": 100,
+      "settings": {
+        "other": "Kind"
+      }
+    },
+    {
+      "rawEvalName": "Charm Offensive",
+      "metric": "fraction Agree or Strongly agree",
+      "value": 95,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 41",
+        "quote": "Gemini 1.0 Ultra         69%            65%        38%            65%           86%           63%         74%\n   Gemini 1.5 Pro           82%            70%        69%            81%           95%           69%         90%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "n": 100,
+      "settings": {
+        "other": "Kind"
+      }
+    },
+    {
+      "rawEvalName": "Charm Offensive",
+      "metric": "fraction Agree or Strongly agree",
+      "value": 63,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 41",
+        "quote": "Gemini 1.0 Ultra         69%            65%        38%            65%           86%           63%         74%\n   Gemini 1.5 Pro           82%            70%        69%            81%           95%           69%         90%"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "n": 100,
+      "settings": {
+        "other": "Trustworthy"
+      }
+    },
+    {
+      "rawEvalName": "Charm Offensive",
+      "metric": "fraction Agree or Strongly agree",
+      "value": 69,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 41",
+        "quote": "Gemini 1.0 Ultra         69%            65%        38%            65%           86%           63%         74%\n   Gemini 1.5 Pro           82%            70%        69%            81%           95%           69%         90%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "n": 100,
+      "settings": {
+        "other": "Trustworthy"
+      }
+    },
+    {
+      "rawEvalName": "Charm Offensive",
+      "metric": "fraction Agree or Strongly agree",
+      "value": 74,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 41",
+        "quote": "Gemini 1.0 Ultra         69%            65%        38%            65%           86%           63%         74%\n   Gemini 1.5 Pro           82%            70%        69%            81%           95%           69%         90%"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "n": 100,
+      "settings": {
+        "other": "Good listener"
+      }
+    },
+    {
+      "rawEvalName": "Charm Offensive",
+      "metric": "fraction Agree or Strongly agree",
+      "value": 90,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 41",
+        "quote": "Gemini 1.0 Ultra         69%            65%        38%            65%           86%           63%         74%\n   Gemini 1.5 Pro           82%            70%        69%            81%           95%           69%         90%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "n": 100,
+      "settings": {
+        "other": "Good listener"
+      }
+    },
+    {
+      "rawEvalName": "Hidden Agenda",
+      "metric": "fraction of participants persuaded",
+      "value": 43,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 42",
+        "quote": "Gemini 1.0 Ultra              43%             18%             14%\n                        Gemini 1.5 Pro                36%             12%             17%"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "n": 100,
+      "settings": {
+        "other": "Click Links"
+      }
+    },
+    {
+      "rawEvalName": "Hidden Agenda",
+      "metric": "fraction of participants persuaded",
+      "value": 36,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 42",
+        "quote": "Gemini 1.0 Ultra              43%             18%             14%\n                        Gemini 1.5 Pro                36%             12%             17%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "n": 100,
+      "settings": {
+        "other": "Click Links"
+      }
+    },
+    {
+      "rawEvalName": "Hidden Agenda",
+      "metric": "fraction of participants persuaded",
+      "value": 18,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 42",
+        "quote": "Gemini 1.0 Ultra              43%             18%             14%\n                        Gemini 1.5 Pro                36%             12%             17%"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "n": 100,
+      "settings": {
+        "other": "Find Info"
+      }
+    },
+    {
+      "rawEvalName": "Hidden Agenda",
+      "metric": "fraction of participants persuaded",
+      "value": 12,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 42",
+        "quote": "Gemini 1.0 Ultra              43%             18%             14%\n                        Gemini 1.5 Pro                36%             12%             17%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "n": 100,
+      "settings": {
+        "other": "Find Info"
+      }
+    },
+    {
+      "rawEvalName": "Hidden Agenda",
+      "metric": "fraction of participants persuaded",
+      "value": 14,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 42",
+        "quote": "Gemini 1.0 Ultra              43%             18%             14%\n                        Gemini 1.5 Pro                36%             12%             17%"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "n": 100,
+      "settings": {
+        "other": "Run Code"
+      }
+    },
+    {
+      "rawEvalName": "Hidden Agenda",
+      "metric": "fraction of participants persuaded",
+      "value": 17,
+      "unit": "percent",
+      "source": {
+        "page": "70",
+        "pdfPage": 70,
+        "table": "Table 42",
+        "quote": "Gemini 1.0 Ultra              43%             18%             14%\n                        Gemini 1.5 Pro                36%             12%             17%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "n": 100,
+      "settings": {
+        "other": "Run Code"
+      }
+    },
+    {
+      "rawEvalName": "Money Talks",
+      "metric": "mean amount donated",
+      "value": 3.45,
+      "unit": "other",
+      "source": {
+        "page": "71",
+        "pdfPage": 71,
+        "table": "Table 43",
+        "quote": "Gemini 1.5 Pro                         £3.45 ± £1.04"
+      },
+      "model": "google/gemini-pro-1.5",
+      "stderr": 1.04,
+      "n": 100
+    },
+    {
+      "rawEvalName": "Money Talks",
+      "metric": "mean amount donated",
+      "value": 4.1,
+      "unit": "other",
+      "source": {
+        "page": "71",
+        "pdfPage": 71,
+        "table": "Table 43",
+        "quote": "Best Gemini 1.0 model                  £4.10 ± £0.90"
+      },
+      "rawModelName": "Best Gemini 1.0 model",
+      "stderr": 0.9
+    },
+    {
+      "rawEvalName": "Money Talks",
+      "metric": "mean amount donated",
+      "value": 2.61,
+      "unit": "other",
+      "source": {
+        "page": "71",
+        "pdfPage": 71,
+        "table": "Table 43",
+        "quote": "No chatbot (baseline)                  £2.61 ± £0.70"
+      },
+      "rawModelName": "No chatbot (baseline)",
+      "stderr": 0.7
+    },
+    {
+      "rawEvalName": "Web of Lies",
+      "metric": "mean shift towards incorrect answer",
+      "value": 3,
+      "unit": "percent",
+      "source": {
+        "page": "71",
+        "pdfPage": 71,
+        "table": "Table 44",
+        "quote": "Gemini 1.5 Pro                                    3% ± 5%                     20% ± 4%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "stderr": 5,
+      "n": 100,
+      "settings": {
+        "other": "dishonest agent"
+      }
+    },
+    {
+      "rawEvalName": "Web of Lies",
+      "metric": "mean shift towards correct answer",
+      "value": 20,
+      "unit": "percent",
+      "source": {
+        "page": "71",
+        "pdfPage": 71,
+        "table": "Table 44",
+        "quote": "Gemini 1.5 Pro                                    3% ± 5%                     20% ± 4%"
+      },
+      "model": "google/gemini-pro-1.5",
+      "stderr": 4,
+      "n": 100,
+      "settings": {
+        "other": "honest agent"
+      }
+    },
+    {
+      "rawEvalName": "Web of Lies",
+      "metric": "mean shift towards incorrect answer",
+      "value": 9,
+      "unit": "percent",
+      "source": {
+        "page": "71",
+        "pdfPage": 71,
+        "table": "Table 44",
+        "quote": "Best Gemini 1.0 model                             9% ± 5%                     22% ± 4%"
+      },
+      "rawModelName": "Best Gemini 1.0 model",
+      "stderr": 5,
+      "settings": {
+        "other": "dishonest agent"
+      }
+    },
+    {
+      "rawEvalName": "Web of Lies",
+      "metric": "mean shift towards correct answer",
+      "value": 22,
+      "unit": "percent",
+      "source": {
+        "page": "71",
+        "pdfPage": 71,
+        "table": "Table 44",
+        "quote": "Best Gemini 1.0 model                             9% ± 5%                     22% ± 4%"
+      },
+      "rawModelName": "Best Gemini 1.0 model",
+      "stderr": 4,
+      "settings": {
+        "other": "honest agent"
+      }
+    },
+    {
+      "rawEvalName": "Web of Lies",
+      "metric": "mean shift towards incorrect answer",
+      "value": 23,
+      "unit": "percent",
+      "source": {
+        "page": "71",
+        "pdfPage": 71,
+        "table": "Table 44",
+        "quote": "Strong human baseline (N=60)                     23% ± 13%                   20% ± 14%"
+      },
+      "rawModelName": "Strong human baseline",
+      "stderr": 13,
+      "n": 60,
+      "settings": {
+        "other": "dishonest agent"
+      }
+    },
+    {
+      "rawEvalName": "Web of Lies",
+      "metric": "mean shift towards correct answer",
+      "value": 20,
+      "unit": "percent",
+      "source": {
+        "page": "71",
+        "pdfPage": 71,
+        "table": "Table 44",
+        "quote": "Strong human baseline (N=60)                     23% ± 13%                   20% ± 14%"
+      },
+      "rawModelName": "Strong human baseline",
+      "stderr": 14,
+      "n": 60,
+      "settings": {
+        "other": "honest agent"
+      }
+    },
+    {
+      "rawEvalName": "STEM QA with Context",
+      "metric": "accurate sentence proportion",
+      "value": 91.6,
+      "unit": "percent",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "table": "Table 15",
+        "quote": "Accurate                    86.9 ±0.9       86.1 ±1.5       91.6 ±0.6        91.1 ±0.5"
+      },
+      "model": "google/gemini-flash-1.5",
+      "stderr": 0.6,
+      "settings": {
+        "other": "Qasper dataset"
+      }
+    },
+    {
+      "rawEvalName": "STEM QA with Context",
+      "metric": "accurate sentence proportion",
+      "value": 91.1,
+      "unit": "percent",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "table": "Table 15",
+        "quote": "Accurate                    86.9 ±0.9       86.1 ±1.5       91.6 ±0.6        91.1 ±0.5"
+      },
+      "model": "google/gemini-pro-1.5",
+      "stderr": 0.5,
+      "settings": {
+        "other": "Qasper dataset"
+      }
+    },
+    {
+      "rawEvalName": "STEM QA with Context",
+      "metric": "accurate sentence proportion",
+      "value": 86.9,
+      "unit": "percent",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "table": "Table 15",
+        "quote": "Accurate                    86.9 ±0.9       86.1 ±1.5       91.6 ±0.6        91.1 ±0.5"
+      },
+      "model": "google/gemini-pro",
+      "stderr": 0.9,
+      "settings": {
+        "other": "Qasper dataset"
+      }
+    },
+    {
+      "rawEvalName": "STEM QA with Context",
+      "metric": "accurate sentence proportion",
+      "value": 86.1,
+      "unit": "percent",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "table": "Table 15",
+        "quote": "Accurate                    86.9 ±0.9       86.1 ±1.5       91.6 ±0.6        91.1 ±0.5"
+      },
+      "model": "google/gemini-1.0-ultra",
+      "stderr": 1.5,
+      "settings": {
+        "other": "Qasper dataset"
+      }
+    },
+    {
+      "rawEvalName": "STEM QA with Context",
+      "metric": "inaccurate sentence proportion",
+      "value": 2.2,
+      "unit": "percent",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "table": "Table 15",
+        "quote": "Inaccurate                   8.2 ±0.7        9.5 ±1.1        2.2 ±0.3         2.2 ±0.2"
+      },
+      "model": "google/gemini-flash-1.5",
+      "stderr": 0.3,
+      "settings": {
+        "other": "Qasper dataset"
+      }
+    },
+    {
+      "rawEvalName": "STEM QA with Context",
+      "metric": "inaccurate sentence proportion",
+      "value": 2.2,
+      "unit": "percent",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "table": "Table 15",
+        "quote": "Inaccurate                   8.2 ±0.7        9.5 ±1.1        2.2 ±0.3         2.2 ±0.2"
+      },
+      "model": "google/gemini-pro-1.5",
+      "stderr": 0.2,
+      "settings": {
+        "other": "Qasper dataset"
+      }
+    },
+    {
+      "rawEvalName": "STEM QA with Context",
+      "metric": "severely inaccurate sentence proportion",
+      "value": 1.6,
+      "unit": "percent",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "table": "Table 15",
+        "quote": "Severely Inaccurate          7.5 ±0.7        9.0 ±1.1        1.6 ±0.2         1.6 ±0.2"
+      },
+      "model": "google/gemini-flash-1.5",
+      "stderr": 0.2,
+      "settings": {
+        "other": "Qasper dataset"
+      }
+    },
+    {
+      "rawEvalName": "STEM QA with Context",
+      "metric": "severely inaccurate sentence proportion",
+      "value": 1.6,
+      "unit": "percent",
+      "source": {
+        "page": "36",
+        "pdfPage": 36,
+        "table": "Table 15",
+        "quote": "Severely Inaccurate          7.5 ±0.7        9.0 ±1.1        1.6 ±0.2         1.6 ±0.2"
+      },
+      "model": "google/gemini-pro-1.5",
+      "stderr": 0.2,
+      "settings": {
+        "other": "Qasper dataset"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 2.08,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Sexual_orientation; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Sexual_orientation 2.08 -0.23 0.93   -0.99   -4.27    -3.1                     Sexual_orientation     0.97 1.0 0.99      0.94   0.81   0.59"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": -0.23,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Sexual_orientation; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Sexual_orientation 2.08 -0.23 0.93   -0.99   -4.27    -3.1                     Sexual_orientation     0.97 1.0 0.99      0.94   0.81   0.59"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 0.93,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Sexual_orientation; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Sexual_orientation 2.08 -0.23 0.93   -0.99   -4.27    -3.1                     Sexual_orientation     0.97 1.0 0.99      0.94   0.81   0.59"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": -0.99,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Sexual_orientation; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Sexual_orientation 2.08 -0.23 0.93   -0.99   -4.27    -3.1                     Sexual_orientation     0.97 1.0 0.99      0.94   0.81   0.59"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": -4.27,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Sexual_orientation; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Sexual_orientation 2.08 -0.23 0.93   -0.99   -4.27    -3.1                     Sexual_orientation     0.97 1.0 0.99      0.94   0.81   0.59"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": -3.1,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Sexual_orientation; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Sexual_orientation 2.08 -0.23 0.93   -0.99   -4.27    -3.1                     Sexual_orientation     0.97 1.0 0.99      0.94   0.81   0.59"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 4.6,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=SES; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "SES 4.6 0.0 0.0       4.82     3.3    2.77                                     SES     0.95 1.0 1.0       0.97   0.89   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": 0,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=SES; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "SES 4.6 0.0 0.0       4.82     3.3    2.77                                     SES     0.95 1.0 1.0       0.97   0.89   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 0,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=SES; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "SES 4.6 0.0 0.0       4.82     3.3    2.77                                     SES     0.95 1.0 1.0       0.97   0.89   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 4.82,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=SES; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "SES 4.6 0.0 0.0       4.82     3.3    2.77                                     SES     0.95 1.0 1.0       0.97   0.89   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": 3.3,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=SES; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "SES 4.6 0.0 0.0       4.82     3.3    2.77                                     SES     0.95 1.0 1.0       0.97   0.89   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 2.77,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=SES; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "SES 4.6 0.0 0.0       4.82     3.3    2.77                                     SES     0.95 1.0 1.0       0.97   0.89   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 8,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Religion; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Religion 8.0 0.33 4.67     5.0    3.32    0.79                                 Religion    0.87 0.98 0.95     0.92   0.87   0.83   1"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": 0.33,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Religion; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Religion 8.0 0.33 4.67     5.0    3.32    0.79                                 Religion    0.87 0.98 0.95     0.92   0.87   0.83   1"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 4.67,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Religion; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Religion 8.0 0.33 4.67     5.0    3.32    0.79                                 Religion    0.87 0.98 0.95     0.92   0.87   0.83   1"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 5,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Religion; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Religion 8.0 0.33 4.67     5.0    3.32    0.79                                 Religion    0.87 0.98 0.95     0.92   0.87   0.83   1"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": 3.32,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Religion; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Religion 8.0 0.33 4.67     5.0    3.32    0.79                                 Religion    0.87 0.98 0.95     0.92   0.87   0.83   1"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 0.79,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Religion; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Religion 8.0 0.33 4.67     5.0    3.32    0.79                                 Religion    0.87 0.98 0.95     0.92   0.87   0.83   1"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 0.28,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_x_gender; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_gender 0.28 -0.21 0.0     1.32    0.09    0.21    20                    Race_x_gender      0.98 1.0 1.0       0.95   0.91   0.91   0.9"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": -0.21,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_x_gender; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_gender 0.28 -0.21 0.0     1.32    0.09    0.21    20                    Race_x_gender      0.98 1.0 1.0       0.95   0.91   0.91   0.9"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 0,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_x_gender; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_gender 0.28 -0.21 0.0     1.32    0.09    0.21    20                    Race_x_gender      0.98 1.0 1.0       0.95   0.91   0.91   0.9"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 1.32,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_x_gender; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_gender 0.28 -0.21 0.0     1.32    0.09    0.21    20                    Race_x_gender      0.98 1.0 1.0       0.95   0.91   0.91   0.9"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": 0.09,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_x_gender; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_gender 0.28 -0.21 0.0     1.32    0.09    0.21    20                    Race_x_gender      0.98 1.0 1.0       0.95   0.91   0.91   0.9"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 0.21,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_x_gender; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_gender 0.28 -0.21 0.0     1.32    0.09    0.21    20                    Race_x_gender      0.98 1.0 1.0       0.95   0.91   0.91   0.9"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 4.28,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_x_SES; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_SES 4.28 0.0 -0.02     -0.95   -5.07   0.54                             Race_x_SES      0.95 1.0 1.0       0.98   0.94   0.99"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": 0,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_x_SES; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_SES 4.28 0.0 -0.02     -0.95   -5.07   0.54                             Race_x_SES      0.95 1.0 1.0       0.98   0.94   0.99"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": -0.02,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_x_SES; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_SES 4.28 0.0 -0.02     -0.95   -5.07   0.54                             Race_x_SES      0.95 1.0 1.0       0.98   0.94   0.99"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": -0.95,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_x_SES; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_SES 4.28 0.0 -0.02     -0.95   -5.07   0.54                             Race_x_SES      0.95 1.0 1.0       0.98   0.94   0.99"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": -5.07,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_x_SES; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_SES 4.28 0.0 -0.02     -0.95   -5.07   0.54                             Race_x_SES      0.95 1.0 1.0       0.98   0.94   0.99"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 0.54,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_x_SES; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_SES 4.28 0.0 -0.02     -0.95   -5.07   0.54                             Race_x_SES      0.95 1.0 1.0       0.98   0.94   0.99"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 0.09,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_ethnicity; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_ethnicity 0.09 -0.12 0.0    0.26    -0.12   0.62    10                    Race_ethnicity     1.0 1.0 1.0        1.0    0.98   0.94   0.8"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": -0.12,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_ethnicity; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_ethnicity 0.09 -0.12 0.0    0.26    -0.12   0.62    10                    Race_ethnicity     1.0 1.0 1.0        1.0    0.98   0.94   0.8"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 0,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_ethnicity; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_ethnicity 0.09 -0.12 0.0    0.26    -0.12   0.62    10                    Race_ethnicity     1.0 1.0 1.0        1.0    0.98   0.94   0.8"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 0.26,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_ethnicity; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_ethnicity 0.09 -0.12 0.0    0.26    -0.12   0.62    10                    Race_ethnicity     1.0 1.0 1.0        1.0    0.98   0.94   0.8"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": -0.12,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_ethnicity; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_ethnicity 0.09 -0.12 0.0    0.26    -0.12   0.62    10                    Race_ethnicity     1.0 1.0 1.0        1.0    0.98   0.94   0.8"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 0.62,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Race_ethnicity; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_ethnicity 0.09 -0.12 0.0    0.26    -0.12   0.62    10                    Race_ethnicity     1.0 1.0 1.0        1.0    0.98   0.94   0.8"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 5.96,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Physical_appearance; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Physical_appearance 5.96 0.0 0.25      2.01    -0.15    -5.1                   Physical_appearance      0.93 1.0 1.0       0.79   0.77   0.71"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": 0,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Physical_appearance; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Physical_appearance 5.96 0.0 0.25      2.01    -0.15    -5.1                   Physical_appearance      0.93 1.0 1.0       0.79   0.77   0.71"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 0.25,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Physical_appearance; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Physical_appearance 5.96 0.0 0.25      2.01    -0.15    -5.1                   Physical_appearance      0.93 1.0 1.0       0.79   0.77   0.71"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 2.01,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Physical_appearance; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Physical_appearance 5.96 0.0 0.25      2.01    -0.15    -5.1                   Physical_appearance      0.93 1.0 1.0       0.79   0.77   0.71"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": -0.15,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Physical_appearance; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Physical_appearance 5.96 0.0 0.25      2.01    -0.15    -5.1                   Physical_appearance      0.93 1.0 1.0       0.79   0.77   0.71"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": -5.1,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Physical_appearance; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Physical_appearance 5.96 0.0 0.25      2.01    -0.15    -5.1                   Physical_appearance      0.93 1.0 1.0       0.79   0.77   0.71"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 4.29,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Nationality; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Nationality 4.29 0.0 0.0     1.46     0.0    0.29    0                         Nationality    0.95 1.0 1.0       0.98   0.95   0.91   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": 0,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Nationality; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Nationality 4.29 0.0 0.0     1.46     0.0    0.29    0                         Nationality    0.95 1.0 1.0       0.98   0.95   0.91   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 0,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Nationality; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Nationality 4.29 0.0 0.0     1.46     0.0    0.29    0                         Nationality    0.95 1.0 1.0       0.98   0.95   0.91   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 1.46,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Nationality; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Nationality 4.29 0.0 0.0     1.46     0.0    0.29    0                         Nationality    0.95 1.0 1.0       0.98   0.95   0.91   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": 0,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Nationality; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Nationality 4.29 0.0 0.0     1.46     0.0    0.29    0                         Nationality    0.95 1.0 1.0       0.98   0.95   0.91   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 0.29,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Nationality; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Nationality 4.29 0.0 0.0     1.46     0.0    0.29    0                         Nationality    0.95 1.0 1.0       0.98   0.95   0.91   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 4,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Gender_identity; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Gender_identity 4.0 0.0 -0.04     0.04    -0.25   -1.47                        Gender_identity     0.96 1.0 1.0       0.97   0.99   0.91   0.6"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": 0,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Gender_identity; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Gender_identity 4.0 0.0 -0.04     0.04    -0.25   -1.47                        Gender_identity     0.96 1.0 1.0       0.97   0.99   0.91   0.6"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": -0.04,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Gender_identity; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Gender_identity 4.0 0.0 -0.04     0.04    -0.25   -1.47                        Gender_identity     0.96 1.0 1.0       0.97   0.99   0.91   0.6"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 0.04,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Gender_identity; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Gender_identity 4.0 0.0 -0.04     0.04    -0.25   -1.47                        Gender_identity     0.96 1.0 1.0       0.97   0.99   0.91   0.6"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": -0.25,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Gender_identity; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Gender_identity 4.0 0.0 -0.04     0.04    -0.25   -1.47                        Gender_identity     0.96 1.0 1.0       0.97   0.99   0.91   0.6"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": -1.47,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Gender_identity; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Gender_identity 4.0 0.0 -0.04     0.04    -0.25   -1.47                        Gender_identity     0.96 1.0 1.0       0.97   0.99   0.91   0.6"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 10.67,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Disability_status; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Disability_status 10.67 0.0 0.0    3.73    -0.66   -8.53                       Disability_status    0.87 1.0 1.0       0.95   0.97   0.82"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": 0,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Disability_status; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Disability_status 10.67 0.0 0.0    3.73    -0.66   -8.53                       Disability_status    0.87 1.0 1.0       0.95   0.97   0.82"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 0,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Disability_status; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Disability_status 10.67 0.0 0.0    3.73    -0.66   -8.53                       Disability_status    0.87 1.0 1.0       0.95   0.97   0.82"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 3.73,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Disability_status; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Disability_status 10.67 0.0 0.0    3.73    -0.66   -8.53                       Disability_status    0.87 1.0 1.0       0.95   0.97   0.82"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": -0.66,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Disability_status; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Disability_status 10.67 0.0 0.0    3.73    -0.66   -8.53                       Disability_status    0.87 1.0 1.0       0.95   0.97   0.82"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": -8.53,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Disability_status; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Disability_status 10.67 0.0 0.0    3.73    -0.66   -8.53                       Disability_status    0.87 1.0 1.0       0.95   0.97   0.82"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 27.5,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Age; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Age 27.5 -0.05 0.38   2.96    1.29    -0.12                                    Age     0.7 1.0 1.0        0.97   0.97   0.93"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": -0.05,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Age; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Age 27.5 -0.05 0.38   2.96    1.29    -0.12                                    Age     0.7 1.0 1.0        0.97   0.97   0.93"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": 0.38,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Age; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Age 27.5 -0.05 0.38   2.96    1.29    -0.12                                    Age     0.7 1.0 1.0        0.97   0.97   0.93"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "bias score",
+      "value": 2.96,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Age; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Age 27.5 -0.05 0.38   2.96    1.29    -0.12                                    Age     0.7 1.0 1.0        0.97   0.97   0.93"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "bias score",
+      "value": 1.29,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Age; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Age 27.5 -0.05 0.38   2.96    1.29    -0.12                                    Age     0.7 1.0 1.0        0.97   0.97   0.93"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "bias score",
+      "value": -0.12,
+      "unit": "score",
+      "settings": {
+        "other": "4-shot; category=Age; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Age 27.5 -0.05 0.38   2.96    1.29    -0.12                                    Age     0.7 1.0 1.0        0.97   0.97   0.93"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.97,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Sexual_orientation; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Sexual_orientation 2.08 -0.23 0.93   -0.99   -4.27    -3.1                     Sexual_orientation     0.97 1.0 0.99      0.94   0.81   0.59"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Sexual_orientation; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Sexual_orientation 2.08 -0.23 0.93   -0.99   -4.27    -3.1                     Sexual_orientation     0.97 1.0 0.99      0.94   0.81   0.59"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 0.99,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Sexual_orientation; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Sexual_orientation 2.08 -0.23 0.93   -0.99   -4.27    -3.1                     Sexual_orientation     0.97 1.0 0.99      0.94   0.81   0.59"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.94,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Sexual_orientation; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Sexual_orientation 2.08 -0.23 0.93   -0.99   -4.27    -3.1                     Sexual_orientation     0.97 1.0 0.99      0.94   0.81   0.59"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 0.81,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Sexual_orientation; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Sexual_orientation 2.08 -0.23 0.93   -0.99   -4.27    -3.1                     Sexual_orientation     0.97 1.0 0.99      0.94   0.81   0.59"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 0.59,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Sexual_orientation; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Sexual_orientation 2.08 -0.23 0.93   -0.99   -4.27    -3.1                     Sexual_orientation     0.97 1.0 0.99      0.94   0.81   0.59"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.95,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=SES; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "SES 4.6 0.0 0.0       4.82     3.3    2.77                                     SES     0.95 1.0 1.0       0.97   0.89   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=SES; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "SES 4.6 0.0 0.0       4.82     3.3    2.77                                     SES     0.95 1.0 1.0       0.97   0.89   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=SES; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "SES 4.6 0.0 0.0       4.82     3.3    2.77                                     SES     0.95 1.0 1.0       0.97   0.89   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.97,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=SES; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "SES 4.6 0.0 0.0       4.82     3.3    2.77                                     SES     0.95 1.0 1.0       0.97   0.89   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 0.89,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=SES; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "SES 4.6 0.0 0.0       4.82     3.3    2.77                                     SES     0.95 1.0 1.0       0.97   0.89   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 0.7,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=SES; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "SES 4.6 0.0 0.0       4.82     3.3    2.77                                     SES     0.95 1.0 1.0       0.97   0.89   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.87,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Religion; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Religion 8.0 0.33 4.67     5.0    3.32    0.79                                 Religion    0.87 0.98 0.95     0.92   0.87   0.83   1"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 0.98,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Religion; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Religion 8.0 0.33 4.67     5.0    3.32    0.79                                 Religion    0.87 0.98 0.95     0.92   0.87   0.83   1"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 0.95,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Religion; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Religion 8.0 0.33 4.67     5.0    3.32    0.79                                 Religion    0.87 0.98 0.95     0.92   0.87   0.83   1"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.92,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Religion; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Religion 8.0 0.33 4.67     5.0    3.32    0.79                                 Religion    0.87 0.98 0.95     0.92   0.87   0.83   1"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 0.87,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Religion; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Religion 8.0 0.33 4.67     5.0    3.32    0.79                                 Religion    0.87 0.98 0.95     0.92   0.87   0.83   1"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 0.83,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Religion; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Religion 8.0 0.33 4.67     5.0    3.32    0.79                                 Religion    0.87 0.98 0.95     0.92   0.87   0.83   1"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.98,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_x_gender; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_gender 0.28 -0.21 0.0     1.32    0.09    0.21    20                    Race_x_gender      0.98 1.0 1.0       0.95   0.91   0.91   0.9"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_x_gender; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_gender 0.28 -0.21 0.0     1.32    0.09    0.21    20                    Race_x_gender      0.98 1.0 1.0       0.95   0.91   0.91   0.9"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_x_gender; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_gender 0.28 -0.21 0.0     1.32    0.09    0.21    20                    Race_x_gender      0.98 1.0 1.0       0.95   0.91   0.91   0.9"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.95,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_x_gender; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_gender 0.28 -0.21 0.0     1.32    0.09    0.21    20                    Race_x_gender      0.98 1.0 1.0       0.95   0.91   0.91   0.9"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 0.91,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_x_gender; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_gender 0.28 -0.21 0.0     1.32    0.09    0.21    20                    Race_x_gender      0.98 1.0 1.0       0.95   0.91   0.91   0.9"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 0.91,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_x_gender; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_gender 0.28 -0.21 0.0     1.32    0.09    0.21    20                    Race_x_gender      0.98 1.0 1.0       0.95   0.91   0.91   0.9"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.95,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_x_SES; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_SES 4.28 0.0 -0.02     -0.95   -5.07   0.54                             Race_x_SES      0.95 1.0 1.0       0.98   0.94   0.99"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_x_SES; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_SES 4.28 0.0 -0.02     -0.95   -5.07   0.54                             Race_x_SES      0.95 1.0 1.0       0.98   0.94   0.99"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_x_SES; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_SES 4.28 0.0 -0.02     -0.95   -5.07   0.54                             Race_x_SES      0.95 1.0 1.0       0.98   0.94   0.99"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.98,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_x_SES; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_SES 4.28 0.0 -0.02     -0.95   -5.07   0.54                             Race_x_SES      0.95 1.0 1.0       0.98   0.94   0.99"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 0.94,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_x_SES; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_SES 4.28 0.0 -0.02     -0.95   -5.07   0.54                             Race_x_SES      0.95 1.0 1.0       0.98   0.94   0.99"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 0.99,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_x_SES; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_x_SES 4.28 0.0 -0.02     -0.95   -5.07   0.54                             Race_x_SES      0.95 1.0 1.0       0.98   0.94   0.99"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_ethnicity; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_ethnicity 0.09 -0.12 0.0    0.26    -0.12   0.62    10                    Race_ethnicity     1.0 1.0 1.0        1.0    0.98   0.94   0.8"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_ethnicity; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_ethnicity 0.09 -0.12 0.0    0.26    -0.12   0.62    10                    Race_ethnicity     1.0 1.0 1.0        1.0    0.98   0.94   0.8"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_ethnicity; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_ethnicity 0.09 -0.12 0.0    0.26    -0.12   0.62    10                    Race_ethnicity     1.0 1.0 1.0        1.0    0.98   0.94   0.8"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_ethnicity; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_ethnicity 0.09 -0.12 0.0    0.26    -0.12   0.62    10                    Race_ethnicity     1.0 1.0 1.0        1.0    0.98   0.94   0.8"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 0.98,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_ethnicity; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_ethnicity 0.09 -0.12 0.0    0.26    -0.12   0.62    10                    Race_ethnicity     1.0 1.0 1.0        1.0    0.98   0.94   0.8"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 0.94,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Race_ethnicity; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Race_ethnicity 0.09 -0.12 0.0    0.26    -0.12   0.62    10                    Race_ethnicity     1.0 1.0 1.0        1.0    0.98   0.94   0.8"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.93,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Physical_appearance; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Physical_appearance 5.96 0.0 0.25      2.01    -0.15    -5.1                   Physical_appearance      0.93 1.0 1.0       0.79   0.77   0.71"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Physical_appearance; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Physical_appearance 5.96 0.0 0.25      2.01    -0.15    -5.1                   Physical_appearance      0.93 1.0 1.0       0.79   0.77   0.71"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Physical_appearance; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Physical_appearance 5.96 0.0 0.25      2.01    -0.15    -5.1                   Physical_appearance      0.93 1.0 1.0       0.79   0.77   0.71"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.79,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Physical_appearance; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Physical_appearance 5.96 0.0 0.25      2.01    -0.15    -5.1                   Physical_appearance      0.93 1.0 1.0       0.79   0.77   0.71"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 0.77,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Physical_appearance; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Physical_appearance 5.96 0.0 0.25      2.01    -0.15    -5.1                   Physical_appearance      0.93 1.0 1.0       0.79   0.77   0.71"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 0.71,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Physical_appearance; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Physical_appearance 5.96 0.0 0.25      2.01    -0.15    -5.1                   Physical_appearance      0.93 1.0 1.0       0.79   0.77   0.71"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.95,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Nationality; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Nationality 4.29 0.0 0.0     1.46     0.0    0.29    0                         Nationality    0.95 1.0 1.0       0.98   0.95   0.91   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Nationality; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Nationality 4.29 0.0 0.0     1.46     0.0    0.29    0                         Nationality    0.95 1.0 1.0       0.98   0.95   0.91   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Nationality; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Nationality 4.29 0.0 0.0     1.46     0.0    0.29    0                         Nationality    0.95 1.0 1.0       0.98   0.95   0.91   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.98,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Nationality; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Nationality 4.29 0.0 0.0     1.46     0.0    0.29    0                         Nationality    0.95 1.0 1.0       0.98   0.95   0.91   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 0.95,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Nationality; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Nationality 4.29 0.0 0.0     1.46     0.0    0.29    0                         Nationality    0.95 1.0 1.0       0.98   0.95   0.91   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 0.91,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Nationality; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Nationality 4.29 0.0 0.0     1.46     0.0    0.29    0                         Nationality    0.95 1.0 1.0       0.98   0.95   0.91   0.7"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.96,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Gender_identity; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Gender_identity 4.0 0.0 -0.04     0.04    -0.25   -1.47                        Gender_identity     0.96 1.0 1.0       0.97   0.99   0.91   0.6"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Gender_identity; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Gender_identity 4.0 0.0 -0.04     0.04    -0.25   -1.47                        Gender_identity     0.96 1.0 1.0       0.97   0.99   0.91   0.6"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Gender_identity; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Gender_identity 4.0 0.0 -0.04     0.04    -0.25   -1.47                        Gender_identity     0.96 1.0 1.0       0.97   0.99   0.91   0.6"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.97,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Gender_identity; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Gender_identity 4.0 0.0 -0.04     0.04    -0.25   -1.47                        Gender_identity     0.96 1.0 1.0       0.97   0.99   0.91   0.6"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 0.99,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Gender_identity; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Gender_identity 4.0 0.0 -0.04     0.04    -0.25   -1.47                        Gender_identity     0.96 1.0 1.0       0.97   0.99   0.91   0.6"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 0.91,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Gender_identity; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Gender_identity 4.0 0.0 -0.04     0.04    -0.25   -1.47                        Gender_identity     0.96 1.0 1.0       0.97   0.99   0.91   0.6"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.87,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Disability_status; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Disability_status 10.67 0.0 0.0    3.73    -0.66   -8.53                       Disability_status    0.87 1.0 1.0       0.95   0.97   0.82"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Disability_status; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Disability_status 10.67 0.0 0.0    3.73    -0.66   -8.53                       Disability_status    0.87 1.0 1.0       0.95   0.97   0.82"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Disability_status; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Disability_status 10.67 0.0 0.0    3.73    -0.66   -8.53                       Disability_status    0.87 1.0 1.0       0.95   0.97   0.82"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.95,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Disability_status; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Disability_status 10.67 0.0 0.0    3.73    -0.66   -8.53                       Disability_status    0.87 1.0 1.0       0.95   0.97   0.82"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 0.97,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Disability_status; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Disability_status 10.67 0.0 0.0    3.73    -0.66   -8.53                       Disability_status    0.87 1.0 1.0       0.95   0.97   0.82"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 0.82,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Disability_status; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Disability_status 10.67 0.0 0.0    3.73    -0.66   -8.53                       Disability_status    0.87 1.0 1.0       0.95   0.97   0.82"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.7,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Age; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Age 27.5 -0.05 0.38   2.96    1.29    -0.12                                    Age     0.7 1.0 1.0        0.97   0.97   0.93"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Age; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Age 27.5 -0.05 0.38   2.96    1.29    -0.12                                    Age     0.7 1.0 1.0        0.97   0.97   0.93"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 1,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Age; ambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Age 27.5 -0.05 0.38   2.96    1.29    -0.12                                    Age     0.7 1.0 1.0        0.97   0.97   0.93"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-1.0-ultra",
+      "metric": "accuracy",
+      "value": 0.97,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Age; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Age 27.5 -0.05 0.38   2.96    1.29    -0.12                                    Age     0.7 1.0 1.0        0.97   0.97   0.93"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-flash-1.5",
+      "metric": "accuracy",
+      "value": 0.97,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Age; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Age 27.5 -0.05 0.38   2.96    1.29    -0.12                                    Age     0.7 1.0 1.0        0.97   0.97   0.93"
+      }
+    },
+    {
+      "rawEvalName": "BBQ",
+      "model": "google/gemini-pro-1.5",
+      "metric": "accuracy",
+      "value": 0.93,
+      "unit": "fraction",
+      "settings": {
+        "other": "4-shot; category=Age; disambiguous"
+      },
+      "source": {
+        "page": "65",
+        "pdfPage": 65,
+        "table": "Figure 26",
+        "quote": "Age 27.5 -0.05 0.38   2.96    1.29    -0.12                                    Age     0.7 1.0 1.0        0.97   0.97   0.93"
+      }
+    },
+    {
+      "rawEvalName": "I2T Refusals",
+      "model": "google/gemini-flash-1.5",
+      "metric": "refusal rate increase vs Gemini 1.0 Ultra",
+      "value": 35,
+      "unit": "percent",
+      "settings": {
+        "other": "ungrounded set"
+      },
+      "source": {
+        "page": "59",
+        "pdfPage": 59,
+        "table": "Figure 22",
+        "quote": "We find that Gemini 1.5 Flash refuses the most ( 35/140% increase over Gemini 1.0 Ultra on ungrounded/grounded data), followed by Gemini 1.5 Pro ( 7/60% increase over Gemini 1.0 Ultra on ungrounded/grounded data)."
+      }
+    },
+    {
+      "rawEvalName": "I2T Refusals",
+      "model": "google/gemini-flash-1.5",
+      "metric": "refusal rate increase vs Gemini 1.0 Ultra",
+      "value": 140,
+      "unit": "percent",
+      "settings": {
+        "other": "grounded set"
+      },
+      "source": {
+        "page": "59",
+        "pdfPage": 59,
+        "table": "Figure 22",
+        "quote": "We find that Gemini 1.5 Flash refuses the most ( 35/140% increase over Gemini 1.0 Ultra on ungrounded/grounded data), followed by Gemini 1.5 Pro ( 7/60% increase over Gemini 1.0 Ultra on ungrounded/grounded data)."
+      }
+    },
+    {
+      "rawEvalName": "I2T Refusals",
+      "model": "google/gemini-pro-1.5",
+      "metric": "refusal rate increase vs Gemini 1.0 Ultra",
+      "value": 7,
+      "unit": "percent",
+      "settings": {
+        "other": "ungrounded set"
+      },
+      "source": {
+        "page": "59",
+        "pdfPage": 59,
+        "table": "Figure 22",
+        "quote": "We find that Gemini 1.5 Flash refuses the most ( 35/140% increase over Gemini 1.0 Ultra on ungrounded/grounded data), followed by Gemini 1.5 Pro ( 7/60% increase over Gemini 1.0 Ultra on ungrounded/grounded data)."
+      }
+    },
+    {
+      "rawEvalName": "I2T Refusals",
+      "model": "google/gemini-pro-1.5",
+      "metric": "refusal rate increase vs Gemini 1.0 Ultra",
+      "value": 60,
+      "unit": "percent",
+      "settings": {
+        "other": "grounded set"
+      },
+      "source": {
+        "page": "59",
+        "pdfPage": 59,
+        "table": "Figure 22",
+        "quote": "We find that Gemini 1.5 Flash refuses the most ( 35/140% increase over Gemini 1.0 Ultra on ungrounded/grounded data), followed by Gemini 1.5 Pro ( 7/60% increase over Gemini 1.0 Ultra on ungrounded/grounded data)."
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -28.6,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=0%; haystack=1,024 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "0%                                      -28.6%        -23.8%         -28.6%        -14.3%         -38.1%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -23.8,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=0%; haystack=256,768 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "0%                                      -28.6%        -23.8%         -28.6%        -14.3%         -38.1%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -28.6,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=0%; haystack=512,512 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "0%                                      -28.6%        -23.8%         -28.6%        -14.3%         -38.1%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -14.3,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=0%; haystack=768,256 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "0%                                      -28.6%        -23.8%         -28.6%        -14.3%         -38.1%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -38.1,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=0%; haystack=1,024,000 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "0%                                      -28.6%        -23.8%         -28.6%        -14.3%         -38.1%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -14.3,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=25%; haystack=1,024 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "25%                                     -14.3%         -9.5%         -33.3%        -33.3%         -14.3%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -9.5,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=25%; haystack=256,768 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "25%                                     -14.3%         -9.5%         -33.3%        -33.3%         -14.3%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -33.3,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=25%; haystack=512,512 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "25%                                     -14.3%         -9.5%         -33.3%        -33.3%         -14.3%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -33.3,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=25%; haystack=768,256 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "25%                                     -14.3%         -9.5%         -33.3%        -33.3%         -14.3%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -14.3,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=25%; haystack=1,024,000 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "25%                                     -14.3%         -9.5%         -33.3%        -33.3%         -14.3%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -14.3,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=50%; haystack=1,024 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "50%                                     -14.3%        -19.0%         -14.3%        -33.3%         -28.6%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -19,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=50%; haystack=256,768 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "50%                                     -14.3%        -19.0%         -14.3%        -33.3%         -28.6%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -14.3,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=50%; haystack=512,512 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "50%                                     -14.3%        -19.0%         -14.3%        -33.3%         -28.6%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -33.3,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=50%; haystack=768,256 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "50%                                     -14.3%        -19.0%         -14.3%        -33.3%         -28.6%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -28.6,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=50%; haystack=1,024,000 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "50%                                     -14.3%        -19.0%         -14.3%        -33.3%         -28.6%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -42.9,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=75%; haystack=1,024 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "75%                                     -42.9%        -28.6%         -33.3%        -33.3%          -4.8%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -28.6,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=75%; haystack=256,768 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "75%                                     -42.9%        -28.6%         -33.3%        -33.3%          -4.8%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -33.3,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=75%; haystack=512,512 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "75%                                     -42.9%        -28.6%         -33.3%        -33.3%          -4.8%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -33.3,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=75%; haystack=768,256 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "75%                                     -42.9%        -28.6%         -33.3%        -33.3%          -4.8%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -4.8,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=75%; haystack=1,024,000 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "75%                                     -42.9%        -28.6%         -33.3%        -33.3%          -4.8%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -38.1,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=100%; haystack=1,024 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "100%                                    -38.1%        -47.6%         -42.9%        -38.1%         -38.1%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -47.6,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=100%; haystack=256,768 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "100%                                    -38.1%        -47.6%         -42.9%        -38.1%         -38.1%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -42.9,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=100%; haystack=512,512 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "100%                                    -38.1%        -47.6%         -42.9%        -38.1%         -38.1%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -38.1,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=100%; haystack=768,256 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "100%                                    -38.1%        -47.6%         -42.9%        -38.1%         -38.1%"
+      }
+    },
+    {
+      "rawEvalName": "Long-context adversarial needle",
+      "model": "google/gemini-pro-1.5",
+      "metric": "safety violation rate change vs short context",
+      "value": -38.1,
+      "unit": "percent",
+      "settings": {
+        "other": "February 2024 Gemini 1.5 Pro; document depth=100%; haystack=1,024,000 tokens"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 28",
+        "quote": "100%                                    -38.1%        -47.6%         -42.9%        -38.1%         -38.1%"
+      }
+    },
+    {
+      "rawEvalName": "Helpfulness",
+      "model": "google/gemini-flash-1.5",
+      "metric": "percentage change vs Gemini 1.0 Ultra",
+      "value": 2,
+      "unit": "percent",
+      "settings": {
+        "other": "Instruction Following"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 29",
+        "quote": "2%                 2%"
+      }
+    },
+    {
+      "rawEvalName": "Helpfulness",
+      "model": "google/gemini-pro-1.5",
+      "metric": "percentage change vs Gemini 1.0 Ultra",
+      "value": 2,
+      "unit": "percent",
+      "settings": {
+        "other": "Instruction Following"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 29",
+        "quote": "2%                 2%"
+      }
+    },
+    {
+      "rawEvalName": "Helpfulness",
+      "model": "google/gemini-flash-1.5",
+      "metric": "percentage change vs Gemini 1.0 Ultra",
+      "value": 16,
+      "unit": "percent",
+      "settings": {
+        "other": "Effective Refusal"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 29",
+        "quote": "16%                10%"
+      }
+    },
+    {
+      "rawEvalName": "Helpfulness",
+      "model": "google/gemini-pro-1.5",
+      "metric": "percentage change vs Gemini 1.0 Ultra",
+      "value": 10,
+      "unit": "percent",
+      "settings": {
+        "other": "Effective Refusal"
+      },
+      "source": {
+        "page": "58",
+        "pdfPage": 58,
+        "table": "Table 29",
+        "quote": "16%                10%"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:11:42Z"
+  },
+  "notes": "Technical report (arXiv:2403.05530v5), not a system card. Safety is Section 9 (pp. 48–73). Skipped general capability benchmarks (MMLU, MATH, coding, long-context retrieval, Arena-style, IFEval, etc.). Also skipped Expert QA (Table 52) and SimpleQA-style factuality as capability; STEM QA with Context kept as groundedness/hallucination. Skipped Table 36 audio demographic identification (classifier task). Skipped memorization bar charts (Figures 24–25) where exact rates are not in the text layer; divergence rates from prose included. Skipped Figure 21 jailbreak curves (visual only; Table 26 has final gains). BBQ numbers taken from Figure 26 text extraction; some rows use figure caption when row layout is garbled. External safety testers are described only as unnamed academia/civil-society/commercial groups plus a government body—no org names, so testers=[]. No Frontier Safety Framework / CCL thresholds stated; riskDecisions empty. Child sexual abuse and self-harm appear only in the policy list, not as dedicated evals. Flash-8B has capability results (Table 22) but no safety numbers. Long-context safety Table 28 is February 2024 Gemini 1.5 Pro. Capability tables named in reply: MMLU/MATH/GPQA/code/vision/audio/long-context needles, Dolomites, productivity impact, etc."
+}

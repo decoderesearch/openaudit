@@ -1,0 +1,65 @@
+{
+  "eval": {
+    "slug": "gdm-unjustified-refusals",
+    "displayName": "Unjustified-refusals (Google DeepMind)",
+    "aliases": ["Unjustified-refusals"],
+    "description": "Google DeepMind internal automated eval of whether the model answers borderline prompts while remaining safe. Cards report unjustified-refusal rate deltas versus a prior Gemini (lower is better). Lab-internal dataset and runner.",
+    "summary": "Measures how often the model refuses borderline prompts that it can safely answer.",
+    "family": "Google DeepMind safety evaluations",
+    "maintainers": [
+      {
+        "name": "Google DeepMind",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+        "title": "Gemini 3.8 Flash model card"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["single_turn"],
+      "cases": ["fixed"],
+      "grading": ["model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": []
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "internal",
+      "status": "draft",
+      "changes": "Google DeepMind updates query sets and automated graders; card deltas are not always comparable across releases.",
+      "scores": [
+        {
+          "key": "unjustified_refusal",
+          "displayName": "Unjustified refusal",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "Whether the model refused a borderline prompt without a safety need."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "unjustified_refusal_rate",
+          "displayName": "Unjustified refusal rate",
+          "score": "unjustified_refusal",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of borderline prompts with an unjustified refusal. Lower is better."
+        }
+      ]
+    }
+  ]
+}

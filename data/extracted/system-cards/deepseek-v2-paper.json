@@ -1,0 +1,240 @@
+{
+  "document": "deepseek-v2-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "deepseek-ai/DeepSeek-V2"
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V2-Chat"
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V2-Lite"
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-V2-Lite-Chat"
+    }
+  ],
+  "pageCount": 52,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "128K tokens",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "are activated for each token, and supports a context length of 128K tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text only",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "Currently, DeepSeek-V2 is designed to support the text modality exclusively."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "bilingual (primarily Chinese and English)",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "since our data primarily consist of Chinese and English content, our\nmodel may exhibit limited proficiency in other languages."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "236B (DeepSeek-V2); 15.7B (DeepSeek-V2-Lite)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "It comprises 236B total parameters, of which 21B\n                                         are activated for each token"
+      }
+    },
+    "activeParams": {
+      "status": "stated",
+      "value": "21B per token (DeepSeek-V2); 2.4B per token (DeepSeek-V2-Lite)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "It comprises 236B total parameters, of which 21B\n                                         are activated for each token"
+      }
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "MoE Transformer with Multi-head Latent Attention (MLA) and DeepSeekMoE; 60 layers, hidden 5120, 2 shared + 160 routed experts (6 activated)",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "DeepSeek-V2 adopts\n                                         innovative architectures including Multi-head Latent Attention (MLA) and DeepSeekMoE."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "8.1T tokens (DeepSeek-V2); 5.7T tokens (DeepSeek-V2-Lite); bilingual Chinese/English corpus",
+      "source": {
+        "page": "12",
+        "pdfPage": 12,
+        "quote": "Our tokenized pre-\ntraining corpus contains 8.1T tokens, where Chinese tokens are approximately 12% more than\nEnglish ones."
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "172.8K GPU hours per trillion tokens on H800",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "for training on each trillion tokens, DeepSeek 67B requires 300.6K\nGPU hours, while DeepSeek-V2 needs only 172.8K GPU hours"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Supervised fine-tuning (SFT) data includes 0.3M safety instances out of 1.5M total, and the authors say they improved data quality to reduce hallucinatory responses.", "tone": "neutral",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "comprising 1.2M instances for helpfulness and 0.3M instances for\nsafety. In comparison to the initial version, we improve the data quality to mitigate hallucinatory\nresponses"
+      }
+    },
+    {
+      "text": "Human-preference reinforcement learning (RL) uses a multi-reward mix with a dedicated safety reward model alongside helpful and rule-based rewards.", "tone": "neutral",
+      "source": {
+        "page": "17",
+        "pdfPage": 17,
+        "quote": "acquires rewards from a helpful reward model 𝑅𝑀ℎ𝑒𝑙 𝑝 𝑓 𝑢𝑙 , a safety reward model 𝑅𝑀𝑠𝑎 𝑓 𝑒𝑡 𝑦 , and a\nrule-based reward model 𝑅𝑀𝑟𝑢𝑙𝑒"
+      }
+    },
+    {
+      "text": "Pre-training filters contentious regional-culture content to reduce subjective bias; Appendix E links weaker [MMLU](https://arxiv.org/abs/2009.03300) Humanity-Moral scores to that filter.", "tone": "good",
+      "source": {
+        "page": "11",
+        "pdfPage": 11,
+        "quote": "we filter out the\ncontentious content from our pre-training corpus to mitigate the data bias introduced from\nspecific regional cultures."
+      }
+    },
+    {
+      "text": "Limitations note shared large language model (LLM) issues including non-factual advice and hallucinations; no dedicated safety benchmarks are reported.", "tone": "mixed",
+      "source": {
+        "page": "21",
+        "pdfPage": 21,
+        "quote": "the possibility\nof generating non-factual information such as unverified advice, and a chance to produce\nhallucinations."
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:04:23Z"
+  },
+  "notes": "Technical report (arXiv:2405.04434), not a system card. No dedicated safety evaluation section and no safety, refusal, jailbreak, toxicity, bias, honesty, hallucination, or dangerous-capability numeric results—evalResults left empty. Safety-adjacent content is SFT safety data, an RL safety reward model, pre-training contentious-content filtering (Appendix E), and a generic hallucination limitation; these are training methods or caveats, so topics stay uncovered per pilot rules. Skipped all capability and preference benchmarks (MMLU, BBH, HumanEval, MBPP, GSM8K, MATH, C-Eval, CMMLU, Arena-Hard/AlpacaEval/MT-Bench/AlignBench, IFEval, LiveCodeBench, NIAH, SC-Math6, etc.). Table 10 is annotator agreement on MMLU Humanity-Moral, not a model bias score. Seed-linked DeepSeek-V2.5 and DeepSeek-V2.5-1210 are not named (later releases). Open-source GitHub link given without a license name. arXiv date is publication, not a model releaseDate. Trailing empty PDF page omitted from pageCount (52)."
+}

@@ -1,0 +1,573 @@
+{
+  "document": "openai-gpt2-release-strategies-safety_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "openai-community/gpt2"
+    },
+    {
+      "model": "openai-community/gpt2-medium"
+    },
+    {
+      "model": "openai-community/gpt2-large"
+    },
+    {
+      "model": "openai-community/gpt2-xl"
+    }
+  ],
+  "pageCount": 71,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "Staged: 124M February 2019, 355M May 2019, 774M August 2019, 1.5B November 2019",
+      "source": {
+        "page": "34",
+        "pdfPage": 36,
+        "quote": "November 2019\n\n         – Released the largest parameter (1.5B) model."
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (language model generating paragraphs of text)",
+      "source": {
+        "page": "1",
+        "pdfPage": 3,
+        "quote": "GPT-2 is a large-scale unsupervised language model that generates coherent paragraphs of text, first\nannounced by OpenAI in February 2019 [65]."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "Primarily English; training data filtered to documents at least 50% English; French about 0.025% of dataset",
+      "source": {
+        "page": "44",
+        "pdfPage": 46,
+        "quote": "GPT-2’s training data was filtered to remove documents where content was less than 50% English-\nlanguage. However, it can output other languages with varying levels of coherence. GPT-2 can perform\nbasic translations in French, with French accounting for 0.025% of the dataset [65]."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "Four variants: 124 million, 355 million, 774 million, and ~1.5 billion parameters",
+      "source": {
+        "page": "1",
+        "pdfPage": 3,
+        "quote": "We developed four variants of the model, ranging in\nsize from small (124 million parameters) to large (~1.5 billion parameters)."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "large-scale unsupervised language model",
+      "source": {
+        "page": "1",
+        "pdfPage": 3,
+        "quote": "GPT-2 is a large-scale unsupervised language model that generates coherent paragraphs of text, first\nannounced by OpenAI in February 2019 [65]."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "WebText (internet-scale English web text; top domains include Google, Archive.org, Blogspot, GitHub, NYT, etc.)",
+      "source": {
+        "page": "19",
+        "pdfPage": 21,
+        "quote": "We have published a list of the top 1,000 sources\nin the ‘WebText’ dataset that GPT-2 was trained on to facilitate further study by researchers here [57]."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [
+    {
+      "domain": "manipulation",
+      "labLabel": "minimal evidence of misuse so far; confidence in publishing 774M and 1.5B",
+      "phase": "after_mitigation",
+      "decidedBy": "OpenAI",
+      "source": {
+        "page": "1",
+        "pdfPage": 3,
+        "quote": "In addi-\ntion to finding minimal evidence of misuse so far, several other factors contributed to our confidence\nin publishing our 774 million and 1.5 billion parameter models."
+      }
+    }
+  ],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": true,
+      "headline": "Threat monitoring found discussion of misuse but no clear large-scale misuse or malicious code sharing; spam/phishing of interest to lower-tier actors",
+      "source": {
+        "page": "8",
+        "pdfPage": 10,
+        "quote": "We also found no clear malicious code sharing or large-scale misuse, and only a small number of\ncases of explicit public plans for misuse."
+      }
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": true,
+      "headline": "Exploratory bias probes for gender, race, religion, and language preference; no significant size differences except language preference for 1.5B",
+      "source": {
+        "page": "20",
+        "pdfPage": 22,
+        "quote": "We did not see\nstatistically significant differences in our gender, race, or religion bias analyses between our 774 million\nand 1.5 billion parameter models. Language preference bias changed with the 1.5 billion parameter\nmodel"
+      }
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": true,
+      "headline": "Human credibility of cherry-picked GPT-2 fake news ~66% (355M) and ~75% (774M/1.5B); automated detection of synthetic text studied",
+      "source": {
+        "page": "10",
+        "pdfPage": 12,
+        "quote": "Kreps and McCain at Cornell University found that cherry-picked fake\nnews samples from the 355 million parameter version of GPT-2 were considered “credible” about 66%\nof the time."
+      }
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": true,
+      "headline": "Public discussion of GPT-2 for spam and phishing; no observed progress beyond discussion for lower-tier actors",
+      "source": {
+        "page": "8",
+        "pdfPage": 10,
+        "quote": "We have seen some discussion around GPT-2’s potential to augment high-volume/low-yield operations\nlike spam and phishing. However, we have not seen any progress (evidence of writing code or documen-\ntation) toward realizing this beyond discussion."
+      }
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [
+    {
+      "name": "Cornell University",
+      "scope": "Human susceptibility to GPT-2-generated digital disinformation; perceived credibility of synthesized news",
+      "source": {
+        "page": "3",
+        "pdfPage": 5,
+        "quote": "Cornell University is studying human susceptibility to digital disinformation generated by\n          language models."
+      }
+    },
+    {
+      "name": "Middlebury Institute of International Studies Center on Terrorism, Extremism, and Counterterrorism (CTEC)",
+      "scope": "How GPT-2 could be misused by terrorists and extremists; fine-tuning on extremist datasets and detection",
+      "source": {
+        "page": "3",
+        "pdfPage": 5,
+        "quote": "The Middlebury Institute of International Studies Center on Terrorism, Extremism, and\n          Counterterrorism (CTEC) is exploring how GPT-2 could be misused by terrorists and extremists\n          online."
+      }
+    },
+    {
+      "name": "University of Oregon",
+      "scope": "Bias probes to analyze bias within GPT-2",
+      "source": {
+        "page": "3",
+        "pdfPage": 5,
+        "quote": "The University of Oregon is developing a series of “bias probes” to analyze bias within GPT-2."
+      }
+    },
+    {
+      "name": "University of Texas at Austin",
+      "scope": "Statistical detectability of GPT-2 outputs after fine-tuning; detection transfer across language models",
+      "source": {
+        "page": "3",
+        "pdfPage": 5,
+        "quote": "The University of Texas at Austin is studying the statistical detectability of GPT-2 outputs af-\n          ter fine-tuning the model on domain-specific datasets, as well as the extent of detection transfer\n          across different language models."
+      }
+    }
+  ],
+  "findings": [
+    {
+      "text": "Staged release withheld larger GPT-2 models for nine months after the February 2019 announcement due to misuse concerns such as fake news, email impersonation, and abusive social media automation.", "tone": "good",
+      "source": {
+        "page": "1",
+        "pdfPage": 3,
+        "quote": "We chose a staged release\nprocess, releasing the smallest model in February, but withholding larger models due to concerns about\nthe potential for misuse, such as generating fake news content, impersonating others in email, or au-\ntomating abusive social media content production [56]."
+      }
+    },
+    {
+      "text": "Zero-shot probability-threshold detection of Top-K 40 generations with the 1.5B model was only between 83% and 85% accuracy, underperforming the N-gram baseline.", "tone": "mixed",
+      "source": {
+        "page": "12",
+        "pdfPage": 14,
+        "quote": "the\n1.5 billion parameter GPT-2 model can detect Top-K 40 generations with between 83% and 85% ac-\ncuracy. This underperforms relative to our N-gram based baseline"
+      }
+    },
+    {
+      "text": "CTEC reported that GPT-2 fine-tuned on extremist material relatively quickly integrates ideological nuances and can produce substantively consistent text.", "tone": "bad",
+      "source": {
+        "page": "9",
+        "pdfPage": 11,
+        "quote": "In their own words, their results suggest that “GPT-2 relatively quickly\nintegrates the nuances of the ideology it is trained on when responding to a specific prompt,” and that\n“fine-tuned GPT-2 models can produce substantively consistent text.”"
+      }
+    },
+    {
+      "text": "Fine-tuning on narrow datasets increased perceived humanness of GPT-2 text and reduced GROVER zero-shot detection of fine-tuned outputs.", "tone": "bad",
+      "source": {
+        "page": "11",
+        "pdfPage": 13,
+        "quote": "our partners at the Middlebury Institute’s Center on Terrorism, Extremism, and Counterterror-\nism have confirmed that fine-tuning GPT-2 on more narrow datasets tends to increase the perceived\nhumanness of GPT-2-generated text."
+      }
+    },
+    {
+      "text": "In Cornell’s automated-cleaning study, none of the survey respondents who called articles “fake news” said they believed the story lacked a human author.", "tone": "bad",
+      "source": {
+        "page": "4",
+        "pdfPage": 66,
+        "quote": "while a number of respondents wrote that they thought the article may have\n  been “fake news,” none indicated that they believed the story did not have a human\n  author."
+      }
+    },
+    {
+      "text": "Figures 1–2 (RoBERTa transfer matrix and length curves) and Appendix C bias bar charts are image-only or color-coded, so bar-level numbers were not extracted as evalResults.", "tone": "mixed",
+      "source": {
+        "page": "14",
+        "pdfPage": 16,
+        "quote": "Figure 1: The detection accuracy can be very sensitive to the sampling method of the test examples,\ndepending on which sampling method the training examples used."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "TF-IDF logistic regression detector (Temperature = 1)",
+      "model": "openai-community/gpt2",
+      "metric": "detection accuracy",
+      "value": 88,
+      "unit": "percent",
+      "settings": {
+        "other": "Temperature = 1; logistic regression on TF-IDF unigram and bigram features"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 14,
+        "quote": "we can detect outputs from the models at Temperature\n= 1 at accuracies ranging from 88% at 124 million parameters to 74% at 1.5 billion parameters."
+      }
+    },
+    {
+      "rawEvalName": "TF-IDF logistic regression detector (Temperature = 1)",
+      "model": "openai-community/gpt2-xl",
+      "metric": "detection accuracy",
+      "value": 74,
+      "unit": "percent",
+      "settings": {
+        "other": "Temperature = 1; logistic regression on TF-IDF unigram and bigram features"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 14,
+        "quote": "we can detect outputs from the models at Temperature\n= 1 at accuracies ranging from 88% at 124 million parameters to 74% at 1.5 billion parameters."
+      }
+    },
+    {
+      "rawEvalName": "TF-IDF logistic regression detector (Top-K = 40)",
+      "model": "openai-community/gpt2",
+      "metric": "detection accuracy",
+      "value": 97,
+      "unit": "percent",
+      "settings": {
+        "other": "Top-K = 40; logistic regression on TF-IDF unigram and bigram features"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 14,
+        "quote": "we can successfully detect outputs at accuracies ranging from 97% at\n124 million parameters to 93% at 1.5 billion parameters."
+      }
+    },
+    {
+      "rawEvalName": "TF-IDF logistic regression detector (Top-K = 40)",
+      "model": "openai-community/gpt2-xl",
+      "metric": "detection accuracy",
+      "value": 93,
+      "unit": "percent",
+      "settings": {
+        "other": "Top-K = 40; logistic regression on TF-IDF unigram and bigram features"
+      },
+      "source": {
+        "page": "12",
+        "pdfPage": 14,
+        "quote": "we can successfully detect outputs at accuracies ranging from 97% at\n124 million parameters to 93% at 1.5 billion parameters."
+      }
+    },
+    {
+      "rawEvalName": "Zero-shot total-probability detector after adversary Amazon-reviews fine-tune",
+      "model": "openai-community/gpt2-xl",
+      "metric": "detection accuracy",
+      "value": 76,
+      "unit": "percent",
+      "settings": {
+        "other": "adversary fine-tunes generator on Amazon reviews; original model used for detection"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 15,
+        "quote": "After fine-tuning to a dataset of Amazon\nreviews accuracy drops to 76%, suggesting there is room for an adversary to evade detection from a\nstatic system."
+      }
+    },
+    {
+      "rawEvalName": "RoBERTa fine-tuned sequence classifier detector",
+      "model": "openai-community/gpt2-xl",
+      "metric": "detection accuracy",
+      "value": 95,
+      "unit": "percent",
+      "settings": {
+        "other": "RoBERTaBASE/LARGE sequence classifier; approximately 95%"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 15,
+        "quote": "Our\nclassifier is able to detect 1.5 billion parameter GPT-2-generated text with approximately 95% accuracy."
+      }
+    },
+    {
+      "rawEvalName": "GROVER-MEGA fine-tuning-based detection of GROVER outputs",
+      "rawModelName": "GROVER-MEGA",
+      "metric": "detection accuracy",
+      "value": 92,
+      "unit": "percent",
+      "source": {
+        "page": "16",
+        "pdfPage": 18,
+        "quote": "They reported that their largest GROVER-MEGA model detected its own and other GROVER models’\noutputs at 92% accuracy."
+      }
+    },
+    {
+      "rawEvalName": "FAIR pretrained-transformer detector (10 negative fake examples)",
+      "rawModelName": "TransfBig",
+      "metric": "detection rate",
+      "value": 93.8,
+      "unit": "percent",
+      "settings": {
+        "other": "setting with 10 negative fake examples; classifier initialized from a pretrained transformer"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 19,
+        "quote": "they increased their detection rate to 93.8% in a setting with 10 negative fake\nexamples."
+      }
+    },
+    {
+      "rawEvalName": "GROVER detection of fine-tuned GPT-2 Amazon reviews (Adelani et al.)",
+      "model": "openai-community/gpt2",
+      "metric": "detection accuracy",
+      "value": 97,
+      "unit": "percent",
+      "settings": {
+        "other": "highest reported; GROVER detector on Amazon reviews; GPT-2 124M fine-tuned generator"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 19,
+        "quote": "Their highest detection\naccuracy was 97%, achieved by using GROVER on Amazon reviews."
+      }
+    },
+    {
+      "rawEvalName": "GLTR-assisted human detection of synthetic text",
+      "rawModelName": "synthetic text (Gehrmann et al.)",
+      "metric": "human detection accuracy without GLTR",
+      "value": 54,
+      "unit": "percent",
+      "settings": {
+        "other": "untrained humans; without GLTR visualization tool"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 19,
+        "quote": "Gehrmann et al. found that the use\nof GLTR enabled untrained humans to more accurately detect synthetic text from 54% to 72%."
+      }
+    },
+    {
+      "rawEvalName": "GLTR-assisted human detection of synthetic text",
+      "rawModelName": "synthetic text (Gehrmann et al.)",
+      "metric": "human detection accuracy with GLTR",
+      "value": 72,
+      "unit": "percent",
+      "settings": {
+        "other": "untrained humans; with GLTR visualization tool"
+      },
+      "source": {
+        "page": "17",
+        "pdfPage": 19,
+        "quote": "Gehrmann et al. found that the use\nof GLTR enabled untrained humans to more accurately detect synthetic text from 54% to 72%."
+      }
+    },
+    {
+      "rawEvalName": "Human credibility of cherry-picked GPT-2 fake news (Kreps and McCain)",
+      "model": "openai-community/gpt2-medium",
+      "metric": "rated credible",
+      "value": 66,
+      "unit": "percent",
+      "settings": {
+        "other": "cherry-picked continuations of NYT articles; human-in-the-loop selection"
+      },
+      "source": {
+        "page": "10",
+        "pdfPage": 12,
+        "quote": "cherry-picked fake\nnews samples from the 355 million parameter version of GPT-2 were considered “credible” about 66%\nof the time."
+      }
+    },
+    {
+      "rawEvalName": "Human credibility of cherry-picked GPT-2 fake news (Kreps and McCain)",
+      "model": "openai-community/gpt2-large",
+      "metric": "rated credible vs real NYT",
+      "value": 75,
+      "unit": "percent",
+      "settings": {
+        "other": "cherry-picked; rated statistically similarly to real New York Times articles"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 13,
+        "quote": "GPT-2 were rated statistically similarly to real New York Times articles at around 75%, although output\nquality was mixed even among these cherry-picked samples."
+      }
+    },
+    {
+      "rawEvalName": "Human credibility of cherry-picked GPT-2 fake news (Kreps and McCain)",
+      "model": "openai-community/gpt2-xl",
+      "metric": "rated credible vs real NYT",
+      "value": 75,
+      "unit": "percent",
+      "settings": {
+        "other": "cherry-picked; rated statistically similarly to real New York Times articles"
+      },
+      "source": {
+        "page": "11",
+        "pdfPage": 13,
+        "quote": "GPT-2 were rated statistically similarly to real New York Times articles at around 75%, although output\nquality was mixed even among these cherry-picked samples."
+      }
+    },
+    {
+      "rawEvalName": "Cornell credibility index (automated StoryCleaner pipeline)",
+      "model": "openai-community/gpt2-medium",
+      "metric": "mean credibility index",
+      "value": 6.07,
+      "unit": "score",
+      "n": 200,
+      "settings": {
+        "other": "1-10 scale; 200 respondents per model; automated cleaning without human cherry-picking"
+      },
+      "source": {
+        "page": "3",
+        "pdfPage": 65,
+        "quote": "the improvement from the 355M model (6.07 mean\n          credibility on a 1-10 scale) to the 774M model (6.72) was more significant than\n          from the 774M model to the 1.5B model (6.91)"
+      }
+    },
+    {
+      "rawEvalName": "Cornell credibility index (automated StoryCleaner pipeline)",
+      "model": "openai-community/gpt2-large",
+      "metric": "mean credibility index",
+      "value": 6.72,
+      "unit": "score",
+      "n": 200,
+      "settings": {
+        "other": "1-10 scale; 200 respondents per model; automated cleaning without human cherry-picking"
+      },
+      "source": {
+        "page": "3",
+        "pdfPage": 65,
+        "quote": "the improvement from the 355M model (6.07 mean\n          credibility on a 1-10 scale) to the 774M model (6.72) was more significant than\n          from the 774M model to the 1.5B model (6.91)"
+      }
+    },
+    {
+      "rawEvalName": "Cornell credibility index (automated StoryCleaner pipeline)",
+      "model": "openai-community/gpt2-xl",
+      "metric": "mean credibility index",
+      "value": 6.91,
+      "unit": "score",
+      "n": 200,
+      "settings": {
+        "other": "1-10 scale; 200 respondents per model; automated cleaning without human cherry-picking"
+      },
+      "source": {
+        "page": "3",
+        "pdfPage": 65,
+        "quote": "the improvement from the 355M model (6.07 mean\n          credibility on a 1-10 scale) to the 774M model (6.72) was more significant than\n          from the 774M model to the 1.5B model (6.91)"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T08:48:22Z"
+  },
+  "notes": "Source is the November 2019 arXiv PDF (1908.09203), 71 PDF pages. Printed page numbers used for the main report; Appendix E (Cornell) and Appendix C restart page numbers—Cornell credibility means cite Appendix E printed page 3. No modern risk framework (ASL/Preparedness); one staged-release decision under manipulation. Chart-only Figures 1–2 and Appendix C bias bar counts skipped (no reliable color/row mapping). Ranges 83–85% put in findings, not evalResults. Intermediate TF-IDF scores for 355M/774M not stated. Partner license in Appendix A is not a public model license. Public GPT-2 license, context window, and training compute not stated in this report."
+}

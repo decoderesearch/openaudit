@@ -1,0 +1,526 @@
+{
+  "document": "openbmb-minicpm-v-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "openbmb/MiniCPM-Llama3-V-2_5"
+    },
+    {
+      "rawModelName": "MiniCPM-V 1.0"
+    },
+    {
+      "rawModelName": "MiniCPM-V 2.0"
+    }
+  ],
+  "pageCount": 26,
+  "disclosures": {
+    "releaseDate": {
+      "status": "stated",
+      "value": "May 2024",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Most recently in May,\nwe released MiniCPM-Llama3-V 2.5 8B"
+      }
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "image and text (vision-language MLLM)",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "the compressed visual tokens, along with the text input, are fed into the\nLLM for conditional text generation."
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "stated",
+      "value": "more than 30 languages",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "helps MiniCPM-Llama3-V 2.5 generalize its multimodal capabilities to more than 30 languages."
+      }
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "8.5B (MiniCPM-Llama3-V 2.5); MiniCPM-V 1.0/2.0 listed as 2.8B",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "MiniCPM-Llama3-V 2.5         8.5B   65.1          2024.6   77.2        74.2        45.8         54.3    86.7      63.5    10.3 / 5.0"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "SigLIP SoViT-400m/14 visual encoder, perceiver-resampler compression, Llama3-Instruct 8B LLM",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "Specifically, we employ SigLIP SoViT-400m/14 [115] as the visual encoder."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "image-text pre-training; SFT part-1&2; RLAIF-V preference pairs (6K from 3K images); multilingual and Cauldron data for 2.5",
+      "source": {
+        "page": "9",
+        "pdfPage": 9,
+        "quote": "Finally, we construct a preference dataset consisting of 6K preference pairs from 3K\nunique images for preference learning."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "Lower [Object HalBench](https://arxiv.org/abs/1809.02156) hallucination rates than GPT-4V-1106 (10.3 / 5.0 vs 13.6 / 7.3)",
+      "source": {
+        "page": "14",
+        "pdfPage": 14,
+        "quote": "MiniCPM-Llama3-V 2.5 also achieves\nlower hallucination rates than GPT-4V-1106 on Object HalBench, indicating its trustworthiness for"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "reinforcement learning from AI feedback (RLAIF-V) preference learning is used to reduce object hallucination without sacrificing OpenCompass score.", "tone": "good",
+      "source": {
+        "page": "15",
+        "pdfPage": 15,
+        "quote": "RLAIF-V effectively\nreduces the hallucination rates of the base model on both response level and mention level."
+      }
+    },
+    {
+      "text": "MiniCPM-V 2.0 uses reinforcement learning from human feedback (RLHF-V) for alignment; MiniCPM-Llama3-V 2.5 uses RLAIF-V; MiniCPM-V 1.0 has no alignment stage.", "tone": "neutral",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "MiniCPM-V 2.0                MiniCPM 2B             1.8M pixel (e.g., 1344 × 1344)        Any      stage-1&2&3    part1+2    RLHF-V"
+      }
+    },
+    {
+      "text": "The authors present qualitative cases claiming fewer hallucinations than GPT-4V on detailed image descriptions.", "tone": "good",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "fewer hallucinations as compared with powerful GPT-4V, showing its promising reliability and"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "Object HalBench",
+      "model": "openai/gpt-4-vision-preview",
+      "metric": "response-level hallucination rate",
+      "value": 13.6,
+      "unit": "percent",
+      "settings": {
+        "other": "table label GPT-4V (2023.11.06); * authors' tested results"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " GPT-4V (2023.11.06)          -      63.5          1771.5   77.0        74.4        53.8         47.8    93.1      63.0    13.6 / 7.3*"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "model": "openai/gpt-4-vision-preview",
+      "metric": "mention-level hallucination rate",
+      "value": 7.3,
+      "unit": "percent",
+      "settings": {
+        "other": "table label GPT-4V (2023.11.06); * authors' tested results"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " GPT-4V (2023.11.06)          -      63.5          1771.5   77.0        74.4        53.8         47.8    93.1      63.0    13.6 / 7.3*"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "rawModelName": "DeepSeek-VL-1.3B",
+      "metric": "response-level hallucination rate",
+      "value": 16.7,
+      "unit": "percent",
+      "settings": {
+        "other": "* authors' tested results"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " DeepSeek-VL-1.3B             1.7B   46.2          1531.6   66.4        62.9        33.8         29.4    51.1      49.7    16.7 / 9.6*"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "rawModelName": "DeepSeek-VL-1.3B",
+      "metric": "mention-level hallucination rate",
+      "value": 9.6,
+      "unit": "percent",
+      "settings": {
+        "other": "* authors' tested results"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " DeepSeek-VL-1.3B             1.7B   46.2          1531.6   66.4        62.9        33.8         29.4    51.1      49.7    16.7 / 9.6*"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "rawModelName": "Yi-VL-6B",
+      "metric": "response-level hallucination rate",
+      "value": 19.4,
+      "unit": "percent",
+      "settings": {
+        "other": "* authors' tested results"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " Yi-VL-6B                     6.7B   48.9          1915.1   68.4        66.6        40.3         28.8    51.9      53.5    19.4 / 11.7*"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "rawModelName": "Yi-VL-6B",
+      "metric": "mention-level hallucination rate",
+      "value": 11.7,
+      "unit": "percent",
+      "settings": {
+        "other": "* authors' tested results"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " Yi-VL-6B                     6.7B   48.9          1915.1   68.4        66.6        40.3         28.8    51.9      53.5    19.4 / 11.7*"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "model": "Qwen/Qwen-VL-Chat",
+      "metric": "response-level hallucination rate",
+      "value": 43.8,
+      "unit": "percent",
+      "settings": {
+        "other": "* authors' tested results"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " Qwen-VL-Chat                 9.6B   51.6          1860.0   61.8        56.3        37.0         33.8    67.7      49.3    43.8 / 20.0*"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "model": "Qwen/Qwen-VL-Chat",
+      "metric": "mention-level hallucination rate",
+      "value": 20,
+      "unit": "percent",
+      "settings": {
+        "other": "* authors' tested results"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " Qwen-VL-Chat                 9.6B   51.6          1860.0   61.8        56.3        37.0         33.8    67.7      49.3    43.8 / 20.0*"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "rawModelName": "Yi-VL-34B",
+      "metric": "response-level hallucination rate",
+      "value": 20.7,
+      "unit": "percent",
+      "settings": {
+        "other": "* authors' tested results"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " Yi-VL-34B                    34B    52.2          2050.2   72.4        70.7        45.1         30.7    62.3      54.8    20.7 / 14.0*"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "rawModelName": "Yi-VL-34B",
+      "metric": "mention-level hallucination rate",
+      "value": 14,
+      "unit": "percent",
+      "settings": {
+        "other": "* authors' tested results"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " Yi-VL-34B                    34B    52.2          2050.2   72.4        70.7        45.1         30.7    62.3      54.8    20.7 / 14.0*"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "model": "zai-org/cogvlm-chat-hf",
+      "metric": "response-level hallucination rate",
+      "value": 26.4,
+      "unit": "percent",
+      "settings": {
+        "other": "table label CogVLM-Chat; * authors' tested results"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " CogVLM-Chat                  17B    54.2          1736.6   65.8        55.9        37.3         34.7    73.9      60.3    26.4 / 12.6*"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "model": "zai-org/cogvlm-chat-hf",
+      "metric": "mention-level hallucination rate",
+      "value": 12.6,
+      "unit": "percent",
+      "settings": {
+        "other": "table label CogVLM-Chat; * authors' tested results"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " CogVLM-Chat                  17B    54.2          1736.6   65.8        55.9        37.3         34.7    73.9      60.3    26.4 / 12.6*"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "rawModelName": "DeepSeek-VL-7B",
+      "metric": "response-level hallucination rate",
+      "value": 11.4,
+      "unit": "percent",
+      "settings": {
+        "other": "* authors' tested results"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " DeepSeek-VL-7B               7.3B   54.6          1765.4   73.8        71.4        38.3         36.8    77.8      54.2    11.4 / 6.5*"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "rawModelName": "DeepSeek-VL-7B",
+      "metric": "mention-level hallucination rate",
+      "value": 6.5,
+      "unit": "percent",
+      "settings": {
+        "other": "* authors' tested results"
+      },
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " DeepSeek-VL-7B               7.3B   54.6          1765.4   73.8        71.4        38.3         36.8    77.8      54.2    11.4 / 6.5*"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "rawModelName": "MiniCPM-V 1.0",
+      "metric": "response-level hallucination rate",
+      "value": 21.6,
+      "unit": "percent",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " MiniCPM-V 1.0                2.8B   47.5          1650.2   64.1        62.6        38.3         28.9    51.3      51.2    21.6 / 11.5"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "rawModelName": "MiniCPM-V 1.0",
+      "metric": "mention-level hallucination rate",
+      "value": 11.5,
+      "unit": "percent",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " MiniCPM-V 1.0                2.8B   47.5          1650.2   64.1        62.6        38.3         28.9    51.3      51.2    21.6 / 11.5"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "rawModelName": "MiniCPM-V 2.0",
+      "metric": "response-level hallucination rate",
+      "value": 14.5,
+      "unit": "percent",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " MiniCPM-V 2.0                2.8B   54.5          1808.6   69.1        66.5        38.2         38.7    69.2      55.8    14.5 / 7.8"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "rawModelName": "MiniCPM-V 2.0",
+      "metric": "mention-level hallucination rate",
+      "value": 7.8,
+      "unit": "percent",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": " MiniCPM-V 2.0                2.8B   54.5          1808.6   69.1        66.5        38.2         38.7    69.2      55.8    14.5 / 7.8"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "model": "openbmb/MiniCPM-Llama3-V-2_5",
+      "metric": "response-level hallucination rate",
+      "value": 10.3,
+      "unit": "percent",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": "MiniCPM-Llama3-V 2.5         8.5B   65.1          2024.6   77.2        74.2        45.8         54.3    86.7      63.5    10.3 / 5.0"
+      }
+    },
+    {
+      "rawEvalName": "Object HalBench",
+      "model": "openbmb/MiniCPM-Llama3-V-2_5",
+      "metric": "mention-level hallucination rate",
+      "value": 5,
+      "unit": "percent",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "table": "Table 4",
+        "quote": "MiniCPM-Llama3-V 2.5         8.5B   65.1          2024.6   77.2        74.2        45.8         54.3    86.7      63.5    10.3 / 5.0"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:52:32Z"
+  },
+  "notes": "Technical report (arXiv:2408.01800), not a system card. Safety content is almost only Object HalBench hallucination rates (Table 4) plus RLAIF-V ablation (Table 6). Table 6 Obj HalBench numbers match 100 minus Table 4 rates for the final model, so only the w/o RLAIF-V ablation row was kept from Table 6. Skipped capability suites: OpenCompass, MME, MMBench, MMMU, MathVista, LLaVA Bench, RealWorldQA, OCRBench, TextVQA, DocVQA, multilingual LLaVA Bench. No harmful-request, jailbreak, bias, or danger-capability evals. MiniCPM-V-2_6 is not named in this paper. License name not stated (only open-source release). Privacy/security appear as deployment use cases, not evals."
+}

@@ -1,0 +1,500 @@
+{
+  "document": "nvidia-nemotron-nano-2-vl-paper-technical_report",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "model": "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16"
+    }
+  ],
+  "pageCount": 29,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "128K",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "we extend the model’s context length from 16K\n                                        to 128K, enabling better handling of long videos and complex reasoning tasks."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text, image, and video",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "As text-only, image and video samples vary significantly in sequence length, we find that sequence"
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "reasoning-on and reasoning-off",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "Furthermore, Nemotron Nano V2 VL supports both reasoning-on and reasoning-off modes, with"
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "12B",
+      "source": {
+        "page": "1",
+        "pdfPage": 1,
+        "quote": "We introduce Nemotron Nano V2 VL, an efficient 12B vision–language model that achieves leading"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "vision encoder, MLP projector, and hybrid Mamba-Transformer LLM (Nemotron-Nano-12B-V2 + c-RADIOv2-VLM-H)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "As illustrated in Figure 1, Nemotron Nano V2 VL consists of three modules: a vision encoder,\nan MLP projector, and a language model."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "Nemotron VLM Dataset V2: over 8 million training samples; multi-stage SFT including text reasoning data with safety domain",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Nemotron VLM Dataset V2: A collection of over 8 million training samples."
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": true,
+      "headline": "[HallusionBench](/evals/hallusionbench) 72.3 / 73.1 and [POPE](/evals/pope) 88.8 / 87.0 (reasoning-off / reasoning-on)",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "HallusionBench                   72.3         73.1         54.0         -          59.1          65.4          61.1          65.4"
+      }
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "The report has no dedicated safety, alignment, or risk-threshold section; the only safety-relevant numbers are [HallusionBench](/evals/hallusionbench) and [POPE](/evals/pope) inside the General visual question answering (VQA) block of Table 3.", "tone": "mixed",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "We conduct a comprehensive evaluation of our model on 45 benchmarks over seven broad categories:"
+      }
+    },
+    {
+      "text": "Stage 1 reuses Nemotron Nano V2 text reasoning data that includes a safety domain, but the report gives no safety-policy details or safety-behavior claims for that data.", "tone": "mixed",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "spanning diverse domains and tasks such as mathematics, science, code,\nmultilingual understanding, multi-turn dialogue, tool-use, and safety."
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16",
+      "metric": "score",
+      "value": 72.3,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "off",
+        "other": "Table 3 General VQA; Reasoning off"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "HallusionBench                   72.3         73.1         54.0         -          59.1          65.4          61.1          65.4"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16",
+      "metric": "score",
+      "value": 73.1,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "on",
+        "other": "Table 3 General VQA; Reasoning on"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "HallusionBench                   72.3         73.1         54.0         -          59.1          65.4          61.1          65.4"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "OpenGVLab/InternVL3_5-14B",
+      "metric": "score",
+      "value": 54,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Non-Thinking",
+        "other": "Table 3 General VQA comparison"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "HallusionBench                   72.3         73.1         54.0         -          59.1          65.4          61.1          65.4"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "zai-org/GLM-4.5V",
+      "metric": "score",
+      "value": 59.1,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Non-Thinking",
+        "other": "Table 3 General VQA; GLM-4.5V 106B (A12B); Non-reasoning"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "HallusionBench                   72.3         73.1         54.0         -          59.1          65.4          61.1          65.4"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "zai-org/GLM-4.5V",
+      "metric": "score",
+      "value": 65.4,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Thinking",
+        "other": "Table 3 General VQA; GLM-4.5V 106B (A12B); Reasoning"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "HallusionBench                   72.3         73.1         54.0         -          59.1          65.4          61.1          65.4"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Qwen/Qwen3-VL-8B-Instruct",
+      "metric": "score",
+      "value": 61.1,
+      "unit": "percent",
+      "settings": {
+        "other": "Table 3 General VQA; Qwen3-VL 8B Instruct"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "HallusionBench                   72.3         73.1         54.0         -          59.1          65.4          61.1          65.4"
+      }
+    },
+    {
+      "rawEvalName": "HallusionBench",
+      "model": "Qwen/Qwen3-VL-8B-Thinking",
+      "metric": "score",
+      "value": 65.4,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Thinking",
+        "other": "Table 3 General VQA; Qwen3-VL 8B Thinking"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "HallusionBench                   72.3         73.1         54.0         -          59.1          65.4          61.1          65.4"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "model": "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16",
+      "metric": "score",
+      "value": 88.8,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "off",
+        "other": "Table 3 General VQA; Reasoning off"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "POPE                             88.8         87.0         87.7         -           -             -           88.2*         86.2*"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "model": "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16",
+      "metric": "score",
+      "value": 87,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "on",
+        "other": "Table 3 General VQA; Reasoning on"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "POPE                             88.8         87.0         87.7         -           -             -           88.2*         86.2*"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "model": "OpenGVLab/InternVL3_5-14B",
+      "metric": "score",
+      "value": 87.7,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Non-Thinking",
+        "other": "Table 3 General VQA comparison"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "POPE                             88.8         87.0         87.7         -           -             -           88.2*         86.2*"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "model": "Qwen/Qwen3-VL-8B-Instruct",
+      "metric": "score",
+      "value": 88.2,
+      "unit": "percent",
+      "settings": {
+        "harness": "VLMEvalKit",
+        "other": "Table 3 General VQA; Qwen3-VL 8B Instruct; * reproduced in VLMEvalKit"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "POPE                             88.8         87.0         87.7         -           -             -           88.2*         86.2*"
+      }
+    },
+    {
+      "rawEvalName": "POPE",
+      "model": "Qwen/Qwen3-VL-8B-Thinking",
+      "metric": "score",
+      "value": 86.2,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Thinking",
+        "harness": "VLMEvalKit",
+        "other": "Table 3 General VQA; Qwen3-VL 8B Thinking; * reproduced in VLMEvalKit"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "POPE                             88.8         87.0         87.7         -           -             -           88.2*         86.2*"
+      }
+    },
+    {
+      "rawEvalName": "CRPE",
+      "model": "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16",
+      "metric": "score",
+      "value": 71.3,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "off",
+        "other": "Relation; Table 3 General VQA; Reasoning off"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "CRPE (Relation)                  71.3         64.3         76.6         -           -             -           71.7*         52.3*"
+      }
+    },
+    {
+      "rawEvalName": "CRPE",
+      "model": "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16",
+      "metric": "score",
+      "value": 64.3,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "on",
+        "other": "Relation; Table 3 General VQA; Reasoning on"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "CRPE (Relation)                  71.3         64.3         76.6         -           -             -           71.7*         52.3*"
+      }
+    },
+    {
+      "rawEvalName": "CRPE",
+      "model": "OpenGVLab/InternVL3_5-14B",
+      "metric": "score",
+      "value": 76.6,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Non-Thinking",
+        "other": "Relation; Table 3 General VQA comparison"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "CRPE (Relation)                  71.3         64.3         76.6         -           -             -           71.7*         52.3*"
+      }
+    },
+    {
+      "rawEvalName": "CRPE",
+      "model": "Qwen/Qwen3-VL-8B-Instruct",
+      "metric": "score",
+      "value": 71.7,
+      "unit": "percent",
+      "settings": {
+        "harness": "VLMEvalKit",
+        "other": "Relation; Table 3 General VQA; Qwen3-VL 8B Instruct; * reproduced in VLMEvalKit"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "CRPE (Relation)                  71.3         64.3         76.6         -           -             -           71.7*         52.3*"
+      }
+    },
+    {
+      "rawEvalName": "CRPE",
+      "model": "Qwen/Qwen3-VL-8B-Thinking",
+      "metric": "score",
+      "value": 52.3,
+      "unit": "percent",
+      "settings": {
+        "reasoningEffort": "Thinking",
+        "harness": "VLMEvalKit",
+        "other": "Relation; Table 3 General VQA; Qwen3-VL 8B Thinking; * reproduced in VLMEvalKit"
+      },
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "table": "Table 3",
+        "quote": "CRPE (Relation)                  71.3         64.3         76.6         -           -             -           71.7*         52.3*"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:06:00Z"
+  },
+  "notes": "Capability-focused VLM technical report (arXiv 2511.03929). No safety section, risk framework, or external safety testers. Safety-relevant numbers limited to HallusionBench and POPE in Table 3 General VQA. Stage 1 mentions training-data safety domain only (not topic coverage). Intro claims 128K context; Stage 4 trains at 300K—used the intro product claim. FP8/NVFP4 releases are checkpoints of the covered BF16 seed model, not separate covers. InternVL3.5 14B and Qwen3-VL-8B-Thinking use rawModelName (14B is only a checkpoint of the 8B seed entry; Thinking is a checkpoint of Instruct). Skipped capability benches: MMBench, MMStar, BLINK, MUIRBench, ZeroBench, CRPE, MME-RealWorld, RealWorldQA, MMT-Bench, R-Bench, WildVision, MMMU/MMMU-Pro, MathVista/MathVision/MathVerse, Dynamath, LogicVista, WeMath, OCR/Doc/Chart suites, TreeBench, CV-Bench, ScreenSpot family, video benches, multilingual MM benches, pure-text (MATH-500, AIME, GPQA, LiveCodeBench, IFEval, SciCode, MMLU-Pro, RULER), EVS/quantization ablations."
+}

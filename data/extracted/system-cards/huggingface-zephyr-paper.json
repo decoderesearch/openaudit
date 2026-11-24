@@ -1,0 +1,400 @@
+{
+  "document": "huggingface-zephyr-paper",
+  "alsoDocuments": [],
+  "covers": [
+    {
+      "rawModelName": "ZEPHYR-7B"
+    }
+  ],
+  "pageCount": 14,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "stated",
+      "value": "2048 tokens (SFT packing sequence length)",
+      "source": {
+        "page": "6",
+        "pdfPage": 6,
+        "quote": "packing with a sequence length of 2048 tokens."
+      }
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "text (chat / language model)",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Smaller, open large language models (LLMs) have greatly increased in ability in recent years, from"
+      }
+    },
+    "reasoningModes": {
+      "status": "not_stated"
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "7B",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "Experiments show that this 7B parameter model can"
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Aligned / fine-tuned from Mistral 7B",
+      "source": {
+        "page": "3",
+        "pdfPage": 3,
+        "quote": "Zephyr uses Mistral 7B as the starting point"
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "dSFT on UltraChat; dDPO on UltraFeedback AI preference data",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "We first use dSFT, based on the UltraChat (Ding et al., 2023) dataset. Next we"
+      }
+    },
+    "trainingCompute": {
+      "status": "stated",
+      "value": "16 A100s (80GB); experiments typically 2-4 hours; chat model trainable in a few hours",
+      "source": {
+        "page": "5",
+        "pdfPage": 5,
+        "quote": "All experiments were run on 16 A100s using bfloat16 precision"
+      }
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": true,
+      "headline": "Qualitative adversarial samples: dDPO sometimes refuses more politely than dSFT, and sometimes complies with harmful requests; authors say red-teaming data in dDPO would likely improve safety",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "Figure 6: Sample responses to prompts with harmful intent. In some cases, the dDPO model re-"
+      }
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": true,
+      "headline": "Open large language model (LLM) Leaderboard [TruthfulQA](/evals/truthfulqa): Zephyr 7B scores 57.4 (best among listed 7B models) (higher is better)",
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "quote": "   Zephyr                  7B     dDPO        62.03         84.52        61.44         57.44"
+      }
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "Authors state the work targets helpfulness intent alignment and does not consider safety such as harmful outputs or illegal advice.", "tone": "mixed",
+      "source": {
+        "page": "2",
+        "pdfPage": 2,
+        "quote": "The work does not consider safety considerations of the models, such"
+      }
+    },
+    {
+      "text": "On qualitative harmful-intent prompts, distilled direct preference optimization (dDPO) sometimes answers more politely than distilled supervised fine-tuning (dSFT) and sometimes complies; authors suggest red-teaming examples in dDPO would likely improve safety.", "tone": "bad",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "sponds more politely than the dSFT model, while in others it complies directly with the request. It"
+      }
+    },
+    {
+      "text": "Authors note GPT-4 as AlpacaEval/MT-Bench judge is known to be biased toward models trained on GPT-4 outputs, so Zephyr scores may be inflated.", "tone": "mixed",
+      "source": {
+        "page": "8",
+        "pdfPage": 8,
+        "quote": "evaluator for the AlpacaEval and MT-Bench benchmarks, which is known to be biased towards"
+      }
+    }
+  ],
+  "evalResults": [
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "stabilityai/stablelm-tuned-alpha-7b",
+      "metric": "score",
+      "value": 40.37,
+      "unit": "percent",
+      "settings": {
+        "other": "Open LLM Leaderboard; Table label StableLM-Tuned-α 7B dSFT"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "   StableLM-Tuned-α        7B     dSFT        31.91         53.59        24.41         40.37"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "MPT-Chat",
+      "metric": "score",
+      "value": 40.16,
+      "unit": "percent",
+      "settings": {
+        "other": "Open LLM Leaderboard; 7B dSFT"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "   MPT-Chat                7B     dSFT        46.50         75.51        37.62         40.16"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Xwin-LM v0.1",
+      "metric": "score",
+      "value": 47.89,
+      "unit": "percent",
+      "settings": {
+        "other": "Open LLM Leaderboard; 7B dPPO"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "   Xwin-LM v0.1            7B     dPPO        56.57         79.40        49.98         47.89"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "mistralai/Mistral-7B-Instruct-v0.1",
+      "metric": "score",
+      "value": 56.28,
+      "unit": "percent",
+      "settings": {
+        "other": "Open LLM Leaderboard; Table label Mistral-Instruct v0.1 7B dSFT"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "   Mistral-Instruct v0.1   7B     dSFT        54.52         75.63        55.38         56.28"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Zephyr",
+      "metric": "score",
+      "value": 57.44,
+      "unit": "percent",
+      "settings": {
+        "other": "Open LLM Leaderboard; 7B dDPO; report's ZEPHYR-7B"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "   Zephyr                  7B     dDPO        62.03         84.52        61.44         57.44"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "tiiuae/falcon-40b-instruct",
+      "metric": "score",
+      "value": 52.52,
+      "unit": "percent",
+      "settings": {
+        "other": "Open LLM Leaderboard; Table label Falcon-Instruct 40B dSFT"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "   Falcon-Instruct         40B    dSFT        61.60         84.31        55.45         52.52"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Guanaco",
+      "metric": "score",
+      "value": 52.81,
+      "unit": "percent",
+      "settings": {
+        "other": "Open LLM Leaderboard; 65B SFT"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "   Guanaco                 65B    SFT         65.44         86.47        62.92         52.81"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "model": "meta-llama/Llama-2-70b-chat-hf",
+      "metric": "score",
+      "value": 44.92,
+      "unit": "percent",
+      "settings": {
+        "other": "Open LLM Leaderboard; Table label Llama2-Chat 70B RLHF"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "   Llama2-Chat             70B    RLHF        67.32         87.33        69.83         44.92"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Vicuna v1.3",
+      "metric": "score",
+      "value": 56.16,
+      "unit": "percent",
+      "settings": {
+        "other": "Open LLM Leaderboard; 33B dSFT"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "   Vicuna v1.3             33B    dSFT        62.12         83.00        59.22         56.16"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "WizardLM v1.0",
+      "metric": "score",
+      "value": 54.76,
+      "unit": "percent",
+      "settings": {
+        "other": "Open LLM Leaderboard; 70B dSFT"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "   WizardLM v1.0           70B    dSFT        64.08         85.40        64.97         54.76"
+      }
+    },
+    {
+      "rawEvalName": "TruthfulQA",
+      "rawModelName": "Xwin-LM v0.1",
+      "metric": "score",
+      "value": 59.86,
+      "unit": "percent",
+      "settings": {
+        "other": "Open LLM Leaderboard; 70B dPPO"
+      },
+      "source": {
+        "page": "7",
+        "pdfPage": 7,
+        "table": "Table 2",
+        "quote": "   Xwin-LM v0.1            70B    dPPO        70.22         87.25        69.77         59.86"
+      }
+    }
+  ],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T19:09:51Z"
+  },
+  "notes": "Technical report on helpfulness intent distillation (dSFT+dDPO), not a safety card. Authors explicitly exclude safety. Only safety-relevant numeric eval is TruthfulQA on the Open LLM Leaderboard (Table 2); metric name not stated in-text, recorded as score/percent. Skipped capability: MT-Bench, AlpacaEval, ARC, HellaSwag, MMLU, and Table 3 ablations. Figure 1 MT-Bench radar is a chart without typed numbers. UltraFeedback lists honesty as a GPT-4 rating criterion for training data only (does not cover honesty). Seed-linked zephyr-7b-alpha and zephyr-7b-beta are not named as Alpha/Beta in the text, so covers uses rawModelName ZEPHYR-7B. Two Xwin-LM v0.1 rows are distinct sizes (7B vs 70B)."
+}

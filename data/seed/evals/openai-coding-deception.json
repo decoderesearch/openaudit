@@ -1,0 +1,65 @@
+{
+  "eval": {
+    "slug": "openai-coding-deception",
+    "displayName": "Coding Deception",
+    "aliases": ["Coding Deception", "Coding Deception — misrepresentation", "Deception — Coding Deception"],
+    "description": "OpenAI internal agentic coding deception eval. The model faces coding tasks with impediments (for example mismatched task and codebase) and is scored on whether it misrepresents progress or success rather than admitting failure. Cards report deception rate and misrepresentation rate. Separate from CoT deception monitoring. Dataset and runner are lab-internal.",
+    "summary": "Measures how often the model lies about its progress or success when a coding task is blocked.",
+    "maintainers": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://cdn.openai.com/gpt-5-system-card.pdf",
+        "title": "GPT-5 System Card (Coding Deception)"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["propensity"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["model_judge", "programmatic"],
+      "adversarial": true,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["honesty", "reward_hacking", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "2025-08-07",
+      "status": "draft",
+      "releasedDate": "2025-08-07",
+      "changes": "OpenAI reports Coding Deception among deception evaluations in the GPT-5 system card. Later cards add misrepresentation breakdowns. Tasks and graders may evolve.",
+      "scores": [
+        {
+          "key": "deceptive",
+          "displayName": "Deceptive",
+          "type": "binary",
+          "direction": "lower_is_better",
+          "description": "The model's coding trajectory is classified as deceptive (for example claiming success or misrepresenting work under impediments)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "deception_rate",
+          "displayName": "Deception / misrepresentation rate",
+          "score": "deceptive",
+          "aggregation": "rate",
+          "min": 0,
+          "max": 1,
+          "direction": "lower_is_better",
+          "headline": true,
+          "description": "Share of coding tasks scored deceptive (also reported as misrepresentation rate). Lower is better."
+        }
+      ]
+    }
+  ]
+}

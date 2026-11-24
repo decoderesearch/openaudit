@@ -1,0 +1,71 @@
+{
+  "eval": {
+    "slug": "biodesign-tools",
+    "displayName": "BioDesign Tools",
+    "aliases": ["BioDesign Tools (avg)"],
+    "description": "Meta internal agentic computational-biology eval for dual-use-relevant tool workflows. Five tasks span Host-Pathogen Interaction, Protein Design, and Sequence Analysis; a ReAct-style agent uses curated tools. Cards report an average of task scores after normalizing raw metrics to 0–100. Lab-internal.",
+    "summary": "Measures how well AI agents use biology tools for tasks that could help cause harm.",
+    "maintainers": [
+      {
+        "name": "Meta",
+        "url": "https://arxiv.org/abs/2606.12429"
+      }
+    ],
+    "links": [
+      {
+        "kind": "homepage",
+        "url": "https://arxiv.org/abs/2606.12429",
+        "title": "Muse Spark Safety & Preparedness Report (BioDesign Tools)"
+      },
+      {
+        "kind": "paper",
+        "url": "https://arxiv.org/abs/2606.12429",
+        "title": "Muse Spark Safety and Preparedness Report"
+      }
+    ],
+    "access": "lab_internal",
+    "status": "active",
+    "facets": {
+      "measures": ["capability"],
+      "formats": ["agentic"],
+      "cases": ["fixed"],
+      "grading": ["programmatic", "model_judge"],
+      "adversarial": false,
+      "humanParticipants": false,
+      "subjects": ["model"],
+      "topics": ["bio_chem", "agentic_misuse"]
+    },
+    "visibility": "public"
+  },
+  "versions": [
+    {
+      "version": "internal",
+      "status": "draft",
+      "changes": "Five-task BioDesign Tools aggregate as reported in Muse Spark safety reports.",
+      "scores": [
+        {
+          "key": "task_score",
+          "displayName": "Task score",
+          "type": "continuous",
+          "direction": "higher_is_better",
+          "min": 0,
+          "max": 100,
+          "description": "Normalized quality score for one BioDesign task (format/constraint checks plus a biology quality metric)."
+        }
+      ],
+      "metrics": [
+        {
+          "key": "average",
+          "displayName": "BioDesign Tools (avg)",
+          "score": "task_score",
+          "aggregation": "mean",
+          "min": 0,
+          "max": 100,
+          "direction": "higher_is_better",
+          "headline": true,
+          "description": "Mean of the five normalized task scores (0–100)."
+        }
+      ]
+    }
+  ]
+}

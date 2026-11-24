@@ -1,0 +1,223 @@
+{
+  "document": "bytedance-ui-tars-technical_report",
+  "alsoDocuments": ["bytedance-ui-tars-1.5-blog"],
+  "covers": [
+    {
+      "rawModelName": "UI-TARS-2B"
+    },
+    {
+      "rawModelName": "UI-TARS-7B"
+    },
+    {
+      "rawModelName": "UI-TARS-72B"
+    },
+    {
+      "rawModelName": "UI-TARS-7B-SFT"
+    },
+    {
+      "rawModelName": "UI-TARS-72B-SFT"
+    },
+    {
+      "model": "ByteDance-Seed/UI-TARS-7B-DPO"
+    },
+    {
+      "model": "ByteDance-Seed/UI-TARS-72B-DPO"
+    }
+  ],
+  "pageCount": 44,
+  "disclosures": {
+    "releaseDate": {
+      "status": "not_stated"
+    },
+    "knowledgeCutoff": {
+      "status": "not_stated"
+    },
+    "contextWindow": {
+      "status": "not_stated"
+    },
+    "maxOutput": {
+      "status": "not_stated"
+    },
+    "modalities": {
+      "status": "stated",
+      "value": "GUI screenshots as input; keyboard and mouse actions as output",
+      "source": {
+        "page": "13",
+        "pdfPage": 13,
+        "quote": "directly perceives the screenshot, applies reasoning processes, and generates valid actions autonomously."
+      }
+    },
+    "reasoningModes": {
+      "status": "stated",
+      "value": "System-1 (direct action, no CoT) and System-2 (deliberate thinking / reasoning steps before action)",
+      "source": {
+        "page": "26",
+        "pdfPage": 26,
+        "quote": "System-1 reasoning refers\nto the model directly producing actions without chain-of-thought, while system-2 reasoning involves a more\ndeliberate thinking process where the model generates reasoning steps before selecting"
+      }
+    },
+    "languages": {
+      "status": "not_stated"
+    },
+    "license": {
+      "status": "not_stated"
+    },
+    "totalParams": {
+      "status": "stated",
+      "value": "2B, 7B, and 72B variants",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "developed three model variants: UI-TARS-2B, UI-TARS-7B and UI-TARS-72B."
+      }
+    },
+    "activeParams": {
+      "status": "not_stated"
+    },
+    "architecture": {
+      "status": "stated",
+      "value": "Continual training on Qwen-2-VL VLM backbone (2B / 7B / 72B)",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "use the same VLM backbone, Qwen-2-VL (Wang et al., 2024c), and adopt a three-phase training\nprocess."
+      }
+    },
+    "trainingData": {
+      "status": "stated",
+      "value": "About 50B tokens of GUI perception, grounding, action-trace, and reflection data (three-phase training)",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "approximately 50B tokens. Each phase progressively incorporates higher-quality data to enhance the model’s"
+      }
+    },
+    "trainingCompute": {
+      "status": "not_stated"
+    }
+  },
+  "riskDecisions": [],
+  "topics": [
+    {
+      "topic": "harmful_requests",
+      "covered": false
+    },
+    {
+      "topic": "child_safety",
+      "covered": false
+    },
+    {
+      "topic": "self_harm",
+      "covered": false
+    },
+    {
+      "topic": "jailbreaks",
+      "covered": false
+    },
+    {
+      "topic": "prompt_injection",
+      "covered": false
+    },
+    {
+      "topic": "agentic_misuse",
+      "covered": false
+    },
+    {
+      "topic": "hallucination",
+      "covered": false
+    },
+    {
+      "topic": "honesty",
+      "covered": false
+    },
+    {
+      "topic": "sycophancy",
+      "covered": false
+    },
+    {
+      "topic": "bias",
+      "covered": false
+    },
+    {
+      "topic": "toxicity",
+      "covered": false
+    },
+    {
+      "topic": "reward_hacking",
+      "covered": false
+    },
+    {
+      "topic": "eval_awareness",
+      "covered": false
+    },
+    {
+      "topic": "situational_awareness",
+      "covered": false
+    },
+    {
+      "topic": "cot_monitorability",
+      "covered": false
+    },
+    {
+      "topic": "sabotage",
+      "covered": false
+    },
+    {
+      "topic": "manipulation",
+      "covered": false
+    },
+    {
+      "topic": "power_seeking",
+      "covered": false
+    },
+    {
+      "topic": "welfare",
+      "covered": false
+    },
+    {
+      "topic": "cyber",
+      "covered": false
+    },
+    {
+      "topic": "bio_chem",
+      "covered": false
+    },
+    {
+      "topic": "auditing",
+      "covered": false
+    }
+  ],
+  "testers": [],
+  "findings": [
+    {
+      "text": "No dedicated safety, alignment, refusal, jailbreak, bias, or dangerous-capability evaluation section; the paper is a graphical user interface (GUI)-agent capability report.", "tone": "mixed",
+      "source": {
+        "page": "22",
+        "pdfPage": 22,
+        "quote": "These experiments are designed to assess the\nmodels’ capabilities in three critical dimensions: perception, grounding, and agent capabilities."
+      }
+    },
+    {
+      "text": "With Best-of-1 sampling, system-2 (with thought) can invent non-existent objects or wrong inferences and raise hallucination or action-failure risk versus system-1.", "tone": "mixed",
+      "source": {
+        "page": "27",
+        "pdfPage": 27,
+        "quote": "introduce irrelevant or incorrect reasoning steps—such as referring to non-existent objects or making erroneous\ninferences—which increases the risk of hallucinations or failure to generate the correct action."
+      }
+    },
+    {
+      "text": "Dense-caption training aims to minimize hallucinations, but that is a training objective, not a measured model safety result.", "tone": "neutral",
+      "source": {
+        "page": "16",
+        "pdfPage": 16,
+        "quote": "minimizing hallucinations. The goal of dense captioning is to provide a comprehensive, detailed description"
+      }
+    }
+  ],
+  "evalResults": [],
+  "extraction": {
+    "by": "claude-sonnet-5.5 subagent",
+    "at": "2026-09-29T18:33:17Z"
+  },
+  "notes": "GUI-agent technical report (arXiv:2501.12326), not a system card. No safety/alignment/jailbreak/toxicity/honesty/dangerous-capability benchmarks—evalResults left empty. Only safety-adjacent claim: system-2 Bo1 can increase hallucination risk (topic hallucination covered). Dense-caption “minimizing hallucinations” and DOM “privacy concerns” are training/design notes, not topic coverage. Skipped all capability evals (pilot SAFETY ONLY): VisualWebBench, WebSRC, ScreenQA-short, ScreenSpot / ScreenSpot Pro / ScreenSpot v2, Mind2Web, AndroidControl, GUI Odyssey, OSWorld, AndroidWorld, and Figure 8 system-1/2 BoN curves (no readable numeric table in text for that figure). 32k sequence length is an agent memory/token-budget example, not a stated inference context window. Open-sourced at GitHub with no license name. arXiv 21 Jan 2025 is publication, not a model release date. Seed-linked ByteDance-Seed/UI-TARS-1.5-7B is not named in this report (1.5 is later)—left out of covers; covered UI-TARS-2B/7B/72B and SFT/DPO variants named in the text, mapping UI-TARS-7B-DPO and UI-TARS-72B-DPO to seed checkpoints."
+}
