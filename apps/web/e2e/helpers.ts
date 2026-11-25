@@ -62,7 +62,7 @@ export async function signInLink(page: Page, email: string, returnTo = '/') {
       `SELECT identifier FROM verification WHERE value LIKE $1 ORDER BY "createdAt" DESC LIMIT 1`,
       [`%"${email}"%`],
     );
-    token = rows[0]?.identifier;
+    token = rows[0]?.identifier.replace(/^magic-link:/, '');
   } finally {
     await client.end();
   }

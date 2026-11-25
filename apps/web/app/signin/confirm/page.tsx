@@ -12,10 +12,11 @@ export const metadata = { title: 'Sign in', robots: { index: false } };
 
 type Params = Partial<Record<(typeof VERIFY_PARAMS)[number], string>>;
 
-// The email address a sign-in token is for, or null when the token is used or expired.
+// The email address a sign-in token is for, or null when the token is used or expired. better-auth
+// stores the token as `magic-link:<token>`.
 async function pendingEmail(token: string): Promise<string | null> {
   const row = await prisma.verification.findFirst({
-    where: { identifier: token, expiresAt: { gt: new Date() } },
+    where: { identifier: `magic-link:${token}`, expiresAt: { gt: new Date() } },
     select: { value: true },
   });
   if (!row) return null;
