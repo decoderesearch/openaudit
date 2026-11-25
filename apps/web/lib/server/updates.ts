@@ -46,11 +46,13 @@ export async function need<T>(call: Promise<Result<T>>, what: string): Promise<T
 }
 
 type Ids = { topics: Record<UpdateList, string>; segments: Record<string, string> };
-let ids: Promise<Ids> | null = null;
+let ids: Ids | null = null;
 
-/** The Resend ids of our Topics and Segments, found by name once per isolate. */
-export function resendIds(): Promise<Ids> {
-  ids ??= (async () => {
+/** The Resend ids of our Topics and Segments, found by name once per isolate. Keeps only found ids:
+ * a Worker request must not wait on another request's I/O. */
+export async function resendIds(): Promise<Ids> {
+  if (ids) return ids;
+  ids = await (async () => {
     const r = resend();
     const [topics, segments] = await Promise.all([
       need(r.topics.list(), 'list topics'),
@@ -67,10 +69,7 @@ export function resendIds(): Promise<Ids> {
       topics: Object.fromEntries(UPDATE_LISTS.map((l) => [l.id, topic(l.label)!])) as Record<UpdateList, string>,
       segments: Object.fromEntries(MIXES.map((m) => [m.segment, segment(m.segment)!])),
     };
-  })().catch((e) => {
-    ids = null;
-    throw e;
-  });
+  })();
   return ids;
 }
 

@@ -3,7 +3,7 @@
 type OgFont = { name: string; data: ArrayBuffer; weight: 400 | 600 | 700; style: 'normal' };
 
 const WEIGHTS = [400, 600, 700] as const;
-let loaded: Promise<OgFont[]> | null = null;
+let loaded: OgFont[] | null = null;
 
 async function inter(weight: (typeof WEIGHTS)[number]): Promise<OgFont> {
   // With no browser user agent, Google gives a TTF file.
@@ -15,12 +15,14 @@ async function inter(weight: (typeof WEIGHTS)[number]): Promise<OgFont> {
   return { name: 'Inter', data: await res.arrayBuffer(), weight, style: 'normal' };
 }
 
-/** The fonts, loaded once per process. A failed load is tried again on the next image. */
-export function ogFonts(): Promise<OgFont[]> {
-  loaded ??= Promise.all(WEIGHTS.map(inter)).catch((e) => {
+/** The fonts. Keeps only loaded fonts: a Worker request must not wait on another request's I/O. A
+ * failed load is tried again on the next image. */
+export async function ogFonts(): Promise<OgFont[]> {
+  if (loaded) return loaded;
+  try {
+    return (loaded = await Promise.all(WEIGHTS.map(inter)));
+  } catch (e) {
     console.error('[og] no Inter font', e);
-    loaded = null;
     return [];
-  });
-  return loaded;
+  }
 }
