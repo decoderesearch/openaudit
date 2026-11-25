@@ -25,6 +25,11 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     '/*': ['../../node_modules/.pnpm/pg@*/node_modules/pg-cloudflare/**'],
   },
+  // Tracing can pull in the Prisma CLI. Its engines (about 20 MB of wasm) put the Worker over the
+  // size limit, and the Worker does not use them: it has its own client (`#prisma`).
+  outputFileTracingExcludes: {
+    '/*': ['../../node_modules/.pnpm/prisma@*/node_modules/prisma/**'],
+  },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
   },
