@@ -3,8 +3,9 @@
 ## Report a security problem
 
 If you find a security problem in the site, the runner, the harnesses or the submission checks,
-email support@openaudit.com with "Security" in the subject. Do not open a public issue or pull
-request for it. Tell us what you found, how to see it again, and what it can affect.
+email support@openaudit.com with "Security" in the subject, or use
+[Report a vulnerability](https://github.com/decoderesearch/openaudit/security/advisories/new) on
+GitHub. Do not open a public issue or pull request for it. Tell us what you found, how to see it again, and what it can affect.
 
 We reply as soon as we can, and we tell you when it is fixed.
 
