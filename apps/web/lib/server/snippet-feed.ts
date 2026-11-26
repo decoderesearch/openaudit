@@ -76,7 +76,7 @@ const MODELS_AT_ONCE = 4;
 
 /** All entries, the newest model release first; models with no release date go last. A model
  * with no flagged chat is left out. The callers in one request share one load. */
-export const snippetFeed = cache(ttlCache(() => loadFeed(), 300_000));
+export const snippetFeed = cache(ttlCache(() => loadFeed(), 300_000, 'snippet-feed'));
 
 /** The entries of the organization with slug `org` only. */
 export const snippetFeedFor = ttlCacheBy((org: string) => loadFeed(org), 300_000);

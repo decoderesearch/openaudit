@@ -50,7 +50,7 @@ type Event = { orgId: string; date: string } & (
 );
 
 /** All updates, newest first. Dates after today are left out. */
-export const orgFeed = ttlCache(() => loadOrgFeed(), 300_000);
+export const orgFeed = ttlCache(() => loadOrgFeed(), 300_000, 'org-feed');
 
 /** The updates of the organization with slug `org` only. */
 export const orgFeedFor = ttlCacheBy((org: string) => loadOrgFeed(org), 300_000);

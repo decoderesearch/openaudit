@@ -34,7 +34,7 @@ export const otherModels = ttlCache(async (): Promise<OtherModel[]> => {
     org: { label: m.organization.displayName, href: organizationPath(m.organization) },
     evalsTooOld: tooOld[i]!,
   }));
-}, 300_000);
+}, 300_000, 'other-models');
 
 export async function allModels(): Promise<AllModels> {
   const [cards, others] = await Promise.all([modelUpdates(), otherModels()]);

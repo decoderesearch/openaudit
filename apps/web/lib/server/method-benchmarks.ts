@@ -172,4 +172,4 @@ export const methodBenchmarks = ttlCache(async (): Promise<MethodBenchmark[]> =>
       )
       .map((x) => ({ ...x.bench, topic: topic && TOPIC_LABELS[topic] }));
   });
-}, 300_000);
+}, 300_000, 'method-benchmarks');

@@ -6,12 +6,13 @@ import { evalHovers } from '@/lib/server/eval-hovers';
 import { evalStandings } from '@/lib/server/eval-ranks';
 import { methodBenchmarks } from '@/lib/server/method-benchmarks';
 import { runnableEvals } from '@/lib/server/runs';
+import { ttlCache } from '@/lib/server/ttl-cache';
 import { evalSuiteFromRow } from '@/lib/spec/rows';
 
 const listed = (e: Awaited<ReturnType<typeof listEvals>>[number]) => e.status !== 'legacy' && e.status !== 'saturated';
 
 /** The model evals of the Models page's list, by name, with no legacy or saturated evals. */
-export async function modelEvalRows(): Promise<EvalListRow[]> {
+export const modelEvalRows = ttlCache(async (): Promise<EvalListRow[]> => {
   const [evals, hovers, standings] = await Promise.all([listEvals({}), evalHovers(), evalStandings()]);
   return evals
     .filter((e) => listed(e) && e.facets.subjects.includes('model') && !e.facets.subjects.includes('method'))
@@ -33,14 +34,14 @@ export async function modelEvalRows(): Promise<EvalListRow[]> {
       };
     })
     .sort((a, b) => a.label.localeCompare(b.label));
-}
+}, 300_000, 'model-eval-rows');
 
 /** The active model evals that we can run now, as `modelEvalRows`. */
-export async function runnableModelEvalRows(): Promise<EvalListRow[]> {
+export const runnableModelEvalRows = ttlCache(async (): Promise<EvalListRow[]> => {
   const [rows, runnable] = await Promise.all([modelEvalRows(), runnableEvals()]);
   const can = new Set(runnable.filter((e) => e.status === 'active').map((e) => e.slug));
   return rows.filter((r) => can.has(r.slug));
-}
+}, 300_000, 'runnable-model-eval-rows');
 
 /** The count of `runnableModelEvalRows`: on the home page and in the Models menu. */
 export const runnableModelEvalCount = async () => (await runnableModelEvalRows()).length;
@@ -86,7 +87,7 @@ export async function evalUpdates(): Promise<Map<string, string>> {
 
 /** The method evals of the Evaluations page's list, the newest first, with no legacy or saturated
  * evals. An eval with no date goes last. In a month, the most recently updated (`evalUpdates`) first. */
-export async function methodEvalRows(): Promise<EvalListRow[]> {
+export const methodEvalRows = ttlCache(async (): Promise<EvalListRow[]> => {
   const [evals, hovers, benchmarks, suites, updates] = await Promise.all([
     listEvals({}),
     evalHovers(),
@@ -140,4 +141,4 @@ export async function methodEvalRows(): Promise<EvalListRow[]> {
     if (r.suite && r.date && (!r.suite.date || r.date < r.suite.date)) r.suite.date = r.date;
   }
   return rows;
-}
+}, 300_000, 'method-eval-rows');

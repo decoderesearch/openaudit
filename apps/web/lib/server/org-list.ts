@@ -4,10 +4,11 @@ import { listOrganizations } from '@/lib/server/catalog';
 import { commitmentSummaries } from '@/lib/server/commitments';
 import { homeOrgsPage } from '@/lib/server/home-orgs';
 import { incidentCounts, lastUpdateDates } from '@/lib/server/org-research';
+import { ttlCache } from '@/lib/server/ttl-cache';
 
 /** All organizations for `OrgList`, the newest update first, each with its commitment score. One
  * with no updates has only its name and counts. */
-export async function orgListItems(): Promise<OrgListItem[]> {
+export const orgListItems = ttlCache(async (): Promise<OrgListItem[]> => {
   const [organizations, home, incidents, updated, commitments] = await Promise.all([
     listOrganizations(),
     homeOrgsPage(0, Number.MAX_SAFE_INTEGER),
@@ -40,4 +41,4 @@ export async function orgListItems(): Promise<OrgListItem[]> {
         search: [o.displayName, o.slug, ...o.aliases, ...o.slugAliases].join(' '),
       };
     });
-}
+}, 300_000, 'org-list-items');

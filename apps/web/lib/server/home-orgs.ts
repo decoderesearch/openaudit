@@ -95,7 +95,7 @@ const allHomeOrgs = ttlCache(async () => {
     ]),
   );
   return homeOrgs(feed, info);
-}, 300_000);
+}, 300_000, 'home-orgs');
 
 /** `size` organizations from `offset`, in the order of `sort`. */
 export async function homeOrgsPage(offset = 0, size = FEED_PAGE, sort: OrgSort = 'date'): Promise<FeedPage<HomeOrg>> {

@@ -16,4 +16,4 @@ export const homeCounts = ttlCache(async (): Promise<HomeCounts> => {
     prisma.methodVariant.count({ where: { baseline: false, visibility: 'public' } }),
   ]);
   return { models, organizations, commitments, methods: methods + variants };
-}, 300_000);
+}, 300_000, 'home-counts');
