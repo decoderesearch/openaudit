@@ -146,4 +146,4 @@ export const navMethods = ttlCache(async (): Promise<NavMethods> => {
         suite,
       })),
   };
-}, 300_000);
+}, 300_000, 'nav-methods');

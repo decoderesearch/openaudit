@@ -53,4 +53,4 @@ export const evalHovers = ttlCache(async (): Promise<Record<string, EvalHover>> 
       },
     ]),
   );
-}, 300_000);
+}, 300_000, 'eval-hovers');

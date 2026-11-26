@@ -53,4 +53,4 @@ export const methodHovers = ttlCache(async (): Promise<Record<string, MethodHove
       ]),
     ]),
   );
-}, 300_000);
+}, 300_000, 'method-hovers');

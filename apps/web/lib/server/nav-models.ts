@@ -93,4 +93,4 @@ export const navModels = ttlCache(async (): Promise<NavModels> => {
     models: cards,
     others,
   };
-}, 300_000);
+}, 300_000, 'nav-models');

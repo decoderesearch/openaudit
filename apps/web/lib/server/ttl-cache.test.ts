@@ -1,10 +1,44 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ttlCache, ttlCacheBy } from './ttl-cache';
+
+const cf = vi.hoisted(() => ({ version: 'v1', writes: [] as Promise<unknown>[] }));
+vi.mock('@/lib/platform', () => ({ IS_WORKERS: true }));
+vi.mock('@opennextjs/cloudflare', () => ({
+  getCloudflareContext: () => ({
+    env: { CF_VERSION_METADATA: { id: cf.version } },
+    ctx: { waitUntil: (p: Promise<unknown>) => cf.writes.push(p) },
+  }),
+}));
+
+/** The Cache API of one data center: one store for all isolates. */
+let stored: Map<string, string>;
+let broken: boolean;
+beforeEach(() => {
+  stored = new Map();
+  broken = false;
+  cf.version = 'v1';
+  cf.writes = [];
+  vi.stubGlobal('caches', {
+    open: async () => ({
+      match: async (url: string) => {
+        if (broken) throw new Error('cache down');
+        const body = stored.get(url);
+        return body === undefined ? undefined : new Response(body);
+      },
+      put: async (url: string, res: Response) => void stored.set(url, await res.text()),
+    }),
+  });
+  vi.spyOn(console, 'error').mockImplementation(() => {});
+});
 
 afterEach(() => {
   vi.useRealTimers();
   vi.unstubAllEnvs();
+  vi.unstubAllGlobals();
+  vi.restoreAllMocks();
 });
+
+const written = () => Promise.all(cf.writes);
 
 describe('ttlCache', () => {
   it('loads once in the window, and again after it', async () => {
@@ -42,6 +76,49 @@ describe('ttlCache', () => {
     await expect(get()).rejects.toThrow('down');
     fail = false;
     expect(await get()).toBe('ok');
+  });
+});
+
+describe('ttlCache with a name, on Workers', () => {
+  it('gives a new isolate the value that another isolate loaded', async () => {
+    let n = 0;
+    const load = async () => ({ n: ++n });
+    expect(await ttlCache(load, 60_000, 'x')()).toEqual({ n: 1 });
+    await written();
+    expect(await ttlCache(load, 60_000, 'x')()).toEqual({ n: 1 });
+    expect(n).toBe(1);
+  });
+
+  it('keeps the time of the first load, so a value is never older than the window', async () => {
+    vi.useFakeTimers();
+    let n = 0;
+    const load = async () => ++n;
+    await ttlCache(load, 1000, 'x')();
+    await written();
+    vi.advanceTimersByTime(600);
+    const other = ttlCache(load, 1000, 'x');
+    expect(await other()).toBe(1);
+    vi.advanceTimersByTime(500);
+    expect(await other()).toBe(2);
+  });
+
+  it('does not give the values of another Worker version', async () => {
+    let n = 0;
+    await ttlCache(async () => ++n, 60_000, 'x')();
+    await written();
+    cf.version = 'v2';
+    expect(await ttlCache(async () => ++n, 60_000, 'x')()).toBe(2);
+  });
+
+  it('loads from the source when the cache fails', async () => {
+    broken = true;
+    expect(await ttlCache(async () => 'db', 60_000, 'x')()).toBe('db');
+  });
+
+  it('uses only this process without a name', async () => {
+    await ttlCache(async () => 1, 60_000)();
+    await written();
+    expect(stored.size).toBe(0);
   });
 });
 

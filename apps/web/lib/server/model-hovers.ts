@@ -45,4 +45,4 @@ export const modelHovers = ttlCache(async (): Promise<Record<string, ModelHover>
       return key ? [[key, hover]] : [];
     }),
   );
-}, 300_000);
+}, 300_000, 'model-hovers');

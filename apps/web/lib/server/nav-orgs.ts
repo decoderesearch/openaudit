@@ -139,7 +139,7 @@ export const navOrgs = ttlCache(async (): Promise<NavOrgs> => {
     .map((x) => x.n);
 
   return { all, updates, grid, counts };
-}, 300_000);
+}, 300_000, 'nav-orgs');
 
 /** The newest updates of the menu, of one filter (`filterFeed`). */
 export async function navOrgUpdates(filter: OrgEventFilter | null): Promise<NavOrgUpdate[]> {

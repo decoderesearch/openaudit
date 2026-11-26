@@ -16,4 +16,4 @@ export const navTopics = ttlCache(async (): Promise<NavTopics> => {
       return c ? [{ label: TOPIC_LABELS[t], href: topicPath(t), info: TOPIC_INFO[t], ...c }] : [];
     }),
   };
-}, 300_000);
+}, 300_000, 'nav-topics');

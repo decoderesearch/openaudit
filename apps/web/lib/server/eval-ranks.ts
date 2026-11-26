@@ -160,4 +160,4 @@ export const evalStandings = ttlCache(async (): Promise<Record<string, EvalStand
     };
   }
   return out;
-}, 300_000);
+}, 300_000, 'eval-standings');
