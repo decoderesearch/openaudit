@@ -43,9 +43,11 @@ export function Leaders({
           className={cn(
             'grid items-center gap-x-1.5',
             !scores && !bars
-              ? ranked
-                ? 'grid-cols-[0.625rem_minmax(0,1fr)]'
-                : 'grid-cols-[minmax(0,1fr)]'
+              ? medals
+                ? 'grid-cols-[1rem_minmax(0,1fr)] gap-x-2'
+                : ranked
+                  ? 'grid-cols-[0.625rem_minmax(0,1fr)]'
+                  : 'grid-cols-[minmax(0,1fr)]'
               : medals
                 ? 'grid-cols-[1rem_minmax(0,1fr)_2.5rem] gap-x-2'
                 : ranked

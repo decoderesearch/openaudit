@@ -1,10 +1,10 @@
 'use client';
 
-import type { EvalListRow } from '@/components/catalog/eval-browser';
 import { EvalOfTheDay } from '@/components/eval-of-the-day';
 import { heroButtons } from '@/components/hero-buttons';
 import { LaunchPostLink } from '@/components/launch-post-link';
 import { HERO_SMALL_COOKIE } from '@/lib/home-hero';
+import type { DayRow } from '@/lib/server/eval-list-rows';
 import { cn } from '@/lib/utils';
 import { canScroll, OWN_WHEEL } from '@/lib/wheel-contain';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode, type RefObject } from 'react';
@@ -141,7 +141,7 @@ export function HomeHeader({
 }: {
   title: string;
   small: boolean;
-  ofTheDay?: EvalListRow | null;
+  ofTheDay?: DayRow | null;
   className?: string;
 }) {
   const hero = useRef<HTMLElement>(null);

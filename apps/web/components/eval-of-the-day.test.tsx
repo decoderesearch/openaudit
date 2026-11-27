@@ -1,5 +1,7 @@
 import type { EvalListRow } from '@/components/catalog/eval-browser';
+import type { Score } from '@/components/catalog/score';
 import { EvalOfTheDay } from '@/components/eval-of-the-day';
+import type { DayRow } from '@/lib/server/eval-list-rows';
 import { cleanup, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
@@ -42,5 +44,37 @@ describe('EvalOfTheDay', () => {
     cleanup();
     render(<EvalOfTheDay row={row({ kind: 'method', newer: 9 })} />);
     expect(screen.queryByText('Needs Update')).toBeNull();
+  });
+
+  it('shows a suite as a suite: its page, medals and no bars; an eval has bars', () => {
+    const bar: Score = {
+      metric: 'm',
+      value: 0.5,
+      unit: 'fraction',
+      safetyDirection: 'higher_is_better',
+      range: [0, 1],
+    };
+    const top = ['TopK', 'ReLU', 'Gated'].map((label) => ({ ...leader, label, href: `/m/${label}`, bar }));
+    render(
+      <EvalOfTheDay
+        row={row({
+          slug: 'bench',
+          label: 'Bench',
+          kind: 'method',
+          top,
+          best: top,
+          href: '/evaluations/suites/bench',
+          evals: 7,
+        } as Partial<DayRow>)}
+      />,
+    );
+    expect(screen.getByRole('link', { name: 'Bench' }).getAttribute('href')).toBe('/evaluations/suites/bench');
+    expect(screen.getByText('Evaluation Suite')).toBeTruthy();
+    expect(screen.getByText('Open Suite')).toBeTruthy();
+    expect(screen.getAllByLabelText(/^Rank [123]$/)).toHaveLength(3);
+    expect(screen.queryByRole('img', { name: /good for safety/ })).toBeNull();
+    cleanup();
+    render(<EvalOfTheDay row={row({ kind: 'method', top, best: top })} />);
+    expect(screen.getAllByRole('img', { name: /good for safety/ })).toHaveLength(3);
   });
 });
